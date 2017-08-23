@@ -22,3 +22,16 @@ select,
 textarea {
     max-width: 280px;
 }
+
+
+.navbar-default .notifications {
+    position: relative;
+}
+
+
+.navbar-default .notifications .badge {
+    position: absolute;
+    top: 8px;
+    right: -1px;
+    background: #a80a0a;
+}
