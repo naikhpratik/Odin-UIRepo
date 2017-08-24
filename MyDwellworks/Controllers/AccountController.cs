@@ -8,7 +8,8 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using MyDwellworks.Models;
+using MyDwellworks.Core.Models;
+using MyDwellworks.Core.ViewModels.Authentication;
 
 namespace MyDwellworks.Controllers
 {

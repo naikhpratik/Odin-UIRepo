@@ -195,9 +195,26 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Core\ViewModels\Authentication\ExternalLoginConfirmationViewModel.cs" />
+    <Compile Include="Core\ViewModels\Authentication\ExternalLoginListViewModel.cs" />
+    <Compile Include="Core\ViewModels\Authentication\ForgotPasswordViewModel.cs" />
+    <Compile Include="Core\ViewModels\Authentication\ForgotViewModel.cs" />
+    <Compile Include="Core\ViewModels\Authentication\AddPhoneNumberViewModel.cs" />
+    <Compile Include="Core\ViewModels\Authentication\ChangePasswordViewModel.cs" />
+    <Compile Include="Core\ViewModels\Authentication\ConfigureTwoFactorViewModel.cs" />
+    <Compile Include="Core\ViewModels\Authentication\FactorViewModel.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="Core\ViewModels\Authentication\LoginViewModel.cs" />
+    <Compile Include="Core\ViewModels\Authentication\IndexViewModel.cs" />
+    <Compile Include="Core\ViewModels\Authentication\ManageLoginsViewModel.cs" />
+    <Compile Include="Core\ViewModels\Authentication\RegisterViewModel.cs" />
+    <Compile Include="Core\ViewModels\Authentication\ResetPasswordViewModel.cs" />
+    <Compile Include="Core\ViewModels\Authentication\SendCodeViewModel.cs" />
+    <Compile Include="Core\ViewModels\Authentication\VerifyCodeViewModel.cs" />
+    <Compile Include="Core\ViewModels\Authentication\SetPasswordViewModel.cs" />
+    <Compile Include="Core\ViewModels\Authentication\VerifyPhoneNumberViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -263,6 +280,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Persistence\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
