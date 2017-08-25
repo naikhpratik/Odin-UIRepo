@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26730.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyDwellworks", "MyDwellworks\MyDwellworks.csproj", "{003E6885-6839-46E6-9E1F-CC8EBFE57EFB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary1", "ClassLibrary1\ClassLibrary1.csproj", "{2F74BCD6-8F77-4346-8324-96177A18B08A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{003E6885-6839-46E6-9E1F-CC8EBFE57EFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{003E6885-6839-46E6-9E1F-CC8EBFE57EFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{003E6885-6839-46E6-9E1F-CC8EBFE57EFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F74BCD6-8F77-4346-8324-96177A18B08A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F74BCD6-8F77-4346-8324-96177A18B08A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F74BCD6-8F77-4346-8324-96177A18B08A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F74BCD6-8F77-4346-8324-96177A18B08A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
