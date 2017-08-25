@@ -10,8 +10,8 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using MyDwellworks.Core.Models;
-using MyDwellworks.Persistence;
+using MyDwellworks.Data.Core.Models;
+using MyDwellworks.Data.Persistence;
 
 namespace MyDwellworks
 {

@@ -1,4 +1,6 @@
-﻿namespace MyDwellworks.ViewModels.Authentication
+﻿using System.Collections.Generic;
+
+namespace MyDwellworks.ViewModels.Authentication
 {
     public class SendCodeViewModel
     {

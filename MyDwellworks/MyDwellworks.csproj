@@ -195,28 +195,25 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Core\ViewModels\Authentication\ExternalLoginConfirmationViewModel.cs" />
-    <Compile Include="Core\ViewModels\Authentication\ExternalLoginListViewModel.cs" />
-    <Compile Include="Core\ViewModels\Authentication\ForgotPasswordViewModel.cs" />
-    <Compile Include="Core\ViewModels\Authentication\ForgotViewModel.cs" />
-    <Compile Include="Core\ViewModels\Authentication\AddPhoneNumberViewModel.cs" />
-    <Compile Include="Core\ViewModels\Authentication\ChangePasswordViewModel.cs" />
-    <Compile Include="Core\ViewModels\Authentication\ConfigureTwoFactorViewModel.cs" />
-    <Compile Include="Core\ViewModels\Authentication\FactorViewModel.cs" />
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\ApplicationDbContext.cs" />
-    <Compile Include="Models\ApplicationUser.cs" />
-    <Compile Include="Core\ViewModels\Authentication\LoginViewModel.cs" />
-    <Compile Include="Core\ViewModels\Authentication\IndexViewModel.cs" />
-    <Compile Include="Core\ViewModels\Authentication\ManageLoginsViewModel.cs" />
-    <Compile Include="Core\ViewModels\Authentication\RegisterViewModel.cs" />
-    <Compile Include="Core\ViewModels\Authentication\ResetPasswordViewModel.cs" />
-    <Compile Include="Core\ViewModels\Authentication\SendCodeViewModel.cs" />
-    <Compile Include="Core\ViewModels\Authentication\VerifyCodeViewModel.cs" />
-    <Compile Include="Core\ViewModels\Authentication\SetPasswordViewModel.cs" />
-    <Compile Include="Core\ViewModels\Authentication\VerifyPhoneNumberViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\Authentication\AddPhoneNumberViewModel.cs" />
+    <Compile Include="ViewModels\Authentication\ChangePasswordViewModel.cs" />
+    <Compile Include="ViewModels\Authentication\ConfigureTwoFactorViewModel.cs" />
+    <Compile Include="ViewModels\Authentication\ExternalLoginConfirmationViewModel.cs" />
+    <Compile Include="ViewModels\Authentication\ExternalLoginListViewModel.cs" />
+    <Compile Include="ViewModels\Authentication\FactorViewModel.cs" />
+    <Compile Include="ViewModels\Authentication\ForgotPasswordViewModel.cs" />
+    <Compile Include="ViewModels\Authentication\ForgotViewModel.cs" />
+    <Compile Include="ViewModels\Authentication\IndexViewModel.cs" />
+    <Compile Include="ViewModels\Authentication\LoginViewModel.cs" />
+    <Compile Include="ViewModels\Authentication\ManageLoginsViewModel.cs" />
+    <Compile Include="ViewModels\Authentication\RegisterViewModel.cs" />
+    <Compile Include="ViewModels\Authentication\ResetPasswordViewModel.cs" />
+    <Compile Include="ViewModels\Authentication\SendCodeViewModel.cs" />
+    <Compile Include="ViewModels\Authentication\SetPasswordViewModel.cs" />
+    <Compile Include="ViewModels\Authentication\VerifyCodeViewModel.cs" />
+    <Compile Include="ViewModels\Authentication\VerifyPhoneNumberViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-flatly.css" />
@@ -280,7 +277,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Persistence\" />
+    <Folder Include="Controllers\Api\" />
+    <Folder Include="Persistence\Migrations\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -294,6 +292,12 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MyDwellworks.Data\MyDwellworks.Data.csproj">
+      <Project>{0D2C0B84-DAFF-4F5C-97D9-1C3BC5871B4C}</Project>
+      <Name>MyDwellworks.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

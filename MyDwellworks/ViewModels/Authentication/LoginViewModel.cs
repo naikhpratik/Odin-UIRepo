@@ -1,4 +1,6 @@
-﻿namespace MyDwellworks.ViewModels.Authentication
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MyDwellworks.ViewModels.Authentication
 {
     public class LoginViewModel
     {

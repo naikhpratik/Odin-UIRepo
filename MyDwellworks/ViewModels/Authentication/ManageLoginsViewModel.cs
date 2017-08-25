@@ -1,4 +1,8 @@
-﻿namespace MyDwellworks.ViewModels.Authentication
+﻿using System.Collections.Generic;
+using Microsoft.AspNet.Identity;
+using Microsoft.Owin.Security;
+
+namespace MyDwellworks.ViewModels.Authentication
 {
     public class ManageLoginsViewModel
     {

@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace MyDwellworks.ViewModels.Authentication
 {
     public class VerifyCodeViewModel

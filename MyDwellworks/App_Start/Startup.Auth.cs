@@ -4,9 +4,9 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
-using MyDwellworks.Core.Models;
+using MyDwellworks.Data.Core.Models;
+using MyDwellworks.Data.Persistence;
 using Owin;
-using MyDwellworks.Persistence;
 
 namespace MyDwellworks
 {
