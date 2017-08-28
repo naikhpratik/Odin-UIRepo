@@ -44,7 +44,7 @@ namespace MyDwellworks.Data.Persistence.Migrations
                     Email = "austin.emser@dwellworks.com",
                     PhoneNumber = "4403184188"
                 };
-                userManager.Create(newConsultant, "consultant");
+                userManager.Create(newConsultant, "Consultant5$");
                 userManager.AddToRole(newConsultant.Id, "Consultant");
             }
         }
