@@ -38,7 +38,7 @@ namespace MyDwellworks.Data.Persistence.Migrations
             {
                 var newConsultant = new ApplicationUser()
                 {
-                    UserName = "testconsultant",
+                    UserName = "austin.emser@dwellworks.com",
                     FirstName = "Test",
                     LastName = "Consultant",
                     Email = "austin.emser@dwellworks.com",
