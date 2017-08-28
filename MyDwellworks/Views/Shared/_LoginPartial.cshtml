@@ -19,7 +19,7 @@
                     <li><a href="#">My Profile</a></li>
                     @if (User.IsInRole(UserRoles.GlobalSupplyChain))
                     {
-                        <li><a href="#">Manage Users</a></li>
+                        <li><a href="@Url.Action("UserManagement", "Account")">Manage Users</a></li>
                     }
                     <li role="separator" class="divider"></li>
                     <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>

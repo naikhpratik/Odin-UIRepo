@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "UserManagement";
+}
+
+<h2>Manager Users</h2>
+
+<table id="users-table" class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>
+            User
+        </th>
+        <th>
+            Type
+        </th>
+        <th>
+            Phone
+        </th>
+    </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            UserManagementController.init("#users-table");
+        });
+    </script>
+}

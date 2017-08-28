@@ -93,6 +93,14 @@ namespace MyDwellworks.Controllers
         }
 
         //
+        // GET: /Account/UserManagement
+        [Authorize(Roles = "Global Supply Chain")]
+        public ActionResult UserManagement()
+        {
+            return View();
+        }
+
+        //
         // GET: /Account/VerifyCode
         [AllowAnonymous]
         public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
