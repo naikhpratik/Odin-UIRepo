@@ -55,12 +55,28 @@
   <ItemGroup>
     <Compile Include="Core\Models\ApplicationUser.cs" />
     <Compile Include="Persistence\ApplicationDbContext.cs" />
+    <Compile Include="Persistence\Migrations\201708281308044_InitialMigration.cs" />
+    <Compile Include="Persistence\Migrations\201708281308044_InitialMigration.Designer.cs">
+      <DependentUpon>201708281308044_InitialMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201708281322256_AddFirstNameAndLastNameTouser.cs" />
+    <Compile Include="Persistence\Migrations\201708281322256_AddFirstNameAndLastNameTouser.Designer.cs">
+      <DependentUpon>201708281322256_AddFirstNameAndLastNameTouser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Persistence\Migrations\201708281308044_InitialMigration.resx">
+      <DependentUpon>201708281308044_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201708281322256_AddFirstNameAndLastNameTouser.resx">
+      <DependentUpon>201708281322256_AddFirstNameAndLastNameTouser.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
