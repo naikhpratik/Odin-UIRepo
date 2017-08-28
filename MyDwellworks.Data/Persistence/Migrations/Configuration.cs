@@ -7,7 +7,7 @@ namespace MyDwellworks.Data.Persistence.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            MigrationsDirectory = @"Persistance\Migrations";
+            MigrationsDirectory = @"Persistence\Migrations";
         }
 
         protected override void Seed(ApplicationDbContext context)
