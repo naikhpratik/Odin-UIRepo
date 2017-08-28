@@ -3,7 +3,7 @@
 
     var init = function (container) {
         table = $(container);
-        console.log(table);
+
         table.DataTable({
             ajax: {
                 url: "/api/users",
