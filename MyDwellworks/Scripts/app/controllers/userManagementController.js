@@ -11,13 +11,13 @@
             },
             columns: [
                 {
-                    data: "username",
+                    data: "userName",
                     render: function(data, type, user) {
                         return "<a href='#'>" + data.username + "</a>";
                     }
                 },
                 {
-                    data: "type"
+                    data: "roles"
                 },
                 {
                     data: "phone"

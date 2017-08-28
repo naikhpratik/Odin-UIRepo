@@ -56,6 +56,13 @@ namespace MyDwellworks.App_Start
                         .BindDefaultInterface();
                 });
 
+                kernel.Bind(x =>
+                {
+                    x.FromAssembliesMatching("MyDwellworks.Data.dll")
+                        .SelectAllClasses()
+                        .BindDefaultInterface();
+                });
+
                 var config = new MapperConfiguration(c => c.AddProfile(new MappingProfile()));
 
                 var mapper = config.CreateMapper();
