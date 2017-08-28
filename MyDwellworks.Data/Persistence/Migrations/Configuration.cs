@@ -23,10 +23,10 @@ namespace MyDwellworks.Data.Persistence.Migrations
             var roleStore = new RoleStore<IdentityRole>(context);
             var roleManager = new RoleManager<IdentityRole>(roleStore);
 
-            var consultantRole = roleManager.FindByName("Consultant");
+            var consultantRole = roleManager.FindByName(UserRoles.Consultant);
             if (consultantRole == null)
             {
-                consultantRole = new IdentityRole("Consultant");
+                consultantRole = new IdentityRole(UserRoles.Consultant);
                 roleManager.Create(consultantRole);
             }
 
@@ -45,7 +45,29 @@ namespace MyDwellworks.Data.Persistence.Migrations
                     PhoneNumber = "4403184188"
                 };
                 userManager.Create(newConsultant, "Consultant5$");
-                userManager.AddToRole(newConsultant.Id, "Consultant");
+                userManager.AddToRole(newConsultant.Id, UserRoles.Consultant);
+            }
+
+            var gscRole = roleManager.FindByName(UserRoles.GlobalSupplyChain);
+            if (gscRole == null)
+            {
+                gscRole = new IdentityRole(UserRoles.GlobalSupplyChain);
+                roleManager.Create(gscRole);
+            }
+
+            var gscUser = userManager.FindByName("aemser@dwellworks.com");
+            if (gscUser == null)
+            {
+                var newGsc = new ApplicationUser()
+                {
+                    UserName = "aemser@dwellworks.com",
+                    FirstName = "Test",
+                    LastName = "Gsc",
+                    Email="aemser@dwellworks.com",
+                    PhoneNumber = "2166824239"
+                };
+                userManager.Create(newGsc, "Global5$");
+                userManager.AddToRole(newGsc.Id,UserRoles.GlobalSupplyChain);
             }
         }
     }

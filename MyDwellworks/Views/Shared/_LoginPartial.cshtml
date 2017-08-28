@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNet.Identity
+@using MyDwellworks.Data.Core.Models
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
@@ -16,6 +17,10 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@User.Identity.GetUserName()<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="#">My Profile</a></li>
+                    @if (User.IsInRole(UserRoles.GlobalSupplyChain))
+                    {
+                        <li><a href="#">Manage Users</a></li>
+                    }
                     <li role="separator" class="divider"></li>
                     <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
                 </ul>
