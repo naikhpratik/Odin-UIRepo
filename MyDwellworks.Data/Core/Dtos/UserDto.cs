@@ -10,7 +10,7 @@ namespace MyDwellworks.Data.Core.Dtos
     {
         public string UserName { get; set; }
         public string Email { get; set; }
-        public string Roles { get; set; }
+        public string UserRoles { get; set; }
         public string Phone { get; set; }
     }
 }

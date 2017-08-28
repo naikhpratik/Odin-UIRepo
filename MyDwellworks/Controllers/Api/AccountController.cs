@@ -28,9 +28,9 @@ namespace MyDwellworks.Controllers.Api
         [Route("api/users")]
         public IHttpActionResult GetUsers()
         {
-            var users = _unitOfWork.Users.GetUsersWithRole(UserRoles.GlobalSupplyChain);
+            var users = _unitOfWork.Users.GetUsersWithRole(UserRoles.Consultant);
 
-            var userDtos = _mapper.Map<UserDto>(users);
+            var userDtos = _mapper.Map<IEnumerable<ApplicationUser>, IEnumerable<UserDto>>(users);
 
             return Ok(userDtos);
         }

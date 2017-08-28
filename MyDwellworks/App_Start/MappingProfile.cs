@@ -12,7 +12,8 @@ namespace MyDwellworks.App_Start
     {
         public MappingProfile()
         {
-            CreateMap<ApplicationUser, UserDto>();
+            CreateMap<ApplicationUser, UserDto>()
+                .ForMember(m => m.Phone, opt => opt.MapFrom(src => src.PhoneNumber));
         }
     }
 }

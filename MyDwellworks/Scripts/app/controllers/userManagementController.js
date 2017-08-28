@@ -13,11 +13,11 @@
                 {
                     data: "userName",
                     render: function(data, type, user) {
-                        return "<a href='#'>" + data.username + "</a>";
+                        return "<a href='#'>" + user.userName + "</a>";
                     }
                 },
                 {
-                    data: "roles"
+                    data: "userRoles"
                 },
                 {
                     data: "phone"
