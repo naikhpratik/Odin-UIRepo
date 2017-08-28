@@ -33,7 +33,7 @@ namespace MyDwellworks.Data.Persistence.Migrations
             var userStore = new UserStore<ApplicationUser>(context);
             var userManager = new UserManager<ApplicationUser>(userStore);
 
-            var consultantUser = userManager.FindByName("testconsultant");
+            var consultantUser = userManager.FindByName("austin.emser@dwellworks.com");
             if (consultantUser == null)
             {
                 var newConsultant = new ApplicationUser()
