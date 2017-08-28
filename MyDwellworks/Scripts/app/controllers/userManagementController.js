@@ -1,7 +1,10 @@
-﻿var UserManagementController = function() {
+﻿var UserManagementController = function () {
+    var table;
 
-    var init = function(container) {
-        container.DataTable({
+    var init = function (container) {
+        table = $(container);
+        console.log(table);
+        table.DataTable({
             ajax: {
                 url: "/api/users",
                 dataSrc: ""
