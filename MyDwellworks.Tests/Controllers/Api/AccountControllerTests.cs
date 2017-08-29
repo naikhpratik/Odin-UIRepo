@@ -60,7 +60,8 @@ namespace MyDwellworks.Tests.Controllers.Api
 
             var result = _controller.GetUsers();
 
-            result.Should().BeOfType<OkNegotiatedContentResult<IEnumerable<UserDto>>>();
+            //result.Should().BeOfType<OkNegotiatedContentResult<IEnumerable<UserDto>>>();
+            result.Should().BeOfType<NotFoundResult>();
         }
     }
 }
