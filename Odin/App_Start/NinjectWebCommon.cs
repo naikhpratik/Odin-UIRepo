@@ -58,7 +58,7 @@ namespace MyDwellworks.App_Start
 
                 kernel.Bind(x =>
                 {
-                    x.FromAssembliesMatching("MyDwellworks.Data.dll")
+                    x.FromAssembliesMatching("Odin.Data.dll")
                         .SelectAllClasses()
                         .BindDefaultInterface();
                 });
