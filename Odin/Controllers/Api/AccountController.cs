@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Collections.Generic;
 using System.Web.Http;
 using AutoMapper;
-using MyDwellworks.Data.Core;
-using MyDwellworks.Data.Core.Dtos;
-using MyDwellworks.Data.Core.Models;
-using MyDwellworks.Data.Persistence;
+using Odin.Data.Core;
+using Odin.Data.Core.Dtos;
+using Odin.Data.Core.Models;
 
-namespace MyDwellworks.Controllers.Api
+namespace Odin.Controllers.Api
 {
     [Authorize]
     public class AccountController : ApiController

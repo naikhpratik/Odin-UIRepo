@@ -1,6 +1,6 @@
-﻿using MyDwellworks.Data.Core.Repositories;
+﻿using Odin.Data.Core.Repositories;
 
-namespace MyDwellworks.Data.Core
+namespace Odin.Data.Core
 {
     public interface IUnitOfWork
     {

@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web.Http.Results;
 using AutoMapper;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using MyDwellworks.Controllers.Api;
-using MyDwellworks.Data.Core;
-using MyDwellworks.Data.Core.Dtos;
-using MyDwellworks.Data.Core.Models;
-using MyDwellworks.Data.Core.Repositories;
+using Odin.Controllers.Api;
+using Odin.Data.Core;
+using Odin.Data.Core.Dtos;
+using Odin.Data.Core.Models;
+using Odin.Data.Core.Repositories;
 
-namespace MyDwellworks.Tests.Controllers.Api
+namespace Odin.Tests.Controllers.Api
 {
     [TestClass]
     public class AccountControllerTests
@@ -29,24 +27,6 @@ namespace MyDwellworks.Tests.Controllers.Api
 
             var mockUnitOfWork = new Mock<IUnitOfWork>();
             mockUnitOfWork.SetupGet(u => u.Users).Returns(_mockRepository.Object);
-            _mockMapper.Setup(
-                m => m.Map<IEnumerable<ApplicationUser>, IEnumerable<UserDto>>(It
-                    .IsAny<List<ApplicationUser>>())).Returns(
-                (IEnumerable<UserDto> userDtos) =>
-                {
-                    var dtos = new List<UserDto>
-                    {
-                        { new UserDto() {Email = "Test@test.com", Phone = "444-555-6666", UserName = "Test@test.com"} }
-                    };
-                    return dtos;
-                });
-
-            _mockMapper.Setup(
-                m => m.Map<IEnumerable<ApplicationUser>, IEnumerable<UserDto>>(It
-                    .IsAny<IEnumerable<ApplicationUser>>())).Returns(new List<UserDto>()
-            {
-                 new UserDto() {Email = "Test@test.com", Phone = "444-555-6666", UserName = "Test@test.com"} 
-            });
 
             _controller = new AccountController(_mockMapper.Object, mockUnitOfWork.Object);
         }

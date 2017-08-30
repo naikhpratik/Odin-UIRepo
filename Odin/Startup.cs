@@ -1,8 +1,9 @@
 ﻿using Microsoft.Owin;
+using Odin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(MyDwellworks.Startup))]
-namespace MyDwellworks
+[assembly: OwinStartup(typeof(Startup))]
+namespace Odin
 {
     public partial class Startup
     {

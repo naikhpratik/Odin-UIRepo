@@ -1,8 +1,7 @@
-namespace MyDwellworks.Data.Persistence.Migrations
+using System.Data.Entity.Migrations;
+
+namespace Odin.Data.Persistence.Migrations
 {
-    using System;
-    using System.Data.Entity.Migrations;
-    
     public partial class AddFirstNameAndLastNameTouser : DbMigration
     {
         public override void Up()

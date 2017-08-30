@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using AutoMapper;
-using MyDwellworks.Data.Core.Dtos;
-using MyDwellworks.Data.Core.Models;
+﻿using AutoMapper;
+using Odin.Data.Core.Dtos;
+using Odin.Data.Core.Models;
 
-namespace MyDwellworks.App_Start
+namespace Odin
 {
     public class MappingProfile : Profile
     {

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace MyDwellworks.Data.Core.Models
+namespace Odin.Data.Core.Models
 {
     public class ApplicationUser : IdentityUser
     {

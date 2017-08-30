@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MyDwellworks.ViewModels.Authentication
+namespace Odin.ViewModels.Authentication
 {
     public class SendCodeViewModel
     {

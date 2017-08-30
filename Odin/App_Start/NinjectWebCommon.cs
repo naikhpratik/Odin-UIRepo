@@ -1,3 +1,5 @@
+using Odin;
+
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(MyDwellworks.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(MyDwellworks.App_Start.NinjectWebCommon), "Stop")]
 

@@ -1,9 +1,9 @@
 using System.Data.Entity.Migrations;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using MyDwellworks.Data.Core.Models;
+using Odin.Data.Core.Models;
 
-namespace MyDwellworks.Data.Persistence.Migrations
+namespace Odin.Data.Persistence.Migrations
 {
     internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace MyDwellworks.ViewModels.Authentication
+namespace Odin.ViewModels.Authentication
 {
     public class RegisterViewModel
     {

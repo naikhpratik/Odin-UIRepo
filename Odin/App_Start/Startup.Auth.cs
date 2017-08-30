@@ -3,12 +3,11 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.Google;
-using MyDwellworks.Data.Core.Models;
-using MyDwellworks.Data.Persistence;
+using Odin.Data.Core.Models;
+using Odin.Data.Persistence;
 using Owin;
 
-namespace MyDwellworks
+namespace Odin
 {
     public partial class Startup
     {

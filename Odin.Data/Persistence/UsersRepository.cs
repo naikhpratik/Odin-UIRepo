@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MyDwellworks.Data.Core.Models;
-using MyDwellworks.Data.Core.Repositories;
+using Odin.Data.Core.Models;
+using Odin.Data.Core.Repositories;
 
-namespace MyDwellworks.Data.Persistence
+namespace Odin.Data.Persistence
 {
     public class UsersRepository : IUsersRepository
     {

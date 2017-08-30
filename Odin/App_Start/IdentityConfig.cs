@@ -1,19 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using System.Web;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using MyDwellworks.Data.Core.Models;
-using MyDwellworks.Data.Persistence;
+using Odin.Data.Core.Models;
+using Odin.Data.Persistence;
 
-namespace MyDwellworks
+namespace Odin
 {
     public class EmailService : IIdentityMessageService
     {

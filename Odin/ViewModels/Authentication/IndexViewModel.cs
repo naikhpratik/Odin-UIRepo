@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.AspNet.Identity;
 
-namespace MyDwellworks.ViewModels.Authentication
+namespace Odin.ViewModels.Authentication
 {
     public class IndexViewModel
     {

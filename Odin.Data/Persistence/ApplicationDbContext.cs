@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
-using MyDwellworks.Data.Core.Models;
+using Odin.Data.Core.Models;
 
-namespace MyDwellworks.Data.Persistence
+namespace Odin.Data.Persistence
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

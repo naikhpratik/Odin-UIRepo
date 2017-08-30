@@ -1,17 +1,14 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using MyDwellworks.Data.Core.Models;
-using MyDwellworks.ViewModels.Authentication;
+using Odin.Data.Core.Models;
+using Odin.ViewModels.Authentication;
 
-namespace MyDwellworks.Controllers
+namespace Odin.Controllers
 {
     [Authorize]
     public class AccountController : Controller

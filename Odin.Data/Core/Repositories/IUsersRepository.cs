@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MyDwellworks.Data.Core.Models;
+﻿using System.Collections.Generic;
+using Odin.Data.Core.Models;
 
-namespace MyDwellworks.Data.Core.Repositories
+namespace Odin.Data.Core.Repositories
 {
     public interface IUsersRepository
     {
