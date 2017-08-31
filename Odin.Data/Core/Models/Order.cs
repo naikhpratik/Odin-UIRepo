@@ -25,5 +25,7 @@ namespace Odin.Data.Core.Models
         [Column(Order = 1)]
         public int TransfereeId { get; set; }
         public Rent Rent { get; set; }
+
+        public ICollection<ApplicationUser> ServiceTeam { get; set; }
     }
 }

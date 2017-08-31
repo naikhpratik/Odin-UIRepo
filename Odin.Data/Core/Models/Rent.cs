@@ -10,7 +10,7 @@ namespace Odin.Data.Core.Models
     {
         public int Id { get; set; }
 
-
-        //TODO: Housing Preferences
+        public decimal? HousingBudget { get; set; }
+        //TODO: The rest of the Housing Preferences
     }
 }
