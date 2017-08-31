@@ -45,7 +45,7 @@ namespace Odin.Data.Tests.Persistence.Repositories
 
             var orders = _ordersRepository.GetOrdersFor(assignment.ConsultantId + "-");
 
-            orders.Should().HaveCount(1);
+            orders.Should().BeEmpty();
         }
 
         [TestMethod]
@@ -58,7 +58,7 @@ namespace Odin.Data.Tests.Persistence.Repositories
 
             var orders = _ordersRepository.GetOrdersFor(assignment.ConsultantId);
 
-            orders.Should().BeEmpty();
+            orders.Should().HaveCount(1);
         }
     }
 }
