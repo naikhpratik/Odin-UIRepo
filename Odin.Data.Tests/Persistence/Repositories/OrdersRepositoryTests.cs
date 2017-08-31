@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -59,6 +60,22 @@ namespace Odin.Data.Tests.Persistence.Repositories
             var orders = _ordersRepository.GetOrdersFor(assignment.ConsultantId);
 
             orders.Should().HaveCount(1);
+        }
+
+        [TestMethod]
+        public void GetOrdersFor_OneOrderIsForUser_ShouldReturnCorrectOrder()
+        {
+            var order1 = new Order() { Transferee = new Transferee(), Id = 1 };
+            var order2 = new Order() { Transferee = new Transferee(), Id = 2 };
+            var assignment1 = new ConsultantAssignment() { Order = order1, ConsultantId = "1" };
+            var assignment2 = new ConsultantAssignment() {Order = order2, ConsultantId = "2"};
+
+            SetupRepositoryWithSource(new[] { order1, order2 }, new[] { assignment1, assignment2 });
+
+            var orders = _ordersRepository.GetOrdersFor(assignment1.ConsultantId);
+
+            orders.Should().HaveCount(1);
+            orders.FirstOrDefault()?.Id.Should().Be(1);
         }
     }
 }
