@@ -7,6 +7,11 @@ namespace Odin.Data.Persistence
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Transferee> Transferees { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Rent> Rents { get; set; }
+        public DbSet<ConsultantAssignment> ConsultantAssignments { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
