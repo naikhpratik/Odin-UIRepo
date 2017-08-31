@@ -2,6 +2,7 @@ using System.Data.Entity.Migrations;
 using System.Linq;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Odin.Data.Builders;
 using Odin.Data.Core.Models;
 
 namespace Odin.Data.Persistence.Migrations
@@ -17,13 +18,27 @@ namespace Odin.Data.Persistence.Migrations
         protected override void Seed(ApplicationDbContext context)
         {
             CreateRolesAndUsers(context);
+            CreateTransfereeAndOrderData(context);
         }
 
         private void CreateTransfereeAndOrderData(ApplicationDbContext context)
         {
             if (!context.Transferees.Any())
             {
-                
+                var dsc = context.Users.First(u => u.LastName.Equals("Consultant"));
+                int count = 10;
+                var transferees = TransfereeBuilder.New(count);
+                var orders = OrderBuilder.New(count);
+
+                for (int i = 0; i < count; i++)
+                {
+                    transferees[i].Orders.Add(orders[i]);
+                    context.Transferees.Add(transferees[i]);
+                    var consultantAssignment = new ConsultantAssignment() {Order = orders[i], ConsultantId = dsc.Id};
+                    context.ConsultantAssignments.Add(consultantAssignment);
+                }
+
+                context.SaveChanges();
             }
         }
 
