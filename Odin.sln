@@ -1,13 +1,14 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
+VisualStudioVersion = 15.0.26730.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Odin", "Odin\Odin.csproj", "{003E6885-6839-46E6-9E1F-CC8EBFE57EFB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Odin.Data", "Odin.Data\Odin.Data.csproj", "{0D2C0B84-DAFF-4F5C-97D9-1C3BC5871B4C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Odin.Tests", "Odin.Tests\Odin.Tests.csproj", "{16DF4B51-F65F-4FDF-8ABC-6E5844BDE941}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Odin.Data.Tests", "Odin.Data.Tests\Odin.Data.Tests.csproj", "{616FB184-2417-47B2-BBCD-25C90AFF9F3F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +28,10 @@ Global
 		{16DF4B51-F65F-4FDF-8ABC-6E5844BDE941}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16DF4B51-F65F-4FDF-8ABC-6E5844BDE941}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{16DF4B51-F65F-4FDF-8ABC-6E5844BDE941}.Release|Any CPU.Build.0 = Release|Any CPU
+		{616FB184-2417-47B2-BBCD-25C90AFF9F3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{616FB184-2417-47B2-BBCD-25C90AFF9F3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{616FB184-2417-47B2-BBCD-25C90AFF9F3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{616FB184-2417-47B2-BBCD-25C90AFF9F3F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

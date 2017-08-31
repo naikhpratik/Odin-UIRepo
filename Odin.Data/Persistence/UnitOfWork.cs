@@ -7,11 +7,13 @@ namespace Odin.Data.Persistence
     {
         private readonly ApplicationDbContext _context;
         public IUsersRepository Users { get; private set; }
+        public IOrdersRepository Orders { get; private set; }
 
         public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
             Users = new UsersRepository(context);
+            Orders = new OrdersRepository(context);
         }
 
         public void Complete()

@@ -60,11 +60,13 @@
     <Compile Include="Core\Models\ConsultantAssignment.cs" />
     <Compile Include="Core\Models\Transferee.cs" />
     <Compile Include="Core\Models\UserRoles.cs" />
+    <Compile Include="Core\Repositories\IOrdersRepository.cs" />
     <Compile Include="Core\Repositories\IUsersRepository.cs" />
     <Compile Include="Persistence\ApplicationDbContext.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Persistence\EntityConfigurations\OrderConfiguration.cs" />
     <Compile Include="Persistence\EntityConfigurations\RentConfiguration.cs" />
+    <Compile Include="Persistence\IApplicationDbContext.cs" />
     <Compile Include="Persistence\Migrations\201708281308044_InitialMigration.cs" />
     <Compile Include="Persistence\Migrations\201708281308044_InitialMigration.Designer.cs">
       <DependentUpon>201708281308044_InitialMigration.cs</DependentUpon>
@@ -78,6 +80,7 @@
       <DependentUpon>201708311715395_AddOrderTransfereeAndRentObjects.cs</DependentUpon>
     </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
+    <Compile Include="Persistence\OrdersRepository.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
     <Compile Include="Persistence\UsersRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

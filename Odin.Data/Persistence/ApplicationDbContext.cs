@@ -5,7 +5,7 @@ using Odin.Data.Persistence.EntityConfigurations;
 
 namespace Odin.Data.Persistence
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
     {
         public DbSet<Transferee> Transferees { get; set; }
         public DbSet<Order> Orders { get; set; }
