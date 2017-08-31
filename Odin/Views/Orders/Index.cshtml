@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Odin.Data.Core.Models.Order>
+
+@{
+    ViewBag.Title = "Transferees";
+}
+
+<h3>Transferee Orders</h3>
+
+<ul class="orders">
+    @foreach (var order in Model)
+    {
+        <li>
+            <div class="transferee">
+                @order.Transferee.TransfereeFullName
+            </div>
+
+        </li>
+    }
+</ul>
