@@ -1,4 +1,5 @@
 using System.Data.Entity.Migrations;
+using System.Linq;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Odin.Data.Core.Models;
@@ -16,6 +17,14 @@ namespace Odin.Data.Persistence.Migrations
         protected override void Seed(ApplicationDbContext context)
         {
             CreateRolesAndUsers(context);
+        }
+
+        private void CreateTransfereeAndOrderData(ApplicationDbContext context)
+        {
+            if (!context.Transferees.Any())
+            {
+                
+            }
         }
 
         private void CreateRolesAndUsers(ApplicationDbContext context)
