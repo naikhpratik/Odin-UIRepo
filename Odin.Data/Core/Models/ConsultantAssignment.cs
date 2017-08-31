@@ -8,15 +8,16 @@ using System.Threading.Tasks;
 
 namespace Odin.Data.Core.Models
 {
-    public class ServiceTeamAssignment
+    public class ConsultantAssignment
     {
+
         public Order Order { get; set; }
         public ApplicationUser Consultant { get; set; }
-
+     
         [Key]
-        [Column(Order = 1)]
+        [Column(Order=1)]
         public int OrderId { get; set; }
-
+        
         [Key]
         [Column(Order = 2)]
         public string ConsultantId { get; set; }

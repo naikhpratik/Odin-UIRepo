@@ -22,5 +22,6 @@ namespace Odin.Data.Core.Models
         public string SpouseName { get; set; }
 
         public ICollection<Order> Orders { get; set; }
+        
     }
 }

@@ -21,11 +21,12 @@ namespace Odin.Data.Core.Models
         public string OriginState { get; set; }
         public string OriginCountry { get; set; }
 
-        [Key]
-        [Column(Order = 1)]
-        public int TransfereeId { get; set; }
+        public int? RentId { get; set; }
         public Rent Rent { get; set; }
 
-        public ICollection<ApplicationUser> ServiceTeam { get; set; }
+        public int TransfereeId { get; set; }
+        public Transferee Transferee { get; set; }
+
+        public ICollection<ConsultantAssignment> Consultants { get; set; }
     }
 }

@@ -57,11 +57,14 @@
     <Compile Include="Core\Models\ApplicationUser.cs" />
     <Compile Include="Core\Models\Order.cs" />
     <Compile Include="Core\Models\Rent.cs" />
+    <Compile Include="Core\Models\ConsultantAssignment.cs" />
     <Compile Include="Core\Models\Transferee.cs" />
     <Compile Include="Core\Models\UserRoles.cs" />
     <Compile Include="Core\Repositories\IUsersRepository.cs" />
     <Compile Include="Persistence\ApplicationDbContext.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
+    <Compile Include="Persistence\EntityConfigurations\OrderConfiguration.cs" />
+    <Compile Include="Persistence\EntityConfigurations\RentConfiguration.cs" />
     <Compile Include="Persistence\Migrations\201708281308044_InitialMigration.cs" />
     <Compile Include="Persistence\Migrations\201708281308044_InitialMigration.Designer.cs">
       <DependentUpon>201708281308044_InitialMigration.cs</DependentUpon>
@@ -69,6 +72,10 @@
     <Compile Include="Persistence\Migrations\201708281322256_AddFirstNameAndLastNameTouser.cs" />
     <Compile Include="Persistence\Migrations\201708281322256_AddFirstNameAndLastNameTouser.Designer.cs">
       <DependentUpon>201708281322256_AddFirstNameAndLastNameTouser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201708311715395_AddOrderTransfereeAndRentObjects.cs" />
+    <Compile Include="Persistence\Migrations\201708311715395_AddOrderTransfereeAndRentObjects.Designer.cs">
+      <DependentUpon>201708311715395_AddOrderTransfereeAndRentObjects.cs</DependentUpon>
     </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
@@ -85,6 +92,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201708281322256_AddFirstNameAndLastNameTouser.resx">
       <DependentUpon>201708281322256_AddFirstNameAndLastNameTouser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201708311715395_AddOrderTransfereeAndRentObjects.resx">
+      <DependentUpon>201708311715395_AddOrderTransfereeAndRentObjects.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

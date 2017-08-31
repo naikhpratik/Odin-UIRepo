@@ -12,5 +12,7 @@ namespace Odin.Data.Core.Models
 
         public decimal? HousingBudget { get; set; }
         //TODO: The rest of the Housing Preferences
+        
+        public Order Order { get; set; }
     }
 }
