@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using Odin.Data.Core;
 
 namespace Odin.Controllers
@@ -20,7 +21,11 @@ namespace Odin.Controllers
         // GET: Orders
         public ActionResult Index()
         {
-            return View();
+            var userId = User.Identity.GetUserId();
+
+            var orders = _unitOfWork.Orders.GetOrdersFor(userId);
+
+            return View(orders);
         }
     }
 }

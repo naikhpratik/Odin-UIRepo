@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,7 @@ namespace Odin.Data.Persistence
             return _context.ConsultantAssignments
                 .Where(ca => ca.ConsultantId == userId)
                 .Select(ca => ca.Order)
+                .Include(o => o.Transferee)
                 .ToList();
         }
     }
