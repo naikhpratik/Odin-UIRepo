@@ -12,7 +12,7 @@ namespace Odin.Tests.Extensions
 {
     public static class ControllerExtensions
     {
-        public static void MockCurrentUser(this Controller controller, string userId)
+        public static void MockControllerContextForUser(this Controller controller, string userId)
         {
             var controllerContext = new Mock<ControllerContext>();
             var claim = new Claim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier", userId);
