@@ -20,6 +20,7 @@ namespace Odin.Data.Core.Models
         public string OriginCity { get; set; }
         public string OriginState { get; set; }
         public string OriginCountry { get; set; }
+        public DateTime? EstimatedArrivalDate { get; set; }
 
         public int? RentId { get; set; }
         public Rent Rent { get; set; }

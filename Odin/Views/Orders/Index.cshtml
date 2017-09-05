@@ -23,6 +23,16 @@
                     @order.DestinationCity, @order.DestinationState
                 </div>
             </div>
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <label class="small-label grey-header">CONSULTANTS</label>
+            </div>
+            @if (order.EstimatedArrivalDate.HasValue)
+            {
+                <div class="col-lg-2 col-md-2 col-sm-2">
+                    <label class="small-label grey-header">Estimated Arrival</label>
+                    @order.EstimatedArrivalDate.Value.ToString("d MMM yyyy")
+                </div>
+            }
             <div class="col-lg-2 col-md-2 col-sm-2">
                 <i class="glyphicon glyphicon-list-alt glyphicon-large"></i>
             </div>

@@ -94,3 +94,13 @@ textarea {
 .glyphicon-large {
     font-size: 25px;
 }
+
+.small-label {
+    font-size: 10px;
+    font-weight: 400;
+    margin-bottom: 0;
+}
+
+.grey-header {
+    color: darkgrey;
+}

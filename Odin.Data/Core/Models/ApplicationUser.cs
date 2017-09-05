@@ -20,5 +20,7 @@ namespace Odin.Data.Core.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        public string FullName => $"{FirstName} {LastName}";
     }
 }

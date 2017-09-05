@@ -10,7 +10,6 @@ namespace Odin.Data.Core.Models
 {
     public class ConsultantAssignment
     {
-
         public Order Order { get; set; }
         public ApplicationUser Consultant { get; set; }
      

@@ -23,7 +23,8 @@ namespace Odin.Data.Builders
                 .RuleFor(o => o.DestinationZip, f => f.Address.ZipCode())
                 .RuleFor(o => o.OriginCity, f => f.Address.City())
                 .RuleFor(o => o.OriginCountry, f => f.Address.CountryCode())
-                .RuleFor(o => o.OriginState, f => f.Address.State());
+                .RuleFor(o => o.OriginState, f => f.Address.State())
+                .RuleFor(o => o.EstimatedArrivalDate, f => f.Date.Future());
 
             var orders = order.Generate(count);
 
