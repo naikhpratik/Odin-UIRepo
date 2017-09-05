@@ -24,7 +24,7 @@ namespace Odin.Data.Persistence
                 .Where(ca => ca.ConsultantId == userId)
                 .Select(ca => ca.Order)
                 .Include(o => o.Transferee)
-                .Include(o => o.Consultants)
+                .Include(o => o.Consultants.Select(c => c.Consultant))
                 .ToList();
         }
     }

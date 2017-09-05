@@ -25,6 +25,12 @@
             </div>
             <div class="col-lg-3 col-md-3 col-sm-3">
                 <label class="small-label grey-header">CONSULTANTS</label>
+                <div>
+                    @foreach (var consultant in order.Consultants)
+                    {
+                        @consultant.Consultant.FullName 
+                    }
+                </div>
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2">
                 @if (order.EstimatedArrivalDate.HasValue)

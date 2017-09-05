@@ -63,8 +63,8 @@ namespace Odin.Data.Persistence.Migrations
                 var newConsultant = new ApplicationUser()
                 {
                     UserName = "austin.emser@dwellworks.com",
-                    FirstName = "Test",
-                    LastName = "Consultant",
+                    FirstName = "Austin",
+                    LastName = "Emser",
                     Email = "austin.emser@dwellworks.com",
                     PhoneNumber = "4403184188"
                 };
@@ -85,7 +85,7 @@ namespace Odin.Data.Persistence.Migrations
                 var newGsc = new ApplicationUser()
                 {
                     UserName = "aemser@dwellworks.com",
-                    FirstName = "Test",
+                    FirstName = "George",
                     LastName = "Gsc",
                     Email="aemser@dwellworks.com",
                     PhoneNumber = "2166824239"
