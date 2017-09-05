@@ -4,16 +4,28 @@
     ViewBag.Title = "Transferees";
 }
 
-<h3>Transferee Orders</h3>
+<h4>Transferees</h4>
 
-<ul class="orders">
+<div class="transferee-list">
     @foreach (var order in Model)
     {
-        <li>
-            <div class="transferee">
-                @order.Transferee.TransfereeFullName
+        <div class="row">
+            <div class="col-lg-1 col-md-1 col-sm-1">
+                <div class="user-image placeholder-image"></div>
             </div>
-
-        </li>
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="transferee">
+                    <a href="#">@order.Transferee.TransfereeFullName</a>
+                </div>
+                
+                <div class="moving-to">
+                    <i class="glyphicon glyphicon-map-marker blue"></i>
+                    @order.DestinationCity, @order.DestinationState
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2">
+                <i class="glyphicon glyphicon-list-alt glyphicon-large"></i>
+            </div>
+        </div>
     }
-</ul>
+</div>
