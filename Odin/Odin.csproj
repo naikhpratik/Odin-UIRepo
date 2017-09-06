@@ -259,6 +259,9 @@
     <Compile Include="ViewModels\Authentication\SetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Authentication\VerifyCodeViewModel.cs" />
     <Compile Include="ViewModels\Authentication\VerifyPhoneNumberViewModel.cs" />
+    <Compile Include="ViewModels\ConsultantViewModel.cs" />
+    <Compile Include="ViewModels\OrderIndexViewModel.cs" />
+    <Compile Include="ViewModels\TransfereeViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-flatly.css" />

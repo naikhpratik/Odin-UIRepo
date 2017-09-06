@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Odin.Data.Core.Models.Order>
+﻿@model IEnumerable<Odin.ViewModels.OrderIndexViewModel>
 
 @{
     ViewBag.Title = "Transferees";
@@ -28,7 +28,7 @@
                 <div>
                     @foreach (var consultant in order.Consultants)
                     {
-                        @consultant.Consultant.FullName 
+                        @consultant.FullName 
                     }
                 </div>
             </div>
