@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Odin.Data.Core.Models;
+using Odin.Filters;
 using Odin.ViewModels.Authentication;
 
 namespace Odin.Controllers
@@ -64,6 +65,7 @@ namespace Odin.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [AiHandleError]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
             if (!ModelState.IsValid)
