@@ -21,8 +21,6 @@ function Update-AzureSQLServerFirewallRule{
   Set-AzureSqlDatabaseServerFirewallRule -StartIPAddress $agentIp -EndIPAddress $agentIp -RuleName $AzureFirewallName -ServerName $AzureServerName
 }
 
-Select-AzureSubscription -SubscriptionName $AzureSubscriptionName
-
 If ((Get-AzureSqlDatabaseServerFirewallRule -ServerName $AzureServerName -RuleName $AzureFirewallName -ErrorAction SilentlyContinue) -eq $null)
 {
   New-AzureSQLServerFirewallRule
