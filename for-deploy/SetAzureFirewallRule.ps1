@@ -2,7 +2,8 @@
 param
 (
   [String] [Parameter(Mandatory = $true)] $ServerName,
-  [String] $AzureFirewallName = "AzureWebAppFirewall"
+  [String] $AzureFirewallName = "AzureWebAppFirewall",
+  [String] [Parameter(Mandatory = $true)] $AzureSubscriptionName
 )
 
 $ErrorActionPreference = 'Stop'
@@ -15,6 +16,8 @@ function Update-AzureSQLServerFirewallRule{
   $agentIP= (New-Object net.webclient).downloadstring("http://checkip.dyndns.com") -replace "[^\d\.]"
   Set-AzureSqlDatabaseServerFirewallRule -StartIPAddress $agentIp -EndIPAddress $agentIp -RuleName $AzureFirewallName -ServerName $ServerName
 }
+
+Select-AzureSubscription -SubscriptionName $AzureSubscriptionName 
 
 If ((Get-AzureSqlDatabaseServerFirewallRule -ServerName $ServerName -RuleName $AzureFirewallName -ErrorAction SilentlyContinue) -eq $null)
 {
