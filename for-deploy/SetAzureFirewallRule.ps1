@@ -1,8 +1,6 @@
-[CmdletBinding(DefaultParameterSetName = 'None')]
 param
 (
   [String] [Parameter(Mandatory = $true)] $ServerName,
-  [String] [Parameter(Mandatory = $true)] $AzureSubscriptionName,
   [String] $AzureFirewallName = "AzureWebAppFirewall"
 )
 
@@ -17,7 +15,7 @@ function Update-AzureSQLServerFirewallRule{
   Set-AzureSqlDatabaseServerFirewallRule -StartIPAddress $agentIp -EndIPAddress $agentIp -RuleName $AzureFirewallName -ServerName $ServerName
 }
 
-Select-AzureSubscription -Default $AzureSubscriptionName 
+Select-AzureSubscription -Default "Free Trial"
 
 If ((Get-AzureSqlDatabaseServerFirewallRule -ServerName $ServerName -RuleName $AzureFirewallName -ErrorAction SilentlyContinue) -eq $null)
 {
