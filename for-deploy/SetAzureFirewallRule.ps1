@@ -2,8 +2,8 @@
 param
 (
   [String] [Parameter(Mandatory = $true)] $ServerName,
-  [String] $AzureFirewallName = "AzureWebAppFirewall",
-  [String] [Parameter(Mandatory = $true)] $AzureSubscriptionName
+  [String] [Parameter(Mandatory = $true)] $AzureSubscriptionName,
+  [String] $AzureFirewallName = "AzureWebAppFirewall"
 )
 
 $ErrorActionPreference = 'Stop'
