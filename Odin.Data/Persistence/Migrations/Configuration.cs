@@ -25,7 +25,7 @@ namespace Odin.Data.Persistence.Migrations
         {
             if (!context.Transferees.Any())
             {
-                var dsc = context.Users.First(u => u.LastName.Equals("Consultant"));
+                var dsc = context.Users.First(u => u.LastName.Equals("Emser"));
                 int count = 10;
                 var transferees = TransfereeBuilder.New(count);
                 var orders = OrderBuilder.New(count);
