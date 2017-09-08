@@ -24,7 +24,7 @@ namespace Odin.Controllers
         }
 
         // GET: Orders
-        public ActionResult Index()
+        public ViewResult Index()
         {
             var userId = User.Identity.GetUserId();
 

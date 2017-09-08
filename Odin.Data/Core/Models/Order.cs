@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -10,6 +11,11 @@ namespace Odin.Data.Core.Models
 {
     public class Order
     {
+        public Order()
+        {
+            Consultants = new Collection<ConsultantAssignment>();
+        }
+
         public int Id { get; set; }
         public string TrackingId { get; set; }
         public string RelocationType { get; set; }
