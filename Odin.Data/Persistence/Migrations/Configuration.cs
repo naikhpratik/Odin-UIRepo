@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Odin.Data.Persistence.Migrations
 {
-    internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
+    public sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {
         public Configuration()
         {
