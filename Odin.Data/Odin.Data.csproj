@@ -105,6 +105,10 @@
     <Compile Include="Persistence\Migrations\201709051444089_AddEstimatedArrivalToOrders.Designer.cs">
       <DependentUpon>201709051444089_AddEstimatedArrivalToOrders.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201709111335207_CiTest.cs" />
+    <Compile Include="Persistence\Migrations\201709111335207_CiTest.Designer.cs">
+      <DependentUpon>201709111335207_CiTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
@@ -129,6 +133,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201709051444089_AddEstimatedArrivalToOrders.resx">
       <DependentUpon>201709051444089_AddEstimatedArrivalToOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709111335207_CiTest.resx">
+      <DependentUpon>201709111335207_CiTest.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
