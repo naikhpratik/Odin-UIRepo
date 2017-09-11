@@ -109,6 +109,10 @@
     <Compile Include="Persistence\Migrations\201709111335207_CiTest.Designer.cs">
       <DependentUpon>201709111335207_CiTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201709111341210_RemoveCiTest.cs" />
+    <Compile Include="Persistence\Migrations\201709111341210_RemoveCiTest.Designer.cs">
+      <DependentUpon>201709111341210_RemoveCiTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
@@ -136,6 +140,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201709111335207_CiTest.resx">
       <DependentUpon>201709111335207_CiTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709111341210_RemoveCiTest.resx">
+      <DependentUpon>201709111341210_RemoveCiTest.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
