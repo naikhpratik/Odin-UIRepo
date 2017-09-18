@@ -18,7 +18,6 @@ namespace Odin.Data.Core.Models
 
         public int Id { get; set; }
         
-
         public string TrackingId { get; set; }
         public string RelocationType { get; set; }
         public string DestinationCity { get; set; }
@@ -29,7 +28,8 @@ namespace Odin.Data.Core.Models
         public string OriginState { get; set; }
         public string OriginCountry { get; set; }
         public DateTime? EstimatedArrivalDate { get; set; }
-
+        public string FamilyDetails { get; set; }
+        
         public int? RentId { get; set; }
         public Rent Rent { get; set; }
 

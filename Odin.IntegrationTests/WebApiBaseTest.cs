@@ -29,6 +29,7 @@ namespace Odin.IntegrationTests
         public void SetUp()
         {
             Context = new ApplicationDbContext();
+            ApiKey = "SeApiTokenKeyTest";
 
             NinjectWebCommon.Start();
             var config = new HttpConfiguration();
@@ -67,7 +68,7 @@ namespace Odin.IntegrationTests
         {
             var request = CreateRequest(url, mthv, method);
             request.Content = new ObjectContent<T>(content, new JsonMediaTypeFormatter());
-
+            
             return request;
         }
 

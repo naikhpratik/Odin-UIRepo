@@ -80,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Builders\OrderBuilder.cs" />
+    <Compile Include="Builders\OrderDtoBuilder.cs" />
     <Compile Include="Builders\TransfereeBuilder.cs" />
     <Compile Include="Core\Dtos\ConsultantDto.cs" />
     <Compile Include="Core\Dtos\OrderDto.cs" />
@@ -133,6 +134,10 @@
     <Compile Include="Persistence\Migrations\201709181847512_AddIndexToOrder.Designer.cs">
       <DependentUpon>201709181847512_AddIndexToOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201709182035102_AddFamilyDetailsToOrder.cs" />
+    <Compile Include="Persistence\Migrations\201709182035102_AddFamilyDetailsToOrder.Designer.cs">
+      <DependentUpon>201709182035102_AddFamilyDetailsToOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
@@ -169,6 +174,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201709181847512_AddIndexToOrder.resx">
       <DependentUpon>201709181847512_AddIndexToOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709182035102_AddFamilyDetailsToOrder.resx">
+      <DependentUpon>201709182035102_AddFamilyDetailsToOrder.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

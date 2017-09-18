@@ -32,18 +32,7 @@ namespace Odin.Controllers.Api
         {
             var order = _unitOfWork.Orders.GetOrderByTrackingId(orderDto.TrackingId);
 
-            if (order == null)
-            {
-                order = _mapper.Map<OrderDto, Order>(orderDto);
-                // insert import
-            }
-            else
-            {
-                // update import
-                // order update params with orderDto   
-            }
-
-            
+            _mapper.Map<OrderDto, Order>(orderDto, order);
 
             // Convert OrderDto to order
             // Upsert
