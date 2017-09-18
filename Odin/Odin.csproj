@@ -239,9 +239,12 @@
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\TransfereesController.cs" />
     <Compile Include="Filters\AiHandleErrorAttribute.cs" />
+    <Compile Include="Filters\ApiAuthorizeAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ConfigHelper.cs" />
+    <Compile Include="Interfaces\IConfigHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\Authentication\AddPhoneNumberViewModel.cs" />

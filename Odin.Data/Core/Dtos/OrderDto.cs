@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,11 @@ namespace Odin.Data.Core.Dtos
 {
     public class OrderDto
     {
+        public OrderDto()
+        {
+            Consultants = new Collection<ConsultantDto>();
+        }
+
         public int Id { get; set; }
         public string TrackingId { get; set; }
         public string RelocationType { get; set; }
@@ -21,5 +27,8 @@ namespace Odin.Data.Core.Dtos
         public DateTime? EstimatedArrivalDate { get; set; }
 
         public TransfereeDto Transferee { get; set; }
+        public ProgramManagerDto ProgramManager { get; set; }
+
+        public ICollection<ConsultantDto> Consultants { get; set; }
     }
 }

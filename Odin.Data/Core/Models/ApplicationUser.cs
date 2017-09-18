@@ -11,6 +11,8 @@ namespace Odin.Data.Core.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
+        public int? SeContactUid { get; set; }
+
         public ICollection<ConsultantAssignment> Orders { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)

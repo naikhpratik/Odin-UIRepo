@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http.ModelBinding;
+using Odin.Data.Extensions;
 
 namespace Odin.Data.Core.Models
 {

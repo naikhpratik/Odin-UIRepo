@@ -81,6 +81,10 @@
   <ItemGroup>
     <Compile Include="Builders\OrderBuilder.cs" />
     <Compile Include="Builders\TransfereeBuilder.cs" />
+    <Compile Include="Core\Dtos\ConsultantDto.cs" />
+    <Compile Include="Core\Dtos\OrderDto.cs" />
+    <Compile Include="Core\Dtos\ProgramManagerDto.cs" />
+    <Compile Include="Core\Dtos\TransfereeDto.cs" />
     <Compile Include="Core\Dtos\UserDto.cs" />
     <Compile Include="Core\Models\ApplicationUser.cs" />
     <Compile Include="Core\Models\ErrorResponse.cs" />
@@ -91,6 +95,7 @@
     <Compile Include="Core\Models\UserRoles.cs" />
     <Compile Include="Core\Repositories\IOrdersRepository.cs" />
     <Compile Include="Core\Repositories\IUsersRepository.cs" />
+    <Compile Include="Extensions\ModelStateExtensions.cs" />
     <Compile Include="Persistence\ApplicationDbContext.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Persistence\EntityConfigurations\OrderConfiguration.cs" />
@@ -119,6 +124,10 @@
     <Compile Include="Persistence\Migrations\201709111341210_RemoveCiTest.cs" />
     <Compile Include="Persistence\Migrations\201709111341210_RemoveCiTest.Designer.cs">
       <DependentUpon>201709111341210_RemoveCiTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201709181541291_AddSeContactUidToUsersAndPmToOrders.cs" />
+    <Compile Include="Persistence\Migrations\201709181541291_AddSeContactUidToUsersAndPmToOrders.Designer.cs">
+      <DependentUpon>201709181541291_AddSeContactUidToUsersAndPmToOrders.cs</DependentUpon>
     </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
@@ -150,6 +159,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201709111341210_RemoveCiTest.resx">
       <DependentUpon>201709111341210_RemoveCiTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709181541291_AddSeContactUidToUsersAndPmToOrders.resx">
+      <DependentUpon>201709181541291_AddSeContactUidToUsersAndPmToOrders.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

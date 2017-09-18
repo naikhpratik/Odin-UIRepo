@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Odin.Data.Core.Dtos
 {
-    public class TransfereeDto
+    public class ConsultantDto
     {
         public string Email { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string SpouseName { get; set; }
+        public int SeContactUid { get; set; }
     }
 }

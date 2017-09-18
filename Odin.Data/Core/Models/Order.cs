@@ -34,6 +34,9 @@ namespace Odin.Data.Core.Models
         public int TransfereeId { get; set; }
         public Transferee Transferee { get; set; }
 
+        public ApplicationUser ProgramManager { get; set; }
+        public string ProgramManagerId { get; set; }
+
         public ICollection<ConsultantAssignment> Consultants { get; set; }
     }
 }
