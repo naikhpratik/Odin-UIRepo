@@ -27,5 +27,10 @@ namespace Odin.Data.Persistence
                 .Include(o => o.Consultants.Select(c => c.Consultant))
                 .ToList();
         }
+
+        public Order GetOrderByTrackingId(string trackingId)
+        {
+            return _context.Orders.SingleOrDefault(o => o.TrackingId.Equals(trackingId));
+        }
     }
 }

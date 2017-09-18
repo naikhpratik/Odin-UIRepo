@@ -23,6 +23,7 @@ namespace Odin.IntegrationTests
         protected HttpClient Client;
         protected ApplicationDbContext Context;
         private HttpServer _server;
+        protected string ApiKey;
 
         [SetUp]
         public void SetUp()

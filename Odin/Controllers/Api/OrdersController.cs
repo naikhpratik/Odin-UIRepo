@@ -4,6 +4,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using AutoMapper;
+using Odin.Data.Core;
 using Odin.Data.Core.Dtos;
 using Odin.Data.Core.Models;
 using Odin.Filters;
@@ -13,11 +15,36 @@ namespace Odin.Controllers.Api
     [Authorize]
     public class OrdersController : ApiController
     {
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
+
+        public OrdersController(IUnitOfWork unitOfWork, IMapper mapper)
+        {
+            _unitOfWork = unitOfWork;
+            _mapper = mapper;
+        }
+
         // POST /api/orders
         [HttpPost]
         [ApiAuthorize]
-        public IHttpActionResult UpsertOrder(OrderDto order)
+        [ValidationActionFilter]
+        public IHttpActionResult UpsertOrder(OrderDto orderDto)
         {
+            var order = _unitOfWork.Orders.GetOrderByTrackingId(orderDto.TrackingId);
+
+            if (order == null)
+            {
+                order = _mapper.Map<OrderDto, Order>(orderDto);
+                // insert import
+            }
+            else
+            {
+                // update import
+                // order update params with orderDto   
+            }
+
+            
+
             // Convert OrderDto to order
             // Upsert
             // Determine if consultant is new
