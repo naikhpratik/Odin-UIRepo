@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.Infrastructure.Annotations;
 using System.Data.Entity.ModelConfiguration;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
@@ -21,6 +23,11 @@ namespace Odin.Data.Persistence.EntityConfigurations
                 .WithRequired(ca => ca.Order)
                 .WillCascadeOnDelete(false);
 
+            Property(o => o.TrackingId)
+                .IsRequired()
+                .HasColumnAnnotation(
+                    IndexAnnotation.AnnotationName,
+                    new IndexAnnotation(new IndexAttribute("IX_TrackingID") {IsUnique = true}));
         }
     }
 }

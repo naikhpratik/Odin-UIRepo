@@ -17,6 +17,9 @@ namespace Odin
                 .ForMember(c => c.FirstName, opt => opt.MapFrom(src => src.Consultant.FirstName))
                 .ForMember(c => c.LastName, opt => opt.MapFrom(src => src.Consultant.LastName));
             CreateMap<Transferee, TransfereeViewModel>();
+
+            CreateMap<OrderDto, Order>();
+            CreateMap<TransfereeDto, Transferee>();
         }
     }
 }

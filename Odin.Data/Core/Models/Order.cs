@@ -17,6 +17,8 @@ namespace Odin.Data.Core.Models
         }
 
         public int Id { get; set; }
+        
+
         public string TrackingId { get; set; }
         public string RelocationType { get; set; }
         public string DestinationCity { get; set; }
