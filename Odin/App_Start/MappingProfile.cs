@@ -20,6 +20,7 @@ namespace Odin
 
             CreateMap<OrderDto, Order>();
             CreateMap<TransfereeDto, Transferee>();
+            CreateMap<ProgramManagerDto, ApplicationUser>();
         }
     }
 }

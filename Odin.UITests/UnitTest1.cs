@@ -15,7 +15,7 @@ namespace Odin.UITests
         private string browser;
         public TestContext TestContext { get; set; }
 
-        [TestMethod]
+        //[TestMethod]
         public void Chrome_Login_Logout()
         {
             driver = new ChromeDriver();

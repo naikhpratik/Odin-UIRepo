@@ -12,7 +12,7 @@ using Odin.Filters;
 
 namespace Odin.Controllers.Api
 {
-    [Authorize]
+    
     public class OrdersController : ApiController
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -32,7 +32,15 @@ namespace Odin.Controllers.Api
         {
             var order = _unitOfWork.Orders.GetOrderByTrackingId(orderDto.TrackingId);
 
-            _mapper.Map<OrderDto, Order>(orderDto, order);
+            if (order == null)
+            {
+                order = _mapper.Map<OrderDto, Order>(orderDto);
+            }
+            else
+            {
+                _mapper.Map<OrderDto, Order>(orderDto, order);
+            }
+            
 
             // Convert OrderDto to order
             // Upsert
@@ -41,7 +49,7 @@ namespace Odin.Controllers.Api
             // Lookup Program Manager by secontactuid, assign PM, or throw back error pm does not exist
             // Lookup transferee by email, if new transferee add transferee record.
 
-            return Ok();
+            return Ok(order);
         }
     }
 }

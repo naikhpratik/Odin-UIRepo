@@ -82,6 +82,7 @@
     <Compile Include="Builders\OrderBuilder.cs" />
     <Compile Include="Builders\OrderDtoBuilder.cs" />
     <Compile Include="Builders\TransfereeBuilder.cs" />
+    <Compile Include="Builders\TransfereeDtoBuilder.cs" />
     <Compile Include="Core\Dtos\ConsultantDto.cs" />
     <Compile Include="Core\Dtos\OrderDto.cs" />
     <Compile Include="Core\Dtos\ProgramManagerDto.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Core\Repositories\IOrdersRepository.cs" />
     <Compile Include="Core\Repositories\IUsersRepository.cs" />
     <Compile Include="Extensions\ModelStateExtensions.cs" />
+    <Compile Include="Helpers\TokenHelper.cs" />
     <Compile Include="Persistence\ApplicationDbContext.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Persistence\EntityConfigurations\OrderConfiguration.cs" />

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Bogus;
 using Odin.Data.Core.Dtos;
+using Odin.Data.Helpers;
 
 namespace Odin.Data.Builders
 {
@@ -14,8 +15,7 @@ namespace Odin.Data.Builders
         {
             var relocationTypes = new[] { "International", "Domestic" };
 
-            var orderDto = new Faker<OrderDto>()
-                .RuleFor(o => o.TrackingId, f => f.IndexFaker + 1.ToString())
+            var orderFaker = new Faker<OrderDto>()
                 .RuleFor(o => o.RelocationType, f => f.PickRandom(relocationTypes))
                 .RuleFor(o => o.DestinationCity, f => f.Address.City())
                 .RuleFor(o => o.DestinationState, f => f.Address.State())
@@ -25,6 +25,10 @@ namespace Odin.Data.Builders
                 .RuleFor(o => o.OriginCountry, f => f.Address.CountryCode())
                 .RuleFor(o => o.OriginState, f => f.Address.State())
                 .RuleFor(o => o.EstimatedArrivalDate, f => f.Date.Future());
+
+            var orderDto = orderFaker.Generate();
+
+            orderDto.TrackingId = TokenHelper.NewToken();
 
             return orderDto;
         }
