@@ -25,6 +25,7 @@ namespace Odin.Data.Persistence.EntityConfigurations
 
             Property(o => o.TrackingId)
                 .IsRequired()
+                .HasMaxLength(20)
                 .HasColumnAnnotation(
                     IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new IndexAttribute("IX_TrackingID") {IsUnique = true}));

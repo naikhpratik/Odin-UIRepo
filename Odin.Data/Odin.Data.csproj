@@ -129,6 +129,10 @@
     <Compile Include="Persistence\Migrations\201709181541291_AddSeContactUidToUsersAndPmToOrders.Designer.cs">
       <DependentUpon>201709181541291_AddSeContactUidToUsersAndPmToOrders.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201709181847512_AddIndexToOrder.cs" />
+    <Compile Include="Persistence\Migrations\201709181847512_AddIndexToOrder.Designer.cs">
+      <DependentUpon>201709181847512_AddIndexToOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
@@ -162,6 +166,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201709181541291_AddSeContactUidToUsersAndPmToOrders.resx">
       <DependentUpon>201709181541291_AddSeContactUidToUsersAndPmToOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709181847512_AddIndexToOrder.resx">
+      <DependentUpon>201709181847512_AddIndexToOrder.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
