@@ -30,7 +30,16 @@ namespace Odin.Domain
                 _mapper.Map<OrderDto, Order>(orderDto, order);
             }
 
+            // If transferee is not new add order to transferee
+            var transferee = _unitOfWork.Transferees.GetTransfereeByEmail(order.Transferee.Email);
+            if (transferee != null)
+            {
+                transferee.Orders.Add(order);
+                order.Transferee = transferee;
+            }
+
             
+
             // Upsert
             // Determine if consultant is new
             //      If new create user and start process of emailing DSC
