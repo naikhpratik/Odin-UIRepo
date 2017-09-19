@@ -16,17 +16,17 @@ namespace Odin.Data.Persistence.EntityConfigurations
         public OrderConfiguration()
         {
             HasRequired(o => o.Transferee)
-                .WithMany()
+                .WithMany(t => t.Orders)
                 .HasForeignKey(o => o.TransfereeId)
                 .WillCascadeOnDelete(false);
 
             HasRequired(o => o.ProgramManager)
-                .WithMany()
+                .WithMany(p => p.Orders)
                 .HasForeignKey(o => o.ProgramManagerId)
                 .WillCascadeOnDelete(false);
 
             HasRequired(o => o.Consultant)
-                .WithMany()
+                .WithMany(c => c.Orders)
                 .HasForeignKey(o => o.ConsultantId)
                 .WillCascadeOnDelete(false);
 

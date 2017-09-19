@@ -79,7 +79,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Builders\ApplicationUserBuilder.cs" />
+    <Compile Include="Builders\TransfereeBuilder.cs" />
     <Compile Include="Builders\OrderBuilder.cs" />
     <Compile Include="Builders\OrderDtoBuilder.cs" />
     <Compile Include="Builders\TransfereeDtoBuilder.cs" />
@@ -89,9 +89,12 @@
     <Compile Include="Core\Dtos\TransfereeDto.cs" />
     <Compile Include="Core\Dtos\UserDto.cs" />
     <Compile Include="Core\Models\ApplicationUser.cs" />
+    <Compile Include="Core\Models\Consultant.cs" />
     <Compile Include="Core\Models\ErrorResponse.cs" />
     <Compile Include="Core\Models\Order.cs" />
+    <Compile Include="Core\Models\Manager.cs" />
     <Compile Include="Core\Models\Rent.cs" />
+    <Compile Include="Core\Models\Transferee.cs" />
     <Compile Include="Core\Models\UserRoles.cs" />
     <Compile Include="Core\Repositories\IOrdersRepository.cs" />
     <Compile Include="Core\Repositories\IUsersRepository.cs" />

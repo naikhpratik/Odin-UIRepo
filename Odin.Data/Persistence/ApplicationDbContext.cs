@@ -9,6 +9,9 @@ namespace Odin.Data.Persistence
     {
         public DbSet<Order> Orders { get; set; }
         public DbSet<Rent> Rents { get; set; }
+        public DbSet<Manager> Managers { get; set; }
+        public DbSet<Consultant> Consultants { get; set; }
+        public DbSet<Transferee> Transferees { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
@@ -24,7 +27,6 @@ namespace Odin.Data.Persistence
         {
             modelBuilder.Configurations.Add(new OrderConfiguration());
             modelBuilder.Configurations.Add(new RentConfiguration());
-
 
             base.OnModelCreating(modelBuilder);
         }

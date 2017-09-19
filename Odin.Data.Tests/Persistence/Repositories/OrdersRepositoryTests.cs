@@ -31,8 +31,8 @@ namespace Odin.Data.Tests.Persistence.Repositories
         [TestMethod]
         public void GetOrdersFor_OrderIsForDifferentUser_ShouldNotBeReturned()
         {
-            var consultant = new ApplicationUser() {Id = "fake-user-id" } ;
-            var order = new Order() {Transferee = new ApplicationUser(), DestinationCity = "Vancouver", ProgramManager = new ApplicationUser(), Consultant = consultant };
+            var consultant = new Consultant() {Id = "fake-user-id" } ;
+            var order = new Order() {Transferee = new Transferee(), DestinationCity = "Vancouver", ProgramManager = new Manager(), Consultant = consultant };
 
             SetupRepositoryWithSource(new[] {order});
 
@@ -44,8 +44,8 @@ namespace Odin.Data.Tests.Persistence.Repositories
         [TestMethod]
         public void GetOrdersFor_OrderIsForUser_ShouldReturnOrder()
         {
-            var consultant = new ApplicationUser() { Id = "fake-user-id" };
-            var order = new Order() { Transferee = new ApplicationUser(), DestinationCity = "Vancouver", ProgramManager = new ApplicationUser(), Consultant = consultant };
+            var consultant = new Consultant() { Id = "fake-user-id" };
+            var order = new Order() { Transferee = new Transferee(), DestinationCity = "Vancouver", ProgramManager = new Manager(), Consultant = consultant };
             
             SetupRepositoryWithSource(new[] { order });
 
@@ -57,10 +57,10 @@ namespace Odin.Data.Tests.Persistence.Repositories
         [TestMethod]
         public void GetOrdersFor_OneOrderIsForUser_ShouldReturnCorrectOrder()
         {
-            var consultant1 = new ApplicationUser() {Id = "consultant1"};
-            var consultant2 = new ApplicationUser() { Id = "consultant2" };
-            var order1 = new Order() { Transferee = new ApplicationUser(), Id = 1,  ProgramManager = new ApplicationUser(), Consultant = consultant1};
-            var order2 = new Order() { Transferee = new ApplicationUser(), Id = 2, ProgramManager = new ApplicationUser(), Consultant = consultant2};
+            var consultant1 = new Consultant() {Id = "consultant1"};
+            var consultant2 = new Consultant() { Id = "consultant2" };
+            var order1 = new Order() { Transferee = new Transferee(), Id = 1,  ProgramManager = new Manager(), Consultant = consultant1};
+            var order2 = new Order() { Transferee = new Transferee(), Id = 2, ProgramManager = new Manager(), Consultant = consultant2};
             
             SetupRepositoryWithSource(new[] { order1, order2 });
 

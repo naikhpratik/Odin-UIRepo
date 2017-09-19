@@ -8,11 +8,11 @@ using Odin.Data.Core.Models;
 
 namespace Odin.Data.Builders
 {
-    public static class ApplicationUserBuilder
+    public static class TransfereeBuilder
     {
-        public static ApplicationUser New()
+        public static Transferee New()
         {
-            var newUser = new Faker<ApplicationUser>()
+            var newUser = new Faker<Transferee>()
                 .RuleFor(u => u.FirstName, f => f.Name.FirstName())
                 .RuleFor(u => u.LastName, f => f.Name.LastName())
                 .RuleFor(u => u.UserName, (f, u) => f.Internet.UserName(u.FirstName, u.LastName))

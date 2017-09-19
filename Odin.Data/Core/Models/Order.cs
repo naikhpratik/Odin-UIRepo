@@ -29,13 +29,13 @@ namespace Odin.Data.Core.Models
         public Rent Rent { get; set; }
         
         public string TransfereeId { get; set; }
-        public ApplicationUser Transferee { get; set; }
+        public virtual Transferee Transferee { get; set; }
 
         public string ProgramManagerId { get; set; }
-        public ApplicationUser ProgramManager { get; set; }
+        public virtual Manager ProgramManager { get; set; }
 
         public string ConsultantId { get; set; }
-        public ApplicationUser Consultant { get; set; }
+        public virtual Consultant Consultant { get; set; }
         
     }
 }

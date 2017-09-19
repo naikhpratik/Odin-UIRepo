@@ -1,14 +1,21 @@
+using System;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Odin.Data.Builders;
 using Odin.Data.Core.Models;
 using System.Data.Entity.Migrations;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace Odin.Data.Persistence.Migrations
 {
     public sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {
+        private static readonly string _odinConsultantUserName = "odinconsultant@dwellworks.com";
+        private static readonly string _odinGscUserName = "odingsc@dwellworks.com";
+        private static readonly string _odinPmUserName = "odinpm@dwellworks.com";
+        private static readonly string _odinEeUserName = "odinee@dwellworks.com";
+
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
@@ -17,7 +24,8 @@ namespace Odin.Data.Persistence.Migrations
 
         protected override void Seed(ApplicationDbContext context)
         {
-            SeedInitialRolesAndUsers(context);
+            SeedInitialRoles(context);
+            SeedInitialUsers(context);
             CreateOrderData(context);
         }
 
@@ -25,8 +33,8 @@ namespace Odin.Data.Persistence.Migrations
         {
             if (!context.Orders.Any())
             {
-                var dsc = context.Users.First(u => u.LastName.Equals("Emser"));
-                var pm = context.Users.First(u => u.UserName.Equals("odin-pm@dwellworks.com"));
+                var dsc = context.Consultants.First(u => u.UserName.Equals(_odinConsultantUserName));
+                var pm = context.Managers.First(u => u.UserName.Equals(_odinPmUserName));
 
                 int count = 10;
                 var orders = OrderBuilder.New(count);
@@ -43,18 +51,92 @@ namespace Odin.Data.Persistence.Migrations
             }
         }
 
-        private ApplicationUser CreateRandomTransferee(ApplicationDbContext context)
+        private Transferee CreateRandomTransferee(ApplicationDbContext context)
         {
-            var userStore = new UserStore<ApplicationUser>(context);
-            var userManager = new UserManager<ApplicationUser>(userStore);
+            var userStore = new UserStore<Transferee>(context);
+            var userManager = new UserManager<Transferee>(userStore);
 
-            var user = ApplicationUserBuilder.New();
+            var user = TransfereeBuilder.New();
             userManager.Create(user, "Transferee5$");
-            userManager.AddToRole(user.Id, UserRoles.Transferee);
             return user;
         }
 
-        private void SeedInitialRolesAndUsers(ApplicationDbContext context)
+        private void SeedInitialUsers(ApplicationDbContext context)
+        {
+            var consultantStore = new UserStore<Consultant>(context);
+            var consultantManager = new UserManager<Consultant>(consultantStore);
+
+            var consultantUser = consultantManager.FindByName(_odinConsultantUserName);
+            if (consultantUser == null)
+            {
+                var newConsultant = new Consultant()
+                {
+                    UserName = _odinConsultantUserName,
+                    FirstName = "Odin",
+                    LastName = "Consultant",
+                    Email = _odinConsultantUserName,
+                    PhoneNumber = "4403184188"
+                };
+                var result = consultantManager.Create(newConsultant, "OdinOdin5$");
+                consultantManager.AddToRole(newConsultant.Id, UserRoles.Consultant);
+            }
+
+
+            var managerStore = new UserStore<Manager>(context);
+            var managerManager = new UserManager<Manager>(managerStore);
+
+            var gscUser = managerManager.FindByName(_odinGscUserName);
+            if (gscUser == null)
+            {
+                var newGsc = new Manager()
+                {
+                    UserName = _odinGscUserName,
+                    FirstName = "George",
+                    LastName = "Gsc",
+                    Email = _odinGscUserName,
+                    PhoneNumber = "2166824239"
+                };
+                managerManager.Create(newGsc, "OdinOdin5$");
+                managerManager.AddToRole(newGsc.Id, UserRoles.GlobalSupplyChain);
+            }
+
+
+
+            var pmUser = managerManager.FindByName(_odinPmUserName);
+            if (pmUser == null)
+            {
+                var newPm = new Manager()
+                {
+                    UserName = _odinPmUserName,
+                    FirstName = "Odin",
+                    LastName = "Pm",
+                    Email = _odinPmUserName,
+                    PhoneNumber = "2166824239"
+                };
+                managerManager.Create(newPm, "OdinOdin5$");
+                managerManager.AddToRole(newPm.Id, UserRoles.ProgramManager);
+            }
+
+            var transfereeStore = new UserStore<Transferee>(context);
+            var transfereeManager = new UserManager<Transferee>(transfereeStore);
+
+            var eeUser = transfereeManager.FindByName(_odinEeUserName);
+            if (eeUser == null)
+            {
+                var newEe = new Transferee()
+                {
+                    UserName = _odinEeUserName,
+                    Email = _odinEeUserName,
+                    FirstName = "Odin",
+                    LastName = "Ee",
+                    PhoneNumber = "2166824239"
+                };
+                transfereeManager.Create(newEe, "OdinOdin5$");
+                transfereeManager.AddToRole(newEe.Id, UserRoles.Transferee);
+            }
+        }
+
+        private void SeedInitialRoles(ApplicationDbContext context)
         {
             var roleStore = new RoleStore<IdentityRole>(context);
             var roleManager = new RoleManager<IdentityRole>(roleStore);
@@ -66,68 +148,11 @@ namespace Odin.Data.Persistence.Migrations
                 roleManager.Create(consultantRole);
             }
 
-            var userStore = new UserStore<ApplicationUser>(context);
-            var userManager = new UserManager<ApplicationUser>(userStore);
-
-            var odinConsultantName = "odin-consultant@dwellworks.com";
-            var consultantUser = userManager.FindByName(odinConsultantName);
-            if (consultantUser == null)
-            {
-                var newConsultant = new ApplicationUser()
-                {
-                    UserName = odinConsultantName,
-                    FirstName = "Odin",
-                    LastName = "Consultant",
-                    Email = odinConsultantName,
-                    PhoneNumber = "4403184188"
-                };
-                userManager.Create(newConsultant, "Consultant5$");
-                userManager.AddToRole(newConsultant.Id, UserRoles.Consultant);
-            }
-
             var gscRole = roleManager.FindByName(UserRoles.GlobalSupplyChain);
             if (gscRole == null)
             {
                 gscRole = new IdentityRole(UserRoles.GlobalSupplyChain);
                 roleManager.Create(gscRole);
-            }
-
-            var odinGscName = "odin-gsc@dwellworks.com";
-            var gscUser = userManager.FindByName(odinGscName);
-            if (gscUser == null)
-            {
-                var newGsc = new ApplicationUser()
-                {
-                    UserName = odinGscName,
-                    FirstName = "George",
-                    LastName = "Gsc",
-                    Email= odinGscName,
-                    PhoneNumber = "2166824239"
-                };
-                userManager.Create(newGsc, "Global5$");
-                userManager.AddToRole(newGsc.Id,UserRoles.GlobalSupplyChain);
-            }
-
-            var pmRole = roleManager.FindByName(UserRoles.ProgramManager);
-            if (pmRole == null)
-            {
-                pmRole = new IdentityRole(UserRoles.ProgramManager);
-                roleManager.Create(pmRole);
-            }
-
-            var pmUser = userManager.FindByName("odin-pm@dwellworks.com");
-            if (pmUser == null)
-            {
-                var newPm = new ApplicationUser()
-                {
-                    UserName = "odin-pm@dwellworks.com",
-                    FirstName = "Odin",
-                    LastName = "Pm",
-                    Email = "odin-pm@dwellworks.com",
-                    PhoneNumber = "2166824239"
-                };
-                userManager.Create(newPm, "OdinPm5$");
-                userManager.AddToRole(newPm.Id, UserRoles.ProgramManager);
             }
 
             var eeRole = roleManager.FindByName(UserRoles.Transferee);
@@ -137,19 +162,11 @@ namespace Odin.Data.Persistence.Migrations
                 roleManager.Create(eeRole);
             }
 
-            var eeUser = userManager.FindByName("odin-ee@dwellworks.com");
-            if (eeUser == null)
+            var pmRole = roleManager.FindByName(UserRoles.ProgramManager);
+            if (pmRole == null)
             {
-                var newEe = new ApplicationUser()
-                {
-                    UserName = "odin-ee@dwellworks.com",
-                    Email = "odin-ee@dwellworks.com",
-                    FirstName = "Odin",
-                    LastName = "Ee",
-                    PhoneNumber = "2166824239"
-                };
-                userManager.Create(newEe, "OdinEe5$");
-                userManager.AddToRole(newEe.Id, UserRoles.Transferee);
+                pmRole = new IdentityRole(UserRoles.ProgramManager);
+                roleManager.Create(pmRole);
             }
         }
     }
