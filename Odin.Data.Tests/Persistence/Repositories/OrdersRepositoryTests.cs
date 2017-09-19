@@ -31,12 +31,12 @@ namespace Odin.Data.Tests.Persistence.Repositories
         [TestMethod]
         public void GetOrdersFor_OrderIsForDifferentUser_ShouldNotBeReturned()
         {
-            var consultant = new ApplicationUser();
+            var consultant = new ApplicationUser() {Id = "fake-user-id" } ;
             var order = new Order() {Transferee = new ApplicationUser(), DestinationCity = "Vancouver", ProgramManager = new ApplicationUser(), Consultant = consultant };
 
             SetupRepositoryWithSource(new[] {order});
 
-            var orders = _ordersRepository.GetOrdersFor(consultant. + "-");
+            var orders = _ordersRepository.GetOrdersFor(consultant.Id + "-");
 
             orders.Should().BeEmpty();
         }
@@ -44,12 +44,12 @@ namespace Odin.Data.Tests.Persistence.Repositories
         [TestMethod]
         public void GetOrdersFor_OrderIsForUser_ShouldReturnOrder()
         {
-            var order = new Order() { Transferee = new Transferee(), DestinationCity = "Vancouver" };
-            var assignment = new ConsultantAssignment() { Order = order, ConsultantId = "1" };
+            var consultant = new ApplicationUser() { Id = "fake-user-id" };
+            var order = new Order() { Transferee = new ApplicationUser(), DestinationCity = "Vancouver", ProgramManager = new ApplicationUser(), Consultant = consultant };
+            
+            SetupRepositoryWithSource(new[] { order });
 
-            SetupRepositoryWithSource(new[] { order }, new[] { assignment });
-
-            var orders = _ordersRepository.GetOrdersFor(assignment.ConsultantId);
+            var orders = _ordersRepository.GetOrdersFor(consultant.Id);
 
             orders.Should().HaveCount(1);
         }
@@ -57,14 +57,14 @@ namespace Odin.Data.Tests.Persistence.Repositories
         [TestMethod]
         public void GetOrdersFor_OneOrderIsForUser_ShouldReturnCorrectOrder()
         {
-            var order1 = new Order() { Transferee = new Transferee(), Id = 1 };
-            var order2 = new Order() { Transferee = new Transferee(), Id = 2 };
-            var assignment1 = new ConsultantAssignment() { Order = order1, ConsultantId = "1" };
-            var assignment2 = new ConsultantAssignment() {Order = order2, ConsultantId = "2"};
+            var consultant1 = new ApplicationUser() {Id = "consultant1"};
+            var consultant2 = new ApplicationUser() { Id = "consultant2" };
+            var order1 = new Order() { Transferee = new ApplicationUser(), Id = 1,  ProgramManager = new ApplicationUser(), Consultant = consultant1};
+            var order2 = new Order() { Transferee = new ApplicationUser(), Id = 2, ProgramManager = new ApplicationUser(), Consultant = consultant2};
+            
+            SetupRepositoryWithSource(new[] { order1, order2 });
 
-            SetupRepositoryWithSource(new[] { order1, order2 }, new[] { assignment1, assignment2 });
-
-            var orders = _ordersRepository.GetOrdersFor(assignment1.ConsultantId);
+            var orders = _ordersRepository.GetOrdersFor(consultant1.Id);
 
             orders.Should().HaveCount(1);
             orders.FirstOrDefault()?.Id.Should().Be(1);
