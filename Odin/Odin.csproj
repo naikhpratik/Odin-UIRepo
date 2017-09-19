@@ -237,7 +237,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
-    <Compile Include="Controllers\TransfereesController.cs" />
     <Compile Include="Domain\OrderImporter.cs" />
     <Compile Include="Filters\AiHandleErrorAttribute.cs" />
     <Compile Include="Filters\ApiAuthorizeAttribute.cs" />
@@ -578,7 +577,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Transferees\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

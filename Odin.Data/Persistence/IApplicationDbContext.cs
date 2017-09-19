@@ -10,9 +10,7 @@ namespace Odin.Data.Persistence
 {
     public interface IApplicationDbContext
     {
-        DbSet<Transferee> Transferees { get; set; }
         DbSet<Order> Orders { get; set; }
         DbSet<Rent> Rents { get; set; }
-        DbSet<ConsultantAssignment> ConsultantAssignments { get; set; }
     }
 }

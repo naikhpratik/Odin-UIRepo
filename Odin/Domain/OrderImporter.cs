@@ -31,12 +31,12 @@ namespace Odin.Domain
             }
 
             // If transferee is not new add order to transferee
-            var transferee = _unitOfWork.Transferees.GetTransfereeByEmail(order.Transferee.Email);
-            if (transferee != null)
-            {
-                transferee.Orders.Add(order);
-                order.Transferee = transferee;
-            }
+            //var transferee = _unitOfWork.Transferees.GetTransfereeByEmail(order.Transferee.Email);
+            //if (transferee != null)
+            //{
+            //    transferee.Orders.Add(order);
+            //    order.Transferee = transferee;
+            //}
 
             
 

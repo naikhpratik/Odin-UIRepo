@@ -10,11 +10,6 @@ namespace Odin.Data.Core.Dtos
 {
     public class OrderDto
     {
-        public OrderDto()
-        {
-            Consultants = new Collection<ConsultantDto>();
-        }
-
         public int Id { get; set; }
 
         [Required]
@@ -36,6 +31,6 @@ namespace Odin.Data.Core.Dtos
         public ProgramManagerDto ProgramManager { get; set; }
 
         [Required]
-        public ICollection<ConsultantDto> Consultants { get; set; }
+        public ConsultantDto Consultant { get; set; }
     }
 }

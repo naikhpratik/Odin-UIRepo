@@ -15,23 +15,15 @@ namespace Odin.Data.Tests.Persistence.Repositories
     public class OrdersRepositoryTests
     {
         private Mock<DbSet<Order>> _mockOrders;
-        private Mock<DbSet<ConsultantAssignment>> _mockAssignments;
         private OrdersRepository _ordersRepository;
 
 
-        private void SetupRepositoryWithSource(IList<Order> source, IList<ConsultantAssignment> assignments = null)
+        private void SetupRepositoryWithSource(IList<Order> source)
         {
             _mockOrders = new Mock<DbSet<Order>>();
             _mockOrders.SetSource(source);
             var mockContext = new Mock<IApplicationDbContext>();
             mockContext.SetupGet(c => c.Orders).Returns(_mockOrders.Object);
-
-            if (assignments != null)
-            {
-                _mockAssignments = new Mock<DbSet<ConsultantAssignment>>();
-                _mockAssignments.SetSource(assignments);
-                mockContext.SetupGet(c => c.ConsultantAssignments).Returns(_mockAssignments.Object);
-            }
 
             _ordersRepository = new OrdersRepository(mockContext.Object);
         }
@@ -39,12 +31,12 @@ namespace Odin.Data.Tests.Persistence.Repositories
         [TestMethod]
         public void GetOrdersFor_OrderIsForDifferentUser_ShouldNotBeReturned()
         {
-            var order = new Order() {Transferee = new Transferee(), DestinationCity = "Vancouver"};
-            var assignment = new ConsultantAssignment() {Order = order, ConsultantId = "1"};
+            var consultant = new ApplicationUser();
+            var order = new Order() {Transferee = new ApplicationUser(), DestinationCity = "Vancouver", ProgramManager = new ApplicationUser(), Consultant = consultant };
 
-            SetupRepositoryWithSource(new[] {order}, new[] {assignment});
+            SetupRepositoryWithSource(new[] {order});
 
-            var orders = _ordersRepository.GetOrdersFor(assignment.ConsultantId + "-");
+            var orders = _ordersRepository.GetOrdersFor(consultant. + "-");
 
             orders.Should().BeEmpty();
         }

@@ -13,13 +13,10 @@ namespace Odin
                 .ForMember(m => m.Phone, opt => opt.MapFrom(src => src.PhoneNumber));
 
             CreateMap<Order, OrderIndexViewModel>();
-            CreateMap<ConsultantAssignment, ConsultantViewModel>()
-                .ForMember(c => c.FirstName, opt => opt.MapFrom(src => src.Consultant.FirstName))
-                .ForMember(c => c.LastName, opt => opt.MapFrom(src => src.Consultant.LastName));
-            CreateMap<Transferee, TransfereeViewModel>();
+            CreateMap<ApplicationUser, TransfereeViewModel>();
 
             CreateMap<OrderDto, Order>();
-            CreateMap<TransfereeDto, Transferee>();
+            CreateMap<TransfereeDto, ApplicationUser>();
             CreateMap<ProgramManagerDto, ApplicationUser>();
         }
     }

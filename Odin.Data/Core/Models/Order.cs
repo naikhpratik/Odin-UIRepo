@@ -11,11 +11,6 @@ namespace Odin.Data.Core.Models
 {
     public class Order
     {
-        public Order()
-        {
-            Consultants = new Collection<ConsultantAssignment>();
-        }
-
         public int Id { get; set; }
         
         public string TrackingId { get; set; }
@@ -34,11 +29,12 @@ namespace Odin.Data.Core.Models
         public Rent Rent { get; set; }
 
         public int TransfereeId { get; set; }
-        public Transferee Transferee { get; set; }
+        public ApplicationUser Transferee { get; set; }
 
         public ApplicationUser ProgramManager { get; set; }
         public string ProgramManagerId { get; set; }
-
-        public ICollection<ConsultantAssignment> Consultants { get; set; }
+        
+        public ApplicationUser Consultant { get; set; }
+        public string ConsultantId { get; set; }
     }
 }

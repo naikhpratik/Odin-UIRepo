@@ -19,8 +19,12 @@ namespace Odin.Data.Persistence.EntityConfigurations
                 .WithMany(t => t.Orders)
                 .WillCascadeOnDelete(false);
 
-            HasMany(o => o.Consultants)
-                .WithRequired(ca => ca.Order)
+            HasRequired(o => o.ProgramManager)
+                .WithMany(u => u.Orders)
+                .WillCascadeOnDelete(false);
+
+            HasRequired(o => o.Consultant)
+                .WithMany(c => c.Orders)
                 .WillCascadeOnDelete(false);
 
             Property(o => o.TrackingId)

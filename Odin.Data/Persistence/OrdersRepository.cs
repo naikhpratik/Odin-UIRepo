@@ -20,12 +20,13 @@ namespace Odin.Data.Persistence
 
         public IEnumerable<Order> GetOrdersFor(string userId)
         {
-            return _context.ConsultantAssignments
-                .Where(ca => ca.ConsultantId == userId)
-                .Select(ca => ca.Order)
+            return _context.Orders
+                .Where(o => o.ConsultantId == userId)
                 .Include(o => o.Transferee)
-                .Include(o => o.Consultants.Select(c => c.Consultant))
+                .Include(o => o.ProgramManager)
+                .Include(o => o.Consultant)
                 .ToList();
+
         }
 
         public Order GetOrderByTrackingId(string trackingId)

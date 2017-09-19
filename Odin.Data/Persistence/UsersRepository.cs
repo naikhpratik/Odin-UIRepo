@@ -20,5 +20,15 @@ namespace Odin.Data.Persistence
             var role = _context.Roles.Single(r => r.Name == roleName);
             return _context.Users.Include(u => u.Roles).Where(u => u.Roles.Any(r => r.RoleId == role.Id));
         }
+
+        public ApplicationUser GetUserByEmail(string email)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public ApplicationUser GetUserByUserName(string userName)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

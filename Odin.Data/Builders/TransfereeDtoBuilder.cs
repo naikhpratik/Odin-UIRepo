@@ -16,8 +16,7 @@ namespace Odin.Data.Builders
             var transferee = new Faker<TransfereeDto>()
                 .RuleFor(t => t.Email, f => f.Internet.Email())
                 .RuleFor(t => t.FirstName, f => f.Name.FirstName())
-                .RuleFor(t => t.LastName, f => f.Name.LastName())
-                .RuleFor(t => t.SpouseName, f => f.Name.FullName());
+                .RuleFor(t => t.LastName, f => f.Name.LastName());
 
             return transferee;
         }

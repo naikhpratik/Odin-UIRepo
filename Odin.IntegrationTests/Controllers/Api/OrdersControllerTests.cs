@@ -24,8 +24,12 @@ namespace Odin.IntegrationTests.Controllers.Api
             // Arrange
             var order = OrderBuilder.New().First();
             order.TrackingId = TokenHelper.NewToken();
-            var transferee = TransfereeBuilder.New().First();
+            var transferee = Context.Users.First(u => u.UserName.Equals("odin-ee@dwellworks.com"));
+            var dsc = Context.Users.First(u => u.UserName.Equals("odin-consultant@dwellworks.com"));
+            var pm = Context.Users.First(u => u.UserName.Equals("odin-pm@dwellworks.com"));
             order.Transferee = transferee;
+            order.Consultant = dsc;
+            order.ProgramManager = pm;
             Context.Orders.Add(order);
             Context.SaveChanges();
             var orderDto = OrderDtoBuilder.New();

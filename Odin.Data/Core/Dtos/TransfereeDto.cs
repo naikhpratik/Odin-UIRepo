@@ -17,7 +17,6 @@ namespace Odin.Data.Core.Dtos
 
         [Required]
         public string LastName { get; set; }
-
-        public string SpouseName { get; set; }
+        
     }
 }
