@@ -47,7 +47,7 @@ namespace Odin.IntegrationTests.Controllers.Api
         }
 
         [Test, Isolated]
-        public async Task UpsertOrder_ValidInsertRequest_ReturnsOkStatus()
+        public async Task UpsertOrder_ValidInsertRequest_CreatesOrderRecord()
         {
             // Arrange
             var orderDto = OrderDtoBuilder.New();

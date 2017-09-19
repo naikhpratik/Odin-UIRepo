@@ -9,6 +9,7 @@ using Odin.Data.Core;
 using Odin.Data.Core.Dtos;
 using Odin.Data.Core.Models;
 using Odin.Filters;
+using Odin.Interfaces;
 
 namespace Odin.Controllers.Api
 {
@@ -17,11 +18,13 @@ namespace Odin.Controllers.Api
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IOrderImporter _orderImporter;
 
-        public OrdersController(IUnitOfWork unitOfWork, IMapper mapper)
+        public OrdersController(IUnitOfWork unitOfWork, IMapper mapper, IOrderImporter orderImporter)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _orderImporter = orderImporter;
         }
 
         // POST /api/orders
@@ -30,16 +33,7 @@ namespace Odin.Controllers.Api
         [ValidationActionFilter]
         public IHttpActionResult UpsertOrder(OrderDto orderDto)
         {
-            var order = _unitOfWork.Orders.GetOrderByTrackingId(orderDto.TrackingId);
-
-            if (order == null)
-            {
-                order = _mapper.Map<OrderDto, Order>(orderDto);
-            }
-            else
-            {
-                _mapper.Map<OrderDto, Order>(orderDto, order);
-            }
+            _orderImporter.ImportOrder(orderDto);
             
 
             // Convert OrderDto to order
@@ -49,7 +43,7 @@ namespace Odin.Controllers.Api
             // Lookup Program Manager by secontactuid, assign PM, or throw back error pm does not exist
             // Lookup transferee by email, if new transferee add transferee record.
 
-            return Ok(order);
+            return Ok();
         }
     }
 }
