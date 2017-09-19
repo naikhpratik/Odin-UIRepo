@@ -26,6 +26,7 @@ namespace Odin.Data.Persistence
         {
             modelBuilder.Configurations.Add(new OrderConfiguration());
             modelBuilder.Configurations.Add(new RentConfiguration());
+            modelBuilder.Configurations.Add(new TransfereeConfiguration());
 
             modelBuilder.Entity<ConsultantAssignment>()
                 .HasRequired(s => s.Order)

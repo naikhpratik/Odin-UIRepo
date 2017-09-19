@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Odin.Data.Core;
 using Odin.Data.Core.Repositories;
 using Odin.Domain;
 
@@ -21,7 +22,15 @@ namespace Odin.Tests.Domain
         [TestInitialize]
         public void TestInitialize()
         {
-            
+            _mockOrdersRepository = new Mock<IOrdersRepository>();
+            _mockMapper = new Mock<IMapper>();
+
+            var mockUnitOfWork = new Mock<IUnitOfWork>();
+            mockUnitOfWork.SetupGet(u => u.Orders).Returns(_mockOrdersRepository.Object);
+
+            _orderImporter = new OrderImporter(mockUnitOfWork.Object, _mockMapper.Object);
         }
+
+
     }
 }

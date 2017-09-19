@@ -135,6 +135,7 @@
   <ItemGroup>
     <Compile Include="Controllers\Api\OrdersControllerTests.cs" />
     <Compile Include="Controllers\OrdersControllerTests.cs" />
+    <Compile Include="Domain\OrderImporterTests.cs" />
     <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="GlobalSetUp.cs" />
     <Compile Include="Isolated.cs" />

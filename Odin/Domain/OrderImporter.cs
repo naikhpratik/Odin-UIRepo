@@ -30,7 +30,12 @@ namespace Odin.Domain
                 _mapper.Map<OrderDto, Order>(orderDto, order);
             }
 
-
+            
+            // Upsert
+            // Determine if consultant is new
+            //      If new create user and start process of emailing DSC
+            // Lookup Program Manager by secontactuid, assign PM, or throw back error pm does not exist
+            // Lookup transferee by email, if new transferee add transferee record.
         }
     }
 }

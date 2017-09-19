@@ -125,6 +125,7 @@
   <ItemGroup>
     <Compile Include="Controllers\Api\AccountControllerTests.cs" />
     <Compile Include="Controllers\OrdersControllerTests.cs" />
+    <Compile Include="Domain\OrderImporterTests.cs" />
     <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

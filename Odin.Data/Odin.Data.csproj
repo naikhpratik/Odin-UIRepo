@@ -103,6 +103,7 @@
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Persistence\EntityConfigurations\OrderConfiguration.cs" />
     <Compile Include="Persistence\EntityConfigurations\RentConfiguration.cs" />
+    <Compile Include="Persistence\EntityConfigurations\TransfereeConfiguration.cs" />
     <Compile Include="Persistence\IApplicationDbContext.cs" />
     <Compile Include="Persistence\Migrations\201708281308044_InitialMigration.cs" />
     <Compile Include="Persistence\Migrations\201708281308044_InitialMigration.Designer.cs">
@@ -139,6 +140,10 @@
     <Compile Include="Persistence\Migrations\201709182035102_AddFamilyDetailsToOrder.cs" />
     <Compile Include="Persistence\Migrations\201709182035102_AddFamilyDetailsToOrder.Designer.cs">
       <DependentUpon>201709182035102_AddFamilyDetailsToOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201709191408496_AddTransfereeEmailUniqueIndex.cs" />
+    <Compile Include="Persistence\Migrations\201709191408496_AddTransfereeEmailUniqueIndex.Designer.cs">
+      <DependentUpon>201709191408496_AddTransfereeEmailUniqueIndex.cs</DependentUpon>
     </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
@@ -179,6 +184,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201709182035102_AddFamilyDetailsToOrder.resx">
       <DependentUpon>201709182035102_AddFamilyDetailsToOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709191408496_AddTransfereeEmailUniqueIndex.resx">
+      <DependentUpon>201709191408496_AddTransfereeEmailUniqueIndex.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
