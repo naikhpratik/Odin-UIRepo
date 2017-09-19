@@ -27,14 +27,15 @@ namespace Odin.Data.Core.Models
         
         public int? RentId { get; set; }
         public Rent Rent { get; set; }
-
-        public int TransfereeId { get; set; }
+        
+        public string TransfereeId { get; set; }
         public ApplicationUser Transferee { get; set; }
 
-        public ApplicationUser ProgramManager { get; set; }
         public string ProgramManagerId { get; set; }
-        
-        public ApplicationUser Consultant { get; set; }
+        public ApplicationUser ProgramManager { get; set; }
+
         public string ConsultantId { get; set; }
+        public ApplicationUser Consultant { get; set; }
+        
     }
 }

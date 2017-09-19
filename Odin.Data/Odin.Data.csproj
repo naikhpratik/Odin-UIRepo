@@ -142,6 +142,10 @@
     <Compile Include="Persistence\Migrations\201709191408496_AddTransfereeEmailUniqueIndex.Designer.cs">
       <DependentUpon>201709191408496_AddTransfereeEmailUniqueIndex.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201709191945569_RemoveTransfereeAndConsultantAssignmentEntities.cs" />
+    <Compile Include="Persistence\Migrations\201709191945569_RemoveTransfereeAndConsultantAssignmentEntities.Designer.cs">
+      <DependentUpon>201709191945569_RemoveTransfereeAndConsultantAssignmentEntities.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
@@ -184,6 +188,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201709191408496_AddTransfereeEmailUniqueIndex.resx">
       <DependentUpon>201709191408496_AddTransfereeEmailUniqueIndex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709191945569_RemoveTransfereeAndConsultantAssignmentEntities.resx">
+      <DependentUpon>201709191945569_RemoveTransfereeAndConsultantAssignmentEntities.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
