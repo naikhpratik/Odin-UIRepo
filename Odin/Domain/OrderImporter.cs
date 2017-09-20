@@ -29,7 +29,7 @@ namespace Odin.Domain
                 if (transferee == null)
                 {
                     transferee = _mapper.Map<TransfereeDto, Transferee>(orderDto.Transferee);
-                    CreateTransferee(transferee);
+                    _unitOfWork.Transferees.Add(transferee);
                 }
                 else
                 {
@@ -45,27 +45,8 @@ namespace Odin.Domain
 
             _unitOfWork.Complete();
 
-            // If transferee is not new add order to transferee
-            //var transferee = _unitOfWork.Transferees.GetTransfereeByEmail(order.Transferee.Email);
-            //if (transferee != null)
-            //{
-            //    transferee.Orders.Add(order);
-            //    order.Transferee = transferee;
-            //}
-
-
-
-            // Upsert
-            // Determine if consultant is new
-            //      If new create user and start process of emailing DSC
-            // Lookup Program Manager by secontactuid, assign PM, or throw back error pm does not exist
-            // Lookup transferee by email, if new transferee add transferee record.
         }
-
-        public void CreateTransferee(Transferee transferee)
-        {
-            
-        }
+        
         
     }
 }
