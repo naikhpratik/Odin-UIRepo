@@ -22,6 +22,6 @@ namespace Odin.ViewModels
         
         public TransfereeViewModel Transferee { get; set; }
 
-        public ICollection<ConsultantViewModel> Consultants { get; set; }
+        public ConsultantViewModel Consultant { get; set; }
     }
 }

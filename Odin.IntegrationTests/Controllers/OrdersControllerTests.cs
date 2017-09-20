@@ -33,9 +33,9 @@ namespace Odin.IntegrationTests.Controllers
             var mapper = config.CreateMapper();
 
             _context = new ApplicationDbContext();
-            _transferee = _context.Transferees.First(u => u.UserName.Equals("odin-ee@dwellworks.com"));
-            _dsc = _context.Consultants.First(u => u.UserName.Equals("odin-consultant@dwellworks.com"));
-            _pm = _context.Managers.First(u => u.UserName.Equals("odin-pm@dwellworks.com"));
+            _transferee = _context.Transferees.First(u => u.UserName.Equals("odinee@dwellworks.com"));
+            _dsc = _context.Consultants.First(u => u.UserName.Equals("odinconsultant@dwellworks.com"));
+            _pm = _context.Managers.First(u => u.UserName.Equals("odinpm@dwellworks.com"));
             _controller = new OrdersController(new UnitOfWork(_context), mapper);
         }
 
@@ -49,7 +49,7 @@ namespace Odin.IntegrationTests.Controllers
         public void Index_ValidRequest_ShouldReturnOrders()
         {
             // Arrange
-            var order = new Order() { OriginCity = "ClevelandTest", Transferee = _transferee, Consultant = _dsc, ProgramManager = _pm};
+            var order = new Order() { OriginCity = "ClevelandTest", Transferee = _transferee, Consultant = _dsc, ProgramManager = _pm, TrackingId = "123Test"};
             _controller.MockCurrentUser(_dsc.Id, _dsc.UserName);
             _context.Orders.Add(order);
             _context.SaveChanges();

@@ -238,6 +238,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Domain\OrderImporter.cs" />
+    <Compile Include="Extensions\HttpResponseMessageExtensions.cs" />
     <Compile Include="Filters\AiHandleErrorAttribute.cs" />
     <Compile Include="Filters\ApiAuthorizeAttribute.cs" />
     <Compile Include="Filters\ValidationActionFilter.cs" />
@@ -268,6 +269,7 @@
     <Compile Include="ViewModels\Authentication\VerifyPhoneNumberViewModel.cs" />
     <Compile Include="ViewModels\ConsultantViewModel.cs" />
     <Compile Include="ViewModels\OrderIndexViewModel.cs" />
+    <Compile Include="ViewModels\ProgramManagerViewModel.cs" />
     <Compile Include="ViewModels\TransfereeViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

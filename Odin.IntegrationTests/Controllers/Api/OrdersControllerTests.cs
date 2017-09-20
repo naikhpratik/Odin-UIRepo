@@ -11,6 +11,7 @@ using Odin.Data.Builders;
 using Odin.Data.Core.Dtos;
 using Odin.Data.Core.Models;
 using Odin.Data.Helpers;
+using Odin.Extensions;
 using Odin.Helpers;
 
 namespace Odin.IntegrationTests.Controllers.Api
@@ -24,9 +25,9 @@ namespace Odin.IntegrationTests.Controllers.Api
             // Arrange
             var order = OrderBuilder.New().First();
             order.TrackingId = TokenHelper.NewToken();
-            var transferee = Context.Transferees.First(u => u.UserName.Equals("odin-ee@dwellworks.com"));
-            var dsc = Context.Consultants.First(u => u.UserName.Equals("odin-consultant@dwellworks.com"));
-            var pm = Context.Managers.First(u => u.UserName.Equals("odin-pm@dwellworks.com"));
+            var transferee = Context.Transferees.First(u => u.UserName.Equals("odinee@dwellworks.com"));
+            var dsc = Context.Consultants.First(u => u.UserName.Equals("odinconsultant@dwellworks.com"));
+            var pm = Context.Managers.First(u => u.UserName.Equals("odinpm@dwellworks.com"));
             order.Transferee = transferee;
             order.Consultant = dsc;
             order.ProgramManager = pm;
@@ -34,17 +35,18 @@ namespace Odin.IntegrationTests.Controllers.Api
             Context.SaveChanges();
             var orderDto = OrderDtoBuilder.New();
             orderDto.TrackingId = order.TrackingId;
-            orderDto.ProgramManager = new ProgramManagerDto() {SeContactUid = 1};
+            orderDto.ProgramManager = ProgramManagerDtoBuilder.New();
+            orderDto.Consultant = ConsultantDtoBuilder.New();
             orderDto.Transferee = TransfereeDtoBuilder.New();
             var request = CreateRequest("api/orders", "application/json", HttpMethod.Post, orderDto);
             request.Headers.Add("Token", ApiKey);
 
             // Act
             var response = await Client.SendAsync(request);
-            var errorResponse = await response.Content.ReadAsAsync<ErrorResponse>();
+            var errorResponse = await response.ReadContentAsyncSafe<ErrorResponse>();
 
             // Assert
-            errorResponse.Errors.Should().BeNull();
+            errorResponse?.Errors.Should().BeNull();
             response.StatusCode.Should().Be(HttpStatusCode.OK);
             Context.Entry(order).Reload();
             order.FamilyDetails.Should().NotBeNullOrEmpty();
@@ -55,17 +57,19 @@ namespace Odin.IntegrationTests.Controllers.Api
         {
             // Arrange
             var orderDto = OrderDtoBuilder.New();
-            orderDto.ProgramManager = new ProgramManagerDto() { SeContactUid = 1 };
+            orderDto.ProgramManager = ProgramManagerDtoBuilder.New();
             orderDto.Transferee = TransfereeDtoBuilder.New();
+            orderDto.Consultant = ConsultantDtoBuilder.New();
+            
             var request = CreateRequest("api/orders", "application/json", HttpMethod.Post, orderDto);
             request.Headers.Add("Token", ApiKey);
 
             // Act
             var response = await Client.SendAsync(request);
-            var errorResponse = await response.Content.ReadAsAsync<ErrorResponse>();
+            var errorResponse = await response.ReadContentAsyncSafe<ErrorResponse>();
 
             // Assert
-            errorResponse.Errors.Should().BeNull();
+            errorResponse?.Errors.Should().BeNull();
             response.StatusCode.Should().Be(HttpStatusCode.OK);
             var order = Context.Orders.FirstOrDefault(o => o.TrackingId.Equals(orderDto.TrackingId));
             order.Should().NotBeNull();

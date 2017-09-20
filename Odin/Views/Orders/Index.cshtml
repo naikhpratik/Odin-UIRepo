@@ -24,12 +24,9 @@
                 </div>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-3">
-                <label class="small-label grey-header">CONSULTANTS</label>
+                <label class="small-label grey-header">CONSULTANT</label>
                 <div>
-                    @foreach (var consultant in order.Consultants)
-                    {
-                        @consultant.FullName 
-                    }
+                    @order.Consultant.ConsultantFullName
                 </div>
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2">
