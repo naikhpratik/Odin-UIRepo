@@ -12,5 +12,8 @@ namespace Odin.Data.Persistence
     {
         DbSet<Order> Orders { get; set; }
         DbSet<Rent> Rents { get; set; }
+        DbSet<Transferee> Transferees { get; set; }
+        DbSet<Consultant> Consultants { get; set; }
+        DbSet<Manager> Managers { get; set; }
     }
 }

@@ -6,6 +6,7 @@ namespace Odin.Data.Core
     {
         IUsersRepository Users { get; }
         IOrdersRepository Orders { get; }
+        ITransfereesRepository Transferees { get; }
         void Complete();
     }
 }
