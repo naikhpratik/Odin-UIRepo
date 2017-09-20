@@ -29,8 +29,8 @@ namespace Odin.Data.Persistence
         {
             var userStore = new UserStore<Transferee>(_context);
             var userManager = new UserManager<Transferee>(userStore);
-
-            userManager.Create(transferee);
+            transferee.UserName = transferee.Email;
+            var result = userManager.Create(transferee, TokenHelper.NewToken());
             userManager.AddToRole(transferee.Id, UserRoles.Transferee);
         }
     }

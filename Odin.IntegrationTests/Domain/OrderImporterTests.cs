@@ -104,6 +104,22 @@ namespace Odin.IntegrationTests.Domain
             orders.Count().Should().Be(2);
         }
 
+        [Test, Isolated]
+        public void ImportOrder_NewOrder_ShouldCreateOrder()
+        {
+            // Arrange
+            var transferee = TransfereeDtoBuilder.New();
+            transferee.Email = "test@testnew.com";
+            var orderDto = OrderHelper.CreateOrderDto(consultantDto, programManagerDto, transferee, TokenHelper.NewToken());
+
+            // Act
+            orderImporter.ImportOrder(orderDto);
+            var order = context.Orders.FirstOrDefault(o => o.TrackingId.Equals(orderDto.TrackingId));
+
+            // Assert
+            order.Should().NotBeNull();
+        }
+
         // If transferee is old and has orders it adds order to transferee and does not add transferee
         // If transferee is new it adds the transferee
         // If Order is new it inserts the order

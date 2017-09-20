@@ -21,8 +21,8 @@ namespace Odin.Domain
         {
             var order = _unitOfWork.Orders.GetOrderByTrackingId(orderDto.TrackingId);
             var transferee = _unitOfWork.Transferees.GetTransfereeByEmail(orderDto.Transferee.Email);
-            //TODO: Add consultant select by SeUid
-            //TODO: Add programManager select by SeUid
+            var consultant = _unitOfWork.Consultants.GetConsultantBySeContactUid(orderDto.Consultant.SeContactUid);
+            var programManager = _unitOfWork.Managers.GetManagerBySeContactUid(orderDto.ProgramManager.SeContactUid);
 
             if (order == null)
             {
@@ -44,6 +44,9 @@ namespace Odin.Domain
             {
                 _mapper.Map<OrderDto, Order>(orderDto, order);
             }
+
+            order.Consultant = consultant;
+            order.ProgramManager = programManager;
 
             _unitOfWork.Complete();
 

@@ -36,8 +36,11 @@ namespace Odin.IntegrationTests.Controllers.Api
             var orderDto = OrderDtoBuilder.New();
             orderDto.TrackingId = order.TrackingId;
             orderDto.ProgramManager = ProgramManagerDtoBuilder.New();
+            orderDto.ProgramManager.SeContactUid = pm.SeContactUid.Value;
             orderDto.Consultant = ConsultantDtoBuilder.New();
+            orderDto.Consultant.SeContactUid = dsc.SeContactUid.Value;
             orderDto.Transferee = TransfereeDtoBuilder.New();
+            orderDto.Transferee.Email = transferee.Email;
             var request = CreateRequest("api/orders", "application/json", HttpMethod.Post, orderDto);
             request.Headers.Add("Token", ApiKey);
 

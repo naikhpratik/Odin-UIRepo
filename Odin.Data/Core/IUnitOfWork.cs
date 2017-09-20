@@ -7,6 +7,8 @@ namespace Odin.Data.Core
         IUsersRepository Users { get; }
         IOrdersRepository Orders { get; }
         ITransfereesRepository Transferees { get; }
+        IConsultantRepository Consultants { get; }
+        IManagerRepository Managers { get; }
         void Complete();
     }
 }
