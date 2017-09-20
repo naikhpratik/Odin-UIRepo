@@ -36,6 +36,9 @@ namespace Odin.Data.Persistence.EntityConfigurations
                 .HasColumnAnnotation(
                     IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new IndexAttribute("IX_TrackingID") {IsUnique = true}));
+
+            Property(o => o.TransfereeInviteEnabled)
+                .HasColumnAnnotation("Default", false);
         }
     }
 }

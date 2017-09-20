@@ -25,6 +25,8 @@ namespace Odin.Data.Core.Models
         public DateTime? EstimatedArrivalDate { get; set; }
         public string FamilyDetails { get; set; }
         
+        public bool TransfereeInviteEnabled { get; set; }
+
         public int? RentId { get; set; }
         public Rent Rent { get; set; }
         
