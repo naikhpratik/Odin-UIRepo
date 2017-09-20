@@ -52,27 +52,27 @@ namespace Odin.IntegrationTests.Controllers.Api
             order.FamilyDetails.Should().NotBeNullOrEmpty();
         }
 
-        [Test, Isolated]
-        public async Task UpsertOrder_ValidInsertRequest_CreatesOrderRecord()
-        {
-            // Arrange
-            var orderDto = OrderDtoBuilder.New();
-            orderDto.ProgramManager = ProgramManagerDtoBuilder.New();
-            orderDto.Transferee = TransfereeDtoBuilder.New();
-            orderDto.Consultant = ConsultantDtoBuilder.New();
+        //[Test, Isolated]
+        //public async Task UpsertOrder_ValidInsertRequest_CreatesOrderRecord()
+        //{
+        //    // Arrange
+        //    var orderDto = OrderDtoBuilder.New();
+        //    orderDto.ProgramManager = ProgramManagerDtoBuilder.New();
+        //    orderDto.Transferee = TransfereeDtoBuilder.New();
+        //    orderDto.Consultant = ConsultantDtoBuilder.New();
             
-            var request = CreateRequest("api/orders", "application/json", HttpMethod.Post, orderDto);
-            request.Headers.Add("Token", ApiKey);
+        //    var request = CreateRequest("api/orders", "application/json", HttpMethod.Post, orderDto);
+        //    request.Headers.Add("Token", ApiKey);
 
-            // Act
-            var response = await Client.SendAsync(request);
-            var errorResponse = await response.ReadContentAsyncSafe<ErrorResponse>();
+        //    // Act
+        //    var response = await Client.SendAsync(request);
+        //    var errorResponse = await response.ReadContentAsyncSafe<ErrorResponse>();
 
-            // Assert
-            errorResponse?.Errors.Should().BeNull();
-            response.StatusCode.Should().Be(HttpStatusCode.OK);
-            var order = Context.Orders.FirstOrDefault(o => o.TrackingId.Equals(orderDto.TrackingId));
-            order.Should().NotBeNull();
-        }
+        //    // Assert
+        //    errorResponse?.Errors.Should().BeNull();
+        //    response.StatusCode.Should().Be(HttpStatusCode.OK);
+        //    var order = Context.Orders.FirstOrDefault(o => o.TrackingId.Equals(orderDto.TrackingId));
+        //    order.Should().NotBeNull();
+        //}
     }
 }
