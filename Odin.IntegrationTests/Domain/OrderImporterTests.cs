@@ -58,11 +58,8 @@ namespace Odin.IntegrationTests.Domain
         public void ImportOrder_NewTransferee_CreatesNewTransferee()
         {
             // Arrange 
-            var orderDto = OrderDtoBuilder.New();
-            orderDto.TrackingId = TokenHelper.NewToken();
-            orderDto.Consultant = consultantDto;
-            orderDto.ProgramManager = programManagerDto;
-            orderDto.Transferee = TransfereeDtoBuilder.New();
+            var orderDto = OrderHelper.CreateOrderDto(consultantDto, programManagerDto, TransfereeDtoBuilder.New(), TokenHelper.NewToken());
+            orderDto.Transferee.Email = "Testnew@test.com";
 
             // Act
             orderImporter.ImportOrder(orderDto);

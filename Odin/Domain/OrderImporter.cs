@@ -21,6 +21,8 @@ namespace Odin.Domain
         {
             var order = _unitOfWork.Orders.GetOrderByTrackingId(orderDto.TrackingId);
             var transferee = _unitOfWork.Transferees.GetTransfereeByEmail(orderDto.Transferee.Email);
+            //TODO: Add consultant select by SeUid
+            //TODO: Add programManager select by SeUid
 
             if (order == null)
             {
