@@ -55,7 +55,7 @@ namespace Odin.Data.Persistence.Migrations
         {
             var userStore = new UserStore<Transferee>(context);
             var userManager = new UserManager<Transferee>(userStore);
-
+            
             var user = TransfereeBuilder.New();
             userManager.Create(user, "Transferee5$");
             return user;

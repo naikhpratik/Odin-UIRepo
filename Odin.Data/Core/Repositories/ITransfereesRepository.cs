@@ -10,5 +10,6 @@ namespace Odin.Data.Core.Repositories
     public interface ITransfereesRepository
     {
         Transferee GetTransfereeByEmail(string email);
+        void Add(Transferee transferee);
     }
 }
