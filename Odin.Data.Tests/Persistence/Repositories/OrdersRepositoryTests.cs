@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -32,7 +33,7 @@ namespace Odin.Data.Tests.Persistence.Repositories
         public void GetOrdersFor_OrderIsForDifferentUser_ShouldNotBeReturned()
         {
             var consultant = new Consultant() {Id = "fake-user-id" } ;
-            var order = new Order() {Transferee = new Transferee(), DestinationCity = "Vancouver", ProgramManager = new Manager(), Consultant = consultant };
+            var order = new Order() {Transferee = new Transferee(), DestinationCity = "Vancouver", ProgramManager = new Manager(), Consultant = consultant, ConsultantId = consultant.Id };
 
             SetupRepositoryWithSource(new[] {order});
 
@@ -45,7 +46,7 @@ namespace Odin.Data.Tests.Persistence.Repositories
         public void GetOrdersFor_OrderIsForUser_ShouldReturnOrder()
         {
             var consultant = new Consultant() { Id = "fake-user-id" };
-            var order = new Order() { Transferee = new Transferee(), DestinationCity = "Vancouver", ProgramManager = new Manager(), Consultant = consultant };
+            var order = new Order() { Transferee = new Transferee(), DestinationCity = "Vancouver", ProgramManager = new Manager(), Consultant = consultant, ConsultantId = consultant.Id};
             
             SetupRepositoryWithSource(new[] { order });
 
@@ -59,8 +60,8 @@ namespace Odin.Data.Tests.Persistence.Repositories
         {
             var consultant1 = new Consultant() {Id = "consultant1"};
             var consultant2 = new Consultant() { Id = "consultant2" };
-            var order1 = new Order() { Transferee = new Transferee(), Id = 1,  ProgramManager = new Manager(), Consultant = consultant1};
-            var order2 = new Order() { Transferee = new Transferee(), Id = 2, ProgramManager = new Manager(), Consultant = consultant2};
+            var order1 = new Order() { ConsultantId = consultant1.Id, Id = 1, Consultant = consultant1};
+            var order2 = new Order() { ConsultantId = consultant2.Id, Id = 2, Consultant = consultant2};
             
             SetupRepositoryWithSource(new[] { order1, order2 });
 
