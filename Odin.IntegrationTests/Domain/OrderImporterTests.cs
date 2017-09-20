@@ -66,7 +66,7 @@ namespace Odin.IntegrationTests.Domain
 
             // Act
             orderImporter.ImportOrder(orderDto);
-            var order = context.Orders.SingleOrDefault(o => o.TrackingId.Equals(orderDto.TrackingId))));
+            var order = context.Orders.SingleOrDefault(o => o.TrackingId.Equals(orderDto.TrackingId));
             var transferee = context.Transferees.SingleOrDefault(t => t.Email.Equals(orderDto.Transferee.Email));
 
             // Assert
