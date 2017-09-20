@@ -1,12 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using FluentAssertions;
 using NUnit.Framework;
+using Odin.Data.Builders;
+using Odin.Data.Core.Dtos;
+using Odin.Data.Core.Models;
+using Odin.Data.Helpers;
 using Odin.Data.Persistence;
 using Odin.Domain;
+using Odin.IntegrationTests.Helpers;
 
 namespace Odin.IntegrationTests.Domain
 {
@@ -15,6 +22,13 @@ namespace Odin.IntegrationTests.Domain
     {
         private ApplicationDbContext context;
         private OrderImporter orderImporter;
+        private ConsultantDto consultantDto;
+        private Consultant consultant;
+        private ProgramManagerDto programManagerDto;
+        private Manager programManager;
+        private TransfereeDto transfereeDto;
+        private Transferee transferee;
+        private IMapper mapper;
 
         [SetUp]
         public void SetUp()
@@ -22,7 +36,14 @@ namespace Odin.IntegrationTests.Domain
             context = new ApplicationDbContext();
 
             var config = new MapperConfiguration(c => c.AddProfile(new MappingProfile()));
-            var mapper = config.CreateMapper();
+            mapper = config.CreateMapper();
+
+            transferee = context.Transferees.First(u => u.UserName.Equals("odinee@dwellworks.com"));
+            transfereeDto = mapper.Map<Transferee, TransfereeDto>(transferee);
+            consultant = context.Consultants.First(u => u.UserName.Equals("odinconsultant@dwellworks.com"));
+            consultantDto = mapper.Map<Consultant, ConsultantDto>(consultant);
+            programManager = context.Managers.First(u => u.UserName.Equals("odinpm@dwellworks.com"));
+            programManagerDto = mapper.Map<Manager, ProgramManagerDto>(programManager);
 
             orderImporter = new OrderImporter(new UnitOfWork(context), mapper);
         }
@@ -31,6 +52,59 @@ namespace Odin.IntegrationTests.Domain
         public void TearDown()
         {
             context.Dispose();
+        }
+
+        [Test, Isolated]
+        public void ImportOrder_NewTransferee_CreatesNewTransferee()
+        {
+            // Arrange 
+            var orderDto = OrderDtoBuilder.New();
+            orderDto.TrackingId = TokenHelper.NewToken();
+            orderDto.Consultant = consultantDto;
+            orderDto.ProgramManager = programManagerDto;
+            orderDto.Transferee = TransfereeDtoBuilder.New();
+
+            // Act
+            orderImporter.ImportOrder(orderDto);
+            var order = context.Orders.SingleOrDefault(o => o.TrackingId.Equals(orderDto.TrackingId))));
+            var transferee = context.Transferees.SingleOrDefault(t => t.Email.Equals(orderDto.Transferee.Email));
+
+            // Assert
+            order.Should().NotBeNull();
+            transferee.Should().NotBeNull();
+        }
+
+        [Test, Isolated]
+        public void ImportOrder_ExistingTransferee_DoesNotCreateDuplicateTransferee()
+        {
+            // Arrange
+            var orderDto = OrderHelper.CreateOrderDto(consultantDto, programManagerDto, transfereeDto, TokenHelper.NewToken());
+
+            // Act
+            orderImporter.ImportOrder(orderDto);
+            var transferee = context.Transferees.Where(t => t.Email.Equals(transfereeDto.Email));
+
+            // Assert
+            transferee.Count().Should().Be(1);
+        }
+
+        [Test, Isolated]
+        public void ImportOrder_NewOrderExistingTransferee_AddsOrderToTransferee()
+        {
+            // Arrange
+            var order = OrderHelper.CreateOrder(consultant, manager: programManager, transferee: transferee,
+                TrackingId: TokenHelper.NewToken());
+            context.Orders.Add(order);
+            context.SaveChanges();
+            var orderDto = OrderHelper.CreateOrderDto(consultantDto, programManagerDto, transfereeDto, TokenHelper.NewToken());
+
+
+            // Act
+            orderImporter.ImportOrder(orderDto);
+            var orders = context.Transferees.Where(t => t.Email.Equals(order.Transferee.Email)).Include(t => t.Orders).Select(t => t.Orders);
+            
+            // Assert
+            orders.Count().Should().Be(2);
         }
 
         // If transferee is old and has orders it adds order to transferee and does not add transferee
