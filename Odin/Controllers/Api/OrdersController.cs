@@ -37,5 +37,11 @@ namespace Odin.Controllers.Api
 
             return Ok("//TODO: ret value");
         }
+
+        [HttpGet]
+        public IHttpActionResult GetValue()
+        {
+            return Ok("test");
+        }
     }
 }

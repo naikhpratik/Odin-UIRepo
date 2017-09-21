@@ -1,7 +1,7 @@
 using Odin;
 
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(MyDwellworks.App_Start.NinjectWebCommon), "Start")]
-[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(MyDwellworks.App_Start.NinjectWebCommon), "Stop")]
+//[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(MyDwellworks.App_Start.NinjectWebCommon), "Start")]
+//[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(MyDwellworks.App_Start.NinjectWebCommon), "Stop")]
 
 namespace MyDwellworks.App_Start
 {
@@ -24,8 +24,8 @@ namespace MyDwellworks.App_Start
         /// </summary>
         public static void Start() 
         {
-            DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
-            DynamicModuleUtility.RegisterModule(typeof(NinjectHttpModule));
+            //DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
+            //DynamicModuleUtility.RegisterModule(typeof(NinjectHttpModule));
             bootstrapper.Initialize(CreateKernel);
         }
         
@@ -41,7 +41,7 @@ namespace MyDwellworks.App_Start
         /// Creates the kernel that will manage your application.
         /// </summary>
         /// <returns>The created kernel.</returns>
-        private static IKernel CreateKernel()
+        public static IKernel CreateKernel()
         {
             var kernel = new StandardKernel();
             try

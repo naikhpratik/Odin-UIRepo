@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.Owin.Hosting;
+using Microsoft.Owin.Testing;
 using NUnit.Framework;
 using Odin.Data.Builders;
 using Odin.Data.Core.Dtos;
@@ -66,12 +67,13 @@ namespace Odin.IntegrationTests.Controllers.Api
             orderDto.Consultant.SeContactUid = dsc.SeContactUid.Value;
 
             // Act
-            using (WebApp.Start<Startup>(url: Url))
+            using (var server = TestServer.Create<Startup>())
             {
-                HttpClient client = new HttpClient();
+                
                 var request = CreateRequest("api/orders", "application/json", HttpMethod.Post, orderDto);
                 request.Headers.Add("Token", ApiKey);
-                var response = await client.SendAsync(request);
+                var result = await server.HttpClient.GetAsync("api/orders");
+                var response = await server.HttpClient.SendAsync(request);
                 var errorResponse = await response.ReadContentAsyncSafe<ErrorResponse>();
                 
                 // Assert
