@@ -34,9 +34,11 @@ namespace Odin.IntegrationTests
             NinjectWebCommon.Start();
             var config = new HttpConfiguration();
             var kernel = NinjectWebCommon.bootstrapper.Kernel;
+
             var resolver = new NinjectDependencyResolver(kernel);
             config.DependencyResolver = resolver;
             WebApiConfig.Register(config);
+            
             _server = new HttpServer(config);
             Client = new HttpClient(_server);
         }

@@ -10,8 +10,6 @@ namespace Odin.Data.Core.Dtos
 {
     public class OrderDto
     {
-        public int Id { get; set; }
-
         [Required]
         public string TrackingId { get; set; }
         public string RelocationType { get; set; }
