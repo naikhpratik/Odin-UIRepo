@@ -33,5 +33,10 @@ namespace Odin.Data.Persistence
         {
             return _context.Orders.SingleOrDefault(o => o.TrackingId.Equals(trackingId));
         }
+
+        public void Add(Order order)
+        {
+            _context.Orders.Add(order);
+        }
     }
 }

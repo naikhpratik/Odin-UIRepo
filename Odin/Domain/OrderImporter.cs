@@ -48,6 +48,7 @@ namespace Odin.Domain
             order.Consultant = consultant;
             order.ProgramManager = programManager;
 
+            _unitOfWork.Orders.Add(order);
             _unitOfWork.Complete();
 
         }

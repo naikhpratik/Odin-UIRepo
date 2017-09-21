@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
+using Microsoft.Owin.Hosting;
 using NUnit.Framework;
 using Odin.Data.Builders;
 using Odin.Data.Core.Dtos;
@@ -25,9 +26,6 @@ namespace Odin.IntegrationTests.Controllers.Api
             // Arrange
             var order = OrderBuilder.New().First();
             order.TrackingId = TokenHelper.NewToken();
-            var transferee = Context.Transferees.First(u => u.UserName.Equals("odinee@dwellworks.com"));
-            var dsc = Context.Consultants.First(u => u.UserName.Equals("odinconsultant@dwellworks.com"));
-            var pm = Context.Managers.First(u => u.UserName.Equals("odinpm@dwellworks.com"));
             order.Transferee = transferee;
             order.Consultant = dsc;
             order.ProgramManager = pm;
@@ -61,21 +59,27 @@ namespace Odin.IntegrationTests.Controllers.Api
             // Arrange
             var orderDto = OrderDtoBuilder.New();
             orderDto.ProgramManager = ProgramManagerDtoBuilder.New();
+            orderDto.ProgramManager.SeContactUid = pm.SeContactUid.Value;
             orderDto.Transferee = TransfereeDtoBuilder.New();
+            orderDto.Transferee.Email = "test@test.com";
             orderDto.Consultant = ConsultantDtoBuilder.New();
-
-            var request = CreateRequest("api/orders", "application/json", HttpMethod.Post, orderDto);
-            request.Headers.Add("Token", ApiKey);
+            orderDto.Consultant.SeContactUid = dsc.SeContactUid.Value;
 
             // Act
-            var response = await Client.SendAsync(request);
-            var errorResponse = await response.ReadContentAsyncSafe<ErrorResponse>();
-
-            // Assert
-            errorResponse?.Errors.Should().BeNull();
-            response.StatusCode.Should().Be(HttpStatusCode.OK);
-            var order = Context.Orders.FirstOrDefault(o => o.TrackingId.Equals(orderDto.TrackingId));
-            order.Should().NotBeNull();
+            using (WebApp.Start<Startup>(url: Url))
+            {
+                HttpClient client = new HttpClient();
+                var request = CreateRequest("api/orders", "application/json", HttpMethod.Post, orderDto);
+                request.Headers.Add("Token", ApiKey);
+                var response = await client.SendAsync(request);
+                var errorResponse = await response.ReadContentAsyncSafe<ErrorResponse>();
+                
+                // Assert
+                errorResponse?.Errors.Should().BeNull();
+                response.StatusCode.Should().Be(HttpStatusCode.OK);
+                var order = Context.Orders.FirstOrDefault(o => o.TrackingId.Equals(orderDto.TrackingId));
+                order.Should().NotBeNull();
+            }
         }
     }
 }

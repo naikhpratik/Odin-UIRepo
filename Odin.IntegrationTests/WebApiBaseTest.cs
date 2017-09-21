@@ -9,9 +9,11 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Microsoft.Owin.Hosting;
 using MyDwellworks.App_Start;
 using Ninject.Web.WebApi;
 using NUnit.Framework;
+using Odin.Data.Core.Models;
 using Odin.Data.Persistence;
 
 namespace Odin.IntegrationTests
@@ -24,12 +26,19 @@ namespace Odin.IntegrationTests
         protected ApplicationDbContext Context;
         private HttpServer _server;
         protected string ApiKey;
+        protected Transferee transferee;
+        protected Consultant dsc;
+        protected Manager pm;
 
         [SetUp]
         public void SetUp()
         {
             Context = new ApplicationDbContext();
             ApiKey = "SeApiTokenKeyTest";
+
+            transferee = Context.Transferees.First(u => u.UserName.Equals("odinee@dwellworks.com"));
+            dsc = Context.Consultants.First(u => u.UserName.Equals("odinconsultant@dwellworks.com"));
+            pm = Context.Managers.First(u => u.UserName.Equals("odinpm@dwellworks.com"));
 
             NinjectWebCommon.Start();
             var config = new HttpConfiguration();
@@ -41,12 +50,15 @@ namespace Odin.IntegrationTests
             
             _server = new HttpServer(config);
             Client = new HttpClient(_server);
+
+            
         }
 
         [TearDown]
         public void TearDown()
         {
-            Context.Dispose();            
+            Context.Dispose();
+            
         }
 
         protected string MakeUri(string uri)
