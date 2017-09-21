@@ -37,18 +37,18 @@ namespace Odin.Domain
                 {
                     _mapper.Map<TransfereeDto, Transferee>(orderDto.Transferee, transferee);
                     transferee.Orders.Add(order);
-                    order.Transferee = transferee;
                 }
+
+                _unitOfWork.Orders.Add(order);
             }
             else
             {
                 _mapper.Map<OrderDto, Order>(orderDto, order);
             }
-
+            order.Transferee = transferee;
             order.Consultant = consultant;
             order.ProgramManager = programManager;
 
-            _unitOfWork.Orders.Add(order);
             _unitOfWork.Complete();
 
         }

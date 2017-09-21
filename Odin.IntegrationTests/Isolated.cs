@@ -14,7 +14,7 @@ namespace Odin.IntegrationTests
         private TransactionScope _transactionScope;
         public void BeforeTest(ITest test)
         {
-            _transactionScope = new TransactionScope();
+            _transactionScope = new TransactionScope(TransactionScopeOption.Required, new TransactionOptions() { IsolationLevel = IsolationLevel.ReadUncommitted, Timeout= TimeSpan.FromSeconds(15) });
         }
 
         public void AfterTest(ITest test)

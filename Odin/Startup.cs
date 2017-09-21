@@ -18,12 +18,6 @@ namespace Odin
             var configuration = new HttpConfiguration();
             WebApiConfig.Register(configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-            //NinjectWebCommon.Start();
-            //var config = new HttpConfiguration();
-            //var kernel = NinjectWebCommon.bootstrapper.Kernel;
-
-            //var resolver = new NinjectDependencyResolver(kernel);
-            //config.DependencyResolver = resolver;
             ConfigureAuth(app);
             app.UseNinjectMiddleware(NinjectWebCommon.CreateKernel);
             app.UseNinjectWebApi(configuration);

@@ -31,7 +31,6 @@ namespace Odin.IntegrationTests.Controllers.Api
             order.Consultant = dsc;
             order.ProgramManager = pm;
             Context.Orders.Add(order);
-            Context.SaveChanges();
             var orderDto = OrderDtoBuilder.New();
             orderDto.TrackingId = order.TrackingId;
             orderDto.ProgramManager = ProgramManagerDtoBuilder.New();
@@ -44,7 +43,7 @@ namespace Odin.IntegrationTests.Controllers.Api
             request.Headers.Add("Token", ApiKey);
 
             // Act
-            var response = await Client.SendAsync(request);
+            var response = await Server.HttpClient.SendAsync(request);
             var errorResponse = await response.ReadContentAsyncSafe<ErrorResponse>();
 
             // Assert
@@ -66,22 +65,18 @@ namespace Odin.IntegrationTests.Controllers.Api
             orderDto.Consultant = ConsultantDtoBuilder.New();
             orderDto.Consultant.SeContactUid = dsc.SeContactUid.Value;
 
-            // Act
-            using (var server = TestServer.Create<Startup>())
-            {
+            // Act                
+            var request = CreateRequest("api/orders", "application/json", HttpMethod.Post, orderDto);
+            request.Headers.Add("Token", ApiKey);
+            var response = await Server.HttpClient.SendAsync(request);
+            var errorResponse = await response.ReadContentAsyncSafe<ErrorResponse>();
                 
-                var request = CreateRequest("api/orders", "application/json", HttpMethod.Post, orderDto);
-                request.Headers.Add("Token", ApiKey);
-                var result = await server.HttpClient.GetAsync("api/orders");
-                var response = await server.HttpClient.SendAsync(request);
-                var errorResponse = await response.ReadContentAsyncSafe<ErrorResponse>();
-                
-                // Assert
-                errorResponse?.Errors.Should().BeNull();
-                response.StatusCode.Should().Be(HttpStatusCode.OK);
-                var order = Context.Orders.FirstOrDefault(o => o.TrackingId.Equals(orderDto.TrackingId));
-                order.Should().NotBeNull();
-            }
+            // Assert
+            errorResponse?.Errors.Should().BeNull();
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
+            var order = Context.Orders.FirstOrDefault(o => o.TrackingId.Equals(orderDto.TrackingId));
+            order.Should().NotBeNull();
+          
         }
     }
 }

@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Microsoft.Owin.Hosting;
+using Microsoft.Owin.Testing;
 using MyDwellworks.App_Start;
 using Ninject.Web.WebApi;
 using NUnit.Framework;
@@ -19,12 +20,11 @@ using Odin.Data.Persistence;
 namespace Odin.IntegrationTests
 {
     [TestFixture]
-    public abstract class WebApiBaseTest : IDisposable
+    public abstract class WebApiBaseTest
     {
         protected const string Url = "http://localhost/";
-        protected HttpClient Client;
+        protected TestServer Server;
         protected ApplicationDbContext Context;
-        private HttpServer _server;
         protected string ApiKey;
         protected Transferee transferee;
         protected Consultant dsc;
@@ -34,31 +34,20 @@ namespace Odin.IntegrationTests
         public void SetUp()
         {
             Context = new ApplicationDbContext();
+            Server = TestServer.Create<Startup>();
+
             ApiKey = "SeApiTokenKeyTest";
 
             transferee = Context.Transferees.First(u => u.UserName.Equals("odinee@dwellworks.com"));
             dsc = Context.Consultants.First(u => u.UserName.Equals("odinconsultant@dwellworks.com"));
             pm = Context.Managers.First(u => u.UserName.Equals("odinpm@dwellworks.com"));
-
-            NinjectWebCommon.Start();
-            var config = new HttpConfiguration();
-            var kernel = NinjectWebCommon.bootstrapper.Kernel;
-
-            var resolver = new NinjectDependencyResolver(kernel);
-            config.DependencyResolver = resolver;
-            WebApiConfig.Register(config);
-            
-            _server = new HttpServer(config);
-            Client = new HttpClient(_server);
-
-            
         }
 
         [TearDown]
         public void TearDown()
         {
             Context.Dispose();
-            
+            Server.Dispose();
         }
 
         protected string MakeUri(string uri)
@@ -84,11 +73,6 @@ namespace Odin.IntegrationTests
             request.Content = new ObjectContent<T>(content, new JsonMediaTypeFormatter());
             
             return request;
-        }
-
-        public void Dispose()
-        {
-            _server?.Dispose();
         }
     }
 }
