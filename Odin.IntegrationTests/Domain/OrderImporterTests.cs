@@ -14,6 +14,7 @@ using Odin.Data.Helpers;
 using Odin.Data.Persistence;
 using Odin.Domain;
 using Odin.IntegrationTests.Helpers;
+using Odin.IntegrationTests.TestAttributes;
 
 namespace Odin.IntegrationTests.Domain
 {

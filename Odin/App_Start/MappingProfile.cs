@@ -17,7 +17,10 @@ namespace Odin
             CreateMap<Consultant, ConsultantViewModel>();
             CreateMap<Manager, ProgramManagerViewModel>();
 
-            CreateMap<OrderDto, Order>();
+            CreateMap<OrderDto, Order>()
+                .ForMember(m => m.Transferee, opt => opt.Ignore())
+                .ForMember(m => m.Consultant, opt => opt.Ignore())
+                .ForMember(m => m.ProgramManager, opt => opt.Ignore());
             CreateMap<TransfereeDto, Transferee>();
             CreateMap<ProgramManagerDto, Manager>();
             CreateMap<ConsultantDto, Consultant>();

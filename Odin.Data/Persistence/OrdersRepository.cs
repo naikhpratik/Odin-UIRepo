@@ -21,6 +21,7 @@ namespace Odin.Data.Persistence
         public IEnumerable<Order> GetOrdersFor(string userId)
         {
             return _context.Orders
+
                 .Where(o => o.ConsultantId == userId)
                 .Include(o => o.Transferee)
                 .Include(o => o.ProgramManager)

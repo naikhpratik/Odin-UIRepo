@@ -27,6 +27,22 @@ namespace Odin.Data.Persistence.Migrations
             SeedInitialRoles(context);
             SeedInitialUsers(context);
             CreateOrderData(context);
+            PopulateSeContactUids(context);
+        }
+
+        private void PopulateSeContactUids(ApplicationDbContext context)
+        {
+            
+            var users = context.Users.Where(u => !u.SeContactUid.HasValue);
+            if (users.Any())
+            {
+                var maxSeContactUid = context.Users.OrderByDescending(u => u.SeContactUid).FirstOrDefault()?.SeContactUid ?? 1;
+                foreach (var user in users)
+                {
+                    user.SeContactUid = ++maxSeContactUid;
+                }
+                context.SaveChanges();
+            }
         }
 
         private void CreateOrderData(ApplicationDbContext context)

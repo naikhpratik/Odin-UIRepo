@@ -15,13 +15,14 @@ using Odin.Data.Core.Models;
 using Odin.Data.Helpers;
 using Odin.Extensions;
 using Odin.Helpers;
+using Odin.IntegrationTests.TestAttributes;
 
 namespace Odin.IntegrationTests.Controllers.Api
 {
     [TestFixture]
     public class OrdersControllerTests : WebApiBaseTest
     {
-        [Test, Isolated]
+        [Test, CleanData]
         public async Task UpsertOrder_ValidUpdateRequest_ShouldNotUpdateNonDtoFields()
         {
             // Arrange
@@ -31,6 +32,7 @@ namespace Odin.IntegrationTests.Controllers.Api
             order.Consultant = dsc;
             order.ProgramManager = pm;
             Context.Orders.Add(order);
+            Context.SaveChanges();
             var orderDto = OrderDtoBuilder.New();
             orderDto.TrackingId = order.TrackingId;
             orderDto.ProgramManager = ProgramManagerDtoBuilder.New();
@@ -53,7 +55,7 @@ namespace Odin.IntegrationTests.Controllers.Api
             order.FamilyDetails.Should().NotBeNullOrEmpty();
         }
 
-        [Test, Isolated]
+        [Test, CleanData]
         public async Task UpsertOrder_ValidInsertRequest_CreatesOrderRecord()
         {
             // Arrange
@@ -61,7 +63,7 @@ namespace Odin.IntegrationTests.Controllers.Api
             orderDto.ProgramManager = ProgramManagerDtoBuilder.New();
             orderDto.ProgramManager.SeContactUid = pm.SeContactUid.Value;
             orderDto.Transferee = TransfereeDtoBuilder.New();
-            orderDto.Transferee.Email = "test@test.com";
+            orderDto.Transferee.Email = "integration@test.com";
             orderDto.Consultant = ConsultantDtoBuilder.New();
             orderDto.Consultant.SeContactUid = dsc.SeContactUid.Value;
 
@@ -78,5 +80,43 @@ namespace Odin.IntegrationTests.Controllers.Api
             order.Should().NotBeNull();
           
         }
+
+        [Test, CleanData]
+        public async Task UpsertOrder_InsertWithNewTransferee_CreatesTransfereeAndOrder()
+        {
+            // Arrange
+            var orderDto = OrderDtoBuilder.New();
+            orderDto.ProgramManager = ProgramManagerDtoBuilder.New();
+            orderDto.ProgramManager.SeContactUid = pm.SeContactUid.Value;
+            orderDto.Transferee = TransfereeDtoBuilder.New();
+            orderDto.Transferee.Email = "integration@test.com";
+            orderDto.Consultant = ConsultantDtoBuilder.New();
+            orderDto.Consultant.SeContactUid = dsc.SeContactUid.Value;
+            orderDto.DestinationCity = "integration-test";
+
+            // Act
+            var request = CreateRequest("api/orders", "application/json", HttpMethod.Post, orderDto);
+            request.Headers.Add("Token", ApiKey);
+            var response = await Server.HttpClient.SendAsync(request);
+            var errorResponse = await response.ReadContentAsyncSafe<ErrorResponse>();
+
+            // Assert
+            errorResponse?.Errors.Should().BeNull();
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
+            var newTransferee = Context.Transferees.SingleOrDefault(t => t.Email.Equals("integration@test.com"));
+            newTransferee.Should().NotBeNull();
+            var newOrder = Context.Orders.SingleOrDefault(o => o.TrackingId.Equals(orderDto.TrackingId));
+            newOrder.Should().NotBeNull();
+        }
+
+
+        //TODO: UpsertOrder_InsertWithExistingTransferee_CreatesOrder()
+        //TODO: UpsertOrder_UpdateOrder_ShouldUpdateFields()
+        //TODO: UpsertOrder_ExistingOrderTriesToUpdateTransferee_ShouldThrowError()
+        //TODO: UpsertOrder_DifferentPm_ShouldChangePmAssigned()
+        //TODO: UpsertOrder_DifferentDsc_ShouldChangeDscAssigned()
+        //TODO: UpsertOrder_OnException_Returns501()
+        //TODO: UpsertOrder_OnWrongToken_Returns401()
+        //TODO: UpsertOrder_DtoMissingFields_ReturnsArrayOfErrors()
     }
 }

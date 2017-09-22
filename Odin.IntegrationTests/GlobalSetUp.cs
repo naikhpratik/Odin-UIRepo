@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using Odin.Data.Core.Models;
 using Odin.Data.Persistence;
+using Odin.IntegrationTests.Helpers;
 
 namespace Odin.IntegrationTests
 {
@@ -37,6 +38,9 @@ namespace Odin.IntegrationTests
 
             context.Users.Add(new ApplicationUser { UserName = "user1", FirstName = "user1", Email = "user1@domain.com", PasswordHash = "-" });
             context.Users.Add(new ApplicationUser { UserName = "user2", FirstName = "user2", Email = "user1@domain.com", PasswordHash = "-" });
+
+            OrderHelper.ClearIntegrationOrders(context);
+
             context.SaveChanges();
         }
     }

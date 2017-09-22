@@ -21,7 +21,7 @@ namespace Odin.Data.Persistence
             Consultants = new ConsultantRepository(context);
             Managers = new ManagerRepository(context);
         }
-
+        
         public void Complete()
         {
             _context.SaveChanges();

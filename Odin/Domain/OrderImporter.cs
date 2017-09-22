@@ -21,8 +21,8 @@ namespace Odin.Domain
         {
             var order = _unitOfWork.Orders.GetOrderByTrackingId(orderDto.TrackingId);
             var transferee = _unitOfWork.Transferees.GetTransfereeByEmail(orderDto.Transferee.Email);
-            var consultant = _unitOfWork.Consultants.GetConsultantBySeContactUid(orderDto.Consultant.SeContactUid);
-            var programManager = _unitOfWork.Managers.GetManagerBySeContactUid(orderDto.ProgramManager.SeContactUid);
+            var consultantId = _unitOfWork.Consultants.GetConsultantBySeContactUid(orderDto.Consultant.SeContactUid).Id;
+            var programManagerId = _unitOfWork.Managers.GetManagerBySeContactUid(orderDto.ProgramManager.SeContactUid).Id;
 
             if (order == null)
             {
@@ -33,24 +33,27 @@ namespace Odin.Domain
                     transferee = _mapper.Map<TransfereeDto, Transferee>(orderDto.Transferee);
                     _unitOfWork.Transferees.Add(transferee);
                 }
-                else
-                {
-                    _mapper.Map<TransfereeDto, Transferee>(orderDto.Transferee, transferee);
-                    transferee.Orders.Add(order);
-                }
+                //else
+                //{
+                //    _mapper.Map<TransfereeDto, Transferee>(orderDto.Transferee, transferee);
+                //}
 
                 _unitOfWork.Orders.Add(order);
             }
             else
             {
                 _mapper.Map<OrderDto, Order>(orderDto, order);
+
             }
-            order.Transferee = transferee;
-            order.Consultant = consultant;
-            order.ProgramManager = programManager;
+
+            
+
+            order.TransfereeId = transferee.Id;
+            order.ConsultantId = consultantId;
+            order.ProgramManagerId = programManagerId;
 
             _unitOfWork.Complete();
-
+            
         }
         
         

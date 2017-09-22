@@ -24,7 +24,8 @@ namespace Odin.Data.Builders
                 .RuleFor(o => o.OriginCity, f => f.Address.City())
                 .RuleFor(o => o.OriginCountry, f => f.Address.CountryCode())
                 .RuleFor(o => o.OriginState, f => f.Address.State())
-                .RuleFor(o => o.EstimatedArrivalDate, f => f.Date.Future());
+                .RuleFor(o => o.EstimatedArrivalDate, f => f.Date.Future())
+                .RuleFor(o => o.TrackingId, f=> $"integration-{f.IndexGlobal}");
 
             var orderDto = orderFaker.Generate();
 

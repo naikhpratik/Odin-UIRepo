@@ -12,6 +12,7 @@ using Odin.Controllers;
 using Odin.Data.Core.Models;
 using Odin.Data.Persistence;
 using Odin.IntegrationTests.Extensions;
+using Odin.IntegrationTests.TestAttributes;
 using Odin.ViewModels;
 
 namespace Odin.IntegrationTests.Controllers
