@@ -31,6 +31,8 @@ namespace Odin.Tests.Domain
             _orderImporter = new OrderImporter(mockUnitOfWork.Object, _mockMapper.Object);
         }
 
-        
+        //TODO: UpsertOrder_OnException_Returns501()
+        //TODO: UpsertOrder_OnWrongToken_Returns401()
+        //TODO: UpsertOrder_DtoMissingFields_ReturnsArrayOfErrors()
     }
 }

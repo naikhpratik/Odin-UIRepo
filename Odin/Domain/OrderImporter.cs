@@ -33,10 +33,6 @@ namespace Odin.Domain
                     transferee = _mapper.Map<TransfereeDto, Transferee>(orderDto.Transferee);
                     _unitOfWork.Transferees.Add(transferee);
                 }
-                //else
-                //{
-                //    _mapper.Map<TransfereeDto, Transferee>(orderDto.Transferee, transferee);
-                //}
 
                 _unitOfWork.Orders.Add(order);
             }
@@ -44,9 +40,14 @@ namespace Odin.Domain
             {
                 _mapper.Map<OrderDto, Order>(orderDto, order);
 
+                if (transferee == null)
+                {
+                    transferee = _mapper.Map<TransfereeDto, Transferee>(orderDto.Transferee);
+                    _unitOfWork.Transferees.Add(transferee);
+                }
             }
 
-            
+
 
             order.TransfereeId = transferee.Id;
             order.ConsultantId = consultantId;

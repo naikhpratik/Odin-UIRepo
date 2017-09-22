@@ -41,10 +41,10 @@ namespace Odin.IntegrationTests.Controllers.Api
             orderDto.Consultant.SeContactUid = dsc.SeContactUid.Value;
             orderDto.Transferee = TransfereeDtoBuilder.New();
             orderDto.Transferee.Email = transferee.Email;
-            var request = CreateRequest("api/orders", "application/json", HttpMethod.Post, orderDto);
-            request.Headers.Add("Token", ApiKey);
 
             // Act
+            var request = CreateRequest("api/orders", "application/json", HttpMethod.Post, orderDto);
+            request.Headers.Add("Token", ApiKey);
             var response = await Server.HttpClient.SendAsync(request);
             var errorResponse = await response.ReadContentAsyncSafe<ErrorResponse>();
 
@@ -92,7 +92,8 @@ namespace Odin.IntegrationTests.Controllers.Api
             orderDto.Transferee.Email = "integration@test.com";
             orderDto.Consultant = ConsultantDtoBuilder.New();
             orderDto.Consultant.SeContactUid = dsc.SeContactUid.Value;
-            orderDto.DestinationCity = "integration-test";
+            Context.Transferees.SingleOrDefault(t => t.Email.Equals("integration@test.com")).Should().BeNull();
+            Context.Orders.SingleOrDefault(o => o.TrackingId.Equals(orderDto.TrackingId)).Should().BeNull();
 
             // Act
             var request = CreateRequest("api/orders", "application/json", HttpMethod.Post, orderDto);
@@ -109,12 +110,185 @@ namespace Odin.IntegrationTests.Controllers.Api
             newOrder.Should().NotBeNull();
         }
 
+        [Test, CleanData]
+        public async Task UpsertOrder_InsertWithExistingTransferee_CreatesOrder()
+        {
+            // Arrange
+            var orderDto = OrderDtoBuilder.New();
+            orderDto.ProgramManager = ProgramManagerDtoBuilder.New();
+            orderDto.ProgramManager.SeContactUid = pm.SeContactUid.Value;
+            orderDto.Transferee = TransfereeDtoBuilder.New();
+            orderDto.Transferee.Email = transferee.Email;
+            orderDto.Consultant = ConsultantDtoBuilder.New();
+            orderDto.Consultant.SeContactUid = dsc.SeContactUid.Value;
+            Context.Orders.SingleOrDefault(o => o.TrackingId.Equals(orderDto.TrackingId)).Should().BeNull();
 
-        //TODO: UpsertOrder_InsertWithExistingTransferee_CreatesOrder()
-        //TODO: UpsertOrder_UpdateOrder_ShouldUpdateFields()
-        //TODO: UpsertOrder_ExistingOrderTriesToUpdateTransferee_ShouldThrowError()
-        //TODO: UpsertOrder_DifferentPm_ShouldChangePmAssigned()
-        //TODO: UpsertOrder_DifferentDsc_ShouldChangeDscAssigned()
+            // Act
+            var request = CreateRequest("api/orders", "application/json", HttpMethod.Post, orderDto);
+            request.Headers.Add("Token", ApiKey);
+            var response = await Server.HttpClient.SendAsync(request);
+            var errorResponse = await response.ReadContentAsyncSafe<ErrorResponse>();
+
+            // Assert
+            errorResponse?.Errors.Should().BeNull();
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
+            Context.Orders.SingleOrDefault(o => o.TrackingId.Equals(orderDto.TrackingId)).Should().NotBeNull();
+        }
+
+        [Test, CleanData]
+        public async Task UpsertOrder_UpdateOrder_ShouldUpdateFields()
+        {
+            // Arrange
+            var order = OrderBuilder.New().First();
+            order.TrackingId = TokenHelper.NewToken();
+            order.Transferee = transferee;
+            order.Consultant = dsc;
+            order.ProgramManager = pm;
+            order.DestinationCity = "test-before-insert";
+            Context.Orders.Add(order);
+            Context.SaveChanges();
+            var orderDto = OrderDtoBuilder.New();
+            orderDto.TrackingId = order.TrackingId;
+            orderDto.ProgramManager = ProgramManagerDtoBuilder.New();
+            orderDto.ProgramManager.SeContactUid = pm.SeContactUid.Value;
+            orderDto.Consultant = ConsultantDtoBuilder.New();
+            orderDto.Consultant.SeContactUid = dsc.SeContactUid.Value;
+            orderDto.Transferee = TransfereeDtoBuilder.New();
+            orderDto.Transferee.Email = transferee.Email;
+            orderDto.DestinationCity = "integration-test-city";
+
+            // Act
+            var request = CreateRequest("api/orders", "application/json", HttpMethod.Post, orderDto);
+            request.Headers.Add("Token", ApiKey);
+            var response = await Server.HttpClient.SendAsync(request);
+            var errorResponse = await response.ReadContentAsyncSafe<ErrorResponse>();
+
+            // Assert
+            errorResponse?.Errors.Should().BeNull();
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
+            Context.Entry(order).Reload();
+            order.DestinationCity.Should().Be(orderDto.DestinationCity);
+        }
+
+        [Test, CleanData]
+        public async Task UpsertOrder_UpdateOrderWithNewEeEmail_ShouldCreateNewTransferee()
+        {
+            // Arrange
+            var order = OrderBuilder.New().First();
+            order.TrackingId = TokenHelper.NewToken();
+            order.Transferee = transferee;
+            order.Consultant = dsc;
+            order.ProgramManager = pm;
+            Context.Orders.Add(order);
+            Context.SaveChanges();
+            var orderDto = OrderDtoBuilder.New();
+            orderDto.TrackingId = order.TrackingId;
+            orderDto.ProgramManager = ProgramManagerDtoBuilder.New();
+            orderDto.ProgramManager.SeContactUid = pm.SeContactUid.Value;
+            orderDto.Consultant = ConsultantDtoBuilder.New();
+            orderDto.Consultant.SeContactUid = dsc.SeContactUid.Value;
+            orderDto.Transferee = TransfereeDtoBuilder.New();
+            orderDto.Transferee.Email = "integration@test.com";
+            Context.Transferees.SingleOrDefault(t => t.Email.Equals(orderDto.Transferee.Email)).Should().BeNull();
+
+            // Act
+            var request = CreateRequest("api/orders", "application/json", HttpMethod.Post, orderDto);
+            request.Headers.Add("Token", ApiKey);
+            var response = await Server.HttpClient.SendAsync(request);
+            var errorResponse = await response.ReadContentAsyncSafe<ErrorResponse>();
+
+            // Assert
+            errorResponse?.Errors.Should().BeNull();
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
+            Context.Transferees.SingleOrDefault(t => t.Email.Equals(orderDto.Transferee.Email)).Should().NotBeNull();
+        }
+
+        [Test, CleanData]
+        public async Task UpsertOrder_DifferentPm_ShouldChangePmAssigned()
+        {
+            // Arrange
+            var secondPm = Context.Managers.Add(new Manager
+            {
+                UserName = "integrationee@dwellworks.com",
+                FirstName = "user2",
+                Email = "integrationee@dwellworks.com",
+                PasswordHash = "-",
+                SeContactUid = 99999
+            });
+            var order = OrderBuilder.New().First();
+            order.TrackingId = TokenHelper.NewToken();
+            order.Transferee = transferee;
+            order.Consultant = dsc;
+            order.ProgramManager = pm;
+            Context.Orders.Add(order);
+            Context.SaveChanges();
+            var orderDto = OrderDtoBuilder.New();
+            orderDto.TrackingId = order.TrackingId;
+            orderDto.ProgramManager = ProgramManagerDtoBuilder.New();
+            orderDto.ProgramManager.SeContactUid = secondPm.SeContactUid.Value;
+            orderDto.Consultant = ConsultantDtoBuilder.New();
+            orderDto.Consultant.SeContactUid = dsc.SeContactUid.Value;
+            orderDto.Transferee = TransfereeDtoBuilder.New();
+            orderDto.Transferee.Email = transferee.Email;
+            Context.Entry(order).Reload();
+            order.ProgramManager.SeContactUid.Value.Should().Be(pm.SeContactUid.Value);
+
+            // Act
+            var request = CreateRequest("api/orders", "application/json", HttpMethod.Post, orderDto);
+            request.Headers.Add("Token", ApiKey);
+            var response = await Server.HttpClient.SendAsync(request);
+            var errorResponse = await response.ReadContentAsyncSafe<ErrorResponse>();
+
+            // Assert
+            errorResponse?.Errors.Should().BeNull();
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
+            Context.Entry(order).Reload();
+            order.ProgramManager.SeContactUid.Value.Should().Be(secondPm.SeContactUid.Value);
+        }
+
+        [Test, CleanData]
+        public async Task UpsertOrder_DifferentDsc_ShouldChangeDscAssigned()
+        {
+            // Arrange
+            var secondConsultant = Context.Consultants.Add(new Consultant()
+            {
+                UserName = "integrationc@dwellworks.com",
+                FirstName = "user2",
+                Email = "integrationc@dwellworks.com",
+                PasswordHash = "-",
+                SeContactUid = 99999
+            });
+            var order = OrderBuilder.New().First();
+            order.TrackingId = TokenHelper.NewToken();
+            order.Transferee = transferee;
+            order.Consultant = dsc;
+            order.ProgramManager = pm;
+            Context.Orders.Add(order);
+            Context.SaveChanges();
+            var orderDto = OrderDtoBuilder.New();
+            orderDto.TrackingId = order.TrackingId;
+            orderDto.ProgramManager = ProgramManagerDtoBuilder.New();
+            orderDto.ProgramManager.SeContactUid = pm.SeContactUid.Value;
+            orderDto.Consultant = ConsultantDtoBuilder.New();
+            orderDto.Consultant.SeContactUid = secondConsultant.SeContactUid.Value;
+            orderDto.Transferee = TransfereeDtoBuilder.New();
+            orderDto.Transferee.Email = transferee.Email;
+            Context.Entry(order).Reload();
+            order.Consultant.SeContactUid.Value.Should().Be(dsc.SeContactUid.Value);
+
+            // Act
+            var request = CreateRequest("api/orders", "application/json", HttpMethod.Post, orderDto);
+            request.Headers.Add("Token", ApiKey);
+            var response = await Server.HttpClient.SendAsync(request);
+            var errorResponse = await response.ReadContentAsyncSafe<ErrorResponse>();
+
+            // Assert
+            errorResponse?.Errors.Should().BeNull();
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
+            Context.Entry(order).Reload();
+            order.Consultant.SeContactUid.Value.Should().Be(secondConsultant.SeContactUid.Value);
+        }
+
         //TODO: UpsertOrder_OnException_Returns501()
         //TODO: UpsertOrder_OnWrongToken_Returns401()
         //TODO: UpsertOrder_DtoMissingFields_ReturnsArrayOfErrors()

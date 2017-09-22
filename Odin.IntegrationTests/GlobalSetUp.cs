@@ -32,13 +32,7 @@ namespace Odin.IntegrationTests
         public void Seed()
         {
             var context = new ApplicationDbContext();
-
-            if (context.Users.Any())
-                return;
-
-            context.Users.Add(new ApplicationUser { UserName = "user1", FirstName = "user1", Email = "user1@domain.com", PasswordHash = "-" });
-            context.Users.Add(new ApplicationUser { UserName = "user2", FirstName = "user2", Email = "user1@domain.com", PasswordHash = "-" });
-
+            
             OrderHelper.ClearIntegrationOrders(context);
 
             context.SaveChanges();

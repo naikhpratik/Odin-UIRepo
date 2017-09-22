@@ -49,6 +49,28 @@ namespace Odin.IntegrationTests.Helpers
                 }
                 context.Transferees.RemoveRange(transferees);
             }
+
+            var managers = context.Managers.Where(m => m.Email.Contains("integration")).Include(m => m.Orders).ToList();
+            if (managers.Any())
+            {
+                foreach (var manager in managers)
+                {
+                    context.Orders.RemoveRange(manager.Orders);
+                }
+                context.Managers.RemoveRange(managers);
+            }
+
+            var consultants = context.Consultants.Where(c => c.Email.Contains("integration")).Include(c => c.Orders)
+                .ToList();
+
+            if (consultants.Any())
+            {
+                foreach (var consultant in consultants)
+                {
+                    context.Orders.RemoveRange(consultant.Orders);
+                }
+                context.Consultants.RemoveRange(consultants);
+            }
             
             var orders = context.Orders.Where(o => o.TrackingId.Contains("integration")).ToList();
             foreach (var order in orders)
