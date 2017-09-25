@@ -1,5 +1,6 @@
 ﻿using System.Net.Http.Headers;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
@@ -25,8 +26,8 @@ namespace Odin
                 .Add(new MediaTypeHeaderValue("text/html"));
 
             // Uncomment to enable cors
-            // var attr = new EnableCorsAttribute("*", "*", "*");
-            // config.EnableCors(attr);
+            var attr = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(attr);
         }
     }
 }

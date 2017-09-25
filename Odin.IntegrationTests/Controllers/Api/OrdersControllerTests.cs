@@ -308,6 +308,7 @@ namespace Odin.IntegrationTests.Controllers.Api
             request.Headers.Add("Token", "--IncorrectToken--");
             var response = await Server.HttpClient.SendAsync(request);
             var errorResponse = await response.ReadContentAsyncSafe<ErrorResponse>();
+            var errorReponse2 = await response.Content.ReadAsAsync<ErrorResponse>();
 
             // Assert
             errorResponse.Should().NotBeNull();
