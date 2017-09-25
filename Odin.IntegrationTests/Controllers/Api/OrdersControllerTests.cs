@@ -289,8 +289,33 @@ namespace Odin.IntegrationTests.Controllers.Api
             order.Consultant.SeContactUid.Value.Should().Be(secondConsultant.SeContactUid.Value);
         }
 
+
+        [Test, CleanData]
+        public async Task UpsertOrder_IncorrectToken_Returns401()
+        {
+            // Arrange
+            var orderDto = OrderDtoBuilder.New();
+            orderDto.TrackingId = TokenHelper.NewToken();
+            orderDto.ProgramManager = ProgramManagerDtoBuilder.New();
+            orderDto.ProgramManager.SeContactUid = pm.SeContactUid.Value;
+            orderDto.Consultant = ConsultantDtoBuilder.New();
+            orderDto.Consultant.SeContactUid = dsc.SeContactUid.Value;
+            orderDto.Transferee = TransfereeDtoBuilder.New();
+            orderDto.Transferee.Email = transferee.Email;
+
+            // Act
+            var request = CreateRequest("api/orders", "application/json", HttpMethod.Post, orderDto);
+            request.Headers.Add("Token", "--IncorrectToken--");
+            var response = await Server.HttpClient.SendAsync(request);
+            var errorResponse = await response.ReadContentAsyncSafe<ErrorResponse>();
+
+            // Assert
+            errorResponse.Should().NotBeNull();
+            response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
+            errorResponse?.Errors.First().Should().Contain("authorized");
+        }
+
         //TODO: UpsertOrder_OnException_Returns501()
-        //TODO: UpsertOrder_OnWrongToken_Returns401()
         //TODO: UpsertOrder_DtoMissingFields_ReturnsArrayOfErrors()
     }
 }
