@@ -4,6 +4,6 @@ namespace Odin.Data.Core.Dtos
 {
     public class ProgramManagersDto
     {
-        public List<ProgramManagersDto> ProgramManagers { get; set; }
+        public List<ProgramManagerDto> ProgramManagers { get; set; }
     }
 }
