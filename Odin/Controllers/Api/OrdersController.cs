@@ -32,9 +32,17 @@ namespace Odin.Controllers.Api
         [ValidationActionFilter]
         public IHttpActionResult UpsertOrder(OrderDto orderDto)
         {
-            _orderImporter.ImportOrder(orderDto);
+            try
+            {
+                _orderImporter.ImportOrder(orderDto);
+            }
+            catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
+            
 
-            return Ok("//TODO: ret value");
+            return Ok();
         }
 
         [HttpGet]

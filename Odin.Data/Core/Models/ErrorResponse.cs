@@ -10,17 +10,17 @@ namespace Odin.Data.Core.Models
 {
     public class ErrorResponse
     {
-        public IEnumerable<string> Errors { get; private set; }
+        public IEnumerable<string> errors { get; private set; }
 
         public static ErrorResponse CreateResponse(ModelStateDictionary modelState)
         {
-            var errorResponse = new ErrorResponse { Errors = modelState.ErrorDescriptions() };
+            var errorResponse = new ErrorResponse { errors = modelState.ErrorDescriptions() };
             return errorResponse;
         }
 
         public static ErrorResponse CreateResponse(List<string> errors)
         {
-            var errorResponse = new ErrorResponse { Errors = errors };
+            var errorResponse = new ErrorResponse { errors = errors };
             return errorResponse;
         }
     }

@@ -88,6 +88,7 @@
     <Compile Include="Core\Dtos\ConsultantDto.cs" />
     <Compile Include="Core\Dtos\OrderDto.cs" />
     <Compile Include="Core\Dtos\ProgramManagerDto.cs" />
+    <Compile Include="Core\Dtos\ProgramManagersDto.cs" />
     <Compile Include="Core\Dtos\TransfereeDto.cs" />
     <Compile Include="Core\Dtos\UserDto.cs" />
     <Compile Include="Core\Models\ApplicationUser.cs" />
