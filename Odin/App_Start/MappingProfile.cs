@@ -27,7 +27,7 @@ namespace Odin
             CreateMap<Transferee, TransfereeDto>();
             CreateMap<Manager, ProgramManagerDto>();
             CreateMap<Consultant, ConsultantDto>();
-
+            CreateMap<ProgramManagerImportDto, Manager>();
         }
     }
 }
