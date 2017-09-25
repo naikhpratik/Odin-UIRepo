@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using AutoMapper;
+using Microsoft.ApplicationInsights;
 using Odin.Data.Core;
 using Odin.Data.Core.Dtos;
 using Odin.Data.Core.Models;
@@ -38,6 +39,8 @@ namespace Odin.Controllers.Api
             }
             catch (Exception e)
             {
+                var ai = new TelemetryClient();
+                ai.TrackException(e);
                 return InternalServerError(e);
             }
             
