@@ -4,7 +4,7 @@
     {
         public static readonly string Consultant = "Consultant";
         public static readonly string GlobalSupplyChain = "Global Supply Chain";
-        public static readonly string ProgramManager = "Program ProgramManager";
+        public static readonly string ProgramManager = "Program Manager";
         public static readonly string Transferee = "Transferee";
     }
 }

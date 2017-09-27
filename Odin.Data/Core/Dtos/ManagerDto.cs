@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Odin.Data.Validations;
 
 namespace Odin.Data.Core.Dtos
 {
@@ -23,6 +24,7 @@ namespace Odin.Data.Core.Dtos
 
         // Look at user roles, should be either Program Manager or Global Supply Chain
         [Required]
+        [HasManagerRole(ErrorMessage = "Role must be Program Manager or Global Supply Chain")]
         public string Role { get; set; }
     }
 }
