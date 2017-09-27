@@ -110,7 +110,7 @@ namespace Odin.Controllers
             }
             return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
-
+                
         //
         // POST: /Account/VerifyCode
         [HttpPost]
@@ -184,6 +184,7 @@ namespace Odin.Controllers
                 // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
                 // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
                 // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                
             }
 
             // If we got this far, something failed, redisplay form
@@ -226,7 +227,9 @@ namespace Odin.Controllers
             var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
             if (result.Succeeded)
             {
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
+                result = await UserManager.ConfirmEmailAsync(user.Id, model.Code);
+                return View(result.Succeeded ? "ResetPasswordConfirmatio" : "Error");
+                //return RedirectToAction("ResetPasswordConfirmation", "Account");
             }
             AddErrors(result);
             return View();
@@ -380,6 +383,7 @@ namespace Odin.Controllers
                 {
                     _userManager.Dispose();
                     _userManager = null;
+
                 }
 
                 if (_signInManager != null)
@@ -391,7 +395,14 @@ namespace Odin.Controllers
 
             base.Dispose(disposing);
         }
+        private async Task<string> SendEmailConfirmationTokenAsync(string userID, string subject, string bdy)
+        {
+            string code = await UserManager.GenerateEmailConfirmationTokenAsync(userID);
+            var callbackUrl = Url.Action("ResetPassword", "Account", new { userID, code = code }, protocol: Request.Url.Scheme);
+            await UserManager.SendEmailAsync(userID, subject, bdy + "click <a href=\"" + callbackUrl + "\">here</a>"); //"Please set your account password by
 
+            return callbackUrl;
+        }
         #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
