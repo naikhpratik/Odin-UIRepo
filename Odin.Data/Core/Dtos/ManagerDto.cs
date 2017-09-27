@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Odin.Data.Core.Dtos
 {
-    public class ProgramManagerImportDto
+    public class ManagerDto
     {
         [Required]
         public int SeContactUid { get; set; }
@@ -20,5 +20,9 @@ namespace Odin.Data.Core.Dtos
         
         [Required]
         public string Email { get; set; }
+
+        // Look at user roles, should be either Program Manager or Global Supply Chain
+        [Required]
+        public string Role { get; set; }
     }
 }
