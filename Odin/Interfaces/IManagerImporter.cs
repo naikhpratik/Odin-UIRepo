@@ -4,6 +4,6 @@ namespace Odin.Interfaces
 {
     public interface IManagerImporter
     {
-        void ImportManager(ManagerDto managerDto);
+        void ImportManager(ManagersDto managerDto);
     }
 }

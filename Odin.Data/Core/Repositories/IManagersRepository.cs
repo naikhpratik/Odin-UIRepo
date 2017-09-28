@@ -10,5 +10,6 @@ namespace Odin.Data.Core.Repositories
     public interface IManagersRepository
     {
         Manager GetManagerBySeContactUid(int seContactUid);
+        void Add(Manager manager, string userRole);
     }
 }

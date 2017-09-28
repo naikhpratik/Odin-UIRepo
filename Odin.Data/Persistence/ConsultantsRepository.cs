@@ -30,7 +30,7 @@ namespace Odin.Data.Persistence
             var userStore = new UserStore<Consultant>(_context);
             var userManager = new UserManager<Consultant>(userStore);
             consultant.UserName = consultant.Email;
-            var result = userManager.Create(consultant, TokenHelper.NewToken());
+            var result = userManager.Create(consultant, PasswordHelper.TemporaryPassword());
             userManager.AddToRole(consultant.Id, UserRoles.Consultant);
         }
     }
