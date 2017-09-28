@@ -26,6 +26,9 @@ namespace Odin.Data.Core.Models
         public string FamilyDetails { get; set; }
         
         public bool TransfereeInviteEnabled { get; set; }
+        public string SeCustNumb { get; set; }
+        public string Rmc { get; set; }
+        public string Client { get; set; }
 
         public int? RentId { get; set; }
         public Rent Rent { get; set; }

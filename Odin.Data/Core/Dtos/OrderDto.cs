@@ -24,6 +24,7 @@ namespace Odin.Data.Core.Dtos
         public string SeCustNumb { get; set; }
         public string Rmc { get; set; }
         public string Client { get; set; }
+        public bool TransfereeInviteEnabled { get; set; }
 
         [Required]
         public TransfereeDto Transferee { get; set; }
