@@ -21,6 +21,9 @@ namespace Odin.Data.Core.Dtos
         public string OriginState { get; set; }
         public string OriginCountry { get; set; }
         public DateTime? EstimatedArrivalDate { get; set; }
+        public string SeCustNumb { get; set; }
+        public string Rmc { get; set; }
+        public string Client { get; set; }
 
         [Required]
         public TransfereeDto Transferee { get; set; }
