@@ -8,15 +8,14 @@ using Odin.Data.Core.Repositories;
 
 namespace Odin.Data.Persistence
 {
-    public class ManagerRepository : IManagerRepository
+    public class ManagersRepository : IManagersRepository
     {
         private readonly ApplicationDbContext _context;
 
-        public ManagerRepository(ApplicationDbContext context)
+        public ManagersRepository(ApplicationDbContext context)
         {
             _context = context;
         }
-
 
         public Manager GetManagerBySeContactUid(int seContactUid)
         {

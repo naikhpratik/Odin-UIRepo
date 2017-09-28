@@ -24,7 +24,7 @@ namespace Odin.Controllers.Api
         [HttpPost]
         [ApiAuthorize]
         [ValidationActionFilter]
-        public IHttpActionResult UpsertConsultants(ConsultantsDto)
+        public IHttpActionResult UpsertConsultants(ConsultantsDto consultantsDto)
         {
 
 

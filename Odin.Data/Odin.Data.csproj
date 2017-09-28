@@ -102,8 +102,8 @@
     <Compile Include="Core\Models\Rent.cs" />
     <Compile Include="Core\Models\Transferee.cs" />
     <Compile Include="Core\Models\UserRoles.cs" />
-    <Compile Include="Core\Repositories\IConsultantRepository.cs" />
-    <Compile Include="Core\Repositories\IManagerRepository.cs" />
+    <Compile Include="Core\Repositories\IConsultantsRepository.cs" />
+    <Compile Include="Core\Repositories\IManagersRepository.cs" />
     <Compile Include="Core\Repositories\IOrdersRepository.cs" />
     <Compile Include="Core\Repositories\ITransfereesRepository.cs" />
     <Compile Include="Core\Repositories\IUsersRepository.cs" />
@@ -112,11 +112,11 @@
     <Compile Include="Persistence\ApplicationDbContext.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Persistence\ApplicationUserRepository.cs" />
-    <Compile Include="Persistence\ConsultantRepository.cs" />
+    <Compile Include="Persistence\ConsultantsRepository.cs" />
     <Compile Include="Persistence\EntityConfigurations\OrderConfiguration.cs" />
     <Compile Include="Persistence\EntityConfigurations\RentConfiguration.cs" />
     <Compile Include="Persistence\IApplicationDbContext.cs" />
-    <Compile Include="Persistence\ManagerRepository.cs" />
+    <Compile Include="Persistence\ManagersRepository.cs" />
     <Compile Include="Persistence\Migrations\201708281308044_InitialMigration.cs" />
     <Compile Include="Persistence\Migrations\201708281308044_InitialMigration.Designer.cs">
       <DependentUpon>201708281308044_InitialMigration.cs</DependentUpon>
