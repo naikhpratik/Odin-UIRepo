@@ -86,10 +86,12 @@
     <Compile Include="Builders\OrderDtoBuilder.cs" />
     <Compile Include="Builders\TransfereeDtoBuilder.cs" />
     <Compile Include="Core\Dtos\ConsultantDto.cs" />
+    <Compile Include="Core\Dtos\ConsultantImportDto.cs" />
+    <Compile Include="Core\Dtos\ConsultantsDto.cs" />
     <Compile Include="Core\Dtos\OrderDto.cs" />
     <Compile Include="Core\Dtos\ProgramManagerDto.cs" />
-    <Compile Include="Core\Dtos\ProgramManagerImportDto.cs" />
-    <Compile Include="Core\Dtos\ProgramManagersDto.cs" />
+    <Compile Include="Core\Dtos\ManagerDto.cs" />
+    <Compile Include="Core\Dtos\ManagersDto.cs" />
     <Compile Include="Core\Dtos\TransfereeDto.cs" />
     <Compile Include="Core\Dtos\UserDto.cs" />
     <Compile Include="Core\Models\ApplicationUser.cs" />
@@ -173,6 +175,7 @@
     <Compile Include="Persistence\UnitOfWork.cs" />
     <Compile Include="Persistence\UsersRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validations\HasManagerRoleAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
