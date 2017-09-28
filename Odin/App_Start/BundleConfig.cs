@@ -8,8 +8,7 @@ namespace Odin
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
-                        "~/Scripts/app/controllers/userManagementController.js"
-                ));
+                        "~/Scripts/app/controllers/userManagementController.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/lib").Include(
                         "~/Scripts/jquery-{version}.js",
@@ -30,6 +29,12 @@ namespace Odin
                       "~/Content/bootstrap-paper.css",
                       "~/Content/site.css",
                       "~/Content/datatables/css/datatables.bootstrap.css"));
+
+            // Home page
+            bundles.Add(new StyleBundle("~/Styling/home").Include("~/Content/Home/home.css"));
+
+            // View scripts
+            bundles.Add(new ScriptBundle("~/Scripts/home").Include("~/Scripts/app/views/home.js"));
         }
     }
 }
