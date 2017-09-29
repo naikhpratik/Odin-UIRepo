@@ -8,6 +8,11 @@
     src: url("~/Fonts/OpenSans-Regular.ttf");
 }
 
+@font-face {
+    font-family: OpenSansLightItalic;
+    src: url(~/Fonts//OpenSans-LightItalic.ttf);
+}
+
 body {
     padding: 0px;
 }
@@ -103,7 +108,7 @@ div#main {
             }
 
             &.second {
-                padding-left: 7px;
+                padding-left: 1px;
             }
 
             &.third {
@@ -149,9 +154,23 @@ div#main {
                     font-family: OpenSansRegular;
                 }
 
-                &:first-of-type a {
+                &:first-of-type {
+                    width: auto;
+                    margin-top: 5px;
+                    vertical-align: top;
+                }
+
+                &:nth-child(2) a {
                     color: #4BAD48;
                 }
+
+                img {
+                    width: 20px;
+                }
+            }
+
+            div.actlist-item-blk {
+                margin-left: 20px;
             }
 
             img {
@@ -159,10 +178,18 @@ div#main {
                 padding-top: 5px;
             }
 
+            p, span {
+                &.Callout {
+                    color: #31A4DD;
+                    margin-bottom: 0;
+                }
+            }
+
             p {
                 &:first-child {
                     margin-bottom: 0px;
                     font-size: 20px;
+                    font-weight: bold;
                     font-family: OpenSansRegular;
 
                     &.actlist-item {
@@ -206,8 +233,33 @@ div#main {
                 padding-left: 29px !important;
             }
 
+            &.fourth {
+                padding-left: 3px !important;
+            }
+
             &.fifth {
                 padding-left: 10px !important;
+            }
+        }
+
+        td {
+            div.actlist-item-hdr {
+                display: block !important;
+            }
+
+            div.actlist-item-blk {
+                margin-left: 0px !important;
+            }
+
+            span {
+                font-size: 14px;
+                font-family: OpenSansLightItalic;
+
+                &.tablet-column-label {
+                    color: #6C6E70;
+                    font-weight: 600;
+                    margin-right: 4px;
+                }
             }
         }
 
@@ -255,6 +307,19 @@ div#main {
                 padding-left: 10px !important;
             }
         }
+
+        td {
+            span {
+                font-size: 14px;
+                font-family: OpenSansLightItalic;
+
+                &.tablet-column-label {
+                    color: #6C6E70;
+                    font-weight: 600;
+                    margin-right: 4px;
+                }
+            }
+        }
     }
 
     @media screen and (max-width: 483px) {
@@ -298,6 +363,19 @@ div#main {
 
             &.third {
                 padding-left: 10px !important;
+            }
+        }
+
+        td {
+            span {
+                font-size: 14px;
+                font-family: OpenSansLightItalic;
+
+                &.tablet-column-label {
+                    color: #6C6E70;
+                    font-weight: 600;
+                    margin-right: 4px;
+                }
             }
         }
 
@@ -351,6 +429,19 @@ div#main {
 
             &.third {
                 padding-left: 10px !important;
+            }
+        }
+
+        td {
+            span {
+                font-size: 14px;
+                font-family: OpenSansLightItalic;
+
+                &.tablet-column-label {
+                    color: #6C6E70;
+                    font-weight: 600;
+                    margin-right: 4px;
+                }
             }
         }
 
