@@ -14,6 +14,7 @@ using Odin.Data.Persistence;
 using Odin.IntegrationTests.Extensions;
 using Odin.IntegrationTests.TestAttributes;
 using Odin.ViewModels;
+using Odin.Helpers;
 
 namespace Odin.IntegrationTests.Controllers
 {
@@ -37,7 +38,9 @@ namespace Odin.IntegrationTests.Controllers
             _transferee = _context.Transferees.First(u => u.UserName.Equals("odinee@dwellworks.com"));
             _dsc = _context.Consultants.First(u => u.UserName.Equals("odinconsultant@dwellworks.com"));
             _pm = _context.Managers.First(u => u.UserName.Equals("odinpm@dwellworks.com"));
-            _controller = new OrdersController(new UnitOfWork(_context), mapper);
+            var emailHelper = new EmailHelper();
+            var accountHelper = new AccountHelper(_context, emailHelper);
+            _controller = new OrdersController(new UnitOfWork(_context), mapper, accountHelper);
         }
 
         [TearDown]

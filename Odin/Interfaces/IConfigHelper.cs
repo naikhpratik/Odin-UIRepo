@@ -10,5 +10,6 @@ namespace Odin.Interfaces
     {
         // Token for getting updates from se
         string GetSeApiToken();
+        string GetSendGridAPIKey();
     }
 }

@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity;
 using Odin.Data.Core;
 using Odin.Data.Core.Models;
 using Odin.ViewModels;
+using Odin.Interfaces;
 
 namespace Odin.Controllers
 {
@@ -16,17 +17,21 @@ namespace Odin.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IAccountHelper _accountHelper;
 
-        public OrdersController(IUnitOfWork unitOfWork, IMapper mapper)
+        public OrdersController(IUnitOfWork unitOfWork, IMapper mapper, IAccountHelper accountHelper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _accountHelper = accountHelper;
         }
 
         // GET: Orders
         public ViewResult Index()
         {
             var userId = User.Identity.GetUserId();
+
+            _accountHelper.SendEmailConfirmationTokenAsync<Transferee>("06bb5638-796e-4fb7-8e4e-dd95d898b123", Url).Wait();
 
             var orders = _unitOfWork.Orders.GetOrdersFor(userId);
 

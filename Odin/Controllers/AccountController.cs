@@ -6,8 +6,10 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Odin.Data.Core.Models;
-using Odin.Filters;
 using Odin.ViewModels.Authentication;
+using RazorEngine;
+using Odin.Interfaces;
+using System;
 
 namespace Odin.Controllers
 {
@@ -16,12 +18,9 @@ namespace Odin.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+         private IEmailHelper _emailHelper;
 
-        public AccountController()
-        {
-        }
-
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -78,6 +77,8 @@ namespace Odin.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    //uncomment to test the SendEmailConfirmationTokenAsync which sends an email to 
+                    //new trustees asking them to setup their password with the emailed link.                    
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -395,12 +396,25 @@ namespace Odin.Controllers
 
             base.Dispose(disposing);
         }
-        private async Task<string> SendEmailConfirmationTokenAsync(string userID, string subject, string bdy)
+        //Do not use the SendEmailConfirmationTokenAsync method outside the membership function
+        //It is exposed through the helper: AccountHelper. Use AccountHelper to access it.
+        public async Task<string> SendEmailConfirmationTokenAsync(string userID, string eml) //, string subject, string bdy)
         {
+            //ApplicationUserManager userM = new ApplicationUserManager();
+            //Forgery check
             string code = await UserManager.GenerateEmailConfirmationTokenAsync(userID);
+            //The link sent to the Transferees for access to reset password
             var callbackUrl = Url.Action("ResetPassword", "Account", new { userID, code = code }, protocol: Request.Url.Scheme);
-            await UserManager.SendEmailAsync(userID, subject, bdy + "click <a href=\"" + callbackUrl + "\">here</a>"); //"Please set your account password by
-
+            //transferee's email address
+            //var eml = await UserManager.GetEmailAsync(userID);
+            //var user = await UserManager.FindByNameAsync(eml);
+            var name = eml.Substring(0, eml.IndexOf("@")).Replace(".", " ");// user.FirstName + " " + user.LastName; 
+            var subject = "Create Password";
+            var templateFolderPath = Server.MapPath(@"~\Views\Mailers\");
+            string template = System.IO.File.ReadAllText(templateFolderPath + "SetNewPassword.cshtml"); 
+            var body = Razor.Parse(template, new { Name = name, Link =  callbackUrl});
+            //send the email, specify the content mime type
+            var response = _emailHelper.SendEmail_SG(eml, subject, body, SendGrid.MimeType.Html);
             return callbackUrl;
         }
         #region Helpers
