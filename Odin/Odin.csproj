@@ -617,7 +617,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\UserManagement.cshtml" />
     <Content Include="Views\Orders\Index.cshtml" />
-    <Content Include="Views\Shared\_Blank.cshtml" />
+    <Content Include="Views\Shared\_Common.cshtml" />
     <None Include="Web.Azure.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,29 +1,15 @@
 ﻿@{
     ViewBag.Title = "Home Page";
-    Layout = "~/Views/Shared/_Blank.cshtml";
+    Layout = "~/Views/Shared/_Common.cshtml";
 }
 
-<div id="main">
-    <div id="caption">
-        <img src="~/Content/Images/dwellworks_icon.png" />
-        <p>&nbsp;</p>
-        <p>Odin</p>
-    </div>
-    <div id="icons">
-        <div>
-            <img src="~/Content/Images/icn_message_2.png" />
-            <img src="~/Content/Images/icn_profile.png" />
-            <img src="~/Content/Images/icn_notification_2.png" />
-            <img src="~/Content/Images/icn_calender_2.png" />
-        </div>
-    </div>
-    <div id="list">
-        <div id="search">
+<div id="list">
+    <div id="search">
             <input /><button>Search</button>
         </div>
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
+    <div>
+        <table class="desktop">
+            <thead>
                     <tr>
                         <th class="first"><span class="arrow arrow_up"></span></th>
                         <th class="second"><span class="arrow arrow_up"></span></th>
@@ -34,7 +20,7 @@
                         <th class="seventh"><span class="arrow arrow_up"></span></th>
                      </tr>
                 </thead>
-                <tbody>
+            <tbody>
                     <tr>
                         <td><p>Victoria A. Sporer</p><p>Amazon.com INC</p></td>
                         <td>
@@ -198,9 +184,264 @@
                         <td><img src="~/Content/Images/icn_notification_2.png" /></td>
                     </tr>
                 </tbody>
-            </table>
-        </div>
-    </div>
+        </table>
+        <table class="tablet">
+            <thead>
+                <tr>
+                    <th class="first"><span class="arrow arrow_up"></span></th>
+                    <th class="second"><span class="arrow arrow_up"></span></th>
+                    <th class="third"><span class="arrow arrow_up"></span></th>
+                    <th class="fourth"><span class="arrow arrow_up"></span></th>
+                    <th class="fifth"><span class="arrow arrow_up"></span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><p>Victoria A. Sporer</p><p>Amazon.com INC</p></td>
+                    <td><p>Manager</p><p>Jane Doese</p></td>
+                    <td><p>Last Contacted</p><p>09/22/17</p></td>
+                    <td>
+                        <div class="actlist-item-hdr">
+                            <p>SS</p>
+                            <a href="#">02</a>
+                        </div>
+                        <div class="actlist-item-hdr">
+                            <p>S</p>
+                            <a href="#">01</a>
+                        </div>
+                        <div class="actlist-item-hdr">
+                            <p>C</p>
+                            <a href="#">00</a>
+                        </div>
+                        <div>
+                            <p class="actlist-item">Pick up</p>
+                            <p>10/15/17</p>
+                        </div>
+                        <div>
+                            <p class="actlist-item">Visit 1st Home</p>
+                            <p>10/15/17</p>
+                        </div>
+                    </td>
+                    <td><img src="~/Content/Images/icn_notification_2.png" /></td>
+                </tr>
+                <tr>
+                    <td><p>Lila C. Smith</p><p>Tesla, Inc</p></td>
+                    <td><p>Manager</p><p>Austin Emser</p></td>
+                    <td><p>Last Contacted</p><p>09/09/17</p></td>
+                    <td>
+                        <div class="actlist-item-hdr">
+                            <p>SS</p>
+                            <a href="#">02</a>
+                        </div>
+                        <div class="actlist-item-hdr">
+                            <p>S</p>
+                            <a href="#">01</a>
+                        </div>
+                        <div class="actlist-item-hdr">
+                            <p>C</p>
+                            <a href="#">00</a>
+                        </div>
+                        <div>
+                            <p class="actlist-item">Pick up</p>
+                            <p>10/15/17</p>
+                        </div>
+                        <div>
+                            <p class="actlist-item">Visit 1st Home</p>
+                            <p>10/15/17</p>
+                        </div>
+                    </td>
+                    <td><img src="~/Content/Images/icn_notification_2.png" /></td>
+                </tr>
+                <tr>
+                    <td><p>Joseph S. Jackson</p><p>Amazon.com INC</p></td>
+                    <td><p>Manager</p><p>Alexandra Kovanen</p></td>
+                    <td><p>Last Contacted</p><p>08/12/17</p></td>
+                    <td>
+                        <div class="actlist-item-hdr">
+                            <p>SS</p>
+                            <a href="#">02</a>
+                        </div>
+                        <div class="actlist-item-hdr">
+                            <p>S</p>
+                            <a href="#">01</a>
+                        </div>
+                        <div class="actlist-item-hdr">
+                            <p>C</p>
+                            <a href="#">00</a>
+                        </div>
+                        <div>
+                            <p class="actlist-item">Pick up</p>
+                            <p>10/15/17</p>
+                        </div>
+                        <div>
+                            <p class="actlist-item">Visit 1st Home</p>
+                            <p>10/15/17</p>
+                        </div>
+                    </td>
+                    <td><img src="~/Content/Images/icn_notification_2.png" /></td>
+                </tr>
+                <tr>
+                    <td><p>Helen A. Gutierrez</p><p>Tesla, Inc</p></td>
+                    <td><p>Manager</p><p>Joseph Jones</p></td>
+                    <td><p>Last Contacted</p><p>08/02/17</p></td>
+                    <td>
+                        <div class="actlist-item-hdr">
+                            <p>SS</p>
+                            <a href="#">02</a>
+                        </div>
+                        <div class="actlist-item-hdr">
+                            <p>S</p>
+                            <a href="#">01</a>
+                        </div>
+                        <div class="actlist-item-hdr">
+                            <p>C</p>
+                            <a href="#">00</a>
+                        </div>
+                        <div>
+                            <p class="actlist-item">Pick up</p>
+                            <p>10/15/17</p>
+                        </div>
+                        <div>
+                            <p class="actlist-item">Visit 1st Home</p>
+                            <p>10/15/17</p>
+                        </div>
+                    </td>
+                    <td><img src="~/Content/Images/icn_notification_2.png" /></td>
+                </tr>
+                <tr>
+                    <td><p>Ricky L.Stanley</p><p>Amazon.com INC</p></td>
+                    <td><p>Manager</p><p>Katy Smith</p></td>
+                    <td><p>Last Contacted</p><p>07/22/17</p></td>
+                    <td>
+                        <div class="actlist-item-hdr">
+                            <p>SS</p>
+                            <a href="#">02</a>
+                        </div>
+                        <div class="actlist-item-hdr">
+                            <p>S</p>
+                            <a href="#">01</a>
+                        </div>
+                        <div class="actlist-item-hdr">
+                            <p>C</p>
+                            <a href="#">00</a>
+                        </div>
+                        <div>
+                            <p class="actlist-item">Pick up</p>
+                            <p>10/15/17</p>
+                        </div>
+                        <div>
+                            <p class="actlist-item">Visit 1st Home</p>
+                            <p>10/15/17</p>
+                        </div>
+                    </td>
+                    <td><img src="~/Content/Images/icn_notification_2.png" /></td>
+                </tr>
+                <tr>
+                    <td><p>John D. Fludd</p><p>Amazon.com INC</p></td>
+                    <td><p>Manager</p><p>Zander Gilley</p></td>
+                    <td><p>Last Contacted</p><p>07/20/17</p></td>
+                    <td>
+                        <div class="actlist-item-hdr">
+                            <p>SS</p>
+                            <a href="#">02</a>
+                        </div>
+                        <div class="actlist-item-hdr">
+                            <p>S</p>
+                            <a href="#">01</a>
+                        </div>
+                        <div class="actlist-item-hdr">
+                            <p>C</p>
+                            <a href="#">00</a>
+                        </div>
+                        <div>
+                            <p class="actlist-item">Pick up</p>
+                            <p>10/15/17</p>
+                        </div>
+                        <div>
+                            <p class="actlist-item">Visit 1st Home</p>
+                            <p>10/15/17</p>
+                        </div>
+                    </td>
+                    <td><img src="~/Content/Images/icn_notification_2.png" /></td>
+                </tr>
+                <tr>
+                    <td><p>Margaret A. Cooley</p><p>Tesla, Inc</p></td>
+                    <td><p>Manager</p><p>Patricia Applesmith</p></td>
+                    <td><p>Last Contacted</p><p>07/15/17</p></td>
+                    <td>
+                        <div class="actlist-item-hdr">
+                            <p>SS</p>
+                            <a href="#">02</a>
+                        </div>
+                        <div class="actlist-item-hdr">
+                            <p>S</p>
+                            <a href="#">01</a>
+                        </div>
+                        <div class="actlist-item-hdr">
+                            <p>C</p>
+                            <a href="#">00</a>
+                        </div>
+                        <div>
+                            <p class="actlist-item">Pick up</p>
+                            <p>10/15/17</p>
+                        </div>
+                        <div>
+                            <p class="actlist-item">Visit 1st Home</p>
+                            <p>10/15/17</p>
+                        </div>
+                    </td>
+                    <td><img src="~/Content/Images/icn_notification_2.png" /></td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="mobile">
+            <thead>
+                <tr>
+                    <th class="first"><span class="arrow arrow_up"></span></th>
+                    <th class="second"><span class="arrow arrow_up"></span></th>
+                    <th class="third"><span class="arrow arrow_up"></span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><p>Victoria A. Sporer</p><p>Amazon.com INC</p></td>
+                    <td><p>Last Contacted</p><p>09/22/17</p></td>
+                    <td><img src="~/Content/Images/icn_notification_2.png" /></td>
+                </tr>
+                <tr>
+                    <td><p>Lila C. Smith</p><p>Tesla, Inc</p></td>
+                    <td><p>Last Contacted</p><p>09/09/17</p></td>
+                     <td><img src="~/Content/Images/icn_notification_2.png" /></td>
+                </tr>
+                <tr>
+                    <td><p>Joseph S. Jackson</p><p>Amazon.com INC</p></td>
+                    <td><p>Last Contacted</p><p>08/12/17</p></td>
+                    <td><img src="~/Content/Images/icn_notification_2.png" /></td>
+                </tr>
+                <tr>
+                    <td><p>Helen A. Gutierrez</p><p>Tesla, Inc</p></td>
+                    <td><p>Last Contacted</p><p>08/02/17</p></td>
+                    <td><img src="~/Content/Images/icn_notification_2.png" /></td>
+                </tr>
+                <tr>
+                    <td><p>Ricky L.Stanley</p><p>Amazon.com INC</p></td>
+                    <td><p>Last Contacted</p><p>07/22/17</p></td>
+                    <td><img src="~/Content/Images/icn_notification_2.png" /></td>
+                </tr>
+                <tr>
+                    <td><p>John D. Fludd</p><p>Amazon.com INC</p></td>
+                    <td><p>Last Contacted</p><p>07/20/17</p></td>
+                    <td><img src="~/Content/Images/icn_notification_2.png" /></td>
+                </tr>
+                <tr>
+                    <td><p>Margaret A. Cooley</p><p>Tesla, Inc</p></td>
+                    <td><p>Last Contacted</p><p>07/15/17</p></td>
+                    <td><img src="~/Content/Images/icn_notification_2.png" /></td>
+                </tr>
+            </tbody>
+        </table>
+
+      </div>
 </div>
 
 @Styles.Render("~/Styling/home")
