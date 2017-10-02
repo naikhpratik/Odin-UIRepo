@@ -22,8 +22,8 @@ namespace Odin.Controllers.Api
         }
 
         [HttpPost]
-        [Route("api/programmanagers")]
         [ApiAuthorize]
+        [ValidationActionFilter]
         public IHttpActionResult UpsertManagers(ManagersDto managersDto)
         {
             try
