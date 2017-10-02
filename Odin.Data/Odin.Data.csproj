@@ -79,7 +79,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builders\ConsultantBuilder.cs" />
     <Compile Include="Builders\ConsultantDtoBuilder.cs" />
+    <Compile Include="Builders\ConsultantImportDtoBuilder.cs" />
     <Compile Include="Builders\ProgramManagerDtoBuilder.cs" />
     <Compile Include="Builders\TransfereeBuilder.cs" />
     <Compile Include="Builders\OrderBuilder.cs" />

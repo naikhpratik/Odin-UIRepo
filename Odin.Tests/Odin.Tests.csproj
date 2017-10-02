@@ -125,6 +125,8 @@
   <ItemGroup>
     <Compile Include="Controllers\Api\AccountControllerTests.cs" />
     <Compile Include="Controllers\OrdersControllerTests.cs" />
+    <Compile Include="Domain\ConsultantImporterTests.cs" />
+    <Compile Include="Domain\ManagerImporterTests.cs" />
     <Compile Include="Domain\OrderImporterTests.cs" />
     <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -134,6 +136,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Odin.Data.Tests\Odin.Data.Tests.csproj">
+      <Project>{616FB184-2417-47B2-BBCD-25C90AFF9F3F}</Project>
+      <Name>Odin.Data.Tests</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Odin.Data\Odin.Data.csproj">
       <Project>{0d2c0b84-daff-4f5c-97d9-1c3bc5871b4c}</Project>
       <Name>Odin.Data</Name>
