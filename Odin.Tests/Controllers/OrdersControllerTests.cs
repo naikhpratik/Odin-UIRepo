@@ -32,8 +32,8 @@ namespace Odin.Tests.Controllers
 
             var mockUnitOfWork = new Mock<IUnitOfWork>();
             mockUnitOfWork.SetupGet(u => u.Orders).Returns(_mockRepository.Object);
-            var mockAccountHelper = new Mock<IAccountHelper>();
-            _controller = new OrdersController(mockUnitOfWork.Object, _mockMapper.Object, mockAccountHelper.Object);
+            var mockEmailHelper = new Mock<IEmailHelper>();
+            _controller = new OrdersController(mockUnitOfWork.Object, _mockMapper.Object);
             _userId = "1";
             _controller.MockControllerContextForUser(_userId);
         }

@@ -20,12 +20,6 @@ namespace Odin.Controllers
         private ApplicationUserManager _userManager;
          private IEmailHelper _emailHelper;
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
-        {
-            UserManager = userManager;
-            SignInManager = signInManager;
-        }
-
         public ApplicationSignInManager SignInManager
         {
             get
@@ -42,7 +36,7 @@ namespace Odin.Controllers
         {
             get
             {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                return _userManager ?? System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
             private set
             {
@@ -398,16 +392,18 @@ namespace Odin.Controllers
         }
         //Do not use the SendEmailConfirmationTokenAsync method outside the membership function
         //It is exposed through the helper: AccountHelper. Use AccountHelper to access it.
-        public async Task<string> SendEmailConfirmationTokenAsync(string userID, string eml) //, string subject, string bdy)
+        public async Task<string> SendEmailConfirmationTokenAsync(string userID) //, string subject, string bdy)
         {
+            try
+            { 
             //ApplicationUserManager userM = new ApplicationUserManager();
             //Forgery check
             string code = await UserManager.GenerateEmailConfirmationTokenAsync(userID);
             //The link sent to the Transferees for access to reset password
             var callbackUrl = Url.Action("ResetPassword", "Account", new { userID, code = code }, protocol: Request.Url.Scheme);
             //transferee's email address
-            //var eml = await UserManager.GetEmailAsync(userID);
-            //var user = await UserManager.FindByNameAsync(eml);
+            var eml = await UserManager.GetEmailAsync(userID);
+            var user = await UserManager.FindByNameAsync(eml);
             var name = eml.Substring(0, eml.IndexOf("@")).Replace(".", " ");// user.FirstName + " " + user.LastName; 
             var subject = "Create Password";
             var templateFolderPath = Server.MapPath(@"~\Views\Mailers\");
@@ -415,7 +411,13 @@ namespace Odin.Controllers
             var body = Razor.Parse(template, new { Name = name, Link =  callbackUrl});
             //send the email, specify the content mime type
             var response = _emailHelper.SendEmail_SG(eml, subject, body, SendGrid.MimeType.Html);
-            return callbackUrl;
+                return callbackUrl;
+            }
+            catch (AggregateException e)
+            {
+                return "";
+            }
+            
         }
         #region Helpers
         // Used for XSRF protection when adding external logins
