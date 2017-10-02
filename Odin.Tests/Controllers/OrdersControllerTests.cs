@@ -12,6 +12,7 @@ using Odin.Data.Core.Models;
 using Odin.Data.Core.Repositories;
 using Odin.Tests.Extensions;
 using Odin.ViewModels;
+using Odin.Interfaces;
 
 namespace Odin.Tests.Controllers
 {
@@ -31,7 +32,7 @@ namespace Odin.Tests.Controllers
 
             var mockUnitOfWork = new Mock<IUnitOfWork>();
             mockUnitOfWork.SetupGet(u => u.Orders).Returns(_mockRepository.Object);
-
+            var mockEmailHelper = new Mock<IEmailHelper>();
             _controller = new OrdersController(mockUnitOfWork.Object, _mockMapper.Object);
             _userId = "1";
             _controller.MockControllerContextForUser(_userId);

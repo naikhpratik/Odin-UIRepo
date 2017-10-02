@@ -14,6 +14,8 @@ namespace MyDwellworks.App_Start
     using Ninject.Web.Common;
     using Ninject.Extensions.Conventions;
     using AutoMapper;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
 
     public static class NinjectWebCommon 
     {
@@ -48,7 +50,7 @@ namespace MyDwellworks.App_Start
             {
                 kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
-
+                
                 RegisterServices(kernel);
 
                 kernel.Bind(x =>
@@ -64,6 +66,7 @@ namespace MyDwellworks.App_Start
                         .SelectAllClasses()
                         .BindDefaultInterface();
                 });
+                
 
                 var config = new MapperConfiguration(c => c.AddProfile(new MappingProfile()));
 
@@ -85,6 +88,7 @@ namespace MyDwellworks.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+
         }        
     }
 }
