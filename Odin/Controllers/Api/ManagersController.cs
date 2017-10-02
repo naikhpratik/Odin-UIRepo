@@ -22,7 +22,7 @@ namespace Odin.Controllers.Api
         }
 
         [HttpPost]
-        [Route("api/programmanaers")]
+        [Route("api/programmanagers")]
         [ApiAuthorize]
         public IHttpActionResult UpsertManagers(ManagersDto managersDto)
         {
