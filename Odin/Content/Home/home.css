@@ -6,6 +6,10 @@
   font-family: OpenSansRegular;
   src: url("~/Fonts/OpenSans-Regular.ttf"); }
 
+@font-face {
+  font-family: OpenSansLightItalic;
+  src: url(~/Fonts/OpenSans-LightItalic.ttf); }
+
 body {
   padding: 0px; }
 
@@ -70,7 +74,7 @@ div#main div#list {
     div#main div#list th.first {
       padding-left: 73px; }
     div#main div#list th.second {
-      padding-left: 7px; }
+      padding-left: 1px; }
     div#main div#list th.third {
       padding-left: 58px; }
     div#main div#list th.fourth {
@@ -97,14 +101,26 @@ div#main div#list {
         font-size: 16px;
         text-decoration: underline;
         font-family: OpenSansRegular; }
-      div#main div#list td div.actlist-item-hdr:first-of-type a {
+      div#main div#list td div.actlist-item-hdr:first-of-type {
+        width: auto;
+        margin-top: 5px;
+        vertical-align: top; }
+      div#main div#list td div.actlist-item-hdr:nth-child(2) a {
         color: #4BAD48; }
+      div#main div#list td div.actlist-item-hdr img {
+        width: 20px; }
+    div#main div#list td div.actlist-item-blk {
+      margin-left: 20px; }
     div#main div#list td img {
       width: 40px;
       padding-top: 5px; }
+    div#main div#list td p.Callout, div#main div#list td span.Callout {
+      color: #31A4DD;
+      margin-bottom: 0; }
     div#main div#list td p:first-child {
       margin-bottom: 0px;
       font-size: 20px;
+      font-weight: bold;
       font-family: OpenSansRegular; }
       div#main div#list td p:first-child.actlist-item {
         color: #48AD48;
@@ -129,8 +145,21 @@ div#main div#list {
     display: none; }
   div#main th.second {
     padding-left: 29px !important; }
+  div#main th.fourth {
+    padding-left: 3px !important; }
   div#main th.fifth {
     padding-left: 10px !important; }
+  div#main td div.actlist-item-hdr {
+    display: block !important; }
+  div#main td div.actlist-item-blk {
+    margin-left: 0px !important; }
+  div#main td span {
+    font-size: 14px;
+    font-family: OpenSansLightItalic; }
+    div#main td span.tablet-column-label {
+      color: #6C6E70;
+      font-weight: 600;
+      margin-right: 4px; }
   div#main table.mobile {
     display: none; } }
 
@@ -157,7 +186,14 @@ div#main div#list {
   div#main th.second {
     padding-left: 54px !important; }
   div#main th.third {
-    padding-left: 10px !important; } }
+    padding-left: 10px !important; }
+  div#main td span {
+    font-size: 14px;
+    font-family: OpenSansLightItalic; }
+    div#main td span.tablet-column-label {
+      color: #6C6E70;
+      font-weight: 600;
+      margin-right: 4px; } }
 
 @media screen and (max-width: 483px) {
   div#main table.desktop {
@@ -185,6 +221,13 @@ div#main div#list {
     padding-left: 54px !important; }
   div#main th.third {
     padding-left: 10px !important; }
+  div#main td span {
+    font-size: 14px;
+    font-family: OpenSansLightItalic; }
+    div#main td span.tablet-column-label {
+      color: #6C6E70;
+      font-weight: 600;
+      margin-right: 4px; }
   div#main div#search {
     margin-left: 0px !important; }
     div#main div#search input {
@@ -216,6 +259,13 @@ div#main div#list {
     padding-left: 54px !important; }
   div#main th.third {
     padding-left: 10px !important; }
+  div#main td span {
+    font-size: 14px;
+    font-family: OpenSansLightItalic; }
+    div#main td span.tablet-column-label {
+      color: #6C6E70;
+      font-weight: 600;
+      margin-right: 4px; }
   div#main div#search {
     margin-left: 0px !important; }
     div#main div#search input {

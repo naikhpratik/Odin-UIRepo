@@ -472,7 +472,9 @@
       <DependentUpon>home.css</DependentUpon>
     </Content>
     <Content Include="Content\Home\home.scss" />
+    <Content Include="Content\Images\collapse.png" />
     <Content Include="Content\Images\dwellworks_icon.png" />
+    <Content Include="Content\Images\expand.png" />
     <Content Include="Content\Images\icn_calender_2.png" />
     <Content Include="Content\Images\icn_message_2.png" />
     <Content Include="Content\Images\icn_notification_2.png" />
@@ -500,6 +502,7 @@
     </None>
     <Content Include="Fonts\OpenSans-Light.ttf" />
     <Content Include="Fonts\OpenSans-Regular.ttf" />
+    <Content Include="Fonts\OpenSans-LightItalic.ttf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
