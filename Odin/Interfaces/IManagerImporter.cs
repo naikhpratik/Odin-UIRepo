@@ -1,9 +1,10 @@
-﻿using Odin.Data.Core.Dtos;
+﻿using System.Threading.Tasks;
+using Odin.Data.Core.Dtos;
 
 namespace Odin.Interfaces
 {
     public interface IManagerImporter
     {
-        void ImportManagers(ManagersDto managerDto);
+        Task ImportManagers(ManagersDto managerDto);
     }
 }

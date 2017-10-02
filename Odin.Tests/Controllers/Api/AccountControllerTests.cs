@@ -42,10 +42,7 @@ namespace Odin.Tests.Controllers.Api
 
             result.Should().BeOfType<OkNegotiatedContentResult<IEnumerable<UserDto>>>();
         }
-        [TestMethod()]
-        public void SendEmailConfirmationTokenAsyncTest()
-        {
-            Assert.Fail();
-        }
+
+
     }
 }

@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using AutoMapper;
 using Microsoft.ApplicationInsights;
@@ -24,11 +25,11 @@ namespace Odin.Controllers.Api
         [HttpPost]
         [ApiAuthorize]
         [ValidationActionFilter]
-        public IHttpActionResult UpsertManagers(ManagersDto managersDto)
+        public async Task<IHttpActionResult> UpsertManagers(ManagersDto managersDto)
         {
             try
             {
-                _managerImporter.ImportManagers(managersDto);
+                await _managerImporter.ImportManagers(managersDto);
             }
             catch (Exception e)
             {

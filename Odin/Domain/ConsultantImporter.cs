@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using AutoMapper;
 using Odin.Data.Core;
@@ -14,14 +15,16 @@ namespace Odin.Domain
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IAccountHelper _accountHelper;
 
-        public ConsultantImporter(IUnitOfWork unitOfWork, IMapper mapper)
+        public ConsultantImporter(IUnitOfWork unitOfWork, IMapper mapper, IAccountHelper accountHelper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _accountHelper = accountHelper;
         }
 
-        public void ImportConsultants(ConsultantsDto consultantsDto)
+        public async Task ImportConsultants(ConsultantsDto consultantsDto)
         {
             foreach (var consultantDto in consultantsDto.Consultants)
             {
@@ -31,7 +34,7 @@ namespace Odin.Domain
                 {
                     consultant = _mapper.Map<ConsultantImportDto, Consultant>(consultantDto);
                     _unitOfWork.Consultants.Add(consultant);
-                    //TODO: Send activation email
+                    await _accountHelper.SendEmailConfirmationTokenAsync(consultant.Id);
                 }
             }
             _unitOfWork.Complete();

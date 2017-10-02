@@ -14,6 +14,7 @@ using Odin.Data.Core.Repositories;
 using Odin.Data.Persistence;
 using Odin.Domain;
 using Odin.Data.Tests.Extensions;
+using Odin.Interfaces;
 
 namespace Odin.Tests.Domain
 {
@@ -22,6 +23,8 @@ namespace Odin.Tests.Domain
     {
         private ConsultantImporter _importer;
         private Mock<IConsultantsRepository> _mockConsultantRepository;
+        private Mock<IAccountHelper> _mockAccountHelper;
+        private Mock<IMapper> _mockMapper;
 
         [TestInitialize]
         public void TestInitialize()
@@ -29,49 +32,68 @@ namespace Odin.Tests.Domain
             _mockConsultantRepository = new Mock<IConsultantsRepository>();
             var mockUnitOfWork = new Mock<IUnitOfWork>();
             mockUnitOfWork.SetupGet(u => u.Consultants).Returns(_mockConsultantRepository.Object);
-            var mockMapper = new Mock<IMapper>();
-            
-            _importer = new ConsultantImporter(mockUnitOfWork.Object, mockMapper.Object);
+            _mockMapper = new Mock<IMapper>();
+            _mockAccountHelper = new Mock<IAccountHelper>();
+            _importer = new ConsultantImporter(mockUnitOfWork.Object, _mockMapper.Object, _mockAccountHelper.Object);
         }
 
         [TestMethod]
-        public void ImportConsultants_NewConsultant_AddConsultant()
+        public async Task ImportConsultants_NewConsultant_AddConsultant()
         {
-            var consultant = new Consultant();
+            var consultant = new Consultant() {Id = "Test"};
             var consultantDto = new ConsultantImportDto();
             var consultantsDto = new ConsultantsDto() {Consultants = new List<ConsultantImportDto> {consultantDto}};
+            _mockMapper.Setup(m => m.Map<ConsultantImportDto, Consultant>(It.IsAny<ConsultantImportDto>()))
+                .Returns(consultant);
 
-            _importer.ImportConsultants(consultantsDto);
+            await _importer.ImportConsultants(consultantsDto);
 
             _mockConsultantRepository.Verify(m => m.Add(It.IsAny<Consultant>()), Times.Once);
         }
 
         [TestMethod]
-        public void ImportConsultant_ExistingConsultant_DoesNotCallAddConsultant()
+        public async Task ImportConsultant_ExistingConsultant_DoesNotCallAddConsultant()
         {
-            var consultant = new Consultant();
-            consultant.SeContactUid = 1234;
+            var consultant = new Consultant {SeContactUid = 1234, Id="Test"};
             var consultantDto = new ConsultantImportDto();
             var consultantsDto = new ConsultantsDto() { Consultants = new List<ConsultantImportDto> { consultantDto } };
             _mockConsultantRepository.Setup(r => r.GetConsultantBySeContactUid(It.IsAny<int>())).Returns((consultant));
+            _mockMapper.Setup(m => m.Map<ConsultantImportDto, Consultant>(It.IsAny<ConsultantImportDto>()))
+                .Returns(consultant);
 
-            _importer.ImportConsultants(consultantsDto);
+            await _importer.ImportConsultants(consultantsDto);
 
             _mockConsultantRepository.Verify(m => m.Add(It.IsAny<Consultant>()), Times.Never);
         }
 
         [TestMethod]
-        public void ImportConsultants_OneNewConsultant_CallsAddOnlyOnce()
+        public async Task ImportConsultants_OneNewConsultant_CallsAddOnlyOnce()
         {
-            var consultant = new Consultant();
+            var consultant = new Consultant() {Id="Test"};
             var consultantDto = new ConsultantImportDto(){SeContactUid = 1234};
             var consultantDto2 = new ConsultantImportDto();
             var consultantsDto = new ConsultantsDto() { Consultants = new List<ConsultantImportDto> { consultantDto, consultantDto2 } };
             _mockConsultantRepository.Setup(r => r.GetConsultantBySeContactUid(1234)).Returns((consultant));
+            _mockMapper.Setup(m => m.Map<ConsultantImportDto, Consultant>(It.IsAny<ConsultantImportDto>()))
+                .Returns(consultant);
 
-            _importer.ImportConsultants(consultantsDto);
+            await _importer.ImportConsultants(consultantsDto);
 
             _mockConsultantRepository.Verify(m => m.Add(It.IsAny<Consultant>()), Times.Once);
+        }
+
+        [TestMethod]
+        public async Task ImportConsultants_NewConsultant_SendsEmail()
+        {
+            var consultant = new Consultant() {Id="Test"};
+            var consultantDto = new ConsultantImportDto();
+            var consultantsDto = new ConsultantsDto() { Consultants = new List<ConsultantImportDto> { consultantDto } };
+            _mockMapper.Setup(m => m.Map<ConsultantImportDto, Consultant>(It.IsAny<ConsultantImportDto>()))
+                .Returns(consultant);
+
+            await _importer.ImportConsultants(consultantsDto);
+
+            _mockAccountHelper.Verify(a => a.SendEmailConfirmationTokenAsync(It.IsAny<string>()), Times.Once);
         }
     }
 }

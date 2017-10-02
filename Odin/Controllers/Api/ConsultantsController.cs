@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using AutoMapper;
 using Microsoft.ApplicationInsights;
@@ -25,11 +26,11 @@ namespace Odin.Controllers.Api
         [HttpPost]
         [ApiAuthorize]
         [ValidationActionFilter]
-        public IHttpActionResult UpsertConsultants(ConsultantsDto consultantsDto)
+        public async Task<IHttpActionResult> UpsertConsultants(ConsultantsDto consultantsDto)
         {
             try
             {
-                _consultantImporter.ImportConsultants(consultantsDto);
+                await _consultantImporter.ImportConsultants(consultantsDto);
             }
             catch (Exception e)
             {
