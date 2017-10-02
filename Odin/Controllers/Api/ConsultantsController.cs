@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using AutoMapper;
+using Microsoft.ApplicationInsights;
 using Odin.Data.Core;
 using Odin.Data.Core.Dtos;
 using Odin.Filters;
@@ -26,7 +27,16 @@ namespace Odin.Controllers.Api
         [ValidationActionFilter]
         public IHttpActionResult UpsertConsultants(ConsultantsDto consultantsDto)
         {
-
+            try
+            {
+                _consultantImporter.ImportConsultants(consultantsDto);
+            }
+            catch (Exception e)
+            {
+                var ai = new TelemetryClient();
+                ai.TrackException(e);
+                return InternalServerError(e);
+            }
 
             return Ok();
         }

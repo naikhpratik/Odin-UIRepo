@@ -4,21 +4,21 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using AutoMapper;
+using Microsoft.ApplicationInsights;
 using Odin.Data.Core;
 using Odin.Data.Core.Dtos;
 using Odin.Filters;
+using Odin.Interfaces;
 
 namespace Odin.Controllers.Api
 {
     public class ManagersController : ApiController
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
+        private readonly IManagerImporter _managerImporter;
 
-        public ManagersController(IUnitOfWork unitOfWork, IMapper mapper)
+        public ManagersController(IManagerImporter managerImporter)
         {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
+            _managerImporter = managerImporter;
         }
 
         [HttpPost]
@@ -26,6 +26,17 @@ namespace Odin.Controllers.Api
         [ApiAuthorize]
         public IHttpActionResult UpsertManagers(ManagersDto managersDto)
         {
+            try
+            {
+                _managerImporter.ImportManagers(managersDto);
+            }
+            catch (Exception e)
+            {
+                var ai = new TelemetryClient();
+                ai.TrackException(e);
+                return InternalServerError(e);
+            }
+
 
             return Ok();
         }

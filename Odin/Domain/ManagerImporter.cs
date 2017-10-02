@@ -21,7 +21,7 @@ namespace Odin.Domain
             _mapper = mapper;
         }
 
-        public void ImportManager(ManagersDto managersDto)
+        public void ImportManagers(ManagersDto managersDto)
         {
             foreach (var managerDto in managersDto.Managers)
             {
