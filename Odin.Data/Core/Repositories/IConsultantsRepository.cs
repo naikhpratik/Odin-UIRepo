@@ -2,8 +2,9 @@
 
 namespace Odin.Data.Core.Repositories
 {
-    public interface IConsultantRepository
+    public interface IConsultantsRepository
     {
         Consultant GetConsultantBySeContactUid(int seContactUid);
+        void Add(Consultant consultant);
     }
 }

@@ -79,17 +79,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builders\ConsultantBuilder.cs" />
     <Compile Include="Builders\ConsultantDtoBuilder.cs" />
+    <Compile Include="Builders\ConsultantImportDtoBuilder.cs" />
     <Compile Include="Builders\ProgramManagerDtoBuilder.cs" />
     <Compile Include="Builders\TransfereeBuilder.cs" />
     <Compile Include="Builders\OrderBuilder.cs" />
     <Compile Include="Builders\OrderDtoBuilder.cs" />
     <Compile Include="Builders\TransfereeDtoBuilder.cs" />
     <Compile Include="Core\Dtos\ConsultantDto.cs" />
+    <Compile Include="Core\Dtos\ConsultantImportDto.cs" />
+    <Compile Include="Core\Dtos\ConsultantsDto.cs" />
     <Compile Include="Core\Dtos\OrderDto.cs" />
     <Compile Include="Core\Dtos\ProgramManagerDto.cs" />
-    <Compile Include="Core\Dtos\ProgramManagerImportDto.cs" />
-    <Compile Include="Core\Dtos\ProgramManagersDto.cs" />
+    <Compile Include="Core\Dtos\ManagerDto.cs" />
+    <Compile Include="Core\Dtos\ManagersDto.cs" />
     <Compile Include="Core\Dtos\TransfereeDto.cs" />
     <Compile Include="Core\Dtos\UserDto.cs" />
     <Compile Include="Core\Models\ApplicationUser.cs" />
@@ -100,21 +104,22 @@
     <Compile Include="Core\Models\Rent.cs" />
     <Compile Include="Core\Models\Transferee.cs" />
     <Compile Include="Core\Models\UserRoles.cs" />
-    <Compile Include="Core\Repositories\IConsultantRepository.cs" />
-    <Compile Include="Core\Repositories\IManagerRepository.cs" />
+    <Compile Include="Core\Repositories\IConsultantsRepository.cs" />
+    <Compile Include="Core\Repositories\IManagersRepository.cs" />
     <Compile Include="Core\Repositories\IOrdersRepository.cs" />
     <Compile Include="Core\Repositories\ITransfereesRepository.cs" />
     <Compile Include="Core\Repositories\IUsersRepository.cs" />
     <Compile Include="Extensions\ModelStateExtensions.cs" />
+    <Compile Include="Helpers\PasswordHelper.cs" />
     <Compile Include="Helpers\TokenHelper.cs" />
     <Compile Include="Persistence\ApplicationDbContext.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Persistence\ApplicationUserRepository.cs" />
-    <Compile Include="Persistence\ConsultantRepository.cs" />
+    <Compile Include="Persistence\ConsultantsRepository.cs" />
     <Compile Include="Persistence\EntityConfigurations\OrderConfiguration.cs" />
     <Compile Include="Persistence\EntityConfigurations\RentConfiguration.cs" />
     <Compile Include="Persistence\IApplicationDbContext.cs" />
-    <Compile Include="Persistence\ManagerRepository.cs" />
+    <Compile Include="Persistence\ManagersRepository.cs" />
     <Compile Include="Persistence\Migrations\201708281308044_InitialMigration.cs" />
     <Compile Include="Persistence\Migrations\201708281308044_InitialMigration.Designer.cs">
       <DependentUpon>201708281308044_InitialMigration.cs</DependentUpon>
@@ -167,12 +172,17 @@
     <Compile Include="Persistence\Migrations\201709201950074_PopulateSeContactUidInUsers.Designer.cs">
       <DependentUpon>201709201950074_PopulateSeContactUidInUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201709282041234_AddClientRmcSeNumbToOrders.cs" />
+    <Compile Include="Persistence\Migrations\201709282041234_AddClientRmcSeNumbToOrders.Designer.cs">
+      <DependentUpon>201709282041234_AddClientRmcSeNumbToOrders.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
     <Compile Include="Persistence\TransfereesRepository.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
     <Compile Include="Persistence\UsersRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validations\HasManagerRoleAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -219,6 +229,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201709201950074_PopulateSeContactUidInUsers.resx">
       <DependentUpon>201709201950074_PopulateSeContactUidInUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709282041234_AddClientRmcSeNumbToOrders.resx">
+      <DependentUpon>201709282041234_AddClientRmcSeNumbToOrders.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

@@ -263,6 +263,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Domain\ConsultantImporter.cs" />
+    <Compile Include="Domain\ManagerImporter.cs" />
     <Compile Include="Domain\OrderImporter.cs" />
     <Compile Include="Extensions\HttpResponseMessageExtensions.cs" />
     <Compile Include="Filters\AiHandleErrorAttribute.cs" />
@@ -274,6 +276,8 @@
     </Compile>
     <Compile Include="Helpers\ConfigHelper.cs" />
     <Compile Include="Interfaces\IConfigHelper.cs" />
+    <Compile Include="Interfaces\IConsultantImporter.cs" />
+    <Compile Include="Interfaces\IManagerImporter.cs" />
     <Compile Include="Interfaces\IOrderImporter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />

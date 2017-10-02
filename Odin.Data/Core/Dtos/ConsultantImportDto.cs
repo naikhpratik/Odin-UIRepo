@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Odin.Data.Core.Dtos
 {
-    public class ProgramManagerImportDto
+    public class ConsultantImportDto
     {
         [Required]
         public int SeContactUid { get; set; }
@@ -17,7 +17,7 @@ namespace Odin.Data.Core.Dtos
 
         [Required]
         public string LastName { get; set; }
-        
+
         [Required]
         public string Email { get; set; }
     }

@@ -16,14 +16,10 @@ namespace Odin.Controllers.Api
 {
     public class OrdersController : ApiController
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
         private readonly IOrderImporter _orderImporter;
 
-        public OrdersController(IUnitOfWork unitOfWork, IMapper mapper, IOrderImporter orderImporter)
+        public OrdersController(IOrderImporter orderImporter)
         {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
             _orderImporter = orderImporter;
         }
 
