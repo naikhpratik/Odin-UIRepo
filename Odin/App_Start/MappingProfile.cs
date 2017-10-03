@@ -36,7 +36,8 @@ namespace Odin
                 .ForMember(m => m.Manager, opt => opt.MapFrom(src => src.ProgramManager.FullName))
                 .ForMember(m => m.FinalArrival, opt => opt.MapFrom(src => src.EstimatedArrivalDate))
                 .ForMember(m => m.Company, opt => opt.MapFrom(src => src.Client))
-                .ForMember(m => m.ManagerPhone, opt => opt.MapFrom(src => src.ProgramManager.PhoneNumber));
+                .ForMember(m => m.ManagerPhone, opt => opt.MapFrom(src => src.ProgramManager.PhoneNumber))
+                .ForMember(m => m.PreTrip, opt => opt.MapFrom(src => src.PreTripDate));
         }
     }
 }

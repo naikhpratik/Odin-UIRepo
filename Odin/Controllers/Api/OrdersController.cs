@@ -19,11 +19,13 @@ namespace Odin.Controllers.Api
     {
         private readonly IOrderImporter _orderImporter;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public OrdersController(IOrderImporter orderImporter, IUnitOfWork unitOfWork)
+        public OrdersController(IOrderImporter orderImporter, IUnitOfWork unitOfWork, IMapper mapper)
         {
             _orderImporter = orderImporter;
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         // POST /api/orders
@@ -47,6 +49,7 @@ namespace Odin.Controllers.Api
             return Ok();
         }
 
+        // GET /api/orders
         [HttpGet]
         [Authorize]
         public IHttpActionResult GetOrders()
@@ -55,9 +58,9 @@ namespace Odin.Controllers.Api
 
             var orders = _unitOfWork.Orders.GetOrdersFor(userId);
 
+            var transfereeIndexDtos = _mapper.Map<IEnumerable<Order>, IEnumerable<TransfereeIndexDto>>(orders);
 
-
-            return Ok();
+            return Ok(new OrderIndexDto {Transferees = transfereeIndexDtos});
         }
             
     }

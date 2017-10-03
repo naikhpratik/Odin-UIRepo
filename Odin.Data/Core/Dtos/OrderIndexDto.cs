@@ -8,15 +8,11 @@ namespace Odin.Data.Core.Dtos
 {
     public class OrderIndexDto
     {
-        public List<TransfereeIndexDto> Transferees;
+        public IEnumerable<TransfereeIndexDto> Transferees;
     }
 
     public class TransfereeIndexDto
     {
-        public TransfereeIndexDto()
-        {
-            Services = new List<ServicesDto>();
-        }
 
         public string FirstName;
         public string Middle;
@@ -37,7 +33,7 @@ namespace Odin.Data.Core.Dtos
 
         public int NumberOfAlerts;
 
-        public List<ServicesDto> Services;
+        public IEnumerable<ServicesDto> Services;
     }
 
     public class ServicesDto
