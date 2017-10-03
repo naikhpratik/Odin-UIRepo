@@ -163,6 +163,10 @@ div#main {
             white-space: nowrap;
             vertical-align: top;
 
+            &:nth-child(2) {
+                width: 160px;
+            }
+
             div.actlist-item-hdr {
                 display: inline-block;
                 width: 30px;

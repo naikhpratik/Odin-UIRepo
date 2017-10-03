@@ -103,6 +103,8 @@ div#main div#list {
     border: none;
     white-space: nowrap;
     vertical-align: top; }
+    div#main div#list td:nth-child(2) {
+      width: 160px; }
     div#main div#list td div.actlist-item-hdr {
       display: inline-block;
       width: 30px; }
