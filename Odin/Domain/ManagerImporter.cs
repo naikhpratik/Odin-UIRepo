@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
-using AutoMapper;
+﻿using AutoMapper;
 using Odin.Data.Core;
 using Odin.Data.Core.Dtos;
 using Odin.Data.Core.Models;
 using Odin.Interfaces;
+using System.Threading.Tasks;
 
 namespace Odin.Domain
 {
@@ -34,7 +30,7 @@ namespace Odin.Domain
                 {
                     manager = _mapper.Map<ManagerDto, Manager>(managerDto);
                     _unitOfWork.Managers.Add(manager, managerDto.Role);
-                    await _accountHelper.SendEmailConfirmationTokenAsync(manager.Id);
+                    await _accountHelper.SendEmailCreateTokenAsync(manager.Id);
                 }
             }
 

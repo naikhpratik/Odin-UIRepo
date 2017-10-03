@@ -1,11 +1,9 @@
-using System;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Odin.Data.Builders;
 using Odin.Data.Core.Models;
 using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Runtime.CompilerServices;
 
 namespace Odin.Data.Persistence.Migrations
 {

@@ -1,11 +1,10 @@
 ﻿
 using Microsoft.AspNet.Identity.Owin;
 using Odin.Interfaces;
-using System;
+using RazorEngine;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using RazorEngine;
 
 namespace Odin.Helpers
 {
@@ -31,22 +30,52 @@ namespace Odin.Helpers
                 _userManager = value;
             }
         }
-        public async Task<string> SendEmailConfirmationTokenAsync(string userID) //, string subject, string bdy)
+        public async Task<string> SendEmailResetTokenAsync(string userID) //, string subject, string bdy)
         {
             var url = new UrlHelper(HttpContext.Current.Request.RequestContext);
             
             //Forgery check
-            string code = await UserManager.GenerateEmailConfirmationTokenAsync(userID);
+            string code = await UserManager.GeneratePasswordResetTokenAsync(userID);
+
             //The link sent to the Transferees for access to reset password
-            var callbackUrl = url.Action("ResetPassword", "Account", new { userID, code = code }, protocol: HttpContext.Current.Request.Url.Scheme);           
+            var callbackUrl = url.Action("ResetPassword", "Account", new { userID, code = code }, protocol: HttpContext.Current.Request.Url.Scheme);
+
+            var user = await UserManager.FindByIdAsync(userID);
+
             //transferee's email address
-            var eml = await UserManager.GetEmailAsync(userID);
-            
-            var name = eml.Substring(0, eml.IndexOf("@")).Replace(".", " ");// user.FirstName + " " + user.LastName; 
+            var eml = user.Email;            
+            var name = user.FirstName + " " + user.LastName;
+
+            var subject = "Reset Password";
+            var templateFolderPath = HttpContext.Current.Server.MapPath(@"~\Views\Mailers\");
+            string template = System.IO.File.ReadAllText(templateFolderPath + "ResetPassword.cshtml");
+            var body = Razor.Parse(template, new { Name = name, Link = callbackUrl });
+
+            //send the email, specify the content mime type
+            var response = _emailHelper.SendEmail_SG(eml, subject, body, SendGrid.MimeType.Html);
+            return callbackUrl;
+        }
+
+        public async Task<string> SendEmailCreateTokenAsync(string userID) //, string subject, string bdy)
+        {
+            var url = new UrlHelper(HttpContext.Current.Request.RequestContext);
+
+            //Forgery check
+            string code = await UserManager.GeneratePasswordResetTokenAsync(userID);
+            //The link sent to the Transferees for access to reset password
+            var callbackUrl = url.Action("CreatePassword", "Account", new { userID, code = code }, protocol: HttpContext.Current.Request.Url.Scheme);
+
+            var user = await UserManager.FindByIdAsync(userID);
+
+            //transferee's email address
+            var eml = user.Email;
+            var name = user.FirstName + " " + user.LastName;
+
             var subject = "Create Password";
             var templateFolderPath = HttpContext.Current.Server.MapPath(@"~\Views\Mailers\");
-            string template = System.IO.File.ReadAllText(templateFolderPath + "SetNewPassword.cshtml");
+            string template = System.IO.File.ReadAllText(templateFolderPath + "CreatePassword.cshtml");
             var body = Razor.Parse(template, new { Name = name, Link = callbackUrl });
+
             //send the email, specify the content mime type
             var response = _emailHelper.SendEmail_SG(eml, subject, body, SendGrid.MimeType.Html);
             return callbackUrl;

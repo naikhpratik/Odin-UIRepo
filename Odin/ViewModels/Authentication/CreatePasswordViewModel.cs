@@ -2,9 +2,8 @@
 
 namespace Odin.ViewModels.Authentication
 {
-    public class ResetPasswordViewModel
+    public class CreatePasswordViewModel
     {
-
         public string UserId { get; set; }
 
         public string Code { get; set; }
@@ -18,7 +17,6 @@ namespace Odin.ViewModels.Authentication
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-        public string ConfirmPassword { get; set; }
-       
+        public string ConfirmPassword { get; set; }      
     }
 }
