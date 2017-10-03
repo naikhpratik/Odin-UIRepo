@@ -1,17 +1,4 @@
-﻿@font-face {
-    font-family: OpenSansLight;
-    src: url("~/Fonts/OpenSans-Light.ttf");
-}
-
-@font-face {
-    font-family: OpenSansRegular;
-    src: url("~/Fonts/OpenSans-Regular.ttf");
-}
-
-@font-face {
-    font-family: OpenSansLightItalic;
-    src: url(~/Fonts//OpenSans-LightItalic.ttf);
-}
+﻿//@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 body {
     padding: 0px;
@@ -55,8 +42,8 @@ div#main {
         float: right;
         width: 48%;
         height: 118px;
-        margin-right: 5px;
-        padding-top: 20px;
+        margin-right: 3px;
+        padding-top: 30px;
         vertical-align: top;
         display: inline-block;
 
@@ -64,10 +51,35 @@ div#main {
             float: right;
             display: inline-block;
 
+            &.icons_notify {
+                font-size: small;
+                color: darkgreen;
+                position: relative;
+                font-weight: bold;
+                display: inline-block;
+                width: 10px;
+                text-align: center;
+
+                &.icons_notify_messages {
+                    top: 6px;
+                    left: -45px;
+                }
+
+                &.icons_notify_alerts {
+                    top: 6px;
+                    left: -145px;
+                }
+
+                &.icons_notify_appts {
+                    top: 6px;
+                    left: -188px;
+                }
+            }
+
             img {
                 float: right;
                 width: 40px;
-                margin: 18px;
+                margin: 8px;
             }
         }
     }
@@ -78,8 +90,12 @@ div#main {
         border-top: 1px solid #979797;
 
         div#search {
-            margin: 20px 0px 60px 47px;
-
+            height: 60px;
+            padding-top: 15px;
+            padding-left: 43px;
+            background-color: #FAFAFA;
+//            background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.33, rgb(14,173,173)), color-stop(0.67, rgb(0,255,255)));
+//            background-image: -moz-linear-gradient(center bottom, rgb(14,173,173) 33%, rgb(0,255,255) 67% );
             input {
                 width: 300px;
                 max-width: none;
@@ -88,8 +104,28 @@ div#main {
             button {
                 width: 90px;
                 color: white;
+                height: 30px;
+                border: none;
                 margin-left: 15px;
                 background-color: #48AD48;
+            }
+        }
+
+        img {
+            &.arrow {
+                cursor: cell;
+            }
+
+            &.expand {
+                cursor: zoom-in;
+            }
+
+            &.collapse {
+                cursor: zoom-out;
+            }
+
+            &.noinit {
+                display: none;
             }
         }
 
@@ -97,42 +133,28 @@ div#main {
             border: none;
             padding-bottom: 16px;
 
-            &.selected {
-                > span.arrow_down {
-                    border: 0.12em solid #333;
-                }
-            }
-
             &.first {
                 padding-left: 73px;
             }
 
-            &.second {
-                padding-left: 1px;
-            }
-
             &.third {
-                padding-left: 58px;
+                padding-left: 55px;
             }
 
             &.fourth {
-                padding-left: 35px;
+                padding-left: 28px;
             }
 
             &.fifth {
-                padding-left: 29px;
+                padding-left: 23px;
             }
 
             &.sixth {
-                padding-left: 48px;
+                padding-left: 41px;
             }
 
             &.seventh {
-                padding-left: 10px;
-
-                > span {
-                    left: 1px;
-                }
+                padding-left: 7px;
             }
         }
 
@@ -143,7 +165,7 @@ div#main {
 
             div.actlist-item-hdr {
                 display: inline-block;
-                width: 30%;
+                width: 30px;
 
                 a {
                     top: -10px;
@@ -155,7 +177,7 @@ div#main {
                 }
 
                 &:first-of-type {
-                    width: auto;
+                    width: 22px;
                     margin-top: 5px;
                     vertical-align: top;
                 }
@@ -170,12 +192,24 @@ div#main {
             }
 
             div.actlist-item-blk {
+                display: none;
                 margin-left: 20px;
             }
 
             img {
                 width: 40px;
-                padding-top: 5px;
+            }
+
+            div.notify-count {
+                font-size: small;
+                color: darkgreen;
+                position: relative;
+                left: -17px;
+                top: -7px;
+                font-weight: bold;
+                display: inline-block;
+                width: 10px;
+                text-align: center;
             }
 
             p, span {
@@ -228,17 +262,24 @@ div#main {
             display: none;
         }
 
+        div#icons div.icons_notify {
+            &.icons_notify_messages {
+                top: 6px;
+                left: -44px;
+            }
+        }
+
         th {
             &.second {
                 padding-left: 29px !important;
             }
 
             &.fourth {
-                padding-left: 3px !important;
+                padding-left: 0px !important;
             }
 
             &.fifth {
-                padding-left: 10px !important;
+                padding-left: 9px !important;
             }
         }
 
@@ -292,11 +333,30 @@ div#main {
             float: none !important;
             width: 97% !important;
             display: block !important;
+            margin-bottom: 16px;
 
             div {
                 float: none !important;
             }
         }
+
+        div#icons div.icons_notify {
+            &.icons_notify_messages {
+                top: -32px;
+                left: 239px;
+            }
+
+            &.icons_notify_alerts {
+                top: -32px;
+                left: 117px;
+            }
+
+            &.icons_notify_appts {
+                top: -32px;
+                left: 50px;
+            }
+        }
+
 
         th {
             &.second {
@@ -304,7 +364,7 @@ div#main {
             }
 
             &.third {
-                padding-left: 10px !important;
+                padding-left: 9px !important;
             }
         }
 
@@ -362,7 +422,7 @@ div#main {
             }
 
             &.third {
-                padding-left: 10px !important;
+                padding-left: 9px !important;
             }
         }
 
@@ -428,7 +488,7 @@ div#main {
             }
 
             &.third {
-                padding-left: 10px !important;
+                padding-left: 9px !important;
             }
         }
 
@@ -456,60 +516,5 @@ div#main {
                 margin-left: 0px !important;
             }
         }
-    }
-
-    .arrow_up {
-        display: inline-block;
-        width: 1.4em;
-        height: 1.4em;
-        border: 0.1em solid #333;
-        border-radius: 50%;
-        margin-right: 0.75em;
-        position: relative;
-        top: -0.5em;
-    }
-
-    .arrow_up:after {
-        content: '';
-        display: inline-block;
-        margin-top: 0.7em;
-        margin-left: 0.3em;
-        width: 0.5em;
-        height: 0.5em;
-        border-top: 0.1em solid #333;
-        border-right: 0.1em solid #333;
-        -moz-transform: rotate(-45deg);
-        -webkit-transform: rotate(-45deg);
-        transform: rotate(-45deg);
-        position: relative;
-        top: -0.2em;
-    }
-
-    .arrow_down {
-        display: inline-block;
-        width: 1.4em;
-        height: 1.4em;
-        border: 0.1em solid #333;
-        border-radius: 50%;
-        margin-right: 0.75em;
-        position: relative;
-        top: -0.5em;
-    }
-
-    .arrow_down:after {
-        content: '';
-        display: inline-block;
-        position: relative;
-        top: -0.2em;
-        margin-left: 0.4em;
-        width: 0.5em;
-        height: 0.5em;
-        border-top: 0.1em solid #333;
-        border-right: 0.1em solid #333;
-        -moz-transform: rotate(135deg);
-        -webkit-transform: rotate(135deg);
-        transform: rotate(135deg);
-        position: relative;
-        top: -0.5em;
     }
 }
