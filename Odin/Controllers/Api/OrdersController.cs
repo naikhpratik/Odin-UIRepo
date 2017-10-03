@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using AutoMapper;
 using Microsoft.ApplicationInsights;
+using Microsoft.AspNet.Identity;
 using Odin.Data.Core;
 using Odin.Data.Core.Dtos;
 using Odin.Data.Core.Models;
@@ -17,10 +18,12 @@ namespace Odin.Controllers.Api
     public class OrdersController : ApiController
     {
         private readonly IOrderImporter _orderImporter;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public OrdersController(IOrderImporter orderImporter)
+        public OrdersController(IOrderImporter orderImporter, IUnitOfWork unitOfWork)
         {
             _orderImporter = orderImporter;
+            _unitOfWork = unitOfWork;
         }
 
         // POST /api/orders
@@ -43,5 +46,19 @@ namespace Odin.Controllers.Api
 
             return Ok();
         }
+
+        [HttpGet]
+        [Authorize]
+        public IHttpActionResult GetOrders()
+        {
+            var userId = User.Identity.GetUserId();
+
+            var orders = _unitOfWork.Orders.GetOrdersFor(userId);
+
+
+
+            return Ok();
+        }
+            
     }
 }
