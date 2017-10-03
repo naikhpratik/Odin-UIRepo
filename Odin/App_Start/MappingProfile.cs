@@ -29,6 +29,14 @@ namespace Odin
             CreateMap<Consultant, ConsultantDto>();
             CreateMap<ManagerDto, Manager>();
             CreateMap<ConsultantImportDto, Consultant>();
+
+            CreateMap<Order, TransfereeIndexDto>()
+                .ForMember(m => m.FirstName, opt => opt.MapFrom(src => src.Transferee.FirstName))
+                .ForMember(m => m.LastName, opt => opt.MapFrom(src => src.Transferee.LastName))
+                .ForMember(m => m.Manager, opt => opt.MapFrom(src => src.ProgramManager.FullName))
+                .ForMember(m => m.FinalArrival, opt => opt.MapFrom(src => src.EstimatedArrivalDate))
+                .ForMember(m => m.Company, opt => opt.MapFrom(src => src.Client))
+                .ForMember(m => m.ManagerPhone, opt => opt.MapFrom(src => src.ProgramManager.PhoneNumber));
         }
     }
 }
