@@ -6,7 +6,6 @@
         "Transferees": [
             {
                 "FirstName": "Victoria",
-                "Middle": "A",
                 "LastName": "Sporer",
 
                 "Rmc": "Cartus",
@@ -36,7 +35,6 @@
             },
             {
                 "FirstName": "Lila",
-                "Middle": "C",
                 "LastName": "Smith",
 
                 "Rmc": "Cartus",
@@ -66,7 +64,6 @@
             },
             {
                 "FirstName": "Joseph",
-                "Middle": "S",
                 "LastName": "Jackson",
 
                 "Rmc": "Cartus",
@@ -96,7 +93,6 @@
             },
             {
                 "FirstName": "Helen",
-                "Middle": "A",
                 "LastName": "Gutierrez",
 
                 "Rmc": "Cartus",
@@ -126,7 +122,6 @@
             },
             {
                 "FirstName": "Ricky",
-                "Middle": "L",
                 "LastName": "Stanley",
 
                 "Rmc": "Cartus",
@@ -156,7 +151,6 @@
             },
             {
                 "FirstName": "John",
-                "Middle": "D",
                 "LastName": "Fludd",
 
                 "Rmc": "Cartus",
@@ -186,7 +180,6 @@
             },
             {
                 "FirstName": "Margaret",
-                "Middle": "A",
                 "LastName": "Cooley",
 
                 "Rmc": "Cartus",
@@ -293,7 +286,7 @@
             for (var i = 0; i < $SearchedOrders.Transferees.length; i++) {
 
                 // name
-                var name = "<p>" + $SearchedOrders.Transferees[i].FirstName + " " + $SearchedOrders.Transferees[i].Middle + " " + $SearchedOrders.Transferees[i].LastName + "</p>" +
+                var name = "<p>" + $SearchedOrders.Transferees[i].FirstName + " " + $SearchedOrders.Transferees[i].LastName + "</p>" +
                     "<p class=\"Callout\">" + $SearchedOrders.Transferees[i].Rmc + "</p><p>" + $SearchedOrders.Transferees[i].Company + "</p>";
 
                 var name_tablet = name + "<div><span class=\"tablet-column-label\">PreTrip:</span><span>" + $SearchedOrders.Transferees[i].PreTrip + "</span><br />" +
