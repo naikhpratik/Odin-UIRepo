@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
+﻿using Microsoft.AspNet.Identity;
 using Odin.Data.Core.Models;
 using Odin.Data.Core.Repositories;
 using Odin.Data.Helpers;
+using System.Linq;
 
 namespace Odin.Data.Persistence
 {
@@ -27,8 +22,7 @@ namespace Odin.Data.Persistence
 
         public void Add(Consultant consultant)
         {
-            var userStore = new UserStore<Consultant>(_context);
-            var userManager = new UserManager<Consultant>(userStore);
+            var userManager = UserHelper.GetUserManager<Consultant>(_context);
             consultant.UserName = consultant.Email;
             var result = userManager.Create(consultant, PasswordHelper.TemporaryPassword());
             userManager.AddToRole(consultant.Id, UserRoles.Consultant);
