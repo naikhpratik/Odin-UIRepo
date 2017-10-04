@@ -10,7 +10,7 @@ namespace Odin.Data.Builders
 {
     public static class OrderBuilder
     {
-        public static IList<Order> New(int count = 1)
+        public static List<Order> New(int count = 1)
         {
             var relocationTypes = new[] {"International", "Domestic"};
 
@@ -27,7 +27,7 @@ namespace Odin.Data.Builders
                 .RuleFor(o => o.EstimatedArrivalDate, f => f.Date.Future())
                 .RuleFor(o => o.FamilyDetails, f=> f.Lorem.Sentence());
 
-            var orders = order.Generate(count);
+            var orders = order.Generate(count).ToList();
 
             return orders;
         }

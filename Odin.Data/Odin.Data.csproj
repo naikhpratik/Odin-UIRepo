@@ -99,7 +99,9 @@
     <Compile Include="Core\Dtos\ProgramManagerDto.cs" />
     <Compile Include="Core\Dtos\ManagerDto.cs" />
     <Compile Include="Core\Dtos\ManagersDto.cs" />
+    <Compile Include="Core\Dtos\ServicesDto.cs" />
     <Compile Include="Core\Dtos\TransfereeDto.cs" />
+    <Compile Include="Core\Dtos\TransfereeIndexDto.cs" />
     <Compile Include="Core\Dtos\UserDto.cs" />
     <Compile Include="Core\Models\ApplicationUser.cs" />
     <Compile Include="Core\Models\Consultant.cs" />

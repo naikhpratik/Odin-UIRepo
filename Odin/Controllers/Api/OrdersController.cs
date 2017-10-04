@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity;
 using Odin.Data.Core;
 using Odin.Data.Core.Dtos;
 using Odin.Data.Core.Models;
+using Odin.Domain;
 using Odin.Filters;
 using Odin.Interfaces;
 
@@ -21,9 +22,9 @@ namespace Odin.Controllers.Api
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public OrdersController(IOrderImporter orderImporter, IUnitOfWork unitOfWork, IMapper mapper)
+        public OrdersController(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            _orderImporter = orderImporter;
+            _orderImporter = new OrderImporter(unitOfWork, mapper);
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }

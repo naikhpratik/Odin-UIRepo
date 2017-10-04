@@ -6,15 +6,20 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Helpers;
+using AutoMapper;
 using FluentAssertions;
 using Microsoft.Owin.Hosting;
 using Microsoft.Owin.Testing;
 using Newtonsoft.Json;
 using NUnit.Framework;
+using Odin.Controllers.Api;
 using Odin.Data.Builders;
+using Odin.Data.Core;
 using Odin.Data.Core.Dtos;
 using Odin.Data.Core.Models;
 using Odin.Data.Helpers;
+using Odin.Data.Persistence;
+using Odin.Domain;
 using Odin.Extensions;
 using Odin.Helpers;
 using Odin.IntegrationTests.TestAttributes;
@@ -24,6 +29,32 @@ namespace Odin.IntegrationTests.Controllers.Api
     [TestFixture]
     public class OrdersControllerTests : WebApiBaseTest
     {
+        private OrdersController _controller;
+
+        private void SetUpOrdersController()
+        {
+            var config = new MapperConfiguration(c => c.AddProfile(new MappingProfile()));
+            var mapper = config.CreateMapper();
+            var unitOfWork = new UnitOfWork(Context);
+            _controller = new OrdersController(unitOfWork, mapper);
+        }
+
+        //[Test, Isolated]
+        public async Task GetOrders_ValidRequests_ShouldReturnOrders()
+        {
+            // Arrange
+            var orders = OrderBuilder.New(2);
+            orders.ForEach(o => o.ConsultantId = dsc.Id);
+            orders.ForEach(o => o.TransfereeId = transferee.Id);
+            orders.ForEach(o => o.ProgramManagerId = pm.Id);
+            Context.Orders.AddRange(orders);
+            Context.SaveChanges();
+
+            // Act
+            var request = CreateRequest("api/orders", "application/json", HttpMethod.Get);
+
+        }
+
         [Test, CleanData]
         public async Task UpsertOrder_ValidUpdateRequest_ShouldNotUpdateNonDtoFields()
         {
