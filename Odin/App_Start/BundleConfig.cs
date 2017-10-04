@@ -30,10 +30,11 @@ namespace Odin
                       "~/Content/site.css",
                       "~/Content/datatables/css/datatables.bootstrap.css"));
 
-            // Home page
+            // Page Styling
             bundles.Add(new StyleBundle("~/Styling/home").Include("~/Content/Home/home.css"));
+            bundles.Add(new StyleBundle("~/Styling/login").Include("~/Content/Login/login.css"));
 
-            // View scripts
+            // Page scripts
             bundles.Add(new ScriptBundle("~/Scripts/home").Include("~/Scripts/app/views/home.js"));
         }
     }
