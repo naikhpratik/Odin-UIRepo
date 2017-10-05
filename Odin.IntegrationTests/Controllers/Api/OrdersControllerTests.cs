@@ -6,17 +6,24 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Helpers;
+using System.Web.Http.Results;
+using AutoMapper;
 using FluentAssertions;
 using Microsoft.Owin.Hosting;
 using Microsoft.Owin.Testing;
 using Newtonsoft.Json;
 using NUnit.Framework;
+using Odin.Controllers.Api;
 using Odin.Data.Builders;
+using Odin.Data.Core;
 using Odin.Data.Core.Dtos;
 using Odin.Data.Core.Models;
 using Odin.Data.Helpers;
+using Odin.Data.Persistence;
+using Odin.Domain;
 using Odin.Extensions;
 using Odin.Helpers;
+using Odin.IntegrationTests.Extensions;
 using Odin.IntegrationTests.TestAttributes;
 
 namespace Odin.IntegrationTests.Controllers.Api
@@ -24,6 +31,37 @@ namespace Odin.IntegrationTests.Controllers.Api
     [TestFixture]
     public class OrdersControllerTests : WebApiBaseTest
     {
+        private OrdersController SetUpOrdersController()
+        {
+            var config = new MapperConfiguration(c => c.AddProfile(new MappingProfile()));
+            var mapper = config.CreateMapper();
+            var unitOfWork = new UnitOfWork(Context);
+            return new OrdersController(unitOfWork, mapper);
+        }
+
+        [Test, Isolated]
+        public async Task GetOrders_ValidRequests_ShouldReturnOrders()
+        {
+            // Arrange
+            var orders = OrderBuilder.New(2);
+            orders.ForEach(o => o.ConsultantId = dsc.Id);
+            orders.ForEach(o => o.TransfereeId = transferee.Id);
+            orders.ForEach(o => o.ProgramManagerId = pm.Id);
+            Context.Orders.AddRange(orders);
+            Context.SaveChanges();
+            var controller = SetUpOrdersController();
+            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+
+            // Act
+            var result = controller.GetOrders();
+            var resultContent = result.GetContent<OrderIndexDto>();
+
+            // Assert
+            result.Should().BeOfType<OkNegotiatedContentResult<OrderIndexDto>>();
+            resultContent.Transferees.Should().NotBeNull();
+            resultContent.Transferees.Should().HaveCount(2);
+        }
+
         [Test, CleanData]
         public async Task UpsertOrder_ValidUpdateRequest_ShouldNotUpdateNonDtoFields()
         {

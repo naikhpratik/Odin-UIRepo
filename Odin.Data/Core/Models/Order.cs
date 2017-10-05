@@ -23,8 +23,10 @@ namespace Odin.Data.Core.Models
         public string OriginState { get; set; }
         public string OriginCountry { get; set; }
         public DateTime? EstimatedArrivalDate { get; set; }
+        public DateTime? PreTripDate { get; set; }
+
         public string FamilyDetails { get; set; }
-        
+
         public bool TransfereeInviteEnabled { get; set; }
         public string SeCustNumb { get; set; }
         public string Rmc { get; set; }

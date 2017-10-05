@@ -156,6 +156,8 @@
   <ItemGroup>
     <Compile Include="Controllers\Api\ConsultantsControllerTests.cs" />
     <Compile Include="Controllers\Api\ManagersControllerTests.cs" />
+    <Compile Include="Extensions\HttpActionResultExtensions.cs" />
+    <Compile Include="Helpers\ResultHelper.cs" />
     <Compile Include="TestAttributes\CleanData.cs" />
     <Compile Include="Controllers\Api\OrdersControllerTests.cs" />
     <Compile Include="Controllers\OrdersControllerTests.cs" />

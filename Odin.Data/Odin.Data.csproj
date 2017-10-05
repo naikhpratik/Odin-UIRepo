@@ -181,10 +181,6 @@
     <Compile Include="Persistence\Migrations\201709282041234_AddClientRmcSeNumbToOrders.Designer.cs">
       <DependentUpon>201709282041234_AddClientRmcSeNumbToOrders.cs</DependentUpon>
     </Compile>
-    <Compile Include="Persistence\Migrations\201710051454185_TestMigration.cs" />
-    <Compile Include="Persistence\Migrations\201710051454185_TestMigration.Designer.cs">
-      <DependentUpon>201710051454185_TestMigration.cs</DependentUpon>
-    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
     <Compile Include="Persistence\TransfereesRepository.cs" />
@@ -241,9 +237,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201709282041234_AddClientRmcSeNumbToOrders.resx">
       <DependentUpon>201709282041234_AddClientRmcSeNumbToOrders.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Persistence\Migrations\201710051454185_TestMigration.resx">
-      <DependentUpon>201710051454185_TestMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
