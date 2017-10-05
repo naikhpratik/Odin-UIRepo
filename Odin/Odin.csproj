@@ -477,13 +477,6 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
-    <Content Include="Content\Home\home.css">
-      <DependentUpon>home.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\Home\home.min.css">
-      <DependentUpon>home.css</DependentUpon>
-    </Content>
-    <Content Include="Content\Home\home.scss" />
     <Content Include="Content\Images\bg_gradient.png" />
     <Content Include="Content\Images\bg_image.png" />
     <Content Include="Content\Images\collapse.png" />
@@ -509,13 +502,19 @@
     <Content Include="Content\Login\login.min.css">
       <DependentUpon>login.css</DependentUpon>
     </Content>
+    <Content Include="Content\Orders\orders.css">
+      <DependentUpon>orders.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\Orders\orders.min.css">
+      <DependentUpon>orders.css</DependentUpon>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="Fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\app\controllers\userManagementController.js" />
-    <Content Include="Scripts\app\views\home.js" />
     <Content Include="Scripts\app\services\userManagementService.js" />
+    <Content Include="Scripts\app\views\orders.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -530,6 +529,7 @@
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
     <Content Include="Content\Login\login.scss" />
+    <Content Include="Content\Orders\orders.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
@@ -668,6 +668,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Home\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Fonts\glyphicons-halflings-regular.woff" />

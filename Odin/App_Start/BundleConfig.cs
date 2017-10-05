@@ -31,11 +31,11 @@ namespace Odin
                       "~/Content/datatables/css/datatables.bootstrap.css"));
 
             // Page Styling
-            bundles.Add(new StyleBundle("~/Styling/home").Include("~/Content/Home/home.css"));
+            bundles.Add(new StyleBundle("~/Styling/orders").Include("~/Content/Orders/orders.css"));
             bundles.Add(new StyleBundle("~/Styling/login").Include("~/Content/Login/login.css"));
 
             // Page scripts
-            bundles.Add(new ScriptBundle("~/Scripts/home").Include("~/Scripts/app/views/home.js"));
+            bundles.Add(new ScriptBundle("~/Scripts/orders").Include("~/Scripts/app/views/orders.js"));
         }
     }
 }
