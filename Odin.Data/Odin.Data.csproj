@@ -173,9 +173,17 @@
     <Compile Include="Persistence\Migrations\201709201941374_AddTransfereeInviteEnabledToOrders.Designer.cs">
       <DependentUpon>201709201941374_AddTransfereeInviteEnabledToOrders.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201709201950074_PopulateSeContactUidInUsers.cs" />
+    <Compile Include="Persistence\Migrations\201709201950074_PopulateSeContactUidInUsers.Designer.cs">
+      <DependentUpon>201709201950074_PopulateSeContactUidInUsers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\201709282041234_AddClientRmcSeNumbToOrders.cs" />
     <Compile Include="Persistence\Migrations\201709282041234_AddClientRmcSeNumbToOrders.Designer.cs">
       <DependentUpon>201709282041234_AddClientRmcSeNumbToOrders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710051454185_TestMigration.cs" />
+    <Compile Include="Persistence\Migrations\201710051454185_TestMigration.Designer.cs">
+      <DependentUpon>201710051454185_TestMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
@@ -228,8 +236,14 @@
     <EmbeddedResource Include="Persistence\Migrations\201709201941374_AddTransfereeInviteEnabledToOrders.resx">
       <DependentUpon>201709201941374_AddTransfereeInviteEnabledToOrders.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709201950074_PopulateSeContactUidInUsers.resx">
+      <DependentUpon>201709201950074_PopulateSeContactUidInUsers.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201709282041234_AddClientRmcSeNumbToOrders.resx">
       <DependentUpon>201709282041234_AddClientRmcSeNumbToOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710051454185_TestMigration.resx">
+      <DependentUpon>201710051454185_TestMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
