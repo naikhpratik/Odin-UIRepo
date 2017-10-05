@@ -1,214 +1,222 @@
 ﻿var HomePageController = function () {
     var $currSort = null;
+    var $Orders = null;
 
     //TODO: fill $Orders via an /api call
-    var $Orders = {
-        "Transferees": [
-            {
-                "FirstName": "Victoria",
-                "LastName": "Sporer",
+    $.getJSON("/api/orders",
+        function(orders) {
+            $Orders = orders;
+        });
 
-                "Rmc": "Cartus",
-                "Company": "Amazon.com INC",
 
-                "NumberOfScheduledServices": 2,
-                "NumberOfServices": 1,
-                "NumberOfCompletedServices": 0,
 
-                "LastContacted": "09/22/17",
-                "Manager": "Jane Doese",
-                "MamagerPhone": "321-23432",
-                "PreTrip": "10/15/17",
-                "FinalArrival": "2/10/18",
-                "NumberOfAlerts": 5,
+    //var $Orders = {
+    //    "Transferees": [
+    //        {
+    //            "FirstName": "Victoria",
+    //            "LastName": "Sporer",
 
-                "Services": [
-                    {
-                        "Name": "Pick up",
-                        "Completed": "10/15/17"
-                    },
-                    {
-                        "Name": "Visit 1st Home",
-                        "Completed": "10/15/17"
-                    }
-                ]
-            },
-            {
-                "FirstName": "Lila",
-                "LastName": "Smith",
+    //            "Rmc": "Cartus",
+    //            "Company": "Amazon.com INC",
 
-                "Rmc": "Cartus",
-                "Company": "Tesla, Inc",
+    //            "NumberOfScheduledServices": 2,
+    //            "NumberOfServices": 1,
+    //            "NumberOfCompletedServices": 0,
 
-                "NumberOfScheduledServices": 2,
-                "NumberOfServices": 1,
-                "NumberOfCompletedServices": 0,
+    //            "LastContacted": "09/22/17",
+    //            "Manager": "Jane Doese",
+    //            "MamagerPhone": "321-23432",
+    //            "PreTrip": "10/15/17",
+    //            "FinalArrival": "2/10/18",
+    //            "NumberOfAlerts": 5,
 
-                "LastContacted": "09/09/17",
-                "Manager": "Austin Emser",
-                "MamagerPhone": "321-23432",
-                "PreTrip": "10/15/17",
-                "FinalArrival": "2/10/18",
-                "NumberOfAlerts": 12,
+    //            "Services": [
+    //                {
+    //                    "Name": "Pick up",
+    //                    "Completed": "10/15/17"
+    //                },
+    //                {
+    //                    "Name": "Visit 1st Home",
+    //                    "Completed": "10/15/17"
+    //                }
+    //            ]
+    //        },
+    //        {
+    //            "FirstName": "Lila",
+    //            "LastName": "Smith",
 
-                "Services": [
-                    {
-                        "Name": "Pick up",
-                        "Completed": "10/15/17"
-                    },
-                    {
-                        "Name": "Visit 1st Home",
-                        "Completed": "10/15/17"
-                    }
-                ]
-            },
-            {
-                "FirstName": "Joseph",
-                "LastName": "Jackson",
+    //            "Rmc": "Cartus",
+    //            "Company": "Tesla, Inc",
 
-                "Rmc": "Cartus",
-                "Company": "Amazon INC",
+    //            "NumberOfScheduledServices": 2,
+    //            "NumberOfServices": 1,
+    //            "NumberOfCompletedServices": 0,
 
-                "NumberOfScheduledServices": 2,
-                "NumberOfServices": 1,
-                "NumberOfCompletedServices": 0,
+    //            "LastContacted": "09/09/17",
+    //            "Manager": "Austin Emser",
+    //            "MamagerPhone": "321-23432",
+    //            "PreTrip": "10/15/17",
+    //            "FinalArrival": "2/10/18",
+    //            "NumberOfAlerts": 12,
 
-                "LastContacted": "08/12/17",
-                "Manager": "Alexander Kovanen",
-                "MamagerPhone": "321-23432",
-                "PreTrip": "10/15/17",
-                "FinalArrival": "2/10/18",
-                "NumberOfAlerts": 3,
+    //            "Services": [
+    //                {
+    //                    "Name": "Pick up",
+    //                    "Completed": "10/15/17"
+    //                },
+    //                {
+    //                    "Name": "Visit 1st Home",
+    //                    "Completed": "10/15/17"
+    //                }
+    //            ]
+    //        },
+    //        {
+    //            "FirstName": "Joseph",
+    //            "LastName": "Jackson",
 
-                "Services": [
-                    {
-                        "Name": "Pick up",
-                        "Completed": "10/15/17"
-                    },
-                    {
-                        "Name": "Visit 1st Home",
-                        "Completed": "10/15/17"
-                    }
-                ]
-            },
-            {
-                "FirstName": "Helen",
-                "LastName": "Gutierrez",
+    //            "Rmc": "Cartus",
+    //            "Company": "Amazon INC",
 
-                "Rmc": "Cartus",
-                "Company": "Tesla, Inc",
+    //            "NumberOfScheduledServices": 2,
+    //            "NumberOfServices": 1,
+    //            "NumberOfCompletedServices": 0,
 
-                "NumberOfScheduledServices": 2,
-                "NumberOfServices": 1,
-                "NumberOfCompletedServices": 0,
+    //            "LastContacted": "08/12/17",
+    //            "Manager": "Alexander Kovanen",
+    //            "MamagerPhone": "321-23432",
+    //            "PreTrip": "10/15/17",
+    //            "FinalArrival": "2/10/18",
+    //            "NumberOfAlerts": 3,
 
-                "LastContacted": "08/02/17",
-                "Manager": "Joseph Jones",
-                "MamagerPhone": "321-23432",
-                "PreTrip": "10/15/17",
-                "FinalArrival": "2/10/18",
-                "NumberOfAlerts": 1,
+    //            "Services": [
+    //                {
+    //                    "Name": "Pick up",
+    //                    "Completed": "10/15/17"
+    //                },
+    //                {
+    //                    "Name": "Visit 1st Home",
+    //                    "Completed": "10/15/17"
+    //                }
+    //            ]
+    //        },
+    //        {
+    //            "FirstName": "Helen",
+    //            "LastName": "Gutierrez",
 
-                "Services": [
-                    {
-                        "Name": "Pick up",
-                        "Completed": "10/15/17"
-                    },
-                    {
-                        "Name": "Visit 1st Home",
-                        "Completed": "10/15/17"
-                    }
-                ]
-            },
-            {
-                "FirstName": "Ricky",
-                "LastName": "Stanley",
+    //            "Rmc": "Cartus",
+    //            "Company": "Tesla, Inc",
 
-                "Rmc": "Cartus",
-                "Company": "Amazon INC",
+    //            "NumberOfScheduledServices": 2,
+    //            "NumberOfServices": 1,
+    //            "NumberOfCompletedServices": 0,
 
-                "NumberOfScheduledServices": 2,
-                "NumberOfServices": 1,
-                "NumberOfCompletedServices": 0,
+    //            "LastContacted": "08/02/17",
+    //            "Manager": "Joseph Jones",
+    //            "MamagerPhone": "321-23432",
+    //            "PreTrip": "10/15/17",
+    //            "FinalArrival": "2/10/18",
+    //            "NumberOfAlerts": 1,
 
-                "LastContacted": "07/22/17",
-                "Manager": "Katy Smith",
-                "MamagerPhone": "321-23432",
-                "PreTrip": "10/15/17",
-                "FinalArrival": "2/10/18",
-                "NumberOfAlerts": 9,
+    //            "Services": [
+    //                {
+    //                    "Name": "Pick up",
+    //                    "Completed": "10/15/17"
+    //                },
+    //                {
+    //                    "Name": "Visit 1st Home",
+    //                    "Completed": "10/15/17"
+    //                }
+    //            ]
+    //        },
+    //        {
+    //            "FirstName": "Ricky",
+    //            "LastName": "Stanley",
 
-                "Services": [
-                    {
-                        "Name": "Pick up",
-                        "Completed": "10/15/17"
-                    },
-                    {
-                        "Name": "Visit 1st Home",
-                        "Completed": "10/15/17"
-                    }
-                ]
-            },
-            {
-                "FirstName": "John",
-                "LastName": "Fludd",
+    //            "Rmc": "Cartus",
+    //            "Company": "Amazon INC",
 
-                "Rmc": "Cartus",
-                "Company": "Amazon INC",
+    //            "NumberOfScheduledServices": 2,
+    //            "NumberOfServices": 1,
+    //            "NumberOfCompletedServices": 0,
 
-                "NumberOfScheduledServices": 2,
-                "NumberOfServices": 1,
-                "NumberOfCompletedServices": 0,
+    //            "LastContacted": "07/22/17",
+    //            "Manager": "Katy Smith",
+    //            "MamagerPhone": "321-23432",
+    //            "PreTrip": "10/15/17",
+    //            "FinalArrival": "2/10/18",
+    //            "NumberOfAlerts": 9,
 
-                "LastContacted": "07/20/17",
-                "Manager": "Zander Gilley",
-                "MamagerPhone": "321-23432",
-                "PreTrip": "10/15/17",
-                "FinalArrival": "2/10/18",
-                "NumberOfAlerts": 17,
+    //            "Services": [
+    //                {
+    //                    "Name": "Pick up",
+    //                    "Completed": "10/15/17"
+    //                },
+    //                {
+    //                    "Name": "Visit 1st Home",
+    //                    "Completed": "10/15/17"
+    //                }
+    //            ]
+    //        },
+    //        {
+    //            "FirstName": "John",
+    //            "LastName": "Fludd",
 
-                "Services": [
-                    {
-                        "Name": "Pick up",
-                        "Completed": "10/15/17"
-                    },
-                    {
-                        "Name": "Visit 1st Home",
-                        "Completed": "10/15/17"
-                    }
-                ]
-            },
-            {
-                "FirstName": "Margaret",
-                "LastName": "Cooley",
+    //            "Rmc": "Cartus",
+    //            "Company": "Amazon INC",
 
-                "Rmc": "Cartus",
-                "Company": "Tesla, Inc",
+    //            "NumberOfScheduledServices": 2,
+    //            "NumberOfServices": 1,
+    //            "NumberOfCompletedServices": 0,
 
-                "NumberOfScheduledServices": 2,
-                "NumberOfServices": 1,
-                "NumberOfCompletedServices": 0,
+    //            "LastContacted": "07/20/17",
+    //            "Manager": "Zander Gilley",
+    //            "MamagerPhone": "321-23432",
+    //            "PreTrip": "10/15/17",
+    //            "FinalArrival": "2/10/18",
+    //            "NumberOfAlerts": 17,
 
-                "LastContacted": "07/15/17",
-                "Manager": "Patricia Applesmith",
-                "MamagerPhone": "321-23432",
-                "PreTrip": "10/15/17",
-                "FinalArrival": "2/10/18",
-                "NumberOfAlerts": 4,
+    //            "Services": [
+    //                {
+    //                    "Name": "Pick up",
+    //                    "Completed": "10/15/17"
+    //                },
+    //                {
+    //                    "Name": "Visit 1st Home",
+    //                    "Completed": "10/15/17"
+    //                }
+    //            ]
+    //        },
+    //        {
+    //            "FirstName": "Margaret",
+    //            "LastName": "Cooley",
 
-                "Services": [
-                    {
-                        "Name": "Pick up",
-                        "Completed": "10/15/17"
-                    },
-                    {
-                        "Name": "Visit 1st Home",
-                        "Completed": "10/15/17"
-                    }
-                ]
-            }
-        ]
-    };
+    //            "Rmc": "Cartus",
+    //            "Company": "Tesla, Inc",
+
+    //            "NumberOfScheduledServices": 2,
+    //            "NumberOfServices": 1,
+    //            "NumberOfCompletedServices": 0,
+
+    //            "LastContacted": "07/15/17",
+    //            "Manager": "Patricia Applesmith",
+    //            "MamagerPhone": "321-23432",
+    //            "PreTrip": "10/15/17",
+    //            "FinalArrival": "2/10/18",
+    //            "NumberOfAlerts": 4,
+
+    //            "Services": [
+    //                {
+    //                    "Name": "Pick up",
+    //                    "Completed": "10/15/17"
+    //                },
+    //                {
+    //                    "Name": "Visit 1st Home",
+    //                    "Completed": "10/15/17"
+    //                }
+    //            ]
+    //        }
+    //    ]
+    //};
 
     var $SortedOrders = $Orders; 
     var $SearchedOrders = $SortedOrders;
