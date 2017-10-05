@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Helpers;
+using System.Web.Http.Results;
 using AutoMapper;
 using FluentAssertions;
 using Microsoft.Owin.Hosting;
@@ -22,6 +23,7 @@ using Odin.Data.Persistence;
 using Odin.Domain;
 using Odin.Extensions;
 using Odin.Helpers;
+using Odin.IntegrationTests.Extensions;
 using Odin.IntegrationTests.TestAttributes;
 
 namespace Odin.IntegrationTests.Controllers.Api
@@ -29,17 +31,15 @@ namespace Odin.IntegrationTests.Controllers.Api
     [TestFixture]
     public class OrdersControllerTests : WebApiBaseTest
     {
-        private OrdersController _controller;
-
-        private void SetUpOrdersController()
+        private OrdersController SetUpOrdersController()
         {
             var config = new MapperConfiguration(c => c.AddProfile(new MappingProfile()));
             var mapper = config.CreateMapper();
             var unitOfWork = new UnitOfWork(Context);
-            _controller = new OrdersController(unitOfWork, mapper);
+            return new OrdersController(unitOfWork, mapper);
         }
 
-        //[Test, Isolated]
+        [Test, Isolated]
         public async Task GetOrders_ValidRequests_ShouldReturnOrders()
         {
             // Arrange
@@ -49,10 +49,17 @@ namespace Odin.IntegrationTests.Controllers.Api
             orders.ForEach(o => o.ProgramManagerId = pm.Id);
             Context.Orders.AddRange(orders);
             Context.SaveChanges();
+            var controller = SetUpOrdersController();
+            controller.MockCurrentUser(dsc.Id, dsc.UserName);
 
             // Act
-            var request = CreateRequest("api/orders", "application/json", HttpMethod.Get);
+            var result = controller.GetOrders();
+            var resultContent = result.GetContent<OrderIndexDto>();
 
+            // Assert
+            result.Should().BeOfType<OkNegotiatedContentResult<OrderIndexDto>>();
+            resultContent.Transferees.Should().NotBeNull();
+            resultContent.Transferees.Should().HaveCount(2);
         }
 
         [Test, CleanData]
