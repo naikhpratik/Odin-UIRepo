@@ -1,15 +1,13 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Odin.Data.Core.Models;
-using Odin.ViewModels.Authentication;
-using RazorEngine;
 using Odin.Interfaces;
-using System;
+using Odin.ViewModels.Authentication;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
 
 namespace Odin.Controllers
 {
@@ -18,7 +16,7 @@ namespace Odin.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-         private IEmailHelper _emailHelper;
+        private IAccountHelper _accountHelper;
 
         public ApplicationSignInManager SignInManager
         {
@@ -42,6 +40,11 @@ namespace Odin.Controllers
             {
                 _userManager = value;
             }
+        }
+
+        public AccountController(IAccountHelper accountHelper)
+        {
+            _accountHelper = accountHelper;
         }
 
         //
@@ -166,12 +169,14 @@ namespace Odin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                var user = await UserManager.FindByEmailAsync(model.Email);               
+                if(user != null)
                 {
-                    // Don't reveal that the user does not exist or is not confirmed
-                    return View("ForgotPasswordConfirmation");
+                    await _accountHelper.SendEmailResetTokenAsync(user.Id);
+                    
                 }
+
+                return View("ForgotPasswordConfirmation");
 
                 // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
@@ -179,7 +184,7 @@ namespace Odin.Controllers
                 // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
                 // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
                 // return RedirectToAction("ForgotPasswordConfirmation", "Account");
-                
+
             }
 
             // If we got this far, something failed, redisplay form
@@ -197,12 +202,12 @@ namespace Odin.Controllers
         //
         // GET: /Account/ResetPassword
         [AllowAnonymous]
-        public ActionResult ResetPassword(string code)
+        public ActionResult ResetPassword(string userId, string code)
         {
-            return code == null ? View("Error") : View();
-        }
-
-        //
+            ViewBag.UserId = userId;
+            return code == null || userId == null ? View("Error") : View();
+        }     
+             
         // POST: /Account/ResetPassword
         [HttpPost]
         [AllowAnonymous]
@@ -213,22 +218,29 @@ namespace Odin.Controllers
             {
                 return View(model);
             }
-            var user = await UserManager.FindByNameAsync(model.Email);
+
+            var user = await UserManager.FindByIdAsync(model.UserId);
+            
             if (user == null)
             {
                 // Don't reveal that the user does not exist
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
+                return RedirectToAction("Error", "Account");
             }
             var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
             if (result.Succeeded)
             {
-                result = await UserManager.ConfirmEmailAsync(user.Id, model.Code);
-                return View(result.Succeeded ? "ResetPasswordConfirmatio" : "Error");
-                //return RedirectToAction("ResetPasswordConfirmation", "Account");
+                var signInResult = await SignInManager.PasswordSignInAsync(user.Email, model.Password, false, shouldLockout: false);
+                switch (signInResult)
+                {
+                    case SignInStatus.Success:                                          
+                        return RedirectToLocal(string.Empty);                   
+                    default:
+                        return RedirectToAction("Login", "Account");                       
+                }
             }
             AddErrors(result);
             return View();
-        }
+        }        
 
         //
         // GET: /Account/ResetPasswordConfirmation
@@ -390,9 +402,45 @@ namespace Odin.Controllers
 
             base.Dispose(disposing);
         }
+
+        // GET: /Account/CreatePassword
+        [AllowAnonymous]
+        public ActionResult CreatePassword(string userId, string code)
+        {
+            ViewBag.UserId = userId;
+            return code == null || userId == null ? View("Error") : View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> CreatePassword(CreatePasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var user = await UserManager.FindByIdAsync(model.UserId);
+            if (user == null)
+            {
+                // Don't reveal that the user does not exist
+                return RedirectToAction("Error");
+            }
+
+            var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
+
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            AddErrors(result);
+            return View();
+        }
+
         //Do not use the SendEmailConfirmationTokenAsync method outside the membership function
         //It is exposed through the helper: AccountHelper. Use AccountHelper to access it.
-       
+
         #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";

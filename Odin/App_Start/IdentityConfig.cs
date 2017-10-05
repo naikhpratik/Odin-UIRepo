@@ -1,13 +1,13 @@
-﻿using System;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Odin.Data.Core.Models;
 using Odin.Data.Persistence;
+using System;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace Odin
 {
@@ -35,6 +35,11 @@ namespace Odin
         public ApplicationUserManager(IUserStore<ApplicationUser> store)
             : base(store)
         {
+            UserValidator = new UserValidator<ApplicationUser>(this)
+            {
+                AllowOnlyAlphanumericUserNames = false,
+                RequireUniqueEmail = true
+            };
         }
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 

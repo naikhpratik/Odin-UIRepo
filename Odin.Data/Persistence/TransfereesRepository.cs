@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
+﻿using Microsoft.AspNet.Identity;
 using Odin.Data.Core.Models;
 using Odin.Data.Core.Repositories;
 using Odin.Data.Helpers;
+using System.Linq;
 
 namespace Odin.Data.Persistence
 {
@@ -27,8 +22,7 @@ namespace Odin.Data.Persistence
 
         public void Add(Transferee transferee)
         {
-            var userStore = new UserStore<Transferee>(_context);
-            var userManager = new UserManager<Transferee>(userStore);
+            var userManager = UserHelper.GetUserManager<Transferee>(_context);
             transferee.UserName = transferee.Email;
             var result = userManager.Create(transferee, TokenHelper.NewToken());
             userManager.AddToRole(transferee.Id, UserRoles.Transferee);

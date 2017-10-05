@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
-using AutoMapper;
+﻿using AutoMapper;
 using Odin.Data.Core;
 using Odin.Data.Core.Dtos;
 using Odin.Data.Core.Models;
 using Odin.Interfaces;
+using System.Threading.Tasks;
 
 namespace Odin.Domain
 {
@@ -34,7 +30,7 @@ namespace Odin.Domain
                 {
                     consultant = _mapper.Map<ConsultantImportDto, Consultant>(consultantDto);
                     _unitOfWork.Consultants.Add(consultant);
-                    await _accountHelper.SendEmailConfirmationTokenAsync(consultant.Id);
+                    await _accountHelper.SendEmailCreateTokenAsync(consultant.Id);
                 }
             }
             _unitOfWork.Complete();
