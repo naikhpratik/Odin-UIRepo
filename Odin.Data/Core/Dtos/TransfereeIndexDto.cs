@@ -5,7 +5,10 @@ namespace Odin.Data.Core.Dtos
 {
     public class TransfereeIndexDto
     {
-
+        public TransfereeIndexDto()
+        {
+            Services = new List<ServicesDto>();
+        }
         public string FirstName;
         public string Middle;
         public string LastName;

@@ -11,38 +11,3 @@ namespace Odin.Data.Core.Dtos
     }
 }
 
-/*
-{
-
-"Transferees": [
-{
-    "FirstName": "String",
-    "Middle": "String",
-    "LastName": "String",
-
-    "Rmc": "String",
-    "Company": "String",
-
-    "NumberOfSecheduledServices": "Int",
-    "NumberOfServices": "Int",
-    "NumberOfCompletedServices": "Int",
-
-    "LastContacted": "Date",
-    "Manager": "String",
-    "ManagerPhone": "String",
-    "PreTrip": "Date",
-    "FinalArrival": "Date",
-
-    "NumberOfAlerts": "Int",
-
-    "Services": [
-    {
-        "Name": "String",
-        "Completed": "Date"
-    }
-    ]
-}
-]    
-}
-
-    */
