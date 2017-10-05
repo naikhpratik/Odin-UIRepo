@@ -1,5 +1,4 @@
-﻿@import url("https://fonts.googleapis.com/css?family=Open+Sans");
-body {
+﻿body {
   padding-top: 0px; }
 
 div.container.body-content {
@@ -73,11 +72,12 @@ div.container.body-content {
         border-left: 1px solid gray;
         margin-left: 4px;
         top: -2px;
-        height: 21px; }
+        height: 21px;
+        position: relative; }
       div.container.body-content div#dwellworks p:last-of-type {
         top: -3px;
         font-size: large;
         color: #4BAD48;
         font-size: 20px;
-        font-family: OpenSansRegular; }
+        font-family: sans-serif; }
 

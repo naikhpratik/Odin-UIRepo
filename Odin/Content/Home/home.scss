@@ -1,5 +1,4 @@
-﻿//@import url('https://fonts.googleapis.com/css?family=Open+Sans');
-
+﻿
 body {
     padding: 0px;
 }
@@ -33,7 +32,7 @@ div#main {
                 font-size: large;
                 color: #4BAD48;
                 font-size: 20px;
-                font-family: OpenSansRegular;
+                font-family: sans-serif;
             }
         }
     }
@@ -94,8 +93,8 @@ div#main {
             padding-top: 15px;
             padding-left: 43px;
             background-color: #FAFAFA;
-//            background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.33, rgb(14,173,173)), color-stop(0.67, rgb(0,255,255)));
-//            background-image: -moz-linear-gradient(center bottom, rgb(14,173,173) 33%, rgb(0,255,255) 67% );
+            //            background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.33, rgb(14,173,173)), color-stop(0.67, rgb(0,255,255)));
+            //            background-image: -moz-linear-gradient(center bottom, rgb(14,173,173) 33%, rgb(0,255,255) 67% );
             input {
                 width: 300px;
                 max-width: none;
@@ -177,7 +176,7 @@ div#main {
                     position: relative;
                     font-size: 16px;
                     text-decoration: underline;
-                    font-family: OpenSansRegular;
+                    font-family: sans-serif;
                 }
 
                 &:first-of-type {
@@ -206,7 +205,7 @@ div#main {
 
             div.notify-count {
                 font-size: small;
-                color: darkgreen;
+                color: #31A4DD;
                 position: relative;
                 left: -17px;
                 top: -7px;
@@ -228,19 +227,19 @@ div#main {
                     margin-bottom: 0px;
                     font-size: 20px;
                     font-weight: bold;
-                    font-family: OpenSansRegular;
+                    font-family: sans-serif;
 
                     &.actlist-item {
                         color: #48AD48;
                         font-size: 16px;
-                        font-family: OpenSansRegular;
+                        font-family: sans-serif;
                     }
                 }
 
                 &:nth-child(2) {
                     font-size: 16px;
                     line-height: 10px;
-                    font-family: OpenSansLight;
+                    font-family: sans-serif;
                 }
             }
         }
@@ -298,7 +297,7 @@ div#main {
 
             span {
                 font-size: 14px;
-                font-family: OpenSansLightItalic;
+                font-family: sans-serif;
 
                 &.tablet-column-label {
                     color: #6C6E70;
@@ -375,7 +374,7 @@ div#main {
         td {
             span {
                 font-size: 14px;
-                font-family: OpenSansLightItalic;
+                font-family: sans-serif;
 
                 &.tablet-column-label {
                     color: #6C6E70;
@@ -433,7 +432,7 @@ div#main {
         td {
             span {
                 font-size: 14px;
-                font-family: OpenSansLightItalic;
+                font-family: sans-serif;
 
                 &.tablet-column-label {
                     color: #6C6E70;
@@ -499,7 +498,7 @@ div#main {
         td {
             span {
                 font-size: 14px;
-                font-family: OpenSansLightItalic;
+                font-family: sans-serif;
 
                 &.tablet-column-label {
                     color: #6C6E70;

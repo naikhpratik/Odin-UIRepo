@@ -239,25 +239,6 @@
             $(this).prev().css("display", "block");
         });
 
-        // row expansion handlers
-        $('.expand').click(function () {
-            $(this).css("display", "none");
-            $(this).next().css("display", "block");
-
-            $(this).parent().parent().children('.actlist-item-blk').each(function () {
-                $(this).css("display", "block");
-            });
-        });
-
-        $('.collapse').click(function () {
-            $(this).css("display", "none");
-            $(this).prev().css("display", "block");
-
-            $(this).parent().parent().children('.actlist-item-blk').each(function () {
-                $(this).css("display", "none");
-            });
-        });
-
         // search box
         $('#searchbox').on("keyup paste", function () {
             var srchIndx = $(this).val().toLowerCase();
@@ -329,6 +310,25 @@
                 desktop_table.append("<tr>" + "<td>" + name + "</td>" + "<td>" + services + "</td>" + "<td>" + lastcontacted + "</td>" + manager + pretrip + finalarrival + notification + "</tr>");
                 tablet_table.append("<tr>" + "<td>" + name_tablet + "</td>" + manager + "<td>" + lastcontacted + "</td>" + "<td>" + services_tablet + "</td>" + notification + "</tr>");
                 mobile_table.append("<tr>" + "<td>" + name_mobile + "</td>" + "<td>" + lastcontacted + services + "</td>" + notification + "</tr>");
+
+                // row expansion handlers
+                $('.expand').click(function () {
+                    $(this).css("display", "none");
+                    $(this).next().css("display", "block");
+
+                    $(this).parent().parent().children('.actlist-item-blk').each(function () {
+                        $(this).css("display", "block");
+                    });
+                });
+
+                $('.collapse').click(function () {
+                    $(this).css("display", "none");
+                    $(this).prev().css("display", "block");
+
+                    $(this).parent().parent().children('.actlist-item-blk').each(function () {
+                        $(this).css("display", "none");
+                    });
+                });
             }
         };
 
