@@ -87,7 +87,7 @@ namespace Odin.Tests.Domain
 
             await _importer.ImportManagers(managersDto);
 
-            _mockAccountHelper.Verify(a => a.SendEmailConfirmationTokenAsync(It.IsAny<string>()), Times.Once);
+            _mockAccountHelper.Verify(a => a.SendEmailCreateTokenAsync(It.IsAny<string>()), Times.Once);
         }
     }
 }
