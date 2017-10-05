@@ -1,8 +1,10 @@
-﻿using System.Net.Http.Headers;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using Odin.Loggers;
+using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Cors;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+using System.Web.Http.ExceptionHandling;
 
 namespace Odin
 {
@@ -28,6 +30,8 @@ namespace Odin
             // Uncomment to enable cors
             var attr = new EnableCorsAttribute("*", "*", "*");
             config.EnableCors(attr);
+
+            config.Services.Add(typeof(IExceptionLogger), new AiExceptionLogger());
         }
     }
 }
