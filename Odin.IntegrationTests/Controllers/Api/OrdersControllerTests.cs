@@ -47,6 +47,9 @@ namespace Odin.IntegrationTests.Controllers.Api
             orders.ForEach(o => o.ConsultantId = dsc.Id);
             orders.ForEach(o => o.TransfereeId = transferee.Id);
             orders.ForEach(o => o.ProgramManagerId = pm.Id);
+            orders.ForEach(o => o.TrackingId = TokenHelper.NewToken());
+            var testDateTime = new DateTime(1999, 6, 14);
+            orders.ForEach(o => o.PreTripDate = testDateTime);
             Context.Orders.AddRange(orders);
             Context.SaveChanges();
             var controller = SetUpOrdersController();
@@ -59,7 +62,8 @@ namespace Odin.IntegrationTests.Controllers.Api
             // Assert
             result.Should().BeOfType<OkNegotiatedContentResult<OrderIndexDto>>();
             resultContent.Transferees.Should().NotBeNull();
-            resultContent.Transferees.Should().HaveCount(2);
+            var newTransferees = resultContent.Transferees.Where(t => t.PreTrip == testDateTime);
+            newTransferees.Should().HaveCount(2);
         }
 
         [Test, CleanData]

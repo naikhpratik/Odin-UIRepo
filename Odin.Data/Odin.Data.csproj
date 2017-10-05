@@ -95,10 +95,13 @@
     <Compile Include="Core\Dtos\ConsultantImportDto.cs" />
     <Compile Include="Core\Dtos\ConsultantsDto.cs" />
     <Compile Include="Core\Dtos\OrderDto.cs" />
+    <Compile Include="Core\Dtos\OrderIndexDto.cs" />
     <Compile Include="Core\Dtos\ProgramManagerDto.cs" />
     <Compile Include="Core\Dtos\ManagerDto.cs" />
     <Compile Include="Core\Dtos\ManagersDto.cs" />
+    <Compile Include="Core\Dtos\ServicesDto.cs" />
     <Compile Include="Core\Dtos\TransfereeDto.cs" />
+    <Compile Include="Core\Dtos\TransfereeIndexDto.cs" />
     <Compile Include="Core\Dtos\UserDto.cs" />
     <Compile Include="Core\Models\ApplicationUser.cs" />
     <Compile Include="Core\Models\Consultant.cs" />
@@ -181,6 +184,10 @@
     <Compile Include="Persistence\Migrations\201709282041234_AddClientRmcSeNumbToOrders.Designer.cs">
       <DependentUpon>201709282041234_AddClientRmcSeNumbToOrders.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201710031626041_AddPreTripToOrders.cs" />
+    <Compile Include="Persistence\Migrations\201710031626041_AddPreTripToOrders.Designer.cs">
+      <DependentUpon>201710031626041_AddPreTripToOrders.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
     <Compile Include="Persistence\TransfereesRepository.cs" />
@@ -237,6 +244,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201709282041234_AddClientRmcSeNumbToOrders.resx">
       <DependentUpon>201709282041234_AddClientRmcSeNumbToOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710031626041_AddPreTripToOrders.resx">
+      <DependentUpon>201710031626041_AddPreTripToOrders.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
