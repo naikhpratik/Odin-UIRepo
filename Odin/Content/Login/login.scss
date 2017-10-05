@@ -1,0 +1,131 @@
+﻿
+body {
+    padding-top: 0px;
+}
+
+div.container.body-content {
+    width: auto;
+
+    div.col-md-5 {
+        margin-top: 32px;
+
+        div#caption {
+            line-height: 44px;
+            padding-top: 60px;
+            font-size: xx-large;
+            text-align: center;
+            margin-bottom: 97px;
+
+            span#Odin {
+                color: green;
+            }
+        }
+    }
+
+    div.col {
+        width: 50%;
+        display: inline-block;
+
+        p {
+            margin: 0px;
+        }
+
+        img {
+            width: 613px;
+            opacity: 0.5;
+
+            &:nth-child(2) {
+                top: -836px;
+                opacity: 0.7;
+                position: relative;
+            }
+        }
+
+        div#labels-box {
+            color: white;
+            position: relative;
+            top: -1445px;
+            left: 87px;
+        }
+
+        div.text-lables {
+            &:nth-child(1) {
+                line-height: 62px;
+                font-family: sans-serif;
+                font-size: 50px;
+                font-weight: bold;
+            }
+
+            &:nth-child(2) {
+                margin-top: 40px;
+                font-size: 24px;
+                line-height: 30px;
+            }
+        }
+    }
+
+    div.form-group {
+
+        div.col-md-10 {
+            padding-left: 88px;
+            padding-right: 0px;
+        }
+
+        label {
+            text-align: left;
+            padding-left: 0px;
+        }
+
+        div.passwd {
+            text-align: center;
+            margin-top: 116px;
+            margin-left: 0px;
+            padding: 0px;
+            width: 100%;
+        }
+
+        input {
+            max-width: none;
+
+            &.btn {
+                color: white;
+                width: 154px;
+                height: 30px;
+                box-shadow: none;
+                margin-bottom: 5px;
+                line-height: 10px;
+                background-color: #48AD48;
+            }
+        }
+    }
+
+    p#forgot {
+        text-align: center;
+    }
+
+    div#dwellworks {
+        margin-top: 152px;
+        text-align: center;
+
+        p {
+            display: inline-block;
+
+            &:first-of-type {
+                border-left: 1px solid gray;
+                margin-left: 4px;
+                top: -2px;
+                height: 21px;
+                position: relative;
+            }
+
+            &:last-of-type {
+                top: -3px;
+                font-size: large;
+                color: #4BAD48;
+                font-size: 20px;
+                font-family: sans-serif;
+            }
+        }
+    }
+}
+

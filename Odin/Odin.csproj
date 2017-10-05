@@ -483,15 +483,31 @@
       <DependentUpon>home.css</DependentUpon>
     </Content>
     <Content Include="Content\Home\home.scss" />
+    <Content Include="Content\Images\bg_gradient.png" />
+    <Content Include="Content\Images\bg_image.png" />
     <Content Include="Content\Images\collapse.png" />
     <Content Include="Content\Images\dwellworks_icon.png" />
     <Content Include="Content\Images\expand.png" />
-    <Content Include="Content\Images\icn_calender_2.png" />
-    <Content Include="Content\Images\icn_message_2.png" />
-    <Content Include="Content\Images\icn_notification_2.png" />
+    <Content Include="Content\Images\icn_cal_1.png" />
+    <Content Include="Content\Images\icn_chat_1.png" />
+    <Content Include="Content\Images\icn_down_arrow.png" />
+    <Content Include="Content\Images\icn_note_1.png" />
     <Content Include="Content\Images\icn_profile.png" />
+    <Content Include="Content\Images\icn_up_arrow.png" />
     <Content Include="Content\Images\ic_search.png" />
     <Content Include="Content\Images\user-placeholder.png" />
+    <Content Include="Content\Login\home.css">
+      <DependentUpon>login.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\Login\home.min.css">
+      <DependentUpon>home.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Login\login.css">
+      <DependentUpon>login.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\Login\login.min.css">
+      <DependentUpon>login.css</DependentUpon>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="Fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -511,9 +527,7 @@
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
-    <Content Include="Fonts\OpenSans-Light.ttf" />
-    <Content Include="Fonts\OpenSans-Regular.ttf" />
-    <Content Include="Fonts\OpenSans-LightItalic.ttf" />
+    <Content Include="Content\Login\login.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
