@@ -81,7 +81,7 @@
 
                 var name_tablet = name + "<div><span class=\"tablet-column-label\">PreTrip:</span>";
                 if ($SearchedOrders.transferees[i].preTrip !== null)
-                    name_tablet += "<span>" + $SearchedOrders.transferees[i].preTrip + "</span><br />";
+                    name_tablet += "<span>" + $SearchedOrders.transferees[i].preTrip.split("T")[0] + "</span><br />";
                 else name_tablet += "<br />";
 
                 name_tablet += "<span class=\"tablet-column-label\">Final Arrival:</span>"
@@ -107,7 +107,7 @@
                     for (var j = 0; j < $SearchedOrders.transferees[i].services.length; j++) {
                         services_list += "<div class=\"actlist-item-blk\"><p class=\"actlist-item\">" + $SearchedOrders.transferees[i].services[j].name + "</p>"
                         if ($SearchedOrders.transferees[i].services[j].completed !== null)
-                            services_list += "<p>" + $SearchedOrders.transferees[i].services[j].completed + "</p></div>";
+                            services_list += "<p>" + $SearchedOrders.transferees[i].services[j].completed.split("T")[0] + "</p></div>";
                         else services_list += "</div>";
                     }
                     services += services_list;
@@ -121,7 +121,7 @@
                 // last contacted
                 var lastcontacted = "<p>Last Contacted</p>";
                 if ($SearchedOrders.transferees[i].lastContacted !== null)
-                    lastcontacted += "<p>" + $SearchedOrders.transferees[i].lastContacted + "</p>";
+                    lastcontacted += "<p>" + $SearchedOrders.transferees[i].lastContacted.split("T")[0] + "</p>";
 
                 // manager
                 var manager = "<td><p>Manager</p>";
@@ -134,7 +134,7 @@
                 // pretrip
                 var pretrip = "<td><p>PreTrip</p>";
                 if ($SearchedOrders.transferees[i].preTrip !== null)
-                    pretrip += "<p>" + $SearchedOrders.transferees[i].preTrip + "</p></td>";
+                    pretrip += "<p>" + $SearchedOrders.transferees[i].preTrip.split("T")[0] + "</p></td>";
                 else pretrip += "</td>";
 
                 // final arrival
