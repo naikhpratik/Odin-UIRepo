@@ -10,12 +10,17 @@ namespace Odin.Tests.Helpers
     class AccountHelperTests
     {
             private IAccountHelper _accountHelper;
-                   
+            
+            [TestInitialize]
+            private void TestInitialize()
+            {
+                var mockEmailHelper = new Mock<IEmailHelper>();
+                _accountHelper = new AccountHelper(mockEmailHelper.Object);
+            }
+
             [TestMethod]
             public void Index_WhenCalled_ReturnsOk()
-            {
-                var mockEmailHelper = new Mock<IEmailHelper>();  
-                _accountHelper = new AccountHelper(mockEmailHelper.Object);
+            {                
                 string _userId = "1";
                 var result = _accountHelper.SendEmailCreateTokenAsync(_userId);
                 result.Should().NotBe("Message not sent");
