@@ -3,7 +3,6 @@ using System.Web.Mvc;
 using Microsoft.Owin;
 using MyDwellworks.App_Start;
 using Ninject.Web.Common.OwinHost;
-using Ninject.Web.WebApi;
 using Ninject.Web.WebApi.OwinHost;
 using Odin;
 using Owin;
