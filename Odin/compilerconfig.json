@@ -1,7 +1,7 @@
 ﻿[
   {
-    "inputFile": "Content/Home/home.scss",
-    "outputFile": "Content/Home/home.css"
+    "inputFile": "Content/Orders/orders.scss",
+    "outputFile": "Content/Orders/orders.css"
   },
   {
     "inputFile": "Content/Login/login.scss",

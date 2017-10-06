@@ -1,46 +1,106 @@
-﻿@model IEnumerable<Odin.ViewModels.OrderIndexViewModel>
-
-@{
-    ViewBag.Title = "Transferees";
+﻿@{
+    ViewBag.Title = "Orders Page";
+    Layout = "~/Views/Shared/_Common.cshtml";
 }
 
-<h4>Transferees</h4>
-
-<div class="transferee-list">
-    @foreach (var order in Model)
-    {
-        <div class="row">
-            <div class="col-lg-1 col-md-1 col-sm-1">
-                <div class="user-image placeholder-image"></div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-3">
-                <div class="transferee">
-                    <a href="#">@order.Transferee.TransfereeFullName</a>
-                </div>
-                
-                <div class="moving-to">
-                    <i class="glyphicon glyphicon-map-marker blue"></i>
-                    @order.DestinationCity, @order.DestinationState
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-3">
-                <label class="small-label grey-header">CONSULTANT</label>
-                <div>
-                    @order.Consultant.ConsultantFullName
-                </div>
-            </div>
-            <div class="col-lg-2 col-md-2 col-sm-2">
-                @if (order.EstimatedArrivalDate.HasValue)
-                {
-                    <label class="small-label grey-header">Estimated Arrival</label>
-                    <div>
-                        @order.EstimatedArrivalDate.Value.ToString("d MMM yyyy")
-                    </div>
-                }
-            </div>
-            <div class="col-lg-2 col-md-2 col-sm-2">
-                <i class="glyphicon glyphicon-list-alt glyphicon-large"></i>
-            </div>
+<div id="list">
+    <div id="search">
+            <input id="searchbox"/><button>Search</button>
         </div>
-    }
+    <div>
+        <table class="desktop">
+            <thead>
+                <tr>
+                    <th class="first">
+                        <img class="arrow up" src="~/Content/Images/icn_up_arrow.png"/>
+                        <img class="arrow down noinit" src="~/Content/Images/icn_down_arrow.png" />
+                    </th>
+                    <th class="second">
+                        <img class="arrow up" src="~/Content/Images/icn_up_arrow.png" />
+                        <img class="arrow down noinit" src="~/Content/Images/icn_down_arrow.png" />
+                    </th>
+                    <th class="third">
+                        <img class="arrow up" src="~/Content/Images/icn_up_arrow.png" />
+                        <img class="arrow down noinit" src="~/Content/Images/icn_down_arrow.png" />
+                    </th>
+                    <th class="fourth">
+                        <img class="arrow up" src="~/Content/Images/icn_up_arrow.png" />
+                        <img class="arrow down noinit" src="~/Content/Images/icn_down_arrow.png" />
+                    </th>
+                    <th class="fifth">
+                        <img class="arrow up" src="~/Content/Images/icn_up_arrow.png" />
+                        <img class="arrow down noinit" src="~/Content/Images/icn_down_arrow.png" />
+                    </th>
+                    <th class="sixth">
+                        <img class="arrow up" src="~/Content/Images/icn_up_arrow.png" />
+                        <img class="arrow down noinit" src="~/Content/Images/icn_down_arrow.png" />
+                    </th>
+                    <th class="seventh">
+                        <img class="arrow up" src="~/Content/Images/icn_up_arrow.png" />
+                        <img class="arrow down noinit" src="~/Content/Images/icn_down_arrow.png" />
+                    </th>
+                </tr>
+            </thead>
+            <tbody> 
+            </tbody>
+        </table>
+        <table class="tablet">
+            <thead>
+                <tr>
+                    <th class="first">
+                        <img class="arrow up" src="~/Content/Images/icn_up_arrow.png" />
+                        <img class="arrow down noinit" src="~/Content/Images/icn_down_arrow.png" />
+                    </th>
+                    <th class="second">
+                        <img class="arrow up" src="~/Content/Images/icn_up_arrow.png" />
+                        <img class="arrow down noinit" src="~/Content/Images/icn_down_arrow.png" />
+                    </th>
+                    <th class="third">
+                        <img class="arrow up" src="~/Content/Images/icn_up_arrow.png" />
+                        <img class="arrow down noinit" src="~/Content/Images/icn_down_arrow.png" />
+                    </th>
+                    <th class="fourth">
+                        <img class="arrow up" src="~/Content/Images/icn_up_arrow.png" />
+                        <img class="arrow down noinit" src="~/Content/Images/icn_down_arrow.png" />
+                    </th>
+                    <th class="fifth">
+                        <img class="arrow up" src="~/Content/Images/icn_up_arrow.png" />
+                        <img class="arrow down noinit" src="~/Content/Images/icn_down_arrow.png" />
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <table class="mobile">
+            <thead>
+                <tr>
+                    <th class="first">
+                        <img class="arrow up" src="~/Content/Images/icn_up_arrow.png" />
+                        <img class="arrow down noinit" src="~/Content/Images/icn_down_arrow.png" />
+                    </th>
+                    <th class="second">
+                        <img class="arrow up" src="~/Content/Images/icn_up_arrow.png" />
+                        <img class="arrow down noinit" src="~/Content/Images/icn_down_arrow.png" />
+                    </th>
+                    <th class="third">
+                        <img class="arrow up" src="~/Content/Images/icn_up_arrow.png" />
+                        <img class="arrow down noinit" src="~/Content/Images/icn_down_arrow.png" />
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
 </div>
+
+@Styles.Render("~/Styling/orders")
+@Scripts.Render("~/Scripts/orders")
+
+@section scripts
+{
+    <script>
+        $(document).ready(OrdersPageController.OrdersPageInit);
+    </script>
+}
