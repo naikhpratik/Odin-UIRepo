@@ -37,7 +37,7 @@ div#main div#icons {
     display: inline-block; }
     div#main div#icons div.icons_notify {
       font-size: small;
-      color: darkgreen;
+      color: #31A4DD;
       position: relative;
       font-weight: bold;
       display: inline-block;
@@ -144,7 +144,7 @@ div#main div#list {
     div#main div#list td p:first-child {
       margin-bottom: 0px;
       font-size: 20px;
-      font-weight: bold;
+      font-weight: 500;
       font-family: sans-serif; }
       div#main div#list td p:first-child.actlist-item {
         color: #48AD48;

@@ -52,7 +52,7 @@ div#main {
 
             &.icons_notify {
                 font-size: small;
-                color: darkgreen;
+                color: #31A4DD;
                 position: relative;
                 font-weight: bold;
                 display: inline-block;
@@ -226,7 +226,7 @@ div#main {
                 &:first-child {
                     margin-bottom: 0px;
                     font-size: 20px;
-                    font-weight: bold;
+                    font-weight: 500;
                     font-family: sans-serif;
 
                     &.actlist-item {
