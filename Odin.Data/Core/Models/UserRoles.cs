@@ -6,5 +6,6 @@
         public static readonly string GlobalSupplyChain = "Global Supply Chain";
         public static readonly string ProgramManager = "Program Manager";
         public static readonly string Transferee = "Transferee";
+        public static readonly string Admin = "Admin";
     }
 }

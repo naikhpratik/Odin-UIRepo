@@ -13,6 +13,7 @@ namespace Odin.Data.Builders
         public static List<Order> New(int count = 1)
         {
             var relocationTypes = new[] {"International", "Domestic"};
+            var rmcs = new[] {"AiReS", "Graebel", "Cartus", "Sirva"};
 
             var order = new Faker<Order>()
                 .RuleFor(o => o.TrackingId, f => f.IndexFaker + 1.ToString())
@@ -25,7 +26,10 @@ namespace Odin.Data.Builders
                 .RuleFor(o => o.OriginCountry, f => f.Address.CountryCode())
                 .RuleFor(o => o.OriginState, f => f.Address.State())
                 .RuleFor(o => o.EstimatedArrivalDate, f => f.Date.Future())
-                .RuleFor(o => o.FamilyDetails, f=> f.Lorem.Sentence());
+                .RuleFor(o => o.FamilyDetails, f => f.Lorem.Sentence())
+                .RuleFor(o => o.PreTripDate, f => f.Date.Future(1))
+                .RuleFor(o => o.Client, f => f.Company.CompanyName())
+                .RuleFor(o => o.Rmc, f => f.PickRandom(rmcs));
 
             var orders = order.Generate(count).ToList();
 

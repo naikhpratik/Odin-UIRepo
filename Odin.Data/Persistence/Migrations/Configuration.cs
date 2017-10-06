@@ -13,6 +13,7 @@ namespace Odin.Data.Persistence.Migrations
         private static readonly string _odinGscUserName = "odingsc@dwellworks.com";
         private static readonly string _odinPmUserName = "odinpm@dwellworks.com";
         private static readonly string _odinEeUserName = "odinee@dwellworks.com";
+        private static readonly string _odinAdminUserName = "odinadmin@dwellworks.com";
 
         public Configuration()
         {
@@ -77,6 +78,25 @@ namespace Odin.Data.Persistence.Migrations
 
         private void SeedInitialUsers(ApplicationDbContext context)
         {
+            var userStore = new UserStore<ApplicationUser>(context);
+            var userManager = new UserManager<ApplicationUser>(userStore);
+
+
+            var adminUser = userManager.FindByName(_odinAdminUserName);
+            if (adminUser == null)
+            {
+                var newAdmin = new ApplicationUser()
+                {
+                    UserName = _odinAdminUserName,
+                    FirstName = "Odin",
+                    LastName = "Admin",
+                    Email = _odinAdminUserName,
+                    PhoneNumber = "4403184188"
+                };
+                var result = userManager.Create(newAdmin, "OdinOdin5$");
+                userManager.AddToRole(newAdmin.Id, UserRoles.Admin);
+            }
+
             var consultantStore = new UserStore<Consultant>(context);
             var consultantManager = new UserManager<Consultant>(consultantStore);
 
@@ -181,6 +201,13 @@ namespace Odin.Data.Persistence.Migrations
             {
                 pmRole = new IdentityRole(UserRoles.ProgramManager);
                 roleManager.Create(pmRole);
+            }
+
+            var adminRole = roleManager.FindByName(UserRoles.Admin);
+            if (adminRole == null)
+            {
+                adminRole = new IdentityRole(UserRoles.Admin);
+                roleManager.Create(adminRole);
             }
         }
     }
