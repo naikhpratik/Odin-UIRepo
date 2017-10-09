@@ -31,7 +31,7 @@ div.container.body-content {
             margin-bottom: 97px;
 
             span#Odin {
-                color: green;
+                color: #4BAD48;
             }
         }
     }
@@ -50,13 +50,17 @@ div.container.body-content {
         }
 
         img {
-            width: 1230px;
+            width: 100%;
             opacity: 0.5;
 
             &:nth-child(2) {
                 top: 0px;
                 opacity: 0.7;
                 position: fixed;
+
+                &.IEorEdge {
+                    left: 33.7%;
+                }
             }
         }
 

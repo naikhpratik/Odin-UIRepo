@@ -477,17 +477,19 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
-    <Content Include="Content\ForgotPassword\forgotpassword.css" />
-    <Content Include="Content\ForgotPassword\forgotpassword.min.css" />
-    <Content Include="Content\ForgotPassword\home.css" />
-    <Content Include="Content\ForgotPassword\home.min.css" />
-    <Content Include="Content\ForgotPassword\login.css" />
-    <Content Include="Content\ForgotPassword\login.min.css" />
-    <Content Include="Content\Images\bg_gradient.png" />
+    <Content Include="Content\ForgotPassword\forgotpassword.css">
+      <DependentUpon>forgotpassword.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\ForgotPassword\forgotpassword.min.css">
+      <DependentUpon>forgotpassword.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Images\bg_gradient_forgot_password.png" />
+    <Content Include="Content\Images\bg_gradient_login.png" />
     <Content Include="Content\Images\bg_image.png" />
     <Content Include="Content\Images\collapse.png" />
     <Content Include="Content\Images\dwellworks_icon.png" />
     <Content Include="Content\Images\expand.png" />
+    <Content Include="Content\Images\forgot_password.jpg" />
     <Content Include="Content\Images\icn_cal_1.png" />
     <Content Include="Content\Images\icn_chat_1.png" />
     <Content Include="Content\Images\icn_down_arrow.png" />
@@ -618,7 +620,9 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -659,6 +663,7 @@
     <Content Include="Views\Mailers\ResetPassword.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Views\Shared\_ForgotPassword.cshtml" />
     <None Include="Web.Azure.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -668,7 +673,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Home\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Fonts\glyphicons-halflings-regular.woff" />
