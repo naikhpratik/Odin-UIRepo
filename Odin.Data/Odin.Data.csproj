@@ -109,11 +109,14 @@
     <Compile Include="Core\Models\Order.cs" />
     <Compile Include="Core\Models\Manager.cs" />
     <Compile Include="Core\Models\Rent.cs" />
+    <Compile Include="Core\Models\Service.cs" />
+    <Compile Include="Core\Models\ServiceType.cs" />
     <Compile Include="Core\Models\Transferee.cs" />
     <Compile Include="Core\Models\UserRoles.cs" />
     <Compile Include="Core\Repositories\IConsultantsRepository.cs" />
     <Compile Include="Core\Repositories\IManagersRepository.cs" />
     <Compile Include="Core\Repositories\IOrdersRepository.cs" />
+    <Compile Include="Core\Repositories\IServicesRepository.cs" />
     <Compile Include="Core\Repositories\ITransfereesRepository.cs" />
     <Compile Include="Core\Repositories\IUsersRepository.cs" />
     <Compile Include="Extensions\ModelStateExtensions.cs" />
@@ -188,8 +191,13 @@
     <Compile Include="Persistence\Migrations\201710031626041_AddPreTripToOrders.Designer.cs">
       <DependentUpon>201710031626041_AddPreTripToOrders.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201710061802248_ServicesAdded.cs" />
+    <Compile Include="Persistence\Migrations\201710061802248_ServicesAdded.Designer.cs">
+      <DependentUpon>201710061802248_ServicesAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
+    <Compile Include="Persistence\ServicesRepository.cs" />
     <Compile Include="Persistence\TransfereesRepository.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
     <Compile Include="Persistence\UsersRepository.cs" />
@@ -247,6 +255,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201710031626041_AddPreTripToOrders.resx">
       <DependentUpon>201710031626041_AddPreTripToOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710061802248_ServicesAdded.resx">
+      <DependentUpon>201710061802248_ServicesAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

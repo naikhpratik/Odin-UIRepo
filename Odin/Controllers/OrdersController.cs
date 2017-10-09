@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNet.Identity;
 using Odin.Data.Core;
 using Odin.Data.Core.Models;
 using Odin.ViewModels;
-using Odin.Interfaces;
-using Microsoft.AspNet.Identity.Owin;
-using RazorEngine;
-
-using Microsoft.AspNet.Identity.EntityFramework;
+using System.Collections.Generic;
+using System.Net;
+using System.Web.Mvc;
 
 namespace Odin.Controllers
 {
@@ -29,8 +22,8 @@ namespace Odin.Controllers
 
         }
 
-    // GET: Orders
-    public ViewResult Index()
+        // GET: Orders
+        public ViewResult Index()
         {
             var userId = User.Identity.GetUserId();
 
@@ -39,6 +32,26 @@ namespace Odin.Controllers
             var orderVms = _mapper.Map<IEnumerable<Order>, IEnumerable<OrderIndexViewModel>>(orders);
 
             return View(orderVms);
-        }       
+        }
+
+        public ActionResult Details(int orderId)
+        {
+            var userId = User.Identity.GetUserId();
+
+            var order = _unitOfWork.Orders.GetOrderById(orderId);
+
+            if (order == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound, "Not found");
+            }
+
+            if (order.ConsultantId != userId)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized, "Unauthorized Order");
+            }
+
+            return View();            
+        }
     }
+    
 }

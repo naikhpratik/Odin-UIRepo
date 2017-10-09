@@ -1,18 +1,15 @@
-﻿using System;
-using System.Web.Http.Results;
-using System.Web.Mvc;
-using AutoMapper;
+﻿using AutoMapper;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Odin.Controllers;
-using Odin.Data.Builders;
 using Odin.Data.Core;
 using Odin.Data.Core.Models;
 using Odin.Data.Core.Repositories;
-using Odin.Tests.Extensions;
-using Odin.ViewModels;
 using Odin.Interfaces;
+using Odin.Tests.Extensions;
+using System.Net;
+using System.Web.Mvc;
 
 namespace Odin.Tests.Controllers
 {
@@ -43,6 +40,44 @@ namespace Odin.Tests.Controllers
         {
             var result = _controller.Index() as ViewResult;
 
+            result.Should().NotBeNull();
+        }
+
+        [TestMethod]
+        public void Details_NoOrderWithGivenIdExists_ShouldReturnNotFound()
+        {
+            int orderId = 1;
+            var result = _controller.Details(orderId);
+
+            result.Should().BeOfType<HttpStatusCodeResult>();
+            Assert.AreEqual(((HttpStatusCodeResult)result).StatusCode, (int)HttpStatusCode.NotFound);
+        }
+
+        [TestMethod]
+        public void Details_OrderConsultantIdIsNotCurrentUser_ShouldReturnUnauthorized()
+        {
+            int orderId = 1;
+           
+            Order order = new Order() { Id = 1, ConsultantId = "2" };
+
+            _mockRepository.Setup(r => r.GetOrderById(1)).Returns(order);
+
+            var result = _controller.Details(orderId);
+
+            result.Should().BeOfType<HttpStatusCodeResult>();
+            Assert.AreEqual(((HttpStatusCodeResult)result).StatusCode, (int)HttpStatusCode.Unauthorized);
+        }
+
+        [TestMethod]
+        public void Details_ValidOrder_ShouldReturnOk()
+        {
+            int orderId = 1;
+
+            Order order = new Order() { Id = 1, ConsultantId = "1" };
+
+            _mockRepository.Setup(r => r.GetOrderById(1)).Returns(order);
+
+            var result = _controller.Details(orderId) as ViewResult;
             result.Should().NotBeNull();
         }
     }

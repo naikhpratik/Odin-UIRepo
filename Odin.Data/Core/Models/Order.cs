@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Odin.Data.Core.Models
 {
@@ -43,6 +37,8 @@ namespace Odin.Data.Core.Models
 
         public string ConsultantId { get; set; }
         public virtual Consultant Consultant { get; set; }
-        
+
+        public virtual IEnumerable<Service> Services { get; set; }
+
     }
 }
