@@ -49,10 +49,10 @@
             if (srchIndx.length > 1) {
                 $SearchedOrders = { "transferees": [] };
 
-                for (var i = 0; i < $Orders.transferees.length; i++) {
-                    if ($Orders.transferees[i].firstName.toLowerCase().includes(srchIndx) ||
-                        $Orders.transferees[i].lastName.toLowerCase().includes(srchIndx)) {
-                        $SearchedOrders.transferees.push($Orders.transferees[i]);
+                for (var i = 0; i < $SortedOrders.transferees.length; i++) {
+                    if ($SortedOrders.transferees[i].firstName.toLowerCase().includes(srchIndx) ||
+                        $SortedOrders.transferees[i].lastName.toLowerCase().includes(srchIndx)) {
+                        $SearchedOrders.transferees.push($SortedOrders.transferees[i]);
                     }
                 }
             }
@@ -140,7 +140,7 @@
                 // final arrival
                 var finalarrival = "<td><p>Final Arrival</p>";
                 if ($SearchedOrders.transferees[i].finalArrival !== null)
-                    finalarrival += $SearchedOrders.transferees[i].finalArrival.split("T")[0] + "</p></td>";
+                    finalarrival += "<p>" + $SearchedOrders.transferees[i].finalArrival.split("T")[0] + "</p></td>";
                 else finalarrival += "</td>";
 
                 // notification

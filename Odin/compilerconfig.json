@@ -6,5 +6,9 @@
   {
     "inputFile": "Content/Login/login.scss",
     "outputFile": "Content/Login/login.css"
+  },
+  {
+    "inputFile": "Content/ForgotPassword/forgotpassword.scss",
+    "outputFile": "Content/ForgotPassword/forgotpassword.css"
   }
 ]

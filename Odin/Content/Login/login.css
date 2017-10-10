@@ -23,7 +23,7 @@ div.container.body-content {
       text-align: center;
       margin-bottom: 97px; }
       div.container.body-content div.col-md-4 div#caption span#Odin {
-        color: green; }
+        color: #4BAD48; }
   div.container.body-content div.col {
     width: 66%;
     position: relative;
@@ -34,12 +34,14 @@ div.container.body-content {
     div.container.body-content div.col p {
       margin: 0px; }
     div.container.body-content div.col img {
-      width: 1230px;
+      width: 100%;
       opacity: 0.5; }
       div.container.body-content div.col img:nth-child(2) {
         top: 0px;
         opacity: 0.7;
         position: fixed; }
+        div.container.body-content div.col img:nth-child(2).IEorEdge {
+          left: 33.7%; }
     div.container.body-content div.col div#labels-box {
       color: white;
       position: absolute;
@@ -75,7 +77,8 @@ div.container.body-content {
       box-shadow: none;
       margin-bottom: 5px;
       line-height: 10px;
-      background-color: #48AD48; }
+      background-color: #48AD48;
+      text-transform: capitalize; }
   div.container.body-content p#forgot {
     text-align: center; }
   div.container.body-content div#dwellworks {

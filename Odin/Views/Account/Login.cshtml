@@ -34,7 +34,7 @@
 
                 <div class="form-group">
                     <div class="passwd col-md-offset-2 col-md-10">
-                        <input type="submit" value="Login" class="btn btn-default text-capitalize" />
+                        <input type="submit" value="Login" class="btn btn-default" />
                         <p id="forgot">@Html.ActionLink("Forgot password", "ForgotPassword")</p>
                     </div>
                 </div>                
@@ -48,7 +48,7 @@
     </div>
     <div class="col">
         <img src="~/Content/Images/bg_image.png"/>
-        <img id="gradient" src="~/Content/Images/bg_gradient.png" />
+        <img id="gradient" src="~/Content/Images/bg_gradient_login.png" />
         <div id="labels-box">
             <div class="text-lables">
                 <p>We make</p>
@@ -71,4 +71,12 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(document).ready(function () {
+            if (navigator.appName == 'Microsoft Internet Explorer' ||
+                (navigator.appName == 'Netscape' && navigator.appVersion.indexOf('Edge') > -1))
+                $('img#gradient').addClass('IEorEdge');
+        });
+    </script>
 }
