@@ -31,12 +31,14 @@ namespace Odin
                       "~/Content/datatables/css/datatables.bootstrap.css"));
 
             // Page Styling
-            bundles.Add(new StyleBundle("~/Styling/orders").Include("~/Content/Orders/orders.css"));
-            bundles.Add(new StyleBundle("~/Styling/login").Include("~/Content/Login/login.css"));
-            bundles.Add(new StyleBundle("~/Styling/forgotpw").Include("~/Content/ForgotPassword/forgotpassword.css"));
+            bundles.Add(new StyleBundle("~/Styling/orders").Include("~/Content/css/orders.css"));
+            bundles.Add(new StyleBundle("~/Styling/login").Include("~/Content/css/login.css"));
+            bundles.Add(new StyleBundle("~/Styling/forgotpw").Include("~/Content/css/forgotpassword.css"));
+            bundles.Add(new StyleBundle("~/Styling/transferee").Include("~/Content/css/transferee.css"));
 
             // Page scripts
             bundles.Add(new ScriptBundle("~/Scripts/orders").Include("~/Scripts/app/views/orders.js"));
+            bundles.Add(new ScriptBundle("~/Scripts/transferee").Include("~/Scripts/app/views/transferee.js"));
         }
     }
 }

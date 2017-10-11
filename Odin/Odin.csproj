@@ -320,6 +320,12 @@
     <Content Include="Content\bootstrap-paper.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\shared\transferee.css">
+      <DependentUpon>_definitions.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\shared\transferee.min.css">
+      <DependentUpon>transferee.css</DependentUpon>
+    </Content>
     <Content Include="Content\DataTables\css\autoFill.bootstrap.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.min.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap4.css" />
@@ -477,10 +483,10 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
-    <Content Include="Content\ForgotPassword\forgotpassword.css">
+    <Content Include="Content\css\forgotpassword.css">
       <DependentUpon>forgotpassword.scss</DependentUpon>
     </Content>
-    <Content Include="Content\ForgotPassword\forgotpassword.min.css">
+    <Content Include="Content\css\forgotpassword.min.css">
       <DependentUpon>forgotpassword.css</DependentUpon>
     </Content>
     <Content Include="Content\Images\bg_gradient_forgot_password.png" />
@@ -498,17 +504,23 @@
     <Content Include="Content\Images\icn_up_arrow.png" />
     <Content Include="Content\Images\ic_search.png" />
     <Content Include="Content\Images\user-placeholder.png" />
-    <Content Include="Content\Login\login.css">
+    <Content Include="Content\css\login.css">
       <DependentUpon>login.scss</DependentUpon>
     </Content>
-    <Content Include="Content\Login\login.min.css">
+    <Content Include="Content\css\login.min.css">
       <DependentUpon>login.css</DependentUpon>
     </Content>
-    <Content Include="Content\Orders\orders.css">
+    <Content Include="Content\css\orders.css">
       <DependentUpon>orders.scss</DependentUpon>
     </Content>
-    <Content Include="Content\Orders\orders.min.css">
+    <Content Include="Content\css\orders.min.css">
       <DependentUpon>orders.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\transferee.css">
+      <DependentUpon>transferee.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\transferee.min.css">
+      <DependentUpon>transferee.css</DependentUpon>
     </Content>
     <Content Include="favicon.ico" />
     <Content Include="Fonts\glyphicons-halflings-regular.svg" />
@@ -516,6 +528,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\app\controllers\userManagementController.js" />
     <Content Include="Scripts\app\services\userManagementService.js" />
+    <Content Include="Scripts\app\views\transferee.js" />
     <Content Include="Scripts\app\views\orders.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -530,9 +543,11 @@
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
-    <Content Include="Content\Login\login.scss" />
-    <Content Include="Content\Orders\orders.scss" />
-    <Content Include="Content\ForgotPassword\forgotpassword.scss" />
+    <Content Include="Content\css\login.scss" />
+    <Content Include="Content\css\orders.scss" />
+    <Content Include="Content\css\forgotpassword.scss" />
+    <Content Include="Content\css\transferee.scss" />
+    <Content Include="Content\css\shared\_definitions.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
@@ -664,6 +679,10 @@
     <Content Include="Views\Mailers\ResetPassword.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Views\Orders\Transferee.cshtml" />
+    <Content Include="Views\Shared\Partials\_logo.cshtml" />
+    <Content Include="Views\Shared\Partials\_header.cshtml" />
+    <Content Include="Views\Shared\Partials\_logo2.cshtml" />
     <None Include="Web.Azure.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

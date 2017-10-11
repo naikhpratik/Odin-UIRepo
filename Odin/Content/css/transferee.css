@@ -1,0 +1,60 @@
+﻿div#main div#caption {
+  width: 48%;
+  height: 118px;
+  padding-top: 44px;
+  vertical-align: top;
+  display: inline-block; }
+  div#main div#caption div#dwellworks {
+    margin-top: 0px;
+    text-align: left;
+    padding-left: 30px; }
+    div#main div#caption div#dwellworks.mailer {
+      margin-top: 40px; }
+    div#main div#caption div#dwellworks p {
+      display: inline-block; }
+      div#main div#caption div#dwellworks p:first-of-type {
+        border-left: 1px solid gray;
+        margin-left: 4px;
+        top: -2px;
+        height: 21px;
+        position: relative; }
+      div#main div#caption div#dwellworks p:last-of-type {
+        top: -3px;
+        font-size: large;
+        color: #4BAD48;
+        font-size: 20px;
+        font-family: sans-serif; }
+
+div#main div#icons {
+  float: right;
+  width: 48%;
+  height: 118px;
+  margin-right: 3px;
+  padding-top: 30px;
+  vertical-align: top;
+  display: inline-block; }
+  div#main div#icons div {
+    float: right;
+    display: inline-block; }
+    div#main div#icons div.icons_notify {
+      font-size: small;
+      color: #31A4DD;
+      position: relative;
+      font-weight: bold;
+      display: inline-block;
+      width: 10px;
+      text-align: center; }
+      div#main div#icons div.icons_notify.icons_notify_messages {
+        top: 6px;
+        left: -45px; }
+      div#main div#icons div.icons_notify.icons_notify_alerts {
+        top: 6px;
+        left: -145px; }
+      div#main div#icons div.icons_notify.icons_notify_appts {
+        top: 6px;
+        left: -188px; }
+    div#main div#icons div img {
+      float: right;
+      width: 40px;
+      margin: 8px; }
+

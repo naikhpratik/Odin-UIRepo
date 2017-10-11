@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Transferee Page";
+    Layout = "~/Views/Shared/_Common.cshtml";
+}
+
+<h2>Hello Transferee</h2>
+
+@Styles.Render("~/Styling/transferee")
+@Scripts.Render("~/Scripts/transferee")
+
+@section scripts
+{
+    <script>
+        $(document).ready(OrdersPageController.TransfereeInit);
+    </script>
+}

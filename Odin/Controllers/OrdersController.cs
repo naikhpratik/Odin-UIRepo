@@ -29,8 +29,8 @@ namespace Odin.Controllers
 
         }
 
-    // GET: Orders
-    public ViewResult Index()
+        // GET: Orders
+        public ViewResult Index()
         {
             var userId = User.Identity.GetUserId();
 
@@ -39,6 +39,12 @@ namespace Odin.Controllers
             var orderVms = _mapper.Map<IEnumerable<Order>, IEnumerable<OrderIndexViewModel>>(orders);
 
             return View(orderVms);
-        }       
+        }
+        
+        // GET: Transferee
+        public ViewResult Transferee()
+        {
+            return View();
+        }
     }
 }
