@@ -87,7 +87,6 @@
     <Compile Include="Builders\ConsultantDtoBuilder.cs" />
     <Compile Include="Builders\ConsultantImportDtoBuilder.cs" />
     <Compile Include="Builders\ProgramManagerDtoBuilder.cs" />
-    <Compile Include="Builders\ServiceBuilder.cs" />
     <Compile Include="Builders\TransfereeBuilder.cs" />
     <Compile Include="Builders\OrderBuilder.cs" />
     <Compile Include="Builders\OrderDtoBuilder.cs" />
