@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Diagnostics;
-using System.Linq;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Odin.Data.Core.Models;
 using Odin.Data.Persistence;
 using Odin.Data.Tests.Extensions;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 
 namespace Odin.Data.Tests.Persistence.Repositories
 {
@@ -69,6 +67,36 @@ namespace Odin.Data.Tests.Persistence.Repositories
 
             orders.Should().HaveCount(1);
             orders.FirstOrDefault()?.Id.Should().Be(1);
+        }
+
+        [TestMethod]
+        public void GetOrderById_OrderWithIdExists_ShouldReturnCorrectOrder()
+        {
+            int orderId = 1;
+
+            var order1 = new Order() { Id = 1};
+            var order2 = new Order() { Id = 2};
+
+            SetupRepositoryWithSource(new[] { order1, order2 });
+
+            var order = _ordersRepository.GetOrderById(orderId);
+
+            order.Id.Should().Be(1);
+        }
+
+        [TestMethod]
+        public void GetOrderById_OrderWithIdDoesNotExist_ShouldReturnNull()
+        {
+            int orderId = 3;
+
+            var order1 = new Order() { Id = 1 };
+            var order2 = new Order() { Id = 2 };
+
+            SetupRepositoryWithSource(new[] { order1, order2 });
+
+            var order = _ordersRepository.GetOrderById(orderId);
+
+            order.Should().Be(null);
         }
     }
 }

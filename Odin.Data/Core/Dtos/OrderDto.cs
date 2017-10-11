@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Odin.Data.Core.Dtos
 {
     public class OrderDto
     {
+        public OrderDto()
+        {
+            Services = new Collection<ServiceDto>();
+        }
+
         [Required]
         public string TrackingId { get; set; }
         public string RelocationType { get; set; }
@@ -34,5 +36,7 @@ namespace Odin.Data.Core.Dtos
 
         [Required]
         public ConsultantDto Consultant { get; set; }
+
+        public ICollection<ServiceDto> Services { get; set; }
     }
 }

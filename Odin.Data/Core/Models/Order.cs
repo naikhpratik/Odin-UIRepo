@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Odin.Data.Core.Models
 {
     public class Order
     {
+
+        public Order()
+        {
+            Services = new Collection<Service>();
+        }
+
         public int Id { get; set; }
         
         public string TrackingId { get; set; }
@@ -24,6 +26,8 @@ namespace Odin.Data.Core.Models
         public string OriginCountry { get; set; }
         public DateTime? EstimatedArrivalDate { get; set; }
         public DateTime? PreTripDate { get; set; }
+        public int TempHousingDays { get; set; }
+        public DateTime? TempHousingEndDate { get; set; }
 
         public string FamilyDetails { get; set; }
 
@@ -43,6 +47,18 @@ namespace Odin.Data.Core.Models
 
         public string ConsultantId { get; set; }
         public virtual Consultant Consultant { get; set; }
-        
+
+        public virtual ICollection<Service> Services { get; private set; }
+
+        public bool HasService(int serviceTypeId)
+        {
+            return Services.Any<Service>(s => s.ServiceTypeId == serviceTypeId);
+        }
+
+        public Service GetService(int serviceTypeId)
+        {
+            return Services.FirstOrDefault<Service>(s => s.ServiceTypeId == serviceTypeId);
+        }
+
     }
 }

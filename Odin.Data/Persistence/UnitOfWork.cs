@@ -11,6 +11,7 @@ namespace Odin.Data.Persistence
         public ITransfereesRepository Transferees { get; private set; }
         public IConsultantsRepository Consultants { get; private set; }
         public IManagersRepository Managers { get; private set; }
+        public IServicesRepository Services { get; private set; }
 
 
         public UnitOfWork(ApplicationDbContext context)
@@ -21,6 +22,7 @@ namespace Odin.Data.Persistence
             Transferees = new TransfereesRepository(context);
             Consultants = new ConsultantsRepository(context);
             Managers = new ManagersRepository(context);
+            Services = new ServicesRepository(context);
         }
         
         public void Complete()

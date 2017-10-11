@@ -1,9 +1,5 @@
-﻿using System;
+﻿using Odin.Data.Core.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Odin.Data.Core.Models;
 
 namespace Odin.Data.Core.Repositories
 {
@@ -12,5 +8,6 @@ namespace Odin.Data.Core.Repositories
         IEnumerable<Order> GetOrdersFor(string userId);
         Order GetOrderByTrackingId(string trackingId);
         void Add(Order order);
+        Order GetOrderById(int orderId);
     }
 }

@@ -1,30 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Helpers;
-using System.Web.Http.Results;
-using AutoMapper;
+﻿using AutoMapper;
 using FluentAssertions;
-using Microsoft.Owin.Hosting;
-using Microsoft.Owin.Testing;
-using Newtonsoft.Json;
 using NUnit.Framework;
 using Odin.Controllers.Api;
 using Odin.Data.Builders;
-using Odin.Data.Core;
 using Odin.Data.Core.Dtos;
 using Odin.Data.Core.Models;
 using Odin.Data.Helpers;
 using Odin.Data.Persistence;
-using Odin.Domain;
 using Odin.Extensions;
-using Odin.Helpers;
 using Odin.IntegrationTests.Extensions;
 using Odin.IntegrationTests.TestAttributes;
+using System;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Web.Http.Results;
 
 namespace Odin.IntegrationTests.Controllers.Api
 {
@@ -361,5 +352,132 @@ namespace Odin.IntegrationTests.Controllers.Api
 
         //TODO: UpsertOrder_OnException_Returns501()
         //TODO: UpsertOrder_DtoMissingFields_ReturnsArrayOfErrors()
+
+        [Test, CleanData]
+        public async Task UpsertOrder_NewService_ShouldAddServiceToOrder()
+        {
+            var order = OrderBuilder.New().First();
+            order.TrackingId = TokenHelper.NewToken();
+            order.Transferee = transferee;
+            order.Consultant = dsc;
+            order.ProgramManager = pm;
+            Context.Orders.Add(order);
+            Context.SaveChanges();
+
+            ServiceType serviceType = Context.ServiceTypes.First();
+            ServiceDto serviceDto = new ServiceDto { ServiceTypeId = serviceType.Id };
+
+            var orderDto = OrderDtoBuilder.New();
+            orderDto.TrackingId = order.TrackingId;
+            orderDto.ProgramManager = ProgramManagerDtoBuilder.New();
+            orderDto.ProgramManager.SeContactUid = pm.SeContactUid.Value;
+            orderDto.Consultant = ConsultantDtoBuilder.New();
+            orderDto.Consultant.SeContactUid = dsc.SeContactUid.Value;
+            orderDto.Transferee = TransfereeDtoBuilder.New();
+            orderDto.Transferee.Email = transferee.Email;
+            orderDto.Services.Add(serviceDto);
+
+            // Act
+            var request = CreateRequest("api/orders", "application/json", HttpMethod.Post, orderDto);
+            request.Headers.Add("Token", ApiKey);
+            var response = await Server.HttpClient.SendAsync(request);
+
+            // Assert
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
+            Context.Entry(order).Reload();
+            Context.Entry(order).Collection(o => o.Services).Load();
+            order.Services.Count.Should().Be(1);
+            order.Services.First().ServiceTypeId.Should().Be(serviceType.Id);
+        }
+
+        [Test, CleanData]
+        public async Task UpsertOrder_DuplicateService_ShouldNotAddServiceToOrder()
+        {
+            ServiceType serviceType = Context.ServiceTypes.First();            
+
+            Service service = new Service()
+            {
+                ServiceType = serviceType,
+                ServiceTypeId = serviceType.Id,
+                ScheduledDate = DateTime.Now,
+                CompletedDate = DateTime.Now,
+            };
+
+            ServiceDto serviceDto = new ServiceDto { ServiceTypeId = serviceType.Id };
+
+
+            var order = OrderBuilder.New().First();
+            order.TrackingId = TokenHelper.NewToken();
+            order.Transferee = transferee;
+            order.Consultant = dsc;
+            order.ProgramManager = pm;
+            order.Services.Add(service);
+            Context.Orders.Add(order);
+            Context.SaveChanges();
+
+            Context.Entry(order).Reload();
+            Context.Entry(order).Collection(o => o.Services).Load();
+            order.Services.Count.Should().Be(1);
+
+            var orderDto = OrderDtoBuilder.New();
+            orderDto.TrackingId = order.TrackingId;
+            orderDto.ProgramManager = ProgramManagerDtoBuilder.New();
+            orderDto.ProgramManager.SeContactUid = pm.SeContactUid.Value;
+            orderDto.Consultant = ConsultantDtoBuilder.New();
+            orderDto.Consultant.SeContactUid = dsc.SeContactUid.Value;
+            orderDto.Transferee = TransfereeDtoBuilder.New();
+            orderDto.Transferee.Email = transferee.Email;
+            orderDto.Services.Add(serviceDto);
+
+            // Act
+            var request = CreateRequest("api/orders", "application/json", HttpMethod.Post, orderDto);
+            request.Headers.Add("Token", ApiKey);
+            var response = await Server.HttpClient.SendAsync(request);
+
+            // Assert
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
+            Context.Entry(order).Reload();
+            Context.Entry(order).Collection(o => o.Services).Load();
+            order.Services.Count.Should().Be(1);
+            order.Services.First().CompletedDate.HasValue.Should().Be(true);
+            order.Services.First().ServiceTypeId.Should().Be(serviceType.Id);
+        }
+
+        [Test, CleanData]
+        public async Task UpsertOrder_InvalidService_ShouldReturnErrorsAndNotAddToOrder()
+        {
+            ServiceType serviceType = Context.ServiceTypes.OrderByDescending(st => st.Id).First();
+
+            ServiceDto serviceDto = new ServiceDto { ServiceTypeId = serviceType.Id + 500 }; //Make invalid id
+
+            var order = OrderBuilder.New().First();
+            order.TrackingId = TokenHelper.NewToken();
+            order.Transferee = transferee;
+            order.Consultant = dsc;
+            order.ProgramManager = pm;
+            Context.Orders.Add(order);
+            Context.SaveChanges();
+
+            var orderDto = OrderDtoBuilder.New();
+            orderDto.TrackingId = order.TrackingId;
+            orderDto.ProgramManager = ProgramManagerDtoBuilder.New();
+            orderDto.ProgramManager.SeContactUid = pm.SeContactUid.Value;
+            orderDto.Consultant = ConsultantDtoBuilder.New();
+            orderDto.Consultant.SeContactUid = dsc.SeContactUid.Value;
+            orderDto.Transferee = TransfereeDtoBuilder.New();
+            orderDto.Transferee.Email = transferee.Email;
+            orderDto.Services.Add(serviceDto);
+
+            // Act
+            var request = CreateRequest("api/orders", "application/json", HttpMethod.Post, orderDto);
+            request.Headers.Add("Token", ApiKey);
+            var response = await Server.HttpClient.SendAsync(request);
+
+            // Assert
+            response.StatusCode.Should().Be(HttpStatusCode.InternalServerError);
+            Context.Entry(order).Reload();
+            Context.Entry(order).Collection(o => o.Services).Load();
+            order.Services.Count.Should().Be(0);
+        }
     }
 }

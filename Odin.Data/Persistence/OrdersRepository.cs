@@ -1,11 +1,8 @@
-﻿using System;
+﻿using Odin.Data.Core.Models;
+using Odin.Data.Core.Repositories;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Odin.Data.Core.Models;
-using Odin.Data.Core.Repositories;
 
 namespace Odin.Data.Persistence
 {
@@ -32,12 +29,24 @@ namespace Odin.Data.Persistence
 
         public Order GetOrderByTrackingId(string trackingId)
         {
-            return _context.Orders.SingleOrDefault(o => o.TrackingId.Equals(trackingId));
+            return _context.Orders
+                .Where(o => o.TrackingId.Equals(trackingId))
+                .Include(o => o.Services)
+                .SingleOrDefault<Order>();
         }
 
         public void Add(Order order)
         {
             _context.Orders.Add(order);
+        }
+
+        public Order GetOrderById(int orderId)
+        {
+            return _context.Orders
+                .Where(o => o.Id == orderId)
+                .Include(o => o.Services)
+                .Include(o => o.Rent)
+                .SingleOrDefault<Order>();
         }
     }
 }
