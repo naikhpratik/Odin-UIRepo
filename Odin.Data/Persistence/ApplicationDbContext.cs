@@ -1,7 +1,7 @@
-﻿using System.Data.Entity;
-using Microsoft.AspNet.Identity.EntityFramework;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
 using Odin.Data.Core.Models;
 using Odin.Data.Persistence.EntityConfigurations;
+using System.Data.Entity;
 
 namespace Odin.Data.Persistence
 {
@@ -13,6 +13,7 @@ namespace Odin.Data.Persistence
         public DbSet<Consultant> Consultants { get; set; }
         public DbSet<Transferee> Transferees { get; set; }
         public DbSet<Service> Services { get; set; }
+        public DbSet<ServiceType> ServiceTypes { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

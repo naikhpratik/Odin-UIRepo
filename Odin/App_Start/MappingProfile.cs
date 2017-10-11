@@ -20,7 +20,8 @@ namespace Odin
             CreateMap<OrderDto, Order>()
                 .ForMember(m => m.Transferee, opt => opt.Ignore())
                 .ForMember(m => m.Consultant, opt => opt.Ignore())
-                .ForMember(m => m.ProgramManager, opt => opt.Ignore());
+                .ForMember(m => m.ProgramManager, opt => opt.Ignore())
+                .ForMember(m => m.Services, opt => opt.Ignore());
             CreateMap<TransfereeDto, Transferee>();
             CreateMap<ProgramManagerDto, Manager>();
             CreateMap<ConsultantDto, Consultant>();
@@ -29,6 +30,7 @@ namespace Odin
             CreateMap<Consultant, ConsultantDto>();
             CreateMap<ManagerDto, Manager>();
             CreateMap<ConsultantImportDto, Consultant>();
+            CreateMap<ServiceDto, Service>();
 
             CreateMap<Order, TransfereeIndexDto>()
                 .ForMember(m => m.FirstName, opt => opt.MapFrom(src => src.Transferee.FirstName))
@@ -38,6 +40,8 @@ namespace Odin
                 .ForMember(m => m.Company, opt => opt.MapFrom(src => src.Client))
                 .ForMember(m => m.ManagerPhone, opt => opt.MapFrom(src => src.ProgramManager.PhoneNumber))
                 .ForMember(m => m.PreTrip, opt => opt.MapFrom(src => src.PreTripDate));
+
+            CreateMap<Service, ServiceDto>();
         }
     }
 }

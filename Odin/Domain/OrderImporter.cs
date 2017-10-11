@@ -28,11 +28,21 @@ namespace Odin.Domain
             {
                 order = _mapper.Map<OrderDto, Order>(orderDto);
 
+                //Add new services
+                foreach (var serviceDto in orderDto.Services)
+                {
+                    if (!order.HasService(serviceDto.ServiceTypeId))
+                    {
+                        var newService = _mapper.Map<ServiceDto, Service>(serviceDto);
+                        order.Services.Add(newService);
+                    }
+                }
+
                 if (transferee == null)
                 {
                     transferee = _mapper.Map<TransfereeDto, Transferee>(orderDto.Transferee);
                     _unitOfWork.Transferees.Add(transferee);
-                }
+                }                
 
                 _unitOfWork.Orders.Add(order);
             }
@@ -40,14 +50,22 @@ namespace Odin.Domain
             {
                 _mapper.Map<OrderDto, Order>(orderDto, order);
 
+                //Add new services
+                foreach (var serviceDto in orderDto.Services)
+                {
+                    if (!order.HasService(serviceDto.ServiceTypeId))
+                    {
+                        var newService = _mapper.Map<ServiceDto, Service>(serviceDto);
+                        order.Services.Add(newService);
+                    }
+                }
+
                 if (transferee == null)
                 {
                     transferee = _mapper.Map<TransfereeDto, Transferee>(orderDto.Transferee);
                     _unitOfWork.Transferees.Add(transferee);
                 }
             }
-
-
 
             order.TransfereeId = transferee.Id;
             order.ConsultantId = consultantId;

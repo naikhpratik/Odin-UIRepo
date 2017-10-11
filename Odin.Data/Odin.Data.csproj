@@ -87,6 +87,7 @@
     <Compile Include="Builders\ConsultantDtoBuilder.cs" />
     <Compile Include="Builders\ConsultantImportDtoBuilder.cs" />
     <Compile Include="Builders\ProgramManagerDtoBuilder.cs" />
+    <Compile Include="Builders\ServiceBuilder.cs" />
     <Compile Include="Builders\TransfereeBuilder.cs" />
     <Compile Include="Builders\OrderBuilder.cs" />
     <Compile Include="Builders\OrderDtoBuilder.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="Core\Dtos\ProgramManagerDto.cs" />
     <Compile Include="Core\Dtos\ManagerDto.cs" />
     <Compile Include="Core\Dtos\ManagersDto.cs" />
+    <Compile Include="Core\Dtos\ServiceDto.cs" />
     <Compile Include="Core\Dtos\ServicesDto.cs" />
     <Compile Include="Core\Dtos\TransfereeDto.cs" />
     <Compile Include="Core\Dtos\TransfereeIndexDto.cs" />
@@ -106,8 +108,10 @@
     <Compile Include="Core\Models\ApplicationUser.cs" />
     <Compile Include="Core\Models\Consultant.cs" />
     <Compile Include="Core\Models\ErrorResponse.cs" />
+    <Compile Include="Core\Models\HousingType.cs" />
     <Compile Include="Core\Models\Order.cs" />
     <Compile Include="Core\Models\Manager.cs" />
+    <Compile Include="Core\Models\OwnershipType.cs" />
     <Compile Include="Core\Models\Rent.cs" />
     <Compile Include="Core\Models\Service.cs" />
     <Compile Include="Core\Models\ServiceType.cs" />
@@ -195,9 +199,30 @@
     <Compile Include="Persistence\Migrations\201710061802248_ServicesAdded.Designer.cs">
       <DependentUpon>201710061802248_ServicesAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201710091435033_RentFieldsForDetailsAdded.cs" />
+    <Compile Include="Persistence\Migrations\201710091435033_RentFieldsForDetailsAdded.Designer.cs">
+      <DependentUpon>201710091435033_RentFieldsForDetailsAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710101407560_ForeignKeyOnServices.cs" />
+    <Compile Include="Persistence\Migrations\201710101407560_ForeignKeyOnServices.Designer.cs">
+      <DependentUpon>201710101407560_ForeignKeyOnServices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710101459536_AddingServiceTypeLinking.cs" />
+    <Compile Include="Persistence\Migrations\201710101459536_AddingServiceTypeLinking.Designer.cs">
+      <DependentUpon>201710101459536_AddingServiceTypeLinking.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710101512327_SeedServiceTypes.cs" />
+    <Compile Include="Persistence\Migrations\201710101512327_SeedServiceTypes.Designer.cs">
+      <DependentUpon>201710101512327_SeedServiceTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710101549284_RemoveNameFromService.cs" />
+    <Compile Include="Persistence\Migrations\201710101549284_RemoveNameFromService.Designer.cs">
+      <DependentUpon>201710101549284_RemoveNameFromService.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
     <Compile Include="Persistence\ServicesRepository.cs" />
+    <Compile Include="Persistence\ServiceTypesRepository.cs" />
     <Compile Include="Persistence\TransfereesRepository.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
     <Compile Include="Persistence\UsersRepository.cs" />
@@ -258,6 +283,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201710061802248_ServicesAdded.resx">
       <DependentUpon>201710061802248_ServicesAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710091435033_RentFieldsForDetailsAdded.resx">
+      <DependentUpon>201710091435033_RentFieldsForDetailsAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710101407560_ForeignKeyOnServices.resx">
+      <DependentUpon>201710101407560_ForeignKeyOnServices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710101459536_AddingServiceTypeLinking.resx">
+      <DependentUpon>201710101459536_AddingServiceTypeLinking.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710101512327_SeedServiceTypes.resx">
+      <DependentUpon>201710101512327_SeedServiceTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710101549284_RemoveNameFromService.resx">
+      <DependentUpon>201710101549284_RemoveNameFromService.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

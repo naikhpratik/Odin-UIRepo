@@ -29,7 +29,10 @@ namespace Odin.Data.Persistence
 
         public Order GetOrderByTrackingId(string trackingId)
         {
-            return _context.Orders.SingleOrDefault(o => o.TrackingId.Equals(trackingId));
+            return _context.Orders
+                .Where(o => o.TrackingId.Equals(trackingId))
+                .Include(o => o.Services)
+                .SingleOrDefault<Order>();
         }
 
         public void Add(Order order)
@@ -42,6 +45,7 @@ namespace Odin.Data.Persistence
             return _context.Orders
                 .Where(o => o.Id == orderId)
                 .Include(o => o.Services)
+                .Include(o => o.Rent)
                 .SingleOrDefault<Order>();
         }
     }

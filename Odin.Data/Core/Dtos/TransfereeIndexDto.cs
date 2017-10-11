@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Odin.Data.Core.Dtos
 {
@@ -7,7 +9,7 @@ namespace Odin.Data.Core.Dtos
     {
         public TransfereeIndexDto()
         {
-            Services = new List<ServicesDto>();
+            Services = new Collection<ServiceDto>();
         }
         public string FirstName;
         public string Middle;
@@ -28,6 +30,6 @@ namespace Odin.Data.Core.Dtos
 
         public int NumberOfAlerts;
 
-        public IEnumerable<ServicesDto> Services;
+        public ICollection<ServiceDto> Services;
     }
 }
