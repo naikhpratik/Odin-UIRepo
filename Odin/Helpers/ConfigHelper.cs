@@ -11,6 +11,7 @@ namespace Odin.Helpers
     {
         private readonly string SeTokenKey = "SeApiToken";
         private readonly string SendGridAPIKey = "SendGridAPIKey";
+        private readonly string DWOdinTeamEmailFrom = "DWOdinTeamEmailFrom";
 
         public string GetSeApiToken()
         {
@@ -19,6 +20,10 @@ namespace Odin.Helpers
         public string GetSendGridAPIKey()
         {
             return WebConfigurationManager.AppSettings[SendGridAPIKey];
+        }
+        public string GetDWOdinTeamEmailFrom()
+        {
+            return WebConfigurationManager.AppSettings[DWOdinTeamEmailFrom];
         }
     }
 }

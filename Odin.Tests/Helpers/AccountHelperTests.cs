@@ -7,23 +7,29 @@ using Odin.Helpers;
 namespace Odin.Tests.Helpers
 {
     [TestClass]
-    class AccountHelperTests
+    public class AccountHelperTests
     {
-            private IAccountHelper _accountHelper;
-            
-            [TestInitialize]
-            private void TestInitialize()
-            {
-                var mockEmailHelper = new Mock<IEmailHelper>();
-                _accountHelper = new AccountHelper(mockEmailHelper.Object);
-            }
+        private IAccountHelper _accountHelper;        
 
-            [TestMethod]
-            public void Index_WhenCalled_ReturnsOk()
-            {                
-                string _userId = "1";
-                var result = _accountHelper.SendEmailCreateTokenAsync(_userId);
-                result.Should().NotBe("Message not sent");
-            }
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            var mockEmailHelper = new Mock<IEmailHelper>();
+            _accountHelper = new AccountHelper(mockEmailHelper.Object);               
+        }
+        [TestMethod]
+        public void SendEmailResetTokenAsync_DoesNotReturn_NotSent()
+        {
+            string _userId = "1";
+            var result = _accountHelper.SendEmailResetTokenAsync(_userId);
+            result.Should().NotBe("Message not sent");                
+        }
+        [TestMethod]
+        public void SendEmailCreateTokenAsync_DoesNotReturn_NotSent()
+        {
+            string _userId = "1";
+            var result = _accountHelper.SendEmailCreateTokenAsync(_userId);
+            result.Should().NotBe("Message not sent");                
         }
     }
+}

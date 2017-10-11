@@ -13,7 +13,7 @@ namespace Odin.Helpers
             var apiKey = _configHelper.GetSendGridAPIKey();
             var client = new SendGridClient(apiKey);
             //set the message and its components
-            var from = new EmailAddress("odin@dwellworks.com", "DwellWorks Odin Team");
+            var from = new EmailAddress(_configHelper.GetDWOdinTeamEmailFrom()); //DWOdinTeamEmailFrom, "DwellWorks Odin Team"
             SendGridMessage msg = null;
             if (contentType == MimeType.Html)
                 msg = MailHelper.CreateSingleEmail(from, new EmailAddress(to), subject, "", content);
