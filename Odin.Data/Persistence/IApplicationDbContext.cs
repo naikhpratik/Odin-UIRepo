@@ -15,6 +15,5 @@ namespace Odin.Data.Persistence
         DbSet<Transferee> Transferees { get; set; }
         DbSet<Consultant> Consultants { get; set; }
         DbSet<Manager> Managers { get; set; }
-        DbSet<ApplicationUser> ApplicationUsers { get; set; }
     }
 }
