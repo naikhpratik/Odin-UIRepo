@@ -13,13 +13,7 @@ namespace Odin
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Orders", action = "Index", id = UrlParameter.Optional }
-            );
-
-            routes.MapRoute(
-                name: "OrderHomes",
-                url: "{controller}/{action}/{Orderid}/{HomeId}",
-                defaults: new { controller = "Orders", action = "Index", Orderid = UrlParameter.Optional, Homeid = UrlParameter.Optional }
-            );
+            );           
         }
     }
 }

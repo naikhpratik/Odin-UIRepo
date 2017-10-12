@@ -91,7 +91,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\MockDbSetExtensions.cs" />
+    <Compile Include="Persistence\Repositories\ConsultantsRepositoryTests.cs" />
+    <Compile Include="Persistence\Repositories\ManagersRepositoryTests.cs" />
     <Compile Include="Persistence\Repositories\OrdersRepositoryTests.cs" />
+    <Compile Include="Persistence\Repositories\TransfereesRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
