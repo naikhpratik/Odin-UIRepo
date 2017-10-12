@@ -1,0 +1,71 @@
+﻿@import "../shared/_definitions.scss";
+
+
+@include header;
+
+body {
+    padding: 0
+}
+
+div.row {
+    text-align: center;
+
+    div.col-md-2 {
+        height: 850px;
+        padding-top: 30px;
+        color: white;
+        background-color: $OdinLime;
+
+        img {
+            width: 70px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: initial;
+        }
+
+        ul {
+            line-height: 57px;
+            font-size: 20px;
+            font-weight: 300;
+            list-style: none;
+            padding-left: 0px;
+
+            li:first-of-type {
+                height: 16px;
+                margin-top: 22px;
+                border-top: 1px solid;
+            }
+
+            li:nth-child(7) {
+                margin-bottom: 20px;
+                border-bottom: 1px solid;
+            }
+
+            li.item {
+                height: 60px;
+
+                &:hover {
+                    background-color: $OdinBlue2;
+                }
+            }
+
+            li.unselectable {
+                pointer-events: none;
+            }
+
+            li.selected {
+                background-color: $OdinBlue;
+            }
+        }
+    }
+
+    div.col {
+        border-top: 1px solid;
+
+        div.noinit {
+            display: none;
+        }
+    }
+}

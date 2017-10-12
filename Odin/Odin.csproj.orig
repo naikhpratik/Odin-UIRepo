@@ -758,7 +758,9 @@
     <Content Include="Views\Mailers\ResetPassword.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+<<<<<<< HEAD
     <Content Include="Views\Home\OfOrder.cshtml" />
+=======
     <Content Include="Views\Orders\Transferee.cshtml" />
     <Content Include="Views\Shared\Partials\_logo.cshtml" />
     <Content Include="Views\Shared\Partials\_header.cshtml" />
@@ -769,6 +771,7 @@
     <Content Include="Views\Orders\Partials\_Calendar.cshtml" />
     <Content Include="Views\Orders\Partials\_Messages.cshtml" />
     <Content Include="Views\Orders\Partials\_History.cshtml" />
+>>>>>>> origin/intake
     <None Include="Web.Azure.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

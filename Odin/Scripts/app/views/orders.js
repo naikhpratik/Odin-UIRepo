@@ -43,16 +43,48 @@
         });
 
         // search box
-        $('#searchbox').on("keyup paste", function () {
+        $('#searchbox').on("keyup input", function () {
             var srchIndx = $(this).val().toLowerCase();
 
             if (srchIndx.length > 1) {
                 $SearchedOrders = { "transferees": [] };
 
                 for (var i = 0; i < $SortedOrders.transferees.length; i++) {
-                    if ($SortedOrders.transferees[i].firstName.toLowerCase().includes(srchIndx) ||
-                        $SortedOrders.transferees[i].lastName.toLowerCase().includes(srchIndx)) {
-                        $SearchedOrders.transferees.push($SortedOrders.transferees[i]);
+                    var firstMatch = $SortedOrders.transferees[i].firstName.split(srchIndx);
+                    var lastMatch = $SortedOrders.transferees[i].lastName.split(srchIndx);
+
+                    if (firstMatch.length > 1 || lastMatch.length > 1) {
+                        var transferee = {};
+
+                        Object.assign(transferee, $SortedOrders.transferees[i]);
+
+                        // indicate search on first name
+                        if (firstMatch.length > 1) {
+                            var firstName = firstMatch[0];
+
+                            firstName += "<span class=\"srchIndx\">";
+                            for (var j = 0; j < srchIndx.length; j++) {
+                                firstName += transferee.firstName[firstMatch[0].length + j];
+                            }
+                            firstName += "</span>" + firstMatch[1];
+
+                            transferee.firstName = firstName;
+                        }
+
+                        // indicate search on last name
+                        if (lastMatch.length > 1) {
+                            var lastName = lastMatch[0];
+
+                            lastName += "<span class=\"srchIndx\">";
+                            for (var j = 0; j < srchIndx.length; j++) {
+                                lastName += transferee.lastName[lastMatch[0].length + j];
+                            }
+                            lastName += "</span>" + lastMatch[1];
+
+                            transferee.lastName = lastName;
+                        }
+
+                        $SearchedOrders.transferees.push(transferee);
                     }
                 }
             }
@@ -152,7 +184,7 @@
                 tablet_table.append("<tr>" + "<td>" + name_tablet + "</td>" + manager + "<td>" + lastcontacted + "</td>" + "<td>" + services_tablet + "</td>" + notification + "</tr>");
                 mobile_table.append("<tr>" + "<td>" + name_mobile + "</td>" + "<td>" + lastcontacted + services + "</td>" + notification + "</tr>");
 
-                // row expansion handlers
+                // service expansion handlers
                 $('.expand').click(function () {
                     $(this).css("display", "none");
                     $(this).next().css("display", "block");
@@ -169,6 +201,11 @@
                     $(this).parent().parent().children('.actlist-item-blk').each(function () {
                         $(this).css("display", "none");
                     });
+                });
+
+                // row selection handler
+                $('tr').not(':first').click(function (event) {
+
                 });
             }
         };

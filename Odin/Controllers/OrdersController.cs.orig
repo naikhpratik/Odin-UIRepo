@@ -33,6 +33,7 @@ namespace Odin.Controllers
 
             return View(orderVms);
         }
+<<<<<<< HEAD
 
         public ActionResult Details(int orderId)
         {
@@ -51,12 +52,13 @@ namespace Odin.Controllers
             }
 
             return View();            
-        }
-
+=======
+        
         // GET: Transferee
         public ViewResult Transferee()
         {
             return View();
+>>>>>>> origin/intake
         }
     }
     

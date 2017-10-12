@@ -31,12 +31,22 @@ namespace Odin
                       "~/Content/datatables/css/datatables.bootstrap.css"));
 
             // Page Styling
-            bundles.Add(new StyleBundle("~/Styling/orders").Include("~/Content/Orders/orders.css"));
-            bundles.Add(new StyleBundle("~/Styling/login").Include("~/Content/Login/login.css"));
-            bundles.Add(new StyleBundle("~/Styling/forgotpw").Include("~/Content/ForgotPassword/forgotpassword.css"));
+            bundles.Add(new StyleBundle("~/Styling/orders").Include("~/Content/css/orders.css"));
+            bundles.Add(new StyleBundle("~/Styling/login").Include("~/Content/css/login.css"));
+            bundles.Add(new StyleBundle("~/Styling/forgotpw").Include("~/Content/css/forgotpassword.css"));
+            bundles.Add(new StyleBundle("~/Styling/transferee").Include("~/Content/css/transferee/transferee.css"));
+
+            // Panel Styling
+            bundles.Add(new StyleBundle("~/Styling/calendar").Include("~/Content/css/transferee/calendar.css"));
+            bundles.Add(new StyleBundle("~/Styling/details").Include("~/Content/css/transferee/details.css"));
+            bundles.Add(new StyleBundle("~/Styling/history").Include("~/Content/css/transferee/history.css"));
+            bundles.Add(new StyleBundle("~/Styling/intake").Include("~/Content/css/transferee/intake.css"));
+            bundles.Add(new StyleBundle("~/Styling/messages").Include("~/Content/css/transferee/messages.css"));
+            bundles.Add(new StyleBundle("~/Styling/rentals").Include("~/Content/css/transferee/rentals.css"));
 
             // Page scripts
             bundles.Add(new ScriptBundle("~/Scripts/orders").Include("~/Scripts/app/views/orders.js"));
+            bundles.Add(new ScriptBundle("~/Scripts/transferee").Include("~/Scripts/app/views/transferee.js"));
         }
     }
 }

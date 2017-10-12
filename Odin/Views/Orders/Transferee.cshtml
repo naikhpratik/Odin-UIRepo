@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "Transferee Page";
+    Layout = "~/Views/Shared/_Common.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-2">
+        <img src="~/Content/Images/icn_profile.png"/>
+        <p>Victoria A. Sporer</p>
+        <ul>
+            <li class="unselectable">&nbsp;</li>
+            <li class="item selected" data-panel="intake">Intake</li>
+            <li class="item" data-panel="details">Details</li>
+            <li class="item" data-panel="rentals">Rentals</li>
+            <li class="item" data-panel="history">History</li>
+            <li class="unselectable">&nbsp;</li>
+            <li class="unselectable">&nbsp;</li>
+            <li class="item" data-panel="messages">Messages</li>
+            <li class="item" data-panel="calendar">Calendar</li>
+        </ul>
+    </div>
+    <div class="col">
+        @Html.Partial("~/Views/Orders/Partials/_Intake.cshtml")
+        @Html.Partial("~/Views/Orders/Partials/_Details.cshtml")
+        @Html.Partial("~/Views/Orders/Partials/_Rentals.cshtml")
+        @Html.Partial("~/Views/Orders/Partials/_History.cshtml")
+        @Html.Partial("~/Views/Orders/Partials/_Messages.cshtml")
+        @Html.Partial("~/Views/Orders/Partials/_Calendar.cshtml")
+    </div>
+</div>
+
+@Styles.Render("~/Styling/transferee")
+@Scripts.Render("~/Scripts/transferee")
+
+@section scripts
+{
+    <script>
+        $(document).ready(OrdersPageController.TransfereeInit);
+    </script>
+}

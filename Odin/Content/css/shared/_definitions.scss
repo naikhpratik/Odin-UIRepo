@@ -1,0 +1,105 @@
+﻿
+//----  variables
+$OdinBlue: #31A4DD;
+$OdinBlue2: #73c2ed;
+$OdinGreen: #49ae44;
+$OdinLime: #a7ce39;
+$OdinBrown: #4b3311;
+$OdinGrey: #aca095;
+
+
+//---- mixins
+@mixin header {
+
+    div#main {
+
+        div#caption {
+            width: 48%;
+            height: 118px;
+            padding-top: 44px;
+            vertical-align: top;
+            display: inline-block;
+
+            @include logo(0px, left, 30px);
+        }
+
+        div#icons {
+            float: right;
+            width: 48%;
+            height: 118px;
+            margin-right: 3px;
+            padding-top: 30px;
+            vertical-align: top;
+            display: inline-block;
+
+            div {
+                float: right;
+                display: inline-block;
+
+                &.icons_notify {
+                    font-size: small;
+                    color: $OdinBlue;
+                    position: relative;
+                    font-weight: bold;
+                    display: inline-block;
+                    width: 10px;
+                    text-align: center;
+
+                    &.icons_notify_messages {
+                        top: 6px;
+                        left: -45px;
+                    }
+
+                    &.icons_notify_alerts {
+                        top: 6px;
+                        left: -145px;
+                    }
+
+                    &.icons_notify_appts {
+                        top: 6px;
+                        left: -188px;
+                    }
+                }
+
+                img {
+                    float: right;
+                    width: 40px;
+                    margin: 8px;
+                }
+            }
+        }
+    }
+}
+
+@mixin logo($topMargin, $align: center, $padleft: 0px) {
+    
+    div#dwellworks {
+        margin-top: $topMargin;
+        text-align: $align;
+        padding-left: $padleft;
+
+        &.mailer {
+            margin-top: 40px;
+        }
+
+        p {
+            display: inline-block;
+
+            &:first-of-type {
+                border-left: 1px solid gray;
+                margin-left: 4px;
+                top: -2px;
+                height: 21px;
+                position: relative;
+            }
+
+            &:last-of-type {
+                top: -3px;
+                font-size: large;
+                color: $OdinGreen;
+                font-size: 20px;
+                font-family: sans-serif;
+            }
+        }
+    }
+ }

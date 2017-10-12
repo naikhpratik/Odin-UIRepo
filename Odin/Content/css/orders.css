@@ -7,22 +7,26 @@ div#main div#caption {
   padding-top: 44px;
   vertical-align: top;
   display: inline-block; }
-  div#main div#caption img {
+  div#main div#caption div#dwellworks {
+    margin-top: 0px;
+    text-align: left;
     padding-left: 30px; }
-  div#main div#caption p {
-    position: relative;
-    display: inline-block; }
-    div#main div#caption p:first-of-type {
-      border-left: 1px solid gray;
-      margin-left: 4px;
-      top: -2px;
-      height: 21px; }
-    div#main div#caption p:last-of-type {
-      top: -3px;
-      font-size: large;
-      color: #4BAD48;
-      font-size: 20px;
-      font-family: sans-serif; }
+    div#main div#caption div#dwellworks.mailer {
+      margin-top: 40px; }
+    div#main div#caption div#dwellworks p {
+      display: inline-block; }
+      div#main div#caption div#dwellworks p:first-of-type {
+        border-left: 1px solid gray;
+        margin-left: 4px;
+        top: -2px;
+        height: 21px;
+        position: relative; }
+      div#main div#caption div#dwellworks p:last-of-type {
+        top: -3px;
+        font-size: large;
+        color: #49ae44;
+        font-size: 20px;
+        font-family: sans-serif; }
 
 div#main div#icons {
   float: right;
@@ -57,78 +61,81 @@ div#main div#icons {
       width: 40px;
       margin: 8px; }
 
-div#main div#list {
+div#list {
   height: auto;
   padding-bottom: 45px;
   border-top: 1px solid #979797; }
-  div#main div#list div#search {
+  div#list div#search {
     height: 60px;
     padding-top: 15px;
     padding-left: 43px;
     background-color: #FAFAFA; }
-    div#main div#list div#search input {
+    div#list div#search input {
       width: 300px;
       max-width: none; }
-    div#main div#list div#search button {
+    div#list div#search button {
       width: 90px;
       color: white;
       height: 30px;
       border: none;
       margin-left: 15px;
-      background-color: #48AD48; }
-  div#main div#list img.arrow {
+      background-color: #49ae44; }
+  div#list img.arrow {
     cursor: cell; }
-  div#main div#list img.expand {
+  div#list img.expand {
     cursor: zoom-in; }
-  div#main div#list img.collapse {
+  div#list img.collapse {
     cursor: zoom-out; }
-  div#main div#list img.noinit {
+  div#list img.noinit {
     display: none; }
-  div#main div#list th {
+  div#list th {
     border: none;
     padding-bottom: 16px; }
-    div#main div#list th.first {
+    div#list th.first {
       padding-left: 73px; }
-    div#main div#list th.third {
+    div#list th.third {
       padding-left: 55px; }
-    div#main div#list th.fourth {
+    div#list th.fourth {
       padding-left: 28px; }
-    div#main div#list th.fifth {
+    div#list th.fifth {
       padding-left: 23px; }
-    div#main div#list th.sixth {
+    div#list th.sixth {
       padding-left: 41px; }
-    div#main div#list th.seventh {
+    div#list th.seventh {
       padding-left: 7px; }
-  div#main div#list td {
+  div#list td {
     border: none;
     white-space: nowrap;
     vertical-align: top; }
-    div#main div#list td:nth-child(2) {
+    div#list td span.srchIndx {
+      color: #49ae44; }
+    div#list td:nth-child(2) {
       width: 160px; }
-    div#main div#list td div.actlist-item-hdr {
+    div#list td div.actlist-item-hdr {
       display: inline-block;
       width: 30px; }
-      div#main div#list td div.actlist-item-hdr a {
+      div#list td div.actlist-item-hdr a {
         top: -10px;
         color: #6C6E70;
         position: relative;
         font-size: 16px;
         text-decoration: underline;
-        font-family: sans-serif; }
-      div#main div#list td div.actlist-item-hdr:first-of-type {
+        font-family: sans-serif;
+        margin-left: 3px; }
+      div#list td div.actlist-item-hdr:first-of-type {
         width: 22px;
         margin-top: 5px;
         vertical-align: top; }
-      div#main div#list td div.actlist-item-hdr:nth-child(2) a {
-        color: #4BAD48; }
-      div#main div#list td div.actlist-item-hdr img {
+      div#list td div.actlist-item-hdr:nth-child(2) a {
+        color: #49ae44; }
+      div#list td div.actlist-item-hdr img {
         width: 20px; }
-    div#main div#list td div.actlist-item-blk {
+    div#list td div.actlist-item-blk {
       display: none;
       margin-left: 20px; }
-    div#main div#list td img {
+    div#list td img {
       width: 40px; }
-    div#main div#list td div.notify-count {
+    div#list td div.notify-count {
       font-size: small;
       color: #31A4DD;
       position: relative;
@@ -138,175 +145,194 @@ div#main div#list {
       display: inline-block;
       width: 10px;
       text-align: center; }
-    div#main div#list td p.Callout, div#main div#list td span.Callout {
+    div#list td p.Callout, div#list td span.Callout {
       color: #31A4DD;
       margin-bottom: 0; }
-    div#main div#list td p:first-child {
+    div#list td p:first-child {
       margin-bottom: 0px;
       font-size: 20px;
       font-weight: 500;
       font-family: sans-serif; }
-      div#main div#list td p:first-child.actlist-item {
-        color: #48AD48;
+      div#list td p:first-child.actlist-item {
+        color: #49ae44;
         font-size: 16px;
         font-family: sans-serif; }
-    div#main div#list td p:nth-child(2) {
+    div#list td p:nth-child(2) {
       font-size: 16px;
       line-height: 10px;
       font-family: sans-serif; }
-  div#main div#list table {
+  div#list table {
     width: 96%;
     margin: 30px 40px 0px 40px; }
+    div#list table tbody tr:hover {
+      background-color: #31A4DD; }
 
-@media screen and (min-width: 992px) {
-  div#main table.tablet {
+@media screen and (min-width: 993px) {
+  table.tablet {
     display: none; }
-  div#main table.mobile {
+  table.mobile {
     display: none; } }
 
 @media screen and (min-width: 800px) and (max-width: 992px) {
-  div#main table.desktop {
+  table.desktop {
     display: none; }
-  div#main div#icons div.icons_notify.icons_notify_messages {
+  div#icons div.icons_notify.icons_notify_messages {
     top: 6px;
     left: -44px; }
-  div#main th.second {
+  th.second {
     padding-left: 29px !important; }
-  div#main th.fourth {
+  th.fourth {
     padding-left: 0px !important; }
-  div#main th.fifth {
+  th.fifth {
     padding-left: 9px !important; }
-  div#main td div.actlist-item-hdr {
+  td div.actlist-item-hdr {
     display: block !important; }
-  div#main td div.actlist-item-blk {
+    td div.actlist-item-hdr:nth-child(2) {
+      height: 47px;
+      line-height: 30px; }
+    td div.actlist-item-hdr:nth-child(3) {
+      height: 47px;
+      line-height: 30px; }
+    td div.actlist-item-hdr:nth-child(4) {
+      height: 52px;
+      line-height: 30px; }
+  td div.actlist-item-blk {
     margin-left: 0px !important; }
-  div#main td span {
+  td span {
     font-size: 14px;
     font-family: sans-serif; }
-    div#main td span.tablet-column-label {
+    td span.tablet-column-label {
       color: #6C6E70;
       font-weight: 600;
       margin-right: 4px; }
-  div#main table.mobile {
+  table.mobile {
     display: none; } }
 
 @media screen and (max-width: 799px) {
-  div#main table.desktop {
+  table.desktop {
     display: none; }
-  div#main table.tablet {
+  table.tablet {
     display: none; }
-  div#main div#caption {
-    height: 76px;
-    padding-top: 20px;
+  div#caption {
+    height: 66px !important;
+    padding-top: 20px !important;
     text-align: center;
-    width: 89% !important;
+    width: 90% !important;
     display: block !important; }
-  div#main div#icons {
-    height: 76px;
+    div#caption div#dwellworks {
+      text-align: center !important; }
+  div#icons {
+    height: 70px !important;
     text-align: center;
-    padding-top: 0px;
+    padding-top: 0px !important;
     float: none !important;
-    width: 97% !important;
+    width: 90% !important;
     display: block !important;
-    margin-bottom: 16px; }
-    div#main div#icons div {
+    margin-bottom: 0px; }
+    div#icons div {
       float: none !important; }
-  div#main div#icons div.icons_notify.icons_notify_messages {
-    top: -32px;
-    left: 239px; }
-  div#main div#icons div.icons_notify.icons_notify_alerts {
-    top: -32px;
-    left: 117px; }
-  div#main div#icons div.icons_notify.icons_notify_appts {
-    top: -32px;
-    left: 50px; }
-  div#main th.second {
+  div#icons div.icons_notify.icons_notify_messages {
+    top: -32px !important;
+    left: 239px !important; }
+  div#icons div.icons_notify.icons_notify_alerts {
+    top: -32px !important;
+    left: 117px !important; }
+  div#icons div.icons_notify.icons_notify_appts {
+    top: -32px !important;
+    left: 50px !important; }
+  th.second {
     padding-left: 54px !important; }
-  div#main th.third {
+  th.third {
     padding-left: 9px !important; }
-  div#main td span {
+  td span {
     font-size: 14px;
     font-family: sans-serif; }
-    div#main td span.tablet-column-label {
+    td span.tablet-column-label {
       color: #6C6E70;
       font-weight: 600;
       margin-right: 4px; } }
 
 @media screen and (max-width: 483px) {
-  div#main table.desktop {
+  table.desktop {
     display: none; }
-  div#main table.tablet {
+  table.tablet {
     display: none; }
-  div#main table.mobile {
+  table.mobile {
     margin-left: 0 !important; }
-  div#main div#caption {
-    height: 76px;
-    padding-top: 20px;
+  div#caption {
+    height: 66px !important;
+    padding-top: 20px !important;
     text-align: center;
-    width: 89% !important;
+    width: 90% !important;
     display: block !important; }
-  div#main div#icons {
-    height: 76px;
+    div#caption div#dwellworks {
+      text-align: center !important; }
+  div#icons {
+    height: 70px !important;
     text-align: center;
-    padding-top: 0px;
+    padding-top: 0px !important;
     float: none !important;
-    width: 97% !important;
-    display: block !important; }
-    div#main div#icons div {
+    width: 90% !important;
+    display: block !important;
+    margin-bottom: 0px; }
+    div#icons div {
       float: none !important; }
-  div#main th.second {
+  th.second {
     padding-left: 54px !important; }
-  div#main th.third {
+  th.third {
     padding-left: 9px !important; }
-  div#main td span {
+  td span {
     font-size: 14px;
     font-family: sans-serif; }
-    div#main td span.tablet-column-label {
+    td span.tablet-column-label {
       color: #6C6E70;
       font-weight: 600;
       margin-right: 4px; }
-  div#main div#search {
+  div#search {
     margin-left: 0px !important; }
-    div#main div#search input {
+    div#search input {
       width: 230px !important; } }
 
 @media screen and (max-width: 365px) {
-  div#main table.desktop {
+  table.desktop {
     display: none; }
-  div#main table.tablet {
+  table.tablet {
     display: none; }
-  div#main table.mobile {
+  table.mobile {
     margin-left: 0 !important; }
-  div#main div#caption {
-    height: 76px;
-    padding-top: 20px;
+  div#caption {
+    height: 66px !important;
+    padding-top: 20px !important;
     text-align: center;
-    width: 89% !important;
+    width: 90% !important;
     display: block !important; }
-  div#main div#icons {
-    height: 76px;
+    div#caption div#dwellworks {
+      text-align: center !important; }
+  div#icons {
+    height: 70px !important;
     text-align: center;
-    padding-top: 0px;
+    padding-top: 0px !important;
     float: none !important;
-    width: 97% !important;
-    display: block !important; }
-    div#main div#icons div {
+    width: 90% !important;
+    display: block !important;
+    margin-bottom: 0px; }
+    div#icons div {
       float: none !important; }
-  div#main th.second {
+  th.second {
     padding-left: 54px !important; }
-  div#main th.third {
+  th.third {
     padding-left: 9px !important; }
-  div#main td span {
+  td span {
     font-size: 14px;
     font-family: sans-serif; }
-    div#main td span.tablet-column-label {
+    td span.tablet-column-label {
       color: #6C6E70;
       font-weight: 600;
       margin-right: 4px; }
-  div#main div#search {
+  div#search {
     margin-left: 0px !important; }
-    div#main div#search input {
+    div#search input {
       width: 230px !important; }
-    div#main div#search button {
+    div#search button {
       margin-left: 0px !important; } }
 
