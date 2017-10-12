@@ -1,11 +1,15 @@
 ﻿
 //----  variables
 $OdinBlue: #31A4DD;
-$OdinGreen: #4BAD48;
+$OdinBlue2: #73c2ed;
+$OdinGreen: #49ae44;
+$OdinLime: #a7ce39;
+$OdinBrown: #4b3311;
+$OdinGrey: #aca095;
 
 
 //---- mixins
-@mixin header() {
+@mixin header {
 
     div#main {
 

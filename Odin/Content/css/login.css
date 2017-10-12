@@ -23,7 +23,7 @@ div.container.body-content {
       text-align: center;
       margin-bottom: 97px; }
       div.container.body-content div.col-md-4 div#caption span#Odin {
-        color: #4BAD48; }
+        color: #49ae44; }
   div.container.body-content div.col {
     width: 66%;
     position: relative;
@@ -77,7 +77,7 @@ div.container.body-content {
       box-shadow: none;
       margin-bottom: 5px;
       line-height: 10px;
-      background-color: #4BAD48;
+      background-color: #49ae44;
       text-transform: capitalize; }
   div.container.body-content p#forgot {
     text-align: center; }
@@ -98,7 +98,7 @@ div.container.body-content {
       div.container.body-content div#dwellworks p:last-of-type {
         top: -3px;
         font-size: large;
-        color: #4BAD48;
+        color: #49ae44;
         font-size: 20px;
         font-family: sans-serif; }
 

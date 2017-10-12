@@ -21,7 +21,7 @@
       div#main div#caption div#dwellworks p:last-of-type {
         top: -3px;
         font-size: large;
-        color: #4BAD48;
+        color: #49ae44;
         font-size: 20px;
         font-family: sans-serif; }
 
@@ -57,4 +57,45 @@ div#main div#icons {
       float: right;
       width: 40px;
       margin: 8px; }
+
+body {
+  padding: 0; }
+
+div.row {
+  text-align: center; }
+  div.row div.col-md-2 {
+    height: 850px;
+    padding-top: 30px;
+    color: white;
+    background-color: #a7ce39; }
+    div.row div.col-md-2 img {
+      width: 70px;
+      margin-bottom: 10px; }
+    div.row div.col-md-2 p {
+      font-size: initial; }
+    div.row div.col-md-2 ul {
+      line-height: 57px;
+      font-size: 20px;
+      font-weight: 300;
+      list-style: none;
+      padding-left: 0px; }
+      div.row div.col-md-2 ul li:first-of-type {
+        height: 16px;
+        margin-top: 22px;
+        border-top: 1px solid; }
+      div.row div.col-md-2 ul li:nth-child(7) {
+        margin-bottom: 20px;
+        border-bottom: 1px solid; }
+      div.row div.col-md-2 ul li.item {
+        height: 60px; }
+        div.row div.col-md-2 ul li.item:hover {
+          background-color: #73c2ed; }
+      div.row div.col-md-2 ul li.unselectable {
+        pointer-events: none; }
+      div.row div.col-md-2 ul li.selected {
+        background-color: #31A4DD; }
+  div.row div.col {
+    border-top: 1px solid; }
+    div.row div.col div.noinit {
+      display: none; }
 

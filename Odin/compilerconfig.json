@@ -12,7 +12,31 @@
     "outputFile": "Content/css/forgotpassword.css"
   },
   {
-    "inputFile": "Content/css/transferee.scss",
-    "outputFile": "Content/css/transferee.css"
+    "inputFile": "Content/css/transferee/transferee.scss",
+    "outputFile": "Content/css/transferee/transferee.css"
+  },
+  {
+    "inputFile": "Content/css/transferee/calendar.scss",
+    "outputFile": "Content/css/transferee/calendar.css"
+  },
+  {
+    "inputFile": "Content/css/transferee/details.scss",
+    "outputFile": "Content/css/transferee/details.css"
+  },
+  {
+    "inputFile": "Content/css/transferee/history.scss",
+    "outputFile": "Content/css/transferee/history.css"
+  },
+  {
+    "inputFile": "Content/css/transferee/intake.scss",
+    "outputFile": "Content/css/transferee/intake.css"
+  },
+  {
+    "inputFile": "Content/css/transferee/messages.scss",
+    "outputFile": "Content/css/transferee/messages.css"
+  },
+  {
+    "inputFile": "Content/css/transferee/rentals.scss",
+    "outputFile": "Content/css/transferee/rentals.css"
   }
 ]

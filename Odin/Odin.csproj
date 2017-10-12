@@ -320,6 +320,78 @@
     <Content Include="Content\bootstrap-paper.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\transferee\calendar.css">
+      <DependentUpon>calendar.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\transferee\calendar.min.css">
+      <DependentUpon>calendar.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\transferee\details.css">
+      <DependentUpon>details.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\transferee\details.min.css">
+      <DependentUpon>details.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\transferee\history.css">
+      <DependentUpon>history.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\transferee\history.min.css">
+      <DependentUpon>history.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\transferee\intake.css">
+      <DependentUpon>intake.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\transferee\intake.min.css">
+      <DependentUpon>intake.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\transferee\messages.css">
+      <DependentUpon>messages.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\transferee\messages.min.css">
+      <DependentUpon>messages.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\transferee\rentals.css">
+      <DependentUpon>rentals.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\transferee\rentals.min.css">
+      <DependentUpon>rentals.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\transferee\transferee - Copy %282%29.css">
+      <DependentUpon>details.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\transferee\transferee - Copy %283%29.css">
+      <DependentUpon>rentals.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\transferee\transferee - Copy %284%29.css">
+      <DependentUpon>history.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\transferee\transferee - Copy %285%29.css">
+      <DependentUpon>messages.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\transferee\transferee - Copy.css">
+      <DependentUpon>calendar.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\transferee\transferee.css">
+      <DependentUpon>intake.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\transferee\transferee.min - Copy %282%29.css">
+      <DependentUpon>transferee - Copy %282%29.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\transferee\transferee.min - Copy %283%29.css">
+      <DependentUpon>transferee - Copy %283%29.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\transferee\transferee.min - Copy %284%29.css">
+      <DependentUpon>transferee - Copy %284%29.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\transferee\transferee.min - Copy %285%29.css">
+      <DependentUpon>transferee - Copy %285%29.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\transferee\transferee.min - Copy.css">
+      <DependentUpon>transferee - Copy.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\transferee\transferee.min.css">
+      <DependentUpon>transferee.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\shared\transferee.css">
       <DependentUpon>_definitions.scss</DependentUpon>
     </Content>
@@ -548,6 +620,13 @@
     <Content Include="Content\css\forgotpassword.scss" />
     <Content Include="Content\css\transferee.scss" />
     <Content Include="Content\css\shared\_definitions.scss" />
+    <Content Include="Content\css\transferee\intake.scss" />
+    <Content Include="Content\css\transferee\calendar.scss" />
+    <Content Include="Content\css\transferee\details.scss" />
+    <Content Include="Content\css\transferee\rentals.scss" />
+    <Content Include="Content\css\transferee\history.scss" />
+    <Content Include="Content\css\transferee\messages.scss" />
+    <Content Include="Content\css\transferee\transferee.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
@@ -683,6 +762,12 @@
     <Content Include="Views\Shared\Partials\_logo.cshtml" />
     <Content Include="Views\Shared\Partials\_header.cshtml" />
     <Content Include="Views\Shared\Partials\_logo2.cshtml" />
+    <Content Include="Views\Orders\Partials\_Intake.cshtml" />
+    <Content Include="Views\Orders\Partials\_Details.cshtml" />
+    <Content Include="Views\Orders\Partials\_Rentals.cshtml" />
+    <Content Include="Views\Orders\Partials\_Calendar.cshtml" />
+    <Content Include="Views\Orders\Partials\_Messages.cshtml" />
+    <Content Include="Views\Orders\Partials\_History.cshtml" />
     <None Include="Web.Azure.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

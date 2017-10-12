@@ -24,7 +24,7 @@ div#main div#caption {
       div#main div#caption div#dwellworks p:last-of-type {
         top: -3px;
         font-size: large;
-        color: #4BAD48;
+        color: #49ae44;
         font-size: 20px;
         font-family: sans-serif; }
 
@@ -79,7 +79,7 @@ div#list {
       height: 30px;
       border: none;
       margin-left: 15px;
-      background-color: #4BAD48; }
+      background-color: #49ae44; }
   div#list img.arrow {
     cursor: cell; }
   div#list img.expand {
@@ -108,7 +108,7 @@ div#list {
     white-space: nowrap;
     vertical-align: top; }
     div#list td span.srchIndx {
-      color: #4BAD48; }
+      color: #49ae44; }
     div#list td:nth-child(2) {
       width: 160px; }
     div#list td div.actlist-item-hdr {
@@ -127,7 +127,7 @@ div#list {
         margin-top: 5px;
         vertical-align: top; }
       div#list td div.actlist-item-hdr:nth-child(2) a {
-        color: #4BAD48; }
+        color: #49ae44; }
       div#list td div.actlist-item-hdr img {
         width: 20px; }
     div#list td div.actlist-item-blk {
@@ -154,7 +154,7 @@ div#list {
       font-weight: 500;
       font-family: sans-serif; }
       div#list td p:first-child.actlist-item {
-        color: #4BAD48;
+        color: #49ae44;
         font-size: 16px;
         font-family: sans-serif; }
     div#list td p:nth-child(2) {
