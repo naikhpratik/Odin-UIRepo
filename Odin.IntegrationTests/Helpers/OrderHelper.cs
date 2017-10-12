@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Odin.Data.Builders;
+﻿using Odin.Data.Builders;
 using Odin.Data.Core.Dtos;
 using Odin.Data.Core.Models;
-using Odin.Data.Helpers;
 using Odin.Data.Persistence;
+using System.Data.Entity;
+using System.Linq;
 
 namespace Odin.IntegrationTests.Helpers
 {
@@ -71,13 +66,16 @@ namespace Odin.IntegrationTests.Helpers
                 }
                 context.Consultants.RemoveRange(consultants);
             }
-            
-            var orders = context.Orders.Where(o => o.TrackingId.Contains("integration")).ToList();
+
+            var orders = context.Orders.Where(o => o.TrackingId.Contains("integration") || o.DestinationCity.Contains("integration")).Include(o => o.Transferee).ToList();
             foreach (var order in orders)
             {
-                context.Transferees.Remove(order.Transferee);
                 context.Orders.Remove(order);
-            }
+                if (order.Transferee != null)
+                {
+                    context.Transferees.Remove(order.Transferee);
+                }                
+            }             
 
             context.SaveChanges();
         }
