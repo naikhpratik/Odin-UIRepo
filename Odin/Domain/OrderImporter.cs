@@ -20,8 +20,9 @@ namespace Odin.Domain
         public void ImportOrder(OrderDto orderDto)
         {
             var order = _unitOfWork.Orders.GetOrderByTrackingId(orderDto.TrackingId);
-            var transferee = _unitOfWork.Transferees.GetTransfereeByEmail(orderDto.Transferee.Email);
             var consultantId = _unitOfWork.Consultants.GetConsultantBySeContactUid(orderDto.Consultant.SeContactUid).Id;
+            var transferee = _unitOfWork.Transferees.GetTransfereeByEmail(orderDto.Transferee.Email);
+            
             var programManagerId = _unitOfWork.Managers.GetManagerBySeContactUid(orderDto.ProgramManager.SeContactUid).Id;
 
             if (order == null)

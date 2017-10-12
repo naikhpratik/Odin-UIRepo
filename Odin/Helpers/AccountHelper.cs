@@ -53,7 +53,7 @@ namespace Odin.Helpers
 
             //send the email, specify the content mime type
             var response = _emailHelper.SendEmail_SG(eml, subject, body, SendGrid.MimeType.Html);
-            return callbackUrl;
+            return response;
         }
 
         public async Task<string> SendEmailCreateTokenAsync(string userID) //, string subject, string bdy)
@@ -78,7 +78,7 @@ namespace Odin.Helpers
 
             //send the email, specify the content mime type
             var response = _emailHelper.SendEmail_SG(eml, subject, body, SendGrid.MimeType.Html);
-            return callbackUrl;
+            return response;
         }
     }
 }
