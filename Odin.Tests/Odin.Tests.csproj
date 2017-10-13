@@ -130,6 +130,7 @@
     <Compile Include="Domain\OrderImporterTests.cs" />
     <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="Helpers\AccountHelperTests.cs" />
+    <Compile Include="Helpers\DateHelperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -218,6 +218,10 @@
     <Compile Include="Persistence\Migrations\201710101549284_RemoveNameFromService.Designer.cs">
       <DependentUpon>201710101549284_RemoveNameFromService.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201710122149268_AddRushVipLastContactedToOrder.cs" />
+    <Compile Include="Persistence\Migrations\201710122149268_AddRushVipLastContactedToOrder.Designer.cs">
+      <DependentUpon>201710122149268_AddRushVipLastContactedToOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
     <Compile Include="Persistence\ServicesRepository.cs" />
@@ -297,6 +301,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201710101549284_RemoveNameFromService.resx">
       <DependentUpon>201710101549284_RemoveNameFromService.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710122149268_AddRushVipLastContactedToOrder.resx">
+      <DependentUpon>201710122149268_AddRushVipLastContactedToOrder.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

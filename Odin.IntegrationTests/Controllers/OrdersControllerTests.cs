@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 using NUnit.Framework;
 using Odin.Controllers;
 using Odin.Data.Core.Models;
 using Odin.Data.Persistence;
+using Odin.Helpers;
 using Odin.IntegrationTests.Extensions;
 using Odin.IntegrationTests.TestAttributes;
-using Odin.ViewModels;
-using Odin.Helpers;
+using Odin.ViewModels.Order.Index;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Odin.IntegrationTests.Controllers
 {
@@ -52,7 +47,10 @@ namespace Odin.IntegrationTests.Controllers
         public void Index_ValidRequest_ShouldReturnOrders()
         {
             // Arrange
-            var order = new Order() { OriginCity = "ClevelandTest", Transferee = _transferee, Consultant = _dsc, ProgramManager = _pm, TrackingId = "123Test"};
+            var order = new Order() { SeCustNumb = "867-5309", Transferee = _transferee, Consultant = _dsc, ProgramManager = _pm, TrackingId = "123Test"};
+            ServiceType serviceType = _context.ServiceTypes.First();
+            order.Services.Add(new Service() { ServiceTypeId = serviceType.Id, OrderId = order.Id });
+
             _controller.MockCurrentUser(_dsc.Id, _dsc.UserName);
             _context.Orders.Add(order);
             _context.SaveChanges();
@@ -63,8 +61,36 @@ namespace Odin.IntegrationTests.Controllers
 
             // Assertion
             model.Should().NotBeNull();
-            var newOrder = model.FirstOrDefault(o => o.OriginCity.Equals(order.OriginCity));
+            var newOrder = model.FirstOrDefault(o => o.SeCustNumb == order.SeCustNumb);
             newOrder.Should().NotBeNull();
+            newOrder.Transferee.Should().NotBeNull();
+            newOrder.ProgramManager.Should().NotBeNull();
+            newOrder.Services.Count().Should().Be(1);
+        }
+
+        [Test, Isolated]
+        public void Index_ValidRequestWithNoOrders_ShouldReturnNoOrders()
+        {
+            // Arrange
+            var order = new Order() { SeCustNumb = "867-5309", Transferee = _transferee, Consultant = _dsc, ProgramManager = _pm, TrackingId = "123Test" };
+            ServiceType serviceType = _context.ServiceTypes.First();
+            order.Services.Add(new Service() { ServiceTypeId = serviceType.Id, OrderId = order.Id });
+
+            _controller.MockCurrentUser(_dsc.Id, _dsc.UserName);
+            _context.Orders.Add(order);
+            _context.SaveChanges();
+
+            // Act
+            var result = _controller.Index();
+            var model = result.ViewData.Model as IEnumerable<OrderIndexViewModel>;
+
+            // Assertion
+            model.Should().NotBeNull();
+            var newOrder = model.FirstOrDefault(o => o.SeCustNumb == order.SeCustNumb);
+            newOrder.Should().NotBeNull();
+            newOrder.Transferee.Should().NotBeNull();
+            newOrder.ProgramManager.Should().NotBeNull();
+            newOrder.Services.Count().Should().Be(1);
         }
 
     }

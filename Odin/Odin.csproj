@@ -281,6 +281,7 @@
     </Compile>
     <Compile Include="Helpers\AccountHelper.cs" />
     <Compile Include="Helpers\ConfigHelper.cs" />
+    <Compile Include="Helpers\DateHelper.cs" />
     <Compile Include="Helpers\EmailHelper.cs" />
     <Compile Include="Interfaces\IConfigHelper.cs" />
     <Compile Include="Interfaces\IConsultantImporter.cs" />
@@ -309,11 +310,11 @@
     <Compile Include="ViewModels\Authentication\SetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Authentication\VerifyCodeViewModel.cs" />
     <Compile Include="ViewModels\Authentication\VerifyPhoneNumberViewModel.cs" />
-    <Compile Include="ViewModels\ConsultantViewModel.cs" />
     <Compile Include="ViewModels\Mailers\SetNewPasswordViewModel.cs" />
-    <Compile Include="ViewModels\OrderIndexViewModel.cs" />
-    <Compile Include="ViewModels\ProgramManagerViewModel.cs" />
-    <Compile Include="ViewModels\TransfereeViewModel.cs" />
+    <Compile Include="ViewModels\Order\Index\OrderIndexManagerViewModel.cs" />
+    <Compile Include="ViewModels\Order\Index\OrderIndexServiceViewModel.cs" />
+    <Compile Include="ViewModels\Order\Index\OrderIndexTransfereeViewModel.cs" />
+    <Compile Include="ViewModels\Order\Index\OrderIndexViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-flatly.css" />
