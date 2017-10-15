@@ -14,7 +14,7 @@ div.row {
         height: 850px;
         padding-top: 30px;
         color: white;
-        background-color: $OdinLime;
+        background-color: $DW_Lime;
 
         img {
             width: 70px;
@@ -47,7 +47,7 @@ div.row {
                 height: 60px;
 
                 &:hover {
-                    background-color: $OdinBlue2;
+                    background-color: $DW_Gray;
                 }
             }
 
@@ -56,7 +56,7 @@ div.row {
             }
 
             li.selected {
-                background-color: $OdinBlue;
+                background-color: $DW_Blue;
             }
         }
     }
