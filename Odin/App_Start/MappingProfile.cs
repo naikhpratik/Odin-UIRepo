@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Odin.Data.Core.Dtos;
 using Odin.Data.Core.Models;
-using Odin.ViewModels;
+using Odin.ViewModels.Order.Index;
 
 namespace Odin
 {
@@ -12,10 +12,17 @@ namespace Odin
             CreateMap<ApplicationUser, UserDto>()
                 .ForMember(m => m.Phone, opt => opt.MapFrom(src => src.PhoneNumber));
 
+            /*ViewModel Mappings*/
+
+            /*Order - Index*/
             CreateMap<Order, OrderIndexViewModel>();
-            CreateMap<Transferee, TransfereeViewModel>();
-            CreateMap<Consultant, ConsultantViewModel>();
-            CreateMap<Manager, ProgramManagerViewModel>();
+            CreateMap<Transferee, OrderIndexTransfereeViewModel>();            
+            CreateMap<Manager, OrderIndexManagerViewModel>();
+            CreateMap<Service, OrderIndexServiceViewModel>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.ServiceType.Name));
+
+
+            /*DTO Mappings*/
 
             CreateMap<OrderDto, Order>()
                 .ForMember(m => m.Transferee, opt => opt.Ignore())

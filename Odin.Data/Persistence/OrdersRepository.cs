@@ -23,6 +23,7 @@ namespace Odin.Data.Persistence
                 .Include(o => o.Transferee)
                 .Include(o => o.ProgramManager)
                 .Include(o => o.Consultant)
+                .Include(o => o.Services.Select(st => st.ServiceType))
                 .ToList();
 
         }

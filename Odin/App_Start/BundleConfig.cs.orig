@@ -34,6 +34,7 @@ namespace Odin
                       "~/Content/datatables/css/datatables.bootstrap.css"));
 
             // Page Styling
+<<<<<<< HEAD
             bundles.Add(new StyleBundle("~/Styling/orders").Include("~/Content/css/orders.css"));
             bundles.Add(new StyleBundle("~/Styling/login").Include("~/Content/css/login.css"));
             bundles.Add(new StyleBundle("~/Styling/forgotpw").Include("~/Content/css/forgotpassword.css"));
@@ -50,6 +51,7 @@ namespace Odin
             // Page scripts
             bundles.Add(new ScriptBundle("~/Scripts/orders").Include("~/Scripts/app/views/orders.js"));
             bundles.Add(new ScriptBundle("~/Scripts/transferee").Include("~/Scripts/app/views/transferee.js"));
+=======
             bundles.Add(new StyleBundle("~/Styling/orders").Include("~/Content/Orders/orders.css"));
             bundles.Add(new StyleBundle("~/Styling/login").Include("~/Content/Login/login.css"));
             bundles.Add(new StyleBundle("~/Styling/forgotPassword").Include(
@@ -61,6 +63,7 @@ namespace Odin
             bundles.Add(new ScriptBundle("~/bundles/forgotPassword").Include(
                         "~/Scripts/bootstrap-notify.min.js",
                         "~/Scripts/app/views/forgotPassword.js"));
+>>>>>>> origin/view_model_for_dashboard
         }
     }
 }

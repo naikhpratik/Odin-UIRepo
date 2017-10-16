@@ -281,6 +281,7 @@
     </Compile>
     <Compile Include="Helpers\AccountHelper.cs" />
     <Compile Include="Helpers\ConfigHelper.cs" />
+    <Compile Include="Helpers\DateHelper.cs" />
     <Compile Include="Helpers\EmailHelper.cs" />
     <Compile Include="Interfaces\IConfigHelper.cs" />
     <Compile Include="Interfaces\IConsultantImporter.cs" />
@@ -309,13 +310,14 @@
     <Compile Include="ViewModels\Authentication\SetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Authentication\VerifyCodeViewModel.cs" />
     <Compile Include="ViewModels\Authentication\VerifyPhoneNumberViewModel.cs" />
-    <Compile Include="ViewModels\ConsultantViewModel.cs" />
     <Compile Include="ViewModels\Mailers\SetNewPasswordViewModel.cs" />
-    <Compile Include="ViewModels\OrderIndexViewModel.cs" />
-    <Compile Include="ViewModels\ProgramManagerViewModel.cs" />
-    <Compile Include="ViewModels\TransfereeViewModel.cs" />
+    <Compile Include="ViewModels\Order\Index\OrderIndexManagerViewModel.cs" />
+    <Compile Include="ViewModels\Order\Index\OrderIndexServiceViewModel.cs" />
+    <Compile Include="ViewModels\Order\Index\OrderIndexTransfereeViewModel.cs" />
+    <Compile Include="ViewModels\Order\Index\OrderIndexViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\animate.css" />
     <Content Include="Content\bootstrap-flatly.css" />
     <Content Include="Content\bootstrap-paper.css" />
     <Content Include="Content\bootstrap.css" />
@@ -600,8 +602,13 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\app\controllers\userManagementController.js" />
     <Content Include="Scripts\app\services\userManagementService.js" />
+<<<<<<< HEAD
     <Content Include="Scripts\app\views\transferee.js" />
+=======
+    <Content Include="Scripts\app\views\forgotPassword.js" />
+>>>>>>> origin/view_model_for_dashboard
     <Content Include="Scripts\app\views\orders.js" />
+    <Content Include="Scripts\bootstrap-notify.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -758,9 +765,7 @@
     <Content Include="Views\Mailers\ResetPassword.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-<<<<<<< HEAD
     <Content Include="Views\Home\OfOrder.cshtml" />
-=======
     <Content Include="Views\Orders\Transferee.cshtml" />
     <Content Include="Views\Shared\Partials\_logo.cshtml" />
     <Content Include="Views\Shared\Partials\_header.cshtml" />
@@ -771,7 +776,6 @@
     <Content Include="Views\Orders\Partials\_Calendar.cshtml" />
     <Content Include="Views\Orders\Partials\_Messages.cshtml" />
     <Content Include="Views\Orders\Partials\_History.cshtml" />
->>>>>>> origin/intake
     <None Include="Web.Azure.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

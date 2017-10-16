@@ -50,6 +50,12 @@ namespace Odin.Data.Core.Models
 
         public virtual ICollection<Service> Services { get; private set; }
 
+        public DateTime? LastContactedDate{get; set; }
+
+        public bool IsRush { get; set; }
+
+        public bool IsVip { get; set; }
+
         public bool HasService(int serviceTypeId)
         {
             return Services.Any<Service>(s => s.ServiceTypeId == serviceTypeId);
