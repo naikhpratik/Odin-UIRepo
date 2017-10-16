@@ -176,7 +176,8 @@ namespace Odin.Controllers
                     
                 }
 
-                return View("ForgotPasswordConfirmation");
+                ViewBag.Message = "sent";
+                return View(model);
 
                 // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
@@ -186,6 +187,8 @@ namespace Odin.Controllers
                 // return RedirectToAction("ForgotPasswordConfirmation", "Account");
 
             }
+
+            ViewBag.Message = "error";
 
             // If we got this far, something failed, redisplay form
             return View(model);

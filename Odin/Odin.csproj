@@ -317,6 +317,7 @@
     <Compile Include="ViewModels\Order\Index\OrderIndexViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\animate.css" />
     <Content Include="Content\bootstrap-flatly.css" />
     <Content Include="Content\bootstrap-paper.css" />
     <Content Include="Content\bootstrap.css" />
@@ -517,7 +518,9 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\app\controllers\userManagementController.js" />
     <Content Include="Scripts\app\services\userManagementService.js" />
+    <Content Include="Scripts\app\views\forgotPassword.js" />
     <Content Include="Scripts\app\views\orders.js" />
+    <Content Include="Scripts\bootstrap-notify.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">

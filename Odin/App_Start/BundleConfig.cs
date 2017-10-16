@@ -20,6 +20,9 @@ namespace Odin
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap-notify").Include(
+                        "~/Scripts/bootstrap-notify.min.js"));
+
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
@@ -33,10 +36,15 @@ namespace Odin
             // Page Styling
             bundles.Add(new StyleBundle("~/Styling/orders").Include("~/Content/Orders/orders.css"));
             bundles.Add(new StyleBundle("~/Styling/login").Include("~/Content/Login/login.css"));
-            bundles.Add(new StyleBundle("~/Styling/forgotpw").Include("~/Content/ForgotPassword/forgotpassword.css"));
+            bundles.Add(new StyleBundle("~/Styling/forgotPassword").Include(
+                "~/Content/ForgotPassword/forgotpassword.css",
+                "~/Content/animate.css"));
 
             // Page scripts
             bundles.Add(new ScriptBundle("~/Scripts/orders").Include("~/Scripts/app/views/orders.js"));
+            bundles.Add(new ScriptBundle("~/bundles/forgotPassword").Include(
+                        "~/Scripts/bootstrap-notify.min.js",
+                        "~/Scripts/app/views/forgotPassword.js"));
         }
     }
 }
