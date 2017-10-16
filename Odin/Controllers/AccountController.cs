@@ -437,7 +437,7 @@ namespace Odin.Controllers
             AddErrors(result);
             return View();
         }
-
+       
         //Do not use the SendEmailConfirmationTokenAsync method outside the membership function
         //It is exposed through the helper: AccountHelper. Use AccountHelper to access it.
 
