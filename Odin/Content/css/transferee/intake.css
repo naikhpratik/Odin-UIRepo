@@ -1,1 +1,37 @@
-﻿
+﻿div#intake {
+  padding-top: 30px;
+  padding-left: 50px; }
+  div#intake div.row {
+    text-align: left; }
+  div#intake .intake-title {
+    padding-bottom: 30px; }
+  div#intake hr {
+    margin-top: 0px;
+    margin-bottom: 0px; }
+  div#intake .intake-blue {
+    color: #31a4dd; }
+  div#intake .intake-lime {
+    color: #a7ce39; }
+  div#intake .intake-block {
+    padding-top: 35px;
+    padding-bottom: 35px; }
+    div#intake .intake-block .intake-header h5 {
+      margin-top: 0px; }
+    div#intake .intake-block .intake-header span {
+      font-size: small;
+      color: #a7ce39;
+      cursor: pointer; }
+    div#intake .intake-block .intake-row {
+      padding-top: 15px; }
+      div#intake .intake-block .intake-row .intake-col label {
+        display: block;
+        font-size: medium;
+        margin-bottom: -5px; }
+      div#intake .intake-block .intake-row .intake-col span {
+        color: #31a4dd;
+        font-size: small; }
+      div#intake .intake-block .intake-row .intake-col input {
+        color: #31a4dd;
+        font-size: small;
+        display: none; }
+

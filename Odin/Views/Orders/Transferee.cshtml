@@ -19,7 +19,7 @@
             <li class="item" data-panel="calendar">Calendar</li>
         </ul>
     </div>
-    <div class="col">
+    <div class="col col-md-10">
         @Html.Partial("~/Views/Orders/Partials/_Intake.cshtml")
         @Html.Partial("~/Views/Orders/Partials/_Details.cshtml")
         @Html.Partial("~/Views/Orders/Partials/_Rentals.cshtml")
@@ -35,6 +35,9 @@
 @section scripts
 {
     <script>
-        $(document).ready(OrdersPageController.TransfereeInit);
+        $(document).ready(function() {
+            OrdersPageController.TransfereeInit();
+            TransfereeIntakeController.init();
+        });
     </script>
 }

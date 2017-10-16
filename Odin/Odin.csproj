@@ -569,6 +569,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\app\controllers\userManagementController.js" />
     <Content Include="Scripts\app\services\userManagementService.js" />
+    <Content Include="Scripts\app\views\transferee-intake.js" />
     <Content Include="Scripts\app\views\transferee.js" />
     <Content Include="Scripts\app\views\forgotPassword.js" />
     <Content Include="Scripts\app\views\orders.js" />
