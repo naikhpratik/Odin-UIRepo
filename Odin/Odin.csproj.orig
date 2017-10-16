@@ -95,9 +95,6 @@
     <Reference Include="Ninject.Web.WebApi.OwinHost, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.Web.WebApi.OwinHost.3.2.4.0\lib\net45-full\Ninject.Web.WebApi.OwinHost.dll</HintPath>
     </Reference>
-    <Reference Include="RazorEngine, Version=3.10.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
-      <HintPath>..\packages\RazorEngine.3.10.0\lib\net45\RazorEngine.dll</HintPath>
-    </Reference>
     <Reference Include="SendGrid, Version=9.8.0.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
       <HintPath>..\packages\Sendgrid.9.9.0\lib\net452\SendGrid.dll</HintPath>
     </Reference>
@@ -283,6 +280,7 @@
     <Compile Include="Helpers\ConfigHelper.cs" />
     <Compile Include="Helpers\DateHelper.cs" />
     <Compile Include="Helpers\EmailHelper.cs" />
+    <Compile Include="Helpers\ViewRenderer.cs" />
     <Compile Include="Interfaces\IConfigHelper.cs" />
     <Compile Include="Interfaces\IConsultantImporter.cs" />
     <Compile Include="Interfaces\IManagerImporter.cs" />
@@ -311,10 +309,19 @@
     <Compile Include="ViewModels\Authentication\VerifyCodeViewModel.cs" />
     <Compile Include="ViewModels\Authentication\VerifyPhoneNumberViewModel.cs" />
     <Compile Include="ViewModels\Mailers\SetNewPasswordViewModel.cs" />
+<<<<<<< HEAD
     <Compile Include="ViewModels\Order\Index\OrderIndexManagerViewModel.cs" />
     <Compile Include="ViewModels\Order\Index\OrderIndexServiceViewModel.cs" />
     <Compile Include="ViewModels\Order\Index\OrderIndexTransfereeViewModel.cs" />
     <Compile Include="ViewModels\Order\Index\OrderIndexViewModel.cs" />
+=======
+    <Compile Include="ViewModels\Mailers\ViewRenderer.cs" />
+    <Compile Include="ViewModels\OrderIndexViewModel.cs" />
+    <Compile Include="ViewModels\ProgramManagerViewModel.cs" />
+    <Compile Include="ViewModels\TransfereeViewModel.cs" />
+    <Compile Include="Views\Helpers\HtmlHelpers.cs" />
+    <Compile Include="Views\Helpers\UrlHelpers.cs" />
+>>>>>>> decorate_sendemail_templates
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\animate.css" />
@@ -358,38 +365,8 @@
     <Content Include="Content\css\transferee\rentals.min.css">
       <DependentUpon>rentals.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\transferee\transferee - Copy %282%29.css">
-      <DependentUpon>details.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\transferee - Copy %283%29.css">
-      <DependentUpon>rentals.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\transferee - Copy %284%29.css">
-      <DependentUpon>history.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\transferee - Copy %285%29.css">
-      <DependentUpon>messages.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\transferee - Copy.css">
-      <DependentUpon>calendar.scss</DependentUpon>
-    </Content>
     <Content Include="Content\css\transferee\transferee.css">
-      <DependentUpon>intake.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\transferee.min - Copy %282%29.css">
-      <DependentUpon>transferee - Copy %282%29.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\transferee.min - Copy %283%29.css">
-      <DependentUpon>transferee - Copy %283%29.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\transferee.min - Copy %284%29.css">
-      <DependentUpon>transferee - Copy %284%29.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\transferee.min - Copy %285%29.css">
-      <DependentUpon>transferee - Copy %285%29.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\transferee.min - Copy.css">
-      <DependentUpon>transferee - Copy.css</DependentUpon>
+      <DependentUpon>transferee.scss</DependentUpon>
     </Content>
     <Content Include="Content\css\transferee\transferee.min.css">
       <DependentUpon>transferee.css</DependentUpon>
@@ -570,11 +547,13 @@
     <Content Include="Content\Images\dwellworks_icon.png" />
     <Content Include="Content\Images\expand.png" />
     <Content Include="Content\Images\forgot_password.jpg" />
-    <Content Include="Content\Images\icn_cal_1.png" />
-    <Content Include="Content\Images\icn_chat_1.png" />
+    <Content Include="Content\Images\icn_alert_B1.png" />
+    <Content Include="Content\Images\icn_alert_circle.png" />
+    <Content Include="Content\Images\icn_cal_B1.png" />
+    <Content Include="Content\Images\icn_chat_B1.png" />
     <Content Include="Content\Images\icn_down_arrow.png" />
-    <Content Include="Content\Images\icn_note_1.png" />
-    <Content Include="Content\Images\icn_profile.png" />
+    <Content Include="Content\Images\icn_person.png" />
+    <Content Include="Content\Images\icn_profile_B1.png" />
     <Content Include="Content\Images\icn_up_arrow.png" />
     <Content Include="Content\Images\ic_search.png" />
     <Content Include="Content\Images\user-placeholder.png" />
@@ -590,23 +569,14 @@
     <Content Include="Content\css\orders.min.css">
       <DependentUpon>orders.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\transferee.css">
-      <DependentUpon>transferee.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee.min.css">
-      <DependentUpon>transferee.css</DependentUpon>
-    </Content>
     <Content Include="favicon.ico" />
     <Content Include="Fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\app\controllers\userManagementController.js" />
     <Content Include="Scripts\app\services\userManagementService.js" />
-<<<<<<< HEAD
     <Content Include="Scripts\app\views\transferee.js" />
-=======
     <Content Include="Scripts\app\views\forgotPassword.js" />
->>>>>>> origin/view_model_for_dashboard
     <Content Include="Scripts\app\views\orders.js" />
     <Content Include="Scripts\bootstrap-notify.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -625,7 +595,6 @@
     <Content Include="Content\css\login.scss" />
     <Content Include="Content\css\orders.scss" />
     <Content Include="Content\css\forgotpassword.scss" />
-    <Content Include="Content\css\transferee.scss" />
     <Content Include="Content\css\shared\_definitions.scss" />
     <Content Include="Content\css\transferee\intake.scss" />
     <Content Include="Content\css\transferee\calendar.scss" />

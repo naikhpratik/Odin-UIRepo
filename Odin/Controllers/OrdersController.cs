@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Net;
 using System.Web.Mvc;
 using System.Linq;
+using Odin.Helpers;
+using Odin.Interfaces;
 
 namespace Odin.Controllers
 {
@@ -15,12 +17,11 @@ namespace Odin.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        
-        public OrdersController(IUnitOfWork unitOfWork, IMapper mapper)
+
+        public OrdersController(IUnitOfWork unitOfWork, IMapper mapper,IAccountHelper accountHelper)
         {
             _unitOfWork = unitOfWork;
-            _mapper = mapper;
-
+            _mapper = mapper;           
         }
 
         // GET: Orders

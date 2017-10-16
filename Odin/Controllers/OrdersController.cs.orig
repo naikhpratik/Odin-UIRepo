@@ -2,10 +2,16 @@
 using Microsoft.AspNet.Identity;
 using Odin.Data.Core;
 using Odin.Data.Core.Models;
-using Odin.ViewModels;
+using Odin.ViewModels.Order.Index;
 using System.Collections.Generic;
 using System.Net;
 using System.Web.Mvc;
+<<<<<<< HEAD
+using System.Linq;
+=======
+using Odin.Helpers;
+using Odin.Interfaces;
+>>>>>>> decorate_sendemail_templates
 
 namespace Odin.Controllers
 {
@@ -14,12 +20,11 @@ namespace Odin.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        
-        public OrdersController(IUnitOfWork unitOfWork, IMapper mapper)
+
+        public OrdersController(IUnitOfWork unitOfWork, IMapper mapper,IAccountHelper accountHelper)
         {
             _unitOfWork = unitOfWork;
-            _mapper = mapper;
-
+            _mapper = mapper;           
         }
 
         // GET: Orders
@@ -33,7 +38,6 @@ namespace Odin.Controllers
 
             return View(orderVms);
         }
-<<<<<<< HEAD
 
         public ActionResult Details(int orderId)
         {
@@ -52,13 +56,12 @@ namespace Odin.Controllers
             }
 
             return View();            
-=======
-        
+        }
+
         // GET: Transferee
         public ViewResult Transferee()
         {
             return View();
->>>>>>> origin/intake
         }
     }
     

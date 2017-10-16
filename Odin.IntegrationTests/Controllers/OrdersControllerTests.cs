@@ -33,8 +33,9 @@ namespace Odin.IntegrationTests.Controllers
             _transferee = _context.Transferees.First(u => u.UserName.Equals("odinee@dwellworks.com"));
             _dsc = _context.Consultants.First(u => u.UserName.Equals("odinconsultant@dwellworks.com"));
             _pm = _context.Managers.First(u => u.UserName.Equals("odinpm@dwellworks.com"));
-            var emailHelper = new EmailHelper();            
-            _controller = new OrdersController(new UnitOfWork(_context), mapper);
+            var emailHelper = new EmailHelper();
+            var accountHelper = new AccountHelper(emailHelper);
+            _controller = new OrdersController(new UnitOfWork(_context), mapper, accountHelper);
         }
 
         [TearDown]
