@@ -25,18 +25,26 @@ namespace Odin.Data.Tests.Persistence.Repositories
             _mockConsultants = new Mock<DbSet<Consultant>>();
             _mockConsultants.SetSource(source);
             var mockContext = new Mock<ApplicationDbContext>();
-            //mockContext.As<IApplicationDbContext>();
             mockContext.SetupGet(c => c.Consultants).Returns(_mockConsultants.Object);
             _consultantsRepository = new ConsultantsRepository(mockContext.Object);
         }
 
         [TestMethod]
-        public void addConsultantTest()
+        public void GetConsultantBySeContactUid_SameUid_ReturnsConsultant()
         {
             var consultant1 = new Consultant() { Id = "consultant1", Email="consultant1@dwellworks.com", SeContactUid=1 };
             SetupRepositoryWithSource(new[] {consultant1 });
             var result = _consultantsRepository.GetConsultantBySeContactUid(1);
             result.Should().Equals(consultant1);
+        }
+
+        [TestMethod]
+        public void GetConsultantBySeContactUid_DifferentUid_DoesNotReturnConsultant()
+        {
+            var consultant = new Consultant() { Id = "consultant1", Email = "consultant1@dwellworks.com", SeContactUid = 1 };
+            SetupRepositoryWithSource(new[] { consultant });
+            var result = _consultantsRepository.GetConsultantBySeContactUid(2);
+            result.Should().BeNull();
         }
     }
 }
