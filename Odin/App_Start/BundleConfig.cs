@@ -36,7 +36,8 @@ namespace Odin
             // Page Styling
             bundles.Add(new StyleBundle("~/Styling/orders").Include("~/Content/css/orders.css"));
             bundles.Add(new StyleBundle("~/Styling/login").Include("~/Content/css/login.css"));
-            bundles.Add(new StyleBundle("~/Styling/forgotpw").Include("~/Content/css/forgotpassword.css"));
+            bundles.Add(new StyleBundle("~/Styling/forgotPassword").Include("~/Content/css/forgotpassword.css",
+                "~/Content/animate.css"));
             bundles.Add(new StyleBundle("~/Styling/transferee").Include("~/Content/css/transferee/transferee.css"));
 
             // Panel Styling
@@ -50,17 +51,11 @@ namespace Odin
             // Page scripts
             bundles.Add(new ScriptBundle("~/Scripts/orders").Include("~/Scripts/app/views/orders.js"));
             bundles.Add(new ScriptBundle("~/Scripts/transferee").Include("~/Scripts/app/views/transferee.js"));
-            bundles.Add(new StyleBundle("~/Styling/orders").Include("~/Content/Orders/orders.css"));
-            bundles.Add(new StyleBundle("~/Styling/login").Include("~/Content/Login/login.css"));
-            bundles.Add(new StyleBundle("~/Styling/forgotPassword").Include(
-                "~/Content/ForgotPassword/forgotpassword.css",
-                "~/Content/animate.css"));
-
-            // Page scripts
-            bundles.Add(new ScriptBundle("~/Scripts/orders").Include("~/Scripts/app/views/orders.js"));
             bundles.Add(new ScriptBundle("~/bundles/forgotPassword").Include(
-                        "~/Scripts/bootstrap-notify.min.js",
-                        "~/Scripts/app/views/forgotPassword.js"));
+                "~/Scripts/bootstrap-notify.min.js",
+                "~/Scripts/app/views/forgotPassword.js"));
+            
+
         }
     }
 }

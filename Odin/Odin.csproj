@@ -358,38 +358,8 @@
     <Content Include="Content\css\transferee\rentals.min.css">
       <DependentUpon>rentals.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\transferee\transferee - Copy %282%29.css">
-      <DependentUpon>details.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\transferee - Copy %283%29.css">
-      <DependentUpon>rentals.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\transferee - Copy %284%29.css">
-      <DependentUpon>history.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\transferee - Copy %285%29.css">
-      <DependentUpon>messages.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\transferee - Copy.css">
-      <DependentUpon>calendar.scss</DependentUpon>
-    </Content>
     <Content Include="Content\css\transferee\transferee.css">
-      <DependentUpon>intake.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\transferee.min - Copy %282%29.css">
-      <DependentUpon>transferee - Copy %282%29.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\transferee.min - Copy %283%29.css">
-      <DependentUpon>transferee - Copy %283%29.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\transferee.min - Copy %284%29.css">
-      <DependentUpon>transferee - Copy %284%29.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\transferee.min - Copy %285%29.css">
-      <DependentUpon>transferee - Copy %285%29.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\transferee.min - Copy.css">
-      <DependentUpon>transferee - Copy.css</DependentUpon>
+      <DependentUpon>transferee.scss</DependentUpon>
     </Content>
     <Content Include="Content\css\transferee\transferee.min.css">
       <DependentUpon>transferee.css</DependentUpon>
