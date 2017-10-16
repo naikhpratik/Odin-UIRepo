@@ -570,11 +570,13 @@
     <Content Include="Content\Images\dwellworks_icon.png" />
     <Content Include="Content\Images\expand.png" />
     <Content Include="Content\Images\forgot_password.jpg" />
-    <Content Include="Content\Images\icn_cal_1.png" />
-    <Content Include="Content\Images\icn_chat_1.png" />
+    <Content Include="Content\Images\icn_alert_B1.png" />
+    <Content Include="Content\Images\icn_alert_circle.png" />
+    <Content Include="Content\Images\icn_cal_B1.png" />
+    <Content Include="Content\Images\icn_chat_B1.png" />
     <Content Include="Content\Images\icn_down_arrow.png" />
-    <Content Include="Content\Images\icn_note_1.png" />
-    <Content Include="Content\Images\icn_profile.png" />
+    <Content Include="Content\Images\icn_person.png" />
+    <Content Include="Content\Images\icn_profile_B1.png" />
     <Content Include="Content\Images\icn_up_arrow.png" />
     <Content Include="Content\Images\ic_search.png" />
     <Content Include="Content\Images\user-placeholder.png" />
@@ -589,12 +591,6 @@
     </Content>
     <Content Include="Content\css\orders.min.css">
       <DependentUpon>orders.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee.css">
-      <DependentUpon>transferee.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee.min.css">
-      <DependentUpon>transferee.css</DependentUpon>
     </Content>
     <Content Include="favicon.ico" />
     <Content Include="Fonts\glyphicons-halflings-regular.svg" />
@@ -622,7 +618,6 @@
     <Content Include="Content\css\login.scss" />
     <Content Include="Content\css\orders.scss" />
     <Content Include="Content\css\forgotpassword.scss" />
-    <Content Include="Content\css\transferee.scss" />
     <Content Include="Content\css\shared\_definitions.scss" />
     <Content Include="Content\css\transferee\intake.scss" />
     <Content Include="Content\css\transferee\calendar.scss" />

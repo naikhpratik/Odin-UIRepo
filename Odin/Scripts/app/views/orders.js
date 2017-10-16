@@ -5,8 +5,7 @@
     var $Orders = null;
     var $SortedOrders = null;
     var $SearchedOrders = null;
-    
-     
+
     var init = function () { 
 
         var tablet_table = $('table.tablet tbody');
@@ -16,13 +15,17 @@
         $.getJSON("/api/orders",
             function (orders) {
                 $Orders = orders;
+                for (var i = 0; i < $Orders.transferees.length; i++) {
+                    $Orders.transferees[i].index = i;
+                }
+
                 $SortedOrders = $Orders; 
                 $SearchedOrders = $SortedOrders;
 
                 populateTables();
             }
         );
-         
+
         // sort handlers
         $('.arrow.up').click(function () {
 
@@ -76,8 +79,8 @@
                             var lastName = lastMatch[0];
 
                             lastName += "<span class=\"srchIndx\">";
-                            for (var j = 0; j < srchIndx.length; j++) {
-                                lastName += transferee.lastName[lastMatch[0].length + j];
+                            for (var k = 0; k < srchIndx.length; k++) {
+                                lastName += transferee.lastName[lastMatch[0].length + k];
                             }
                             lastName += "</span>" + lastMatch[1];
 
@@ -99,17 +102,20 @@
 
         var populateTables = function () {
 
-            if ($SearchedOrders.transferees == null) return;
+            if ($SearchedOrders.transferees === null) return;
 
             for (var i = 0; i < $SearchedOrders.transferees.length; i++) {
 
                 // name
-                var name = "<p>" + $SearchedOrders.transferees[i].firstName + " " + $SearchedOrders.transferees[i].lastName + "</p>";
+                var name = "<p class=\"transferee\">" + $SearchedOrders.transferees[i].firstName + " " + $SearchedOrders.transferees[i].lastName + "</p>";
                 if ($SearchedOrders.transferees[i].rmc !== null) 
                     name += "<p class=\"Callout\">" + $SearchedOrders.transferees[i].rmc + "</p>";                        
                 
                 if ($SearchedOrders.transferees[i].company !== null) 
-                    name += "<p>" + $SearchedOrders.transferees[i].company + "</p>";                                   
+                    name += "<p class=\"company\">" + $SearchedOrders.transferees[i].company + "</p>";   
+
+                if ($SearchedOrders.transferees[i].rush !== undefined && $SearchedOrders.transferees[i].rush === true)
+                    name += "<p class=\"urgent\">Rush</p>";
 
                 var name_tablet = name + "<div><span class=\"tablet-column-label\">PreTrip:</span>";
                 if ($SearchedOrders.transferees[i].preTrip !== null)
@@ -131,8 +137,8 @@
 
                 // services
                 var services = "<div class=\"actlist-item-hdr\"><img class=\"expand\" src=\"/Content/Images/expand.png\" /><img class=\"collapse noinit\" src=\"/Content/Images/collapse.png\" />" +
-                    "</div><div class=\"actlist-item-hdr\"><p>SS</p><a href=\"#\">" + $SearchedOrders.transferees[i].numberOfScheduledServices + "</a></div><div class=\"actlist-item-hdr\"><p>S</p><a href=\"#\">" +
-                    $SearchedOrders.transferees[i].numberOfServices + "</a></div>" + "<div class=\"actlist-item-hdr\"><p>C</p><a href=\"#\">" + $SearchedOrders.transferees[i].numberOfCompletedServices + "</a></div>";
+                    "</div><div class=\"actlist-item-hdr\"><p>AT</p><a href=\"#\">" + ("0" + $SearchedOrders.transferees[i].numberOfScheduledServices).slice(-2) + "</a></div><div class=\"actlist-item-hdr\"><p>S</p><a href=\"#\">" +
+                    ("0" + $SearchedOrders.transferees[i].numberOfServices).slice(-2) + "</a></div>" + "<div class=\"actlist-item-hdr\"><p>C</p><a href=\"#\">" + ("0" + $SearchedOrders.transferees[i].numberOfCompletedServices).slice(-2) + "</a></div>";
 
                 var services_list = "";
                 if ($SearchedOrders.transferees[i].services !== null) {
@@ -146,43 +152,43 @@
                 }
 
                 var services_tablet = "<div class=\"actlist-item-hdr\"><img class=\"expand\" src=\"/Content/Images/expand.png\" /><img class=\"collapse noinit\" src=\"/Content/Images/collapse.png\" />" +
-                    "</div><div class=\"actlist-item-hdr\"><p>SS</p><a href=\"#\">" + $SearchedOrders.transferees[i].numberOfScheduledServices + "</a></div><div class=\"actlist-item-hdr\"><p>S</p><a href=\"#\">" +
-                    $SearchedOrders.transferees[i].numberOfServices + "</a></div><div class=\"actlist-item-hdr\">" + "<p>C</p><a href=\"#\">" + $SearchedOrders.transferees[i].numberOfCompletedServices + "</a></div>";
+                    "</div><div class=\"actlist-item-hdr\"><p>AT</p><a href=\"#\">" + ("0" + $SearchedOrders.transferees[i].numberOfScheduledServices).slice(-2) + "</a></div><div class=\"actlist-item-hdr\"><p>S</p><a href=\"#\">" +
+                    ("0" + $SearchedOrders.transferees[i].numberOfServices).slice(-2) + "</a></div><div class=\"actlist-item-hdr\">" + "<p>C</p><a href=\"#\">" + ("0"+$SearchedOrders.transferees[i].numberOfCompletedServices).slice(-2) + "</a></div>";
                 services_tablet += services_list;
 
                 // last contacted
-                var lastcontacted = "<p>Last Contacted</p>";
+                var lastcontacted = "";
                 if ($SearchedOrders.transferees[i].lastContacted !== null)
-                    lastcontacted += "<p>" + $SearchedOrders.transferees[i].lastContacted.split("T")[0] + "</p>";
+                    lastcontacted += "<p class=\"lastcontacted\">" + $SearchedOrders.transferees[i].lastContacted.split("T")[0] + "</p>";
 
                 // manager
-                var manager = "<td><p>Manager</p>";
+                var manager = "<td>";
                 if ($SearchedOrders.transferees[i].manager !== null)
                     manager += "<p class=\"Callout\">" + $SearchedOrders.transferees[i].manager + "</p>";
                 if ($SearchedOrders.transferees[i].managerPhone !== null)
-                    manager += "<p>" + $SearchedOrders.transferees[i].managerPhone + "</p></td>";
+                    manager += "<p class=\"managerphone\">" + $SearchedOrders.transferees[i].managerPhone + "</p></td>";
                 else manager += "</td>";
 
                 // pretrip
-                var pretrip = "<td><p>PreTrip</p>";
+                var pretrip = "<td>";
                 if ($SearchedOrders.transferees[i].preTrip !== null)
-                    pretrip += "<p>" + $SearchedOrders.transferees[i].preTrip.split("T")[0] + "</p></td>";
+                    pretrip += "<p class=\"pretrip\">" + $SearchedOrders.transferees[i].preTrip.split("T")[0] + "</p></td>";
                 else pretrip += "</td>";
 
                 // final arrival
-                var finalarrival = "<td><p>Final Arrival</p>";
+                var finalarrival = "<td>";
                 if ($SearchedOrders.transferees[i].finalArrival !== null)
-                    finalarrival += "<p>" + $SearchedOrders.transferees[i].finalArrival.split("T")[0] + "</p></td>";
+                    finalarrival += "<p class=\"finalarrival\">" + $SearchedOrders.transferees[i].finalArrival.split("T")[0] + "</p></td>";
                 else finalarrival += "</td>";
 
                 // notification
-                var notification = "<td><img src=\"/Content/Images/icn_note_1.png\" />"
+                var notification = "<td><img src=\"/Content/Images/icn_alert_B1.png\" />"
                 if ($SearchedOrders.transferees[i].numberOfAlerts > 0)
-                    notification += "<div class=\"notify-count\"><span>" + $SearchedOrders.transferees[i].numberOfAlerts + "</span></div></td>";
+                    notification += "<div class=\"notify-count\"><img src=\"/Content/Images/icn_alert_circle.png\"/><span>" + ("0"+$SearchedOrders.transferees[i].numberOfAlerts).slice(-2) + "</span></div></td>";
 
-                desktop_table.append("<tr>" + "<td>" + name + "</td>" + "<td>" + services + "</td>" + "<td>" + lastcontacted + "</td>" + manager + pretrip + finalarrival + notification + "</tr>");
-                tablet_table.append("<tr>" + "<td>" + name_tablet + "</td>" + manager + "<td>" + lastcontacted + "</td>" + "<td>" + services_tablet + "</td>" + notification + "</tr>");
-                mobile_table.append("<tr>" + "<td>" + name_mobile + "</td>" + "<td>" + lastcontacted + services + "</td>" + notification + "</tr>");
+                desktop_table.append("<tr data-index=\"" + $SearchedOrders.transferees[i].index + "\">" + "<td>" + name + "</td>" + "<td>" + services + "</td>" + "<td>" + lastcontacted + "</td>" + manager + pretrip + finalarrival + notification + "</tr>");
+                tablet_table.append ("<tr data-index=\"" + $SearchedOrders.transferees[i].index + "\">" + "<td>" + name_tablet + "</td>" + manager + "<td>" + lastcontacted + "</td>" + "<td>" + services_tablet + "</td>" + notification + "</tr>");
+                mobile_table.append ("<tr data-index=\"" + $SearchedOrders.transferees[i].index + "\">" + "<td>" + name_mobile + "</td>" + "<td>" + lastcontacted + services + "</td>" + notification + "</tr>");
 
                 // service expansion handlers
                 $('.expand').click(function () {
@@ -205,7 +211,7 @@
 
                 // row selection handler
                 $('tr').not(':first').click(function (event) {
-
+                    window.location.href = "/Orders/Transferee/" + $(this).attr('data-index');
                 });
             }
         };

@@ -1,11 +1,14 @@
 ﻿
 //----  variables
-$OdinBlue: #31A4DD;
-$OdinBlue2: #73c2ed;
-$OdinGreen: #49ae44;
-$OdinLime: #a7ce39;
-$OdinBrown: #4b3311;
-$OdinGrey: #aca095;
+$DW_LtBlue: #73c2ed;
+$DW_Blue: #31a4dd;
+$DW_Green: #49ae44;
+$DW_Lime: #a7ce39;
+$DW_Brown: #4b3311;
+$DW_Red: #e53c2e;
+$DW_LtPurple: #8d0b56;
+$DW_Gray: #b7a998;
+$DW_Purple: #621f65;
 
 
 //---- mixins
@@ -38,33 +41,59 @@ $OdinGrey: #aca095;
 
                 &.icons_notify {
                     font-size: small;
-                    color: $OdinBlue;
+                    color: white;
                     position: relative;
                     font-weight: bold;
                     display: inline-block;
                     width: 10px;
                     text-align: center;
 
+                    img {
+                        width: 26px;
+                    }
+
                     &.icons_notify_messages {
-                        top: 6px;
-                        left: -45px;
+                        top: -2px;
+                        left: -321px;
+
+                        span {
+                            position: relative;
+                            top: -33px;
+                            left: -19px;
+                        }
                     }
 
                     &.icons_notify_alerts {
-                        top: 6px;
-                        left: -145px;
+                        top: -2px;
+                        left: -104px;
+
+                        span {
+                            position: relative;
+                            top: -33px;
+                            left: -17px;
+                        }
                     }
 
                     &.icons_notify_appts {
-                        top: 6px;
-                        left: -188px;
+                        top: -2px;
+                        left: -204px;
+
+                        span {
+                            position: relative;
+                            top: -33px;
+                            left: -18px;
+                        }
                     }
                 }
 
                 img {
                     float: right;
-                    width: 40px;
+                    width: 50px;
                     margin: 8px;
+
+                    &.icons_notify {
+                        margin-right: 40px;
+                    }
                 }
             }
         }
@@ -96,7 +125,7 @@ $OdinGrey: #aca095;
             &:last-of-type {
                 top: -3px;
                 font-size: large;
-                color: $OdinGreen;
+                color: $DW_Green;
                 font-size: 20px;
                 font-family: sans-serif;
             }

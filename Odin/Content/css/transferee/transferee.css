@@ -38,25 +38,41 @@ div#main div#icons {
     display: inline-block; }
     div#main div#icons div.icons_notify {
       font-size: small;
-      color: #31A4DD;
+      color: white;
       position: relative;
       font-weight: bold;
       display: inline-block;
       width: 10px;
       text-align: center; }
+      div#main div#icons div.icons_notify img {
+        width: 26px; }
       div#main div#icons div.icons_notify.icons_notify_messages {
-        top: 6px;
-        left: -45px; }
+        top: -2px;
+        left: -321px; }
+        div#main div#icons div.icons_notify.icons_notify_messages span {
+          position: relative;
+          top: -33px;
+          left: -19px; }
       div#main div#icons div.icons_notify.icons_notify_alerts {
-        top: 6px;
-        left: -145px; }
+        top: -2px;
+        left: -104px; }
+        div#main div#icons div.icons_notify.icons_notify_alerts span {
+          position: relative;
+          top: -33px;
+          left: -17px; }
       div#main div#icons div.icons_notify.icons_notify_appts {
-        top: 6px;
-        left: -188px; }
+        top: -2px;
+        left: -204px; }
+        div#main div#icons div.icons_notify.icons_notify_appts span {
+          position: relative;
+          top: -33px;
+          left: -18px; }
     div#main div#icons div img {
       float: right;
-      width: 40px;
+      width: 50px;
       margin: 8px; }
+      div#main div#icons div img.icons_notify {
+        margin-right: 40px; }
 
 body {
   padding: 0; }
@@ -89,11 +105,11 @@ div.row {
       div.row div.col-md-2 ul li.item {
         height: 60px; }
         div.row div.col-md-2 ul li.item:hover {
-          background-color: #73c2ed; }
+          background-color: #b7a998; }
       div.row div.col-md-2 ul li.unselectable {
         pointer-events: none; }
       div.row div.col-md-2 ul li.selected {
-        background-color: #31A4DD; }
+        background-color: #31a4dd; }
   div.row div.col {
     border-top: 1px solid; }
     div.row div.col div.noinit {
