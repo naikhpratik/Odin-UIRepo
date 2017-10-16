@@ -28,7 +28,7 @@ namespace Odin
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
+            bundles.Add(new StyleBundle("~/Content/cssBundle").Include(
                       "~/Content/bootstrap-paper.css",
                       "~/Content/site.css",
                       "~/Content/datatables/css/datatables.bootstrap.css"));
