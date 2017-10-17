@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
 using Odin.Data.Core.Dtos;
 using Odin.Data.Core.Models;
-using Odin.ViewModels.Order.Index;
+
+using Odin.ViewModels.Orders.Index;
+using Odin.ViewModels.Orders.Transferee;
+using Odin.ViewModels.Shared;
 
 namespace Odin
 {
@@ -14,12 +17,15 @@ namespace Odin
 
             /*ViewModel Mappings*/
 
-            /*Order - Index*/
-            CreateMap<Order, OrderIndexViewModel>();
-            CreateMap<Transferee, OrderIndexTransfereeViewModel>();            
-            CreateMap<Manager, OrderIndexManagerViewModel>();
-            CreateMap<Service, OrderIndexServiceViewModel>()
+            /*Shared*/
+            CreateMap<Transferee, TransfereeViewModel>();
+            CreateMap<Manager, ManagerViewModel>();
+            CreateMap<Service, ServiceViewModel>()
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.ServiceType.Name));
+
+            /*Order - Index*/
+            CreateMap<Order, OrdersIndexViewModel>();
+            CreateMap<Order, OrdersTransfereeViewModel>();
 
 
             /*DTO Mappings*/

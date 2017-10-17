@@ -7,7 +7,7 @@ using Odin.Data.Persistence;
 using Odin.Helpers;
 using Odin.IntegrationTests.Extensions;
 using Odin.IntegrationTests.TestAttributes;
-using Odin.ViewModels.Order.Index;
+using Odin.ViewModels.Orders.Index;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -58,7 +58,7 @@ namespace Odin.IntegrationTests.Controllers
 
             // Act
             var result = _controller.Index();
-            var model = result.ViewData.Model as IEnumerable<OrderIndexViewModel>;
+            var model = result.ViewData.Model as IEnumerable<OrdersIndexViewModel>;
 
             // Assertion
             model.Should().NotBeNull();
@@ -83,7 +83,7 @@ namespace Odin.IntegrationTests.Controllers
 
             // Act
             var result = _controller.Index();
-            var model = result.ViewData.Model as IEnumerable<OrderIndexViewModel>;
+            var model = result.ViewData.Model as IEnumerable<OrdersIndexViewModel>;
 
             // Assertion
             model.Should().NotBeNull();

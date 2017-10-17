@@ -11,6 +11,7 @@ namespace Odin.Data.Core.Dtos
         {
             Services = new Collection<ServiceDto>();
         }
+
         public string FirstName;
         public string Middle;
         public string LastName;

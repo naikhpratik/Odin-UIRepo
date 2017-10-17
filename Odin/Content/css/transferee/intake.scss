@@ -2,4 +2,76 @@
 
 
 div#intake {
+    padding-top: 30px;
+    padding-left: 50px;
+
+    div.row {
+        text-align: left;
+    }
+
+    .intake-title {
+        padding-bottom: 30px;
+    }
+
+    hr {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .intake-blue {
+        color: $DW_Blue;
+    }
+
+    .intake-lime {
+        color: $DW_Lime;
+    }
+
+    .intake-block {
+        padding-top: 35px;
+        padding-bottom: 35px;
+
+        .intake-header {
+            h5 {
+                margin-top: 0px
+            }
+
+            span {
+                font-size: small;
+                color: $DW_Lime;
+                cursor: pointer;
+            }
+        }
+
+        .intake-row {
+
+            .intake-col {
+                padding-top: 15px;
+
+                label {
+                    display: block;
+                    font-size: medium;
+                    margin-bottom: -5px;
+                }
+
+                span {
+                    color: $DW_Blue;
+                    font-size: small;
+                }
+
+                input {
+                    color: $DW_Blue;
+                    font-size: small;
+                    display: none;
+                }
+
+                textarea {
+                    display: none;
+                    width: 100%;
+                    max-width: 100%;
+                    color: $DW_Blue;
+                    font-size: small;
+                }
+            }
+        }
+    }
 }

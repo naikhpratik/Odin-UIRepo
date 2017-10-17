@@ -1,3 +1,209 @@
-﻿<div id="intake">
-    <h2>Intake Panel</h2>
+﻿@model Odin.ViewModels.Orders.Transferee.OrdersTransfereeViewModel
+
+<div id="intake">
+    <div class="row intake-title">
+        <h4>Intake</h4>
+        <span class="intake-blue">Please fill out any items that are not already auto-generated that could aid in the help of your clients placement.</span>
+    </div>
+    <hr />
+    <div class="intake-block">
+        <div class="row intake-header">
+            <h5>
+                Contact Information
+                <span>
+                    + Edit
+                </span>
+            </h5>
+        </div>
+        <div class="row intake-row">
+            <div class="col-sm-3 intake-col">
+                <label>Name:</label>
+                <span>@Model.Transferee.FullName</span>
+                <input type="text" class="form-control"/>
+            </div>
+            <div class="col-sm-3 intake-col">
+                <label>Email:</label>
+                <span>@Model.Transferee.Email</span>
+                <input type="text" class="form-control" />
+            </div>
+            <div class="col-sm-3 intake-col">
+                <label>Phone:</label>
+                <span>@Model.Transferee.PhoneNumber</span>
+                <input type="text" class="form-control" />
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="intake-block">
+        <div class="row intake-header">
+            <h5>
+                Destination Location
+                <span>
+                    + Edit
+                </span>
+            </h5>
+        </div>
+        <div class="row intake-row">
+            <div class="col-sm-3 intake-col">
+                <label>City:</label>
+                <span>@Model.DestinationCity</span>
+                <input type="text" class="form-control" />
+            </div>
+            <div class="col-sm-3 intake-col">
+                <label>State:</label>
+                <span>@Model.DestinationState</span>
+                <input type="text" class="form-control" />
+            </div>
+            <div class="col-sm-3 intake-col">
+                <label>Country:</label>
+                <span>@Model.DestinationCountry</span>
+                <input type="text" class="form-control" />
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="intake-block">
+        <div class="row intake-header">
+            <h5>
+                Relocation Dates
+                <span>
+                    + Edit
+                </span>
+            </h5>
+        </div>
+        <div class="row intake-row">
+            <div class="col-sm-3 intake-col">
+                <label>Familiarization Trip:</label>
+                <span>Test Val</span>
+                <input type="text" class="form-control" />
+            </div>
+            <div class="col-sm-3 intake-col">
+                <label>Final Arrival:</label>
+                <span>Test Val</span>
+                <input type="text" class="form-control" />
+            </div>
+        </div>
+        <div class="row intake-row">
+            <div class="col-sm-3 intake-col">
+                <label>Assignment/Permanent:</label>
+                <span>Test Val</span>
+                <input type="text" class="form-control" />
+            </div>
+            <div class="col-sm-3 intake-col">
+                <label>Estimated Departure:</label>
+                <span>Test Val</span>
+                <input type="text" class="form-control" />
+            </div>
+            <div class="col-sm-3 intake-col">
+                <label>Assignment Length:</label>
+                <span>Test Val</span>
+                <input type="text" class="form-control" />
+            </div>
+        </div>
+        <div class="row intake-row">
+            <div class="col-sm-3 intake-col">
+                <label>Work Start Date:</label>
+                <span>Test Val</span>
+                <input type="text" class="form-control" />
+            </div>
+            <div class="col-sm-3 intake-col">
+                <label>Home Finding Dates:</label>
+                <span>Test Val</span>
+                <input type="text" class="form-control" />
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="intake-block">
+        <div class="row intake-header">
+            <h5>
+                General
+                <span>
+                    + Edit
+                </span>
+            </h5>
+        </div>
+        <div class="row intake-row">
+            <div class="col-sm-3 intake-col">
+                <label>Rush:</label>
+                <span>Yes</span>
+                <input type="checkbox" />
+            </div>
+            <div class="col-sm-3 intake-col">
+                <label>Vip:</label>
+                <span>No</span>
+                <input type="checkbox" />
+            </div>
+            <div class="col-sm-3 intake-col">
+                <label>Self-Pay:</label>
+                <span>No</span>
+                <input type="checkbox" />
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <div class="intake-block">
+        <div class="row intake-header">
+            <h5>
+                Family And Pets
+                <span>
+                    + Edit
+                </span>
+            </h5>
+        </div>
+        <div class="row intake-row">
+            <div class="col-sm-3 intake-col">
+                <label>Partner Name:</label>
+                <span>Test Val</span>
+                <input type="text" class="form-control" />
+            </div>
+            <div class="col-sm-3 intake-col">
+                <label>Partner Visa Type:</label>
+                <span>Test Val</span>
+                <input type="text" class="form-control" />
+            </div>
+        </div>
+        <div class="row intake-row">
+            <div class="col-sm-3 intake-col">
+                <label>Child Name:</label>
+                <span>Test Val</span>
+                <input type="text" class="form-control" />
+            </div>
+            <div class="col-sm-3 intake-col">
+                <label>Child Age:</label>
+                <span>Test Val</span>
+                <input type="text" class="form-control" />
+            </div>
+            <div class="col-sm-3 intake-col">
+                <label>Education Preference:</label>
+                <span>Test Val</span>
+                <input type="text" class="form-control" />
+            </div>
+        </div>
+        <div class="row intake-row">
+            <div class="col-sm-3 intake-col">
+                <label>Pet Type:</label>
+                <span>Test Val</span>
+                <input type="text" class="form-control" />
+            </div>
+            <div class="col-sm-3 intake-col">
+                <label>Breed:</label>
+                <span>Test Val</span>
+                <input type="text" class="form-control" />
+            </div>
+            <div class="col-sm-3 intake-col">
+                <label>Size/Weight:</label>
+                <span>Test Val</span>
+                <input type="text" class="form-control" />
+            </div>
+        </div>
+        <div class="row intake-row">
+            <div class="col-sm-9 intake-col">
+                <label>Notes:</label>
+                <span>This is a really long test value. A really really long test value.  Man I love test values.  Test values are the greatest.</span>
+                <textarea class="form-control"></textarea>
+            </div>
+        </div>
+    </div>
 </div>
+@Styles.Render("~/Styling/intake")
