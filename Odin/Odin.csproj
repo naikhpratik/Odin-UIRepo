@@ -545,9 +545,15 @@
     <Content Include="Content\Images\icn_alert_circle.png" />
     <Content Include="Content\Images\icn_cal_B1.png" />
     <Content Include="Content\Images\icn_chat_B1.png" />
+    <Content Include="Content\Images\icn_details.png" />
     <Content Include="Content\Images\icn_down_arrow.png" />
+    <Content Include="Content\Images\icn_history.png" />
+    <Content Include="Content\Images\icn_intake.png" />
+    <Content Include="Content\Images\icn_internal_calendar.png" />
+    <Content Include="Content\Images\icn_internal_messages.png" />
     <Content Include="Content\Images\icn_person.png" />
     <Content Include="Content\Images\icn_profile_B1.png" />
+    <Content Include="Content\Images\icn_rentals.png" />
     <Content Include="Content\Images\icn_up_arrow.png" />
     <Content Include="Content\Images\ic_search.png" />
     <Content Include="Content\Images\user-placeholder.png" />
