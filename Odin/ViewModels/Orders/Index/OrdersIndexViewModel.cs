@@ -1,11 +1,12 @@
 ﻿using Odin.Helpers;
+using Odin.ViewModels.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Odin.ViewModels.Order.Index
+namespace Odin.ViewModels.Orders.Index
 {
-    public class OrderIndexViewModel
+    public class OrdersIndexViewModel
     {
         public int Id { get; set; }
         public string SeCustNumb { get; set; }
@@ -24,11 +25,11 @@ namespace Odin.ViewModels.Order.Index
         public int ScheduledServicesDisplay => Services.Where(s => s.ScheduledDate.HasValue && !s.CompletedDate.HasValue).Count();
         public int CompletedServicesDisplay => Services.Where(s => s.CompletedDate.HasValue).Count();
 
-        public OrderIndexTransfereeViewModel Transferee { get; set; }
+        public TransfereeViewModel Transferee { get; set; }
 
-        public OrderIndexManagerViewModel ProgramManager { get; set; }
+        public ManagerViewModel ProgramManager { get; set; }
 
-        public IEnumerable<OrderIndexServiceViewModel> Services {get; set;}
+        public IEnumerable<ServiceViewModel> Services {get; set;}
 
     }
 }

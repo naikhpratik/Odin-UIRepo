@@ -2,13 +2,12 @@
 using Microsoft.AspNet.Identity;
 using Odin.Data.Core;
 using Odin.Data.Core.Models;
-using Odin.ViewModels.Order.Index;
+using Odin.Interfaces;
+using Odin.ViewModels.Orders.Index;
+using Odin.ViewModels.Orders.Transferee;
 using System.Collections.Generic;
 using System.Net;
 using System.Web.Mvc;
-using System.Linq;
-using Odin.Helpers;
-using Odin.Interfaces;
 
 namespace Odin.Controllers
 {
@@ -31,7 +30,7 @@ namespace Odin.Controllers
 
             var orders = _unitOfWork.Orders.GetOrdersFor(userId);
 
-            var orderVms = _mapper.Map<IEnumerable<Order>, IEnumerable<OrderIndexViewModel>>(orders);
+            var orderVms = _mapper.Map<IEnumerable<Order>, IEnumerable<OrdersIndexViewModel>>(orders);
 
             return View(orderVms);
         }
@@ -56,9 +55,14 @@ namespace Odin.Controllers
         }
 
         // GET: Transferee
-        public ViewResult Transferee()
+        public ViewResult Transferee(int id)
         {
-            return View();
+            //int id = Int32.Parse(orderId);
+            var order = _unitOfWork.Orders.GetOrderById(id);
+
+            OrdersTransfereeViewModel vm = _mapper.Map<Order, OrdersTransfereeViewModel>(order);
+
+            return View(vm);
         }
     }
     

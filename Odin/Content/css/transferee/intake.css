@@ -21,7 +21,7 @@
       font-size: small;
       color: #a7ce39;
       cursor: pointer; }
-    div#intake .intake-block .intake-row {
+    div#intake .intake-block .intake-row .intake-col {
       padding-top: 15px; }
       div#intake .intake-block .intake-row .intake-col label {
         display: block;
@@ -34,4 +34,10 @@
         color: #31a4dd;
         font-size: small;
         display: none; }
+      div#intake .intake-block .intake-row .intake-col textarea {
+        display: none;
+        width: 100%;
+        max-width: 100%;
+        color: #31a4dd;
+        font-size: small; }
 

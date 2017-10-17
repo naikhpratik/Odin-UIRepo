@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Odin.ViewModels.Order.Index
+namespace Odin.ViewModels.Shared
 {
-    public class OrderIndexServiceViewModel
+    public class ServiceViewModel
     {
         public DateTime? ScheduledDate { get; set; }
 

@@ -309,11 +309,12 @@
     <Compile Include="ViewModels\Authentication\VerifyCodeViewModel.cs" />
     <Compile Include="ViewModels\Authentication\VerifyPhoneNumberViewModel.cs" />
     <Compile Include="ViewModels\Mailers\SetNewPasswordViewModel.cs" />
-    <Compile Include="ViewModels\Order\Index\OrderIndexManagerViewModel.cs" />
-    <Compile Include="ViewModels\Order\Index\OrderIndexServiceViewModel.cs" />
-    <Compile Include="ViewModels\Order\Index\OrderIndexTransfereeViewModel.cs" />
-    <Compile Include="ViewModels\Order\Index\OrderIndexViewModel.cs" />
+    <Compile Include="ViewModels\Orders\Index\OrdersIndexViewModel.cs" />
     <Compile Include="ViewModels\Mailers\ViewRenderer.cs" />
+    <Compile Include="ViewModels\Orders\Transferee\OrdersTransfereeViewModel.cs" />
+    <Compile Include="ViewModels\Shared\ManagerViewModel.cs" />
+    <Compile Include="ViewModels\Shared\ServiceViewModel.cs" />
+    <Compile Include="ViewModels\Shared\TransfereeViewModel.cs" />
     <Compile Include="Views\Helpers\HtmlHelpers.cs" />
     <Compile Include="Views\Helpers\UrlHelpers.cs" />
   </ItemGroup>

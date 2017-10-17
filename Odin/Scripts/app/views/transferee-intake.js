@@ -1,17 +1,22 @@
 ﻿var TransfereeIntakeController = function () {
 
+    var pnlIntake;
+
     var init = function () {
-        $(".intake-header").find("span").on("click",
+
+        pnlIntake = $("div#intake");
+
+        pnlIntake.find(".intake-header").find("span").on("click",
             function () {
                 var cols = $(this).parents(".intake-block").find(".intake-row > .intake-col");
                 if (contains($(this).text(), "Edit")) {
                     $(this).text("- Save");
                     
-                    cols.find("input").css("display", "block");
+                    cols.find(":input").css("display", "block");
                     cols.find("span").css("display", "none");
                 } else {
                     $(this).text("+ Edit");
-                    cols.find("input").css("display", "none");
+                    cols.find(":input").css("display", "none");
                     cols.find("span").css("display", "block");
                 }
             });

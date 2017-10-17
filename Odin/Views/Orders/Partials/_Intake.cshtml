@@ -1,4 +1,6 @@
-﻿<div id="intake">
+﻿@model Odin.ViewModels.Orders.Transferee.OrdersTransfereeViewModel
+
+<div id="intake">
     <div class="row intake-title">
         <h4>Intake</h4>
         <span class="intake-blue">Please fill out any items that are not already auto-generated that could aid in the help of your clients placement.</span>
@@ -16,17 +18,17 @@
         <div class="row intake-row">
             <div class="col-sm-3 intake-col">
                 <label>Name:</label>
-                <span>Test Val</span>
+                <span>@Model.Transferee.FullName</span>
                 <input type="text" class="form-control"/>
             </div>
             <div class="col-sm-3 intake-col">
                 <label>Email:</label>
-                <span>Test Val</span>
+                <span>@Model.Transferee.Email</span>
                 <input type="text" class="form-control" />
             </div>
             <div class="col-sm-3 intake-col">
                 <label>Phone:</label>
-                <span>Test Val</span>
+                <span>@Model.Transferee.PhoneNumber</span>
                 <input type="text" class="form-control" />
             </div>
         </div>
@@ -44,17 +46,17 @@
         <div class="row intake-row">
             <div class="col-sm-3 intake-col">
                 <label>City:</label>
-                <span>Test Val</span>
+                <span>@Model.DestinationCity</span>
                 <input type="text" class="form-control" />
             </div>
             <div class="col-sm-3 intake-col">
                 <label>State:</label>
-                <span>Test Val</span>
+                <span>@Model.DestinationState</span>
                 <input type="text" class="form-control" />
             </div>
             <div class="col-sm-3 intake-col">
                 <label>Country:</label>
-                <span>Test Val</span>
+                <span>@Model.DestinationCountry</span>
                 <input type="text" class="form-control" />
             </div>
         </div>
@@ -193,6 +195,13 @@
                 <label>Size/Weight:</label>
                 <span>Test Val</span>
                 <input type="text" class="form-control" />
+            </div>
+        </div>
+        <div class="row intake-row">
+            <div class="col-sm-9 intake-col">
+                <label>Notes:</label>
+                <span>This is a really long test value. A really really long test value.  Man I love test values.  Test values are the greatest.</span>
+                <textarea class="form-control"></textarea>
             </div>
         </div>
     </div>
