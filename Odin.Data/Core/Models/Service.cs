@@ -10,7 +10,7 @@ namespace Odin.Data.Core.Models
 
         public DateTime? CompletedDate { get; set; }
 
-        public int OrderId { get; set; }
+        public string OrderId { get; set; }
 
         public Order Order { get; set; }
 

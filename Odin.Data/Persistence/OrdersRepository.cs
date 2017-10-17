@@ -41,10 +41,10 @@ namespace Odin.Data.Persistence
             _context.Orders.Add(order);
         }
 
-        public Order GetOrderById(int orderId)
+        public Order GetOrderById(string orderId)
         {
             return _context.Orders
-                .Where(o => o.Id == orderId)
+                .Where(o => o.Id.Equals(orderId))
                 .Include(o => o.Services)
                 .Include(o => o.Rent)
                 .SingleOrDefault<Order>();
