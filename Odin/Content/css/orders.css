@@ -296,15 +296,15 @@ div#list {
     margin-bottom: 0px; }
     div#icons div {
       float: none !important; }
-  div#icons div.icons_notify.icons_notify_messages {
-    top: -14px !important;
-    left: 96px !important; }
-  div#icons div.icons_notify.icons_notify_alerts {
-    top: -14px !important;
-    left: 265px !important; }
-  div#icons div.icons_notify.icons_notify_appts {
-    top: -14px !important;
-    left: 190px !important; }
+      div#icons div.icons_notify.icons_notify_messages {
+        top: -14px !important;
+        left: 96px !important; }
+      div#icons div.icons_notify.icons_notify_alerts {
+        top: -14px !important;
+        left: 265px !important; }
+      div#icons div.icons_notify.icons_notify_appts {
+        top: -14px !important;
+        left: 190px !important; }
   th.second {
     padding-top: 0px !important; }
     th.second div {

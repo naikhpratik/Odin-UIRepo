@@ -122,12 +122,12 @@
                     name_tablet += "<span>" + $SearchedOrders.transferees[i].preTrip.split("T")[0] + "</span><br />";
                 else name_tablet += "<br />";
 
-                name_tablet += "<span class=\"tablet-column-label\">Final Arrival:</span>"
+                name_tablet += "<span class=\"tablet-column-label\">Final Arrival:</span>";
                 if ($SearchedOrders.transferees[i].finalArrival !== null)
-                    name_tablet += "<span> " + $SearchedOrders.transferees[i].finalArrival.split("T")[0] + "</span></div>"
+                    name_tablet += "<span> " + $SearchedOrders.transferees[i].finalArrival.split("T")[0] + "</span></div>";
                 else name_tablet += "</div>";
 
-                var name_mobile = name_tablet + "<div><span class=\"tablet-column-label\">Manager:</span>"
+                var name_mobile = name_tablet + "<div><span class=\"tablet-column-label\">Manager:</span>";
                 if ($SearchedOrders.transferees[i].manager !== null)
                     name_mobile += "<span class=\"Callout\">" + $SearchedOrders.transferees[i].manager + "</span>";
 
@@ -143,7 +143,7 @@
                 var services_list = "";
                 if ($SearchedOrders.transferees[i].services !== null) {
                     for (var j = 0; j < $SearchedOrders.transferees[i].services.length; j++) {
-                        services_list += "<div class=\"actlist-item-blk\"><p class=\"actlist-item\">" + $SearchedOrders.transferees[i].services[j].name + "</p>"
+                        services_list += "<div class=\"actlist-item-blk\"><p class=\"actlist-item\">" + $SearchedOrders.transferees[i].services[j].name + "</p>";
                         if ($SearchedOrders.transferees[i].services[j].completed !== null)
                             services_list += "<p>" + $SearchedOrders.transferees[i].services[j].completed.split("T")[0] + "</p></div>";
                         else services_list += "</div>";
@@ -182,7 +182,7 @@
                 else finalarrival += "</td>";
 
                 // notification
-                var notification = "<td><img src=\"/Content/Images/icn_alert_B1.png\" />"
+                var notification = "<td><img src=\"/Content/Images/icn_alert_B1.png\" />";
                 if ($SearchedOrders.transferees[i].numberOfAlerts > 0)
                     notification += "<div class=\"notify-count\"><img src=\"/Content/Images/icn_alert_circle.png\"/><span>" + ("0"+$SearchedOrders.transferees[i].numberOfAlerts).slice(-2) + "</span></div></td>";
 
@@ -191,7 +191,9 @@
                 mobile_table.append ("<tr data-index=\"" + $SearchedOrders.transferees[i].index + "\">" + "<td>" + name_mobile + "</td>" + "<td>" + lastcontacted + services + "</td>" + notification + "</tr>");
 
                 // service expansion handlers
-                $('.expand').click(function () {
+                $('.expand').click(function (event) {
+                    event.stopPropagation();
+
                     $(this).css("display", "none");
                     $(this).next().css("display", "block");
 
@@ -200,7 +202,9 @@
                     });
                 });
 
-                $('.collapse').click(function () {
+                $('.collapse').click(function (event) {
+                    event.stopPropagation();
+
                     $(this).css("display", "none");
                     $(this).prev().css("display", "block");
 

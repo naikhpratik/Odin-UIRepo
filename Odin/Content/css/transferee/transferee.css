@@ -75,10 +75,42 @@ div#main div#icons {
         margin-right: 40px; }
 
 body {
-  padding: 0; }
+  padding: 0px; }
+
+@media screen and (max-width: 842px) {
+  div#caption {
+    height: 66px !important;
+    padding-top: 20px !important;
+    text-align: center;
+    width: 90% !important;
+    display: block !important; }
+    div#caption div#dwellworks {
+      text-align: center !important; }
+  div#icons {
+    height: 70px !important;
+    text-align: center;
+    padding-top: 0px !important;
+    float: none !important;
+    width: 90% !important;
+    display: block !important;
+    margin-bottom: 0px; }
+    div#icons div {
+      float: none !important; }
+      div#icons div.icons_notify.icons_notify_messages {
+        top: -14px !important;
+        left: 96px !important; }
+      div#icons div.icons_notify.icons_notify_alerts {
+        top: -14px !important;
+        left: 265px !important; }
+      div#icons div.icons_notify.icons_notify_appts {
+        top: -14px !important;
+        left: 190px !important; } }
 
 div.row {
   text-align: center; }
+  @media screen and (max-width: 842px) {
+    div.row {
+      margin-top: 20px; } }
   div.row div.col-md-2 {
     height: 850px;
     padding-top: 30px;
@@ -95,6 +127,21 @@ div.row {
       font-weight: 300;
       list-style: none;
       padding-left: 0px; }
+      div.row div.col-md-2 ul img {
+        left: -10px;
+        margin: 0px;
+        width: 22px;
+        position: relative; }
+      div.row div.col-md-2 ul li[data-panel="details"] {
+        padding-left: 5px; }
+      div.row div.col-md-2 ul li[data-panel="rentals"] {
+        padding-left: 11px; }
+      div.row div.col-md-2 ul li[data-panel="history"] {
+        padding-left: 8px; }
+      div.row div.col-md-2 ul li[data-panel="messages"] {
+        padding-left: 22px; }
+      div.row div.col-md-2 ul li[data-panel="calendar"] {
+        padding-left: 12px; }
       div.row div.col-md-2 ul li:first-of-type {
         height: 16px;
         margin-top: 22px;
@@ -110,6 +157,37 @@ div.row {
         pointer-events: none; }
       div.row div.col-md-2 ul li.selected {
         background-color: #31a4dd; }
+    @media screen and (max-width: 991px) {
+      div.row div.col-md-2 {
+        padding-left: 32px;
+        height: auto !important; }
+        div.row div.col-md-2 p {
+          float: left; }
+        div.row div.col-md-2 > img {
+          display: none; }
+        div.row div.col-md-2 ul {
+          text-align: left;
+          padding-bottom: 23px;
+          margin: 46px 0px 0px 10px; }
+          div.row div.col-md-2 ul li > span {
+            display: none; }
+          div.row div.col-md-2 ul li > img:hover {
+            background-color: #b7a998; }
+          div.row div.col-md-2 ul li.item:hover {
+            background-color: unset; }
+          div.row div.col-md-2 ul li.selected {
+            background-color: unset; }
+            div.row div.col-md-2 ul li.selected > img {
+              background-color: #73c2ed; }
+          div.row div.col-md-2 ul li.unselectable {
+            display: none; }
+          div.row div.col-md-2 ul li[data-panel="intake"],
+          div.row div.col-md-2 ul li[data-panel="details"],
+          div.row div.col-md-2 ul li[data-panel="rentals"],
+          div.row div.col-md-2 ul li[data-panel="history"],
+          div.row div.col-md-2 ul li[data-panel="messages"],
+          div.row div.col-md-2 ul li[data-panel="calendar"] {
+            display: inline; } }
   div.row div.col {
     border-top: 1px solid; }
     div.row div.col div.noinit {
