@@ -58,39 +58,39 @@ namespace Odin.Data.Tests.Persistence.Repositories
         {
             var consultant1 = new Consultant() {Id = "consultant1"};
             var consultant2 = new Consultant() { Id = "consultant2" };
-            var order1 = new Order() { ConsultantId = consultant1.Id, Id = 1, Consultant = consultant1};
-            var order2 = new Order() { ConsultantId = consultant2.Id, Id = 2, Consultant = consultant2};
+            var order1 = new Order() { ConsultantId = consultant1.Id, Id = "1", Consultant = consultant1};
+            var order2 = new Order() { ConsultantId = consultant2.Id, Id = "2", Consultant = consultant2};
             
             SetupRepositoryWithSource(new[] { order1, order2 });
 
             var orders = _ordersRepository.GetOrdersFor(consultant1.Id);
 
             orders.Should().HaveCount(1);
-            orders.FirstOrDefault()?.Id.Should().Be(1);
+            orders.FirstOrDefault()?.Id.Should().Be("1");
         }
 
         [TestMethod]
         public void GetOrderById_OrderWithIdExists_ShouldReturnCorrectOrder()
         {
-            int orderId = 1;
+            var orderId = "1";
 
-            var order1 = new Order() { Id = 1};
-            var order2 = new Order() { Id = 2};
+            var order1 = new Order() { Id = "1"};
+            var order2 = new Order() { Id = "2"};
 
             SetupRepositoryWithSource(new[] { order1, order2 });
 
             var order = _ordersRepository.GetOrderById(orderId);
 
-            order.Id.Should().Be(1);
+            order.Id.Should().Be("1");
         }
 
         [TestMethod]
         public void GetOrderById_OrderWithIdDoesNotExist_ShouldReturnNull()
         {
-            int orderId = 3;
+            var orderId = "3";
 
-            var order1 = new Order() { Id = 1 };
-            var order2 = new Order() { Id = 2 };
+            var order1 = new Order() { Id = "1" };
+            var order2 = new Order() { Id = "2" };
 
             SetupRepositoryWithSource(new[] { order1, order2 });
 

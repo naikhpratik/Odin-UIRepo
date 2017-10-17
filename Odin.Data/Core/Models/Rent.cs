@@ -1,9 +1,9 @@
-﻿namespace Odin.Data.Core.Models
-{
-    public class Rent
-    {
-        public int Id { get; set; }
+﻿using Microsoft.Azure.Mobile.Server;
 
+namespace Odin.Data.Core.Models
+{
+    public class Rent : EntityData
+    {
         public decimal? HousingBudget { get; set; }
         //TODO: The rest of the Housing Preferences
         
