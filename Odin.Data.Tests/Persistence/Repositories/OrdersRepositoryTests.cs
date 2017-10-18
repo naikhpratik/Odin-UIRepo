@@ -7,6 +7,7 @@ using Odin.Data.Tests.Extensions;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using Microsoft.Azure.Mobile.Server;
 
 namespace Odin.Data.Tests.Persistence.Repositories
 {

@@ -253,9 +253,9 @@
     <Compile Include="Persistence\Migrations\201710122149268_AddRushVipLastContactedToOrder.Designer.cs">
       <DependentUpon>201710122149268_AddRushVipLastContactedToOrder.cs</DependentUpon>
     </Compile>
-    <Compile Include="Persistence\Migrations\201710171948356_ChangeOrderToMobile.cs" />
-    <Compile Include="Persistence\Migrations\201710171948356_ChangeOrderToMobile.Designer.cs">
-      <DependentUpon>201710171948356_ChangeOrderToMobile.cs</DependentUpon>
+    <Compile Include="Persistence\Migrations\201710181423555_ChangeOrdersRentAndServiceToEntityData.cs" />
+    <Compile Include="Persistence\Migrations\201710181423555_ChangeOrdersRentAndServiceToEntityData.Designer.cs">
+      <DependentUpon>201710181423555_ChangeOrdersRentAndServiceToEntityData.cs</DependentUpon>
     </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
@@ -340,8 +340,8 @@
     <EmbeddedResource Include="Persistence\Migrations\201710122149268_AddRushVipLastContactedToOrder.resx">
       <DependentUpon>201710122149268_AddRushVipLastContactedToOrder.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Persistence\Migrations\201710171948356_ChangeOrderToMobile.resx">
-      <DependentUpon>201710171948356_ChangeOrderToMobile.cs</DependentUpon>
+    <EmbeddedResource Include="Persistence\Migrations\201710181423555_ChangeOrdersRentAndServiceToEntityData.resx">
+      <DependentUpon>201710181423555_ChangeOrdersRentAndServiceToEntityData.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

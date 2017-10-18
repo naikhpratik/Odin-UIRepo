@@ -6,7 +6,7 @@ using Microsoft.Azure.Mobile.Server;
 
 namespace Odin.Data.Core.Models
 {
-    public class Order : EntityData
+    public class Order : EntityData 
     {
 
         public Order()
@@ -14,6 +14,7 @@ namespace Odin.Data.Core.Models
             Services = new Collection<Service>();
         }
         
+
         public string TrackingId { get; set; }
         public string RelocationType { get; set; }
         public string DestinationCity { get; set; }

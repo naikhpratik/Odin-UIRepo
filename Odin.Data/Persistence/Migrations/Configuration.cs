@@ -4,6 +4,7 @@ using Odin.Data.Builders;
 using Odin.Data.Core.Models;
 using System.Data.Entity.Migrations;
 using System.Linq;
+using Microsoft.Azure.Mobile.Server.Tables;
 
 namespace Odin.Data.Persistence.Migrations
 {
@@ -19,6 +20,7 @@ namespace Odin.Data.Persistence.Migrations
         {
             AutomaticMigrationsEnabled = false;
             MigrationsDirectory = @"Persistence\Migrations";
+            SetSqlGenerator("System.Data.SqlClient", new EntityTableSqlGenerator());
         }
 
         protected override void Seed(ApplicationDbContext context)
