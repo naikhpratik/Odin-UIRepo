@@ -16,6 +16,9 @@ namespace Odin.Data.Persistence.Migrations
             DropPrimaryKey("dbo.Orders");
             DropPrimaryKey("dbo.Rents");
             DropPrimaryKey("dbo.Services");
+            DropColumn("dbo.Orders", "Id");
+            DropColumn("dbo.Services", "Id");
+            DropColumn("dbo.Rents", "Id");
             AddColumn("dbo.Orders", "Version", c => c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion",
                 annotations: new Dictionary<string, AnnotationValues>
                 {
@@ -112,7 +115,7 @@ namespace Odin.Data.Persistence.Migrations
                         new AnnotationValues(oldValue: null, newValue: "Deleted")
                     },
                 }));
-            AlterColumn("dbo.Orders", "Id", c => c.String(nullable: false, maxLength: 128,
+            AddColumn("dbo.Orders", "Id", c => c.String(nullable: false, maxLength: 128,
                 annotations: new Dictionary<string, AnnotationValues>
                 {
                     { 
@@ -120,7 +123,7 @@ namespace Odin.Data.Persistence.Migrations
                         new AnnotationValues(oldValue: null, newValue: "Id")
                     },
                 }));
-            AlterColumn("dbo.Rents", "Id", c => c.String(nullable: false, maxLength: 128,
+            AddColumn("dbo.Rents", "Id", c => c.String(nullable: false, maxLength: 128,
                 annotations: new Dictionary<string, AnnotationValues>
                 {
                     { 
@@ -128,7 +131,7 @@ namespace Odin.Data.Persistence.Migrations
                         new AnnotationValues(oldValue: null, newValue: "Id")
                     },
                 }));
-            AlterColumn("dbo.Services", "Id", c => c.String(nullable: false, maxLength: 128,
+            AddColumn("dbo.Services", "Id", c => c.String(nullable: false, maxLength: 128,
                 annotations: new Dictionary<string, AnnotationValues>
                 {
                     { 
@@ -137,14 +140,14 @@ namespace Odin.Data.Persistence.Migrations
                     },
                 }));
             AlterColumn("dbo.Services", "OrderId", c => c.String(maxLength: 128));
+            CreateIndex("dbo.Orders", "CreatedAt", clustered: true);
+            CreateIndex("dbo.Rents", "CreatedAt", clustered: true);
+            CreateIndex("dbo.Services", "CreatedAt", clustered: true);
             AddPrimaryKey("dbo.Orders", "Id");
             AddPrimaryKey("dbo.Rents", "Id");
             AddPrimaryKey("dbo.Services", "Id");
-            CreateIndex("dbo.Orders", "CreatedAt", clustered: true);
             CreateIndex("dbo.Rents", "Id");
-            CreateIndex("dbo.Rents", "CreatedAt", clustered: true);
             CreateIndex("dbo.Services", "OrderId");
-            CreateIndex("dbo.Services", "CreatedAt", clustered: true);
             AddForeignKey("dbo.Services", "OrderId", "dbo.Orders", "Id");
             AddForeignKey("dbo.Rents", "Id", "dbo.Orders", "Id");
         }
@@ -161,8 +164,12 @@ namespace Odin.Data.Persistence.Migrations
             DropPrimaryKey("dbo.Services");
             DropPrimaryKey("dbo.Rents");
             DropPrimaryKey("dbo.Orders");
+            DropColumn("dbo.Orders", "Id");
+            DropColumn("dbo.Services", "Id");
+            DropColumn("dbo.Rents", "Id");
+
             AlterColumn("dbo.Services", "OrderId", c => c.Int(nullable: false));
-            AlterColumn("dbo.Services", "Id", c => c.Int(nullable: false, identity: true,
+            AddColumn("dbo.Services", "Id", c => c.Int(nullable: false, identity: true,
                 annotations: new Dictionary<string, AnnotationValues>
                 {
                     { 
@@ -170,7 +177,7 @@ namespace Odin.Data.Persistence.Migrations
                         new AnnotationValues(oldValue: "Id", newValue: null)
                     },
                 }));
-            AlterColumn("dbo.Rents", "Id", c => c.Int(nullable: false,
+            AddColumn("dbo.Rents", "Id", c => c.Int(nullable: false,
                 annotations: new Dictionary<string, AnnotationValues>
                 {
                     { 
@@ -178,7 +185,7 @@ namespace Odin.Data.Persistence.Migrations
                         new AnnotationValues(oldValue: "Id", newValue: null)
                     },
                 }));
-            AlterColumn("dbo.Orders", "Id", c => c.Int(nullable: false, identity: true,
+            AddColumn("dbo.Orders", "Id", c => c.Int(nullable: false, identity: true,
                 annotations: new Dictionary<string, AnnotationValues>
                 {
                     { 

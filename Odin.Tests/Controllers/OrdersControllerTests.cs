@@ -59,9 +59,9 @@ namespace Odin.Tests.Controllers
         {
             var orderId = "1";
            
-            Order order = new Order() { Id = "1", ConsultantId = "2" };
+            Order order = new Order() { Id = orderId, ConsultantId = "2" };
 
-            _mockRepository.Setup(r => r.GetOrderById("1")).Returns(order);
+            _mockRepository.Setup(r => r.GetOrderById(orderId)).Returns(order);
 
             var result = _controller.Details(orderId);
 
@@ -74,9 +74,9 @@ namespace Odin.Tests.Controllers
         {
             var orderId = "1";
 
-            Order order = new Order() { Id = "1", ConsultantId = "1" };
+            Order order = new Order() { Id = orderId, ConsultantId = "1" };
 
-            _mockRepository.Setup(r => r.GetOrderById("1")).Returns(order);
+            _mockRepository.Setup(r => r.GetOrderById(orderId)).Returns(order);
 
             var result = _controller.Details(orderId) as ViewResult;
             result.Should().NotBeNull();

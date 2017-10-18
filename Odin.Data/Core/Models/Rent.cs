@@ -4,8 +4,7 @@ namespace Odin.Data.Core.Models
 {
     public class Rent : EntityData
     {
-        public string Id { get; set; }
-
+        
         public decimal? HousingBudget { get; set; }
         //TODO: The rest of the Housing Preferences
         

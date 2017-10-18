@@ -82,7 +82,7 @@ namespace Odin.Data.Tests.Persistence.Repositories
 
             var order = _ordersRepository.GetOrderById(orderId);
 
-            order.Id.Should().Be("1");
+            order.Id.Should().Be(orderId);
         }
 
         [TestMethod]

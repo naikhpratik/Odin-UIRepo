@@ -13,7 +13,6 @@ namespace Odin.Data.Core.Models
         {
             Services = new Collection<Service>();
         }
-        
 
         public string TrackingId { get; set; }
         public string RelocationType { get; set; }
