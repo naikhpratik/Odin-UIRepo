@@ -135,6 +135,7 @@
     <Compile Include="Core\Dtos\TransfereeIndexDto.cs" />
     <Compile Include="Core\Dtos\UserDto.cs" />
     <Compile Include="Core\Models\ApplicationUser.cs" />
+    <Compile Include="Core\Models\AzureTest.cs" />
     <Compile Include="Core\Models\Consultant.cs" />
     <Compile Include="Core\Models\ErrorResponse.cs" />
     <Compile Include="Core\Models\HousingType.cs" />
@@ -257,6 +258,10 @@
     <Compile Include="Persistence\Migrations\201710181423555_ChangeOrdersRentAndServiceToEntityData.Designer.cs">
       <DependentUpon>201710181423555_ChangeOrdersRentAndServiceToEntityData.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201710181656109_AddTriggersToAzureTables.cs" />
+    <Compile Include="Persistence\Migrations\201710181656109_AddTriggersToAzureTables.Designer.cs">
+      <DependentUpon>201710181656109_AddTriggersToAzureTables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
     <Compile Include="Persistence\ServicesRepository.cs" />
@@ -342,6 +347,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201710181423555_ChangeOrdersRentAndServiceToEntityData.resx">
       <DependentUpon>201710181423555_ChangeOrdersRentAndServiceToEntityData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710181656109_AddTriggersToAzureTables.resx">
+      <DependentUpon>201710181656109_AddTriggersToAzureTables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
