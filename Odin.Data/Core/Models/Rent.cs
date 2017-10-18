@@ -2,7 +2,7 @@
 
 namespace Odin.Data.Core.Models
 {
-    public class Rent : EntityData
+    public class Rent : MobileTable
     {
         
         public decimal? HousingBudget { get; set; }

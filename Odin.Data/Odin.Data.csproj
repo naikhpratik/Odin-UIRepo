@@ -262,6 +262,10 @@
     <Compile Include="Persistence\Migrations\201710181725012_AddAzureTablesBack.Designer.cs">
       <DependentUpon>201710181725012_AddAzureTablesBack.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201710182111512_ReSeedServiceTypes.cs" />
+    <Compile Include="Persistence\Migrations\201710182111512_ReSeedServiceTypes.Designer.cs">
+      <DependentUpon>201710182111512_ReSeedServiceTypes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
     <Compile Include="Persistence\ServicesRepository.cs" />
@@ -350,6 +354,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201710181725012_AddAzureTablesBack.resx">
       <DependentUpon>201710181725012_AddAzureTablesBack.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710182111512_ReSeedServiceTypes.resx">
+      <DependentUpon>201710182111512_ReSeedServiceTypes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

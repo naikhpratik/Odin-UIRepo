@@ -5,26 +5,20 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Azure.Mobile.Server;
 using Microsoft.Azure.Mobile.Server.Tables;
 
 namespace Odin.Data.Core.Models
 {
-    public abstract class MobileTable : ITableData
+    /// <inheritdoc />
+    /// <summary>
+    /// When inheriting from mobile table if you call a constructor make sure to call : base() after the constructor
+    /// </summary>
+    public abstract class MobileTable : EntityData
     {
-        [Key]
-        [TableColumn(TableColumnType.Id)]
-        public string Id { get; set; }
-        [TableColumn(TableColumnType.Version)]
-        [Timestamp]
-        public byte[] Version { get; set; }
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Index(IsClustered = true)]
-        [TableColumn(TableColumnType.CreatedAt)]
-        public DateTimeOffset? CreatedAt { get; set; }
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        [TableColumn(TableColumnType.UpdatedAt)]
-        public DateTimeOffset? UpdatedAt { get; set; }
-        [TableColumn(TableColumnType.Deleted)]
-        public bool Deleted { get; set; }
+        protected MobileTable()
+        {
+            Id = Guid.NewGuid().ToString();
+        }
     }
 }

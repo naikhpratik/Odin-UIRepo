@@ -6,7 +6,7 @@ using Microsoft.Azure.Mobile.Server;
 
 namespace Odin.Data.Core.Models
 {
-    public class Order : EntityData 
+    public class Order : MobileTable 
     {
 
         public Order()

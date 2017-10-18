@@ -3,7 +3,7 @@ using Microsoft.Azure.Mobile.Server;
 
 namespace Odin.Data.Core.Models
 {
-    public class Service : EntityData
+    public class Service : MobileTable
     {
         public DateTime? ScheduledDate { get; set; }
 
