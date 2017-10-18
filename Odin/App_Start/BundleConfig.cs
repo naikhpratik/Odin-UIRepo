@@ -53,9 +53,7 @@ namespace Odin
             bundles.Add(new ScriptBundle("~/Scripts/transferee").Include("~/Scripts/app/views/transferee.js"));
             bundles.Add(new ScriptBundle("~/bundles/forgotPassword").Include(
                 "~/Scripts/bootstrap-notify.min.js",
-                "~/Scripts/app/views/forgotPassword.js"));
-            
-
+                "~/Scripts/app/views/forgotPassword.js")); 
         }
     }
 }

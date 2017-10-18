@@ -4,11 +4,19 @@
 @include header;
 
 body {
-    padding: 0
+    padding: 0px
+}
+
+@media screen and (max-width: 842px) {
+    @include mobile_header;
 }
 
 div.row {
     text-align: center;
+
+    @media screen and (max-width: 842px) {
+        margin-top: 20px;
+    }
 
     div.col-md-2 {
         height: 850px;
@@ -31,6 +39,33 @@ div.row {
             font-weight: 300;
             list-style: none;
             padding-left: 0px;
+
+            img {
+                left: -10px;
+                margin: 0px;
+                width: 22px;
+                position: relative;
+            }
+
+            li[data-panel="details"] {
+                padding-left: 5px;
+            }
+
+            li[data-panel="rentals"] {
+                padding-left: 11px;
+            }
+
+            li[data-panel="history"] {
+                padding-left: 8px;
+            }
+
+            li[data-panel="messages"] {
+                padding-left: 22px;
+            }
+
+            li[data-panel="calendar"] {
+                padding-left: 12px;
+            }
 
             li:first-of-type {
                 height: 16px;
@@ -59,10 +94,65 @@ div.row {
                 background-color: $DW_Blue;
             }
         }
+
+        @media screen and (max-width: 991px) {
+            padding-left: 32px;
+            height: auto !important;
+
+            p {
+                float: left;
+            }
+
+            > img {
+                display: none;
+            }
+
+            ul {
+                text-align: left;
+                padding-bottom: 23px;
+                margin: 46px 0px 0px 10px;
+
+                li {
+                    > span {
+                        display: none;
+                    }
+
+                    > img:hover {
+                        background-color: $DW_Gray;
+                    }
+
+                    &.item:hover {
+                        background-color: unset;
+                    }
+
+                    &.selected {
+                        background-color: unset;
+
+                        > img {
+                            background-color: $DW_LtBlue;
+                        }
+                    }
+
+                    &.unselectable {
+                        display: none;
+                    }
+                }
+
+                li[data-panel="intake"],
+                li[data-panel="details"],
+                li[data-panel="rentals"],
+                li[data-panel="history"],
+                li[data-panel="messages"],
+                li[data-panel="calendar"] {
+                    display: inline;
+                }
+            }
+        }
     }
 
     div.col {
         border-top: 1px solid;
+        font-family: sans-serif;
 
         div.noinit {
             display: none;
