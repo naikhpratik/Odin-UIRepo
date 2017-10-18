@@ -165,16 +165,16 @@
         var dateSort = function (field, asc) {
             $SortedOrders.transferees.sort(function (a, b) {
                 // trap nulls
-                if (a[field] == null && b[field] == null)
+                if (a[field] === null && b[field] === null)
                     return 0;
 
-                if (a[field] == null && b[field] != null)
+                if (a[field] === null && b[field] !== null)
                     if (asc)
                         return -1;
                     else
                         return 1;
 
-                if (a[field] != null && b[field] == null)
+                if (a[field] !== null && b[field] === null)
                     if (asc)
                         return 1;
                     else
@@ -188,7 +188,7 @@
                         return -1;
                     else
                         return 1;
-                else if (dateA == dateB)
+                else if (dateA === dateB)
                     return 0;
                 else
                     if (asc)
@@ -205,7 +205,7 @@
                         return -1;
                     else
                         return 1;
-                else if (a.numberOfAlerts == b.numberOfAlerts)
+                else if (a.numberOfAlerts === b.numberOfAlerts)
                     return 0;
                 else
                     if (asc)
