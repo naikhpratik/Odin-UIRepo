@@ -7,13 +7,13 @@ namespace Odin.Data.Persistence.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddTriggersToAzureTables : IMigrationMetadata
+    public sealed partial class DropAzureTables : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddTriggersToAzureTables));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(DropAzureTables));
         
         string IMigrationMetadata.Id
         {
-            get { return "201710181656109_AddTriggersToAzureTables"; }
+            get { return "201710181723591_DropAzureTables"; }
         }
         
         string IMigrationMetadata.Source

@@ -7,13 +7,13 @@ namespace Odin.Data.Persistence.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class ChangeOrdersRentAndServiceToEntityData : IMigrationMetadata
+    public sealed partial class AddAzureTablesBack : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(ChangeOrdersRentAndServiceToEntityData));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddAzureTablesBack));
         
         string IMigrationMetadata.Id
         {
-            get { return "201710181423555_ChangeOrdersRentAndServiceToEntityData"; }
+            get { return "201710181725012_AddAzureTablesBack"; }
         }
         
         string IMigrationMetadata.Source

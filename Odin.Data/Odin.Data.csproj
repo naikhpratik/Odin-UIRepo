@@ -254,13 +254,13 @@
     <Compile Include="Persistence\Migrations\201710122149268_AddRushVipLastContactedToOrder.Designer.cs">
       <DependentUpon>201710122149268_AddRushVipLastContactedToOrder.cs</DependentUpon>
     </Compile>
-    <Compile Include="Persistence\Migrations\201710181423555_ChangeOrdersRentAndServiceToEntityData.cs" />
-    <Compile Include="Persistence\Migrations\201710181423555_ChangeOrdersRentAndServiceToEntityData.Designer.cs">
-      <DependentUpon>201710181423555_ChangeOrdersRentAndServiceToEntityData.cs</DependentUpon>
+    <Compile Include="Persistence\Migrations\201710181723591_DropAzureTables.cs" />
+    <Compile Include="Persistence\Migrations\201710181723591_DropAzureTables.Designer.cs">
+      <DependentUpon>201710181723591_DropAzureTables.cs</DependentUpon>
     </Compile>
-    <Compile Include="Persistence\Migrations\201710181656109_AddTriggersToAzureTables.cs" />
-    <Compile Include="Persistence\Migrations\201710181656109_AddTriggersToAzureTables.Designer.cs">
-      <DependentUpon>201710181656109_AddTriggersToAzureTables.cs</DependentUpon>
+    <Compile Include="Persistence\Migrations\201710181725012_AddAzureTablesBack.cs" />
+    <Compile Include="Persistence\Migrations\201710181725012_AddAzureTablesBack.Designer.cs">
+      <DependentUpon>201710181725012_AddAzureTablesBack.cs</DependentUpon>
     </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
@@ -345,11 +345,11 @@
     <EmbeddedResource Include="Persistence\Migrations\201710122149268_AddRushVipLastContactedToOrder.resx">
       <DependentUpon>201710122149268_AddRushVipLastContactedToOrder.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Persistence\Migrations\201710181423555_ChangeOrdersRentAndServiceToEntityData.resx">
-      <DependentUpon>201710181423555_ChangeOrdersRentAndServiceToEntityData.cs</DependentUpon>
+    <EmbeddedResource Include="Persistence\Migrations\201710181723591_DropAzureTables.resx">
+      <DependentUpon>201710181723591_DropAzureTables.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Persistence\Migrations\201710181656109_AddTriggersToAzureTables.resx">
-      <DependentUpon>201710181656109_AddTriggersToAzureTables.cs</DependentUpon>
+    <EmbeddedResource Include="Persistence\Migrations\201710181725012_AddAzureTablesBack.resx">
+      <DependentUpon>201710181725012_AddAzureTablesBack.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
