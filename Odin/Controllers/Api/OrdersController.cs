@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.ApplicationInsights;
 using Microsoft.AspNet.Identity;
 using Odin.Data.Core;
@@ -13,6 +7,11 @@ using Odin.Data.Core.Models;
 using Odin.Domain;
 using Odin.Filters;
 using Odin.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Web.Http;
 
 namespace Odin.Controllers.Api
 {
@@ -63,6 +62,95 @@ namespace Odin.Controllers.Api
 
             return Ok(new OrderIndexDto {Transferees = transfereeIndexDtos});
         }
+
+        // Post /api/orders/transferee/intake/destination
+        [HttpPost]
+        [Authorize]
+        [Route("api/orders/transferee/intake/destination")]
+        public IHttpActionResult UpsertIntakeDestination(OrdersTransfereeIntakeDestinationDto dto)
+        {
+
+            var userId = User.Identity.GetUserId();
+            //var order = _unitOfWork.Orders.GetOrderFor(userId,dto.Id);
+            var order = _unitOfWork.Orders.GetOrderById(dto.Id);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            _mapper.Map<OrdersTransfereeIntakeDestinationDto, Order>(dto, order);
+            _unitOfWork.Complete();
             
+            return Ok();
+        }
+
+        // Post /api/orders/transferee/intake/origin
+        [HttpPost]
+        [Authorize]
+        [Route("api/orders/transferee/intake/origin")]
+        public IHttpActionResult UpsertIntakeOrigin(OrdersTransfereeIntakeOriginDto dto)
+        {
+
+            var userId = User.Identity.GetUserId();
+            //var order = _unitOfWork.Orders.GetOrderFor(userId,dto.Id);
+            var order = _unitOfWork.Orders.GetOrderById(dto.Id);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            _mapper.Map<OrdersTransfereeIntakeOriginDto, Order>(dto, order);
+            _unitOfWork.Complete();
+
+            return Ok();
+        }
+
+        // Post /api/orders/transferee/intake/family
+        [HttpPost]
+        [Authorize]
+        [Route("api/orders/transferee/intake/family")]
+        public IHttpActionResult UpsertIntakeFamily(OrdersTransfereeIntakeFamilyDto dto)
+        {
+            var userId = User.Identity.GetUserId();
+            //var order = _unitOfWork.Orders.GetOrderFor(userId,dto.Id);
+            var order = _unitOfWork.Orders.GetOrderById(dto.Id);
+
+
+            Collection<Child> newChildren = new Collection<Child>();
+            foreach (var childDto in dto.Children)
+            {
+                var child = order.Children.FirstOrDefault(c => c.Id > 0 && c.Id == childDto.Id);
+                if (child == null) 
+                {
+                    child = _mapper.Map<ChildDto, Child>(childDto);
+                    order.Children.Add(child);
+                    newChildren.Add(child);
+                }
+                else
+                {
+                    _mapper.Map<ChildDto, Child>(childDto, child);
+                }
+            }
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            _mapper.Map<OrdersTransfereeIntakeFamilyDto, Order>(dto, order);
+            _unitOfWork.Complete();
+
+            Dictionary<string,int> newEntities = new Dictionary<string, int>();
+            foreach (var child in newChildren)
+            {
+                newEntities.Add(child.TempId,child.Id);
+            }
+
+            //On success, return the newly created id's with the associated temp id's so that the client can be updated.
+            return Ok(newEntities);
+        }
+
     }
 }

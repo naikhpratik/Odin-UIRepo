@@ -9,5 +9,6 @@ namespace Odin.Data.Core.Repositories
         Order GetOrderByTrackingId(string trackingId);
         void Add(Order order);
         Order GetOrderById(int orderId);
+        Order GetOrderFor(string userId, int orderId);
     }
 }

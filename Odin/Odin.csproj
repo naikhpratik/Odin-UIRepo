@@ -312,6 +312,7 @@
     <Compile Include="ViewModels\Orders\Index\OrdersIndexViewModel.cs" />
     <Compile Include="ViewModels\Mailers\ViewRenderer.cs" />
     <Compile Include="ViewModels\Orders\Transferee\OrdersTransfereeViewModel.cs" />
+    <Compile Include="ViewModels\Shared\ChildViewModel.cs" />
     <Compile Include="ViewModels\Shared\ManagerViewModel.cs" />
     <Compile Include="ViewModels\Shared\ServiceViewModel.cs" />
     <Compile Include="ViewModels\Shared\TransfereeViewModel.cs" />

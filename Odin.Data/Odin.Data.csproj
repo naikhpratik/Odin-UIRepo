@@ -91,11 +91,15 @@
     <Compile Include="Builders\OrderBuilder.cs" />
     <Compile Include="Builders\OrderDtoBuilder.cs" />
     <Compile Include="Builders\TransfereeDtoBuilder.cs" />
+    <Compile Include="Core\Dtos\ChildDto.cs" />
     <Compile Include="Core\Dtos\ConsultantDto.cs" />
     <Compile Include="Core\Dtos\ConsultantImportDto.cs" />
     <Compile Include="Core\Dtos\ConsultantsDto.cs" />
     <Compile Include="Core\Dtos\OrderDto.cs" />
     <Compile Include="Core\Dtos\OrderIndexDto.cs" />
+    <Compile Include="Core\Dtos\OrdersTransfereeIntakeFamilyDto.cs" />
+    <Compile Include="Core\Dtos\OrdersTransfereeIntakeDestinationDto.cs" />
+    <Compile Include="Core\Dtos\OrdersTransfereeIntakeOriginDto.cs" />
     <Compile Include="Core\Dtos\ProgramManagerDto.cs" />
     <Compile Include="Core\Dtos\ManagerDto.cs" />
     <Compile Include="Core\Dtos\ManagersDto.cs" />
@@ -105,6 +109,7 @@
     <Compile Include="Core\Dtos\TransfereeIndexDto.cs" />
     <Compile Include="Core\Dtos\UserDto.cs" />
     <Compile Include="Core\Models\ApplicationUser.cs" />
+    <Compile Include="Core\Models\Child.cs" />
     <Compile Include="Core\Models\Consultant.cs" />
     <Compile Include="Core\Models\ErrorResponse.cs" />
     <Compile Include="Core\Models\HousingType.cs" />
@@ -222,6 +227,14 @@
     <Compile Include="Persistence\Migrations\201710122149268_AddRushVipLastContactedToOrder.Designer.cs">
       <DependentUpon>201710122149268_AddRushVipLastContactedToOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201710190417220_AddChildren.cs" />
+    <Compile Include="Persistence\Migrations\201710190417220_AddChildren.Designer.cs">
+      <DependentUpon>201710190417220_AddChildren.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710190421355_AddSpouseInfo.cs" />
+    <Compile Include="Persistence\Migrations\201710190421355_AddSpouseInfo.Designer.cs">
+      <DependentUpon>201710190421355_AddSpouseInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
     <Compile Include="Persistence\ServicesRepository.cs" />
@@ -304,6 +317,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201710122149268_AddRushVipLastContactedToOrder.resx">
       <DependentUpon>201710122149268_AddRushVipLastContactedToOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710190417220_AddChildren.resx">
+      <DependentUpon>201710190417220_AddChildren.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710190421355_AddSpouseInfo.resx">
+      <DependentUpon>201710190421355_AddSpouseInfo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

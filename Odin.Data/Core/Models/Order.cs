@@ -11,6 +11,7 @@ namespace Odin.Data.Core.Models
         public Order()
         {
             Services = new Collection<Service>();
+            Children = new Collection<Child>();
         }
 
         public int Id { get; set; }
@@ -55,6 +56,11 @@ namespace Odin.Data.Core.Models
         public bool IsRush { get; set; }
 
         public bool IsVip { get; set; }
+
+        public string SpouseName { get; set; }
+        public string SpouseVisaType { get; set; }
+        public virtual ICollection<Child> Children { get; private set; }
+        public string ChildrenEducationPreferences { get; set; }
 
         public bool HasService(int serviceTypeId)
         {
