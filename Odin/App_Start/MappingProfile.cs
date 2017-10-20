@@ -22,6 +22,7 @@ namespace Odin
             CreateMap<Manager, ManagerViewModel>();
             CreateMap<Service, ServiceViewModel>()
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.ServiceType.Name));
+            CreateMap<Child, ChildViewModel>();
 
             /*Order - Index*/
             CreateMap<Order, OrdersIndexViewModel>();
@@ -45,6 +46,8 @@ namespace Odin
             CreateMap<ConsultantImportDto, Consultant>();
             CreateMap<ServiceDto, Service>();
 
+            CreateMap<ChildDto, Child>();
+
             CreateMap<Order, TransfereeIndexDto>()
                 .ForMember(m => m.FirstName, opt => opt.MapFrom(src => src.Transferee.FirstName))
                 .ForMember(m => m.LastName, opt => opt.MapFrom(src => src.Transferee.LastName))
@@ -55,6 +58,10 @@ namespace Odin
                 .ForMember(m => m.PreTrip, opt => opt.MapFrom(src => src.PreTripDate));
 
             CreateMap<Service, ServiceDto>();
+
+            CreateMap<OrdersTransfereeIntakeDestinationDto,Order>();
+            CreateMap<OrdersTransfereeIntakeOriginDto, Order>();
+            CreateMap<OrdersTransfereeIntakeFamilyDto, Order>().ForMember(opt => opt.Children, opt => opt.Ignore());
         }
     }
 }

@@ -49,5 +49,14 @@ namespace Odin.Data.Persistence
                 .Include(o => o.Rent)
                 .SingleOrDefault<Order>();
         }
+
+        public Order GetOrderFor(string userId, string orderId)
+        {
+            return _context.Orders
+                .Where(o => o.Id == orderId && o.ConsultantId == userId)
+                .Include(o => o.Services)
+                .Include(o => o.Rent)
+                .SingleOrDefault<Order>();
+        }
     }
 }

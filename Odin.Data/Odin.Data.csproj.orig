@@ -139,8 +139,11 @@
     <Compile Include="Core\Dtos\TransfereeIndexDto.cs" />
     <Compile Include="Core\Dtos\UserDto.cs" />
     <Compile Include="Core\Models\ApplicationUser.cs" />
+<<<<<<< HEAD
     <Compile Include="Core\Models\AzureTest.cs" />
+=======
     <Compile Include="Core\Models\Child.cs" />
+>>>>>>> origin/intake_changes
     <Compile Include="Core\Models\Consultant.cs" />
     <Compile Include="Core\Models\ErrorResponse.cs" />
     <Compile Include="Core\Models\HousingType.cs" />
@@ -259,6 +262,7 @@
     <Compile Include="Persistence\Migrations\201710122149268_AddRushVipLastContactedToOrder.Designer.cs">
       <DependentUpon>201710122149268_AddRushVipLastContactedToOrder.cs</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="Persistence\Migrations\201710181723591_DropAzureTables.cs" />
     <Compile Include="Persistence\Migrations\201710181723591_DropAzureTables.Designer.cs">
       <DependentUpon>201710181723591_DropAzureTables.cs</DependentUpon>
@@ -270,10 +274,15 @@
     <Compile Include="Persistence\Migrations\201710182111512_ReSeedServiceTypes.cs" />
     <Compile Include="Persistence\Migrations\201710182111512_ReSeedServiceTypes.Designer.cs">
       <DependentUpon>201710182111512_ReSeedServiceTypes.cs</DependentUpon>
+=======
+    <Compile Include="Persistence\Migrations\201710190417220_AddChildren.cs" />
+    <Compile Include="Persistence\Migrations\201710190417220_AddChildren.Designer.cs">
+      <DependentUpon>201710190417220_AddChildren.cs</DependentUpon>
     </Compile>
-    <Compile Include="Persistence\Migrations\201710201611358_AddChildToOrder.cs" />
-    <Compile Include="Persistence\Migrations\201710201611358_AddChildToOrder.Designer.cs">
-      <DependentUpon>201710201611358_AddChildToOrder.cs</DependentUpon>
+    <Compile Include="Persistence\Migrations\201710190421355_AddSpouseInfo.cs" />
+    <Compile Include="Persistence\Migrations\201710190421355_AddSpouseInfo.Designer.cs">
+      <DependentUpon>201710190421355_AddSpouseInfo.cs</DependentUpon>
+>>>>>>> origin/intake_changes
     </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
@@ -358,6 +367,7 @@
     <EmbeddedResource Include="Persistence\Migrations\201710122149268_AddRushVipLastContactedToOrder.resx">
       <DependentUpon>201710122149268_AddRushVipLastContactedToOrder.cs</DependentUpon>
     </EmbeddedResource>
+<<<<<<< HEAD
     <EmbeddedResource Include="Persistence\Migrations\201710181723591_DropAzureTables.resx">
       <DependentUpon>201710181723591_DropAzureTables.cs</DependentUpon>
     </EmbeddedResource>
@@ -366,9 +376,13 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201710182111512_ReSeedServiceTypes.resx">
       <DependentUpon>201710182111512_ReSeedServiceTypes.cs</DependentUpon>
+=======
+    <EmbeddedResource Include="Persistence\Migrations\201710190417220_AddChildren.resx">
+      <DependentUpon>201710190417220_AddChildren.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Persistence\Migrations\201710201611358_AddChildToOrder.resx">
-      <DependentUpon>201710201611358_AddChildToOrder.cs</DependentUpon>
+    <EmbeddedResource Include="Persistence\Migrations\201710190421355_AddSpouseInfo.resx">
+      <DependentUpon>201710190421355_AddSpouseInfo.cs</DependentUpon>
+>>>>>>> origin/intake_changes
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
