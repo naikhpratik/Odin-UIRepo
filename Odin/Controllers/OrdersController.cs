@@ -55,9 +55,8 @@ namespace Odin.Controllers
         }
 
         // GET: Transferee
-        public ViewResult Transferee(int id)
+        public ViewResult Transferee(string id)
         {
-            //int id = Int32.Parse(orderId);
             var order = _unitOfWork.Orders.GetOrderById(id);
 
             OrdersTransfereeViewModel vm = _mapper.Map<Order, OrdersTransfereeViewModel>(order);
