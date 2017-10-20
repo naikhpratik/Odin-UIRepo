@@ -6,7 +6,7 @@ namespace Odin.ViewModels.Orders.Transferee
 {
     public class OrdersTransfereeViewModel
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         public string DestinationCity { get; set; }
         public string DestinationState { get; set; }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
 
 namespace Odin.Data.Core.Dtos
 {
@@ -11,6 +10,8 @@ namespace Odin.Data.Core.Dtos
         {
             Services = new Collection<ServiceDto>();
         }
+
+        public string Id;
 
         public string FirstName;
         public string Middle;

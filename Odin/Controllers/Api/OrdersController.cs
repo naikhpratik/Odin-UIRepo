@@ -121,10 +121,11 @@ namespace Odin.Controllers.Api
             Collection<Child> newChildren = new Collection<Child>();
             foreach (var childDto in dto.Children)
             {
-                var child = order.Children.FirstOrDefault(c => c.Id > 0 && c.Id == childDto.Id);
+                var child = order.Children.FirstOrDefault(c => !String.IsNullOrEmpty(c.Id) && c.Id == childDto.Id);
                 if (child == null) 
                 {
                     child = _mapper.Map<ChildDto, Child>(childDto);
+                    child.Id = Guid.NewGuid().ToString();
                     order.Children.Add(child);
                     newChildren.Add(child);
                 }
@@ -142,7 +143,7 @@ namespace Odin.Controllers.Api
             _mapper.Map<OrdersTransfereeIntakeFamilyDto, Order>(dto, order);
             _unitOfWork.Complete();
 
-            Dictionary<string,int> newEntities = new Dictionary<string, int>();
+            Dictionary<string,string> newEntities = new Dictionary<string, string>();
             foreach (var child in newChildren)
             {
                 newEntities.Add(child.TempId,child.Id);

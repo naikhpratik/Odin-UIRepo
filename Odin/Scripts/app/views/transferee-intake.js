@@ -84,8 +84,6 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
                 }
             });
 
-            alert(JSON.stringify(data));
-
             //Do save
             transfereeIntakeService.updateIntakeBlock(block, data, saveSuccess, saveFail);
         }
@@ -126,7 +124,7 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
 
     var cancelEditBlock = function (e) {
         var intakeBlock = $(e.target).parents(".intake-block");
-        cancel(intakeBlock, spnCancel);
+        cancel(intakeBlock);
     }
 
     var addRowToBlock = function (e) {
@@ -176,7 +174,7 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
             var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
             return v.toString(16);
-        }) + "-"+Date.now();
+        }) + "-Temp"+Date.now();
     }
 
     var isCollectionRowEmpty = function(rowInputs) {

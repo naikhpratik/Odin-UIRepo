@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Azure.Mobile.Server.Tables;
 using Odin.Data.Core.Models;
 using Odin.Data.Persistence.EntityConfigurations;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
-using Microsoft.Azure.Mobile.Server.Tables;
 
 namespace Odin.Data.Persistence
 {

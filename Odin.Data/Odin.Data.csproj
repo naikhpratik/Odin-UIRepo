@@ -275,6 +275,14 @@
     <Compile Include="Persistence\Migrations\201710201611358_AddChildToOrder.Designer.cs">
       <DependentUpon>201710201611358_AddChildToOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201710201719164_DeleteOriginalChildTable.cs" />
+    <Compile Include="Persistence\Migrations\201710201719164_DeleteOriginalChildTable.Designer.cs">
+      <DependentUpon>201710201719164_DeleteOriginalChildTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710201721130_AddChildMobileTable.cs" />
+    <Compile Include="Persistence\Migrations\201710201721130_AddChildMobileTable.Designer.cs">
+      <DependentUpon>201710201721130_AddChildMobileTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
     <Compile Include="Persistence\ServicesRepository.cs" />
@@ -369,6 +377,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201710201611358_AddChildToOrder.resx">
       <DependentUpon>201710201611358_AddChildToOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710201719164_DeleteOriginalChildTable.resx">
+      <DependentUpon>201710201719164_DeleteOriginalChildTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710201721130_AddChildMobileTable.resx">
+      <DependentUpon>201710201721130_AddChildMobileTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
