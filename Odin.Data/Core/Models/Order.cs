@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Microsoft.Azure.Mobile.Server;
 
 namespace Odin.Data.Core.Models
 {
-    public class Order
+    public class Order : MobileTable 
     {
 
         public Order()
@@ -13,8 +14,6 @@ namespace Odin.Data.Core.Models
             Services = new Collection<Service>();
         }
 
-        public int Id { get; set; }
-        
         public string TrackingId { get; set; }
         public string RelocationType { get; set; }
         public string DestinationCity { get; set; }

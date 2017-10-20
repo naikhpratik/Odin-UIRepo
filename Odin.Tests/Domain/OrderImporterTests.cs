@@ -44,7 +44,7 @@ namespace Odin.Tests.Domain
         [TestMethod]  
         public void ImportOrderTest_New()
         {
-            var order = new Order() {Id = 1, TrackingId = "TestOrder" };
+            var order = new Order() {Id = "1", TrackingId = "TestOrder" };
             var transferee = new TransfereeDto() { Email = "testorder@dwellworks.com" };
             var consultant = new ConsultantDto() { SeContactUid = 1};
             var programManager = new ProgramManagerDto() { SeContactUid = 1 };
@@ -72,7 +72,7 @@ namespace Odin.Tests.Domain
         [TestMethod]
         public void ImportOrderTest_Update()
         {
-            var order = new Order() { Id = 1, TrackingId = "TestOrder" };
+            var order = new Order() { Id = "1", TrackingId = "TestOrder" };
             var transferee = new TransfereeDto() { Email = "testorder@dwellworks.com" };
             var consultant = new ConsultantDto() { SeContactUid = 1 };
             var programManager = new ProgramManagerDto() { SeContactUid = 1 };

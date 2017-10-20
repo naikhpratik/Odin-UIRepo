@@ -35,7 +35,7 @@ namespace Odin.Controllers
             return View(orderVms);
         }
 
-        public ActionResult Details(int orderId)
+        public ActionResult Details(string orderId)
         {
             var userId = User.Identity.GetUserId();
 

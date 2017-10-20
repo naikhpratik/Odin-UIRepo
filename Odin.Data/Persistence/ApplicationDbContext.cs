@@ -2,6 +2,9 @@
 using Odin.Data.Core.Models;
 using Odin.Data.Persistence.EntityConfigurations;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Linq;
+using Microsoft.Azure.Mobile.Server.Tables;
 
 namespace Odin.Data.Persistence
 {
@@ -29,6 +32,10 @@ namespace Odin.Data.Persistence
         {
             modelBuilder.Configurations.Add(new OrderConfiguration());
             modelBuilder.Configurations.Add(new RentConfiguration());
+
+            modelBuilder.Conventions.Add(
+                new AttributeToColumnAnnotationConvention<TableColumnAttribute, string>(
+                    "ServiceTableColumn", (property, attributes) => attributes.Single().ColumnType.ToString()));
 
             base.OnModelCreating(modelBuilder);
         }

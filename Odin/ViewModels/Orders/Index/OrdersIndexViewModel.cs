@@ -8,7 +8,7 @@ namespace Odin.ViewModels.Orders.Index
 {
     public class OrdersIndexViewModel
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string SeCustNumb { get; set; }
         public string Rmc { get; set; }
         public string Client { get; set; }

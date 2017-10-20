@@ -1,16 +1,15 @@
 ﻿using System;
+using Microsoft.Azure.Mobile.Server;
 
 namespace Odin.Data.Core.Models
 {
-    public class Service
+    public class Service : MobileTable
     {
-        public int Id { get; set; }
-
         public DateTime? ScheduledDate { get; set; }
 
         public DateTime? CompletedDate { get; set; }
 
-        public int OrderId { get; set; }
+        public string OrderId { get; set; }
 
         public Order Order { get; set; }
 
