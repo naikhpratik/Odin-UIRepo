@@ -1,13 +1,20 @@
 ﻿var TransfereeIntakeService = function() {
-    var route = "/api/orders/transferee/intake/";
+    var route = "/api/orders/transferee/";
 
     var updateIntakeBlock = function (block, data, success, fail) {
-        var url = route + block;
+        var url = route + "intake/" + block;
         $.post(url, data).done(success).fail(fail);
     }
 
+    var insertIntakeEntity = function(addType, orderId, success, fail) {
+        var url = route + addType;
+        var data = {"orderId":orderId}
+        $.post(url, orderId).done(success).fail(fail);
+    }
+
     return{
-        updateIntakeBlock: updateIntakeBlock
+        updateIntakeBlock: updateIntakeBlock,
+        insertIntakeEntity: insertIntakeEntity
     }
 
 }();
@@ -16,6 +23,9 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
 
     var intakeBlocks;
     var orderId;
+
+    var childTemplate =
+        '<div class="row intake-row collapse in" data-entity-collection="Children" data-entity-temp-id="#GUID#"> <div class="col-sm-3 intake-col"> <label>Child:</label> <span></span> <input type="text" class="form-control" name="Name"/> <input type="hidden" name="Name" /> </div> <div class="col-sm-3 intake-col"> <label>Age:</label> <span></span> <input type="text" class="form-control" name="Age"/> <input type="hidden" name="Age" /> </div> <div class="col-sm-3 intake-col"> <label>Grade:</label> <span></span> <input type="text" class="form-control" name="Grade"/> <input type="hidden" name="Grade" /> </div> <div class="col-sm-3 intake-col"> <span class="intake-add"> + Add </span> </div> </div>';
 
     var init = function () {
 
@@ -130,22 +140,29 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
     var addRowToBlock = function (e) {
 
         var spnAdd = $(e.target);
-        //Duplicate current row
-        var row = spnAdd.parents(".intake-row");
-        var clone = row.clone();
+        var addType = spnAdd.attr("data-add");
+        var template = '';
+        switch(addType) {
+            case 'child':
+                template = childTemplate;
+                break;
+            default:
+                break;
+        }
 
-        //Remove add button from current row
-        spnAdd.remove();
+        var insertSuccess = function(guid) {
+            var row = spnAdd.parents(".intake-row");
+            template.replace("#GUID#", guid);
+            row.after(template);
+            row.parents(".intake-block").find(".intake-edit").click();
+        }
 
-        //Clear values in clone
-        clone.find(":input").val(""); //All inputs including hidden fields
-        clone.find("span").not(".intake-add").text("");
-        clone.removeAttr("data-entity-id");
-        clone.attr("data-entity-temp-id", getTempId());
+        var insertFail = function() {
+            alert('failed');
+        }
 
-        //Add duplicate row to dom, make cancel button visible, call click of edit so all fields editable
-        row.after(clone);
-        clone.parents(".intake-block").find(".intake-edit").click();
+        //Function Execution
+        TransfereeIntakeService.insertIntakeEntity(addType, orderId, insertSuccess, insertFail);
     }
 
     var toggleCollapse = function (e) {

@@ -211,6 +211,11 @@
                 @Html.HiddenFor(m => @Model.SpouseVisaType)
             </div>
         </div>
+        <div class="row intake-row collapse in">
+            <div class="col-sm-9 intake-col">
+                <span class="intake-add" data-add="child">+Add Child</span>
+            </div>
+        </div>
         @if (@Model.Children.Count() > 0)
         {
             for (int i = 0; i < @Model.Children.Count(); i++)
@@ -234,14 +239,11 @@
                          @Html.TextBoxFor(m => @Model.Children.ElementAt(i).Grade, new {@class = "form-control"})
                          @Html.HiddenFor(m => @Model.Children.ElementAt(i).Grade)
                      </div>
-                     @if (i == @Model.Children.Count() - 1)
-                     {
-                         <div class="col-sm-3 intake-col">
-                             <span class="intake-add">
-                                 + Add
-                             </span>
-                         </div>
-                     }
+                     <div class="col-sm-3 intake-col">
+                         <span class="intake-del">
+                             x Delete
+                         </span>
+                     </div>
                  </div>
              }
         }
