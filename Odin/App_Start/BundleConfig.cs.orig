@@ -28,16 +28,16 @@ namespace Odin
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
+            bundles.Add(new StyleBundle("~/Content/cssBundle").Include(
                       "~/Content/bootstrap-paper.css",
                       "~/Content/site.css",
                       "~/Content/datatables/css/datatables.bootstrap.css"));
 
             // Page Styling
-<<<<<<< HEAD
             bundles.Add(new StyleBundle("~/Styling/orders").Include("~/Content/css/orders.css"));
             bundles.Add(new StyleBundle("~/Styling/login").Include("~/Content/css/login.css"));
-            bundles.Add(new StyleBundle("~/Styling/forgotpw").Include("~/Content/css/forgotpassword.css"));
+            bundles.Add(new StyleBundle("~/Styling/forgotPassword").Include("~/Content/css/forgotpassword.css",
+                "~/Content/animate.css"));
             bundles.Add(new StyleBundle("~/Styling/transferee").Include("~/Content/css/transferee/transferee.css"));
 
             // Panel Styling
@@ -50,20 +50,18 @@ namespace Odin
 
             // Page scripts
             bundles.Add(new ScriptBundle("~/Scripts/orders").Include("~/Scripts/app/views/orders.js"));
-            bundles.Add(new ScriptBundle("~/Scripts/transferee").Include("~/Scripts/app/views/transferee.js"));
-=======
-            bundles.Add(new StyleBundle("~/Styling/orders").Include("~/Content/Orders/orders.css"));
-            bundles.Add(new StyleBundle("~/Styling/login").Include("~/Content/Login/login.css"));
-            bundles.Add(new StyleBundle("~/Styling/forgotPassword").Include(
-                "~/Content/ForgotPassword/forgotpassword.css",
-                "~/Content/animate.css"));
+            bundles.Add(new ScriptBundle("~/Scripts/transferee").Include(
+                "~/Scripts/app/views/transferee.js",
+                "~/Scripts/app/views/transferee-intake.js"));
+            bundles.Add(new ScriptBundle("~/Scripts/forgotPassword").Include(
+                "~/Scripts/bootstrap-notify.min.js",
+<<<<<<< HEAD
+                "~/Scripts/app/views/forgotPassword.js"));
 
-            // Page scripts
-            bundles.Add(new ScriptBundle("~/Scripts/orders").Include("~/Scripts/app/views/orders.js"));
-            bundles.Add(new ScriptBundle("~/bundles/forgotPassword").Include(
-                        "~/Scripts/bootstrap-notify.min.js",
-                        "~/Scripts/app/views/forgotPassword.js"));
->>>>>>> origin/view_model_for_dashboard
+
+=======
+                "~/Scripts/app/views/forgotPassword.js")); 
+>>>>>>> origin/order_page_sorting
         }
     }
 }
