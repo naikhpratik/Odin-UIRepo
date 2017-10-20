@@ -563,6 +563,7 @@
     <Content Include="Content\Images\bg_gradient_login.png" />
     <Content Include="Content\Images\bg_image.png" />
     <Content Include="Content\Images\collapse.png" />
+    <Content Include="Content\Images\Desktop_ln_image_placeholder.png" />
     <Content Include="Content\Images\dwellworks_icon.png" />
     <Content Include="Content\Images\expand.png" />
     <Content Include="Content\Images\forgot_password.jpg" />
@@ -580,6 +581,7 @@
     <Content Include="Content\Images\icn_profile_B1.png" />
     <Content Include="Content\Images\icn_rentals.png" />
     <Content Include="Content\Images\icn_up_arrow.png" />
+    <Content Include="Content\Images\icn_up_sel_arrow.png" />
     <Content Include="Content\Images\ic_search.png" />
     <Content Include="Content\Images\user-placeholder.png" />
     <Content Include="Content\css\login.css">

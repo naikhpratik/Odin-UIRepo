@@ -189,7 +189,8 @@ div.row {
           div.row div.col-md-2 ul li[data-panel="calendar"] {
             display: inline; } }
   div.row div.col {
-    border-top: 1px solid; }
+    border-top: 1px solid;
+    font-family: sans-serif; }
     div.row div.col div.noinit {
       display: none; }
 

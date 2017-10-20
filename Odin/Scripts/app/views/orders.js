@@ -31,18 +31,74 @@
 
             if ($currSort !== null) {
                 $currSort.next().css("display", "none");
+                $currSort.next().next().css("display", "none");
+
                 $currSort.css("display", "block");
             }
 
             $currSort = $(this);
             $currSort.css("display", "none");
             $currSort.next().css("display", "block");
+
+            if ($currSort.hasClass('name')) {
+                nameSort(true);
+            }
+
+            if ($currSort.hasClass('date')) {
+                dateSort($(this).attr('data-field'), true);
+            }
+
+            if ($currSort.hasClass('number')) {
+                numberSort(true);
+            }
+
+            $SearchedOrders = $SortedOrders;
+
+            populateTables();
         });
 
         $('.arrow.down').click(function () {
-            $currSort = null;
+
+            $(this).css("display", "none");
+            $(this).next().css("display", "block");
+
+            if ($currSort.hasClass('name')) {
+                nameSort(false);
+            }
+
+            if ($currSort.hasClass('date')) {
+                dateSort($(this).attr('data-field'), false);
+            }
+
+            if ($currSort.hasClass('number')) {
+                numberSort(false);
+            }
+
+            $SearchedOrders = $SortedOrders;
+
+            populateTables();
+        });
+
+        $('.arrow.upsel').click(function () {
+
             $(this).css("display", "none");
             $(this).prev().css("display", "block");
+
+            if ($currSort.hasClass('name')) {
+                nameSort(true);
+            }
+
+            if ($currSort.hasClass('date')) {
+                dateSort($(this).attr('data-field'), true);
+            }
+
+            if ($currSort.hasClass('number')) {
+                numberSort(true);
+            }
+
+            $SearchedOrders = $SortedOrders;
+
+            populateTables();
         });
 
         // search box
@@ -93,14 +149,78 @@
             }
             else $SearchedOrders = $SortedOrders;
 
-            desktop_table.empty();
-            tablet_table.empty();
-            mobile_table.empty();
-
             populateTables();  
         });
 
+        // sorting routines
+        var nameSort = function (asc) {
+            $SortedOrders.transferees.sort(function (a, b) {
+                if (asc)
+                    return a.lastName.localeCompare(b.lastName);
+                else
+                    return a.lastName.localeCompare(b.lastName) * -1;
+            });
+        };
+
+        var dateSort = function (field, asc) {
+            $SortedOrders.transferees.sort(function (a, b) {
+                // trap nulls
+                if (a[field] === null && b[field] === null)
+                    return 0;
+
+                if (a[field] === null && b[field] !== null)
+                    if (asc)
+                        return -1;
+                    else
+                        return 1;
+
+                if (a[field] !== null && b[field] === null)
+                    if (asc)
+                        return 1;
+                    else
+                        return -1;
+
+                var dateA = new Date(a[field]);
+                var dateB = new Date(b[field]);
+
+                if (dateA > dateB)
+                    if (asc)
+                        return -1;
+                    else
+                        return 1;
+                else if (dateA === dateB)
+                    return 0;
+                else
+                    if (asc)
+                        return 1;
+                    else
+                        return -1;
+            });
+        };
+
+        var numberSort = function (asc) {
+            $SortedOrders.transferees.sort(function (a, b) {
+                if (a.numberOfAlerts > b.numberOfAlerts)
+                    if (asc)
+                        return -1;
+                    else
+                        return 1;
+                else if (a.numberOfAlerts === b.numberOfAlerts)
+                    return 0;
+                else
+                    if (asc)
+                        return 1;
+                    else
+                        return -1;
+            });
+        };
+
+        // tables builder
         var populateTables = function () {
+
+            desktop_table.empty();
+            tablet_table.empty();
+            mobile_table.empty();
 
             if ($SearchedOrders.transferees === null) return;
 
@@ -211,6 +331,11 @@
                     $(this).parent().parent().children('.actlist-item-blk').each(function () {
                         $(this).css("display", "none");
                     });
+                });
+
+                // <a> handler until functionality decided
+                $('a').click(function (event) {
+                    event.stopPropagation();
                 });
 
                 // row selection handler
