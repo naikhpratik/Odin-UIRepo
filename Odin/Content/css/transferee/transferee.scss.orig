@@ -132,11 +132,6 @@ div.row {
                             background-color: $DW_LtBlue;
                         }
                     }
-<<<<<<< HEAD
-                    
-=======
-
->>>>>>> origin/order_page_sorting
                     &.unselectable {
                         display: none;
                     }
@@ -156,8 +151,12 @@ div.row {
 
     div.col {
         border-top: 1px solid;
+<<<<<<< HEAD
         font-family: sans-serif;
 
+=======
+        font-family:sans-serif;
+>>>>>>> origin/matts_branch_2
         div.noinit {
             display: none;
         }
