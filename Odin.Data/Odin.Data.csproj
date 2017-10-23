@@ -301,6 +301,10 @@
     <Compile Include="Persistence\Migrations\201710212255364_AddNotesToService.Designer.cs">
       <DependentUpon>201710212255364_AddNotesToService.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201710231718208_RemoveChildDeletedMapping.cs" />
+    <Compile Include="Persistence\Migrations\201710231718208_RemoveChildDeletedMapping.Designer.cs">
+      <DependentUpon>201710231718208_RemoveChildDeletedMapping.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
     <Compile Include="Persistence\ServicesRepository.cs" />
@@ -410,6 +414,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201710212255364_AddNotesToService.resx">
       <DependentUpon>201710212255364_AddNotesToService.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710231718208_RemoveChildDeletedMapping.resx">
+      <DependentUpon>201710231718208_RemoveChildDeletedMapping.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

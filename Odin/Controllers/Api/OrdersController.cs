@@ -173,7 +173,7 @@ namespace Odin.Controllers.Api
             {
                 return NotFound();
             }
-            _unitOfWork.Children.Remove(child);
+            child.Deleted = true;
             _unitOfWork.Complete();
             return Ok();
         }

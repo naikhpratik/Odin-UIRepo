@@ -40,9 +40,9 @@ namespace Odin.Data.Persistence
             modelBuilder.Configurations.Add(new OrderConfiguration());
             modelBuilder.Configurations.Add(new RentConfiguration());
 
-            modelBuilder.Entity<Child>()
-                .Map(m => m.Requires("Deleted").HasValue(false))
-                .Ignore(m => m.Deleted);
+            //modelBuilder.Entity<Child>()
+            //    .Map(m => m.Requires("Deleted").HasValue(false))
+            //    .Ignore(m => m.Deleted);
 
             modelBuilder.Conventions.Add(
                 new AttributeToColumnAnnotationConvention<TableColumnAttribute, string>(
@@ -55,8 +55,7 @@ namespace Odin.Data.Persistence
 
         //public override int SaveChanges()
         //{
-        //    foreach (var entry in ChangeTracker.Entries()
-        //        .Where(p => p.State == EntityState.Deleted))
+        //    foreach (var entry in ChangeTracker.Entries().Where(e => e.Entity is MobileTable && ((MobileTable)e.Entity).Deleted).ToList())
         //    {
         //        SoftDelete(entry);
         //    }
@@ -79,9 +78,6 @@ namespace Odin.Data.Persistence
             Database.ExecuteSqlCommand(
                 sql,
                 new SqlParameter("@id", entry.OriginalValues[primaryKeyName]));
-
-            // prevent hard delete            
-            entry.State = EntityState.Detached;
         }
 
         private static Dictionary<Type, EntitySetBase> _mappingCache = new Dictionary<Type, EntitySetBase>();
