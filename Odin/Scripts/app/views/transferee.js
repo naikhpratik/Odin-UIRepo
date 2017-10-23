@@ -1,6 +1,8 @@
 ﻿var OrdersPageController = function () {
-        
+     
     var init = function () { 
+        $('div.col > div').each(function () { $(this).css("display", "none"); })
+        $('div.col > div#intake').css("display", "block");
         $('.item').click(function () {
             $('.item').removeClass('selected');
             $(this).addClass('selected');

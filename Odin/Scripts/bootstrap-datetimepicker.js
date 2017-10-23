@@ -2469,7 +2469,7 @@
             next: 'glyphicon glyphicon-chevron-right',
             today: 'glyphicon glyphicon-screenshot',
             clear: 'glyphicon glyphicon-trash',
-            close: 'glyphicon glyphicon-remove'
+            close: 'glyphicon glyphicon-ok-sign'
         },
         tooltips: {
             today: 'Go to today',

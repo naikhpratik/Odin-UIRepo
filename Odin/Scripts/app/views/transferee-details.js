@@ -1,7 +1,6 @@
 ﻿var TransfereeDetailsController = function () {
     
-    var pnlIntake;
-
+    
     var init = function () {
        
         $('.date').datetimepicker({    
@@ -10,7 +9,10 @@
             keepOpen: false
         });
         $('.time').datetimepicker({
-            format: 'LT'
+            format: 'LT',
+            showClose: true,
+            toolbarPlacement: 'bottom',
+            icons: { close: 'custom-icon-check'}
         });
         pnlDetails = $("div#details");
 
