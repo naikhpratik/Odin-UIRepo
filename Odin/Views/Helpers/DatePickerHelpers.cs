@@ -65,6 +65,9 @@ using System.Web.Mvc;
 
         public static IHtmlString DatePicker(this HtmlHelper htmlHelper, string clss, string name, DateTime value)
         {
+            if (String.IsNullOrEmpty(clss) || String.IsNullOrEmpty(name))
+                throw new ArgumentNullException("helper");
+
             string icon = "calendar";
             string wid = "100%";
             if (clss == "time")
@@ -79,8 +82,8 @@ using System.Web.Mvc;
             res = tagDiv.ToString(TagRenderMode.StartTag);
 
             TagBuilder tagInput = new TagBuilder("input");
-            tagInput.AddCssClass("form-control");
             tagInput.Attributes.Add("name", name);
+            tagInput.AddCssClass("form-control");            
             tagInput.Attributes.Add("type", "text");
             tagInput.Attributes.Add("style", "display:block;width:85%");
             tagInput.Attributes.Add("placeholder", "Enter " + clss + " or hit "+icon);

@@ -311,6 +311,7 @@
     <Compile Include="ViewModels\Mailers\SetNewPasswordViewModel.cs" />
     <Compile Include="ViewModels\Orders\Index\OrdersIndexViewModel.cs" />
     <Compile Include="ViewModels\Mailers\ViewRenderer.cs" />
+    <Compile Include="ViewModels\Orders\Transferee\OrdersTransfereeDetailsViewModel.cs" />
     <Compile Include="ViewModels\Orders\Transferee\OrdersTransfereeViewModel.cs" />
     <Compile Include="ViewModels\Shared\ManagerViewModel.cs" />
     <Compile Include="ViewModels\Shared\ServiceViewModel.cs" />
@@ -543,6 +544,7 @@
     <Content Include="Content\Images\bg_gradient_forgot_password.png" />
     <Content Include="Content\Images\bg_gradient_login.png" />
     <Content Include="Content\Images\bg_image.png" />
+    <Content Include="Content\Images\check.png" />
     <Content Include="Content\Images\collapse.png" />
     <Content Include="Content\Images\dwellworks_icon.png" />
     <Content Include="Content\Images\expand.png" />

@@ -1,4 +1,5 @@
-﻿<div id="details">
+﻿@*@model Odin.ViewModels.Orders.Transferee.OrdersTransfereeDetailsViewModel*@
+<div id="details">
     <div class="row details-title">
         <p>Profile Summary</p>
         <span class="details-blue">Please fill out any items that are not already auto-generated that could aid in the help of your clients placement.</span>
@@ -21,7 +22,7 @@
             </div>
             <div class="col-sm-3 details-col">
                 <label>Temp Housing:</label>
-                <span>Model.Transferee.TempHousing</span>               
+                <span>Model.TempHousingDays</span>               
             </div>
         
             <div class="col-sm-3 details-col">
@@ -34,7 +35,7 @@
             </div>
             <div class="col-sm-3 details-col">
                 <label>Temp Housing Last Day:</label>
-                <span>Model.Transferee.THLD</span>
+                <span>Model.TempHousingEndDate</span>
             </div>
         </div>
         <div class="details-block">
@@ -46,11 +47,11 @@
             <div class="row details-row">
                 <div class="col-sm-3 details-col">
                     <label>Monthly Budget:</label>
-                    <span>Model.Transferee.MonthlyBudget</span>
+                    <span>Model.rent.HousingBudget</span>
                 </div>
                 <div class="col-sm-3 details-col">
                     <label>Housing:</label>
-                    <span>Model.Transferee.Housing</span>
+                    <span>Model.rent.HousingType</span>
                 </div>
                 <div class="col-sm-3 details-col">
                     <label>School District:</label>
@@ -59,15 +60,15 @@
             
                 <div class="col-sm-3 details-col">
                     <label>BD/BA:</label>
-                    <span>Model.Transferee.BD/Model.Transferee.BA</span>
+                    <span>Model.rent.NumberOfBedrooms.ToString()/Model.rent.NumberOfBathrooms.ToString()</span>
                 </div>
                 <div class="col-sm-3 details-col">
                     <label>Sq. Ft:</label>
-                    <span>Model.Transferee.SqFt</span>
+                    <span>Model.rent.SquareFootage</span>
                 </div>
                 <div class="col-sm-3 details-col">
                     <label>Rent or Own:</label>
-                    <span>Model.Transferee.RentorOwn</span>
+                    <span>Model.rent.OwnershipType</span>
                 </div>
             </div>
         </div>
@@ -107,7 +108,7 @@
         <span class="details-blue">Please fill out any items that are not already auto-generated that could aid in the help of your clients placement.</span>
     </div>
     <hr />
-    <div class="details-block">
+    <div class="details-block" id="scheduledServices">
         <div class="row details-row">
             <div class="col-sm-3 details-col">
                 <label>Service:</label>                
