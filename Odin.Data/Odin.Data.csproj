@@ -130,6 +130,8 @@
     <Compile Include="Core\Dtos\OrdersTransfereeIntakeFamilyDto.cs" />
     <Compile Include="Core\Dtos\OrdersTransfereeIntakeDestinationDto.cs" />
     <Compile Include="Core\Dtos\OrdersTransfereeIntakeOriginDto.cs" />
+    <Compile Include="Core\Dtos\OrdersTransfereeIntakeServiceDto.cs" />
+    <Compile Include="Core\Dtos\OrdersTransfereeIntakeServicesDto.cs" />
     <Compile Include="Core\Dtos\ProgramManagerDto.cs" />
     <Compile Include="Core\Dtos\ManagerDto.cs" />
     <Compile Include="Core\Dtos\ManagersDto.cs" />
@@ -150,13 +152,16 @@
     <Compile Include="Core\Models\OwnershipType.cs" />
     <Compile Include="Core\Models\Rent.cs" />
     <Compile Include="Core\Models\Service.cs" />
+    <Compile Include="Core\Models\ServiceCategory.cs" />
     <Compile Include="Core\Models\ServiceType.cs" />
     <Compile Include="Core\Models\Transferee.cs" />
     <Compile Include="Core\Models\UserRoles.cs" />
+    <Compile Include="Core\Repositories\IChildrenRepository.cs" />
     <Compile Include="Core\Repositories\IConsultantsRepository.cs" />
     <Compile Include="Core\Repositories\IManagersRepository.cs" />
     <Compile Include="Core\Repositories\IOrdersRepository.cs" />
     <Compile Include="Core\Repositories\IServicesRepository.cs" />
+    <Compile Include="Core\Repositories\IServiceTypesRepository.cs" />
     <Compile Include="Core\Repositories\ITransfereesRepository.cs" />
     <Compile Include="Core\Repositories\IUsersRepository.cs" />
     <Compile Include="Extensions\ModelStateExtensions.cs" />
@@ -166,6 +171,7 @@
     <Compile Include="Persistence\ApplicationDbContext.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Persistence\ApplicationUserRepository.cs" />
+    <Compile Include="Persistence\ChildrenRepository.cs" />
     <Compile Include="Persistence\ConsultantsRepository.cs" />
     <Compile Include="Persistence\EntityConfigurations\OrderConfiguration.cs" />
     <Compile Include="Persistence\EntityConfigurations\RentConfiguration.cs" />
@@ -283,6 +289,18 @@
     <Compile Include="Persistence\Migrations\201710201721130_AddChildMobileTable.Designer.cs">
       <DependentUpon>201710201721130_AddChildMobileTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201710211940045_AddSoftDeletesForChild.cs" />
+    <Compile Include="Persistence\Migrations\201710211940045_AddSoftDeletesForChild.Designer.cs">
+      <DependentUpon>201710211940045_AddSoftDeletesForChild.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710212142374_UpdateServices.cs" />
+    <Compile Include="Persistence\Migrations\201710212142374_UpdateServices.Designer.cs">
+      <DependentUpon>201710212142374_UpdateServices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710212255364_AddNotesToService.cs" />
+    <Compile Include="Persistence\Migrations\201710212255364_AddNotesToService.Designer.cs">
+      <DependentUpon>201710212255364_AddNotesToService.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
     <Compile Include="Persistence\ServicesRepository.cs" />
@@ -383,6 +401,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201710201721130_AddChildMobileTable.resx">
       <DependentUpon>201710201721130_AddChildMobileTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710211940045_AddSoftDeletesForChild.resx">
+      <DependentUpon>201710211940045_AddSoftDeletesForChild.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710212142374_UpdateServices.resx">
+      <DependentUpon>201710212142374_UpdateServices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710212255364_AddNotesToService.resx">
+      <DependentUpon>201710212255364_AddNotesToService.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

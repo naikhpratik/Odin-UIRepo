@@ -2,19 +2,34 @@
     var route = "/api/orders/transferee/";
 
     var updateIntakeBlock = function (block, data, success, fail) {
-        var url = route + "intake/" + block;
+        var url = route + "/intake/" + block;
         $.post(url, data).done(success).fail(fail);
     }
 
     var insertIntakeEntity = function(addType, orderId, success, fail) {
-        var url = route + addType;
+        var url = route + addType + "/" + orderId;
         var data = {"orderId":orderId}
         $.post(url, orderId).done(success).fail(fail);
     }
 
+    var deleteIntakeEntity = function(delType, entityId, success, fail) {
+        var url = route + delType + "/" + entityId;
+        $.ajax({
+            url: url,
+            type: 'DELETE'
+        }).done(success).fail(fail);
+    }
+
+    var insertIntakeEntityWithType = function(addType, orderId, typeId, success, fail) {
+        var url = route + addType + "/" + orderId + "/" + typeId;
+        $.post(url).done(success).fail(fail);
+    }
+
     return{
         updateIntakeBlock: updateIntakeBlock,
-        insertIntakeEntity: insertIntakeEntity
+        insertIntakeEntity: insertIntakeEntity,
+        deleteIntakeEntity: deleteIntakeEntity,
+        insertIntakeEntityWithType: insertIntakeEntityWithType
     }
 
 }();
@@ -25,7 +40,7 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
     var orderId;
 
     var childTemplate =
-        '<div class="row intake-row collapse in" data-entity-collection="Children" data-entity-temp-id="#GUID#"> <div class="col-sm-3 intake-col"> <label>Child:</label> <span></span> <input type="text" class="form-control" name="Name"/> <input type="hidden" name="Name" /> </div> <div class="col-sm-3 intake-col"> <label>Age:</label> <span></span> <input type="text" class="form-control" name="Age"/> <input type="hidden" name="Age" /> </div> <div class="col-sm-3 intake-col"> <label>Grade:</label> <span></span> <input type="text" class="form-control" name="Grade"/> <input type="hidden" name="Grade" /> </div> <div class="col-sm-3 intake-col"> <span class="intake-add"> + Add </span> </div> </div>';
+        '<div class="row intake-row collapse in" data-entity-collection="children" data-entity-id="#GUID#"> <div class="col-sm-3 intake-col"> <label>Child:</label> <span></span> <input type="text" class="form-control" name="Name"/> <input type="hidden" name="Name" /> </div> <div class="col-sm-3 intake-col"> <label>Age:</label> <span></span> <input type="text" class="form-control" name="Age"/> <input type="hidden" name="Age" /> </div> <div class="col-sm-3 intake-col"> <label>Grade:</label> <span></span> <input type="text" class="form-control" name="Grade"/> <input type="hidden" name="Grade" /> </div> <div class="col-sm-3 intake-col"> <span class="intake-del"> x Delete </span> </div> </div>';
 
     var init = function () {
 
@@ -40,6 +55,9 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
         intakeBlocks.on("click", ".intake-cancel", cancelEditBlock);
         intakeBlocks.on("click", ".intake-add", addRowToBlock);
         intakeBlocks.on("click", ".intake-collapse", toggleCollapse);
+        intakeBlocks.on("click", ".intake-del", deleteRowFromBlock);
+        intakeBlocks.on("click", ".intake-save", saveBlock);
+        intakeBlocks.on("change", "[type=checkbox]", saveChecked);
     };
 
     //Event Callbacks
@@ -80,7 +98,7 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
                 if (hasAttr(row, 'data-entity-collection')) {
                     if (!isCollectionRowEmpty(rowInputs)) {
                         var collectionKey = row.attr("data-entity-collection");
-                        var collectionData = hasAttr(row, "data-entity-id") ? { "Id": row.attr("data-entity-id") } : { "TempId": row.attr("data-entity-temp-id") }
+                        var collectionData = { "Id": row.attr("data-entity-id") };
 
                         fillPostData(collectionData, rowInputs);
 
@@ -110,13 +128,6 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
             });
             inputs.css("display", "none");
             spans.css("display", "block");
-
-            //Remove temp ids of newly created rows and replace with db ids
-            for (key in data) {
-                var newCollectionRow = intakeBlock.find(".intake-row[data-entity-temp-id='" + key + "']");
-                newCollectionRow.removeAttr('data-entity-temp-id');
-                newCollectionRow.attr("data-entity-id", data[key]);
-            }
         }
 
         var saveFail = function() {
@@ -140,19 +151,19 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
     var addRowToBlock = function (e) {
 
         var spnAdd = $(e.target);
-        var addType = spnAdd.attr("data-add");
+        var addType = spnAdd.attr("data-entity-add");
         var template = '';
         switch(addType) {
-            case 'child':
+            case 'children':
                 template = childTemplate;
                 break;
             default:
                 break;
         }
 
-        var insertSuccess = function(guid) {
+        var insertSuccess = function (guid) {
             var row = spnAdd.parents(".intake-row");
-            template.replace("#GUID#", guid);
+            template = template.replace("#GUID#", guid);
             row.after(template);
             row.parents(".intake-block").find(".intake-edit").click();
         }
@@ -165,6 +176,23 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
         TransfereeIntakeService.insertIntakeEntity(addType, orderId, insertSuccess, insertFail);
     }
 
+    var deleteRowFromBlock = function (e) {
+        var spnDel = $(e.target);
+        var row = spnDel.parents(".intake-row");
+        var delType = row.attr("data-entity-collection");
+        var entityId = row.attr("data-entity-id");
+
+        var deleteSuccess = function() {
+            row.remove();
+        }
+
+        var deleteFail = function() {
+            alert('failed');
+        }
+
+        transfereeIntakeService.deleteIntakeEntity(delType, entityId, deleteSuccess, deleteFail);
+    }
+
     var toggleCollapse = function (e) {
         var intakeBlock = $(e.target).parents(".intake-block");
         var img = intakeBlock.find(".intake-collapse-img");
@@ -172,26 +200,94 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
 
         if (contains(src,"collapse")) {
             collapse(intakeBlock);
-            cancel(intakeBlock);
+            if (intakeBlock.find(".intake-cancel").length > 0) {
+                cancel(intakeBlock);
+            }
         } else {
             expand(intakeBlock);
         }
         
     }
 
+    var saveBlock = function(e) {
+        var intakeBlock = $(e.target).parents(".intake-block");
+        var block = intakeBlock.attr("data-block");
+        var rows = intakeBlock.find(".intake-row[data-entity-id]");
+
+        var saveSuccess = function () { }
+        var saveFail = function () {
+            alert("failed");
+        }
+
+        var data = { "Id": orderId };
+
+        rows.each(function () {
+            var row = $(this);
+            var rowInputs = row.find(":input").not("input[type='hidden']");
+
+            //If a collection that can have added values
+            if (hasAttr(row, 'data-entity-collection')) {
+                if (!isCollectionRowEmpty(rowInputs)) {
+                    var collectionKey = row.attr("data-entity-collection");
+                    var collectionData = { "Id": row.attr("data-entity-id") };
+
+                    fillPostData(collectionData, rowInputs);
+
+                    if (!(collectionKey in data)) {
+                        data[collectionKey] = [];
+                    }
+                    data[collectionKey].push(collectionData);
+                }
+            } else {
+                fillPostData(data, rowInputs);
+            }
+        });
+
+        transfereeIntakeService.updateIntakeBlock(block, data, saveSuccess, saveFail);
+    }
+
+    var saveChecked = function (e) {
+
+        var checkbox = $(e.target);
+        var row = checkbox.parents(".intake-row");
+        var rowInputs = row.find(":input").not("input[type='hidden']");
+
+        var saveSuccess = function(data) {
+            row.attr("data-entity-id", data);
+        }
+
+        var saveFail = function () {
+            rowInputs.not("[type=checkbox]").prop("disabled", true);
+            alert("failed");
+        }
+
+        if (checkbox.prop('checked')) {
+            rowInputs.prop("disabled", false);
+            if (!hasAttr(row, "data-entity-id")) {
+
+                var addType = row.attr("data-entity-collection");
+                var typeId = row.attr("data-entity-type-id");
+                
+                //create new service
+                transfereeIntakeService.insertIntakeEntityWithType(addType, orderId, typeId, saveSuccess, saveFail);
+                
+            }
+        } else {
+            rowInputs.not("[type=checkbox]").prop("disabled", true);
+        }
+    }
+
     //Utilities
 
     var fillPostData = function(data, inputs){
         inputs.each(function () {
-            data[$(this).attr("name")] = $(this).val();
+            var input = $(this);
+            if (input.is(":checkbox")) {
+                data[input.attr("name")] = input.prop('checked');
+            } else {
+                data[input.attr("name")] = input.val();
+            }
         });
-    }
-
-    var getTempId = function() {
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-            var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-            return v.toString(16);
-        }) + "-Temp"+Date.now();
     }
 
     var isCollectionRowEmpty = function(rowInputs) {

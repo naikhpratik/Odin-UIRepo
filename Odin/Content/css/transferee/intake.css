@@ -17,7 +17,7 @@
     padding-bottom: 35px; }
     div#intake .intake-block .intake-header h5 {
       margin-top: 0px; }
-    div#intake .intake-block .intake-header .intake-edit {
+    div#intake .intake-block .intake-header .intake-edit, div#intake .intake-block .intake-header .intake-save {
       font-size: medium;
       color: #a7ce39;
       cursor: pointer; }

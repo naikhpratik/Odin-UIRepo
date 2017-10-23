@@ -338,6 +338,7 @@
     <Compile Include="ViewModels\Orders\Transferee\OrdersTransfereeViewModel.cs" />
     <Compile Include="ViewModels\Shared\ChildViewModel.cs" />
     <Compile Include="ViewModels\Shared\ManagerViewModel.cs" />
+    <Compile Include="ViewModels\Shared\ServiceTypeViewModel.cs" />
     <Compile Include="ViewModels\Shared\ServiceViewModel.cs" />
     <Compile Include="ViewModels\Shared\TransfereeViewModel.cs" />
     <Compile Include="Views\Helpers\HtmlHelpers.cs" />

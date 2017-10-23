@@ -9,7 +9,5 @@
         public int? Age { get; set; }
 
         public int? Grade { get; set; }
-
-        public string TempId { get; set; }
     }
 }

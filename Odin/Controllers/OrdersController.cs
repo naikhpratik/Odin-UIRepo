@@ -3,9 +3,10 @@ using Microsoft.AspNet.Identity;
 using Odin.Data.Core;
 using Odin.Data.Core.Models;
 using Odin.Interfaces;
-using Odin.ViewModels.Orders.Index;
 using Odin.ViewModels.Orders.Transferee;
+using Odin.ViewModels.Shared;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 
@@ -30,9 +31,9 @@ namespace Odin.Controllers
 
             var orders = _unitOfWork.Orders.GetOrdersFor(userId);
 
-            var orderVms = _mapper.Map<IEnumerable<Order>, IEnumerable<OrdersIndexViewModel>>(orders);
+            //var orderVms = _mapper.Map<IEnumerable<Order>, IEnumerable<OrdersIndexViewModel>>(orders);
 
-            return View(orderVms);
+            return View();
         }
 
         public ActionResult Details(string orderId)
@@ -60,6 +61,16 @@ namespace Odin.Controllers
             var order = _unitOfWork.Orders.GetOrderById(id);
 
             OrdersTransfereeViewModel vm = _mapper.Map<Order, OrdersTransfereeViewModel>(order);
+
+            var cats = order.Services.Select(s => s.ServiceType.Category).ToList();
+            var ids = order.Services.Select(s => s.ServiceType.Id).ToList();
+            
+            //Remove service types that already have services.
+            var filtPossible = _unitOfWork.ServiceTypes.GetPossibleServiceTypes(cats, ids);
+
+            vm.PossibleServices =
+                _mapper.Map<IEnumerable<ServiceType>, IEnumerable<ServiceTypeViewModel>>(filtPossible);
+
 
             return View(vm);
         }

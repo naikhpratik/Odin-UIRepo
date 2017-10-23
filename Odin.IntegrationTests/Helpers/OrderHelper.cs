@@ -67,14 +67,21 @@ namespace Odin.IntegrationTests.Helpers
                 context.Consultants.RemoveRange(consultants);
             }
 
-            var orders = context.Orders.Where(o => o.TrackingId.Contains("integration") || o.DestinationCity.Contains("integration")).Include(o => o.Transferee).ToList();
+            var orders = context.Orders.Where(o => o.TrackingId.Contains("integration") || o.DestinationCity.Contains("integration")).Include(o => o.Transferee).Include(s => s.Services).ToList();
             foreach (var order in orders)
             {
                 context.Orders.Remove(order);
                 if (order.Transferee != null)
                 {
                     context.Transferees.Remove(order.Transferee);
-                }                
+                }
+                if (order.Services != null)
+                {
+                    foreach (var service in order.Services)
+                    {
+                        context.Services.Remove(service);
+                    }
+                }
             }             
 
             context.SaveChanges();

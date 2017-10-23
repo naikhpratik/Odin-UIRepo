@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Odin.Data.Core.Models;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Odin.Data.Core.Models;
 
 namespace Odin.Data.Persistence
 {
@@ -15,5 +10,6 @@ namespace Odin.Data.Persistence
         DbSet<Transferee> Transferees { get; set; }
         DbSet<Consultant> Consultants { get; set; }
         DbSet<Manager> Managers { get; set; }
+        DbSet<Child> Children { get; set; }
     }
 }
