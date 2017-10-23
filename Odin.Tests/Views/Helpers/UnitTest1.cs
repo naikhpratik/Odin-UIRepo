@@ -27,13 +27,7 @@ public class HTMLHelpersTests
 
         return new HtmlHelper(mockViewContext.Object, mockDataContainer.Object);
     }
-    [TestMethod]
-    [ExpectedException(typeof(ArgumentNullException))]
-    public void datePickerTest_ShouldThrow_NullException()
-    {
-        var mqHelper = CreateMockHtmlHelper(null);
-        mqHelper.DatePicker(null, null);
-    }
+   
     [TestMethod]
     public void DatePicker_should_render_HTML_input_with_date()
     {
