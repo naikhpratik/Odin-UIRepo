@@ -6,6 +6,13 @@ namespace Odin.ViewModels.Orders.Transferee
 {
     public class OrdersTransfereeViewModel
     {
+        public OrdersTransfereeViewModel()
+        {
+            Children = new List<ChildViewModel>();
+            Services = new List<ServiceViewModel>();
+            PossibleServices = new List<ServiceTypeViewModel>();
+        }
+
         public string Id { get; set; }
 
         public string DestinationCity { get; set; }
@@ -23,6 +30,9 @@ namespace Odin.ViewModels.Orders.Transferee
         public string SpouseVisaType { get; set; }
         public virtual IEnumerable<ChildViewModel> Children { get; set; }
         public string ChildrenEducationPreferences { get; set; }
+
+        public IEnumerable<ServiceViewModel> Services { get; set; }
+        public IEnumerable<ServiceTypeViewModel> PossibleServices { get; set; }
 
         public TransfereeViewModel Transferee { get; set; }
     }

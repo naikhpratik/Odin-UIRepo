@@ -3,6 +3,7 @@ using Odin.Data.Core;
 using Odin.Data.Core.Dtos;
 using Odin.Data.Core.Models;
 using Odin.Interfaces;
+using System;
 
 namespace Odin.Domain
 {
@@ -35,6 +36,7 @@ namespace Odin.Domain
                     if (!order.HasService(serviceDto.ServiceTypeId))
                     {
                         var newService = _mapper.Map<ServiceDto, Service>(serviceDto);
+                        newService.Id = Guid.NewGuid().ToString();
                         order.Services.Add(newService);
                     }
                 }
@@ -57,6 +59,7 @@ namespace Odin.Domain
                     if (!order.HasService(serviceDto.ServiceTypeId))
                     {
                         var newService = _mapper.Map<ServiceDto, Service>(serviceDto);
+                        newService.Id = Guid.NewGuid().ToString();
                         order.Services.Add(newService);
                     }
                 }

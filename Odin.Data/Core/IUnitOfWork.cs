@@ -10,6 +10,8 @@ namespace Odin.Data.Core
         IConsultantsRepository Consultants { get; }
         IManagersRepository Managers { get; }
         IServicesRepository Services { get; }
+        IServiceTypesRepository ServiceTypes { get; }
+        IChildrenRepository Children { get; }
         void Complete();
     }
 }

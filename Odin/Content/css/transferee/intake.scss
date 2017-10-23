@@ -35,7 +35,7 @@ div#intake {
                 margin-top: 0px
             }
 
-            .intake-edit {
+            .intake-edit, .intake-save {
                 font-size: medium;
                 color: $DW_Lime;
                 cursor: pointer;
@@ -72,7 +72,7 @@ div#intake {
                     cursor: pointer;
                 }
 
-                .intake-delete {
+                .intake-del {
                     font-size: medium;
                     color: $DW_Red;
                     cursor: pointer;

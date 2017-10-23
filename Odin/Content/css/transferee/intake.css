@@ -17,7 +17,7 @@
     padding-bottom: 35px; }
     div#intake .intake-block .intake-header h5 {
       margin-top: 0px; }
-    div#intake .intake-block .intake-header .intake-edit {
+    div#intake .intake-block .intake-header .intake-edit, div#intake .intake-block .intake-header .intake-save {
       font-size: medium;
       color: #a7ce39;
       cursor: pointer; }
@@ -40,7 +40,7 @@
         font-size: medium;
         color: #a7ce39;
         cursor: pointer; }
-      div#intake .intake-block .intake-row .intake-col .intake-delete {
+      div#intake .intake-block .intake-row .intake-col .intake-del {
         font-size: medium;
         color: #e53c2e;
         cursor: pointer; }

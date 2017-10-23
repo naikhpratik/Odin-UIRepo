@@ -1,5 +1,4 @@
 ﻿using System;
-using Microsoft.Azure.Mobile.Server;
 
 namespace Odin.Data.Core.Models
 {
@@ -9,6 +8,8 @@ namespace Odin.Data.Core.Models
 
         public DateTime? CompletedDate { get; set; }
 
+        public string Notes { get; set; }
+
         public string OrderId { get; set; }
 
         public Order Order { get; set; }
@@ -16,6 +17,8 @@ namespace Odin.Data.Core.Models
         public int ServiceTypeId { get; set; }
 
         public ServiceType ServiceType {get; set;}
+
+        public bool Selected { get; set; }
 
     }
 }

@@ -9,7 +9,6 @@ using Odin.Filters;
 using Odin.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Web.Http;
 
@@ -63,7 +62,6 @@ namespace Odin.Controllers.Api
             return Ok(new OrderIndexDto {Transferees = transfereeIndexDtos});
         }
 
-        // Post /api/orders/transferee/intake/destination
         [HttpPost]
         [Authorize]
         [Route("api/orders/transferee/intake/destination")]
@@ -85,7 +83,6 @@ namespace Odin.Controllers.Api
             return Ok();
         }
 
-        // Post /api/orders/transferee/intake/origin
         [HttpPost]
         [Authorize]
         [Route("api/orders/transferee/intake/origin")]
@@ -107,27 +104,27 @@ namespace Odin.Controllers.Api
             return Ok();
         }
 
-        // Post /api/orders/transferee/intake/family
         [HttpPost]
         [Authorize]
         [Route("api/orders/transferee/intake/family")]
         public IHttpActionResult UpsertIntakeFamily(OrdersTransfereeIntakeFamilyDto dto)
         {
             var userId = User.Identity.GetUserId();
-
             var order = _unitOfWork.Orders.GetOrderById(dto.Id);
 
+            if (order == null)
+            {
+                return NotFound();
+            }
 
-            Collection<Child> newChildren = new Collection<Child>();
             foreach (var childDto in dto.Children)
             {
-                var child = order.Children.FirstOrDefault(c => !String.IsNullOrEmpty(c.Id) && c.Id == childDto.Id);
-                if (child == null) 
+                var child = order.Children.FirstOrDefault(c => !String.IsNullOrEmpty(childDto.Id) && c.Id == childDto.Id);
+                if (child == null)
                 {
                     child = _mapper.Map<ChildDto, Child>(childDto);
                     child.Id = Guid.NewGuid().ToString();
                     order.Children.Add(child);
-                    newChildren.Add(child);
                 }
                 else
                 {
@@ -135,22 +132,105 @@ namespace Odin.Controllers.Api
                 }
             }
 
+            _mapper.Map<OrdersTransfereeIntakeFamilyDto, Order>(dto, order);
+            _unitOfWork.Complete();
+
+            //On success, return the newly created id's with the associated temp id's so that the client can be updated.
+            return Ok();
+        }
+
+        [HttpPost]
+        [Authorize]
+        [Route("api/orders/transferee/children/{orderId}")]
+        public IHttpActionResult InsertChild(string orderId)
+        {
+            var userId = User.Identity.GetUserId();
+            var order = _unitOfWork.Orders.GetOrderById(orderId);
+
             if (order == null)
             {
                 return NotFound();
             }
 
-            _mapper.Map<OrdersTransfereeIntakeFamilyDto, Order>(dto, order);
+            var child = new Child { Id = Guid.NewGuid().ToString() };
+            order.Children.Add(child);
             _unitOfWork.Complete();
 
-            Dictionary<string,string> newEntities = new Dictionary<string, string>();
-            foreach (var child in newChildren)
+            //On success, return the newly created id.
+            return Ok(child.Id);
+        }
+
+        [HttpDelete]
+        [Authorize]
+        [Route("api/orders/transferee/children/{id}")]
+        public IHttpActionResult DeleteChild(string id)
+        {
+
+            var userId = User.Identity.GetUserId();
+            var child = _unitOfWork.Children.GetChildById(id);
+
+            if (child == null)
             {
-                newEntities.Add(child.TempId,child.Id);
+                return NotFound();
+            }
+            child.Deleted = true;
+            _unitOfWork.Complete();
+            return Ok();
+        }
+
+        [HttpPost]
+        [Authorize]
+        [Route("api/orders/transferee/services/{orderId}/{id}")]
+        public IHttpActionResult InsertService(string orderId, int id)
+        {
+
+            var userId = User.Identity.GetUserId();
+            var order = _unitOfWork.Orders.GetOrderById(orderId);
+
+            if (order == null)
+            {
+                return NotFound();
             }
 
-            //On success, return the newly created id's with the associated temp id's so that the client can be updated.
-            return Ok(newEntities);
+            var newService = new Service(){ServiceTypeId = id, Selected = true};
+
+            order.Services.Add(newService);
+
+            _unitOfWork.Complete();
+            return Ok(newService.Id);
+        }
+
+        [HttpPost]
+        [Authorize]
+        [Route("api/orders/transferee/intake/services")]
+        public IHttpActionResult UpsertIntakeServices(OrdersTransfereeIntakeServicesDto dto)
+        {
+
+            var userId = User.Identity.GetUserId();
+            var order = _unitOfWork.Orders.GetOrderById(dto.Id);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            foreach (var serviceDto in dto.Services)
+            {
+                var service = order.Services.FirstOrDefault(s => !String.IsNullOrEmpty(serviceDto.Id) && s.Id == serviceDto.Id);
+                if (service == null)
+                {
+                    service = _mapper.Map<OrdersTransfereeIntakeServiceDto, Service>(serviceDto);
+                    service.Id = Guid.NewGuid().ToString();
+                    order.Services.Add(service);
+                }
+                else
+                {
+                    _mapper.Map<OrdersTransfereeIntakeServiceDto, Service>(serviceDto, service);
+                }
+            }
+
+            _unitOfWork.Complete();
+            return Ok();
         }
 
     }

@@ -46,6 +46,7 @@ namespace Odin.Data.Persistence
             return _context.Orders
                 .Where(o => o.Id == orderId)
                 .Include(o => o.Services)
+                .Include(o => o.Services.Select(s => s.ServiceType))
                 .Include(o => o.Rent)
                 .SingleOrDefault<Order>();
         }
