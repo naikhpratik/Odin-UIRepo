@@ -562,8 +562,6 @@
       <DependentUpon>forgotpassword.css</DependentUpon>
     </Content>
     <Content Include="Content\Images\bg_gradient_forgot_password.png" />
-    <Content Include="Content\Images\bg_gradient_login.png" />
-    <Content Include="Content\Images\bg_image.png" />
     <Content Include="Content\Images\check.png" />
     <Content Include="Content\Images\btn_add_home.png" />
     <Content Include="Content\Images\collapse.png" />
