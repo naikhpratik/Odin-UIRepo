@@ -35,15 +35,23 @@ div#intake {
                 margin-top: 0px
             }
 
-            span {
-                font-size: small;
+            .intake-edit, .intake-save {
+                font-size: medium;
                 color: $DW_Lime;
                 cursor: pointer;
+            }
+
+            .intake-cancel {
+                display: none;
+                font-size: medium;
+                color: $DW_Red;
+                cursor: pointer;
+                padding-left: 15px;
             }
         }
 
         .intake-row {
-
+            
             .intake-col {
                 padding-top: 15px;
 
@@ -58,10 +66,29 @@ div#intake {
                     font-size: small;
                 }
 
+                .intake-add {
+                    font-size: medium;
+                    color: $DW_Lime;
+                    cursor: pointer;
+                }
+
+                .intake-del {
+                    font-size: medium;
+                    color: $DW_Red;
+                    cursor: pointer;
+                }
+
                 input {
                     color: $DW_Blue;
                     font-size: small;
                     display: none;
+                    width: 100%;
+                    min-width: 100%;
+                }
+
+                .intake-service-input {
+                    display: block;
+                    line-height: 20px;
                 }
 
                 textarea {

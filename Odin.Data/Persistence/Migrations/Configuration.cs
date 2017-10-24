@@ -1,5 +1,6 @@
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Azure.Mobile.Server.Tables;
 using Odin.Data.Builders;
 using Odin.Data.Core.Models;
 using System.Data.Entity.Migrations;
@@ -19,6 +20,7 @@ namespace Odin.Data.Persistence.Migrations
         {
             AutomaticMigrationsEnabled = false;
             MigrationsDirectory = @"Persistence\Migrations";
+            SetSqlGenerator("System.Data.SqlClient", new EntityTableSqlGenerator());
         }
 
         protected override void Seed(ApplicationDbContext context)
@@ -59,6 +61,14 @@ namespace Odin.Data.Persistence.Migrations
                     orders[i].Consultant = dsc;
                     orders[i].ProgramManager = pm;
                     orders[i].Transferee = CreateRandomTransferee(context);
+                    orders[i].Services.Add(new Service()
+                    {
+                        ServiceType = context.ServiceTypes.First()
+                    });
+                    orders[i].Services.Add(new Service()
+                    {
+                        ServiceType = context.ServiceTypes.OrderByDescending(st=>st.Id).First()
+                    });
                     context.Orders.Add(orders[i]);
                 }
 

@@ -1,5 +1,87 @@
 ﻿@import "../shared/_definitions.scss";
 
-
 div#details {
+    padding-top: 10px;
+    padding-left: 20px;
+
+
+    div.row {
+        text-align: left;
+    }
+
+    .details-title P {
+        padding-bottom: 0px;
+        margin-bottom: 0px;
+        font-size: 18px;
+        color: #231F20;
+    }
+
+    hr {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .details-blue {
+        color: $DW_Blue;
+    }
+
+    .details-lime {
+        color: $DW_Lime;
+    }
+
+    .details-block {
+        padding-top: 15px;
+        padding-bottom: 15px;
+
+        .details-header {
+            P {
+                margin: 0px;
+                font-size: 16px;
+                font-weight:200;
+                color: #6c6e70;
+            }
+
+            span {
+                font-size: small;
+                color: $DW_Lime;
+                cursor: pointer;
+            }
+        }
+
+        .details-row {
+
+            .details-col {
+                padding-top: 15px;
+                padding-left: 0px;
+                width: 16%;
+
+                label {
+                    display: block;
+                    font-size: 14px;
+                    font-weight:200;
+                    margin-bottom: -5px;
+                    color: #858585;
+                }
+
+                span {
+                    color: $DW_Blue;
+                    font-size: 14px;
+                }
+
+                input {
+                    color: $DW_Blue;
+                    font-size: small;
+                    display: none;
+                }
+
+                textarea {
+                    display: none;
+                    width: 100%;
+                    max-width: 100%;
+                    color: $DW_Blue;
+                    font-size: small;
+                }
+            }
+        }
+    }
 }

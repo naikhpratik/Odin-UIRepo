@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Microsoft.Azure.Mobile.Server;
 
 namespace Odin.Data.Core.Models
 {
-    public class Order
+    public class Order : MobileTable 
     {
 
         public Order()
         {
             Services = new Collection<Service>();
+            Children = new Collection<Child>();
         }
 
-        public int Id { get; set; }
-        
         public string TrackingId { get; set; }
         public string RelocationType { get; set; }
         public string DestinationCity { get; set; }
@@ -28,14 +28,14 @@ namespace Odin.Data.Core.Models
         public DateTime? PreTripDate { get; set; }
         public int TempHousingDays { get; set; }
         public DateTime? TempHousingEndDate { get; set; }
-
+        public string SchoolDistrict { get; set; }
         public string FamilyDetails { get; set; }
 
         public bool TransfereeInviteEnabled { get; set; }
         public string SeCustNumb { get; set; }
         public string Rmc { get; set; }
         public string Client { get; set; }
-
+        public string ClientFileNumber { get; set; }
         public int? RentId { get; set; }
         public Rent Rent { get; set; }
         
@@ -55,6 +55,11 @@ namespace Odin.Data.Core.Models
         public bool IsRush { get; set; }
 
         public bool IsVip { get; set; }
+
+        public string SpouseName { get; set; }
+        public string SpouseVisaType { get; set; }
+        public virtual ICollection<Child> Children { get; private set; }
+        public string ChildrenEducationPreferences { get; set; }
 
         public bool HasService(int serviceTypeId)
         {

@@ -1,7 +1,216 @@
-﻿<div id="details" class="noinit">
-    <h2>Details Panel</h2>
+﻿@model Odin.ViewModels.Orders.Transferee.OrdersTransfereeViewModel
+<div id="details">
+    <div class="row details-title">
+        <p>Profile Summary</p>
+        <span class="details-blue">Please fill out any items that are not already auto-generated that could aid in the help of your clients placement.</span>
+    </div>
+    <hr />
+    <div class="details-block">
+        <div class="row details-header">
+            <P>
+                Important Dates:
+            </P>
+        </div>
+        <div class="row details-row">
+            <div class="col-sm-3 details-col">
+                <label>Familiarization Trip:</label>
+                <span>@(Model.PreTripDate.HasValue ? Model.PreTripDate.Value.ToString("MM/dd/yy") : "TBD")</span>
+            </div>
+            <div class="col-sm-3 details-col">
+                <label>Work Start Date:</label>
+                <span>(Model.WorkStartDate.HasValue ? Model.WorkStartDate.Value.ToString("MM/dd/yy") : "TBD")</span>
+            </div>
+            <div class="col-sm-3 details-col">
+                <label>Temp Housing:</label>
+                <span>@Model.TempHousingDays</span>
+            </div>
+
+            <div class="col-sm-3 details-col">
+                <label>Final Arrival:</label>
+                <span>Model.FA</span>
+            </div>
+            <div class="col-sm-3 details-col">
+                <label>Home Finding Date:</label>
+                <span>Model.HFDate</span>
+            </div>
+            <div class="col-sm-3 details-col">
+                <label>Temp Housing Last Day:</label>
+                <span>@(Model.TempHousingEndDate.HasValue ? Model.TempHousingEndDate.Value.ToString("MM/dd/yy") : "TBD")</span>
+            </div>
+        </div>
+    </div>
+    <div class="details-block">
+        <div class="row details-header">
+            <P>
+                Housing Details:
+            </P>
+        </div>
+        <div class="row details-row">
+            <div class="col-sm-3 details-col">
+                <label>Monthly Budget:</label>
+                <span>@string.Format("{0: $#,###.00}", @Model.rent.HousingBudget)</span>
+            </div>
+            <div class="col-sm-3 details-col">
+                <label>Housing:</label>
+                <span>@Model.rent.HousingType</span>
+            </div>
+            <div class="col-sm-3 details-col">
+                <label>School District:</label>
+                <span>@Model.SchoolDistrict</span>
+            </div>
+
+            <div class="col-sm-3 details-col">
+                <label>BD/BA:</label>
+                <span>@Model.rent.NumberOfBedrooms.ToString()/@Model.rent.NumberOfBathrooms.ToString()</span>
+            </div>
+            <div class="col-sm-3 details-col">
+                <label>Sq. Ft:</label>
+                <span>@string.Format("{0: #,###.00}", @Model.rent.SquareFootage)</span>
+            </div>
+            <div class="col-sm-3 details-col">
+                <label>Rent or Own:</label>
+                <span>@Model.rent.OwnershipType</span>
+            </div>
+        </div>
+    </div>
+    <div class="details-block">
+        <div class="row details-header">
+            <P>
+                Other Details:
+            </P>
+        </div>
+        <div class="row details-row">
+            <div class="col-sm-3 details-col">
+                <label>Manager:</label>
+                <span>@Model.ProgramManager.FullName</span>
+            </div>
+            <div class="col-sm-3 details-col">
+                <label>Manager Email:</label>
+                <span>@Model.ProgramManager.Email</span>
+            </div>
+            <div class="col-sm-3 details-col">
+                <label>Manager #:</label>
+                <span>@String.Format("{0:###'.'###'.'####}", double.Parse(@Model.ProgramManager.PhoneNumber))</span>
+            </div>
+            <div class="col-sm-3 details-col">
+                <label>SE Number:</label>
+                <span>@Model.ProgramManager.SeContactUid</span>
+            </div>
+            <div class="col-sm-3 details-col">
+                <label>Client Number:</label>
+                <span>@Model.ClientFileNumber</span>
+            </div>
+        </div>
+    </div>
+
+    <hr />
+    <div class="row details-title">
+        <p>Scheduled Services</p>
+        <span class="details-blue">Please fill out any items that are not already auto-generated that could aid in the help of your clients placement.</span>
+    </div>
+    <hr />
+    <div class="details-block" id="scheduledServices">
+        <div class="row details-row">
+            <div class="col-sm-3 details-col">
+                <label>Service:</label>
+            </div>
+            <div class="col-sm-3 details-col">
+                <label>Scheduled Date:</label>
+            </div>
+            <div class="col-sm-3 details-col">
+                <label>Completed Date:</label>
+            </div>
+            <div class="col-sm-3 details-col">
+                <label>Time:</label>
+            </div>
+            <div class="col-sm-3 details-col">
+                <label>Notes:</label>
+            </div>
+        </div>
+    @for (int i = 0; i < @Model.Services.Count(); i++)
+    {  
+        if (@Model.Services.ElementAt(i).Name.Contains("Pre-Arrival Consultation"))
+        {
+            <div class="row details-row">
+                <div class="col-sm-3 details-col">
+                    <label>Pre Arrival Consultation</label>
+                </div>
+                <div class="col-sm-3 details-col">
+                    @Html.DatePicker("date", "preArrivalSchDate", @Model.Services.ElementAt(i).ScheduledDate ?? DateTime.Now)
+                </div>
+                <div class="col-sm-3 details-col">
+                    @Html.DatePicker("date", "preArrivalComplDate", @Model.Services.ElementAt(i).CompletedDate ?? DateTime.Now)
+                </div>
+                <div class="col-sm-3 details-col">
+                    @Html.DatePicker("time", "preArrivalTime", @Model.Services.ElementAt(i).CompletedDate ?? DateTime.Now)
+                </div>
+                <div class="col-sm-3 details-col">
+                    <p>@Html.TextBoxFor(s => @Model.Services.ElementAt(i).Notes, new { @class = "form-control intake-service-input" })</p>
+                </div>
+            </div>
+        }
+        else if (@Model.Services.ElementAt(i).Name == "Welcome Packet")
+        {
+            <div class="row details-row">
+                <div class="col-sm-3 details-col">
+                    <label>Welcome Packet</label>
+                </div>
+                <div class="col-sm-3 details-col">
+                    @Html.DatePicker("date", "welSchDate", @Model.Services.ElementAt(i).ScheduledDate ?? DateTime.Now)
+                </div>
+                <div class="col-sm-3 details-col">
+                    @Html.DatePicker("date", "welComplDate", @Model.Services.ElementAt(i).CompletedDate ?? DateTime.Now)
+                </div>
+                <div class="col-sm-3 details-col">
+                    @Html.DatePicker("time", "welSchTimee", @Model.Services.ElementAt(i).CompletedDate ?? DateTime.Now)
+                </div>
+                <div class="col-sm-3 details-col">
+                    <p>@Html.TextBoxFor(s => @Model.Services.ElementAt(i).Notes, new { @class = "form-control intake-service-input" })</p>
+                </div>
+            </div>
+        }
+        else if (@Model.Services.ElementAt(i).Name == "Area Orientation")
+        {
+            <div class="row details-row">
+                <div class="col-sm-3 details-col">
+                    <label>Area Orientation</label>
+                </div>
+                <div class="col-sm-3 details-col">
+                    @Html.DatePicker("date", "welSchDate", @Model.Services.ElementAt(i).ScheduledDate ?? DateTime.Now)
+                </div>
+                <div class="col-sm-3 details-col">
+                    @Html.DatePicker("date", "welComplDate", @Model.Services.ElementAt(i).CompletedDate ?? DateTime.Now)
+                </div>
+                <div class="col-sm-3 details-col">
+                    @Html.DatePicker("time", "welSchTimee", @Model.Services.ElementAt(i).CompletedDate ?? DateTime.Now)
+                </div>
+                <div class="col-sm-3 details-col">
+                    <p>@Html.TextBoxFor(s => @Model.Services.ElementAt(i).Notes, new { @class = "form-control intake-service-input" })</p>
+                </div>
+            </div>
+        }
+        else if (@Model.Services.ElementAt(i).Name == "Area Orientation")
+        {
+            <div class="row details-row">
+                <div class="col-sm-3 details-col">
+                    <label>Accompanied Home Finding</label>
+                </div>
+                <div class="col-sm-3 details-col">
+                    @Html.DatePicker("date", "welSchDate", @Model.Services.ElementAt(i).ScheduledDate ?? DateTime.Now)
+                </div>
+                <div class="col-sm-3 details-col">
+                    @Html.DatePicker("date", "welComplDate", @Model.Services.ElementAt(i).CompletedDate ?? DateTime.Now)
+                </div>
+                <div class="col-sm-3 details-col">
+                    @Html.DatePicker("time", "welSchTimee", @Model.Services.ElementAt(i).CompletedDate ?? DateTime.Now)
+                </div>
+                <div class="col-sm-3 details-col" style="width:32%; max-width: 500px;text-wrap:normal">
+                    <p>@Html.TextBoxFor(s => @Model.Services.ElementAt(i).Notes, new { @class = "form-control intake-service-input" })</p>
+                </div>
+            </div>
+        }
+    }
+    </div>
 </div>
 
 @Styles.Render("~/Styling/details")
-
-

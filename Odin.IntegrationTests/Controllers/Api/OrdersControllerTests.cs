@@ -42,8 +42,17 @@ namespace Odin.IntegrationTests.Controllers.Api
             orders.ForEach(o => o.TrackingId = TokenHelper.NewToken());
             var testDateTime = new DateTime(1999, 6, 14);
             orders.ForEach(o => o.PreTripDate = testDateTime);
-            Context.Orders.AddRange(orders);
-            Context.SaveChanges();
+            try
+            {
+                Context.Orders.AddRange(orders);
+                Context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
             var controller = SetUpOrdersController();
             controller.MockCurrentUser(dsc.Id, dsc.UserName);
 

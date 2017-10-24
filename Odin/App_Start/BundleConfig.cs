@@ -11,8 +11,10 @@ namespace Odin
                         "~/Scripts/app/controllers/userManagementController.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/lib").Include(
-                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/jquery-{version}.js",                        
                         "~/Scripts/bootstrap.js",
+                        "~/Scripts/moment.js",
+                        "~/Scripts/bootstrap-datetimepicker.js",                        
                         "~/Scripts/respond.js",
                         "~/Scripts/datatables/jquery.datatables.js",
                         "~/Scripts/datatables/datatables.bootstrap.js"));
@@ -30,7 +32,8 @@ namespace Odin
 
             bundles.Add(new StyleBundle("~/Content/cssBundle").Include(
                       "~/Content/bootstrap-paper.css",
-                      "~/Content/site.css",
+                      "~/Content/bootstrap-datetimepicker.css",
+                      "~/Content/site.css",                     
                       "~/Content/datatables/css/datatables.bootstrap.css"));
 
             // Page Styling
@@ -52,12 +55,11 @@ namespace Odin
             bundles.Add(new ScriptBundle("~/Scripts/orders").Include("~/Scripts/app/views/orders.js"));
             bundles.Add(new ScriptBundle("~/Scripts/transferee").Include(
                 "~/Scripts/app/views/transferee.js",
-                "~/Scripts/app/views/transferee-intake.js"));
+                "~/Scripts/app/views/transferee-intake.js",
+               "~/Scripts/app/views/transferee-details.js"));
             bundles.Add(new ScriptBundle("~/Scripts/forgotPassword").Include(
                 "~/Scripts/bootstrap-notify.min.js",
-                "~/Scripts/app/views/forgotPassword.js"));
-
-
+                "~/Scripts/app/views/forgotPassword.js")); 
         }
     }
 }

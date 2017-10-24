@@ -42,6 +42,12 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
     <Reference Include="Bogus, Version=17.0.1.0, Culture=neutral, PublicKeyToken=fa1bb3f3f218129a, processorArchitecture=MSIL">
       <HintPath>..\packages\Bogus.17.0.1\lib\net40\Bogus.dll</HintPath>
     </Reference>
@@ -57,6 +63,23 @@
     <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Azure.Mobile.Server, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.Mobile.Server.1.1.157.1\lib\net45\Microsoft.Azure.Mobile.Server.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Mobile.Server.Entity, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.Mobile.Server.Entity.1.1.157.1\lib\net45\Microsoft.Azure.Mobile.Server.Entity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Mobile.Server.Tables, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.Mobile.Server.Tables.1.1.157.1\lib\net45\Microsoft.Azure.Mobile.Server.Tables.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.Edm, Version=5.6.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.Edm.5.6.4\lib\net40\Microsoft.Data.Edm.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Data.OData, Version=5.6.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.OData.5.6.4\lib\net40\Microsoft.Data.OData.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -70,8 +93,15 @@
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
+    <Reference Include="System.Spatial, Version=5.6.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Spatial.5.6.4\lib\net40\System.Spatial.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.OData, Version=5.5.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.OData.5.5.1\lib\net45\System.Web.Http.OData.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -91,11 +121,17 @@
     <Compile Include="Builders\OrderBuilder.cs" />
     <Compile Include="Builders\OrderDtoBuilder.cs" />
     <Compile Include="Builders\TransfereeDtoBuilder.cs" />
+    <Compile Include="Core\Dtos\ChildDto.cs" />
     <Compile Include="Core\Dtos\ConsultantDto.cs" />
     <Compile Include="Core\Dtos\ConsultantImportDto.cs" />
     <Compile Include="Core\Dtos\ConsultantsDto.cs" />
     <Compile Include="Core\Dtos\OrderDto.cs" />
     <Compile Include="Core\Dtos\OrderIndexDto.cs" />
+    <Compile Include="Core\Dtos\OrdersTransfereeIntakeFamilyDto.cs" />
+    <Compile Include="Core\Dtos\OrdersTransfereeIntakeDestinationDto.cs" />
+    <Compile Include="Core\Dtos\OrdersTransfereeIntakeOriginDto.cs" />
+    <Compile Include="Core\Dtos\OrdersTransfereeIntakeServiceDto.cs" />
+    <Compile Include="Core\Dtos\OrdersTransfereeIntakeServicesDto.cs" />
     <Compile Include="Core\Dtos\ProgramManagerDto.cs" />
     <Compile Include="Core\Dtos\ManagerDto.cs" />
     <Compile Include="Core\Dtos\ManagersDto.cs" />
@@ -105,21 +141,27 @@
     <Compile Include="Core\Dtos\TransfereeIndexDto.cs" />
     <Compile Include="Core\Dtos\UserDto.cs" />
     <Compile Include="Core\Models\ApplicationUser.cs" />
+    <Compile Include="Core\Models\AzureTest.cs" />
+    <Compile Include="Core\Models\Child.cs" />
     <Compile Include="Core\Models\Consultant.cs" />
     <Compile Include="Core\Models\ErrorResponse.cs" />
     <Compile Include="Core\Models\HousingType.cs" />
+    <Compile Include="Core\Models\MobileTable.cs" />
     <Compile Include="Core\Models\Order.cs" />
     <Compile Include="Core\Models\Manager.cs" />
     <Compile Include="Core\Models\OwnershipType.cs" />
     <Compile Include="Core\Models\Rent.cs" />
     <Compile Include="Core\Models\Service.cs" />
+    <Compile Include="Core\Models\ServiceCategory.cs" />
     <Compile Include="Core\Models\ServiceType.cs" />
     <Compile Include="Core\Models\Transferee.cs" />
     <Compile Include="Core\Models\UserRoles.cs" />
+    <Compile Include="Core\Repositories\IChildrenRepository.cs" />
     <Compile Include="Core\Repositories\IConsultantsRepository.cs" />
     <Compile Include="Core\Repositories\IManagersRepository.cs" />
     <Compile Include="Core\Repositories\IOrdersRepository.cs" />
     <Compile Include="Core\Repositories\IServicesRepository.cs" />
+    <Compile Include="Core\Repositories\IServiceTypesRepository.cs" />
     <Compile Include="Core\Repositories\ITransfereesRepository.cs" />
     <Compile Include="Core\Repositories\IUsersRepository.cs" />
     <Compile Include="Extensions\ModelStateExtensions.cs" />
@@ -129,6 +171,7 @@
     <Compile Include="Persistence\ApplicationDbContext.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Persistence\ApplicationUserRepository.cs" />
+    <Compile Include="Persistence\ChildrenRepository.cs" />
     <Compile Include="Persistence\ConsultantsRepository.cs" />
     <Compile Include="Persistence\EntityConfigurations\OrderConfiguration.cs" />
     <Compile Include="Persistence\EntityConfigurations\RentConfiguration.cs" />
@@ -222,6 +265,50 @@
     <Compile Include="Persistence\Migrations\201710122149268_AddRushVipLastContactedToOrder.Designer.cs">
       <DependentUpon>201710122149268_AddRushVipLastContactedToOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201710181723591_DropAzureTables.cs" />
+    <Compile Include="Persistence\Migrations\201710181723591_DropAzureTables.Designer.cs">
+      <DependentUpon>201710181723591_DropAzureTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710181725012_AddAzureTablesBack.cs" />
+    <Compile Include="Persistence\Migrations\201710181725012_AddAzureTablesBack.Designer.cs">
+      <DependentUpon>201710181725012_AddAzureTablesBack.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710182111512_ReSeedServiceTypes.cs" />
+    <Compile Include="Persistence\Migrations\201710182111512_ReSeedServiceTypes.Designer.cs">
+      <DependentUpon>201710182111512_ReSeedServiceTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710201611358_AddChildToOrder.cs" />
+    <Compile Include="Persistence\Migrations\201710201611358_AddChildToOrder.Designer.cs">
+      <DependentUpon>201710201611358_AddChildToOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710201719164_DeleteOriginalChildTable.cs" />
+    <Compile Include="Persistence\Migrations\201710201719164_DeleteOriginalChildTable.Designer.cs">
+      <DependentUpon>201710201719164_DeleteOriginalChildTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710201721130_AddChildMobileTable.cs" />
+    <Compile Include="Persistence\Migrations\201710201721130_AddChildMobileTable.Designer.cs">
+      <DependentUpon>201710201721130_AddChildMobileTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710211940045_AddSoftDeletesForChild.cs" />
+    <Compile Include="Persistence\Migrations\201710211940045_AddSoftDeletesForChild.Designer.cs">
+      <DependentUpon>201710211940045_AddSoftDeletesForChild.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710212142374_UpdateServices.cs" />
+    <Compile Include="Persistence\Migrations\201710212142374_UpdateServices.Designer.cs">
+      <DependentUpon>201710212142374_UpdateServices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710212255364_AddNotesToService.cs" />
+    <Compile Include="Persistence\Migrations\201710212255364_AddNotesToService.Designer.cs">
+      <DependentUpon>201710212255364_AddNotesToService.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710231718208_RemoveChildDeletedMapping.cs" />
+    <Compile Include="Persistence\Migrations\201710231718208_RemoveChildDeletedMapping.Designer.cs">
+      <DependentUpon>201710231718208_RemoveChildDeletedMapping.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710241440161_OrderSchoolNFile.cs" />
+    <Compile Include="Persistence\Migrations\201710241440161_OrderSchoolNFile.Designer.cs">
+      <DependentUpon>201710241440161_OrderSchoolNFile.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
     <Compile Include="Persistence\ServicesRepository.cs" />
@@ -305,7 +392,41 @@
     <EmbeddedResource Include="Persistence\Migrations\201710122149268_AddRushVipLastContactedToOrder.resx">
       <DependentUpon>201710122149268_AddRushVipLastContactedToOrder.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710181723591_DropAzureTables.resx">
+      <DependentUpon>201710181723591_DropAzureTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710181725012_AddAzureTablesBack.resx">
+      <DependentUpon>201710181725012_AddAzureTablesBack.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710182111512_ReSeedServiceTypes.resx">
+      <DependentUpon>201710182111512_ReSeedServiceTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710201611358_AddChildToOrder.resx">
+      <DependentUpon>201710201611358_AddChildToOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710201719164_DeleteOriginalChildTable.resx">
+      <DependentUpon>201710201719164_DeleteOriginalChildTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710201721130_AddChildMobileTable.resx">
+      <DependentUpon>201710201721130_AddChildMobileTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710211940045_AddSoftDeletesForChild.resx">
+      <DependentUpon>201710211940045_AddSoftDeletesForChild.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710212142374_UpdateServices.resx">
+      <DependentUpon>201710212142374_UpdateServices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710212255364_AddNotesToService.resx">
+      <DependentUpon>201710212255364_AddNotesToService.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710231718208_RemoveChildDeletedMapping.resx">
+      <DependentUpon>201710231718208_RemoveChildDeletedMapping.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710241440161_OrderSchoolNFile.resx">
+      <DependentUpon>201710241440161_OrderSchoolNFile.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
 </Project>

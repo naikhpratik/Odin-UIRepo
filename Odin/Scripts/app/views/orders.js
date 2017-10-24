@@ -31,18 +31,74 @@
 
             if ($currSort !== null) {
                 $currSort.next().css("display", "none");
+                $currSort.next().next().css("display", "none");
+
                 $currSort.css("display", "block");
             }
 
             $currSort = $(this);
             $currSort.css("display", "none");
             $currSort.next().css("display", "block");
+
+            if ($currSort.hasClass('name')) {
+                nameSort(true);
+            }
+
+            if ($currSort.hasClass('date')) {
+                dateSort($(this).attr('data-field'), true);
+            }
+
+            if ($currSort.hasClass('number')) {
+                numberSort(true);
+            }
+
+            $SearchedOrders = $SortedOrders;
+
+            populateTables();
         });
 
         $('.arrow.down').click(function () {
-            $currSort = null;
+
+            $(this).css("display", "none");
+            $(this).next().css("display", "block");
+
+            if ($currSort.hasClass('name')) {
+                nameSort(false);
+            }
+
+            if ($currSort.hasClass('date')) {
+                dateSort($(this).attr('data-field'), false);
+            }
+
+            if ($currSort.hasClass('number')) {
+                numberSort(false);
+            }
+
+            $SearchedOrders = $SortedOrders;
+
+            populateTables();
+        });
+
+        $('.arrow.upsel').click(function () {
+
             $(this).css("display", "none");
             $(this).prev().css("display", "block");
+
+            if ($currSort.hasClass('name')) {
+                nameSort(true);
+            }
+
+            if ($currSort.hasClass('date')) {
+                dateSort($(this).attr('data-field'), true);
+            }
+
+            if ($currSort.hasClass('number')) {
+                numberSort(true);
+            }
+
+            $SearchedOrders = $SortedOrders;
+
+            populateTables();
         });
 
         // search box
@@ -93,14 +149,78 @@
             }
             else $SearchedOrders = $SortedOrders;
 
-            desktop_table.empty();
-            tablet_table.empty();
-            mobile_table.empty();
-
             populateTables();  
         });
 
+        // sorting routines
+        var nameSort = function (asc) {
+            $SortedOrders.transferees.sort(function (a, b) {
+                if (asc)
+                    return a.lastName.localeCompare(b.lastName);
+                else
+                    return a.lastName.localeCompare(b.lastName) * -1;
+            });
+        };
+
+        var dateSort = function (field, asc) {
+            $SortedOrders.transferees.sort(function (a, b) {
+                // trap nulls
+                if (a[field] === null && b[field] === null)
+                    return 0;
+
+                if (a[field] === null && b[field] !== null)
+                    if (asc)
+                        return -1;
+                    else
+                        return 1;
+
+                if (a[field] !== null && b[field] === null)
+                    if (asc)
+                        return 1;
+                    else
+                        return -1;
+
+                var dateA = new Date(a[field]);
+                var dateB = new Date(b[field]);
+
+                if (dateA > dateB)
+                    if (asc)
+                        return -1;
+                    else
+                        return 1;
+                else if (dateA === dateB)
+                    return 0;
+                else
+                    if (asc)
+                        return 1;
+                    else
+                        return -1;
+            });
+        };
+
+        var numberSort = function (asc) {
+            $SortedOrders.transferees.sort(function (a, b) {
+                if (a.numberOfAlerts > b.numberOfAlerts)
+                    if (asc)
+                        return -1;
+                    else
+                        return 1;
+                else if (a.numberOfAlerts === b.numberOfAlerts)
+                    return 0;
+                else
+                    if (asc)
+                        return 1;
+                    else
+                        return -1;
+            });
+        };
+
+        // tables builder
         var populateTables = function () {
+
+            desktop_table.empty();
+            tablet_table.empty();
+            mobile_table.empty();
 
             if ($SearchedOrders.transferees === null) return;
 
@@ -144,8 +264,8 @@
                 if ($SearchedOrders.transferees[i].services !== null) {
                     for (var j = 0; j < $SearchedOrders.transferees[i].services.length; j++) {
                         services_list += "<div class=\"actlist-item-blk\"><p class=\"actlist-item\">" + $SearchedOrders.transferees[i].services[j].name + "</p>";
-                        if ($SearchedOrders.transferees[i].services[j].completed !== null)
-                            services_list += "<p>" + $SearchedOrders.transferees[i].services[j].completed.split("T")[0] + "</p></div>";
+                        if ($SearchedOrders.transferees[i].services[j].completedDate !== null)
+                            services_list += "<p>" + $SearchedOrders.transferees[i].services[j].completedDate.split("T")[0] + "</p></div>";
                         else services_list += "</div>";
                     }
                     services += services_list;
@@ -186,9 +306,9 @@
                 if ($SearchedOrders.transferees[i].numberOfAlerts > 0)
                     notification += "<div class=\"notify-count\"><img src=\"/Content/Images/icn_alert_circle.png\"/><span>" + ("0"+$SearchedOrders.transferees[i].numberOfAlerts).slice(-2) + "</span></div></td>";
 
-                desktop_table.append("<tr data-index=\"" + $SearchedOrders.transferees[i].index + "\">" + "<td>" + name + "</td>" + "<td>" + services + "</td>" + "<td>" + lastcontacted + "</td>" + manager + pretrip + finalarrival + notification + "</tr>");
-                tablet_table.append ("<tr data-index=\"" + $SearchedOrders.transferees[i].index + "\">" + "<td>" + name_tablet + "</td>" + manager + "<td>" + lastcontacted + "</td>" + "<td>" + services_tablet + "</td>" + notification + "</tr>");
-                mobile_table.append ("<tr data-index=\"" + $SearchedOrders.transferees[i].index + "\">" + "<td>" + name_mobile + "</td>" + "<td>" + lastcontacted + services + "</td>" + notification + "</tr>");
+                desktop_table.append("<tr data-order-id=\""+$SearchedOrders.transferees[i].id+"\" data-index=\"" + $SearchedOrders.transferees[i].index + "\">" + "<td>" + name + "</td>" + "<td>" + services + "</td>" + "<td>" + lastcontacted + "</td>" + manager + pretrip + finalarrival + notification + "</tr>");
+                tablet_table.append("<tr data-order-id=\"" + $SearchedOrders.transferees[i].id +"\" data-index=\"" + $SearchedOrders.transferees[i].index + "\">" + "<td>" + name_tablet + "</td>" + manager + "<td>" + lastcontacted + "</td>" + "<td>" + services_tablet + "</td>" + notification + "</tr>");
+                mobile_table.append("<tr data-order-id=\"" + $SearchedOrders.transferees[i].id +"\" data-index=\"" + $SearchedOrders.transferees[i].index + "\">" + "<td>" + name_mobile + "</td>" + "<td>" + lastcontacted + services + "</td>" + notification + "</tr>");
 
                 // service expansion handlers
                 $('.expand').click(function (event) {
@@ -213,9 +333,14 @@
                     });
                 });
 
+                // <a> handler until functionality decided
+                $('a').click(function (event) {
+                    event.stopPropagation();
+                });
+
                 // row selection handler
                 $('tr').not(':first').click(function (event) {
-                    window.location.href = "/Orders/Transferee/" + $(this).attr('data-index');
+                    window.location.href = "/Orders/Transferee/" + $(this).attr("data-order-id");
                 });
             }
         };

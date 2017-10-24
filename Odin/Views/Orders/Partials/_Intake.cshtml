@@ -1,143 +1,106 @@
 ﻿@model Odin.ViewModels.Orders.Transferee.OrdersTransfereeViewModel
 
-<div id="intake">
+<div id="intake" data-order-id="@Model.Id">
     <div class="row intake-title">
         <h4>Intake</h4>
         <span class="intake-blue">Please fill out any items that are not already auto-generated that could aid in the help of your clients placement.</span>
     </div>
-    <hr />
+    <hr/>
     <div class="intake-block">
         <div class="row intake-header">
             <h5>
-                Contact Information
-                <span>
-                    + Edit
+                <span class ="intake-collapse">
+                    <img class="intake-collapse-img" src ="/Content/Images/collapse.png" />
+                    Contact Information
                 </span>
             </h5>
         </div>
-        <div class="row intake-row">
+        <div class="row intake-row collapse in">
             <div class="col-sm-3 intake-col">
                 <label>Name:</label>
                 <span>@Model.Transferee.FullName</span>
-                <input type="text" class="form-control"/>
             </div>
             <div class="col-sm-3 intake-col">
                 <label>Email:</label>
                 <span>@Model.Transferee.Email</span>
-                <input type="text" class="form-control" />
             </div>
             <div class="col-sm-3 intake-col">
                 <label>Phone:</label>
                 <span>@Model.Transferee.PhoneNumber</span>
-                <input type="text" class="form-control" />
             </div>
         </div>
     </div>
-    <hr />
-    <div class="intake-block">
+    <hr/>
+    <div class="intake-block" data-block="destination">
         <div class="row intake-header">
             <h5>
-                Destination Location
-                <span>
+                <span class="intake-collapse">
+                    <img class="intake-collapse-img" src="/Content/Images/collapse.png" />
+                    Destination Location
+                </span>
+                <span class="intake-edit">
                     + Edit
+                </span>
+                <span class="intake-cancel">
+                    x Cancel
                 </span>
             </h5>
         </div>
-        <div class="row intake-row">
+        <div class="row intake-row collapse in">
             <div class="col-sm-3 intake-col">
                 <label>City:</label>
                 <span>@Model.DestinationCity</span>
-                <input type="text" class="form-control" />
+                @Html.TextBoxFor(m => @Model.DestinationCity,new {@class="form-control"})
+                @Html.HiddenFor(m => @Model.DestinationCity)
             </div>
             <div class="col-sm-3 intake-col">
                 <label>State:</label>
                 <span>@Model.DestinationState</span>
-                <input type="text" class="form-control" />
+                @Html.TextBoxFor(m => @Model.DestinationState,new {@class="form-control"})
+                @Html.HiddenFor(m => @Model.DestinationState)
             </div>
             <div class="col-sm-3 intake-col">
                 <label>Country:</label>
                 <span>@Model.DestinationCountry</span>
-                <input type="text" class="form-control" />
+                @Html.TextBoxFor(m => @Model.DestinationCountry, new { @class = "form-control" })
+                @Html.HiddenFor(m => @Model.DestinationCountry)
             </div>
         </div>
     </div>
-    <hr />
-    <div class="intake-block">
+    <hr/>
+    <div class="intake-block" data-block="origin">
         <div class="row intake-header">
             <h5>
-                Relocation Dates
-                <span>
+                <span class="intake-collapse">
+                    <img class="intake-collapse-img" src="/Content/Images/collapse.png" />
+                    Departure Location
+                </span>
+                <span class="intake-edit">
                     + Edit
+                </span>
+                <span class="intake-cancel">
+                    x Cancel
                 </span>
             </h5>
         </div>
-        <div class="row intake-row">
+        <div class="row intake-row collapse in">
             <div class="col-sm-3 intake-col">
-                <label>Familiarization Trip:</label>
-                <span>Test Val</span>
-                <input type="text" class="form-control" />
+                <label>City:</label>
+                <span>@Model.OriginCity</span>
+                @Html.TextBoxFor(m => @Model.OriginCity, new { @class = "form-control" })
+                @Html.HiddenFor(m => @Model.OriginCity)
             </div>
             <div class="col-sm-3 intake-col">
-                <label>Final Arrival:</label>
-                <span>Test Val</span>
-                <input type="text" class="form-control" />
-            </div>
-        </div>
-        <div class="row intake-row">
-            <div class="col-sm-3 intake-col">
-                <label>Assignment/Permanent:</label>
-                <span>Test Val</span>
-                <input type="text" class="form-control" />
+                <label>State:</label>
+                <span>@Model.OriginState</span>
+                @Html.TextBoxFor(m => @Model.OriginState, new { @class = "form-control" })
+                @Html.HiddenFor(m => @Model.OriginState)
             </div>
             <div class="col-sm-3 intake-col">
-                <label>Estimated Departure:</label>
-                <span>Test Val</span>
-                <input type="text" class="form-control" />
-            </div>
-            <div class="col-sm-3 intake-col">
-                <label>Assignment Length:</label>
-                <span>Test Val</span>
-                <input type="text" class="form-control" />
-            </div>
-        </div>
-        <div class="row intake-row">
-            <div class="col-sm-3 intake-col">
-                <label>Work Start Date:</label>
-                <span>Test Val</span>
-                <input type="text" class="form-control" />
-            </div>
-            <div class="col-sm-3 intake-col">
-                <label>Home Finding Dates:</label>
-                <span>Test Val</span>
-                <input type="text" class="form-control" />
-            </div>
-        </div>
-    </div>
-    <hr />
-    <div class="intake-block">
-        <div class="row intake-header">
-            <h5>
-                General
-                <span>
-                    + Edit
-                </span>
-            </h5>
-        </div>
-        <div class="row intake-row">
-            <div class="col-sm-3 intake-col">
-                <label>Rush:</label>
-                <span>Yes</span>
-                <input type="checkbox" />
-            </div>
-            <div class="col-sm-3 intake-col">
-                <label>Vip:</label>
-                <span>No</span>
-                <input type="checkbox" />
-            </div>
-            <div class="col-sm-3 intake-col">
-                <label>Self-Pay:</label>
-                <span>No</span>
-                <input type="checkbox" />
+                <label>Country:</label>
+                <span>@Model.OriginCountry</span>
+                @Html.TextBoxFor(m => @Model.OriginCountry, new { @class = "form-control" })
+                @Html.HiddenFor(m => @Model.OriginCountry)
             </div>
         </div>
     </div>
@@ -145,65 +108,224 @@
     <div class="intake-block">
         <div class="row intake-header">
             <h5>
-                Family And Pets
-                <span>
+                <span class="intake-collapse">
+                    <img class="intake-collapse-img" src="/Content/Images/collapse.png" />
+                    Relocation Dates
+                </span>
+                <span class="intake-edit">
                     + Edit
+                </span>
+                <span class="intake-cancel">
+                    x Cancel
                 </span>
             </h5>
         </div>
-        <div class="row intake-row">
+        <div class="row intake-row collapse in">
             <div class="col-sm-3 intake-col">
-                <label>Partner Name:</label>
+                <label>Familiarization Trip:</label>
                 <span>Test Val</span>
-                <input type="text" class="form-control" />
+                <input type="text" class="form-control"/>
             </div>
             <div class="col-sm-3 intake-col">
-                <label>Partner Visa Type:</label>
+                <label>Final Arrival:</label>
                 <span>Test Val</span>
-                <input type="text" class="form-control" />
-            </div>
-        </div>
-        <div class="row intake-row">
-            <div class="col-sm-3 intake-col">
-                <label>Child Name:</label>
-                <span>Test Val</span>
-                <input type="text" class="form-control" />
-            </div>
-            <div class="col-sm-3 intake-col">
-                <label>Child Age:</label>
-                <span>Test Val</span>
-                <input type="text" class="form-control" />
-            </div>
-            <div class="col-sm-3 intake-col">
-                <label>Education Preference:</label>
-                <span>Test Val</span>
-                <input type="text" class="form-control" />
+                <input type="text" class="form-control"/>
             </div>
         </div>
-        <div class="row intake-row">
+        <div class="row intake-row collapse in">
+            <div class="col-sm-3 intake-col">
+                <label>Work Start Date:</label>
+                <span>Test Val</span>
+                <input type="text" class="form-control"/>
+            </div>
+        </div>
+        <div class="row intake-row collapse in">
+            <div class="col-sm-3 intake-col">
+                <label>Assignment/Permanent:</label>
+                <span>Test Val</span>
+                <input type="text" class="form-control"/>
+            </div>
+            <div class="col-sm-3 intake-col">
+                <label>Estimated Departure:</label>
+                <span>Test Val</span>
+                <input type="text" class="form-control"/>
+            </div>
+            <div class="col-sm-3 intake-col">
+                <label>Assignment Length:</label>
+                <span>Test Val</span>
+                <input type="text" class="form-control"/>
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <div class="intake-block">
+        <div class="row intake-header">
+            <h5>
+                <span class ="intake-collapse">
+                    <img class="intake-collapse-img" src ="/Content/Images/collapse.png" />
+                    General
+                </span>
+            </h5>
+        </div>
+        <div class="row intake-row collapse in">
+            <div class="col-sm-3 intake-col">
+                <label>Rush:</label>
+                <span>Yes</span>
+                <input type="checkbox"/>
+            </div>
+            <div class="col-sm-3 intake-col">
+                <label>Vip:</label>
+                <span>No</span>
+                <input type="checkbox"/>
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <div class="intake-block" data-block="family">
+        <div class="row intake-header">
+            <h5>
+                <span class="intake-collapse">
+                    <img class="intake-collapse-img" src="/Content/Images/collapse.png" />
+                    Family And Pets
+                </span>
+                <span class="intake-edit">
+                    + Edit
+                </span>
+                <span class="intake-cancel">
+                    x Cancel
+                </span>
+                
+            </h5>
+        </div>
+        <div class="row intake-row collapse in">
+            <div class="col-sm-3 intake-col">
+                <label>Spouse/Partner:</label>
+                <span>@Model.SpouseName</span>
+                @Html.TextBoxFor(m => @Model.SpouseName, new { @class = "form-control" })
+                @Html.HiddenFor(m => @Model.SpouseName)
+            </div>
+            <div class="col-sm-3 intake-col">
+                <label>Visa Type:</label>
+                <span>@Model.SpouseVisaType</span>
+                @Html.TextBoxFor(m => @Model.SpouseVisaType, new { @class = "form-control" })
+                @Html.HiddenFor(m => @Model.SpouseVisaType)
+            </div>
+        </div>
+        <div class="row intake-row collapse in">
+            <div class="col-sm-9 intake-col">
+                <span class="intake-add" data-entity-add="children">+Add Child</span>
+            </div>
+        </div>
+        @if (@Model.Children.Count() > 0)
+        {
+            for (int i = 0; i < @Model.Children.Count(); i++)
+             {
+                 <div class="row intake-row collapse in" data-entity-id="@Model.Children.ElementAt(i).Id" data-entity-collection="children">
+                     <div class="col-sm-3 intake-col">
+                         <label>Child:</label>
+                         <span>@Model.Children.ElementAt(i).Name</span>
+                         @Html.TextBoxFor(m => @Model.Children.ElementAt(i).Name, new {@class = "form-control"})
+                         @Html.HiddenFor(m => @Model.Children.ElementAt(i).Name)
+                     </div>
+                     <div class="col-sm-3 intake-col">
+                         <label>Age:</label>
+                         <span>@Model.Children.ElementAt(i).Age</span>
+                         @Html.TextBoxFor(m => @Model.Children.ElementAt(i).Age, new {@class = "form-control"})
+                         @Html.HiddenFor(m => @Model.Children.ElementAt(i).Age)
+                     </div>
+                     <div class="col-sm-3 intake-col">
+                         <label>Grade:</label>
+                         <span>@Model.Children.ElementAt(i).Grade</span>
+                         @Html.TextBoxFor(m => @Model.Children.ElementAt(i).Grade, new {@class = "form-control"})
+                         @Html.HiddenFor(m => @Model.Children.ElementAt(i).Grade)
+                     </div>
+                     <div class="col-sm-3 intake-col">
+                         <span class="intake-del">
+                             x Delete
+                         </span>
+                     </div>
+                 </div>
+             }
+        }
+        <div class="row intake-row collapse in">
+            <div class="col-sm-9 intake-col">
+                <label>Educational Preferences:</label>
+                <span>Test Val</span>
+                <textarea type="text" class="form-control" placeholder="Schooling, Areas"></textarea>
+            </div>
+        </div>
+        <div class="row intake-row collapse in">
             <div class="col-sm-3 intake-col">
                 <label>Pet Type:</label>
                 <span>Test Val</span>
-                <input type="text" class="form-control" />
+                <input type="text" class="form-control"/>
             </div>
             <div class="col-sm-3 intake-col">
                 <label>Breed:</label>
                 <span>Test Val</span>
-                <input type="text" class="form-control" />
+                <input type="text" class="form-control"/>
             </div>
             <div class="col-sm-3 intake-col">
                 <label>Size/Weight:</label>
                 <span>Test Val</span>
-                <input type="text" class="form-control" />
+                <input type="text" class="form-control"/>
+            </div>
+            <div class="col-sm-3 intake-col">
+                <span class="intake-add">
+                    + Add
+                </span>
             </div>
         </div>
-        <div class="row intake-row">
+        <div class="row intake-row collapse in">
             <div class="col-sm-9 intake-col">
-                <label>Notes:</label>
-                <span>This is a really long test value. A really really long test value.  Man I love test values.  Test values are the greatest.</span>
+                <label>Pet Notes:</label>
+                <span>This is a really long test value. A really really long test value. Man I love test values. Test values are the greatest.</span>
                 <textarea class="form-control"></textarea>
             </div>
         </div>
     </div>
+    <div class="intake-block" data-block="services">
+        <div class="row intake-header">
+            <h5>
+                <span class="intake-collapse">
+                    <img class="intake-collapse-img" src="/Content/Images/collapse.png" />
+                    Services
+                </span>
+                <span class="intake-save">
+                    - Save
+                </span>
+            </h5>
+        </div>
+        @for(int i = 0; i < @Model.Services.Count(); i++)
+        {
+            <div class="row intake-row collapse in" data-entity-id="@Model.Services.ElementAt(i).Id" data-entity-collection="services">
+                <div class="col-sm-1 intake-col">
+                    <input type="checkbox" class="intake-service-input" name="Selected"  @Model.Services.ElementAt(i).Selected ? checked ="checked" : String.Empty/>
+                </div>
+                 <div class="col-sm-5 intake-col">
+                    <span>@Model.Services.ElementAt(i).Name</span>
+                </div>
+                <div class="col-sm-5 intake-col">
+                    @Html.TextBoxFor(s => @Model.Services.ElementAt(i).Notes, new { @class = "form-control intake-service-input" })
+                </div>
+            </div>
+            
+        }
+        @for(int i = 0; i < @Model.PossibleServices.Count(); i++)
+        {
+            <div class="row intake-row collapse in" data-entity-collection="services" data-entity-type-id="@Model.PossibleServices.ElementAt(i).Id">
+                <div class="col-sm-1 intake-col">
+                    <input type="checkbox" value="false" class="intake-service-input" name="Selected"/>
+                </div>
+                <div class="col-sm-5 intake-col">
+                    <span>@Model.PossibleServices.ElementAt(i).Name</span>
+                </div>
+                <div class="col-sm-5 intake-col">
+                    <input type="text" name="Notes" class="form-control"/>    
+                </div>
+            </div>
+        }
+    </div>
+    
 </div>
 @Styles.Render("~/Styling/intake")

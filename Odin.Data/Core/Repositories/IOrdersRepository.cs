@@ -8,6 +8,7 @@ namespace Odin.Data.Core.Repositories
         IEnumerable<Order> GetOrdersFor(string userId);
         Order GetOrderByTrackingId(string trackingId);
         void Add(Order order);
-        Order GetOrderById(int orderId);
+        Order GetOrderById(string orderId);
+        Order GetOrderFor(string userId, string orderId);
     }
 }

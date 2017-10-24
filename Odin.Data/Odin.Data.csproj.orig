@@ -1,0 +1,391 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0D2C0B84-DAFF-4F5C-97D9-1C3BC5871B4C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Odin.Data</RootNamespace>
+    <AssemblyName>Odin.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Azure|AnyCPU'">
+    <OutputPath>bin\Azure\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Staging|AnyCPU'">
+    <OutputPath>bin\Staging\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="Bogus, Version=17.0.1.0, Culture=neutral, PublicKeyToken=fa1bb3f3f218129a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Bogus.17.0.1\lib\net40\Bogus.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Mobile.Server, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.Mobile.Server.1.1.157.1\lib\net45\Microsoft.Azure.Mobile.Server.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Mobile.Server.Entity, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.Mobile.Server.Entity.1.1.157.1\lib\net45\Microsoft.Azure.Mobile.Server.Entity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Mobile.Server.Tables, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.Mobile.Server.Tables.1.1.157.1\lib\net45\Microsoft.Azure.Mobile.Server.Tables.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.Edm, Version=5.6.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.Edm.5.6.4\lib\net40\Microsoft.Data.Edm.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Data.OData, Version=5.6.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.OData.5.6.4\lib\net40\Microsoft.Data.OData.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SendGrid, Version=9.8.0.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sendgrid.9.9.0\lib\net452\SendGrid.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Spatial, Version=5.6.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Spatial.5.6.4\lib\net40\System.Spatial.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.OData, Version=5.5.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.OData.5.5.1\lib\net45\System.Web.Http.OData.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Builders\ConsultantBuilder.cs" />
+    <Compile Include="Builders\ConsultantDtoBuilder.cs" />
+    <Compile Include="Builders\ConsultantImportDtoBuilder.cs" />
+    <Compile Include="Builders\ProgramManagerDtoBuilder.cs" />
+    <Compile Include="Builders\TransfereeBuilder.cs" />
+    <Compile Include="Builders\OrderBuilder.cs" />
+    <Compile Include="Builders\OrderDtoBuilder.cs" />
+    <Compile Include="Builders\TransfereeDtoBuilder.cs" />
+    <Compile Include="Core\Dtos\ChildDto.cs" />
+    <Compile Include="Core\Dtos\ConsultantDto.cs" />
+    <Compile Include="Core\Dtos\ConsultantImportDto.cs" />
+    <Compile Include="Core\Dtos\ConsultantsDto.cs" />
+    <Compile Include="Core\Dtos\OrderDto.cs" />
+    <Compile Include="Core\Dtos\OrderIndexDto.cs" />
+    <Compile Include="Core\Dtos\OrdersTransfereeIntakeFamilyDto.cs" />
+    <Compile Include="Core\Dtos\OrdersTransfereeIntakeDestinationDto.cs" />
+    <Compile Include="Core\Dtos\OrdersTransfereeIntakeOriginDto.cs" />
+    <Compile Include="Core\Dtos\ProgramManagerDto.cs" />
+    <Compile Include="Core\Dtos\ManagerDto.cs" />
+    <Compile Include="Core\Dtos\ManagersDto.cs" />
+    <Compile Include="Core\Dtos\ServiceDto.cs" />
+    <Compile Include="Core\Dtos\ServicesDto.cs" />
+    <Compile Include="Core\Dtos\TransfereeDto.cs" />
+    <Compile Include="Core\Dtos\TransfereeIndexDto.cs" />
+    <Compile Include="Core\Dtos\UserDto.cs" />
+    <Compile Include="Core\Models\ApplicationUser.cs" />
+<<<<<<< HEAD
+    <Compile Include="Core\Models\AzureTest.cs" />
+=======
+    <Compile Include="Core\Models\Child.cs" />
+>>>>>>> origin/intake_changes
+    <Compile Include="Core\Models\Consultant.cs" />
+    <Compile Include="Core\Models\ErrorResponse.cs" />
+    <Compile Include="Core\Models\HousingType.cs" />
+    <Compile Include="Core\Models\MobileTable.cs" />
+    <Compile Include="Core\Models\Order.cs" />
+    <Compile Include="Core\Models\Manager.cs" />
+    <Compile Include="Core\Models\OwnershipType.cs" />
+    <Compile Include="Core\Models\Rent.cs" />
+    <Compile Include="Core\Models\Service.cs" />
+    <Compile Include="Core\Models\ServiceType.cs" />
+    <Compile Include="Core\Models\Transferee.cs" />
+    <Compile Include="Core\Models\UserRoles.cs" />
+    <Compile Include="Core\Repositories\IConsultantsRepository.cs" />
+    <Compile Include="Core\Repositories\IManagersRepository.cs" />
+    <Compile Include="Core\Repositories\IOrdersRepository.cs" />
+    <Compile Include="Core\Repositories\IServicesRepository.cs" />
+    <Compile Include="Core\Repositories\ITransfereesRepository.cs" />
+    <Compile Include="Core\Repositories\IUsersRepository.cs" />
+    <Compile Include="Extensions\ModelStateExtensions.cs" />
+    <Compile Include="Helpers\PasswordHelper.cs" />
+    <Compile Include="Helpers\TokenHelper.cs" />
+    <Compile Include="Helpers\UserHelper.cs" />
+    <Compile Include="Persistence\ApplicationDbContext.cs" />
+    <Compile Include="Core\IUnitOfWork.cs" />
+    <Compile Include="Persistence\ApplicationUserRepository.cs" />
+    <Compile Include="Persistence\ConsultantsRepository.cs" />
+    <Compile Include="Persistence\EntityConfigurations\OrderConfiguration.cs" />
+    <Compile Include="Persistence\EntityConfigurations\RentConfiguration.cs" />
+    <Compile Include="Persistence\IApplicationDbContext.cs" />
+    <Compile Include="Persistence\ManagersRepository.cs" />
+    <Compile Include="Persistence\Migrations\201708281308044_InitialMigration.cs" />
+    <Compile Include="Persistence\Migrations\201708281308044_InitialMigration.Designer.cs">
+      <DependentUpon>201708281308044_InitialMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201708281322256_AddFirstNameAndLastNameTouser.cs" />
+    <Compile Include="Persistence\Migrations\201708281322256_AddFirstNameAndLastNameTouser.Designer.cs">
+      <DependentUpon>201708281322256_AddFirstNameAndLastNameTouser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201708311715395_AddOrderTransfereeAndRentObjects.cs" />
+    <Compile Include="Persistence\Migrations\201708311715395_AddOrderTransfereeAndRentObjects.Designer.cs">
+      <DependentUpon>201708311715395_AddOrderTransfereeAndRentObjects.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201709051444089_AddEstimatedArrivalToOrders.cs" />
+    <Compile Include="Persistence\Migrations\201709051444089_AddEstimatedArrivalToOrders.Designer.cs">
+      <DependentUpon>201709051444089_AddEstimatedArrivalToOrders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201709111335207_CiTest.cs" />
+    <Compile Include="Persistence\Migrations\201709111335207_CiTest.Designer.cs">
+      <DependentUpon>201709111335207_CiTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201709111341210_RemoveCiTest.cs" />
+    <Compile Include="Persistence\Migrations\201709111341210_RemoveCiTest.Designer.cs">
+      <DependentUpon>201709111341210_RemoveCiTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201709181541291_AddSeContactUidToUsersAndPmToOrders.cs" />
+    <Compile Include="Persistence\Migrations\201709181541291_AddSeContactUidToUsersAndPmToOrders.Designer.cs">
+      <DependentUpon>201709181541291_AddSeContactUidToUsersAndPmToOrders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201709181847512_AddIndexToOrder.cs" />
+    <Compile Include="Persistence\Migrations\201709181847512_AddIndexToOrder.Designer.cs">
+      <DependentUpon>201709181847512_AddIndexToOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201709182035102_AddFamilyDetailsToOrder.cs" />
+    <Compile Include="Persistence\Migrations\201709182035102_AddFamilyDetailsToOrder.Designer.cs">
+      <DependentUpon>201709182035102_AddFamilyDetailsToOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201709191408496_AddTransfereeEmailUniqueIndex.cs" />
+    <Compile Include="Persistence\Migrations\201709191408496_AddTransfereeEmailUniqueIndex.Designer.cs">
+      <DependentUpon>201709191408496_AddTransfereeEmailUniqueIndex.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201709191945569_RemoveTransfereeAndConsultantAssignmentEntities.cs" />
+    <Compile Include="Persistence\Migrations\201709191945569_RemoveTransfereeAndConsultantAssignmentEntities.Designer.cs">
+      <DependentUpon>201709191945569_RemoveTransfereeAndConsultantAssignmentEntities.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201709201941374_AddTransfereeInviteEnabledToOrders.cs" />
+    <Compile Include="Persistence\Migrations\201709201941374_AddTransfereeInviteEnabledToOrders.Designer.cs">
+      <DependentUpon>201709201941374_AddTransfereeInviteEnabledToOrders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201709201950074_PopulateSeContactUidInUsers.cs" />
+    <Compile Include="Persistence\Migrations\201709201950074_PopulateSeContactUidInUsers.Designer.cs">
+      <DependentUpon>201709201950074_PopulateSeContactUidInUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201709282041234_AddClientRmcSeNumbToOrders.cs" />
+    <Compile Include="Persistence\Migrations\201709282041234_AddClientRmcSeNumbToOrders.Designer.cs">
+      <DependentUpon>201709282041234_AddClientRmcSeNumbToOrders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710031626041_AddPreTripToOrders.cs" />
+    <Compile Include="Persistence\Migrations\201710031626041_AddPreTripToOrders.Designer.cs">
+      <DependentUpon>201710031626041_AddPreTripToOrders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710061802248_ServicesAdded.cs" />
+    <Compile Include="Persistence\Migrations\201710061802248_ServicesAdded.Designer.cs">
+      <DependentUpon>201710061802248_ServicesAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710091435033_RentFieldsForDetailsAdded.cs" />
+    <Compile Include="Persistence\Migrations\201710091435033_RentFieldsForDetailsAdded.Designer.cs">
+      <DependentUpon>201710091435033_RentFieldsForDetailsAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710101407560_ForeignKeyOnServices.cs" />
+    <Compile Include="Persistence\Migrations\201710101407560_ForeignKeyOnServices.Designer.cs">
+      <DependentUpon>201710101407560_ForeignKeyOnServices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710101459536_AddingServiceTypeLinking.cs" />
+    <Compile Include="Persistence\Migrations\201710101459536_AddingServiceTypeLinking.Designer.cs">
+      <DependentUpon>201710101459536_AddingServiceTypeLinking.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710101512327_SeedServiceTypes.cs" />
+    <Compile Include="Persistence\Migrations\201710101512327_SeedServiceTypes.Designer.cs">
+      <DependentUpon>201710101512327_SeedServiceTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710101549284_RemoveNameFromService.cs" />
+    <Compile Include="Persistence\Migrations\201710101549284_RemoveNameFromService.Designer.cs">
+      <DependentUpon>201710101549284_RemoveNameFromService.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710122149268_AddRushVipLastContactedToOrder.cs" />
+    <Compile Include="Persistence\Migrations\201710122149268_AddRushVipLastContactedToOrder.Designer.cs">
+      <DependentUpon>201710122149268_AddRushVipLastContactedToOrder.cs</DependentUpon>
+    </Compile>
+<<<<<<< HEAD
+    <Compile Include="Persistence\Migrations\201710181723591_DropAzureTables.cs" />
+    <Compile Include="Persistence\Migrations\201710181723591_DropAzureTables.Designer.cs">
+      <DependentUpon>201710181723591_DropAzureTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710181725012_AddAzureTablesBack.cs" />
+    <Compile Include="Persistence\Migrations\201710181725012_AddAzureTablesBack.Designer.cs">
+      <DependentUpon>201710181725012_AddAzureTablesBack.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710182111512_ReSeedServiceTypes.cs" />
+    <Compile Include="Persistence\Migrations\201710182111512_ReSeedServiceTypes.Designer.cs">
+      <DependentUpon>201710182111512_ReSeedServiceTypes.cs</DependentUpon>
+=======
+    <Compile Include="Persistence\Migrations\201710190417220_AddChildren.cs" />
+    <Compile Include="Persistence\Migrations\201710190417220_AddChildren.Designer.cs">
+      <DependentUpon>201710190417220_AddChildren.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710190421355_AddSpouseInfo.cs" />
+    <Compile Include="Persistence\Migrations\201710190421355_AddSpouseInfo.Designer.cs">
+      <DependentUpon>201710190421355_AddSpouseInfo.cs</DependentUpon>
+>>>>>>> origin/intake_changes
+    </Compile>
+    <Compile Include="Persistence\Migrations\Configuration.cs" />
+    <Compile Include="Persistence\OrdersRepository.cs" />
+    <Compile Include="Persistence\ServicesRepository.cs" />
+    <Compile Include="Persistence\ServiceTypesRepository.cs" />
+    <Compile Include="Persistence\TransfereesRepository.cs" />
+    <Compile Include="Persistence\UnitOfWork.cs" />
+    <Compile Include="Persistence\UsersRepository.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validations\HasManagerRoleAttribute.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="App.Release.config" />
+    <None Include="App.Staging.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Persistence\Migrations\201708281308044_InitialMigration.resx">
+      <DependentUpon>201708281308044_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201708281322256_AddFirstNameAndLastNameTouser.resx">
+      <DependentUpon>201708281322256_AddFirstNameAndLastNameTouser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201708311715395_AddOrderTransfereeAndRentObjects.resx">
+      <DependentUpon>201708311715395_AddOrderTransfereeAndRentObjects.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709051444089_AddEstimatedArrivalToOrders.resx">
+      <DependentUpon>201709051444089_AddEstimatedArrivalToOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709111335207_CiTest.resx">
+      <DependentUpon>201709111335207_CiTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709111341210_RemoveCiTest.resx">
+      <DependentUpon>201709111341210_RemoveCiTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709181541291_AddSeContactUidToUsersAndPmToOrders.resx">
+      <DependentUpon>201709181541291_AddSeContactUidToUsersAndPmToOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709181847512_AddIndexToOrder.resx">
+      <DependentUpon>201709181847512_AddIndexToOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709182035102_AddFamilyDetailsToOrder.resx">
+      <DependentUpon>201709182035102_AddFamilyDetailsToOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709191408496_AddTransfereeEmailUniqueIndex.resx">
+      <DependentUpon>201709191408496_AddTransfereeEmailUniqueIndex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709191945569_RemoveTransfereeAndConsultantAssignmentEntities.resx">
+      <DependentUpon>201709191945569_RemoveTransfereeAndConsultantAssignmentEntities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709201941374_AddTransfereeInviteEnabledToOrders.resx">
+      <DependentUpon>201709201941374_AddTransfereeInviteEnabledToOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709201950074_PopulateSeContactUidInUsers.resx">
+      <DependentUpon>201709201950074_PopulateSeContactUidInUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709282041234_AddClientRmcSeNumbToOrders.resx">
+      <DependentUpon>201709282041234_AddClientRmcSeNumbToOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710031626041_AddPreTripToOrders.resx">
+      <DependentUpon>201710031626041_AddPreTripToOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710061802248_ServicesAdded.resx">
+      <DependentUpon>201710061802248_ServicesAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710091435033_RentFieldsForDetailsAdded.resx">
+      <DependentUpon>201710091435033_RentFieldsForDetailsAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710101407560_ForeignKeyOnServices.resx">
+      <DependentUpon>201710101407560_ForeignKeyOnServices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710101459536_AddingServiceTypeLinking.resx">
+      <DependentUpon>201710101459536_AddingServiceTypeLinking.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710101512327_SeedServiceTypes.resx">
+      <DependentUpon>201710101512327_SeedServiceTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710101549284_RemoveNameFromService.resx">
+      <DependentUpon>201710101549284_RemoveNameFromService.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710122149268_AddRushVipLastContactedToOrder.resx">
+      <DependentUpon>201710122149268_AddRushVipLastContactedToOrder.cs</DependentUpon>
+    </EmbeddedResource>
+<<<<<<< HEAD
+    <EmbeddedResource Include="Persistence\Migrations\201710181723591_DropAzureTables.resx">
+      <DependentUpon>201710181723591_DropAzureTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710181725012_AddAzureTablesBack.resx">
+      <DependentUpon>201710181725012_AddAzureTablesBack.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710182111512_ReSeedServiceTypes.resx">
+      <DependentUpon>201710182111512_ReSeedServiceTypes.cs</DependentUpon>
+=======
+    <EmbeddedResource Include="Persistence\Migrations\201710190417220_AddChildren.resx">
+      <DependentUpon>201710190417220_AddChildren.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710190421355_AddSpouseInfo.resx">
+      <DependentUpon>201710190421355_AddSpouseInfo.cs</DependentUpon>
+>>>>>>> origin/intake_changes
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
+</Project>
