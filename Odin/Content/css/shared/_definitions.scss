@@ -28,7 +28,7 @@ $DW_Purple: #621f65;
 
         div#icons {
             float: right;
-            width: 48%;
+            width: 50%;
             height: 118px;
             margin-right: 3px;
             padding-top: 30px;
@@ -100,7 +100,7 @@ $DW_Purple: #621f65;
     }
 }
 
-@mixin mobile_header() {
+@mixin mobile_header {
     div#caption {
         height: 66px !important;
         padding-top: 20px !important;

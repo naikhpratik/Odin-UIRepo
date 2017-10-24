@@ -1,0 +1,40 @@
+﻿<div id="rentals" class="noinit">
+    <div class="col-md-6">
+        <p>Rental Summary</p>
+        <div>
+            <div>
+                <span>Budget:</span>
+                <span>$6,000</span>
+
+                <span>Bedrooms:</span>
+                <span>2 +</span>
+            </div>
+            <div>
+                <span>Housing Type:</span>
+                <span>Apartment, Condo, Townhouse</span>
+
+                <span>Bathrooms:</span>
+                <span>2 +</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div>
+            <img src="~/Content/Images/Desktop_ln_image_placeholder.png"/>
+        </div>
+        <div>
+            <div>
+                <span>Address:</span>
+                <span>1234 Medow Rd Renton WA 11111</span>
+            </div>
+            <div>
+                <span>Rent:</span>
+                <span>$3,200 Sq.Ft. Condo</span>
+            </div>
+            <div>
+                <span>Bedrooms and Bathrooms:</span>
+                <span>2,2</span>
+            </div>
+        </div>
+    </div>
+</div>

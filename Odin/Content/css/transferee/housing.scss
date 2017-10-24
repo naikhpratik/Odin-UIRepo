@@ -1,0 +1,241 @@
+﻿@import "../shared/_definitions.scss";
+
+
+div#housing {
+
+    .row {
+        text-align: left;
+        padding-left: 10px;
+        padding-bottom: 20px;
+        border-bottom: 2px solid lightgray;
+        margin: 0px 20px 0px 20px;
+
+        &.notfirst {
+            font-size: 20px;
+            padding-top: 18px;
+        }
+
+        &:nth-child(2) {
+
+            div {
+                display: inline-block;
+
+                span {
+                    margin-right: 8px;
+                }
+
+                &:nth-child(2) {
+                    color: lightgray;
+
+                    span {
+                        margin-right: 15px;
+                    }
+
+                    input {
+                        top: 6px;
+                        margin-right: 10px;
+                    }
+                }
+
+                input[checked=""] {
+                    + span {
+                        color: $DW_LtPurple;
+                    }
+                }
+            }
+
+            div#add {
+                float: right;
+                margin-right: 70px;
+
+                img {
+                    width: 38px;
+                }
+
+                span {
+                    color: $DW_Blue;
+                }
+            }
+        }
+
+        &:nth-child(3) {
+            width: 100%;
+            border-bottom: unset;
+
+            table {
+                left: -49px;
+                width: 100%;
+                text-align: center;
+                position: relative;
+                font-size: 16px;
+                font-weight: 500;
+                font-family: sans-serif;
+
+                th {
+                    text-align: center;
+                    font-weight: normal;
+                    line-height: 22px;
+                    padding-top: 8px;
+                    color: $DW_LtBlue;
+                }
+
+                tr:hover {
+                    background-color: lightgray;
+                }
+
+                td {
+                    height: 84px;
+                    line-height: 18px;
+
+                    img {
+                        width: 35px;
+
+                        &.location {
+                            width: 60px;
+                        }
+
+                        &.like {
+                            width: 22px;
+                        }
+                    }
+                }
+
+                p {
+                    margin-bottom: 0px
+                }
+
+                span {
+                    color: $DW_LtPurple;
+                }
+            }
+        }
+
+        .col-md-6 {
+            p#caption {
+                color: black;
+                font-size: 30px;
+                margin: 30px 0px 15px 0px;
+            }
+
+            &:nth-child(2) {
+                padding: 0px;
+                margin-top: 20px;
+                max-height: 342px;
+                overflow: hidden;
+                //TODO: temporary until real map is in place
+                img {
+                    width: 100%;
+                }
+            }
+
+            .col-md-5, .col-md-6 {
+                padding-left: 0px;
+
+                p {
+                    font-size: 20px;
+                    font-weight: 400;
+                    margin-top: 10px;
+                    margin-bottom: 0px;
+
+                    &:first-of-type {
+                        margin-top: 0px;
+                    }
+                }
+
+                span {
+                    top: -9px;
+                    font-size: 16px;
+                    color: $DW_Blue;
+                    position: relative;
+                }
+            }
+        }
+    }
+
+    div#chat {
+        top: 179px;
+        left: 832px;
+        color: white;
+        width: 360px;
+        padding-top: 10px;
+        max-height: 450px;
+        position: absolute;
+        background-color: $DW_Lime;
+
+        div#addr {
+            margin-bottom: 10px;
+        }
+
+        div#chatwrapper {
+            padding: 10px 10px 42px 10px;
+            background-color: lightgray;
+        }
+
+        div#chatframe {
+            color: lightgray;
+            text-align: left;
+            margin-bottom: 14px;
+            padding: 0px 5px 1px 0px;
+            background-color: white;
+
+            ul {
+                font-size: 16px;
+                padding: 12px 0px 0px 12px;
+
+                li {
+                    span {
+                        color: gray;
+                    }
+
+                    p {
+                        color: lightgray;
+                        line-height: 18px;
+                    }
+                }
+            }
+
+            img {
+                width: 25px;
+                margin-right: 10px;
+
+                &.dsc {
+                    background-color: $DW_Purple;
+                }
+
+                &.transferee {
+                    background-color: $DW_Red;
+                }
+            }
+
+            div {
+                margin-left: 35px;
+            }
+        }
+
+        div#comment {
+            height: 100px;
+            color: lightgray;
+            text-align: left;
+            padding: 10px;
+            margin-bottom: 14px;
+            background-color: white;
+        }
+
+        button {
+            color: gray;
+            width: 60px;
+            border: 2px solid gray;
+            background-color: lightgray;
+
+            &:first-of-type {
+                float: left;
+            }
+
+            &:last-of-type {
+                float: right;
+                color: $DW_Purple;
+                border: 2px solid $DW_Purple;
+            }
+        }
+    }
+}

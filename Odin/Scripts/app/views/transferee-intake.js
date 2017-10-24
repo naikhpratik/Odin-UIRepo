@@ -303,7 +303,7 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
     var contains = function(value, searchFor)
     {
         return (value || '').indexOf(searchFor) > -1;
-    }
+    };
 
     var expand = function (intakeBlock) {
         var img = intakeBlock.find(".intake-collapse-img");

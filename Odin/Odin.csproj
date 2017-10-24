@@ -356,12 +356,6 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\css\transferee\calendar.css">
-      <DependentUpon>calendar.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\calendar.min.css">
-      <DependentUpon>calendar.css</DependentUpon>
-    </Content>
     <Content Include="Content\css\transferee\details.css">
       <DependentUpon>details.scss</DependentUpon>
     </Content>
@@ -374,11 +368,23 @@
     <Content Include="Content\css\transferee\history.min.css">
       <DependentUpon>history.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\transferee\housing.css">
+      <DependentUpon>housing.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\transferee\housing.min.css">
+      <DependentUpon>housing.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\transferee\intake.css">
       <DependentUpon>intake.scss</DependentUpon>
     </Content>
     <Content Include="Content\css\transferee\intake.min.css">
       <DependentUpon>intake.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\transferee\itinerary.css">
+      <DependentUpon>itinerary.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\transferee\itinerary.min.css">
+      <DependentUpon>itinerary.css</DependentUpon>
     </Content>
     <Content Include="Content\css\transferee\messages.css">
       <DependentUpon>messages.scss</DependentUpon>
@@ -386,22 +392,10 @@
     <Content Include="Content\css\transferee\messages.min.css">
       <DependentUpon>messages.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\transferee\rentals.css">
-      <DependentUpon>rentals.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\rentals.min.css">
-      <DependentUpon>rentals.css</DependentUpon>
-    </Content>
     <Content Include="Content\css\transferee\transferee.css">
       <DependentUpon>transferee.scss</DependentUpon>
     </Content>
     <Content Include="Content\css\transferee\transferee.min.css">
-      <DependentUpon>transferee.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\shared\transferee.css">
-      <DependentUpon>_definitions.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\shared\transferee.min.css">
       <DependentUpon>transferee.css</DependentUpon>
     </Content>
     <Content Include="Content\DataTables\css\autoFill.bootstrap.css" />
@@ -571,6 +565,7 @@
     <Content Include="Content\Images\bg_gradient_login.png" />
     <Content Include="Content\Images\bg_image.png" />
     <Content Include="Content\Images\check.png" />
+    <Content Include="Content\Images\btn_add_home.png" />
     <Content Include="Content\Images\collapse.png" />
     <Content Include="Content\Images\Desktop_ln_image_placeholder.png" />
     <Content Include="Content\Images\dwellworks_icon.png" />
@@ -584,14 +579,20 @@
     <Content Include="Content\Images\icn_down_arrow.png" />
     <Content Include="Content\Images\icn_history.png" />
     <Content Include="Content\Images\icn_intake.png" />
-    <Content Include="Content\Images\icn_internal_calendar.png" />
+    <Content Include="Content\Images\icn_internal_itinerary.png" />
     <Content Include="Content\Images\icn_internal_messages.png" />
+    <Content Include="Content\Images\icn_ln_selected_dislike.png" />
+    <Content Include="Content\Images\icn_ln_selected_like.png" />
+    <Content Include="Content\Images\icn_marker.png" />
     <Content Include="Content\Images\icn_person.png" />
     <Content Include="Content\Images\icn_profile_B1.png" />
-    <Content Include="Content\Images\icn_rentals.png" />
+    <Content Include="Content\Images\icn_housing.png" />
     <Content Include="Content\Images\icn_up_arrow.png" />
     <Content Include="Content\Images\icn_up_sel_arrow.png" />
     <Content Include="Content\Images\ic_search.png" />
+    <Content Include="Content\Images\login.jpg" />
+    <Content Include="Content\Images\map_placeholder.png" />
+    <Content Include="Content\Images\popout_sml_img.png" />
     <Content Include="Content\Images\user-placeholder.png" />
     <Content Include="Content\css\login.css">
       <DependentUpon>login.scss</DependentUpon>
@@ -678,9 +679,9 @@
     <Content Include="Content\css\forgotpassword.scss" />
     <Content Include="Content\css\shared\_definitions.scss" />
     <Content Include="Content\css\transferee\intake.scss" />
-    <Content Include="Content\css\transferee\calendar.scss" />
+    <Content Include="Content\css\transferee\itinerary.scss" />
     <Content Include="Content\css\transferee\details.scss" />
-    <Content Include="Content\css\transferee\rentals.scss" />
+    <Content Include="Content\css\transferee\housing.scss" />
     <Content Include="Content\css\transferee\history.scss" />
     <Content Include="Content\css\transferee\messages.scss" />
     <Content Include="Content\css\transferee\transferee.scss" />
@@ -836,8 +837,8 @@
     <Content Include="Views\Shared\Partials\_logo2.cshtml" />
     <Content Include="Views\Orders\Partials\_Intake.cshtml" />
     <Content Include="Views\Orders\Partials\_Details.cshtml" />
-    <Content Include="Views\Orders\Partials\_Rentals.cshtml" />
-    <Content Include="Views\Orders\Partials\_Calendar.cshtml" />
+    <Content Include="Views\Orders\Partials\_Housing.cshtml" />
+    <Content Include="Views\Orders\Partials\_Itinerary.cshtml" />
     <Content Include="Views\Orders\Partials\_Messages.cshtml" />
     <Content Include="Views\Orders\Partials\_History.cshtml" />
     <None Include="Web.Azure.config">
