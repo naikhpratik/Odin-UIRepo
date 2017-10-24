@@ -11,5 +11,6 @@ namespace Odin.Data.Persistence
         DbSet<Consultant> Consultants { get; set; }
         DbSet<Manager> Managers { get; set; }
         DbSet<Child> Children { get; set; }
+        DbSet<Pet> Pets { get; set; }
     }
 }

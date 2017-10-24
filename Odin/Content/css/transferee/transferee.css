@@ -190,7 +190,8 @@ div.row {
             display: inline; } }
   div.row div.col {
     border-top: 1px solid;
-    font-family: sans-serif; }
+    font-family: sans-serif;
+    overflow-y: scroll; }
     div.row div.col div.noinit {
       display: none; }
 

@@ -1,12 +1,14 @@
 ﻿namespace Odin.Data.Core.Models
 {
-    public class Child : MobileTable
+    public class Pet : MobileTable
     {
-        public string Name { get; set; }
+        public string Id { get; set; }
 
-        public int? Age { get; set; }
+        public string Type { get; set; }
 
-        public int? Grade { get; set; }
+        public string Breed { get; set; }
+
+        public string Size { get; set; }
 
         public string OrderId { get; set; }
 
@@ -16,6 +18,5 @@
         {
             Deleted = true;
         }
-
     }
 }

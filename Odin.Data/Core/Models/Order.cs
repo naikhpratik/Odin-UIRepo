@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Microsoft.Azure.Mobile.Server;
 
 namespace Odin.Data.Core.Models
 {
@@ -13,6 +12,7 @@ namespace Odin.Data.Core.Models
         {
             Services = new Collection<Service>();
             Children = new Collection<Child>();
+            Pets = new Collection<Pet>();
         }
 
         public string TrackingId { get; set; }
@@ -34,6 +34,8 @@ namespace Odin.Data.Core.Models
         public bool TransfereeInviteEnabled { get; set; }
         public string SeCustNumb { get; set; }
         public string Rmc { get; set; }
+        public string RmcContact { get; set; }
+        public string RmcContactEmail { get; set; }
         public string Client { get; set; }
 
         public int? RentId { get; set; }
@@ -60,6 +62,9 @@ namespace Odin.Data.Core.Models
         public string SpouseVisaType { get; set; }
         public virtual ICollection<Child> Children { get; private set; }
         public string ChildrenEducationPreferences { get; set; }
+
+        public virtual ICollection<Pet> Pets { get; private set; }
+        public string PetNotes { get; set; }
 
         public bool HasService(int serviceTypeId)
         {

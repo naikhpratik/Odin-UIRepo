@@ -51,7 +51,7 @@ div#intake {
         }
 
         .intake-row {
-            
+
             .intake-col {
                 padding-top: 15px;
 
@@ -61,7 +61,7 @@ div#intake {
                     margin-bottom: -5px;
                 }
 
-                span {
+                .intake-span {
                     color: $DW_Blue;
                     font-size: small;
                 }
@@ -78,7 +78,7 @@ div#intake {
                     cursor: pointer;
                 }
 
-                input {
+                .intake-input {
                     color: $DW_Blue;
                     font-size: small;
                     display: none;
@@ -91,12 +91,18 @@ div#intake {
                     line-height: 20px;
                 }
 
-                textarea {
+                .intake-date {
                     display: none;
-                    width: 100%;
-                    max-width: 100%;
-                    color: $DW_Blue;
-                    font-size: small;
+
+                    input {
+                        color: $DW_Blue;
+                        font-size: small;
+                        display: none;                        
+                    }
+
+                    span {
+                        color:$DW_Blue;
+                    }
                 }
             }
         }

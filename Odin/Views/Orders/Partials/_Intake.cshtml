@@ -18,20 +18,20 @@
         <div class="row intake-row collapse in">
             <div class="col-sm-3 intake-col">
                 <label>Name:</label>
-                <span>@Model.Transferee.FullName</span>
+                <span class="intake-span">@Model.Transferee.FullName</span>
             </div>
             <div class="col-sm-3 intake-col">
                 <label>Email:</label>
-                <span>@Model.Transferee.Email</span>
+                <span class="intake-span">@Model.Transferee.Email</span>
             </div>
             <div class="col-sm-3 intake-col">
                 <label>Phone:</label>
-                <span>@Model.Transferee.PhoneNumber</span>
+                <span class="intake-span">@Model.Transferee.PhoneNumber</span>
             </div>
         </div>
     </div>
     <hr/>
-    <div class="intake-block" data-block="destination">
+`   <div class="intake-block" data-block="destination">
         <div class="row intake-header">
             <h5>
                 <span class="intake-collapse">
@@ -49,20 +49,20 @@
         <div class="row intake-row collapse in">
             <div class="col-sm-3 intake-col">
                 <label>City:</label>
-                <span>@Model.DestinationCity</span>
-                @Html.TextBoxFor(m => @Model.DestinationCity,new {@class="form-control"})
+                <span class="intake-span">@Model.DestinationCity</span>
+                @Html.TextBoxFor(m => @Model.DestinationCity,new {@class="form-control intake-input"})
                 @Html.HiddenFor(m => @Model.DestinationCity)
             </div>
             <div class="col-sm-3 intake-col">
                 <label>State:</label>
-                <span>@Model.DestinationState</span>
-                @Html.TextBoxFor(m => @Model.DestinationState,new {@class="form-control"})
+                <span class="intake-span">@Model.DestinationState</span>
+                @Html.TextBoxFor(m => @Model.DestinationState,new {@class= "form-control intake-input" })
                 @Html.HiddenFor(m => @Model.DestinationState)
             </div>
             <div class="col-sm-3 intake-col">
                 <label>Country:</label>
-                <span>@Model.DestinationCountry</span>
-                @Html.TextBoxFor(m => @Model.DestinationCountry, new { @class = "form-control" })
+                <span class="intake-span">@Model.DestinationCountry</span>
+                @Html.TextBoxFor(m => @Model.DestinationCountry, new { @class = "form-control intake-input" })
                 @Html.HiddenFor(m => @Model.DestinationCountry)
             </div>
         </div>
@@ -86,20 +86,20 @@
         <div class="row intake-row collapse in">
             <div class="col-sm-3 intake-col">
                 <label>City:</label>
-                <span>@Model.OriginCity</span>
-                @Html.TextBoxFor(m => @Model.OriginCity, new { @class = "form-control" })
+                <span class="intake-span">@Model.OriginCity</span>
+                @Html.TextBoxFor(m => @Model.OriginCity, new { @class = "form-control intake-input" })
                 @Html.HiddenFor(m => @Model.OriginCity)
             </div>
             <div class="col-sm-3 intake-col">
                 <label>State:</label>
-                <span>@Model.OriginState</span>
-                @Html.TextBoxFor(m => @Model.OriginState, new { @class = "form-control" })
+                <span class="intake-span">@Model.OriginState</span>
+                @Html.TextBoxFor(m => @Model.OriginState, new { @class = "form-control intake-input" })
                 @Html.HiddenFor(m => @Model.OriginState)
             </div>
             <div class="col-sm-3 intake-col">
                 <label>Country:</label>
-                <span>@Model.OriginCountry</span>
-                @Html.TextBoxFor(m => @Model.OriginCountry, new { @class = "form-control" })
+                <span class="intake-span">@Model.OriginCountry</span>
+                @Html.TextBoxFor(m => @Model.OriginCountry, new { @class = "form-control intake-input" })
                 @Html.HiddenFor(m => @Model.OriginCountry)
             </div>
         </div>
@@ -123,37 +123,37 @@
         <div class="row intake-row collapse in">
             <div class="col-sm-3 intake-col">
                 <label>Familiarization Trip:</label>
-                <span>Test Val</span>
-                <input type="text" class="form-control"/>
+                <span class="intake-span">Test Val</span>
+                <input type="text" class="form-control intake-input"/>
             </div>
             <div class="col-sm-3 intake-col">
                 <label>Final Arrival:</label>
-                <span>Test Val</span>
-                <input type="text" class="form-control"/>
+                <span class="intake-span">Test Val</span>
+                <input type="text" class="form-control intake-input"/>
             </div>
         </div>
         <div class="row intake-row collapse in">
             <div class="col-sm-3 intake-col">
                 <label>Work Start Date:</label>
-                <span>Test Val</span>
-                <input type="text" class="form-control"/>
+                <span class="intake-span">Test Val</span>
+                <input type="text" class="form-control intake-input"/>
             </div>
         </div>
         <div class="row intake-row collapse in">
             <div class="col-sm-3 intake-col">
                 <label>Assignment/Permanent:</label>
-                <span>Test Val</span>
-                <input type="text" class="form-control"/>
+                <span class="intake-span">Test Val</span>
+                <input type="text" class="form-control intake-input"/>
             </div>
             <div class="col-sm-3 intake-col">
                 <label>Estimated Departure:</label>
-                <span>Test Val</span>
-                <input type="text" class="form-control"/>
+                <span class="intake-span">Test Val</span>
+                <input type="text" class="form-control intake-input"/>
             </div>
             <div class="col-sm-3 intake-col">
                 <label>Assignment Length:</label>
-                <span>Test Val</span>
-                <input type="text" class="form-control"/>
+                <span class="intake-span">Test Val</span>
+                <input type="text" class="form-control intake-input"/>
             </div>
         </div>
     </div>
@@ -170,13 +170,11 @@
         <div class="row intake-row collapse in">
             <div class="col-sm-3 intake-col">
                 <label>Rush:</label>
-                <span>Yes</span>
-                <input type="checkbox"/>
+                <span class="intake-span">Yes</span>
             </div>
             <div class="col-sm-3 intake-col">
                 <label>Vip:</label>
-                <span>No</span>
-                <input type="checkbox"/>
+                <span class="intake-span">No</span>
             </div>
         </div>
     </div>
@@ -200,14 +198,14 @@
         <div class="row intake-row collapse in">
             <div class="col-sm-3 intake-col">
                 <label>Spouse/Partner:</label>
-                <span>@Model.SpouseName</span>
-                @Html.TextBoxFor(m => @Model.SpouseName, new { @class = "form-control" })
+                <span class="intake-span">@Model.SpouseName</span>
+                @Html.TextBoxFor(m => @Model.SpouseName, new { @class = "form-control intake-input" })
                 @Html.HiddenFor(m => @Model.SpouseName)
             </div>
             <div class="col-sm-3 intake-col">
                 <label>Visa Type:</label>
-                <span>@Model.SpouseVisaType</span>
-                @Html.TextBoxFor(m => @Model.SpouseVisaType, new { @class = "form-control" })
+                <span class="intake-span">@Model.SpouseVisaType</span>
+                @Html.TextBoxFor(m => @Model.SpouseVisaType, new { @class = "form-control intake-input" })
                 @Html.HiddenFor(m => @Model.SpouseVisaType)
             </div>
         </div>
@@ -219,71 +217,88 @@
         @if (@Model.Children.Count() > 0)
         {
             for (int i = 0; i < @Model.Children.Count(); i++)
-             {
-                 <div class="row intake-row collapse in" data-entity-id="@Model.Children.ElementAt(i).Id" data-entity-collection="children">
-                     <div class="col-sm-3 intake-col">
-                         <label>Child:</label>
-                         <span>@Model.Children.ElementAt(i).Name</span>
-                         @Html.TextBoxFor(m => @Model.Children.ElementAt(i).Name, new {@class = "form-control"})
-                         @Html.HiddenFor(m => @Model.Children.ElementAt(i).Name)
-                     </div>
-                     <div class="col-sm-3 intake-col">
-                         <label>Age:</label>
-                         <span>@Model.Children.ElementAt(i).Age</span>
-                         @Html.TextBoxFor(m => @Model.Children.ElementAt(i).Age, new {@class = "form-control"})
-                         @Html.HiddenFor(m => @Model.Children.ElementAt(i).Age)
-                     </div>
-                     <div class="col-sm-3 intake-col">
-                         <label>Grade:</label>
-                         <span>@Model.Children.ElementAt(i).Grade</span>
-                         @Html.TextBoxFor(m => @Model.Children.ElementAt(i).Grade, new {@class = "form-control"})
-                         @Html.HiddenFor(m => @Model.Children.ElementAt(i).Grade)
-                     </div>
-                     <div class="col-sm-3 intake-col">
-                         <span class="intake-del">
-                             x Delete
-                         </span>
-                     </div>
-                 </div>
-             }
+            {
+                <div class="row intake-row collapse in" data-entity-id="@Model.Children.ElementAt(i).Id" data-entity-collection="children">
+                    <div class="col-sm-3 intake-col">
+                        <label>Child:</label>
+                        <span class="intake-span">@Model.Children.ElementAt(i).Name</span>
+                        @Html.TextBoxFor(m => @Model.Children.ElementAt(i).Name, new {@class = "form-control intake-input" })
+                        @Html.HiddenFor(m => @Model.Children.ElementAt(i).Name)
+                    </div>
+                    <div class="col-sm-3 intake-col">
+                        <label>Age:</label>
+                        <span class="intake-span">@Model.Children.ElementAt(i).Age</span>
+                        @Html.TextBoxFor(m => @Model.Children.ElementAt(i).Age, new {@class = "form-control intake-input" })
+                        @Html.HiddenFor(m => @Model.Children.ElementAt(i).Age)
+                    </div>
+                    <div class="col-sm-3 intake-col">
+                        <label>Grade:</label>
+                        <span class="intake-span">@Model.Children.ElementAt(i).Grade</span>
+                        @Html.TextBoxFor(m => @Model.Children.ElementAt(i).Grade, new {@class = "form-control intake-input" })
+                        @Html.HiddenFor(m => @Model.Children.ElementAt(i).Grade)
+                    </div>
+                    <div class="col-sm-3 intake-col">
+                        <span class="intake-del">
+                            x Delete
+                        </span>
+                    </div>
+                </div>
+            }
         }
         <div class="row intake-row collapse in">
             <div class="col-sm-9 intake-col">
                 <label>Educational Preferences:</label>
-                <span>Test Val</span>
-                <textarea type="text" class="form-control" placeholder="Schooling, Areas"></textarea>
-            </div>
-        </div>
-        <div class="row intake-row collapse in">
-            <div class="col-sm-3 intake-col">
-                <label>Pet Type:</label>
-                <span>Test Val</span>
-                <input type="text" class="form-control"/>
-            </div>
-            <div class="col-sm-3 intake-col">
-                <label>Breed:</label>
-                <span>Test Val</span>
-                <input type="text" class="form-control"/>
-            </div>
-            <div class="col-sm-3 intake-col">
-                <label>Size/Weight:</label>
-                <span>Test Val</span>
-                <input type="text" class="form-control"/>
-            </div>
-            <div class="col-sm-3 intake-col">
-                <span class="intake-add">
-                    + Add
-                </span>
+                <span class="intake-span">@Model.ChildrenEducationPreferences</span>
+                @Html.TextAreaFor(m => @Model.ChildrenEducationPreferences, new { @class = "form-control intake-input" })
+                @Html.HiddenFor(m => @Model.ChildrenEducationPreferences)
             </div>
         </div>
         <div class="row intake-row collapse in">
             <div class="col-sm-9 intake-col">
+                <span class="intake-add" data-entity-add="pets">+Add Pet</span>
+            </div>
+        </div>
+        @if (@Model.Pets.Count() > 0)
+        {
+            for (int i = 0; i < @Model.Pets.Count(); i++)
+            {
+                <div class="row intake-row collapse in" data-entity-id="@Model.Pets.ElementAt(i).Id" data-entity-collection="pets">
+                    <div class="col-sm-3 intake-col">
+                        <label>Pet Type:</label>
+                        <span class="intake-span">@Model.Pets.ElementAt(i).Type</span>
+                        @Html.TextBoxFor(m => @Model.Pets.ElementAt(i).Type, new {@class = "form-control intake-input" })
+                        @Html.HiddenFor(m => @Model.Pets.ElementAt(i).Type)
+                    </div>
+                    <div class="col-sm-3 intake-col">
+                        <label>Breed:</label>
+                        <span class="intake-span">@Model.Pets.ElementAt(i).Breed</span>
+                        @Html.TextBoxFor(m => @Model.Pets.ElementAt(i).Breed, new {@class = "form-control intake-input" })
+                        @Html.HiddenFor(m => @Model.Pets.ElementAt(i).Breed)
+                    </div>
+                    <div class="col-sm-3 intake-col">
+                        <label>Weight/Size:</label>
+                        <span class="intake-span">@Model.Pets.ElementAt(i).Size</span>
+                        @Html.TextBoxFor(m => @Model.Pets.ElementAt(i).Size, new {@class = "form-control intake-input" })
+                        @Html.HiddenFor(m => @Model.Pets.ElementAt(i).Size)
+                    </div>
+                    <div class="col-sm-3 intake-col">
+                        <span class="intake-del">
+                            x Delete
+                        </span>
+                    </div>
+                </div>
+            }
+        }
+        <div class="row intake-row collapse in">
+            <div class="col-sm-9 intake-col">
                 <label>Pet Notes:</label>
-                <span>This is a really long test value. A really really long test value. Man I love test values. Test values are the greatest.</span>
-                <textarea class="form-control"></textarea>
+                <span class="intake-span">@Model.PetNotes</span>
+                @Html.TextAreaFor(m => @Model.PetNotes, new { @class = "form-control intake-input" })
+                @Html.HiddenFor(m => @Model.PetNotes)
             </div>
         </div>
     </div>
+    <hr/>
     <div class="intake-block" data-block="services">
         <div class="row intake-header">
             <h5>
@@ -302,11 +317,11 @@
                 <div class="col-sm-1 intake-col">
                     <input type="checkbox" class="intake-service-input" name="Selected"  @Model.Services.ElementAt(i).Selected ? checked ="checked" : String.Empty/>
                 </div>
-                 <div class="col-sm-5 intake-col">
-                    <span>@Model.Services.ElementAt(i).Name</span>
+                <div class="col-sm-5 intake-col">
+                    <span class="intake-span">@Model.Services.ElementAt(i).Name</span>
                 </div>
                 <div class="col-sm-5 intake-col">
-                    @Html.TextBoxFor(s => @Model.Services.ElementAt(i).Notes, new { @class = "form-control intake-service-input" })
+                    @Html.TextBoxFor(s => @Model.Services.ElementAt(i).Notes, new { @class = "form-control intake-input intake-service-input" })
                 </div>
             </div>
             
@@ -318,14 +333,56 @@
                     <input type="checkbox" value="false" class="intake-service-input" name="Selected"/>
                 </div>
                 <div class="col-sm-5 intake-col">
-                    <span>@Model.PossibleServices.ElementAt(i).Name</span>
+                    <span class="intake-span">@Model.PossibleServices.ElementAt(i).Name</span>
                 </div>
                 <div class="col-sm-5 intake-col">
-                    <input type="text" name="Notes" class="form-control"/>    
+                    <input type="text" name="Notes" class="form-control intake-input intake-service-input"/>    
                 </div>
             </div>
         }
     </div>
-    
+    <div class="intake-block" data-block="temphousing">
+        <div class="row intake-header">
+            <h5>
+                <span class="intake-collapse">
+                    <img class="intake-collapse-img" src="/Content/Images/collapse.png" />
+                    Temporary Housing
+                </span>
+                <span class="intake-edit">
+                    + Edit
+                </span>
+                <span class="intake-cancel">
+                    x Cancel
+                </span>
+            </h5>
+        </div>
+        <div class="row intake-row collapse in">
+            <div class="col-sm-3 intake-col">
+                <label>Length (Days):</label>
+                <span class="intake-span">@Model.TempHousingDays</span>
+                @Html.TextBoxFor(m => @Model.TempHousingDays, new {@class= "form-control intake-input" })
+                @Html.HiddenFor(m => @Model.TempHousingDays)
+            </div>
+            <div class="col-sm-3 intake-col">
+                <label>Last Day:</label>
+                <span class="intake-span">@Model.TempHousingEndDate</span>
+                @*<div class="input-group intake-date date">
+                    <input class="form-control" data-date-today-btn="true" data-date-today-highlight="true" name="TempHousingEndDate" placeholder="Enter date or hit calendar" style="display: block; width: 85%" type="text" value="2017-10-24">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>*@
+                @if (@Model.TempHousingEndDate.HasValue)
+                {
+                    @Html.DatePicker("intake-date date", "TempHousingEndDate", Model.TempHousingEndDate.Value)
+                }
+                else
+                {
+                    @Html.DatePicker("intake-date date", "TempHousingEndDate")
+                }
+                @Html.HiddenFor(m => @Model.TempHousingEndDate, new {@class = "intake-hidden"})
+                
+            </div>
+        </div>
+    </div>
+
 </div>
 @Styles.Render("~/Styling/intake")

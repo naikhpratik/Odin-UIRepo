@@ -24,6 +24,7 @@ namespace Odin.Data.Persistence
         public virtual DbSet<Consultant> Consultants { get; set; }
         public virtual DbSet<Transferee> Transferees { get; set; }
         public virtual DbSet<Child> Children { get; set; }
+        public virtual DbSet<Pet> Pets { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

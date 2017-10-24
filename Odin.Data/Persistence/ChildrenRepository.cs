@@ -18,9 +18,5 @@ namespace Odin.Data.Persistence
             return _context.Children.SingleOrDefault(c => c.Id == id);
         }
 
-        public void Remove(Child child)
-        {
-            _context.Children.Remove(child);
-        }
     }
 }
