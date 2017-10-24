@@ -40,6 +40,8 @@ div.container.body-content {
 
     div.col {
         width: 66%;
+        max-height: 884px;
+        overflow: hidden;
         position: relative;
         display: inline-block;
 
@@ -52,18 +54,7 @@ div.container.body-content {
         }
 
         img {
-            width: 100%;
-            opacity: 0.5;
-
-            &:nth-child(2) {
-                top: 0px;
-                opacity: 0.7;
-                position: fixed;
-
-                &.IEorEdge {
-                    left: 33.7%;
-                }
-            }
+            width: 223%;
         }
 
         div#labels-box {

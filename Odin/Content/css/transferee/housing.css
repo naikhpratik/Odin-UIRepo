@@ -1,0 +1,143 @@
+﻿div#housing .row {
+  text-align: left;
+  padding-left: 10px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid lightgray;
+  margin: 0px 20px 0px 20px; }
+  div#housing .row.notfirst {
+    font-size: 20px;
+    padding-top: 18px; }
+  div#housing .row:nth-child(2) div {
+    display: inline-block; }
+    div#housing .row:nth-child(2) div span {
+      margin-right: 8px; }
+    div#housing .row:nth-child(2) div:nth-child(2) {
+      color: lightgray; }
+      div#housing .row:nth-child(2) div:nth-child(2) span {
+        margin-right: 15px; }
+      div#housing .row:nth-child(2) div:nth-child(2) input {
+        top: 6px;
+        margin-right: 10px; }
+    div#housing .row:nth-child(2) div input[checked=""] + span {
+      color: #8d0b56; }
+  div#housing .row:nth-child(2) div#add {
+    float: right;
+    margin-right: 70px; }
+    div#housing .row:nth-child(2) div#add img {
+      width: 38px; }
+    div#housing .row:nth-child(2) div#add span {
+      color: #31a4dd; }
+  div#housing .row:nth-child(3) {
+    width: 100%;
+    border-bottom: unset; }
+    div#housing .row:nth-child(3) table {
+      left: -49px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      font-size: 16px;
+      font-weight: 500;
+      font-family: sans-serif; }
+      div#housing .row:nth-child(3) table th {
+        text-align: center;
+        font-weight: normal;
+        line-height: 22px;
+        padding-top: 8px;
+        color: #73c2ed; }
+      div#housing .row:nth-child(3) table tr:hover {
+        background-color: lightgray; }
+      div#housing .row:nth-child(3) table td {
+        height: 84px;
+        line-height: 18px; }
+        div#housing .row:nth-child(3) table td img {
+          width: 35px; }
+          div#housing .row:nth-child(3) table td img.location {
+            width: 60px; }
+          div#housing .row:nth-child(3) table td img.like {
+            width: 22px; }
+      div#housing .row:nth-child(3) table p {
+        margin-bottom: 0px; }
+      div#housing .row:nth-child(3) table span {
+        color: #8d0b56; }
+  div#housing .row .col-md-6 p#caption {
+    color: black;
+    font-size: 30px;
+    margin: 30px 0px 15px 0px; }
+  div#housing .row .col-md-6:nth-child(2) {
+    padding: 0px;
+    margin-top: 20px;
+    max-height: 342px;
+    overflow: hidden; }
+    div#housing .row .col-md-6:nth-child(2) img {
+      width: 100%; }
+  div#housing .row .col-md-6 .col-md-5, div#housing .row .col-md-6 .col-md-6 {
+    padding-left: 0px; }
+    div#housing .row .col-md-6 .col-md-5 p, div#housing .row .col-md-6 .col-md-6 p {
+      font-size: 20px;
+      font-weight: 400;
+      margin-top: 10px;
+      margin-bottom: 0px; }
+      div#housing .row .col-md-6 .col-md-5 p:first-of-type, div#housing .row .col-md-6 .col-md-6 p:first-of-type {
+        margin-top: 0px; }
+    div#housing .row .col-md-6 .col-md-5 span, div#housing .row .col-md-6 .col-md-6 span {
+      top: -9px;
+      font-size: 16px;
+      color: #31a4dd;
+      position: relative; }
+
+div#housing div#chat {
+  top: 179px;
+  left: 832px;
+  color: white;
+  width: 360px;
+  padding-top: 10px;
+  max-height: 450px;
+  position: absolute;
+  background-color: #a7ce39; }
+  div#housing div#chat div#addr {
+    margin-bottom: 10px; }
+  div#housing div#chat div#chatwrapper {
+    padding: 10px 10px 42px 10px;
+    background-color: lightgray; }
+  div#housing div#chat div#chatframe {
+    color: lightgray;
+    text-align: left;
+    margin-bottom: 14px;
+    padding: 0px 5px 1px 0px;
+    background-color: white; }
+    div#housing div#chat div#chatframe ul {
+      font-size: 16px;
+      padding: 12px 0px 0px 12px; }
+      div#housing div#chat div#chatframe ul li span {
+        color: gray; }
+      div#housing div#chat div#chatframe ul li p {
+        color: lightgray;
+        line-height: 18px; }
+    div#housing div#chat div#chatframe img {
+      width: 25px;
+      margin-right: 10px; }
+      div#housing div#chat div#chatframe img.dsc {
+        background-color: #621f65; }
+      div#housing div#chat div#chatframe img.transferee {
+        background-color: #e53c2e; }
+    div#housing div#chat div#chatframe div {
+      margin-left: 35px; }
+  div#housing div#chat div#comment {
+    height: 100px;
+    color: lightgray;
+    text-align: left;
+    padding: 10px;
+    margin-bottom: 14px;
+    background-color: white; }
+  div#housing div#chat button {
+    color: gray;
+    width: 60px;
+    border: 2px solid gray;
+    background-color: lightgray; }
+    div#housing div#chat button:first-of-type {
+      float: left; }
+    div#housing div#chat button:last-of-type {
+      float: right;
+      color: #621f65;
+      border: 2px solid #621f65; }
+

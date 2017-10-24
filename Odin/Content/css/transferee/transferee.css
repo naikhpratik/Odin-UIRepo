@@ -27,7 +27,7 @@
 
 div#main div#icons {
   float: right;
-  width: 48%;
+  width: 50%;
   height: 118px;
   margin-right: 3px;
   padding-top: 30px;
@@ -106,90 +106,106 @@ body {
         top: -14px !important;
         left: 190px !important; } }
 
-div.row {
+div#transferee {
   text-align: center; }
   @media screen and (max-width: 842px) {
-    div.row {
+    div#transferee {
       margin-top: 20px; } }
-  div.row div.col-md-2 {
-    height: 850px;
-    padding-top: 30px;
+  div#transferee > div.col-md-2 {
     color: white;
+    height: 850px;
+    padding: 30px 0px 0px 0px;
     background-color: #a7ce39; }
-    div.row div.col-md-2 img {
+    div#transferee > div.col-md-2 img {
       width: 70px;
       margin-bottom: 10px; }
-    div.row div.col-md-2 p {
+    div#transferee > div.col-md-2 p {
+      font-weight: bold;
+      margin-bottom: 0px;
       font-size: initial; }
-    div.row div.col-md-2 ul {
+    div#transferee > div.col-md-2 span.hdr {
+      top: -6px;
+      position: relative; }
+      div#transferee > div.col-md-2 span.hdr:nth-of-type(3) {
+        top: -15px; }
+    div#transferee > div.col-md-2 ul {
+      top: -19px;
+      position: relative;
       line-height: 57px;
       font-size: 20px;
       font-weight: 300;
       list-style: none;
       padding-left: 0px; }
-      div.row div.col-md-2 ul img {
+      div#transferee > div.col-md-2 ul img {
         left: -10px;
         margin: 0px;
         width: 22px;
         position: relative; }
-      div.row div.col-md-2 ul li[data-panel="details"] {
-        padding-left: 5px; }
-      div.row div.col-md-2 ul li[data-panel="rentals"] {
-        padding-left: 11px; }
-      div.row div.col-md-2 ul li[data-panel="history"] {
-        padding-left: 8px; }
-      div.row div.col-md-2 ul li[data-panel="messages"] {
-        padding-left: 22px; }
-      div.row div.col-md-2 ul li[data-panel="calendar"] {
-        padding-left: 12px; }
-      div.row div.col-md-2 ul li:first-of-type {
+      @media screen and (min-width: 991px) {
+        div#transferee > div.col-md-2 ul li[data-panel="intake"] {
+          padding-right: 16px !important; }
+        div#transferee > div.col-md-2 ul li[data-panel="details"] {
+          padding-right: 11px !important; }
+        div#transferee > div.col-md-2 ul li[data-panel="history"] {
+          padding-right: 10px !important; } }
+      div#transferee > div.col-md-2 ul li[data-panel="housing"] {
+        padding-left: 1px; }
+      div#transferee > div.col-md-2 ul li[data-panel="messages"] {
+        padding-left: 13px; }
+      div#transferee > div.col-md-2 ul li:first-of-type {
         height: 16px;
         margin-top: 22px;
         border-top: 1px solid; }
-      div.row div.col-md-2 ul li:nth-child(7) {
+      div#transferee > div.col-md-2 ul li:nth-child(7) {
         margin-bottom: 20px;
         border-bottom: 1px solid; }
-      div.row div.col-md-2 ul li.item {
+      div#transferee > div.col-md-2 ul li.item {
         height: 60px; }
-        div.row div.col-md-2 ul li.item:hover {
+        div#transferee > div.col-md-2 ul li.item:hover {
           background-color: #b7a998; }
-      div.row div.col-md-2 ul li.unselectable {
+      div#transferee > div.col-md-2 ul li.unselectable {
         pointer-events: none; }
-      div.row div.col-md-2 ul li.selected {
-        background-color: #31a4dd; }
+        div#transferee > div.col-md-2 ul li.unselectable:first-of-type {
+          margin-bottom: 18px; }
+      div#transferee > div.col-md-2 ul li.selected {
+        background-color: #e53c2e; }
     @media screen and (max-width: 991px) {
-      div.row div.col-md-2 {
+      div#transferee > div.col-md-2 {
         padding-left: 32px;
         height: auto !important; }
-        div.row div.col-md-2 p {
+        div#transferee > div.col-md-2 p {
           float: left; }
-        div.row div.col-md-2 > img {
+        div#transferee > div.col-md-2 > span {
           display: none; }
-        div.row div.col-md-2 ul {
+        div#transferee > div.col-md-2 > img {
+          display: none; }
+        div#transferee > div.col-md-2 ul {
           text-align: left;
           padding-bottom: 23px;
-          margin: 46px 0px 0px 10px; }
-          div.row div.col-md-2 ul li > span {
+          margin: 11px 0px 0px 10px; }
+          div#transferee > div.col-md-2 ul li > span {
             display: none; }
-          div.row div.col-md-2 ul li > img:hover {
+          div#transferee > div.col-md-2 ul li > img:hover {
             background-color: #b7a998; }
-          div.row div.col-md-2 ul li.item:hover {
+          div#transferee > div.col-md-2 ul li.item:hover {
             background-color: unset; }
-          div.row div.col-md-2 ul li.selected {
+          div#transferee > div.col-md-2 ul li.selected {
             background-color: unset; }
-            div.row div.col-md-2 ul li.selected > img {
-              background-color: #73c2ed; }
-          div.row div.col-md-2 ul li.unselectable {
+            div#transferee > div.col-md-2 ul li.selected > img {
+              background-color: #e53c2e; }
+          div#transferee > div.col-md-2 ul li.unselectable {
             display: none; }
-          div.row div.col-md-2 ul li[data-panel="intake"],
-          div.row div.col-md-2 ul li[data-panel="details"],
-          div.row div.col-md-2 ul li[data-panel="rentals"],
-          div.row div.col-md-2 ul li[data-panel="history"],
-          div.row div.col-md-2 ul li[data-panel="messages"],
-          div.row div.col-md-2 ul li[data-panel="calendar"] {
+          div#transferee > div.col-md-2 ul li[data-panel="intake"],
+          div#transferee > div.col-md-2 ul li[data-panel="details"],
+          div#transferee > div.col-md-2 ul li[data-panel="housing"],
+          div#transferee > div.col-md-2 ul li[data-panel="history"],
+          div#transferee > div.col-md-2 ul li[data-panel="messages"],
+          div#transferee > div.col-md-2 ul li[data-panel="calendar"] {
             display: inline; } }
-  div.row div.col {
+  div#transferee > div.col {
+    height: 850px;
+    overflow-y: scroll;
     border-top: 1px solid; }
-    div.row div.col div.noinit {
+    div#transferee > div.col div.noinit {
       display: none; }
 

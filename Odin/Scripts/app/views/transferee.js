@@ -5,8 +5,8 @@
             $('.item').removeClass('selected');
             $(this).addClass('selected');
 
-            $('div.col div').each(function () { $(this).css("display", "none"); })
-            $('div.col div#' + $(this).attr('data-panel')).css("display", "block");
+            $('div.col > div.frame').each(function () { $(this).css("display", "none"); });
+            $('div.col > div#' + $(this).attr('data-panel')).css("display", "block");
         });
 
         // ensure icon spacing is adequate on mobile
@@ -17,7 +17,7 @@
     var resizeFn = function () {
         if (window.innerWidth <= 991) {
             $('li.item').each(function () {
-                $(this).css("padding-right", ((window.innerWidth / 6) - 48).toString() + "px");
+                $(this).css("padding-right", (window.innerWidth / 6 - 52).toString() + "px");
             });
         }
         else {
@@ -25,7 +25,7 @@
                 $(this).css("padding-right", "0px");
             });
         }
-    }
+    };
 
     return {
         TransfereeInit: init

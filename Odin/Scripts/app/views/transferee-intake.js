@@ -25,7 +25,7 @@
     var contains = function(value, searchFor)
     {
         return (value || '').indexOf(searchFor) > -1;
-    }
+    };
 
     return {
         init: init

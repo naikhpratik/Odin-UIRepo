@@ -16,8 +16,8 @@
     "outputFile": "Content/css/transferee/transferee.css"
   },
   {
-    "inputFile": "Content/css/transferee/calendar.scss",
-    "outputFile": "Content/css/transferee/calendar.css"
+    "inputFile": "Content/css/transferee/itinerary.scss",
+    "outputFile": "Content/css/transferee/itinerary.css"
   },
   {
     "inputFile": "Content/css/transferee/details.scss",
@@ -36,7 +36,7 @@
     "outputFile": "Content/css/transferee/messages.css"
   },
   {
-    "inputFile": "Content/css/transferee/rentals.scss",
-    "outputFile": "Content/css/transferee/rentals.css"
+    "inputFile": "Content/css/transferee/housing.scss",
+    "outputFile": "Content/css/transferee/housing.css"
   }
 ]

@@ -11,17 +11,17 @@ body {
     @include mobile_header;
 }
 
-div.row {
+div#transferee {
     text-align: center;
 
     @media screen and (max-width: 842px) {
         margin-top: 20px;
     }
 
-    div.col-md-2 {
-        height: 850px;
-        padding-top: 30px;
+    > div.col-md-2 {
         color: white;
+        height: 850px;
+        padding: 30px 0px 0px 0px;
         background-color: $DW_Lime;
 
         img {
@@ -30,10 +30,23 @@ div.row {
         }
 
         p {
+            font-weight: bold;
+            margin-bottom: 0px;
             font-size: initial;
         }
 
+        span.hdr {
+            top: -6px;
+            position: relative;
+
+            &:nth-of-type(3) {
+                top: -15px;
+            }
+        }
+
         ul {
+            top: -19px;
+            position: relative;
             line-height: 57px;
             font-size: 20px;
             font-weight: 300;
@@ -47,24 +60,27 @@ div.row {
                 position: relative;
             }
 
-            li[data-panel="details"] {
-                padding-left: 5px;
+            @media screen and (min-width: 991px) {
+
+                li[data-panel="intake"] {
+                    padding-right: 16px !important;
+                }
+
+                li[data-panel="details"] {
+                    padding-right: 11px !important;
+                }
+
+                li[data-panel="history"] {
+                    padding-right: 10px !important;
+                }
             }
 
-            li[data-panel="rentals"] {
-                padding-left: 11px;
-            }
-
-            li[data-panel="history"] {
-                padding-left: 8px;
+            li[data-panel="housing"] {
+                padding-left: 1px;
             }
 
             li[data-panel="messages"] {
-                padding-left: 22px;
-            }
-
-            li[data-panel="calendar"] {
-                padding-left: 12px;
+                padding-left: 13px;
             }
 
             li:first-of-type {
@@ -88,10 +104,14 @@ div.row {
 
             li.unselectable {
                 pointer-events: none;
+
+                &:first-of-type {
+                    margin-bottom: 18px;
+                }
             }
 
             li.selected {
-                background-color: $DW_Blue;
+                background-color: $DW_Red;
             }
         }
 
@@ -103,6 +123,10 @@ div.row {
                 float: left;
             }
 
+            > span {
+                display: none;
+            }
+
             > img {
                 display: none;
             }
@@ -110,7 +134,7 @@ div.row {
             ul {
                 text-align: left;
                 padding-bottom: 23px;
-                margin: 46px 0px 0px 10px;
+                margin: 11px 0px 0px 10px;
 
                 li {
                     > span {
@@ -129,10 +153,10 @@ div.row {
                         background-color: unset;
 
                         > img {
-                            background-color: $DW_LtBlue;
+                            background-color: $DW_Red;
                         }
                     }
-                    
+
                     &.unselectable {
                         display: none;
                     }
@@ -140,7 +164,7 @@ div.row {
 
                 li[data-panel="intake"],
                 li[data-panel="details"],
-                li[data-panel="rentals"],
+                li[data-panel="housing"],
                 li[data-panel="history"],
                 li[data-panel="messages"],
                 li[data-panel="calendar"] {
@@ -150,7 +174,9 @@ div.row {
         }
     }
 
-    div.col {
+    > div.col {
+        height: 850px;
+        overflow-y: scroll;
         border-top: 1px solid;
 
         div.noinit {
