@@ -2,8 +2,6 @@
 {
     public class Pet : MobileTable
     {
-        public string Id { get; set; }
-
         public string Type { get; set; }
 
         public string Breed { get; set; }

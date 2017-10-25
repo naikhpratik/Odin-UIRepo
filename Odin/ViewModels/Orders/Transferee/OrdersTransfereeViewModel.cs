@@ -40,8 +40,6 @@ namespace Odin.ViewModels.Orders.Transferee
         public string RmcContact { get; set; }
         public string RmcContactEmail { get; set; }
 
-        public int TempHousingDays { get; set; }
-        public DateTime? TempHousingEndDate { get; set; }
 
         public string TempHousingEndDateDisplay =>
             TempHousingEndDate.HasValue ? TempHousingEndDate.Value.ToString("d") : String.Empty;
@@ -87,7 +85,6 @@ namespace Odin.ViewModels.Orders.Transferee
         public string ProgramManagerId { get; set; }
         public virtual Manager ProgramManager { get; set; }
         public string SeCustNumb { get; set; }
-        public string Rmc { get; set; }
         public string Client { get; set; }
         public string ClientFileNumber { get; set; }
     }
