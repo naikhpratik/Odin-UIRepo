@@ -3,7 +3,8 @@
 
 div#intake {
     padding-top: 30px;
-    padding-left: 50px;
+    padding-left: 10px;
+    margin-left: 20px;
 
     div.row {
         text-align: left;
@@ -11,6 +12,13 @@ div#intake {
 
     .intake-title {
         padding-bottom: 30px;
+
+        p {
+            color: black;
+            font-size: 30px;
+            margin-bottom: 0px;
+            /*margin: 30px 0px 15px 0px;*/
+        }
     }
 
     hr {
@@ -32,8 +40,8 @@ div#intake {
 
         .intake-header {
 
-            .intake-collapse{
-                cursor:pointer;
+            .intake-collapse {
+                cursor: pointer;
             }
 
             h5 {
@@ -62,7 +70,6 @@ div#intake {
         .intake-row {
 
             .intake-col {
-
                 min-height: 50px;
 
                 label {

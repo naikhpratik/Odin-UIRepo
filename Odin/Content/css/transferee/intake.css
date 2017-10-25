@@ -1,10 +1,16 @@
 ﻿div#intake {
   padding-top: 30px;
-  padding-left: 50px; }
+  padding-left: 10px;
+  margin-left: 20px; }
   div#intake div.row {
     text-align: left; }
   div#intake .intake-title {
     padding-bottom: 30px; }
+    div#intake .intake-title p {
+      color: black;
+      font-size: 30px;
+      margin-bottom: 0px;
+      /*margin: 30px 0px 15px 0px;*/ }
   div#intake hr {
     margin-top: 0px;
     margin-bottom: 0px; }
