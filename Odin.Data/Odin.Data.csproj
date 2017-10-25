@@ -119,6 +119,7 @@
     <Compile Include="Builders\ConsultantImportDtoBuilder.cs" />
     <Compile Include="Builders\PetBuilder.cs" />
     <Compile Include="Builders\ProgramManagerDtoBuilder.cs" />
+    <Compile Include="Builders\RentBuilder.cs" />
     <Compile Include="Builders\TransfereeBuilder.cs" />
     <Compile Include="Builders\OrderBuilder.cs" />
     <Compile Include="Builders\OrderDtoBuilder.cs" />
@@ -340,6 +341,10 @@
     <Compile Include="Persistence\Migrations\201710251529590_MergeMattaBranch3.Designer.cs">
       <DependentUpon>201710251529590_MergeMattaBranch3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201710251727362_SeedRentData.cs" />
+    <Compile Include="Persistence\Migrations\201710251727362_SeedRentData.Designer.cs">
+      <DependentUpon>201710251727362_SeedRentData.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
     <Compile Include="Persistence\PetsRepository.cs" />
@@ -474,6 +479,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201710251529590_MergeMattaBranch3.resx">
       <DependentUpon>201710251529590_MergeMattaBranch3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710251727362_SeedRentData.resx">
+      <DependentUpon>201710251727362_SeedRentData.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
