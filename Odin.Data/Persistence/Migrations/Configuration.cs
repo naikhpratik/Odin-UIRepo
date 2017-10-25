@@ -70,6 +70,11 @@ namespace Odin.Data.Persistence.Migrations
                         ServiceType = context.ServiceTypes.OrderByDescending(st=>st.Id).First()
                     });
                     context.Orders.Add(orders[i]);
+
+                    orders[i].Children.Add(ChildBuilder.New());
+                    orders[i].Children.Add(ChildBuilder.New());
+                    orders[i].Pets.Add(PetBuilder.New());
+                    orders[i].Pets.Add(PetBuilder.New());
                 }
 
                 context.SaveChanges();
