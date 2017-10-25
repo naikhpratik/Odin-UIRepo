@@ -314,7 +314,7 @@
     <Compile Include="Persistence\Migrations\201710241711552_RemoveStringRentId.cs" />
     <Compile Include="Persistence\Migrations\201710241711552_RemoveStringRentId.Designer.cs">
       <DependentUpon>201710241711552_RemoveStringRentId.cs</DependentUpon>
-=======
+    </Compile>
     <Compile Include="Persistence\Migrations\201710232215595_AddRmcContactFields.cs" />
     <Compile Include="Persistence\Migrations\201710232215595_AddRmcContactFields.Designer.cs">
       <DependentUpon>201710232215595_AddRmcContactFields.cs</DependentUpon>
@@ -326,7 +326,15 @@
     <Compile Include="Persistence\Migrations\201710240231391_AddedPetNotes.cs" />
     <Compile Include="Persistence\Migrations\201710240231391_AddedPetNotes.Designer.cs">
       <DependentUpon>201710240231391_AddedPetNotes.cs</DependentUpon>
->>>>>>> origin/adding_more_sections_to_intake
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710251518243_MergeAddingMoreSectionsToIntake.cs" />
+    <Compile Include="Persistence\Migrations\201710251518243_MergeAddingMoreSectionsToIntake.Designer.cs">
+      <DependentUpon>201710251518243_MergeAddingMoreSectionsToIntake.cs</DependentUpon>
+=======
+    <Compile Include="Persistence\Migrations\201710241440161_OrderSchoolNFile.cs" />
+    <Compile Include="Persistence\Migrations\201710241440161_OrderSchoolNFile.Designer.cs">
+      <DependentUpon>201710241440161_OrderSchoolNFile.cs</DependentUpon>
+>>>>>>> origin/matta_branch_3
     </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
@@ -445,7 +453,7 @@
 <<<<<<< HEAD
     <EmbeddedResource Include="Persistence\Migrations\201710241711552_RemoveStringRentId.resx">
       <DependentUpon>201710241711552_RemoveStringRentId.cs</DependentUpon>
-=======
+    </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201710232215595_AddRmcContactFields.resx">
       <DependentUpon>201710232215595_AddRmcContactFields.cs</DependentUpon>
     </EmbeddedResource>
@@ -454,7 +462,13 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201710240231391_AddedPetNotes.resx">
       <DependentUpon>201710240231391_AddedPetNotes.cs</DependentUpon>
->>>>>>> origin/adding_more_sections_to_intake
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710251518243_MergeAddingMoreSectionsToIntake.resx">
+      <DependentUpon>201710251518243_MergeAddingMoreSectionsToIntake.cs</DependentUpon>
+=======
+    <EmbeddedResource Include="Persistence\Migrations\201710241440161_OrderSchoolNFile.resx">
+      <DependentUpon>201710241440161_OrderSchoolNFile.cs</DependentUpon>
+>>>>>>> origin/matta_branch_3
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

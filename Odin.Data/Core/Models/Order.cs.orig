@@ -37,8 +37,12 @@ namespace Odin.Data.Core.Models
         public string RmcContact { get; set; }
         public string RmcContactEmail { get; set; }
         public string Client { get; set; }
+<<<<<<< HEAD
+        
+=======
         public string ClientFileNumber { get; set; }
-
+        public int? RentId { get; set; }
+>>>>>>> origin/matta_branch_3
         public Rent Rent { get; set; }
         
         public string TransfereeId { get; set; }

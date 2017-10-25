@@ -8,6 +8,12 @@
     background-repeat: no-repeat;
     background-position: center;
 }
+.custom-icon-check:hover {
+    background-color: #eeeeee;
+    background-image: url(Images/check.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
 #scheduledServices .btn-primary {
     border-radius: 50%;
 }
@@ -342,12 +348,11 @@
   cursor: pointer;
   border-radius: 50%;
 }
-    .bootstrap-datetimepicker-widget table td span:hover {
-        background-color: #eeeeee;
-        background-image: url(Images/check.png);
-        background-repeat: no-repeat;
-        background-position: center;
-    }
+.timepicker span:hover {
+    background-color: #eeeeee;    
+    background-repeat: no-repeat;
+    background-position: center;
+}
 .bootstrap-datetimepicker-widget table td span.active {
   background-color: #337ab7;
   color: #fff;

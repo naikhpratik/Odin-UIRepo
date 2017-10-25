@@ -14,37 +14,37 @@ div#details {
         margin-bottom: 0px;
         font-size: 18px;
         color: #231F20;
-    }
+           }
+        .details-save {
+            font-size: small;
+            color: $DW_Lime;
+            cursor: pointer;
+        }
+     
+        hr {
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
 
-    hr {
-        margin-top: 0px;
-        margin-bottom: 0px;
-    }
+        .details-blue {
+            color: $DW_Blue;
+        }
 
-    .details-blue {
-        color: $DW_Blue;
-    }
+        .details-lime {
+            color: $DW_Lime;
+        }
 
-    .details-lime {
-        color: $DW_Lime;
-    }
+        .details-blocks {
+            padding-top: 15px;
+            padding-bottom: 15px;
 
-    .details-block {
-        padding-top: 15px;
-        padding-bottom: 15px;
-
-        .details-header {
-            P {
-                margin: 0px;
-                font-size: 15px;
-                font-weight:bold;
-                color: #8E1A55;
-            }
-
-            span {
-                font-size: small;
-                color: $DW_Lime;
-                cursor: pointer;
+            .details-header {
+                p {
+                    margin: 0px;
+                    font-size: 16px;
+                    font-weight: 200;
+                    color: #6c6e70;
+                }
             }
         }
 
@@ -58,6 +58,7 @@ div#details {
                 label {
                     display: block;
                     font-size: 14px;
+                    font-weight: 200;
                     margin-bottom: -5px;
                     color: #858585;
                 }
@@ -83,4 +84,3 @@ div#details {
             }
         }
     }
-}

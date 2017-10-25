@@ -330,6 +330,10 @@
     <Compile Include="Persistence\Migrations\201710251518243_MergeAddingMoreSectionsToIntake.Designer.cs">
       <DependentUpon>201710251518243_MergeAddingMoreSectionsToIntake.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201710241440161_OrderSchoolNFile.cs" />
+    <Compile Include="Persistence\Migrations\201710241440161_OrderSchoolNFile.Designer.cs">
+      <DependentUpon>201710241440161_OrderSchoolNFile.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
     <Compile Include="Persistence\PetsRepository.cs" />
@@ -458,6 +462,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201710251518243_MergeAddingMoreSectionsToIntake.resx">
       <DependentUpon>201710251518243_MergeAddingMoreSectionsToIntake.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710241440161_OrderSchoolNFile.resx">
+      <DependentUpon>201710241440161_OrderSchoolNFile.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

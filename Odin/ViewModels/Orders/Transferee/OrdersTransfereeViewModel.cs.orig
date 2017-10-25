@@ -1,9 +1,13 @@
 ﻿using Odin.ViewModels.Shared;
 using System;
 using System.Collections.Generic;
+<<<<<<< HEAD
 using System.Linq;
-using Odin.Data.Core.Models;
 
+=======
+using Odin.Data.Core.Models;
+using System;
+>>>>>>> origin/matta_branch_3
 
 namespace Odin.ViewModels.Orders.Transferee
 {
