@@ -130,6 +130,11 @@
     <Compile Include="Core\Dtos\OrdersTransfereeIntakeFamilyDto.cs" />
     <Compile Include="Core\Dtos\OrdersTransfereeIntakeDestinationDto.cs" />
     <Compile Include="Core\Dtos\OrdersTransfereeIntakeOriginDto.cs" />
+    <Compile Include="Core\Dtos\OrdersTransfereeIntakeRmcDto.cs" />
+    <Compile Include="Core\Dtos\OrdersTransfereeIntakeServiceDto.cs" />
+    <Compile Include="Core\Dtos\OrdersTransfereeIntakeServicesDto.cs" />
+    <Compile Include="Core\Dtos\OrdersTransfereeIntakeTempHousingDto.cs" />
+    <Compile Include="Core\Dtos\PetDto.cs" />
     <Compile Include="Core\Dtos\ProgramManagerDto.cs" />
     <Compile Include="Core\Dtos\ManagerDto.cs" />
     <Compile Include="Core\Dtos\ManagersDto.cs" />
@@ -139,11 +144,8 @@
     <Compile Include="Core\Dtos\TransfereeIndexDto.cs" />
     <Compile Include="Core\Dtos\UserDto.cs" />
     <Compile Include="Core\Models\ApplicationUser.cs" />
-<<<<<<< HEAD
     <Compile Include="Core\Models\AzureTest.cs" />
-=======
     <Compile Include="Core\Models\Child.cs" />
->>>>>>> origin/intake_changes
     <Compile Include="Core\Models\Consultant.cs" />
     <Compile Include="Core\Models\ErrorResponse.cs" />
     <Compile Include="Core\Models\HousingType.cs" />
@@ -151,15 +153,20 @@
     <Compile Include="Core\Models\Order.cs" />
     <Compile Include="Core\Models\Manager.cs" />
     <Compile Include="Core\Models\OwnershipType.cs" />
+    <Compile Include="Core\Models\Pet.cs" />
     <Compile Include="Core\Models\Rent.cs" />
     <Compile Include="Core\Models\Service.cs" />
+    <Compile Include="Core\Models\ServiceCategory.cs" />
     <Compile Include="Core\Models\ServiceType.cs" />
     <Compile Include="Core\Models\Transferee.cs" />
     <Compile Include="Core\Models\UserRoles.cs" />
+    <Compile Include="Core\Repositories\IChildrenRepository.cs" />
     <Compile Include="Core\Repositories\IConsultantsRepository.cs" />
     <Compile Include="Core\Repositories\IManagersRepository.cs" />
     <Compile Include="Core\Repositories\IOrdersRepository.cs" />
+    <Compile Include="Core\Repositories\IPetsRepository.cs" />
     <Compile Include="Core\Repositories\IServicesRepository.cs" />
+    <Compile Include="Core\Repositories\IServiceTypesRepository.cs" />
     <Compile Include="Core\Repositories\ITransfereesRepository.cs" />
     <Compile Include="Core\Repositories\IUsersRepository.cs" />
     <Compile Include="Extensions\ModelStateExtensions.cs" />
@@ -169,6 +176,7 @@
     <Compile Include="Persistence\ApplicationDbContext.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Persistence\ApplicationUserRepository.cs" />
+    <Compile Include="Persistence\ChildrenRepository.cs" />
     <Compile Include="Persistence\ConsultantsRepository.cs" />
     <Compile Include="Persistence\EntityConfigurations\OrderConfiguration.cs" />
     <Compile Include="Persistence\EntityConfigurations\RentConfiguration.cs" />
@@ -262,7 +270,6 @@
     <Compile Include="Persistence\Migrations\201710122149268_AddRushVipLastContactedToOrder.Designer.cs">
       <DependentUpon>201710122149268_AddRushVipLastContactedToOrder.cs</DependentUpon>
     </Compile>
-<<<<<<< HEAD
     <Compile Include="Persistence\Migrations\201710181723591_DropAzureTables.cs" />
     <Compile Include="Persistence\Migrations\201710181723591_DropAzureTables.Designer.cs">
       <DependentUpon>201710181723591_DropAzureTables.cs</DependentUpon>
@@ -274,18 +281,56 @@
     <Compile Include="Persistence\Migrations\201710182111512_ReSeedServiceTypes.cs" />
     <Compile Include="Persistence\Migrations\201710182111512_ReSeedServiceTypes.Designer.cs">
       <DependentUpon>201710182111512_ReSeedServiceTypes.cs</DependentUpon>
-=======
-    <Compile Include="Persistence\Migrations\201710190417220_AddChildren.cs" />
-    <Compile Include="Persistence\Migrations\201710190417220_AddChildren.Designer.cs">
-      <DependentUpon>201710190417220_AddChildren.cs</DependentUpon>
     </Compile>
-    <Compile Include="Persistence\Migrations\201710190421355_AddSpouseInfo.cs" />
-    <Compile Include="Persistence\Migrations\201710190421355_AddSpouseInfo.Designer.cs">
-      <DependentUpon>201710190421355_AddSpouseInfo.cs</DependentUpon>
->>>>>>> origin/intake_changes
+    <Compile Include="Persistence\Migrations\201710201611358_AddChildToOrder.cs" />
+    <Compile Include="Persistence\Migrations\201710201611358_AddChildToOrder.Designer.cs">
+      <DependentUpon>201710201611358_AddChildToOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710201719164_DeleteOriginalChildTable.cs" />
+    <Compile Include="Persistence\Migrations\201710201719164_DeleteOriginalChildTable.Designer.cs">
+      <DependentUpon>201710201719164_DeleteOriginalChildTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710201721130_AddChildMobileTable.cs" />
+    <Compile Include="Persistence\Migrations\201710201721130_AddChildMobileTable.Designer.cs">
+      <DependentUpon>201710201721130_AddChildMobileTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710211940045_AddSoftDeletesForChild.cs" />
+    <Compile Include="Persistence\Migrations\201710211940045_AddSoftDeletesForChild.Designer.cs">
+      <DependentUpon>201710211940045_AddSoftDeletesForChild.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710212142374_UpdateServices.cs" />
+    <Compile Include="Persistence\Migrations\201710212142374_UpdateServices.Designer.cs">
+      <DependentUpon>201710212142374_UpdateServices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710212255364_AddNotesToService.cs" />
+    <Compile Include="Persistence\Migrations\201710212255364_AddNotesToService.Designer.cs">
+      <DependentUpon>201710212255364_AddNotesToService.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710231718208_RemoveChildDeletedMapping.cs" />
+    <Compile Include="Persistence\Migrations\201710231718208_RemoveChildDeletedMapping.Designer.cs">
+      <DependentUpon>201710231718208_RemoveChildDeletedMapping.cs</DependentUpon>
+    </Compile>
+<<<<<<< HEAD
+    <Compile Include="Persistence\Migrations\201710241711552_RemoveStringRentId.cs" />
+    <Compile Include="Persistence\Migrations\201710241711552_RemoveStringRentId.Designer.cs">
+      <DependentUpon>201710241711552_RemoveStringRentId.cs</DependentUpon>
+=======
+    <Compile Include="Persistence\Migrations\201710232215595_AddRmcContactFields.cs" />
+    <Compile Include="Persistence\Migrations\201710232215595_AddRmcContactFields.Designer.cs">
+      <DependentUpon>201710232215595_AddRmcContactFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710240132473_AddedPets.cs" />
+    <Compile Include="Persistence\Migrations\201710240132473_AddedPets.Designer.cs">
+      <DependentUpon>201710240132473_AddedPets.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710240231391_AddedPetNotes.cs" />
+    <Compile Include="Persistence\Migrations\201710240231391_AddedPetNotes.Designer.cs">
+      <DependentUpon>201710240231391_AddedPetNotes.cs</DependentUpon>
+>>>>>>> origin/adding_more_sections_to_intake
     </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
+    <Compile Include="Persistence\PetsRepository.cs" />
     <Compile Include="Persistence\ServicesRepository.cs" />
     <Compile Include="Persistence\ServiceTypesRepository.cs" />
     <Compile Include="Persistence\TransfereesRepository.cs" />
@@ -367,7 +412,6 @@
     <EmbeddedResource Include="Persistence\Migrations\201710122149268_AddRushVipLastContactedToOrder.resx">
       <DependentUpon>201710122149268_AddRushVipLastContactedToOrder.cs</DependentUpon>
     </EmbeddedResource>
-<<<<<<< HEAD
     <EmbeddedResource Include="Persistence\Migrations\201710181723591_DropAzureTables.resx">
       <DependentUpon>201710181723591_DropAzureTables.cs</DependentUpon>
     </EmbeddedResource>
@@ -376,13 +420,41 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201710182111512_ReSeedServiceTypes.resx">
       <DependentUpon>201710182111512_ReSeedServiceTypes.cs</DependentUpon>
-=======
-    <EmbeddedResource Include="Persistence\Migrations\201710190417220_AddChildren.resx">
-      <DependentUpon>201710190417220_AddChildren.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Persistence\Migrations\201710190421355_AddSpouseInfo.resx">
-      <DependentUpon>201710190421355_AddSpouseInfo.cs</DependentUpon>
->>>>>>> origin/intake_changes
+    <EmbeddedResource Include="Persistence\Migrations\201710201611358_AddChildToOrder.resx">
+      <DependentUpon>201710201611358_AddChildToOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710201719164_DeleteOriginalChildTable.resx">
+      <DependentUpon>201710201719164_DeleteOriginalChildTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710201721130_AddChildMobileTable.resx">
+      <DependentUpon>201710201721130_AddChildMobileTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710211940045_AddSoftDeletesForChild.resx">
+      <DependentUpon>201710211940045_AddSoftDeletesForChild.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710212142374_UpdateServices.resx">
+      <DependentUpon>201710212142374_UpdateServices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710212255364_AddNotesToService.resx">
+      <DependentUpon>201710212255364_AddNotesToService.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710231718208_RemoveChildDeletedMapping.resx">
+      <DependentUpon>201710231718208_RemoveChildDeletedMapping.cs</DependentUpon>
+    </EmbeddedResource>
+<<<<<<< HEAD
+    <EmbeddedResource Include="Persistence\Migrations\201710241711552_RemoveStringRentId.resx">
+      <DependentUpon>201710241711552_RemoveStringRentId.cs</DependentUpon>
+=======
+    <EmbeddedResource Include="Persistence\Migrations\201710232215595_AddRmcContactFields.resx">
+      <DependentUpon>201710232215595_AddRmcContactFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710240132473_AddedPets.resx">
+      <DependentUpon>201710240132473_AddedPets.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710240231391_AddedPetNotes.resx">
+      <DependentUpon>201710240231391_AddedPetNotes.cs</DependentUpon>
+>>>>>>> origin/adding_more_sections_to_intake
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

@@ -2,8 +2,8 @@
 
 namespace Odin.Data.Core.Repositories
 {
-    public interface IChildrenRepository
+    public interface IPetsRepository
     {
-        Child GetChildById(string id);
+        Pet GetChildById(string id);
     }
 }

@@ -130,8 +130,11 @@
     <Compile Include="Core\Dtos\OrdersTransfereeIntakeFamilyDto.cs" />
     <Compile Include="Core\Dtos\OrdersTransfereeIntakeDestinationDto.cs" />
     <Compile Include="Core\Dtos\OrdersTransfereeIntakeOriginDto.cs" />
+    <Compile Include="Core\Dtos\OrdersTransfereeIntakeRmcDto.cs" />
     <Compile Include="Core\Dtos\OrdersTransfereeIntakeServiceDto.cs" />
     <Compile Include="Core\Dtos\OrdersTransfereeIntakeServicesDto.cs" />
+    <Compile Include="Core\Dtos\OrdersTransfereeIntakeTempHousingDto.cs" />
+    <Compile Include="Core\Dtos\PetDto.cs" />
     <Compile Include="Core\Dtos\ProgramManagerDto.cs" />
     <Compile Include="Core\Dtos\ManagerDto.cs" />
     <Compile Include="Core\Dtos\ManagersDto.cs" />
@@ -150,6 +153,7 @@
     <Compile Include="Core\Models\Order.cs" />
     <Compile Include="Core\Models\Manager.cs" />
     <Compile Include="Core\Models\OwnershipType.cs" />
+    <Compile Include="Core\Models\Pet.cs" />
     <Compile Include="Core\Models\Rent.cs" />
     <Compile Include="Core\Models\Service.cs" />
     <Compile Include="Core\Models\ServiceCategory.cs" />
@@ -160,6 +164,7 @@
     <Compile Include="Core\Repositories\IConsultantsRepository.cs" />
     <Compile Include="Core\Repositories\IManagersRepository.cs" />
     <Compile Include="Core\Repositories\IOrdersRepository.cs" />
+    <Compile Include="Core\Repositories\IPetsRepository.cs" />
     <Compile Include="Core\Repositories\IServicesRepository.cs" />
     <Compile Include="Core\Repositories\IServiceTypesRepository.cs" />
     <Compile Include="Core\Repositories\ITransfereesRepository.cs" />
@@ -309,8 +314,21 @@
     <Compile Include="Persistence\Migrations\201710241711552_RemoveStringRentId.Designer.cs">
       <DependentUpon>201710241711552_RemoveStringRentId.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201710232215595_AddRmcContactFields.cs" />
+    <Compile Include="Persistence\Migrations\201710232215595_AddRmcContactFields.Designer.cs">
+      <DependentUpon>201710232215595_AddRmcContactFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710240132473_AddedPets.cs" />
+    <Compile Include="Persistence\Migrations\201710240132473_AddedPets.Designer.cs">
+      <DependentUpon>201710240132473_AddedPets.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710240231391_AddedPetNotes.cs" />
+    <Compile Include="Persistence\Migrations\201710240231391_AddedPetNotes.Designer.cs">
+      <DependentUpon>201710240231391_AddedPetNotes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
+    <Compile Include="Persistence\PetsRepository.cs" />
     <Compile Include="Persistence\ServicesRepository.cs" />
     <Compile Include="Persistence\ServiceTypesRepository.cs" />
     <Compile Include="Persistence\TransfereesRepository.cs" />
@@ -424,6 +442,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201710241711552_RemoveStringRentId.resx">
       <DependentUpon>201710241711552_RemoveStringRentId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710232215595_AddRmcContactFields.resx">
+      <DependentUpon>201710232215595_AddRmcContactFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710240132473_AddedPets.resx">
+      <DependentUpon>201710240132473_AddedPets.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710240231391_AddedPetNotes.resx">
+      <DependentUpon>201710240231391_AddedPetNotes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

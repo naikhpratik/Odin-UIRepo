@@ -206,7 +206,8 @@ div#transferee {
     height: 850px;
     overflow-y: scroll;
     border-top: 1px solid;
-    font-family: sans-serif; }
+    font-family: sans-serif;
+    overflow-y: scroll; }
     div#transferee > div.col div.noinit {
       display: none; }
 

@@ -40,7 +40,10 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
     var orderId;
 
     var childTemplate =
-        '<div class="row intake-row collapse in" data-entity-collection="children" data-entity-id="#GUID#"> <div class="col-sm-3 intake-col"> <label>Child:</label> <span></span> <input type="text" class="form-control" name="Name"/> <input type="hidden" name="Name" /> </div> <div class="col-sm-3 intake-col"> <label>Age:</label> <span></span> <input type="text" class="form-control" name="Age"/> <input type="hidden" name="Age" /> </div> <div class="col-sm-3 intake-col"> <label>Grade:</label> <span></span> <input type="text" class="form-control" name="Grade"/> <input type="hidden" name="Grade" /> </div> <div class="col-sm-3 intake-col"> <span class="intake-del"> x Delete </span> </div> </div>';
+        '<div class="row intake-row collapse in" data-entity-collection="children" data-entity-id="#GUID#"> <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col"> <label>Child:</label> <span class="intake-span"></span> <input type="text" class="form-control intake-input" name="Name"/> <input type="hidden" name="Name" class="intake-hidden"/> </div> <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col"> <label>Age:</label> <span class="intake-span"></span> <input type="text" class="form-control intake-input" name="Age"/> <input type="hidden" name="Age" class="intake-hidden"/> </div> <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col"> <label>Grade:</label> <span class="intake-span"></span> <input type="text" class="form-control intake-input" name="Grade"/> <input type="hidden" name="Grade" class="intake-hidden"/> </div> <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col"> <span class="intake-del"> x Delete </span> </div> </div>';
+
+    var petTemplate =
+        '<div class="row intake-row collapse in" data-entity-id="#GUID#" data-entity-collection="pets"> <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col"> <label>Pet Type:</label> <span class="intake-span"></span> <input type="text" class="form-control intake-input" name="Type" /> <input type="hidden" class="intake-hidden" name="Type" /> </div> <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col"> <label>Breed:</label> <span class="intake-span"></span> <input type="text" class="form-control intake-input" name="Breed" /> <input type="hidden" class="intake-hidden" name="Breed" /> </div> <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col"> <label>Weight/Size:</label> <span class="intake-span"></span> <input type="text" class="form-control intake-input" name="Size" /> <input type="hidden" class="intake-hidden" name="Size" /> </div> <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col"> <span class="intake-del"> x Delete </span> </div></div>';
 
     var init = function () {
 
@@ -49,6 +52,13 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
         //Init Variables
         intakeBlocks = pnlIntake.find(".intake-block");
         orderId = pnlIntake.attr("data-order-id");
+
+        //Init Dates
+        intakeBlocks.find(".intake-date").datetimepicker({
+            format: "MM/DD/YYYY",
+            useCurrent: true,
+            keepOpen: false
+        });
 
         //Bind Events
         intakeBlocks.on("click", ".intake-edit", editSaveBlock);
@@ -68,8 +78,11 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
         var spnEditSave = $(e.target);
         var intakeBlock = spnEditSave.parents(".intake-block");
         var rows = intakeBlock.find(".intake-row");
-        var spans = rows.find("span");
-        var inputs = rows.find(":input").not("input[type='hidden']");
+        var spans = rows.find(".intake-span");
+        var addSpans = rows.find(".intake-add");
+        var delSpans = rows.find(".intake-del");
+        var inputs = rows.find(".intake-input");
+        var dates = rows.find(".intake-date");
 
         //Local Functions
         var edit = function () {
@@ -79,10 +92,19 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
 
             //Bind hidden values to inputs
             inputs.css("display", "block").each(function() {
-                var hidden = $(this).next("input[type='hidden']");
+                var hidden = $(this).next(".intake-hidden");
                 $(this).val(hidden.val());
             });
+
+            //Bind hidden values to inputs
+            dates.css("display", "block").each(function () {
+                var hidden = $(this).next(".intake-hidden");
+                $(this).find("input").val(hidden.val());
+            });
+
             spans.css("display", "none");
+            addSpans.css("display", "none");
+            delSpans.css("display", "none");
         }
 
         var save = function() {
@@ -92,21 +114,21 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
 
             rows.each(function () {
                 var row = $(this);
-                var rowInputs = row.find(":input").not("input[type='hidden']");
+                var rowInputs = row.find(".intake-input, .intake-date");
 
                 //If a collection that can have added values
                 if (hasAttr(row, 'data-entity-collection')) {
-                    if (!isCollectionRowEmpty(rowInputs)) {
-                        var collectionKey = row.attr("data-entity-collection");
-                        var collectionData = { "Id": row.attr("data-entity-id") };
+                    
+                    var collectionKey = row.attr("data-entity-collection");
+                    var collectionData = { "Id": row.attr("data-entity-id") };
 
-                        fillPostData(collectionData, rowInputs);
+                    fillPostData(collectionData, rowInputs);
 
-                        if (!(collectionKey in data)) {
-                            data[collectionKey] = [];
-                        }
-                        data[collectionKey].push(collectionData);
+                    if (!(collectionKey in data)) {
+                        data[collectionKey] = [];
                     }
+                    data[collectionKey].push(collectionData);
+                    
                 } else {
                     fillPostData(data, rowInputs);
                 }
@@ -124,10 +146,20 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
             //Update spans to new values and toggle.
             inputs.each(function () {
                 $(this).prev("span").text($(this).val());
-                $(this).next("input[type='hidden']").val($(this).val());
+                $(this).next(".intake-hidden").val($(this).val());
             });
+
+            dates.each(function () {
+                var innerInput = $(this).find("input");
+                $(this).prev("span").text(innerInput.val());
+                $(this).next(".intake-hidden").val(innerInput.val());
+            });
+
+            dates.css("display", "none");
             inputs.css("display", "none");
             spans.css("display", "block");
+            addSpans.css("display", "block");
+            delSpans.css("display", "block");
         }
 
         var saveFail = function() {
@@ -156,6 +188,9 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
         switch(addType) {
             case 'children':
                 template = childTemplate;
+                break;
+            case 'pets':
+                template = petTemplate;
                 break;
             default:
                 break;
@@ -195,10 +230,7 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
 
     var toggleCollapse = function (e) {
         var intakeBlock = $(e.target).parents(".intake-block");
-        var img = intakeBlock.find(".intake-collapse-img");
-        var src = img.attr("src");
-
-        if (contains(src,"collapse")) {
+        if (intakeBlock.find(".intake-collapse-img").is(":visible")) {
             collapse(intakeBlock);
             if (intakeBlock.find(".intake-cancel").length > 0) {
                 cancel(intakeBlock);
@@ -223,21 +255,21 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
 
         rows.each(function () {
             var row = $(this);
-            var rowInputs = row.find(":input").not("input[type='hidden']");
+            var rowInputs = row.find(".intake-input, .intake-date");
 
             //If a collection that can have added values
             if (hasAttr(row, 'data-entity-collection')) {
-                if (!isCollectionRowEmpty(rowInputs)) {
-                    var collectionKey = row.attr("data-entity-collection");
-                    var collectionData = { "Id": row.attr("data-entity-id") };
 
-                    fillPostData(collectionData, rowInputs);
+                var collectionKey = row.attr("data-entity-collection");
+                var collectionData = { "Id": row.attr("data-entity-id") };
 
-                    if (!(collectionKey in data)) {
-                        data[collectionKey] = [];
-                    }
-                    data[collectionKey].push(collectionData);
+                fillPostData(collectionData, rowInputs);
+
+                if (!(collectionKey in data)) {
+                    data[collectionKey] = [];
                 }
+                data[collectionKey].push(collectionData);
+                
             } else {
                 fillPostData(data, rowInputs);
             }
@@ -250,7 +282,7 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
 
         var checkbox = $(e.target);
         var row = checkbox.parents(".intake-row");
-        var rowInputs = row.find(":input").not("input[type='hidden']");
+        var rowInputs = row.find(".intake-input");
 
         var saveSuccess = function(data) {
             row.attr("data-entity-id", data);
@@ -281,17 +313,16 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
 
     var fillPostData = function(data, inputs){
         inputs.each(function () {
-            var input = $(this);
-            if (input.is(":checkbox")) {
-                data[input.attr("name")] = input.prop('checked');
+            var elt = $(this);
+            if (elt.hasClass("intake-date")) {
+                var innerInput = elt.find("input");
+                data[innerInput.attr("name")] = innerInput.val();
+            } else if (elt.is(":checkbox")) {
+                data[elt.attr("name")] = elt.prop('checked');
             } else {
-                data[input.attr("name")] = input.val();
+                data[elt.attr("name")] = elt.val();
             }
         });
-    }
-
-    var isCollectionRowEmpty = function(rowInputs) {
-        return rowInputs.filter(function() { return $.trim($(this).val()) !== ""; }).length === 0;
     }
 
     var hasAttr = function (obj, attrName)
@@ -306,23 +337,24 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
     };
 
     var expand = function (intakeBlock) {
-        var img = intakeBlock.find(".intake-collapse-img");
-        var src = img.attr("src");
+        var colImg = intakeBlock.find(".intake-collapse-img");
+        var expImg = intakeBlock.find(".intake-expand-img");
+
         var intakeRows = intakeBlock.find(".intake-row");
-        if (!intakeRows.hasClass("in")) {
-            intakeBlock.find(".intake-row").collapse("show");
-            img.attr("src", src.replace("expand", "collapse"));
-        }
+        intakeBlock.find(".intake-row").collapse("show");
+        expImg.css("display", "none");
+        colImg.css("display", "inline");
+        
     }
 
     var collapse = function(intakeBlock) {
-        var img = intakeBlock.find(".intake-collapse-img");
-        var src = img.attr("src");
+        var colImg = intakeBlock.find(".intake-collapse-img");
+        var expImg = intakeBlock.find(".intake-expand-img");
+      
         var intakeRows = intakeBlock.find(".intake-row");
-        if (intakeRows.hasClass("in")) {
-            intakeBlock.find(".intake-row").collapse("hide");
-            img.attr("src", src.replace("collapse", "expand"));
-        }
+        intakeBlock.find(".intake-row").collapse("hide");
+        colImg.css("display", "none");
+        expImg.css("display", "inline");
     }
 
     var cancel = function (intakeBlock) {
@@ -330,8 +362,11 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
         var cols = intakeBlock.find(".intake-row > .intake-col");
         spnCancel.css("display", "none");
         spnCancel.prev(".intake-edit").text("+ Edit");
-        cols.find(":input").not("input[type='hidden']").css("display", "none").val("");
-        cols.find("span").css("display", "block");
+        cols.find(".intake-input").css("display", "none").val("");
+        cols.find(".intake-date").css("display", "none").find("input").val("");
+        cols.find(".intake-span").css("display", "block");
+        cols.find(".intake-add").css("display", "block");
+        cols.find(".intake-del").css("display", "block");
     }
 
     return {

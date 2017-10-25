@@ -1,5 +1,7 @@
 ﻿using Odin.ViewModels.Shared;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 
 namespace Odin.ViewModels.Orders.Transferee
@@ -28,8 +30,45 @@ namespace Odin.ViewModels.Orders.Transferee
 
         public string SpouseName { get; set; }
         public string SpouseVisaType { get; set; }
-        public virtual IEnumerable<ChildViewModel> Children { get; set; }
+
+        public string Rmc { get; set; }
+        public string RmcContact { get; set; }
+        public string RmcContactEmail { get; set; }
+
+        public int TempHousingDays { get; set; }
+        public DateTime? TempHousingEndDate { get; set; }
+
+        public string TempHousingEndDateDisplay =>
+            TempHousingEndDate.HasValue ? TempHousingEndDate.Value.ToString("d") : String.Empty;
+
+        private IEnumerable<ChildViewModel> _children;
+        public virtual IEnumerable<ChildViewModel> Children
+        {
+            get
+            {
+                return _children.Where(c => !c.Deleted).ToList();
+            }
+            set
+            {
+                _children = value;
+            }
+        }
         public string ChildrenEducationPreferences { get; set; }
+
+        private IEnumerable<PetViewModel> _pets;
+        public virtual IEnumerable<PetViewModel> Pets
+        {
+            get
+            {
+                return _pets.Where(p => !p.Deleted).ToList();
+            }
+            set
+            {
+                _pets = value;
+            }
+        }
+
+        public string PetNotes { get; set; }
 
         public IEnumerable<ServiceViewModel> Services { get; set; }
         public IEnumerable<ServiceTypeViewModel> PossibleServices { get; set; }

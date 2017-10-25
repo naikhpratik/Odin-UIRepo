@@ -1,10 +1,9 @@
 ﻿@import "../shared/_definitions.scss";
 
-
 @include header;
 
 body {
-    padding: 0px
+    padding: 0px;
 }
 
 @media screen and (max-width: 842px) {
@@ -13,7 +12,6 @@ body {
 
 div#transferee {
     text-align: center;
-
     @media screen and (max-width: 842px) {
         margin-top: 20px;
     }
@@ -178,8 +176,9 @@ div#transferee {
         overflow-y: scroll;
         border-top: 1px solid;
         font-family:sans-serif;
+        overflow-y:scroll;
         div.noinit {
             display: none;
-        }
+        }        
     }
 }
