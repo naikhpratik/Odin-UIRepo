@@ -67,12 +67,16 @@
                             <p>Photos:</p>
                         </th>
                         <th>
-                            <p>Address,</p>
-                            <p>Rent & Sq.Ft:</p>
+                            <p>Address:</p>
+                            <p>&nbsp;</p>
                         </th>
                         <th>
-                            <p>Beds &</p>
-                            <p>Baths:</p>
+                            <p>Available or Not</p>
+                            <p>Date:</p>
+                        </th>
+                        <th>
+                            <p>BD | BA</p>
+                            <p>Rent | Sq.Ft:</p>
                         </th>
                         <th>
                             <p>Schedule</p>
@@ -96,10 +100,14 @@
                         <td>
                             <p>1234 Meadow Rd</p>
                             <p>Renton WA</p>
-                            <span>$3,200 | 1,300 sq.ft</span>
                         </td>
                         <td>
-                            <span>2 | 2</span>
+                            <p>Available</p>
+                            <p>11/12/17</p>
+                        </td>
+                        <td>
+                            <p>2 | 2</p>
+                            <p>$3,200 | 1,300 sq.ft</p>
                         </td>
                         <td>
                             <img src="~/Content/Images/icn_cal_B1.png" />
@@ -118,10 +126,14 @@
                         <td>
                             <p>5252 Gala Cr.</p>
                             <p>Ballard WA</p>
-                            <span>$1,800 | 950 sq.ft</span>
                         </td>
                         <td>
-                            <span>3 | 2</span>
+                            <p>Available</p>
+                            <p>11/01/17</p>
+                        </td>
+                        <td>
+                            <p>3 | 2</p>
+                            <p>$1,800 | 950 sq.ft</p>
                         </td>
                         <td>
                             <img src="~/Content/Images/icn_cal_B1.png" />
@@ -140,10 +152,14 @@
                         <td>
                             <p>6143 Asdar Rd</p>
                             <p>Belltown WA</p>
-                            <span>$1,200 | 750 sq.ft</span>
                         </td>
                         <td>
-                            <span>1 | 1</span>
+                            <p>Not</p>
+                            <p>Available</p>
+                        </td>
+                        <td>
+                            <p>1 | 1</p>
+                            <p>$1,200 | 750 sq.ft</p>
                         </td>
                         <td>
                             <img src="~/Content/Images/icn_cal_B1.png" />
@@ -162,10 +178,14 @@
                         <td>
                             <p>5252 Meadowbrook</p>
                             <p>Ballard WA</p>
-                            <span>$1,500 | 800 sq.ft</span>
                         </td>
                         <td>
-                            <span>2 | 1.5</span>
+                            <p>Available</p>
+                            <p>11/12/17</p>
+                        </td>
+                        <td>
+                            <p>2 | 1.5</p>
+                            <p>$1,500 | 800 sq.ft</p>
                         </td>
                         <td>
                             <img src="~/Content/Images/icn_cal_B1.png" />
@@ -184,10 +204,14 @@
                         <td>
                             <p>1234 Meadow Rd</p>
                             <p>Renton WA</p>
-                            <span>$3,200 | 1,300 sq.ft</span>
                         </td>
                         <td>
-                            <span>2 | 2</span>
+                            <p>Not</p>
+                            <p>Available</p>
+                        </td>
+                        <td>
+                            <p>2 | 2</p>
+                            <p>$3,200 | 1,300 sq.ft</p>
                         </td>
                         <td>
                             <img src="~/Content/Images/icn_cal_B1.png" />
@@ -205,7 +229,7 @@
     </div>
     <div id="chat">
         <div id="addr">
-            <span>1234 Meadow Rd, Renton WA</span>
+            <span>Last Message</span><span id="lastchat"> 01:45 PM</span>
         </div>
         <div id="chatwrapper">
             <div id="chatframe">
@@ -219,13 +243,31 @@
                     <li>
                         <img class="transferee" src="~/Content/Images/icn_person.png" /><span>Victoria Sporer</span>
                         <div>
-                            <p>Yes, I would like to go visit 1234 Meadow Rd. That will work well,I am bringing the kids.</p>
+                            <p>Yes, I would like to go visit 1234 Meadow Rd. That will work well, I am bringing the kids.</p>
                         </div>
                     </li>
                     <li>
                         <img class="dsc" src="~/Content/Images/icn_person.png" /><span>Joyce Damino</span>
                         <div>
                             <p>Sounds good, I will see you all there at 10am?</p>
+                        </div>
+                    </li>
+                    <li>
+                        <img class="dsc" src="~/Content/Images/icn_person.png" /><span>Joyce Damino</span>
+                        <div>
+                            <p>Would you like to go see 1232 RoseLn on the 11th of November</p>
+                        </div>
+                    </li>
+                    <li>
+                        <img class="transferee" src="~/Content/Images/icn_person.png" /><span>Victoria Sporer</span>
+                        <div>
+                            <p>Yes, I would like to go visit 1232 RoseLn. That will work well, we can do this one in the afternoon.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <img class="dsc" src="~/Content/Images/icn_person.png" /><span>Joyce Damino</span>
+                        <div>
+                            <p>Sounds good, I will call and make sure we can get in then.</p>
                         </div>
                     </li>
                 </ul>
@@ -240,3 +282,25 @@
 </div>
 
 @Styles.Render("~/Styling/housing")
+
+<script>
+    // row selection handler
+    document.addEventListener("DOMContentLoaded", function () {
+        $('div#housing tbody tr').click(function () {
+//            $('div#transferee').css("background-color", "black");
+//            $('div#transferee').css("opacity", "0.3");
+
+//            $('div#chat').css("background-color", "white");
+//            $('div#chat').css("opacity", "1.0");
+
+            $('div#chat').css("display", "block");
+        });
+
+        $($('div#chat button')[0]).click(function () {
+            $('div#chat').css("display", "none");
+
+//            $('div#transferee').css("background-color", "white");
+//            $('div#transferee').css("opacity", "1.0");
+        });
+    });
+</script>
