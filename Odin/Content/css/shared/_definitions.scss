@@ -15,6 +15,11 @@ $DW_Purple: #621f65;
 @mixin header {
 
     div#main {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1;
+        background-color: white;
 
         div#caption {
             width: 48%;

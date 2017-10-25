@@ -20,8 +20,8 @@ div#transferee {
 
     > div.col-md-2 {
         color: white;
-        height: 850px;
-        padding: 30px 0px 0px 0px;
+        //height: 850px;
+        //padding: 30px 0px 0px 0px;
         background-color: $DW_Lime;
 
         img {
@@ -173,9 +173,9 @@ div#transferee {
         }
     }
 
-    > div.col {
-        height: 850px;
-        overflow-y: scroll;
+    > div.col-md-10 {
+        //height: 850px;
+        //overflow-y: scroll;
         border-top: 1px solid;
         font-family:sans-serif;
         div.noinit {
