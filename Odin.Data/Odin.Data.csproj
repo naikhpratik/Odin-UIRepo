@@ -326,6 +326,10 @@
     <Compile Include="Persistence\Migrations\201710240231391_AddedPetNotes.Designer.cs">
       <DependentUpon>201710240231391_AddedPetNotes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201710251518243_MergeAddingMoreSectionsToIntake.cs" />
+    <Compile Include="Persistence\Migrations\201710251518243_MergeAddingMoreSectionsToIntake.Designer.cs">
+      <DependentUpon>201710251518243_MergeAddingMoreSectionsToIntake.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
     <Compile Include="Persistence\PetsRepository.cs" />
@@ -451,6 +455,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201710240231391_AddedPetNotes.resx">
       <DependentUpon>201710240231391_AddedPetNotes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710251518243_MergeAddingMoreSectionsToIntake.resx">
+      <DependentUpon>201710251518243_MergeAddingMoreSectionsToIntake.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
