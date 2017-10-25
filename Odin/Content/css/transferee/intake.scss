@@ -27,10 +27,15 @@ div#intake {
     }
 
     .intake-block {
-        padding-top: 35px;
-        padding-bottom: 35px;
+        padding-top: 10px;
+        padding-bottom: 10px;
 
         .intake-header {
+
+            .intake-collapse{
+                cursor:pointer;
+            }
+
             h5 {
                 margin-top: 0px
             }
@@ -48,12 +53,17 @@ div#intake {
                 cursor: pointer;
                 padding-left: 15px;
             }
+
+            .intake-expand-img {
+                display: none;
+            }
         }
 
         .intake-row {
 
             .intake-col {
-                padding-top: 15px;
+
+                min-height: 50px;
 
                 label {
                     display: block;
@@ -67,9 +77,12 @@ div#intake {
                 }
 
                 .intake-add {
+                    padding-top: 10px;
+                    padding-bottom: 10px;
                     font-size: medium;
                     color: $DW_Lime;
                     cursor: pointer;
+                    display: block;
                 }
 
                 .intake-del {
@@ -97,11 +110,11 @@ div#intake {
                     input {
                         color: $DW_Blue;
                         font-size: small;
-                        display: none;                        
+                        display: none;
                     }
 
                     span {
-                        color:$DW_Blue;
+                        color: $DW_Blue;
                     }
                 }
             }

@@ -38,6 +38,9 @@ namespace Odin.ViewModels.Orders.Transferee
         public int TempHousingDays { get; set; }
         public DateTime? TempHousingEndDate { get; set; }
 
+        public string TempHousingEndDateDisplay =>
+            TempHousingEndDate.HasValue ? TempHousingEndDate.Value.ToString("d") : String.Empty;
+
         private IEnumerable<ChildViewModel> _children;
         public virtual IEnumerable<ChildViewModel> Children
         {

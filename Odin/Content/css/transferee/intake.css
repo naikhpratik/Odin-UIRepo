@@ -13,8 +13,10 @@
   div#intake .intake-lime {
     color: #a7ce39; }
   div#intake .intake-block {
-    padding-top: 35px;
-    padding-bottom: 35px; }
+    padding-top: 10px;
+    padding-bottom: 10px; }
+    div#intake .intake-block .intake-header .intake-collapse {
+      cursor: pointer; }
     div#intake .intake-block .intake-header h5 {
       margin-top: 0px; }
     div#intake .intake-block .intake-header .intake-edit, div#intake .intake-block .intake-header .intake-save {
@@ -27,8 +29,10 @@
       color: #e53c2e;
       cursor: pointer;
       padding-left: 15px; }
+    div#intake .intake-block .intake-header .intake-expand-img {
+      display: none; }
     div#intake .intake-block .intake-row .intake-col {
-      padding-top: 15px; }
+      min-height: 50px; }
       div#intake .intake-block .intake-row .intake-col label {
         display: block;
         font-size: medium;
@@ -37,9 +41,12 @@
         color: #31a4dd;
         font-size: small; }
       div#intake .intake-block .intake-row .intake-col .intake-add {
+        padding-top: 10px;
+        padding-bottom: 10px;
         font-size: medium;
         color: #a7ce39;
-        cursor: pointer; }
+        cursor: pointer;
+        display: block; }
       div#intake .intake-block .intake-row .intake-col .intake-del {
         font-size: medium;
         color: #e53c2e;

@@ -40,10 +40,10 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
     var orderId;
 
     var childTemplate =
-        '<div class="row intake-row collapse in" data-entity-collection="children" data-entity-id="#GUID#"> <div class="col-sm-3 intake-col"> <label>Child:</label> <span class="intake-span"></span> <input type="text" class="form-control intake-input" name="Name"/> <input type="hidden" name="Name" /> </div> <div class="col-sm-3 intake-col"> <label>Age:</label> <span class="intake-span"></span> <input type="text" class="form-control intake-input" name="Age"/> <input type="hidden" name="Age" /> </div> <div class="col-sm-3 intake-col"> <label>Grade:</label> <span class="intake-span"></span> <input type="text" class="form-control intake-input" name="Grade"/> <input type="hidden" name="Grade" /> </div> <div class="col-sm-3 intake-col"> <span class="intake-del"> x Delete </span> </div> </div>';
+        '<div class="row intake-row collapse in" data-entity-collection="children" data-entity-id="#GUID#"> <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col"> <label>Child:</label> <span class="intake-span"></span> <input type="text" class="form-control intake-input" name="Name"/> <input type="hidden" name="Name" class="intake-hidden"/> </div> <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col"> <label>Age:</label> <span class="intake-span"></span> <input type="text" class="form-control intake-input" name="Age"/> <input type="hidden" name="Age" class="intake-hidden"/> </div> <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col"> <label>Grade:</label> <span class="intake-span"></span> <input type="text" class="form-control intake-input" name="Grade"/> <input type="hidden" name="Grade" class="intake-hidden"/> </div> <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col"> <span class="intake-del"> x Delete </span> </div> </div>';
 
     var petTemplate =
-        '<div class="row intake-row collapse in" data-entity-id="#GUID#" data-entity-collection="pets"> <div class="col-sm-3 intake-col"> <label>Pet Type:</label> <span class="intake-span"></span> <input type="text" class="form-control intake-input" name="Type" /> <input type="hidden" class="form-control" name="Type" /> </div> <div class="col-sm-3 intake-col"> <label>Breed:</label> <span class="intake-span"></span> <input type="text" class="form-control intake-input" name="Breed" /> <input type="hidden" class="form-control" name="Breed" /> </div> <div class="col-sm-3 intake-col"> <label>Weight/Size:</label> <span class="intake-span"></span> <input type="text" class="form-control intake-input" name="Size" /> <input type="hidden" class="form-control" name="Size" /> </div> <div class="col-sm-3 intake-col"> <span class="intake-del"> x Delete </span> </div></div>';
+        '<div class="row intake-row collapse in" data-entity-id="#GUID#" data-entity-collection="pets"> <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col"> <label>Pet Type:</label> <span class="intake-span"></span> <input type="text" class="form-control intake-input" name="Type" /> <input type="hidden" class="intake-hidden" name="Type" /> </div> <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col"> <label>Breed:</label> <span class="intake-span"></span> <input type="text" class="form-control intake-input" name="Breed" /> <input type="hidden" class="intake-hidden" name="Breed" /> </div> <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col"> <label>Weight/Size:</label> <span class="intake-span"></span> <input type="text" class="form-control intake-input" name="Size" /> <input type="hidden" class="intake-hidden" name="Size" /> </div> <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col"> <span class="intake-del"> x Delete </span> </div></div>';
 
     var init = function () {
 
@@ -52,6 +52,13 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
         //Init Variables
         intakeBlocks = pnlIntake.find(".intake-block");
         orderId = pnlIntake.attr("data-order-id");
+
+        //Init Dates
+        intakeBlocks.find(".intake-date").datetimepicker({
+            format: "MM/DD/YYYY",
+            useCurrent: true,
+            keepOpen: false
+        });
 
         //Bind Events
         intakeBlocks.on("click", ".intake-edit", editSaveBlock);
@@ -85,7 +92,7 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
 
             //Bind hidden values to inputs
             inputs.css("display", "block").each(function() {
-                var hidden = $(this).next("input[type='hidden']");
+                var hidden = $(this).next(".intake-hidden");
                 $(this).val(hidden.val());
             });
 
@@ -127,8 +134,6 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
                 }
             });
 
-            alert(JSON.stringify(data));
-
             //Do save
             transfereeIntakeService.updateIntakeBlock(block, data, saveSuccess, saveFail);
         }
@@ -141,8 +146,16 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
             //Update spans to new values and toggle.
             inputs.each(function () {
                 $(this).prev("span").text($(this).val());
-                $(this).next("input[type='hidden']").val($(this).val());
+                $(this).next(".intake-hidden").val($(this).val());
             });
+
+            dates.each(function () {
+                var innerInput = $(this).find("input");
+                $(this).prev("span").text(innerInput.val());
+                $(this).next(".intake-hidden").val(innerInput.val());
+            });
+
+            dates.css("display", "none");
             inputs.css("display", "none");
             spans.css("display", "block");
             addSpans.css("display", "block");
@@ -217,10 +230,7 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
 
     var toggleCollapse = function (e) {
         var intakeBlock = $(e.target).parents(".intake-block");
-        var img = intakeBlock.find(".intake-collapse-img");
-        var src = img.attr("src");
-
-        if (contains(src,"collapse")) {
+        if (intakeBlock.find(".intake-collapse-img").is(":visible")) {
             collapse(intakeBlock);
             if (intakeBlock.find(".intake-cancel").length > 0) {
                 cancel(intakeBlock);
@@ -272,7 +282,7 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
 
         var checkbox = $(e.target);
         var row = checkbox.parents(".intake-row");
-        var rowInputs = row.find(".intake-inputs");
+        var rowInputs = row.find(".intake-input");
 
         var saveSuccess = function(data) {
             row.attr("data-entity-id", data);
@@ -327,23 +337,24 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
     }
 
     var expand = function (intakeBlock) {
-        var img = intakeBlock.find(".intake-collapse-img");
-        var src = img.attr("src");
+        var colImg = intakeBlock.find(".intake-collapse-img");
+        var expImg = intakeBlock.find(".intake-expand-img");
+
         var intakeRows = intakeBlock.find(".intake-row");
-        if (!intakeRows.hasClass("in")) {
-            intakeBlock.find(".intake-row").collapse("show");
-            img.attr("src", src.replace("expand", "collapse"));
-        }
+        intakeBlock.find(".intake-row").collapse("show");
+        expImg.css("display", "none");
+        colImg.css("display", "inline");
+        
     }
 
     var collapse = function(intakeBlock) {
-        var img = intakeBlock.find(".intake-collapse-img");
-        var src = img.attr("src");
+        var colImg = intakeBlock.find(".intake-collapse-img");
+        var expImg = intakeBlock.find(".intake-expand-img");
+      
         var intakeRows = intakeBlock.find(".intake-row");
-        if (intakeRows.hasClass("in")) {
-            intakeBlock.find(".intake-row").collapse("hide");
-            img.attr("src", src.replace("collapse", "expand"));
-        }
+        intakeBlock.find(".intake-row").collapse("hide");
+        colImg.css("display", "none");
+        expImg.css("display", "inline");
     }
 
     var cancel = function (intakeBlock) {
