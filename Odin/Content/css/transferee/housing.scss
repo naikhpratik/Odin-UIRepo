@@ -46,7 +46,7 @@ div#housing {
 
             div#add {
                 float: right;
-                margin-right: 70px;
+                margin-right: 12px;
 
                 img {
                     width: 38px;
@@ -63,7 +63,7 @@ div#housing {
             border-bottom: unset;
 
             table {
-                left: -49px;
+                left: -36px;
                 width: 100%;
                 text-align: center;
                 position: relative;
@@ -79,7 +79,7 @@ div#housing {
                     color: $DW_LtBlue;
                 }
 
-                tr:hover {
+                tbody tr:hover {
                     background-color: lightgray;
                 }
 
@@ -153,33 +153,42 @@ div#housing {
     }
 
     div#chat {
-        top: 179px;
-        left: 832px;
+        top: 92px;
+        left: 642px;
         color: white;
-        width: 360px;
-        padding-top: 10px;
-        max-height: 450px;
+        width: 600px;
+        display: none;
+        padding-top: 35px;
         position: absolute;
+        border: 1px solid black;
         background-color: $DW_Lime;
 
         div#addr {
-            margin-bottom: 10px;
+            font-size: 16px;
+            text-align: right;
+            padding-right: 40px;
+            margin-bottom: 30px;
+
+            span#lastchat {
+                font-weight: bold;
+            }
         }
 
         div#chatwrapper {
             padding: 10px 10px 42px 10px;
-            background-color: lightgray;
+            background-color: white;
         }
 
         div#chatframe {
             color: lightgray;
             text-align: left;
             margin-bottom: 14px;
-            padding: 0px 5px 1px 0px;
+            padding: 0px 8px 1px 8px;
             background-color: white;
 
             ul {
                 font-size: 16px;
+                list-style: none;
                 padding: 12px 0px 0px 12px;
 
                 li {
@@ -196,7 +205,7 @@ div#housing {
 
             img {
                 width: 25px;
-                margin-right: 10px;
+                margin-right: 20px;
 
                 &.dsc {
                     background-color: $DW_Purple;
@@ -208,7 +217,7 @@ div#housing {
             }
 
             div {
-                margin-left: 35px;
+                margin-left: 46px;
             }
         }
 
@@ -218,14 +227,15 @@ div#housing {
             text-align: left;
             padding: 10px;
             margin-bottom: 14px;
-            background-color: white;
+            border: 1px solid lightgray;
+            border-top: 2px solid darkgray;
         }
 
         button {
-            color: gray;
+            color: lightgray;
             width: 60px;
             border: 2px solid gray;
-            background-color: lightgray;
+            background-color: white;
 
             &:first-of-type {
                 float: left;
