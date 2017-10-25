@@ -35,8 +35,7 @@ namespace Odin.Data.Core.Models
         public string SeCustNumb { get; set; }
         public string Rmc { get; set; }
         public string Client { get; set; }
-
-        public int? RentId { get; set; }
+        
         public Rent Rent { get; set; }
         
         public string TransfereeId { get; set; }
