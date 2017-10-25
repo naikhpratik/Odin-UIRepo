@@ -1,6 +1,7 @@
 ﻿div#details {
   padding-top: 10px;
-  padding-left: 50px; }
+  padding-left: 50px;
+  height: 100%; }
   div#details div.row {
     text-align: left; }
   div#details .details-title P {

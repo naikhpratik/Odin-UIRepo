@@ -23,7 +23,7 @@
             });
 
         //Init Variables
-        detailBlocks = pnlDetails.find(".details-blocks");
+        detailsBlocks = pnlDetails.find(".details-blocks");
         orderId = pnlDetails.attr("data-order-id");
 
         //Save Event for Services
