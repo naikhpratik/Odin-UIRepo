@@ -11,7 +11,10 @@
 
     @Html.Partial("~/Views/Shared/Partials/_header.cshtml")
 
-    @RenderBody()
+    <div class="page-content">
+        @RenderBody()
+    </div>    
+
 
     @Scripts.Render("~/bundles/lib")
     @Scripts.Render("~/bundles/app")
