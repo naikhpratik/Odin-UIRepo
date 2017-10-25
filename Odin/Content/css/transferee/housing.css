@@ -18,8 +18,17 @@
       div#housing .row:nth-child(2) div:nth-child(2) input {
         top: 6px;
         margin-right: 10px; }
-    div#housing .row:nth-child(2) div input[checked=""] + span {
-      color: #8d0b56; }
+        div#housing .row:nth-child(2) div:nth-child(2) input:checked:before {
+          left: -3px;
+          background-color: #621f65; }
+        div#housing .row:nth-child(2) div:nth-child(2) input:checked:after {
+          border: none; }
+        div#housing .row:nth-child(2) div:nth-child(2) input:after {
+          top: 0px;
+          width: 12px;
+          height: 12px; }
+        div#housing .row:nth-child(2) div:nth-child(2) input + span.selected {
+          color: #8d0b56; }
   div#housing .row:nth-child(2) div#add {
     float: right;
     margin-right: 12px; }
@@ -55,6 +64,8 @@
             width: 60px; }
           div#housing .row:nth-child(3) table td img.like {
             width: 22px; }
+          div#housing .row:nth-child(3) table td img.comment {
+            width: 21px; }
       div#housing .row:nth-child(3) table p {
         margin-bottom: 0px; }
       div#housing .row:nth-child(3) table span {
@@ -123,10 +134,6 @@ div#housing div#chat {
     div#housing div#chat div#chatframe img {
       width: 25px;
       margin-right: 20px; }
-      div#housing div#chat div#chatframe img.dsc {
-        background-color: #621f65; }
-      div#housing div#chat div#chatframe img.transferee {
-        background-color: #e53c2e; }
     div#housing div#chat div#chatframe div {
       margin-left: 46px; }
   div#housing div#chat div#comment {
@@ -134,18 +141,22 @@ div#housing div#chat {
     color: lightgray;
     text-align: left;
     padding: 10px;
-    margin-bottom: 14px;
+    margin: 0px 18px 20px 18px;
     border: 1px solid lightgray;
     border-top: 2px solid darkgray; }
   div#housing div#chat button {
     color: lightgray;
     width: 60px;
+    height: 23px;
+    line-height: 10px;
     border: 2px solid gray;
     background-color: white; }
     div#housing div#chat button:first-of-type {
-      float: left; }
+      float: left;
+      margin-left: 18px; }
     div#housing div#chat button:last-of-type {
       float: right;
       color: #621f65;
+      margin-right: 18px;
       border: 2px solid #621f65; }
 

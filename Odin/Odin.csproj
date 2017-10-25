@@ -572,7 +572,10 @@
     <Content Include="Content\Images\icn_alert_B1.png" />
     <Content Include="Content\Images\icn_alert_circle.png" />
     <Content Include="Content\Images\icn_cal_B1.png" />
+    <Content Include="Content\Images\icn_chat_1.png" />
+    <Content Include="Content\Images\icn_chat_2.png" />
     <Content Include="Content\Images\icn_chat_B1.png" />
+    <Content Include="Content\Images\icn_chat_bubble.png" />
     <Content Include="Content\Images\icn_details.png" />
     <Content Include="Content\Images\icn_down_arrow.png" />
     <Content Include="Content\Images\icn_history.png" />

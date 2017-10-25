@@ -34,12 +34,25 @@ div#housing {
                     input {
                         top: 6px;
                         margin-right: 10px;
-                    }
-                }
 
-                input[checked=""] {
-                    + span {
-                        color: $DW_LtPurple;
+                        &:checked:before {
+                            left: -3px;
+                            background-color: $DW_Purple;
+                        }
+
+                        &:checked:after {
+                            border: none;
+                        }
+
+                        &:after {
+                            top: 0px;
+                            width: 12px;
+                            height: 12px;
+                        }
+
+                        + span.selected {
+                            color: $DW_LtPurple;
+                        }
                     }
                 }
             }
@@ -96,6 +109,10 @@ div#housing {
 
                         &.like {
                             width: 22px;
+                        }
+
+                        &.comment {
+                            width: 21px;
                         }
                     }
                 }
@@ -206,14 +223,6 @@ div#housing {
             img {
                 width: 25px;
                 margin-right: 20px;
-
-                &.dsc {
-                    background-color: $DW_Purple;
-                }
-
-                &.transferee {
-                    background-color: $DW_Red;
-                }
             }
 
             div {
@@ -226,7 +235,7 @@ div#housing {
             color: lightgray;
             text-align: left;
             padding: 10px;
-            margin-bottom: 14px;
+            margin: 0px 18px 20px 18px;
             border: 1px solid lightgray;
             border-top: 2px solid darkgray;
         }
@@ -234,16 +243,20 @@ div#housing {
         button {
             color: lightgray;
             width: 60px;
+            height: 23px;
+            line-height: 10px;
             border: 2px solid gray;
             background-color: white;
 
             &:first-of-type {
                 float: left;
+                margin-left: 18px;
             }
 
             &:last-of-type {
                 float: right;
                 color: $DW_Purple;
+                margin-right: 18px;
                 border: 2px solid $DW_Purple;
             }
         }

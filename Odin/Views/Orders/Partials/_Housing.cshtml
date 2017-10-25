@@ -48,7 +48,7 @@
             <span>Filter:</span>
             <div>
                 <input type="radio" name="choice" value="New"><span>New</span>
-                <input type="radio" name="choice" value="Like" checked><span>Like</span>
+                <input type="radio" name="choice" value="Like"><span>Like</span>
                 <input type="radio" name="choice" value="Dislike"><span>Dislike</span>
             </div> 
         </div>
@@ -116,7 +116,7 @@
                             <img class="like" src="~/Content/Images/icn_ln_selected_like.png" />
                         </td>
                         <td>
-                            <img src="~/Content/Images/icn_chat_B1.png" />
+                            <img class="comment" src="~/Content/Images/icn_chat_bubble.png" />
                         </td>
                     </tr>
                     <tr>
@@ -142,7 +142,7 @@
                             <img class="like" src="~/Content/Images/icn_ln_selected_like.png" />
                         </td>
                         <td>
-                            <img src="~/Content/Images/icn_chat_B1.png" />
+                            <img class="comment" src="~/Content/Images/icn_chat_bubble.png" />
                         </td>
                     </tr>
                     <tr>
@@ -168,7 +168,7 @@
                             <img  class="like" src="~/Content/Images/icn_ln_selected_like.png" />
                         </td>
                         <td>
-                            <img src="~/Content/Images/icn_chat_B1.png" />
+                            <img class="comment" src="~/Content/Images/icn_chat_bubble.png" />
                         </td>
                     </tr>
                     <tr>
@@ -194,7 +194,7 @@
                             <img  class="like" src="~/Content/Images/icn_ln_selected_like.png" />
                         </td>
                         <td>
-                            <img src="~/Content/Images/icn_chat_B1.png" />
+                            <img class="comment" src="~/Content/Images/icn_chat_bubble.png" />
                         </td>
                     </tr>
                     <tr>
@@ -217,10 +217,10 @@
                             <img src="~/Content/Images/icn_cal_B1.png" />
                         </td>
                         <td>
-                            <img  class="like" src="~/Content/Images/icn_ln_selected_like.png" />
+                            <img class="like" src="~/Content/Images/icn_ln_selected_like.png" />
                         </td>
                         <td>
-                            <img src="~/Content/Images/icn_chat_B1.png" />
+                            <img class="comment" src="~/Content/Images/icn_chat_bubble.png" />
                         </td>
                     </tr>
                 </tbody>
@@ -235,37 +235,37 @@
             <div id="chatframe">
                 <ul>
                     <li>
-                        <img class="dsc" src="~/Content/Images/icn_person.png"/><span>Joyce Damino</span>
+                        <img src="~/Content/Images/icn_chat_2.png"/><span>Joyce Damino</span>
                         <div>
                             <p>Would you like to go see 1234 MeadowRd on the 11th of November?</p>
                         </div>
                     </li>
                     <li>
-                        <img class="transferee" src="~/Content/Images/icn_person.png" /><span>Victoria Sporer</span>
+                        <img src="~/Content/Images/icn_chat_1.png" /><span>Victoria Sporer</span>
                         <div>
                             <p>Yes, I would like to go visit 1234 Meadow Rd. That will work well, I am bringing the kids.</p>
                         </div>
                     </li>
                     <li>
-                        <img class="dsc" src="~/Content/Images/icn_person.png" /><span>Joyce Damino</span>
+                        <img src="~/Content/Images/icn_chat_2.png" /><span>Joyce Damino</span>
                         <div>
                             <p>Sounds good, I will see you all there at 10am?</p>
                         </div>
                     </li>
                     <li>
-                        <img class="dsc" src="~/Content/Images/icn_person.png" /><span>Joyce Damino</span>
+                        <img src="~/Content/Images/icn_chat_2.png" /><span>Joyce Damino</span>
                         <div>
                             <p>Would you like to go see 1232 RoseLn on the 11th of November</p>
                         </div>
                     </li>
                     <li>
-                        <img class="transferee" src="~/Content/Images/icn_person.png" /><span>Victoria Sporer</span>
+                        <img src="~/Content/Images/icn_chat_1.png" /><span>Victoria Sporer</span>
                         <div>
                             <p>Yes, I would like to go visit 1232 RoseLn. That will work well, we can do this one in the afternoon.</p>
                         </div>
                     </li>
                     <li>
-                        <img class="dsc" src="~/Content/Images/icn_person.png" /><span>Joyce Damino</span>
+                        <img src="~/Content/Images/icn_chat_2.png" /><span>Joyce Damino</span>
                         <div>
                             <p>Sounds good, I will call and make sure we can get in then.</p>
                         </div>
@@ -284,9 +284,20 @@
 @Styles.Render("~/Styling/housing")
 
 <script>
-    // row selection handler
+    // selection handlers
+    var $lastFilter = null;
+
     document.addEventListener("DOMContentLoaded", function () {
-        $('div#housing tbody tr').click(function () {
+        $("div.notfirst input[name='choice']").click(function () {
+//            if ($lastFilter !== null) {
+//                $lastFilter.removeClass("selected");
+//            }
+
+//            $lastFilter = $($(this).next);
+//            $lastFilter.addClass("selected");
+        });
+
+        $('div#housing tbody img.comment').click(function () {
 //            $('div#transferee').css("background-color", "black");
 //            $('div#transferee').css("opacity", "0.3");
 
