@@ -339,7 +339,7 @@
                 });
 
                 // row selection handler
-                $('tr').not(':first').click(function (event) {
+                $('tr').not(':first').click(function () {
                     window.location.href = "/Orders/Transferee/" + $(this).attr("data-order-id");
                 });
             }

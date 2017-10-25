@@ -27,10 +27,15 @@ div#intake {
     }
 
     .intake-block {
-        padding-top: 35px;
-        padding-bottom: 35px;
+        padding-top: 10px;
+        padding-bottom: 10px;
 
         .intake-header {
+
+            .intake-collapse{
+                cursor:pointer;
+            }
+
             h5 {
                 margin-top: 0px
             }
@@ -48,12 +53,17 @@ div#intake {
                 cursor: pointer;
                 padding-left: 15px;
             }
+
+            .intake-expand-img {
+                display: none;
+            }
         }
 
         .intake-row {
-            
+
             .intake-col {
-                padding-top: 15px;
+
+                min-height: 50px;
 
                 label {
                     display: block;
@@ -61,15 +71,18 @@ div#intake {
                     margin-bottom: -5px;
                 }
 
-                span {
+                .intake-span {
                     color: $DW_Blue;
                     font-size: small;
                 }
 
                 .intake-add {
+                    padding-top: 10px;
+                    padding-bottom: 10px;
                     font-size: medium;
                     color: $DW_Lime;
                     cursor: pointer;
+                    display: block;
                 }
 
                 .intake-del {
@@ -78,7 +91,7 @@ div#intake {
                     cursor: pointer;
                 }
 
-                input {
+                .intake-input {
                     color: $DW_Blue;
                     font-size: small;
                     display: none;
@@ -91,12 +104,18 @@ div#intake {
                     line-height: 20px;
                 }
 
-                textarea {
+                .intake-date {
                     display: none;
-                    width: 100%;
-                    max-width: 100%;
-                    color: $DW_Blue;
-                    font-size: small;
+
+                    input {
+                        color: $DW_Blue;
+                        font-size: small;
+                        display: none;
+                    }
+
+                    span {
+                        color: $DW_Blue;
+                    }
                 }
             }
         }

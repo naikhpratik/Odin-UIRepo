@@ -5,7 +5,12 @@ using System.Linq.Expressions;
 using System.Web.Mvc;
 
     public static class DatePickerHelper
-    {
+{
+        //For calling the helper that takes a model as a parameter                
+        //use the following code    
+            //@*@Html.DatePicker("svcPreArrival")
+            //@Html.DatePickerFor(m => m.BirthDate)
+            //@Html.ValidationMessageFor(m => m.BirthDate)*@
         public static IHtmlString DatePickerFor<TModel, TProperty>(this HtmlHelper<TModel> helper, Expression<Func<TModel, TProperty>> expression)
         {
             string datePickerName = ExpressionHelper.GetExpressionText(expression);
