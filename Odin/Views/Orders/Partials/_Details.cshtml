@@ -18,8 +18,7 @@
             </div>
             <div class="col-sm-3 details-col">
                 <label>Work Start Date:</label>
-               @* <span>(Model.WorkStartDate.HasValue ? Model.WorkStartDate.Value.ToString("MM/dd/yy") : "TBD")</span>*@
-                <span>test data</span>
+                <span>@(Model.WorkStartDate.HasValue ? Model.WorkStartDate.Value.ToString("MM/dd/yy") : "TBD")</span>
             </div>
             <div class="col-sm-3 details-col">
                 <label>Temp Housing:</label>
@@ -28,13 +27,11 @@
 
             <div class="col-sm-3 details-col">
                 <label>Final Arrival:</label>
-               @* <span>Model.FA</span>*@
-                <span>test data</span>
+                <span>@(Model.FinalArrivalDate.HasValue ? Model.FinalArrivalDate.Value.ToString("MM/dd/yy") : "TBD")</span>
             </div>
             <div class="col-sm-3 details-col">
                 <label>Home Finding Date:</label>
-                @*<span>Model.HFDate</span>*@
-                <span>test data</span>
+                <span>@(Model.HomeFindingDate.HasValue ? Model.HomeFindingDate.Value.ToString("MM/dd/yy") : "TBD")</span>
             </div>
             <div class="col-sm-3 details-col">
                 <label>Temp Housing Last Day:</label>
