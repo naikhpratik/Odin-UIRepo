@@ -2,15 +2,13 @@
 using Moq;
 using AutoMapper;
 using FluentAssertions;
-using Odin.Controllers;
+using System.Net;
 using Odin.Data.Core;
 using Odin.Data.Core.Dtos;
 using Odin.Data.Core.Models;
 using Odin.Data.Core.Repositories;
 using Odin.Interfaces;
-using Odin.Tests.Extensions;
 using System;
-using System.Web.Mvc;
 using System.Collections.Generic;
 using System.Web.Http;
 
@@ -48,7 +46,37 @@ namespace Odin.Tests.Controllers.Api
             dtos.Services= svc;
             order.Services.Add(new Service() {Id="1", ScheduledDate=DateTime.Now, CompletedDate=DateTime.Now });
             var result = _controller.UpsertDetailsServices(dtos) as IHttpActionResult;
-            result.Should().NotBeNull();
+            result.Should().BeOfType<System.Web.Http.Results.OkResult>();
+        }
+        [TestMethod]
+        public void UpsertDetailsServicesTest_OrderNotFound()
+        {
+            var orderId = "1";
+            Order order = new Order() { Id = orderId };
+            _mockRepository.Setup(r => r.GetOrderById(orderId)).Returns(order);
+            OrdersTransfereeDetailsServiceDto dto = new OrdersTransfereeDetailsServiceDto() { Id = "1", ScheduledDate = DateTime.Now, CompletedDate = DateTime.Now };
+            OrdersTransfereeDetailsServicesDto dtos = new OrdersTransfereeDetailsServicesDto() { Id = "2" };
+            List<OrdersTransfereeDetailsServiceDto> svc = new List<OrdersTransfereeDetailsServiceDto>();
+            svc.Add(dto);
+            dtos.Services = svc;
+            order.Services.Add(new Service() { Id = "1", ScheduledDate = DateTime.Now, CompletedDate = DateTime.Now });
+            var result = _controller.UpsertDetailsServices(dtos) as IHttpActionResult;
+            result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
+        }
+        [TestMethod]
+        public void UpsertDetailsServicesTest_ServiceNotFound()
+        {
+            var orderId = "1";
+            Order order = new Order() { Id = orderId };
+            _mockRepository.Setup(r => r.GetOrderById(orderId)).Returns(order);
+            OrdersTransfereeDetailsServiceDto dto = new OrdersTransfereeDetailsServiceDto() { Id = "1", ScheduledDate = DateTime.Now, CompletedDate = DateTime.Now };
+            OrdersTransfereeDetailsServicesDto dtos = new OrdersTransfereeDetailsServicesDto() { Id = "1" };
+            List<OrdersTransfereeDetailsServiceDto> svc = new List<OrdersTransfereeDetailsServiceDto>();
+            svc.Add(dto);
+            dtos.Services = svc;
+            order.Services.Add(new Service() { Id = "2", ScheduledDate = DateTime.Now, CompletedDate = DateTime.Now });
+            var result = _controller.UpsertDetailsServices(dtos) as IHttpActionResult;
+            result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
         }
     }
 }
