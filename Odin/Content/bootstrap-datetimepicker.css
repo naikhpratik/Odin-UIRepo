@@ -8,12 +8,6 @@
     background-repeat: no-repeat;
     background-position: center;
 }
-.custom-icon-check:hover {
-    background-color: #eeeeee;
-    background-image: url(Images/check.png);
-    background-repeat: no-repeat;
-    background-position: center;
-}
 #scheduledServices .btn-primary {
     border-radius: 50%;
 }
@@ -27,7 +21,7 @@
         display: block;
         margin: 2px 0;
         padding:0px 2px;
-        width: 17em;        
+        width: 20em;        
     }
 @media (min-width: 768px) {
   .bootstrap-datetimepicker-widget.dropdown-menu.timepicker-sbs {
@@ -295,9 +289,9 @@
   color: #777777;
 }
 .bootstrap-datetimepicker-widget table td.day {
-  height: 20px;
-  line-height: 20px;
-  width: 20px;
+  height: 30px;
+  line-height: 30px;
+  width: 30px;
 }
 .bootstrap-datetimepicker-widget table td.day:hover,
 .bootstrap-datetimepicker-widget table td.hour:hover,
@@ -348,11 +342,11 @@
   cursor: pointer;
   border-radius: 50%;
 }
-.timepicker span:hover {
-    background-color: #eeeeee;    
-    background-repeat: no-repeat;
-    background-position: center;
-}
+    .bootstrap-datetimepicker-widget table td span:hover {
+        background-color: #eeeeee;        
+        background-repeat: no-repeat;
+        background-position: center;
+    }
 .bootstrap-datetimepicker-widget table td span.active {
   background-color: #337ab7;
   color: #fff;

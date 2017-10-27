@@ -335,7 +335,6 @@
     <Compile Include="ViewModels\Mailers\SetNewPasswordViewModel.cs" />
     <Compile Include="ViewModels\Orders\Index\OrdersIndexViewModel.cs" />
     <Compile Include="ViewModels\Mailers\ViewRenderer.cs" />
-    <Compile Include="ViewModels\Orders\Transferee\OrdersTransfereeDetailsViewModel.cs" />
     <Compile Include="ViewModels\Orders\Transferee\OrdersTransfereeViewModel.cs" />
     <Compile Include="ViewModels\Shared\ChildViewModel.cs" />
     <Compile Include="ViewModels\Shared\ManagerViewModel.cs" />

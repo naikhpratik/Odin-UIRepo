@@ -1,15 +1,21 @@
 ﻿var OrdersPageController = function () {
      
     var init = function () {
-        $('div.col > div').each(function() { $(this).css("display", "none"); });
-        $('div.col > div#intake').css("display", "block");
+
+        $('div.col-md-10 > div > div').each(function () { $(this).css("display", "none"); });
+
+        $('#intake').css("display", "block");
+
         $('.item').click(function () {
             $('.item').removeClass('selected');
+            
             $(this).addClass('selected');
 
-            $('div.col > div').each(function() { $(this).css("display", "none"); });
-            $('div.col > div.frame').each(function () { $(this).css("display", "none"); });
-            $('div.col > div#' + $(this).attr('data-panel')).css("display", "block");
+            $('div.col-md-10 > div > div').each(function () { $(this).css("display", "none"); });
+            
+            //$('div.col > div.frame').each(function () { $(this).css("display", "none"); });
+
+            $('div#' + $(this).attr('data-panel')).css("display", "block");
         });
 
         // ensure icon spacing is adequate on mobile

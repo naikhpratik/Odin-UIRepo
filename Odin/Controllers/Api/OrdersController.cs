@@ -250,6 +250,37 @@ namespace Odin.Controllers.Api
 
         [HttpPost]
         [Authorize]
+        [Route("api/orders/transferee/details/services")]
+        public IHttpActionResult UpsertDetailsServices(OrdersTransfereeDetailsServicesDto dto)
+        {
+
+            var userId = User.Identity.GetUserId();
+            var order = _unitOfWork.Orders.GetOrderById(dto.Id);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            foreach (var serviceDto in dto.Services)
+            {
+                var service = order.Services.FirstOrDefault(s => !String.IsNullOrEmpty(serviceDto.Id) && s.Id == serviceDto.Id);
+                if (service == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    _mapper.Map<OrdersTransfereeDetailsServiceDto, Service>(serviceDto, service);
+                }
+            }
+
+            _unitOfWork.Complete();
+            return Ok();
+        }
+
+        [HttpPost]
+        [Authorize]
         [Route("api/orders/transferee/intake/rmc")]
         public IHttpActionResult UpsertIntakeRmc(OrdersTransfereeIntakeRmcDto dto)
         {

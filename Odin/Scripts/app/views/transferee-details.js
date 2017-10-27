@@ -1,5 +1,16 @@
-﻿var TransfereeDetailsController = function () {
-    
+﻿var TransfereeDetailsService = function (){
+     var route = "/api/orders/transferee/";
+
+var updateDetailsBlock = function (block, data, success, fail) {
+    var url = route + "/details/" + block;
+    $.post(url, data).done(success).fail(fail);
+     }
+return {
+    updateDetailsBlock: updateDetailsBlock    
+}
+
+}();
+    var TransfereeDetailsController = function (transfereeDetailseService) {
     
     var init = function () {
        
@@ -23,7 +34,7 @@
             });
 
         //Init Variables
-        detailBlocks = pnlDetails.find(".details-blocks");
+        detailsBlocks = pnlDetails.find(".details-blocks");
         orderId = pnlDetails.attr("data-order-id");
 
         //Save Event for Services
@@ -31,13 +42,16 @@
     };
 
     var saveBlock = function (e) {
+
         var detailsBlock = $(e.target).parents(".details-blocks");
         var block = detailsBlock.attr("data-block");
         var rows = detailsBlock.find(".details-row[data-entity-id]");
 
-        var saveSuccess = function () { }
+        var saveSuccess = function () {
+            toast('changes to service dates are successful', 'success');
+        }
         var saveFail = function () {
-            alert("failed");
+            toast('changes to service dates failed', 'danger');
         }
 
         var data = { "Id": orderId };
@@ -46,12 +60,11 @@
             var row = $(this);
             var rowInputs = row.find(":input").not("input[type='hidden']");
 
-            //If a collection that can have added values
             if (hasAttr(row, 'data-entity-collection')) {
                 if (!isCollectionRowEmpty(rowInputs)) {
                     var collectionKey = row.attr("data-entity-collection");
                     var collectionData = { "Id": row.attr("data-entity-id") };
-
+                    
                     fillPostData(collectionData, rowInputs);
 
                     if (!(collectionKey in data)) {
@@ -62,20 +75,25 @@
             } else {
                 fillPostData(data, rowInputs);
             }
+            
         });
-
-        transfereedetailsService.updatedetailsBlock(block, data, saveSuccess, saveFail);
+        
+        TransfereeDetailsService.updateDetailsBlock(block, data, saveSuccess, saveFail);
     }
 
     var fillPostData = function (data, inputs) {
+        var sd = '';
+        var st = '';
+        var cd = '';
         inputs.each(function () {
             var input = $(this);
-            if (input.is(":checkbox")) {
-                data[input.attr("name")] = input.prop('checked');
-            } else {
-                data[input.attr("name")] = input.val();
-            }
+            sd = input.attr("name") == "ScheduledDate" ? input.val() : sd;
+            st = input.attr("name") == "ScheduledTime" ? input.val() : st;
+            cd = input.attr("name") == "CompletedDate" ? input.val() : cd;
         });
+        data["ScheduledDate"] = sd + ' ' + st;
+        data["CompletedDate"] = cd;
+        
     }
 
     var isCollectionRowEmpty = function (rowInputs) {
@@ -91,9 +109,26 @@
     {
         return (value || '').indexOf(searchFor) > -1;
     }
-      
+
+    var toast = function (message, type) {
+        $.notify({
+            message: message
+        }, {
+            delay: 2000,
+            type: type,
+            placement: {
+                from: "bottom",
+                align: "center"
+            },
+            animate: {
+                enter: 'animated fadeInUp',
+                exit: 'animated fadeOutDown'
+            }
+        });
+    }
+
 
     return {
         init: init
     };
-}();
+    }(TransfereeDetailsService);

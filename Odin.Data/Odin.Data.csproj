@@ -113,11 +113,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builders\ChildBuilder.cs" />
     <Compile Include="Builders\ConsultantBuilder.cs" />
     <Compile Include="Builders\ConsultantDtoBuilder.cs" />
     <Compile Include="Builders\ConsultantImportDtoBuilder.cs" />
     <Compile Include="Builders\LeaseBuilder.cs" />
+    <Compile Include="Builders\PetBuilder.cs" />
     <Compile Include="Builders\ProgramManagerDtoBuilder.cs" />
+    <Compile Include="Builders\RentBuilder.cs" />
     <Compile Include="Builders\TransfereeBuilder.cs" />
     <Compile Include="Builders\OrderBuilder.cs" />
     <Compile Include="Builders\OrderDtoBuilder.cs" />
@@ -128,6 +131,8 @@
     <Compile Include="Core\Dtos\ConsultantsDto.cs" />
     <Compile Include="Core\Dtos\OrderDto.cs" />
     <Compile Include="Core\Dtos\OrderIndexDto.cs" />
+    <Compile Include="Core\Dtos\OrdersTransfereeDetailsServiceDto.cs" />
+    <Compile Include="Core\Dtos\OrdersTransfereeDetailsServicesDto.cs" />
     <Compile Include="Core\Dtos\OrdersTransfereeIntakeFamilyDto.cs" />
     <Compile Include="Core\Dtos\OrdersTransfereeIntakeDestinationDto.cs" />
     <Compile Include="Core\Dtos\OrdersTransfereeIntakeOriginDto.cs" />
@@ -140,6 +145,7 @@
     <Compile Include="Core\Dtos\ProgramManagerDto.cs" />
     <Compile Include="Core\Dtos\ManagerDto.cs" />
     <Compile Include="Core\Dtos\ManagersDto.cs" />
+    <Compile Include="Core\Dtos\RentDto.cs" />
     <Compile Include="Core\Dtos\ServiceDto.cs" />
     <Compile Include="Core\Dtos\ServicesDto.cs" />
     <Compile Include="Core\Dtos\TransfereeDto.cs" />
@@ -352,6 +358,18 @@
     <Compile Include="Persistence\Migrations\201710271554252_UpdatedFields.Designer.cs">
       <DependentUpon>201710271554252_UpdatedFields.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201710251727362_SeedRentData.cs" />
+    <Compile Include="Persistence\Migrations\201710251727362_SeedRentData.Designer.cs">
+      <DependentUpon>201710251727362_SeedRentData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710261236309_orderItems.cs" />
+    <Compile Include="Persistence\Migrations\201710261236309_orderItems.Designer.cs">
+      <DependentUpon>201710261236309_orderItems.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710271758539_MergedMattA5.cs" />
+    <Compile Include="Persistence\Migrations\201710271758539_MergedMattA5.Designer.cs">
+      <DependentUpon>201710271758539_MergedMattA5.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
     <Compile Include="Persistence\PetsRepository.cs" />
@@ -490,6 +508,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201710271554252_UpdatedFields.resx">
       <DependentUpon>201710271554252_UpdatedFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710251727362_SeedRentData.resx">
+      <DependentUpon>201710251727362_SeedRentData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710261236309_orderItems.resx">
+      <DependentUpon>201710261236309_orderItems.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710271758539_MergedMattA5.resx">
+      <DependentUpon>201710271758539_MergedMattA5.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

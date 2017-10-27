@@ -1,9 +1,10 @@
 ﻿@import "../shared/_definitions.scss";
 
+
 @include header;
 
 body {
-    padding: 0px;
+    padding: 0px
 }
 
 @media screen and (max-width: 842px) {
@@ -12,17 +13,12 @@ body {
 
 div#transferee {
     text-align: center;
+
     @media screen and (max-width: 842px) {
         margin-top: 20px;
     }
 
-<<<<<<< HEAD
     > div.col-md-2 {
-=======
-    div.col-md-2 {
-        height:850px;
-        padding-top: 30px;
->>>>>>> origin/adding_more_sections_to_intake
         color: white;
         height: 850px;
         padding: 30px 0px 0px 0px;
@@ -160,6 +156,10 @@ div#transferee {
                             background-color: $DW_Red;
                         }
                     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/housing_page_changes
                     &.unselectable {
                         display: none;
                     }
@@ -182,9 +182,8 @@ div#transferee {
         overflow-y: scroll;
         border-top: 1px solid;
         font-family:sans-serif;
-        overflow-y:scroll;
         div.noinit {
             display: none;
-        }        
+        }
     }
 }

@@ -26,6 +26,9 @@ namespace Odin.Data.Core.Models
         public string OriginCountry { get; set; }
         public DateTime? EstimatedArrivalDate { get; set; }
         public DateTime? PreTripDate { get; set; }
+        public DateTime? FinalArrivalDate { get; set; }
+        public DateTime? HomeFindingDate { get; set; }
+        public DateTime? WorkStartDate { get; set; }
         public int TempHousingDays { get; set; }
         public DateTime? TempHousingEndDate { get; set; }
         public string SchoolDistrict { get; set; }
@@ -46,7 +49,6 @@ namespace Odin.Data.Core.Models
         public bool IsInternational { get; set; }
         public bool IsAssignment { get; set; }
         public DateTime? EstimatedDepartureDate { get; set; }
-        public DateTime? WorkStartDate { get; set; }
 
         public string SpouseName { get; set; }
         public string SpouseVisaType { get; set; }

@@ -8,10 +8,13 @@
     @Scripts.Render("~/bundles/modernizr")
  </head>
 <body>
-    <div class="container-fluid">
-        @Html.Partial("~/Views/Shared/Partials/_header.cshtml")
+
+    @Html.Partial("~/Views/Shared/Partials/_header.cshtml")
+
+    <div class="page-content">
         @RenderBody()
-    </div>
+    </div>    
+
 
     @Scripts.Render("~/bundles/lib")
     @Scripts.Render("~/bundles/app")

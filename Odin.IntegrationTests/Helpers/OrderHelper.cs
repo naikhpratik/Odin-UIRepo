@@ -67,7 +67,16 @@ namespace Odin.IntegrationTests.Helpers
                 context.Consultants.RemoveRange(consultants);
             }
 
-            var orders = context.Orders.Where(o => o.TrackingId.Contains("integration") || o.DestinationCity.Contains("integration")).Include(o => o.Transferee).Include(s => s.Services).ToList();
+            var orders = context.Orders
+                .Where(o => o.TrackingId.Contains("integration") || o.DestinationCity.Contains("integration"))
+                .Include(o => o.Transferee)
+                .Include(s => s.Services)
+                .Include(o => o.Rent)
+                .Include(o => o.Pets)
+                .Include(o => o.Children)
+                .Include(o => o.Lease)
+                .ToList();
+
             foreach (var order in orders)
             {
                 context.Orders.Remove(order);
@@ -82,6 +91,24 @@ namespace Odin.IntegrationTests.Helpers
                         context.Services.Remove(service);
                     }
                 }
+                if (order.Pets != null)
+                {
+                    foreach (var pet in order.Pets)
+                    {
+                        context.Pets.Remove(pet);
+                    }
+                }
+                if (order.Children != null)
+                {
+                    foreach (var orderChild in order.Children)
+                    {
+                        context.Children.Remove(orderChild);
+                    }
+                }
+                if (order.Lease != null)
+                    context.Leases.Remove(order.Lease);
+                if (order.Rent != null)
+                    context.Rents.Remove(order.Rent);
             }             
 
             context.SaveChanges();

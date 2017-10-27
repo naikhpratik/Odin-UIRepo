@@ -25,6 +25,7 @@ namespace Odin.Data.Persistence
         public virtual DbSet<Transferee> Transferees { get; set; }
         public virtual DbSet<Child> Children { get; set; }
         public virtual DbSet<Pet> Pets { get; set; }
+        public virtual DbSet<Lease> Leases { get; set; }
 
 
         public ApplicationDbContext()

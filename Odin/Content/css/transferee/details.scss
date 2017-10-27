@@ -2,85 +2,95 @@
 
 div#details {
     padding-top: 10px;
-    padding-left: 20px;
-
+    padding-left: 50px;
 
     div.row {
         text-align: left;
     }
 
-    .details-title P {
+    .details-title {
+        padding-bottom: 30px;
+    }
+
+    P {
         padding-bottom: 0px;
         margin-bottom: 0px;
         font-size: 18px;
         color: #231F20;
-           }
-        .details-save {
-            font-size: small;
-            color: $DW_Lime;
-            cursor: pointer;
-        }
-     
-        hr {
-            margin-top: 0px;
-            margin-bottom: 0px;
-        }
+    }
 
-        .details-blue {
-            color: $DW_Blue;
-        }
+    .details-save {
+        font-size: small;
+        color: $DW_Lime;
+        cursor: pointer;
+    }
 
-        .details-lime {
-            color: $DW_Lime;
-        }
+    hr {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
 
-        .details-blocks {
-            padding-top: 15px;
-            padding-bottom: 15px;
+    .details-blue {
+        color: $DW_Blue;
+    }
 
-            .details-header {
-                p {
-                    margin: 0px;
-                    font-size: 16px;
-                    font-weight: 200;
-                    color: #6c6e70;
-                }
-            }
-        }
+    .details-lime {
+        color: $DW_Lime;
+    }
 
-        .details-row {
+    .details-block {
+        padding-top: 15px;
+        padding-bottom: 15px;
 
-            .details-col {
-                padding-top: 15px;
-                padding-left: 0px;
-                width: 16%;
-
-                label {
-                    display: block;
-                    font-size: 14px;
-                    font-weight: 200;
-                    margin-bottom: -5px;
-                    color: #858585;
-                }
-
-                span {
-                    color: $DW_Blue;
-                    font-size: 14px;
-                }
-
-                input {
-                    color: $DW_Blue;
-                    font-size: small;
-                    display: none;
-                }
-
-                textarea {
-                    display: none;
-                    width: 100%;
-                    max-width: 100%;
-                    color: $DW_Blue;
-                    font-size: small;
-                }
+        .details-header {
+            p {
+                margin: 0px;
+                font-size: 16px;
+                font-weight: 200;
+                color: #8e1a55;
             }
         }
     }
+
+    .details-row {
+
+        .details-col {
+            padding-top: 15px;
+            padding-left: 0px;
+            width: 16%;
+
+h5 {
+    display: block;
+    font-size: 16px;
+    font-weight: 200;
+    margin-bottom: -5px;
+    color: #6c6e70;
+}
+            label {
+                display: block;
+                font-size: 14px;
+                font-weight: 200;
+                color: #858585;
+            }
+
+            span {
+                color: $DW_Blue;
+                font-size: 14px;
+            }
+
+            input {
+                color: $DW_Blue;
+                font-size: small;
+                display: none;
+            }
+
+            textarea {
+                display: none;
+                width: 100%;
+                max-width: 100%;
+                color: $DW_Blue;
+                font-size: small;
+            }
+        }
+    }
+}

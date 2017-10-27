@@ -34,6 +34,7 @@
     </div>
 </div>
 
+<<<<<<< HEAD
 
 @section scripts
 {
@@ -42,6 +43,15 @@
     @Scripts.Render("~/Scripts/transferee")
 
     <script>
+=======
+
+
+@section scripts
+{
+@Styles.Render("~/Styling/transferee")
+@Scripts.Render("~/Scripts/transferee")
+<script>
+>>>>>>> master
     $(document).ready(function () {
         OrdersPageController.TransfereeInit();
         TransfereeIntakeController.init();
