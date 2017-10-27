@@ -31,6 +31,9 @@ namespace Odin.Data.Core.Dtos
         public bool IsVip { get; set; }
 
         [Required]
+        public RentDto Rent { get; set; }
+
+        [Required]
         public TransfereeDto Transferee { get; set; }
 
         [Required]

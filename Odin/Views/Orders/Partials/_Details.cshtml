@@ -39,7 +39,7 @@
             </div>
         </div>
     </div>
-    @if (@Model.rent != null)
+    @if (@Model.Rent != null)
     {
     <div class="details-block">
         <div class="row details-header">
@@ -50,11 +50,11 @@
         <div class="row details-row">
             <div class="col-sm-3 details-col">
                 <label>Monthly Budget:</label>
-                <span>@string.Format("{0: $#,###.00}", @Model.rent.HousingBudget)</span>
+                <span>@string.Format("{0: $#,###.00}", @Model.Rent.HousingBudget)</span>
             </div>
             <div class="col-sm-3 details-col">
                 <label>Housing:</label>
-                <span>@Model.rent.HousingType</span>
+                <span>@Model.Rent.HousingType</span>
             </div>
             <div class="col-sm-3 details-col">
                 <label>School District:</label>
@@ -63,15 +63,15 @@
 
             <div class="col-sm-3 details-col">
                 <label>BD/BA:</label>
-                <span>@Model.rent.NumberOfBedrooms.ToString()/@Model.rent.NumberOfBathrooms.ToString()</span>
+                <span>@Model.Rent.NumberOfBedrooms.ToString()/@Model.Rent.NumberOfBathrooms.ToString()</span>
             </div>
             <div class="col-sm-3 details-col">
                 <label>Sq.Ft:</label>
-                <span>@string.Format("{0: #,###.00}", @Model.rent.SquareFootage)</span>
+                <span>@string.Format("{0: #,###.00}", @Model.Rent.SquareFootage)</span>
             </div>
             <div class="col-sm-3 details-col">
                 <label>Rent or Own:</label>
-                <span>@Model.rent.OwnershipType</span>
+                <span>@Model.Rent.OwnershipType</span>
             </div>
         </div>
     </div>
@@ -111,9 +111,9 @@
         <div class="row details-title">
             <p>
                 Scheduled Services
-                @*<span class="details-save">
+                <span class="details-save">
                     - Save
-                </span>*@
+                </span>
             </p>
             <span class="details-blue">Please fill out any items that are not already auto-generated that could aid in the help of your clients placement.</span>
         </div>
@@ -123,103 +123,41 @@
         <div class="details-block" id="scheduledServices">
             <div class="row details-row">
                 <div class="col-sm-3 details-col">
-                    <label>Service:</label>
+                    <H5>Service:</H5>
                 </div>
                 <div class="col-sm-3 details-col">
-                    <label>Scheduled Date:</label>
+                    <H5>Scheduled Date:</H5>
                 </div>
                 <div class="col-sm-3 details-col">
-                    <label>Completed Date:</label>
+                    <H5>Time:</H5>
                 </div>
                 <div class="col-sm-3 details-col">
-                    <label>Time:</label>
+                    <H5>Completed Date:</H5>
                 </div>
+                
                 <div class="col-sm-3 details-col">
-                    <label>Notes:</label>
+                    <H5>Notes:</H5>
                 </div>
             </div>
             @for (int i = 0; i < @Model.Services.Count(); i++)
             {
-                if (@Model.Services.ElementAt(i).Name.Contains("Pre-Arrival Consultation"))
-                {
-                    <div class="row details-row" data-entity-id="@Model.Services.ElementAt(i).Id" data-entity-collection="services">
-                        <div class="col-sm-3 details-col">
-                            <label>Pre Arrival Consultation</label>
-                        </div>
-                        <div class="col-sm-3 details-col">
-                            @Html.DatePicker("date", "preArrivalSchDate", @Model.Services.ElementAt(i).ScheduledDate ?? DateTime.Now)
-                        </div>
-                        <div class="col-sm-3 details-col">
-                            @Html.DatePicker("date", "preArrivalComplDate", @Model.Services.ElementAt(i).CompletedDate ?? DateTime.Now)
-                        </div>
-                        <div class="col-sm-3 details-col">
-                            @Html.DatePicker("time", "preArrivalTime", @Model.Services.ElementAt(i).CompletedDate ?? DateTime.Now)
-                        </div>
-                        <div class="col-sm-3 details-col">
-                            <p>@Html.TextBoxFor(s => @Model.Services.ElementAt(i).Notes, new { @class = "form-control intake-service-input" })</p>
-                        </div>
+                <div class="row details-row" data-entity-id="@Model.Services.ElementAt(i).Id" data-entity-collection="services">
+                    <div class="col-sm-3 details-col">
+                        <label>@Model.Services.ElementAt(i).Name.</label>
                     </div>
-                }
-                else if (@Model.Services.ElementAt(i).Name == "Welcome Packet")
-                {
-                    <div class="row details-row" data-entity-id="@Model.Services.ElementAt(i).Id" data-entity-collection="services">
-                        <div class="col-sm-3 details-col">
-                            <label>Welcome Packet</label>
-                        </div>
-                        <div class="col-sm-3 details-col">
-                            @Html.DatePicker("date", "welSchDate", @Model.Services.ElementAt(i).ScheduledDate ?? DateTime.Now)
-                        </div>
-                        <div class="col-sm-3 details-col">
-                            @Html.DatePicker("date", "welComplDate", @Model.Services.ElementAt(i).CompletedDate ?? DateTime.Now)
-                        </div>
-                        <div class="col-sm-3 details-col">
-                            @Html.DatePicker("time", "welSchTimee", @Model.Services.ElementAt(i).CompletedDate ?? DateTime.Now)
-                        </div>
-                        <div class="col-sm-3 details-col">
-                            <p>@Html.TextBoxFor(s => @Model.Services.ElementAt(i).Notes, new { @class = "form-control intake-service-input" })</p>
-                        </div>
+                    <div class="col-sm-3 details-col">
+                        @Html.DatePicker("date", "ScheduledDate", Model.Services.ElementAt(i).ScheduledDateDisplay)
                     </div>
-                }
-                else if (@Model.Services.ElementAt(i).Name == "Area Orientation")
-                {
-                    <div class="row details-row" data-entity-id="@Model.Services.ElementAt(i).Id" data-entity-collection="services">
-                        <div class="col-sm-3 details-col">
-                            <label>Area Orientation</label>
-                        </div>
-                        <div class="col-sm-3 details-col">
-                            @Html.DatePicker("date", "welSchDate", @Model.Services.ElementAt(i).ScheduledDate ?? DateTime.Now)
-                        </div>
-                        <div class="col-sm-3 details-col">
-                            @Html.DatePicker("date", "welComplDate", @Model.Services.ElementAt(i).CompletedDate ?? DateTime.Now)
-                        </div>
-                        <div class="col-sm-3 details-col">
-                            @Html.DatePicker("time", "welSchTimee", @Model.Services.ElementAt(i).CompletedDate ?? DateTime.Now)
-                        </div>
-                        <div class="col-sm-3 details-col">
-                            <p>@Html.TextBoxFor(s => @Model.Services.ElementAt(i).Notes, new { @class = "form-control intake-service-input" })</p>
-                        </div>
+                    <div class="col-sm-3 details-col">
+                        @Html.DatePicker("time", "ScheduledTime", Model.Services.ElementAt(i).ScheduledTimeDisplay)
                     </div>
-                }
-                else if (@Model.Services.ElementAt(i).Name == "Area Orientation")
-                {
-                    <div class="row details-row" data-entity-id="@Model.Services.ElementAt(i).Id" data-entity-collection="services">
-                        <div class="col-sm-3 details-col">
-                            <label>Accompanied Home Finding</label>
-                        </div>
-                        <div class="col-sm-3 details-col">
-                            @Html.DatePicker("date", "welSchDate", @Model.Services.ElementAt(i).ScheduledDate ?? DateTime.Now)
-                        </div>
-                        <div class="col-sm-3 details-col">
-                            @Html.DatePicker("date", "welComplDate", @Model.Services.ElementAt(i).CompletedDate ?? DateTime.Now)
-                        </div>
-                        <div class="col-sm-3 details-col">
-                            @Html.DatePicker("time", "welSchTimee", @Model.Services.ElementAt(i).CompletedDate ?? DateTime.Now)
-                        </div>
-                        <div class="col-sm-3 details-col" style="width:32%; max-width: 500px;text-wrap:normal">
-                            <p>@Html.TextBoxFor(s => @Model.Services.ElementAt(i).Notes, new { @class = "form-control intake-service-input" })</p>
-                        </div>
+                    <div class="col-sm-3 details-col">
+                        @Html.DatePicker("date", "CompletedDate", Model.Services.ElementAt(i).CompletedDateDisplay)
+                    </div>                        
+                    <div class="col-sm-3 details-col">
+                        <p>@Html.TextAreaFor(s => @Model.Services.ElementAt(i).Notes, new { @class = "form-control intake-service-input" })</p>
                     </div>
-                }
+                </div>               
             }
         </div>
     </div>

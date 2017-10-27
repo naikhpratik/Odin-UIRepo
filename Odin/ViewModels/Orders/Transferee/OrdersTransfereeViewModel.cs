@@ -34,8 +34,9 @@ namespace Odin.ViewModels.Orders.Transferee
         public DateTime? TempHousingEndDate { get; set; }
         public DateTime? FinalArrivalDate { get; set; }
         public DateTime? HomeFindingDate { get; set; }
-        public DateTime? WorkStartDate { get; set; }
 
+        public DateTime? WorkStartDate { get; set; }
+        
         public string SpouseName { get; set; }
         public string SpouseVisaType { get; set; }
 
@@ -82,8 +83,7 @@ namespace Odin.ViewModels.Orders.Transferee
 
         public TransfereeViewModel Transferee { get; set; }
 
-        public int? RentId { get; set; }
-        public Rent rent { get; set; }
+        public Rent Rent { get; set; }
 
         public string ProgramManagerId { get; set; }
         public virtual Manager ProgramManager { get; set; }

@@ -1,10 +1,11 @@
 ﻿div#details {
   padding-top: 10px;
-  padding-left: 50px;
-  height: 100%; }
+  padding-left: 50px; }
   div#details div.row {
     text-align: left; }
-  div#details .details-title P {
+  div#details .details-title {
+    padding-bottom: 30px; }
+  div#details P {
     padding-bottom: 0px;
     margin-bottom: 0px;
     font-size: 18px;
@@ -20,23 +21,28 @@
     color: #31a4dd; }
   div#details .details-lime {
     color: #a7ce39; }
-  div#details .details-blocks {
+  div#details .details-block {
     padding-top: 15px;
     padding-bottom: 15px; }
-    div#details .details-blocks .details-header p {
+    div#details .details-block .details-header p {
       margin: 0px;
       font-size: 16px;
       font-weight: 200;
-      color: #6c6e70; }
+      color: #8e1a55; }
   div#details .details-row .details-col {
     padding-top: 15px;
     padding-left: 0px;
     width: 16%; }
+    div#details .details-row .details-col h5 {
+      display: block;
+      font-size: 16px;
+      font-weight: 200;
+      margin-bottom: -5px;
+      color: #6c6e70; }
     div#details .details-row .details-col label {
       display: block;
       font-size: 14px;
       font-weight: 200;
-      margin-bottom: -5px;
       color: #858585; }
     div#details .details-row .details-col span {
       color: #31a4dd;

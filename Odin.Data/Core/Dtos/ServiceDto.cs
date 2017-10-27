@@ -12,10 +12,10 @@ namespace Odin.Data.Core.Dtos
 
         public string Notes { get; set; }
 
-        public DateTime? ScheduledDate { get; set; }
+        public DateTime? ScheduledDate { get; set; }      
 
         public DateTime? CompletedDate { get; set; }
-
+        
         public int ServiceTypeId { get; set; }
     }
 }

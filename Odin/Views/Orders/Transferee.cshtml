@@ -34,11 +34,12 @@
     </div>
 </div>
 
-@Styles.Render("~/Styling/transferee")
-@Scripts.Render("~/Scripts/transferee")
+
 
 @section scripts
 {
+@Styles.Render("~/Styling/transferee")
+@Scripts.Render("~/Scripts/transferee")
 <script>
     $(document).ready(function () {
         OrdersPageController.TransfereeInit();

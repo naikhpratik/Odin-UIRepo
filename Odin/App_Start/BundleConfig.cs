@@ -54,6 +54,7 @@ namespace Odin
             // Page scripts
             bundles.Add(new ScriptBundle("~/Scripts/orders").Include("~/Scripts/app/views/orders.js"));
             bundles.Add(new ScriptBundle("~/Scripts/transferee").Include(
+                "~/Scripts/bootstrap-notify.min.js",
                 "~/Scripts/app/views/transferee.js",
                 "~/Scripts/app/views/transferee-intake.js",
                "~/Scripts/app/views/transferee-details.js"));
