@@ -1,5 +1,5 @@
-﻿using System;
-using Odin.Data.Core.Models;
+﻿using Odin.Data.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -16,8 +16,8 @@ namespace Odin.ViewModels.Orders.Transferee
 
         //Profile Summary
         //Housing Details
-        public int? RentId { get; set; }
-        public Rent rent { get; set; }
+        public string RentId { get; set; }
+        public Rent Rent { get; set; }
         //schooldistrict?
 
         //Profile Summary

@@ -1,8 +1,9 @@
-﻿using Odin.ViewModels.Shared;
+﻿using Odin.Data.Core.Models;
+using Odin.Helpers;
+using Odin.ViewModels.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Odin.Data.Core.Models;
 
 
 namespace Odin.ViewModels.Orders.Transferee
@@ -14,6 +15,7 @@ namespace Odin.ViewModels.Orders.Transferee
             Children = new List<ChildViewModel>();
             Services = new List<ServiceViewModel>();
             PossibleServices = new List<ServiceTypeViewModel>();
+            Rent = new RentViewModel();
         }
 
         public string Id { get; set; }
@@ -42,7 +44,7 @@ namespace Odin.ViewModels.Orders.Transferee
 
 
         public string TempHousingEndDateDisplay =>
-            TempHousingEndDate.HasValue ? TempHousingEndDate.Value.ToString("d") : String.Empty;
+            DateHelper.GetViewFormat(TempHousingEndDate);
 
         private IEnumerable<ChildViewModel> _children;
         public virtual IEnumerable<ChildViewModel> Children
@@ -79,8 +81,8 @@ namespace Odin.ViewModels.Orders.Transferee
 
         public TransfereeViewModel Transferee { get; set; }
 
-        public int? RentId { get; set; }
-        public Rent rent { get; set; }
+        public string RentId { get; set; }
+        public RentViewModel Rent { get; set; }
 
         public string ProgramManagerId { get; set; }
         public virtual Manager ProgramManager { get; set; }

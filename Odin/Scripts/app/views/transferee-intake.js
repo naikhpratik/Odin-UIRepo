@@ -133,7 +133,7 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
                     fillPostData(data, rowInputs);
                 }
             });
-
+            
             //Do save
             transfereeIntakeService.updateIntakeBlock(block, data, saveSuccess, saveFail);
         }
@@ -145,8 +145,23 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
 
             //Update spans to new values and toggle.
             inputs.each(function () {
-                $(this).prev("span").text($(this).val());
-                $(this).next(".intake-hidden").val($(this).val());
+                var input = $(this);
+                var span = input.prev("span");
+                var hidden = input.next(".intake-hidden");
+                if (input.is('select')) {
+                    if (input.val() === null) {
+                        input.find("option:selected").removeAttr("selected");
+                        span.text("");
+                        hidden.val("");
+                    } else {
+                        var selText = input.find("option:selected").text();
+                        span.text(selText);
+                        hidden.val(input.val());
+                    }
+                } else {
+                    input.prev("span").text($(this).val());
+                    input.next(".intake-hidden").val($(this).val());
+                }
             });
 
             dates.each(function () {
@@ -160,10 +175,12 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
             spans.css("display", "block");
             addSpans.css("display", "block");
             delSpans.css("display", "block");
+
+            toast("Save Successful!","success");
         }
 
         var saveFail = function() {
-            alert('fail');
+            toast("Uh oh!  Something went wrong!", "danger");
         }
 
         //Function Execution
@@ -201,10 +218,11 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
             template = template.replace("#GUID#", guid);
             row.after(template);
             row.parents(".intake-block").find(".intake-edit").click();
+            toast("Added!", "success");
         }
 
         var insertFail = function() {
-            alert('failed');
+            toast("Uh oh!  Something went wrong!", "danger");
         }
 
         //Function Execution
@@ -217,12 +235,13 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
         var delType = row.attr("data-entity-collection");
         var entityId = row.attr("data-entity-id");
 
-        var deleteSuccess = function() {
+        var deleteSuccess = function () {
             row.remove();
+            toast("Deleted!", "success");
         }
 
         var deleteFail = function() {
-            alert('failed');
+            toast("Uh oh!  Something went wrong!", "danger");
         }
 
         transfereeIntakeService.deleteIntakeEntity(delType, entityId, deleteSuccess, deleteFail);
@@ -246,9 +265,11 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
         var block = intakeBlock.attr("data-block");
         var rows = intakeBlock.find(".intake-row[data-entity-id]");
 
-        var saveSuccess = function () { }
+        var saveSuccess = function() {
+            toast("Save Successful!","success");
+        }
         var saveFail = function () {
-            alert("failed");
+            toast("Uh oh!  Something went wrong!", "danger");
         }
 
         var data = { "Id": orderId };
@@ -286,11 +307,12 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
 
         var saveSuccess = function(data) {
             row.attr("data-entity-id", data);
+            toast("Added!", "success");
         }
 
         var saveFail = function () {
             rowInputs.not("[type=checkbox]").prop("disabled", true);
-            alert("failed");
+            toast("Uh oh!  Something went wrong!", "danger");
         }
 
         if (checkbox.prop('checked')) {
@@ -367,6 +389,23 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
         cols.find(".intake-span").css("display", "block");
         cols.find(".intake-add").css("display", "block");
         cols.find(".intake-del").css("display", "block");
+    }
+
+    var toast = function (message, type) {
+        $.notify({
+            message: message
+        }, {
+            delay: 2000,
+            type: type,
+            placement: {
+                from: "bottom",
+                align: "center"
+            },
+            animate: {
+                enter: 'animated fadeInUp',
+                exit: 'animated fadeOutDown'
+            }
+        });
     }
 
     return {

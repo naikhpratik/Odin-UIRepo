@@ -1,9 +1,16 @@
-﻿div#intake {
+﻿div[data-notify].alert-success {
+  background-color: #8d0b56; }
+
+div[data-notify].alert-danger {
+  background-color: #e53c2e; }
+
+div#intake {
   padding-top: 30px;
-  padding-left: 10px;
+  padding-left: 25px;
   margin-left: 20px; }
   div#intake div.row {
-    text-align: left; }
+    text-align: left;
+    margin: 0px; }
   div#intake .intake-title {
     padding-bottom: 30px; }
     div#intake .intake-title p {
@@ -12,8 +19,9 @@
       margin-bottom: 0px;
       /*margin: 30px 0px 15px 0px;*/ }
   div#intake hr {
-    margin-top: 0px;
-    margin-bottom: 0px; }
+    border-color: lightgray;
+    margin-top: 10px;
+    margin-bottom: 10px; }
   div#intake .intake-blue {
     color: #31a4dd; }
   div#intake .intake-lime {
@@ -24,42 +32,44 @@
     div#intake .intake-block .intake-header .intake-collapse {
       cursor: pointer; }
     div#intake .intake-block .intake-header h5 {
-      margin-top: 0px; }
+      margin-top: 0px;
+      font-size: 22px; }
     div#intake .intake-block .intake-header .intake-edit, div#intake .intake-block .intake-header .intake-save {
-      font-size: medium;
+      font-size: 20px;
       color: #a7ce39;
       cursor: pointer; }
     div#intake .intake-block .intake-header .intake-cancel {
       display: none;
-      font-size: medium;
+      font-size: 20px;
       color: #e53c2e;
       cursor: pointer;
       padding-left: 15px; }
     div#intake .intake-block .intake-header .intake-expand-img {
       display: none; }
     div#intake .intake-block .intake-row .intake-col {
-      min-height: 50px; }
+      padding-top: 10px;
+      min-height: 70px; }
       div#intake .intake-block .intake-row .intake-col label {
         display: block;
-        font-size: medium;
+        font-size: 20px;
         margin-bottom: -5px; }
       div#intake .intake-block .intake-row .intake-col .intake-span {
         color: #31a4dd;
-        font-size: small; }
+        font-size: 16px; }
       div#intake .intake-block .intake-row .intake-col .intake-add {
         padding-top: 10px;
         padding-bottom: 10px;
-        font-size: medium;
+        font-size: 20px;
         color: #a7ce39;
         cursor: pointer;
         display: block; }
       div#intake .intake-block .intake-row .intake-col .intake-del {
-        font-size: medium;
+        font-size: 20px;
         color: #e53c2e;
         cursor: pointer; }
       div#intake .intake-block .intake-row .intake-col .intake-input {
         color: #31a4dd;
-        font-size: small;
+        font-size: 16px;
         display: none;
         width: 100%;
         min-width: 100%; }
@@ -70,8 +80,10 @@
         display: none; }
         div#intake .intake-block .intake-row .intake-col .intake-date input {
           color: #31a4dd;
-          font-size: small;
+          font-size: 16px;
           display: none; }
         div#intake .intake-block .intake-row .intake-col .intake-date span {
           color: #31a4dd; }
+    div#intake .intake-block .intake-row .intake-col-add {
+      min-height: 0px; }
 

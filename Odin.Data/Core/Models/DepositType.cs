@@ -1,6 +1,6 @@
 ﻿namespace Odin.Data.Core.Models
 {
-    public class HousingType : SeDropDownType
+    public class DepositType : SeDropDownType
     {
     }
 }

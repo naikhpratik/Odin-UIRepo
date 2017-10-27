@@ -32,17 +32,19 @@
     </div>
 </div>
 
-@Styles.Render("~/Styling/transferee")
-@Scripts.Render("~/Scripts/transferee")
 
 @section scripts
 {
-<script>
+    
+    @Styles.Render("~/Styling/transferee")
+    @Scripts.Render("~/Scripts/transferee")
+
+    <script>
     $(document).ready(function () {
         OrdersPageController.TransfereeInit();
         TransfereeIntakeController.init();
         TransfereeDetailsController.init();
     });
-</script>
+    </script>
 
 }

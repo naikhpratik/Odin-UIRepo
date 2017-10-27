@@ -340,6 +340,7 @@
     <Compile Include="ViewModels\Shared\ChildViewModel.cs" />
     <Compile Include="ViewModels\Shared\ManagerViewModel.cs" />
     <Compile Include="ViewModels\Shared\PetViewModel.cs" />
+    <Compile Include="ViewModels\Shared\RentViewModel.cs" />
     <Compile Include="ViewModels\Shared\ServiceTypeViewModel.cs" />
     <Compile Include="ViewModels\Shared\ServiceViewModel.cs" />
     <Compile Include="ViewModels\Shared\TransfereeViewModel.cs" />

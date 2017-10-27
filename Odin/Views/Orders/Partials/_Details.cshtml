@@ -42,7 +42,7 @@
             </div>
         </div>
     </div>
-    @if (@Model.rent != null)
+    @if (@Model.Rent != null)
     {
     <div class="details-block">
         <div class="row details-header">
@@ -50,33 +50,33 @@
                 Housing Details:
             </P>
         </div>
-        <div class="row details-row">
-            <div class="col-sm-3 details-col">
-                <label>Monthly Budget:</label>
-                <span>@string.Format("{0: $#,###.00}", @Model.rent.HousingBudget)</span>
-            </div>
-            <div class="col-sm-3 details-col">
-                <label>Housing:</label>
-                <span>@Model.rent.HousingType</span>
-            </div>
-            <div class="col-sm-3 details-col">
-                <label>School District:</label>
-                <span>@(Model.SchoolDistrict != null ? Model.SchoolDistrict : "TBD") </span>
-            </div>
-
-            <div class="col-sm-3 details-col">
-                <label>BD/BA:</label>
-                <span>@Model.rent.NumberOfBedrooms.ToString()/@Model.rent.NumberOfBathrooms.ToString()</span>
-            </div>
-            <div class="col-sm-3 details-col">
-                <label>Sq.Ft:</label>
-                <span>@string.Format("{0: #,###.00}", @Model.rent.SquareFootage)</span>
-            </div>
-            <div class="col-sm-3 details-col">
-                <label>Rent or Own:</label>
-                <span>@Model.rent.OwnershipType</span>
-            </div>
+       @*<div class="row details-row">
+        <div class="col-sm-3 details-col">
+            <label>Monthly Budget:</label>
+            <span>@string.Format("{0: $#,###.00}", @Model.Rent.HousingBudget)</span>
         </div>
+        <div class="col-sm-3 details-col">
+            <label>Housing:</label>
+            <span>@Model.Rent.HousingType</span>
+        </div>
+        <div class="col-sm-3 details-col">
+            <label>School District:</label>
+            <span>@(Model.SchoolDistrict != null ? Model.SchoolDistrict : "TBD") </span>
+        </div>
+
+        <div class="col-sm-3 details-col">
+            <label>BD/BA:</label>
+            <span>@Model.Rent.NumberOfBedrooms.ToString()/@Model.Rent.NumberOfBathrooms.ToString()</span>
+        </div>
+        <div class="col-sm-3 details-col">
+            <label>Sq.Ft:</label>
+            <span>@string.Format("{0: #,###.00}", @Model.Rent.SquareFootage)</span>
+        </div>
+        <div class="col-sm-3 details-col">
+            <label>Rent or Own:</label>
+            <span>@Model.Rent.OwnershipType</span>
+        </div>
+    </div>*@
     </div>
     }
     <div class="details-block">

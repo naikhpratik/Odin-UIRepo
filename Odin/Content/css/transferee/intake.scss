@@ -1,13 +1,22 @@
 ﻿@import "../shared/_definitions.scss";
 
+div[data-notify].alert-success {
+    background-color: $DW_LtPurple;
+}
+
+div[data-notify].alert-danger {
+    background-color: $DW_Red;
+}
+
 
 div#intake {
     padding-top: 30px;
-    padding-left: 10px;
-    margin-left: 20px;
+    padding-left: 25px;
+    margin-left: 20px;    
 
     div.row {
         text-align: left;
+        margin: 0px;
     }
 
     .intake-title {
@@ -22,8 +31,9 @@ div#intake {
     }
 
     hr {
-        margin-top: 0px;
-        margin-bottom: 0px;
+        border-color: lightgray;
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
 
     .intake-blue {
@@ -45,18 +55,19 @@ div#intake {
             }
 
             h5 {
-                margin-top: 0px
+                margin-top: 0px;
+                font-size: 22px
             }
 
             .intake-edit, .intake-save {
-                font-size: medium;
+                font-size: 20px;
                 color: $DW_Lime;
                 cursor: pointer;
             }
 
             .intake-cancel {
                 display: none;
-                font-size: medium;
+                font-size: 20px;
                 color: $DW_Red;
                 cursor: pointer;
                 padding-left: 15px;
@@ -70,37 +81,38 @@ div#intake {
         .intake-row {
 
             .intake-col {
-                min-height: 50px;
+                padding-top:10px;
+                min-height: 70px;
 
                 label {
                     display: block;
-                    font-size: medium;
+                    font-size: 20px;
                     margin-bottom: -5px;
                 }
 
                 .intake-span {
                     color: $DW_Blue;
-                    font-size: small;
+                    font-size: 16px;
                 }
 
                 .intake-add {
                     padding-top: 10px;
                     padding-bottom: 10px;
-                    font-size: medium;
+                    font-size: 20px;
                     color: $DW_Lime;
                     cursor: pointer;
                     display: block;
                 }
 
                 .intake-del {
-                    font-size: medium;
+                    font-size: 20px;
                     color: $DW_Red;
                     cursor: pointer;
                 }
 
                 .intake-input {
                     color: $DW_Blue;
-                    font-size: small;
+                    font-size: 16px;
                     display: none;
                     width: 100%;
                     min-width: 100%;
@@ -116,7 +128,7 @@ div#intake {
 
                     input {
                         color: $DW_Blue;
-                        font-size: small;
+                        font-size: 16px;
                         display: none;
                     }
 
@@ -124,6 +136,10 @@ div#intake {
                         color: $DW_Blue;
                     }
                 }
+            }
+
+            .intake-col-add {
+                min-height: 0px;
             }
         }
     }
