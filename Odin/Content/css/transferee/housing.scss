@@ -59,7 +59,8 @@ div#housing {
 
             div#add {
                 float: right;
-                margin-right: 12px;
+                cursor: pointer;
+                margin-right: 60px;
 
                 img {
                     width: 38px;
@@ -72,7 +73,8 @@ div#housing {
         }
 
         &:nth-child(3) {
-            width: 100%;
+            max-height: 388px;
+            overflow-y: scroll;
             border-bottom: unset;
 
             table {
@@ -102,17 +104,49 @@ div#housing {
 
                     img {
                         width: 35px;
+                        cursor: pointer;
+
+                        &.noinit {
+                            display: none;
+                        }
 
                         &.location {
                             width: 60px;
                         }
 
-                        &.like {
+                        &.comment {
+                            width: 21px;
+                        }
+                    }
+
+                    div.likebtns img {
+                        width: 22px
+                    }
+
+                    div.notify-count {
+                        top: 14px;
+                        left: -18px;
+                        width: 10px;
+                        cursor: pointer;
+                        font-weight: bold;
+                        position: relative;
+                        display: inline-block;
+                        text-align: center;
+
+                        &.noinit {
+                            display: none;
+                        }
+
+                        img {
                             width: 22px;
                         }
 
-                        &.comment {
-                            width: 21px;
+                        span {
+                            top: -21px;
+                            left: 5px;
+                            color: white;
+                            font-size: 10px;
+                            position: relative;
                         }
                     }
                 }
@@ -258,6 +292,184 @@ div#housing {
                 color: $DW_Purple;
                 margin-right: 18px;
                 border: 2px solid $DW_Purple;
+            }
+        }
+    }
+
+    div#property {
+        top: 34px;
+        left: 338px;
+        width: 1234px;
+        display: none;
+        font-size: 18px;
+        border: 1px solid;
+        position: absolute;
+        background-color: white;
+
+        span {
+            color: black;
+        }
+
+        p {
+            color: $DW_LtBlue;
+            margin-bottom: 0px;
+        }
+
+        div.row {
+            overflow: unset;
+            border-bottom: none;
+
+            &:nth-child(1) {
+                div:nth-child(1) {
+                    padding: 36px 0px 0px 30px;
+
+                    span {
+                        color: $DW_LtPurple;
+
+                        &:first-of-type {
+                            font-weight: bold;
+                        }
+                    }
+                }
+
+                div:nth-child(2) {
+                    float: right;
+                    padding: 20px 0px 0px 0px;
+
+                    img {
+                        float: right;
+                        cursor: pointer;
+                    }
+                }
+            }
+
+            &:nth-child(2) {
+                img {
+                    width: 750px;
+                }
+
+                div.col-md-4 {
+                    width: 28.3%;
+                    padding: 0px;
+                    margin-left: 40px;
+                    line-height: 30px;
+                    border-bottom: 2px solid lightgray;
+
+                    p {
+                        top: -8px;
+                        position: relative;
+                    }
+
+                    div {
+                        &:nth-child(1) {
+                            padding-top: 10px;
+                        }
+
+                        &:nth-child(2) {
+                            margin-top: 20px;
+                            padding-bottom: 20px;
+                        }
+                    }
+                }
+            }
+
+            &:nth-child(3) {
+                text-align: center;
+
+                div.col-md-8 {
+                    padding-right: 60px;
+
+                    img {
+                        width: 136px;
+                        padding: 0px 10px 0px 10px;
+                    }
+                }
+
+                div.col-md-4 {
+                    width: 28.3%;
+                    margin-left: 40px;
+                    padding: 14px 0px 32px 0px;
+                    border-bottom: 2px solid lightgray;
+
+                    div {
+                        height: 34px;
+                    }
+
+                    div:nth-child(1) {
+                        width: 28%;
+                        float: left;
+                        text-align: left;
+                        display: inline-block;
+
+                        div.dislike {
+                            margin-top: 10px;
+                            
+                            img.dislike_sel {
+                                top: -4px;
+                                left: -4px;
+                                position: relative;
+                            }
+                        }
+                    }
+
+                    div:nth-child(2) {
+                        width: 36%;
+                        float: right;
+                        text-align: right;
+
+                        img:nth-child(1) {
+                            float: left;
+                        }
+
+                        div.notify-count {
+                            top: -33px;
+                            left: -13px;
+                            width: 10px;
+                            cursor: pointer;
+                            font-weight: bold;
+                            position: relative;
+                            display: inline-block;
+                            text-align: center;
+
+                            &.noinit {
+                                display: none;
+                            }
+
+                            img {
+                                width: 25px;
+                            }
+
+                            span {
+                                top: -32px;
+                                left: 7px;
+                                color: white;
+                                font-size: 10px;
+                                position: relative;
+                            }
+                        }
+                    }
+
+                    img {
+                        width: 30px;
+
+                        &.noinit {
+                            display: none;
+                        }
+                    }
+                }
+            }
+
+            &:nth-child(4) {
+                p {
+                    &:first-child {
+                        color: black;
+                    }
+
+                    &:last-child {
+                        line-height: 26px;
+                        margin: 10px 0px 20px 0px;
+                    }
+                }
             }
         }
     }

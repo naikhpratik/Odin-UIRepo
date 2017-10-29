@@ -31,13 +31,15 @@
           color: #8d0b56; }
   div#housing .row:nth-child(2) div#add {
     float: right;
-    margin-right: 12px; }
+    cursor: pointer;
+    margin-right: 60px; }
     div#housing .row:nth-child(2) div#add img {
       width: 38px; }
     div#housing .row:nth-child(2) div#add span {
       color: #31a4dd; }
   div#housing .row:nth-child(3) {
-    width: 100%;
+    max-height: 388px;
+    overflow-y: scroll;
     border-bottom: unset; }
     div#housing .row:nth-child(3) table {
       left: -36px;
@@ -59,13 +61,35 @@
         height: 84px;
         line-height: 18px; }
         div#housing .row:nth-child(3) table td img {
-          width: 35px; }
+          width: 35px;
+          cursor: pointer; }
+          div#housing .row:nth-child(3) table td img.noinit {
+            display: none; }
           div#housing .row:nth-child(3) table td img.location {
             width: 60px; }
-          div#housing .row:nth-child(3) table td img.like {
-            width: 22px; }
           div#housing .row:nth-child(3) table td img.comment {
             width: 21px; }
+        div#housing .row:nth-child(3) table td div.likebtns img {
+          width: 22px; }
+        div#housing .row:nth-child(3) table td div.notify-count {
+          top: 14px;
+          left: -18px;
+          width: 10px;
+          cursor: pointer;
+          font-weight: bold;
+          position: relative;
+          display: inline-block;
+          text-align: center; }
+          div#housing .row:nth-child(3) table td div.notify-count.noinit {
+            display: none; }
+          div#housing .row:nth-child(3) table td div.notify-count img {
+            width: 22px; }
+          div#housing .row:nth-child(3) table td div.notify-count span {
+            top: -21px;
+            left: 5px;
+            color: white;
+            font-size: 10px;
+            position: relative; }
       div#housing .row:nth-child(3) table p {
         margin-bottom: 0px; }
       div#housing .row:nth-child(3) table span {
@@ -159,4 +183,109 @@ div#housing div#chat {
       color: #621f65;
       margin-right: 18px;
       border: 2px solid #621f65; }
+
+div#housing div#property {
+  top: 34px;
+  left: 338px;
+  width: 1234px;
+  display: none;
+  font-size: 18px;
+  border: 1px solid;
+  position: absolute;
+  background-color: white; }
+  div#housing div#property span {
+    color: black; }
+  div#housing div#property p {
+    color: #73c2ed;
+    margin-bottom: 0px; }
+  div#housing div#property div.row {
+    overflow: unset;
+    border-bottom: none; }
+    div#housing div#property div.row:nth-child(1) div:nth-child(1) {
+      padding: 36px 0px 0px 30px; }
+      div#housing div#property div.row:nth-child(1) div:nth-child(1) span {
+        color: #8d0b56; }
+        div#housing div#property div.row:nth-child(1) div:nth-child(1) span:first-of-type {
+          font-weight: bold; }
+    div#housing div#property div.row:nth-child(1) div:nth-child(2) {
+      float: right;
+      padding: 20px 0px 0px 0px; }
+      div#housing div#property div.row:nth-child(1) div:nth-child(2) img {
+        float: right;
+        cursor: pointer; }
+    div#housing div#property div.row:nth-child(2) img {
+      width: 750px; }
+    div#housing div#property div.row:nth-child(2) div.col-md-4 {
+      width: 28.3%;
+      padding: 0px;
+      margin-left: 40px;
+      line-height: 30px;
+      border-bottom: 2px solid lightgray; }
+      div#housing div#property div.row:nth-child(2) div.col-md-4 p {
+        top: -8px;
+        position: relative; }
+      div#housing div#property div.row:nth-child(2) div.col-md-4 div:nth-child(1) {
+        padding-top: 10px; }
+      div#housing div#property div.row:nth-child(2) div.col-md-4 div:nth-child(2) {
+        margin-top: 20px;
+        padding-bottom: 20px; }
+    div#housing div#property div.row:nth-child(3) {
+      text-align: center; }
+      div#housing div#property div.row:nth-child(3) div.col-md-8 {
+        padding-right: 60px; }
+        div#housing div#property div.row:nth-child(3) div.col-md-8 img {
+          width: 136px;
+          padding: 0px 10px 0px 10px; }
+      div#housing div#property div.row:nth-child(3) div.col-md-4 {
+        width: 28.3%;
+        margin-left: 40px;
+        padding: 14px 0px 32px 0px;
+        border-bottom: 2px solid lightgray; }
+        div#housing div#property div.row:nth-child(3) div.col-md-4 div {
+          height: 34px; }
+        div#housing div#property div.row:nth-child(3) div.col-md-4 div:nth-child(1) {
+          width: 28%;
+          float: left;
+          text-align: left;
+          display: inline-block; }
+          div#housing div#property div.row:nth-child(3) div.col-md-4 div:nth-child(1) div.dislike {
+            margin-top: 10px; }
+            div#housing div#property div.row:nth-child(3) div.col-md-4 div:nth-child(1) div.dislike img.dislike_sel {
+              top: -4px;
+              left: -4px;
+              position: relative; }
+        div#housing div#property div.row:nth-child(3) div.col-md-4 div:nth-child(2) {
+          width: 36%;
+          float: right;
+          text-align: right; }
+          div#housing div#property div.row:nth-child(3) div.col-md-4 div:nth-child(2) img:nth-child(1) {
+            float: left; }
+          div#housing div#property div.row:nth-child(3) div.col-md-4 div:nth-child(2) div.notify-count {
+            top: -33px;
+            left: -13px;
+            width: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            position: relative;
+            display: inline-block;
+            text-align: center; }
+            div#housing div#property div.row:nth-child(3) div.col-md-4 div:nth-child(2) div.notify-count.noinit {
+              display: none; }
+            div#housing div#property div.row:nth-child(3) div.col-md-4 div:nth-child(2) div.notify-count img {
+              width: 25px; }
+            div#housing div#property div.row:nth-child(3) div.col-md-4 div:nth-child(2) div.notify-count span {
+              top: -32px;
+              left: 7px;
+              color: white;
+              font-size: 10px;
+              position: relative; }
+        div#housing div#property div.row:nth-child(3) div.col-md-4 img {
+          width: 30px; }
+          div#housing div#property div.row:nth-child(3) div.col-md-4 img.noinit {
+            display: none; }
+    div#housing div#property div.row:nth-child(4) p:first-child {
+      color: black; }
+    div#housing div#property div.row:nth-child(4) p:last-child {
+      line-height: 26px;
+      margin: 10px 0px 20px 0px; }
 
