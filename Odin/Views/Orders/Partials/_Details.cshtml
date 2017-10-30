@@ -1,5 +1,5 @@
-﻿@*@model Odin.ViewModels.Orders.Transferee.OrdersTransfereeDetailsViewModel*@
-<div id="details">
+﻿@model Odin.ViewModels.Orders.Transferee.OrdersTransfereeViewModel
+<div id="details" data-order-id="@Model.Id">
     <div class="row details-title">
         <p>Profile Summary</p>
         <span class="details-blue">Please fill out any items that are not already auto-generated that could aid in the help of your clients placement.</span>
@@ -14,198 +14,152 @@
         <div class="row details-row">
             <div class="col-sm-3 details-col">
                 <label>Familiarization Trip:</label>
-                <span>Model.Transferee.FTrip</span>               
+                <span>@(Model.PreTripDate.HasValue ? Model.PreTripDate.Value.ToString("MM/dd/yy") : "TBD")</span>
             </div>
             <div class="col-sm-3 details-col">
                 <label>Work Start Date:</label>
-                <span>Model.Transferee.WorkStartDate</span>               
+                <span>@(Model.WorkStartDate.HasValue ? Model.WorkStartDate.Value.ToString("MM/dd/yy") : "TBD")</span>
             </div>
             <div class="col-sm-3 details-col">
                 <label>Temp Housing:</label>
-                <span>Model.TempHousingDays</span>               
+                <span>@Model.TempHousingDays</span>
             </div>
-        
+
             <div class="col-sm-3 details-col">
                 <label>Final Arrival:</label>
-                <span>Model.Transferee.FinalArrival</span>
+                <span>@(Model.FinalArrivalDate.HasValue ? Model.FinalArrivalDate.Value.ToString("MM/dd/yy") : "TBD")</span>
             </div>
             <div class="col-sm-3 details-col">
                 <label>Home Finding Date:</label>
-                <span>Model.Transferee.HFDate</span>
+                <span>@(Model.HomeFindingDate.HasValue ? Model.HomeFindingDate.Value.ToString("MM/dd/yy") : "TBD")</span>
             </div>
             <div class="col-sm-3 details-col">
                 <label>Temp Housing Last Day:</label>
-                <span>Model.TempHousingEndDate</span>
+                <span>@(Model.TempHousingEndDate.HasValue ? Model.TempHousingEndDate.Value.ToString("MM/dd/yy") : "TBD")</span>
             </div>
         </div>
-        <div class="details-block">
-            <div class="row details-header">
-                <P>
-                    Housing Details:
-                </P>
+    </div>
+    @if (@Model.Rent != null)
+    {
+    <div class="details-block">
+        <div class="row details-header">
+            <P>
+                Housing Details:
+            </P>
+        </div>
+       @*<div class="row details-row">
+        <div class="col-sm-3 details-col">
+            <label>Monthly Budget:</label>
+            <span>@string.Format("{0: $#,###.00}", @Model.Rent.HousingBudget)</span>
+        </div>
+        <div class="col-sm-3 details-col">
+            <label>Housing:</label>
+            <span>@Model.Rent.HousingType</span>
+        </div>
+        <div class="col-sm-3 details-col">
+            <label>School District:</label>
+            <span>@(Model.SchoolDistrict != null ? Model.SchoolDistrict : "TBD") </span>
+        </div>
+
+        <div class="col-sm-3 details-col">
+            <label>BD/BA:</label>
+            <span>@Model.Rent.NumberOfBedrooms.ToString()/@Model.Rent.NumberOfBathrooms.ToString()</span>
+        </div>
+        <div class="col-sm-3 details-col">
+            <label>Sq.Ft:</label>
+            <span>@string.Format("{0: #,###.00}", @Model.Rent.SquareFootage)</span>
+        </div>
+        <div class="col-sm-3 details-col">
+            <label>Rent or Own:</label>
+            <span>@Model.Rent.OwnershipType</span>
+        </div>
+    </div>*@
+    </div>
+    }
+    <div class="details-block">
+        <div class="row details-header">
+            <P>
+                Other Details:
+            </P>
+        </div>
+        <div class="row details-row">
+            <div class="col-sm-3 details-col">
+                <label>Manager:</label>
+                <span>@Model.ProgramManager.FullName</span>
             </div>
+            <div class="col-sm-3 details-col">
+                <label>Manager Email:</label>
+                <span>@Model.ProgramManager.Email</span>
+            </div>
+            <div class="col-sm-3 details-col">
+                <label>Manager #:</label>
+                <span> @String.Format("{0:###'.'###'.'####}", double.Parse(@Model.ProgramManager.PhoneNumber))</span>
+            </div>
+            <div class="col-sm-3 details-col">
+                <label>SE Number:</label>
+                <span>@Model.ProgramManager.SeContactUid</span>
+            </div>
+            <div class="col-sm-3 details-col">
+                <label>Client Number:</label>
+                <span>@Model.ClientFileNumber</span>
+            </div>
+        </div>
+    </div>
+
+    <hr />
+    <div class="details-blocks" data-block="services">
+        <div class="row details-title">
+            <p>
+                Scheduled Services
+                <span class="details-save">
+                    - Save
+                </span>
+            </p>
+            <span class="details-blue">Please fill out any items that are not already auto-generated that could aid in the help of your clients placement.</span>
+        </div>
+        
+       
+        <hr />
+        <div class="details-block" id="scheduledServices">
             <div class="row details-row">
                 <div class="col-sm-3 details-col">
-                    <label>Monthly Budget:</label>
-                    <span>Model.rent.HousingBudget</span>
+                    <H5>Service:</H5>
                 </div>
                 <div class="col-sm-3 details-col">
-                    <label>Housing:</label>
-                    <span>Model.rent.HousingType</span>
+                    <H5>Scheduled Date:</H5>
                 </div>
                 <div class="col-sm-3 details-col">
-                    <label>School District:</label>
-                    <span>Model.Transferee.SchoolDistrict</span>
-                </div>
-            
-                <div class="col-sm-3 details-col">
-                    <label>BD/BA:</label>
-                    <span>Model.rent.NumberOfBedrooms.ToString()/Model.rent.NumberOfBathrooms.ToString()</span>
+                    <H5>Time:</H5>
                 </div>
                 <div class="col-sm-3 details-col">
-                    <label>Sq. Ft:</label>
-                    <span>Model.rent.SquareFootage</span>
+                    <H5>Completed Date:</H5>
                 </div>
+                
                 <div class="col-sm-3 details-col">
-                    <label>Rent or Own:</label>
-                    <span>Model.rent.OwnershipType</span>
+                    <H5>Notes:</H5>
                 </div>
             </div>
-        </div>
-        <div class="details-block">
-            <div class="row details-header">
-                <P>
-                    Other Details:
-                </P>
-            </div>
-            <div class="row details-row">
-                <div class="col-sm-3 details-col">
-                    <label>Manager:</label>
-                    <span>Model.Transferee.Manager</span>
-                </div>
-                <div class="col-sm-3 details-col">
-                    <label>Manager Email:</label>
-                    <span>Model.Transferee.MEmail</span>
-                </div>
-                <div class="col-sm-3 details-col">
-                    <label>Manager #:</label>
-                    <span>Model.Transferee.ManNum</span>
-                </div>
-                <div class="col-sm-3 details-col">
-                    <label>SE Number:</label>
-                    <span>Model.Transferee.SENum</span>
-                </div>
-                <div class="col-sm-3 details-col">
-                    <label>Client Number:</label>
-                    <span>Model.Transferee.ClientNum</span>
-                </div>
-            </div>
+            @for (int i = 0; i < @Model.Services.Count(); i++)
+            {
+                <div class="row details-row" data-entity-id="@Model.Services.ElementAt(i).Id" data-entity-collection="services">
+                    <div class="col-sm-3 details-col">
+                        <label>@Model.Services.ElementAt(i).Name.</label>
+                    </div>
+                    <div class="col-sm-3 details-col">
+                        @Html.DatePicker("date", "ScheduledDate", Model.Services.ElementAt(i).ScheduledDateDisplay)
+                    </div>
+                    <div class="col-sm-3 details-col">
+                        @Html.DatePicker("time", "ScheduledTime", Model.Services.ElementAt(i).ScheduledTimeDisplay)
+                    </div>
+                    <div class="col-sm-3 details-col">
+                        @Html.DatePicker("date", "CompletedDate", Model.Services.ElementAt(i).CompletedDateDisplay)
+                    </div>                        
+                    <div class="col-sm-3 details-col">
+                        <p>@Html.TextAreaFor(s => @Model.Services.ElementAt(i).Notes, new { @class = "form-control intake-service-input" })</p>
+                    </div>
+                </div>               
+            }
         </div>
     </div>
-    <hr />
-    <div class="row details-title">
-        <p>Scheduled Services</p>
-        <span class="details-blue">Please fill out any items that are not already auto-generated that could aid in the help of your clients placement.</span>
-    </div>
-    <hr />
-    <div class="details-block" id="scheduledServices">
-        <div class="row details-row">
-            <div class="col-sm-3 details-col">
-                <label>Service:</label>                
-            </div>
-            <div class="col-sm-3 details-col">
-                <label>Scheduled Date:</label>                
-            </div>
-            <div class="col-sm-3 details-col">
-                <label>Completed Date:</label>                
-            </div>
-            <div class="col-sm-3 details-col">
-                <label>Time:</label>
-            </div>
-            <div class="col-sm-3 details-col">
-                <label>Notes:</label>
-            </div>
-        </div>
-        <div class="row details-row">
-            <div class="col-sm-3 details-col">                
-                <label>Pre Arrival Consultation</label>
-            </div>
-            <div class="col-sm-3 details-col">
-                @*@Html.DatePicker("svcPreArrival")
-                @Html.DatePickerFor(m => m.BirthDate)
-                @Html.ValidationMessageFor(m => m.BirthDate)*@
-
-
-                @Html.DatePicker("date", "preArrivalSchDate", DateTime.Now)
-            </div>
-            <div class="col-sm-3 details-col">                
-                @Html.DatePicker("date", "preArrivalComplDate", DateTime.Now)
-            </div>
-            <div class="col-sm-3 details-col">               
-                @Html.DatePicker("time", "preArrivalTime", DateTime.Now)
-            </div>
-            <div class="col-sm-3 details-col">
-                <p>Model.Transferee.Notes</p>
-                <input type="text" class="form-control" />
-            </div>
-        </div>
-        <div class="row details-row">
-            <div class="col-sm-3 details-col">
-                <label>Welcome Packet</label>
-            </div>
-            <div class="col-sm-3 details-col">
-                @Html.DatePicker("date", "welSchDate", DateTime.Now)
-            </div>
-            <div class="col-sm-3 details-col">
-                @Html.DatePicker("date", "welComplDate", DateTime.Now)
-            </div>
-            <div class="col-sm-3 details-col">
-                @Html.DatePicker("time", "welSchTimee", DateTime.Now)
-            </div>
-            <div class="col-sm-3 details-col">
-                <p>Model.Transferee.Notes</p>
-                <input type="text" class="form-control" />
-            </div>
-        </div>
-        <div class="row details-row">
-            <div class="col-sm-3 details-col">
-                <label>Area Orientation</label>
-            </div>
-            <div class="col-sm-3 details-col">
-                @Html.DatePicker("date", "orientSchDate", DateTime.Now)
-            </div>
-            <div class="col-sm-3 details-col">
-                @Html.DatePicker("date", "orientComplDate", DateTime.Now)
-            </div>
-            <div class="col-sm-3 details-col">
-                @Html.DatePicker("time", "orientSchTime", DateTime.Now)
-            </div>
-            <div class="col-sm-3 details-col">
-                <p>Model.Transferee.Notes</p>
-                <input type="text" class="form-control" />
-            </div>
-        </div>
-        <div class="row details-row">
-            <div class="col-sm-3 details-col">
-                <label>Accompanied Home Finding</label>
-            </div>
-            <div class="col-sm-3 details-col">
-                @Html.DatePicker("date", "findingSchDate", DateTime.Now)
-            </div>
-            <div class="col-sm-3 details-col">
-                @Html.DatePicker("date", "findingComplDate", DateTime.Now)
-            </div>
-            <div class="col-sm-3 details-col">
-                @Html.DatePicker("time", "findingSchTime", DateTime.Now)
-            </div>
-            <div class="col-sm-3 details-col" style="width:32%; max-width: 500px;text-wrap:normal">
-                <p>Model.Transferee NotesModel Transferee NotesModel Transferee NotesModel Transferee.NotesModel Transferee NotesModel Transferee.NotesModel Transferee.NotesModel Transferee.NotesModel Transferee.NotesModel Transferee.NotesModel Transferee.Notes</p>
-                <input type="text" class="form-control" />
-            </div>
-        </div>
-       </div>
-    </div>
-
-        @Styles.Render("~/Styling/details")
-
-
+</div>
+@Styles.Render("~/Styling/details")

@@ -1,21 +1,39 @@
 ﻿@import "../shared/_definitions.scss";
 
+div[data-notify].alert-success {
+    background-color: $DW_LtPurple;
+}
+
+div[data-notify].alert-danger {
+    background-color: $DW_Red;
+}
+
 
 div#intake {
     padding-top: 30px;
-    padding-left: 50px;
+    padding-left: 25px;
+    margin-left: 20px;    
 
     div.row {
         text-align: left;
+        margin: 0px;
     }
 
     .intake-title {
         padding-bottom: 30px;
+
+        p {
+            color: black;
+            font-size: 30px;
+            margin-bottom: 0px;
+            /*margin: 30px 0px 15px 0px;*/
+        }
     }
 
     hr {
-        margin-top: 0px;
-        margin-bottom: 0px;
+        border-color: lightgray;
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
 
     .intake-blue {
@@ -27,60 +45,74 @@ div#intake {
     }
 
     .intake-block {
-        padding-top: 35px;
-        padding-bottom: 35px;
+        padding-top: 10px;
+        padding-bottom: 10px;
 
         .intake-header {
+
+            .intake-collapse {
+                cursor: pointer;
+            }
+
             h5 {
-                margin-top: 0px
+                margin-top: 0px;
+                font-size: 22px
             }
 
             .intake-edit, .intake-save {
-                font-size: medium;
+                font-size: 20px;
                 color: $DW_Lime;
                 cursor: pointer;
             }
 
             .intake-cancel {
                 display: none;
-                font-size: medium;
+                font-size: 20px;
                 color: $DW_Red;
                 cursor: pointer;
                 padding-left: 15px;
             }
+
+            .intake-expand-img {
+                display: none;
+            }
         }
 
         .intake-row {
-            
+
             .intake-col {
-                padding-top: 15px;
+                padding-top:10px;
+                min-height: 70px;
 
                 label {
                     display: block;
-                    font-size: medium;
+                    font-size: 20px;
                     margin-bottom: -5px;
                 }
 
-                span {
+                .intake-span {
                     color: $DW_Blue;
-                    font-size: small;
+                    font-size: 16px;
                 }
 
                 .intake-add {
-                    font-size: medium;
+                    padding-top: 10px;
+                    padding-bottom: 10px;
+                    font-size: 20px;
                     color: $DW_Lime;
                     cursor: pointer;
+                    display: block;
                 }
 
                 .intake-del {
-                    font-size: medium;
+                    font-size: 20px;
                     color: $DW_Red;
                     cursor: pointer;
                 }
 
-                input {
+                .intake-input {
                     color: $DW_Blue;
-                    font-size: small;
+                    font-size: 16px;
                     display: none;
                     width: 100%;
                     min-width: 100%;
@@ -91,13 +123,23 @@ div#intake {
                     line-height: 20px;
                 }
 
-                textarea {
+                .intake-date {
                     display: none;
-                    width: 100%;
-                    max-width: 100%;
-                    color: $DW_Blue;
-                    font-size: small;
+
+                    input {
+                        color: $DW_Blue;
+                        font-size: 16px;
+                        display: none;
+                    }
+
+                    span {
+                        color: $DW_Blue;
+                    }
                 }
+            }
+
+            .intake-col-add {
+                min-height: 0px;
             }
         }
     }

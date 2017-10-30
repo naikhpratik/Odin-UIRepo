@@ -132,6 +132,21 @@ namespace Odin.Controllers.Api
                 }
             }
 
+            foreach (var petDto in dto.Pets)
+            {
+                var pet = order.Pets.FirstOrDefault(p => !String.IsNullOrEmpty(petDto.Id) && p.Id == petDto.Id);
+                if (pet == null)
+                {
+                    pet = _mapper.Map<PetDto, Pet>(petDto);
+                    pet.Id = Guid.NewGuid().ToString();
+                    order.Pets.Add(pet);
+                }
+                else
+                {
+                    _mapper.Map<PetDto, Pet>(petDto, pet);
+                }
+            }
+
             _mapper.Map<OrdersTransfereeIntakeFamilyDto, Order>(dto, order);
             _unitOfWork.Complete();
 
@@ -233,5 +248,144 @@ namespace Odin.Controllers.Api
             return Ok();
         }
 
+        [HttpPost]
+        [Authorize]
+        [Route("api/orders/transferee/details/services")]
+        public IHttpActionResult UpsertDetailsServices(OrdersTransfereeDetailsServicesDto dto)
+        {
+
+            var userId = User.Identity.GetUserId();
+            var order = _unitOfWork.Orders.GetOrderById(dto.Id);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            foreach (var serviceDto in dto.Services)
+            {
+                var service = order.Services.FirstOrDefault(s => !String.IsNullOrEmpty(serviceDto.Id) && s.Id == serviceDto.Id);
+                if (service == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    _mapper.Map<OrdersTransfereeDetailsServiceDto, Service>(serviceDto, service);
+                }
+            }
+
+            _unitOfWork.Complete();
+            return Ok();
+        }
+
+        [HttpPost]
+        [Authorize]
+        [Route("api/orders/transferee/intake/rmc")]
+        public IHttpActionResult UpsertIntakeRmc(OrdersTransfereeIntakeRmcDto dto)
+        {
+
+            var userId = User.Identity.GetUserId();
+
+            var order = _unitOfWork.Orders.GetOrderById(dto.Id);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            _mapper.Map<OrdersTransfereeIntakeRmcDto, Order>(dto, order);
+            _unitOfWork.Complete();
+
+            return Ok();
+        }
+
+        [HttpPost]
+        [Authorize]
+        [Route("api/orders/transferee/pets/{orderId}")]
+        public IHttpActionResult InsertPet(string orderId)
+        {
+            var userId = User.Identity.GetUserId();
+            var order = _unitOfWork.Orders.GetOrderById(orderId);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            var pet = new Pet { Id = Guid.NewGuid().ToString() };
+            order.Pets.Add(pet);
+            _unitOfWork.Complete();
+
+            //On success, return the newly created id.
+            return Ok(pet.Id);
+        }
+
+        [HttpDelete]
+        [Authorize]
+        [Route("api/orders/transferee/pets/{id}")]
+        public IHttpActionResult DeletePet(string id)
+        {
+
+            var userId = User.Identity.GetUserId();
+            var pet = _unitOfWork.Pets.GetChildById(id);
+
+            if (pet == null)
+            {
+                return NotFound();
+            }
+            pet.Deleted = true;
+            _unitOfWork.Complete();
+            return Ok();
+        }
+
+        [HttpPost]
+        [Authorize]
+        [Route("api/orders/transferee/intake/temphousing")]
+        public IHttpActionResult UpsertIntakeTempHousing(OrdersTransfereeIntakeTempHousingDto dto)
+        {
+
+            var userId = User.Identity.GetUserId();
+
+            var order = _unitOfWork.Orders.GetOrderById(dto.Id);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            _mapper.Map<OrdersTransfereeIntakeTempHousingDto, Order>(dto, order);
+            _unitOfWork.Complete();
+
+            return Ok();
+        }
+
+        [HttpPost]
+        [Authorize]
+        [Route("api/orders/transferee/intake/rent")]
+        public IHttpActionResult UpsertIntakeRent(OrdersTransfereeIntakeRentDto dto)
+        {
+            var userId = User.Identity.GetUserId();
+
+            var order = _unitOfWork.Orders.GetOrderById(dto.Id);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            if (order.Rent == null)
+            {
+                order.Rent = _mapper.Map<OrdersTransfereeIntakeRentDto, Rent>(dto);
+            }
+            else
+            {
+                _mapper.Map<OrdersTransfereeIntakeRentDto, Rent>(dto, order.Rent);
+            }
+
+            _unitOfWork.Complete();
+
+            return Ok();
+        }
     }
 }

@@ -24,6 +24,9 @@ namespace Odin.Data.Persistence
         public virtual DbSet<Consultant> Consultants { get; set; }
         public virtual DbSet<Transferee> Transferees { get; set; }
         public virtual DbSet<Child> Children { get; set; }
+        public virtual DbSet<Pet> Pets { get; set; }
+        public virtual DbSet<Lease> Leases { get; set; }
+
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
@@ -39,6 +42,7 @@ namespace Odin.Data.Persistence
         {
             modelBuilder.Configurations.Add(new OrderConfiguration());
             modelBuilder.Configurations.Add(new RentConfiguration());
+            modelBuilder.Configurations.Add(new LeaseConfiguration());
 
             //modelBuilder.Entity<Child>()
             //    .Map(m => m.Requires("Deleted").HasValue(false))

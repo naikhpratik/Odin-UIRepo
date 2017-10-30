@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Microsoft.Azure.Mobile.Server;
 
 namespace Odin.Data.Core.Models
 {
@@ -13,6 +12,7 @@ namespace Odin.Data.Core.Models
         {
             Services = new Collection<Service>();
             Children = new Collection<Child>();
+            Pets = new Collection<Pet>();
         }
 
         public string TrackingId { get; set; }
@@ -26,19 +26,38 @@ namespace Odin.Data.Core.Models
         public string OriginCountry { get; set; }
         public DateTime? EstimatedArrivalDate { get; set; }
         public DateTime? PreTripDate { get; set; }
+        public DateTime? FinalArrivalDate { get; set; }
+        public DateTime? HomeFindingDate { get; set; }
+        public DateTime? WorkStartDate { get; set; }
         public int TempHousingDays { get; set; }
         public DateTime? TempHousingEndDate { get; set; }
-
+        public string SchoolDistrict { get; set; }
         public string FamilyDetails { get; set; }
 
         public bool TransfereeInviteEnabled { get; set; }
         public string SeCustNumb { get; set; }
         public string Rmc { get; set; }
+        public string RmcContact { get; set; }
+        public string RmcContactEmail { get; set; }
         public string Client { get; set; }
+        public string ClientFileNumber { get; set; }
 
-        public int? RentId { get; set; }
-        public Rent Rent { get; set; }
-        
+        public DateTime? LastContactedDate{get; set; }
+
+        public bool IsRush { get; set; }
+        public bool IsVip { get; set; }
+        public bool IsInternational { get; set; }
+        public bool IsAssignment { get; set; }
+        public DateTime? EstimatedDepartureDate { get; set; }
+
+        public string SpouseName { get; set; }
+        public string SpouseVisaType { get; set; }
+        public virtual ICollection<Child> Children { get; private set; }
+        public string ChildrenEducationPreferences { get; set; }
+
+        public virtual ICollection<Pet> Pets { get; private set; }
+        public string PetNotes { get; set; }
+
         public string TransfereeId { get; set; }
         public virtual Transferee Transferee { get; set; }
 
@@ -48,18 +67,10 @@ namespace Odin.Data.Core.Models
         public string ConsultantId { get; set; }
         public virtual Consultant Consultant { get; set; }
 
+        public Rent Rent { get; set; }
+        public Lease Lease { get; set; }
+
         public virtual ICollection<Service> Services { get; private set; }
-
-        public DateTime? LastContactedDate{get; set; }
-
-        public bool IsRush { get; set; }
-
-        public bool IsVip { get; set; }
-
-        public string SpouseName { get; set; }
-        public string SpouseVisaType { get; set; }
-        public virtual ICollection<Child> Children { get; private set; }
-        public string ChildrenEducationPreferences { get; set; }
 
         public bool HasService(int serviceTypeId)
         {

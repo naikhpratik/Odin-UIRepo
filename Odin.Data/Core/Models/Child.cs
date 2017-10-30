@@ -12,5 +12,10 @@
 
         public Order Order { get; set; }
 
+        public void Delete()
+        {
+            Deleted = true;
+        }
+
     }
 }

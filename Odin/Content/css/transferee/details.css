@@ -1,13 +1,19 @@
 ﻿div#details {
   padding-top: 10px;
-  padding-left: 20px; }
+  padding-left: 50px; }
   div#details div.row {
     text-align: left; }
-  div#details .details-title P {
+  div#details .details-title {
+    padding-bottom: 30px; }
+  div#details P {
     padding-bottom: 0px;
     margin-bottom: 0px;
     font-size: 18px;
     color: #231F20; }
+  div#details .details-save {
+    font-size: small;
+    color: #a7ce39;
+    cursor: pointer; }
   div#details hr {
     margin-top: 0px;
     margin-bottom: 0px; }
@@ -18,35 +24,37 @@
   div#details .details-block {
     padding-top: 15px;
     padding-bottom: 15px; }
-    div#details .details-block .details-header P {
+    div#details .details-block .details-header p {
       margin: 0px;
-      font-size: 15px;
-      font-weight: bold;
-      color: #8E1A55; }
-    div#details .details-block .details-header span {
+      font-size: 16px;
+      font-weight: 200;
+      color: #8e1a55; }
+  div#details .details-row .details-col {
+    padding-top: 15px;
+    padding-left: 0px;
+    width: 16%; }
+    div#details .details-row .details-col h5 {
+      display: block;
+      font-size: 16px;
+      font-weight: 200;
+      margin-bottom: -5px;
+      color: #6c6e70; }
+    div#details .details-row .details-col label {
+      display: block;
+      font-size: 14px;
+      font-weight: 200;
+      color: #858585; }
+    div#details .details-row .details-col span {
+      color: #31a4dd;
+      font-size: 14px; }
+    div#details .details-row .details-col input {
+      color: #31a4dd;
       font-size: small;
-      color: #a7ce39;
-      cursor: pointer; }
-    div#details .details-block .details-row .details-col {
-      padding-top: 15px;
-      padding-left: 0px;
-      width: 16%; }
-      div#details .details-block .details-row .details-col label {
-        display: block;
-        font-size: 14px;
-        margin-bottom: -5px;
-        color: #858585; }
-      div#details .details-block .details-row .details-col span {
-        color: #31a4dd;
-        font-size: 14px; }
-      div#details .details-block .details-row .details-col input {
-        color: #31a4dd;
-        font-size: small;
-        display: none; }
-      div#details .details-block .details-row .details-col textarea {
-        display: none;
-        width: 100%;
-        max-width: 100%;
-        color: #31a4dd;
-        font-size: small; }
+      display: none; }
+    div#details .details-row .details-col textarea {
+      display: none;
+      width: 100%;
+      max-width: 100%;
+      color: #31a4dd;
+      font-size: small; }
 
