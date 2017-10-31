@@ -35,6 +35,8 @@
 
         public bool? HasExerciseRoom { get; set; }
 
+        public bool? HasLaundry { get; set; }
+
         public string Comments { get; set; }
 
         public AreaType AreaType { get; set; }
