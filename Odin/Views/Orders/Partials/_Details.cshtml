@@ -1,4 +1,4 @@
-﻿@model Odin.ViewModels.Orders.Transferee.OrdersTransfereeViewModel
+﻿@model Odin.ViewModels.Orders.Transferee.OrdersTransfereeDetailsViewModel
 <div id="details" data-order-id="@Model.Id">
     <div class="row details-title">
         <p>Profile Summary</p>
@@ -47,7 +47,7 @@
                 Housing Details:
             </P>
         </div>
-       @*<div class="row details-row">
+       <div class="row details-row">
         <div class="col-sm-3 details-col">
             <label>Monthly Budget:</label>
             <span>@string.Format("{0: $#,###.00}", @Model.Rent.HousingBudget)</span>
@@ -63,7 +63,7 @@
 
         <div class="col-sm-3 details-col">
             <label>BD/BA:</label>
-            <span>@Model.Rent.NumberOfBedrooms.ToString()/@Model.Rent.NumberOfBathrooms.ToString()</span>
+            <span>@Model.Rent.NumberOfBedrooms.ToString()/@(Model.Rent.NumberOfBathrooms != null ? Model.Rent.NumberOfBathrooms.ToString() : "NA")</span>
         </div>
         <div class="col-sm-3 details-col">
             <label>Sq.Ft:</label>
@@ -73,7 +73,7 @@
             <label>Rent or Own:</label>
             <span>@Model.Rent.OwnershipType</span>
         </div>
-    </div>*@
+    </div>
     </div>
     }
     <div class="details-block">

@@ -33,9 +33,8 @@ namespace Odin.ViewModels.Orders.Transferee
         public IEnumerable<ServiceViewModel> Services { get; set; }
         
         public Rent Rent { get; set; }
-
-        public string ProgramManagerId { get; set; }
-        public virtual Manager ProgramManager { get; set; }
+               
+        public Manager ProgramManager { get; set; }
         public string SeCustNumb { get; set; }
         public string Client { get; set; }
         public string ClientFileNumber { get; set; }

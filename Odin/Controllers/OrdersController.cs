@@ -35,7 +35,14 @@ namespace Odin.Controllers
 
             return View();
         }
+        public ActionResult DetailsPartial(string id)
+        {
+            var order = _unitOfWork.Orders.GetOrderById(id);
 
+            OrdersTransfereeDetailsViewModel vm = _mapper.Map<Order, OrdersTransfereeDetailsViewModel>(order);
+                        
+            return PartialView("~/views/orders/partials/_Details.cshtml",vm);  
+        }
         public ActionResult Details(string orderId)
         {
             var userId = User.Identity.GetUserId();

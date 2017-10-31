@@ -23,13 +23,13 @@
         </ul>
     </div>
     <div class="col-md-10 col-md-offset-2">
-        <div class="row" style="overflow-x: hidden;">
+        <div id="orderContainer" class="row" style="overflow-x: hidden;">
             @Html.Partial("~/Views/Orders/Partials/_Intake.cshtml")
-            @Html.Partial("~/Views/Orders/Partials/_Details.cshtml")
+            @*@Html.Partial("~/Views/Orders/Partials/_Details.cshtml")
             @Html.Partial("~/Views/Orders/Partials/_Housing.cshtml")
             @Html.Partial("~/Views/Orders/Partials/_History.cshtml")
             @Html.Partial("~/Views/Orders/Partials/_Messages.cshtml")
-            @Html.Partial("~/Views/Orders/Partials/_Itinerary.cshtml")
+            @Html.Partial("~/Views/Orders/Partials/_Itinerary.cshtml")*@
         </div>
     </div>
 </div>
@@ -40,8 +40,9 @@
     
     @Styles.Render("~/Styling/transferee")
     @Scripts.Render("~/Scripts/transferee")
-
+    
     <script>
+    var GorderId = '@Model.Id';
     $(document).ready(function () {
         OrdersPageController.TransfereeInit();
         TransfereeIntakeController.init();
