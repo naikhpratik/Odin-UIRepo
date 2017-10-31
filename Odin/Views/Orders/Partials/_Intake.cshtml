@@ -2,7 +2,7 @@
 
 <div id="intake" data-order-id="@Model.Id">
     <div class="row intake-title">
-        <h4>Intake</h4>
+        <p>Intake</p>
         <span class="intake-blue">Please fill out any items that are not already auto-generated that could aid in the help of your clients placement.</span>
     </div>
     <hr/>
@@ -160,8 +160,8 @@
                 <input type="text" class="form-control intake-input"/>
             </div>
         </div>
-    </div>*@
-    <hr/>
+    </div>
+    <hr/>*@
     <div class="intake-block">
         <div class="row intake-header">
             <h5>
@@ -216,7 +216,7 @@
             </div>
         </div>
         <div class="row intake-row collapse in">
-            <div class="col-sm-9 intake-col">
+            <div class="col-sm-9 intake-col intake-col-add">
                 <span class="intake-add" data-entity-add="children">+Add Child</span>
             </div>
         </div>
@@ -259,8 +259,8 @@
                 @Html.HiddenFor(m => @Model.ChildrenEducationPreferences, new { @class = "intake-hidden" })
             </div>
         </div>
-        <div class="row intake-row collapse in">
-            <div class="col-sm-9 intake-col">
+        <div class="row intake-row intake-row-add collapse in">
+            <div class="col-sm-9 intake-col intake-col-add">
                 <span class="intake-add" data-entity-add="pets">+Add Pet</span>
             </div>
         </div>
@@ -348,6 +348,7 @@
             </div>
         }
     </div>
+    <hr/>
     <div class="intake-block" data-block="temphousing">
         <div class="row intake-header">
             <h5>
@@ -375,9 +376,9 @@
                 <label>Last Day:</label>
                 <span class="intake-span">@Model.TempHousingEndDateDisplay</span>
                 @*<div class="input-group intake-date date">
-                    <input class="form-control" data-date-today-btn="true" data-date-today-highlight="true" name="TempHousingEndDate" placeholder="Enter date or hit calendar" style="display: block; width: 85%" type="text" value="2017-10-24">
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                </div>*@
+                            <input class="form-control" data-date-today-btn="true" data-date-today-highlight="true" name="TempHousingEndDate" placeholder="Enter date or hit calendar" style="display: block; width: 85%" type="text" value="2017-10-24">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>*@
                 @if (@Model.TempHousingEndDate.HasValue)
                 {
                     @Html.DatePicker("intake-date date", "TempHousingEndDate", Model.TempHousingEndDate.Value)
@@ -388,6 +389,38 @@
                 }
                 <input type="hidden" value="@Model.TempHousingEndDateDisplay" class="intake-hidden" name="TempHousingEndDate"/>
                 
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <div class="intake-block" data-block="rent">
+        <div class="row intake-header">
+            <h5>
+                <span class="intake-collapse">
+                    <img class="intake-collapse-img" src="/Content/Images/collapse.png" />
+                    <img class="intake-expand-img" src="/Content/Images/expand.png" />
+                    Housing Preferences
+                </span>
+                <span class="intake-edit">
+                    + Edit
+                </span>
+                <span class="intake-cancel">
+                    x Cancel
+                </span>
+            </h5>
+        </div>
+        <div class="row intake-row collapse in">
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
+                <label>Number of Bedrooms:</label>
+                <span class="intake-span">@(Model.Rent != null ? Model.Rent.NumberOfBedrooms.ToString() : String.Empty)</span>
+                @Html.TextBoxFor(m => @Model.Rent.NumberOfBedrooms, new { @class = "form-control intake-input", Name="NumberOfBedrooms" })
+                @Html.HiddenFor(m => @Model.Rent.NumberOfBedrooms, new { @class = "intake-hidden", Name="NumberOfBedrooms" })
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
+                <label>Number of Bathrooms:</label>
+                <span class="intake-span">@(Model.Rent != null ? Model.Rent.NumberOfBathrooms.ToString() : String.Empty)</span>
+                @Html.TextBoxFor(m => @Model.Rent.NumberOfBathrooms, new { @class = "form-control intake-input", Name="NumberOfBathrooms" })
+                @Html.HiddenFor(m => @Model.Rent.NumberOfBathrooms, new { @class = "intake-hidden", Name="NumberOfBathrooms" })
             </div>
         </div>
     </div>

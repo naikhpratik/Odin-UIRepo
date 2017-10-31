@@ -339,6 +339,7 @@
     <Compile Include="ViewModels\Shared\ChildViewModel.cs" />
     <Compile Include="ViewModels\Shared\ManagerViewModel.cs" />
     <Compile Include="ViewModels\Shared\PetViewModel.cs" />
+    <Compile Include="ViewModels\Shared\RentViewModel.cs" />
     <Compile Include="ViewModels\Shared\ServiceTypeViewModel.cs" />
     <Compile Include="ViewModels\Shared\ServiceViewModel.cs" />
     <Compile Include="ViewModels\Shared\TransfereeViewModel.cs" />
@@ -572,13 +573,19 @@
     <Content Include="Content\Images\icn_alert_B1.png" />
     <Content Include="Content\Images\icn_alert_circle.png" />
     <Content Include="Content\Images\icn_cal_B1.png" />
+    <Content Include="Content\Images\icn_chat_1.png" />
+    <Content Include="Content\Images\icn_chat_2.png" />
     <Content Include="Content\Images\icn_chat_B1.png" />
+    <Content Include="Content\Images\icn_chat_bubble.png" />
+    <Content Include="Content\Images\icn_close_pg.png" />
     <Content Include="Content\Images\icn_details.png" />
     <Content Include="Content\Images\icn_down_arrow.png" />
     <Content Include="Content\Images\icn_history.png" />
     <Content Include="Content\Images\icn_intake.png" />
     <Content Include="Content\Images\icn_internal_itinerary.png" />
     <Content Include="Content\Images\icn_internal_messages.png" />
+    <Content Include="Content\Images\icn_ln_non_selected_dislike.png" />
+    <Content Include="Content\Images\icn_ln_non_selected_like.png" />
     <Content Include="Content\Images\icn_ln_selected_dislike.png" />
     <Content Include="Content\Images\icn_ln_selected_like.png" />
     <Content Include="Content\Images\icn_marker.png" />
@@ -588,6 +595,7 @@
     <Content Include="Content\Images\icn_up_arrow.png" />
     <Content Include="Content\Images\icn_up_sel_arrow.png" />
     <Content Include="Content\Images\ic_search.png" />
+    <Content Include="Content\Images\image_placeholder_large.png" />
     <Content Include="Content\Images\login.jpg" />
     <Content Include="Content\Images\map_placeholder.png" />
     <Content Include="Content\Images\popout_sml_img.png" />

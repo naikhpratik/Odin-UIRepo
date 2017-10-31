@@ -49,7 +49,8 @@ namespace Odin.Data.Persistence
                 .Include(o => o.Services)
                 .Include(o => o.Rent)
                 .Include(o => o.Services.Select(s => s.ServiceType))
-                .SingleOrDefault();
+                .Include(o => o.Rent)
+                .SingleOrDefault<Order>();
         }
 
         public Order GetOrderFor(string userId, string orderId)

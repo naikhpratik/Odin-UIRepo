@@ -360,5 +360,33 @@ namespace Odin.Controllers.Api
 
             return Ok();
         }
+
+        [HttpPost]
+        [Authorize]
+        [Route("api/orders/transferee/intake/rent")]
+        public IHttpActionResult UpsertIntakeRent(OrdersTransfereeIntakeRentDto dto)
+        {
+            var userId = User.Identity.GetUserId();
+
+            var order = _unitOfWork.Orders.GetOrderById(dto.Id);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            if (order.Rent == null)
+            {
+                order.Rent = _mapper.Map<OrdersTransfereeIntakeRentDto, Rent>(dto);
+            }
+            else
+            {
+                _mapper.Map<OrdersTransfereeIntakeRentDto, Rent>(dto, order.Rent);
+            }
+
+            _unitOfWork.Complete();
+
+            return Ok();
+        }
     }
 }

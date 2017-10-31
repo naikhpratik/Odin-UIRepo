@@ -74,6 +74,7 @@ namespace Odin.IntegrationTests.Helpers
                 .Include(o => o.Rent)
                 .Include(o => o.Pets)
                 .Include(o => o.Children)
+                .Include(o => o.Lease)
                 .ToList();
 
             foreach (var order in orders)
@@ -104,6 +105,8 @@ namespace Odin.IntegrationTests.Helpers
                         context.Children.Remove(orderChild);
                     }
                 }
+                if (order.Lease != null)
+                    context.Leases.Remove(order.Lease);
                 if (order.Rent != null)
                     context.Rents.Remove(order.Rent);
             }             

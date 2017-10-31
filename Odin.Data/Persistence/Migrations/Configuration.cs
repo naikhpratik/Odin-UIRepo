@@ -61,6 +61,7 @@ namespace Odin.Data.Persistence.Migrations
                     orders[i].Consultant = dsc;
                     orders[i].ProgramManager = pm;
                     orders[i].Transferee = CreateRandomTransferee(context);
+                    orders[i].Lease = LeaseBuilder.New();
                     orders[i].Services.Add(new Service()
                     {
                         ServiceType = context.ServiceTypes.First()

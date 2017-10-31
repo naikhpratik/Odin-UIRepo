@@ -85,8 +85,12 @@ namespace Odin.ViewModels.Orders.Transferee
 
         public TransfereeViewModel Transferee { get; set; }
 
+<<<<<<< HEAD
         public string RentId { get; set; }
         public RentViewModel Rent { get; set; }
+=======
+        public Rent Rent { get; set; }
+>>>>>>> master
 
         public string ProgramManagerId { get; set; }
         public virtual Manager ProgramManager { get; set; }

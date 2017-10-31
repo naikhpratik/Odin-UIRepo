@@ -42,8 +42,22 @@ namespace Odin.Data.Core.Models
         public string Client { get; set; }
         public string ClientFileNumber { get; set; }
 
-        public Rent Rent { get; set; }
-        
+        public DateTime? LastContactedDate{get; set; }
+
+        public bool IsRush { get; set; }
+        public bool IsVip { get; set; }
+        public bool IsInternational { get; set; }
+        public bool IsAssignment { get; set; }
+        public DateTime? EstimatedDepartureDate { get; set; }
+
+        public string SpouseName { get; set; }
+        public string SpouseVisaType { get; set; }
+        public virtual ICollection<Child> Children { get; private set; }
+        public string ChildrenEducationPreferences { get; set; }
+
+        public virtual ICollection<Pet> Pets { get; private set; }
+        public string PetNotes { get; set; }
+
         public string TransfereeId { get; set; }
         public virtual Transferee Transferee { get; set; }
 
@@ -53,21 +67,10 @@ namespace Odin.Data.Core.Models
         public string ConsultantId { get; set; }
         public virtual Consultant Consultant { get; set; }
 
+        public Rent Rent { get; set; }
+        public Lease Lease { get; set; }
+
         public virtual ICollection<Service> Services { get; private set; }
-
-        public DateTime? LastContactedDate{get; set; }
-
-        public bool IsRush { get; set; }
-
-        public bool IsVip { get; set; }
-
-        public string SpouseName { get; set; }
-        public string SpouseVisaType { get; set; }
-        public virtual ICollection<Child> Children { get; private set; }
-        public string ChildrenEducationPreferences { get; set; }
-
-        public virtual ICollection<Pet> Pets { get; private set; }
-        public string PetNotes { get; set; }
 
         public bool HasService(int serviceTypeId)
         {

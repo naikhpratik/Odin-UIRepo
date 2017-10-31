@@ -16,7 +16,6 @@ namespace Odin.Data.Persistence
         public IChildrenRepository Children { get; private set; }
         public IPetsRepository Pets { get; private set; }
 
-
         public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;

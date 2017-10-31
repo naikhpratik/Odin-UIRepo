@@ -72,8 +72,11 @@ namespace Odin
             CreateMap<OrdersTransfereeIntakeServiceDto, Service>();
             CreateMap<OrdersTransfereeIntakeRmcDto, Order>();
             CreateMap<OrdersTransfereeIntakeTempHousingDto, Order>();
+<<<<<<< HEAD
             CreateMap<OrdersTransfereeIntakeRentDto, Rent>();
+=======
             CreateMap<OrdersTransfereeDetailsServiceDto, Service>();
+>>>>>>> master
         }
     }
 }

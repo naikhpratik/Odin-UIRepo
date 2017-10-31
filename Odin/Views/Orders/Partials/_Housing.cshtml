@@ -47,9 +47,9 @@
         <div>
             <span>Filter:</span>
             <div>
-                <input type="radio" name="choice" value="New"><span>New</span>
-                <input type="radio" name="choice" value="Like" checked><span>Like</span>
-                <input type="radio" name="choice" value="Dislike"><span>Dislike</span>
+                <input type="radio" name="choice" value="new"><span>New</span>
+                <input type="radio" name="choice" value="like"><span>Like</span>
+                <input type="radio" name="choice" value="dislike"><span>Dislike</span>
             </div> 
         </div>
         <div id="add">
@@ -93,7 +93,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr sel="new">
                         <td>
                             <img class="location" src="~/Content/Images/popout_sml_img.png" />
                         </td>
@@ -107,19 +107,29 @@
                         </td>
                         <td>
                             <p>2 | 2</p>
-                            <p>$3,200 | 1,300 sq.ft</p>
+                            <p>$3,200 | 1,300</p>
                         </td>
                         <td>
                             <img src="~/Content/Images/icn_cal_B1.png" />
                         </td>
                         <td>
-                            <img class="like" src="~/Content/Images/icn_ln_selected_like.png" />
+                            <div class="likebtns">
+                                <img class="new" src="~/Content/Images/icn_ln_non_selected_like.png" />
+                                <img class="like noinit" src="~/Content/Images/icn_ln_selected_like.png" />
+                                <img class="dislike noinit" src="~/Content/Images/icn_ln_selected_dislike.png" />
+                            </div>
                         </td>
                         <td>
-                            <img src="~/Content/Images/icn_chat_B1.png" />
+                            <div class="comments">
+                                <img class="comment" src="~/Content/Images/icn_chat_bubble.png" />
+                                <div class="notify-count">
+                                    <img src="~/Content/Images/icn_alert_circle.png" />
+                                    <span>03</span>
+                                </div>
+                            </div>
                         </td>
                     </tr>
-                    <tr>
+                    <tr sel="new">
                         <td>
                             <img class="location" src="~/Content/Images/popout_sml_img.png" />
                         </td>
@@ -133,19 +143,29 @@
                         </td>
                         <td>
                             <p>3 | 2</p>
-                            <p>$1,800 | 950 sq.ft</p>
+                            <p>$1,800 | 950</p>
                         </td>
                         <td>
                             <img src="~/Content/Images/icn_cal_B1.png" />
                         </td>
                         <td>
-                            <img class="like" src="~/Content/Images/icn_ln_selected_like.png" />
+                            <div class="likebtns">
+                                <img class="new" src="~/Content/Images/icn_ln_non_selected_like.png" />
+                                <img class="like noinit" src="~/Content/Images/icn_ln_selected_like.png" />
+                                <img class="dislike noinit" src="~/Content/Images/icn_ln_selected_dislike.png" />
+                            </div>
                         </td>
                         <td>
-                            <img src="~/Content/Images/icn_chat_B1.png" />
+                            <div class="comments">
+                                <img class="comment" src="~/Content/Images/icn_chat_bubble.png" />
+                                <div class="notify-count noinit">
+                                    <img src="~/Content/Images/icn_alert_circle.png" />
+                                    <span>00</span>
+                                </div>
+                            </div>
                         </td>
                     </tr>
-                    <tr>
+                    <tr sel="new">
                         <td>
                             <img class="location" src="~/Content/Images/popout_sml_img.png" />
                         </td>
@@ -159,19 +179,29 @@
                         </td>
                         <td>
                             <p>1 | 1</p>
-                            <p>$1,200 | 750 sq.ft</p>
+                            <p>$1,200 | 750</p>
                         </td>
                         <td>
                             <img src="~/Content/Images/icn_cal_B1.png" />
                         </td>
                         <td>
-                            <img  class="like" src="~/Content/Images/icn_ln_selected_like.png" />
+                            <div class="likebtns">
+                                <img class="new" src="~/Content/Images/icn_ln_non_selected_like.png" />
+                                <img class="like noinit" src="~/Content/Images/icn_ln_selected_like.png" />
+                                <img class="dislike noinit" src="~/Content/Images/icn_ln_selected_dislike.png" />
+                            </div>
                         </td>
                         <td>
-                            <img src="~/Content/Images/icn_chat_B1.png" />
+                            <div class="comments">
+                                <img class="comment" src="~/Content/Images/icn_chat_bubble.png" />
+                                <div class="notify-count noinit">
+                                    <img src="~/Content/Images/icn_alert_circle.png" />
+                                    <span>00</span>
+                                </div>
+                            </div>
                         </td>
                     </tr>
-                    <tr>
+                    <tr sel="new">
                         <td>
                             <img class="location" src="~/Content/Images/popout_sml_img.png" />
                         </td>
@@ -185,19 +215,29 @@
                         </td>
                         <td>
                             <p>2 | 1.5</p>
-                            <p>$1,500 | 800 sq.ft</p>
+                            <p>$1,500 | 800</p>
                         </td>
                         <td>
                             <img src="~/Content/Images/icn_cal_B1.png" />
                         </td>
                         <td>
-                            <img  class="like" src="~/Content/Images/icn_ln_selected_like.png" />
+                            <div class="likebtns">
+                                <img class="new" src="~/Content/Images/icn_ln_non_selected_like.png" />
+                                <img class="like noinit" src="~/Content/Images/icn_ln_selected_like.png" />
+                                <img class="dislike noinit" src="~/Content/Images/icn_ln_selected_dislike.png" />
+                            </div>
                         </td>
                         <td>
-                            <img src="~/Content/Images/icn_chat_B1.png" />
+                            <div class="comments">
+                                <img class="comment" src="~/Content/Images/icn_chat_bubble.png" />
+                                <div class="notify-count">
+                                    <img src="~/Content/Images/icn_alert_circle.png" />
+                                    <span>01</span>
+                                </div>
+                            </div>
                         </td>
                     </tr>
-                    <tr>
+                    <tr sel="new">
                         <td>
                             <img class="location" src="~/Content/Images/popout_sml_img.png" />
                         </td>
@@ -211,16 +251,26 @@
                         </td>
                         <td>
                             <p>2 | 2</p>
-                            <p>$3,200 | 1,300 sq.ft</p>
+                            <p>$3,200 | 1,300</p>
                         </td>
                         <td>
                             <img src="~/Content/Images/icn_cal_B1.png" />
                         </td>
                         <td>
-                            <img  class="like" src="~/Content/Images/icn_ln_selected_like.png" />
+                            <div class="likebtns">
+                                <img class="new" src="~/Content/Images/icn_ln_non_selected_like.png" />
+                                <img class="like noinit" src="~/Content/Images/icn_ln_selected_like.png" />
+                                <img class="dislike noinit" src="~/Content/Images/icn_ln_selected_dislike.png" />
+                            </div>
                         </td>
                         <td>
-                            <img src="~/Content/Images/icn_chat_B1.png" />
+                            <div class="comments">
+                                <img class="comment" src="~/Content/Images/icn_chat_bubble.png" />
+                                <div class="notify-count noinit">
+                                    <img src="~/Content/Images/icn_alert_circle.png" />
+                                    <span>00</span>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 </tbody>
@@ -235,37 +285,37 @@
             <div id="chatframe">
                 <ul>
                     <li>
-                        <img class="dsc" src="~/Content/Images/icn_person.png"/><span>Joyce Damino</span>
+                        <img src="~/Content/Images/icn_chat_2.png"/><span>Joyce Damino</span>
                         <div>
                             <p>Would you like to go see 1234 MeadowRd on the 11th of November?</p>
                         </div>
                     </li>
                     <li>
-                        <img class="transferee" src="~/Content/Images/icn_person.png" /><span>Victoria Sporer</span>
+                        <img src="~/Content/Images/icn_chat_1.png" /><span>Victoria Sporer</span>
                         <div>
                             <p>Yes, I would like to go visit 1234 Meadow Rd. That will work well, I am bringing the kids.</p>
                         </div>
                     </li>
                     <li>
-                        <img class="dsc" src="~/Content/Images/icn_person.png" /><span>Joyce Damino</span>
+                        <img src="~/Content/Images/icn_chat_2.png" /><span>Joyce Damino</span>
                         <div>
                             <p>Sounds good, I will see you all there at 10am?</p>
                         </div>
                     </li>
                     <li>
-                        <img class="dsc" src="~/Content/Images/icn_person.png" /><span>Joyce Damino</span>
+                        <img src="~/Content/Images/icn_chat_2.png" /><span>Joyce Damino</span>
                         <div>
                             <p>Would you like to go see 1232 RoseLn on the 11th of November</p>
                         </div>
                     </li>
                     <li>
-                        <img class="transferee" src="~/Content/Images/icn_person.png" /><span>Victoria Sporer</span>
+                        <img src="~/Content/Images/icn_chat_1.png" /><span>Victoria Sporer</span>
                         <div>
                             <p>Yes, I would like to go visit 1232 RoseLn. That will work well, we can do this one in the afternoon.</p>
                         </div>
                     </li>
                     <li>
-                        <img class="dsc" src="~/Content/Images/icn_person.png" /><span>Joyce Damino</span>
+                        <img src="~/Content/Images/icn_chat_2.png" /><span>Joyce Damino</span>
                         <div>
                             <p>Sounds good, I will call and make sure we can get in then.</p>
                         </div>
@@ -279,28 +329,180 @@
             <button>Send</button>
         </div>
     </div>
+    <div id="property">
+        <div class="row">
+            <div class="col-md-5">
+                <span>Available: </span><span>November 12th 2017</span>
+            </div>
+            <div class="col-md-5">
+                <img id="closeproperty" src="~/Content/Images/icn_close_pg.png"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <img src="~/Content/Images/image_placeholder_large.png"/>
+            </div>
+            <div class="col-md-4">
+                <div>
+                    <span>Address:</span>
+                    <p>1234 Meadow Rd Renton WA 11111</p>
+
+                    <span>Rent:</span>
+                    <p>$1,200 a month</p>
+
+                    <span>Housing Type and Sq.Ft:</span>
+                    <p>900 Sq.Ft. Condo</p>
+
+                    <span>Bedrooms and Bathrooms:</span>
+                    <p>2.2</p>
+                </div>
+                <div>
+                    <span>Pets:</span>
+                    <p>Small dogs and cats (no pitbulls)</p>
+
+                    <span>Central Air:</span>
+                    <p>Yes</p>
+
+                    <span>Parking:</span>
+                    <p>1 spot</p>
+
+                    <span>Laundry:</span>
+                    <p>Shared laundry, not in units</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <img src="~/Content/Images/Desktop_ln_image_placeholder.png" />
+                <img src="~/Content/Images/Desktop_ln_image_placeholder.png" />
+                <img src="~/Content/Images/Desktop_ln_image_placeholder.png" />
+                <img src="~/Content/Images/Desktop_ln_image_placeholder.png" />
+            </div>
+            <div class="col-md-4">
+                <div>
+                    <div>
+                        <img class="non_like_sel likebtn" src="~/Content/Images/icn_ln_non_selected_like.png" />
+                        <img class="like_sel likebtn noinit" src="~/Content/Images/icn_ln_selected_like.png" />
+                    </div>
+                    <div class="dislike">
+                        <img class="non_dislike_sel likebtn" src="~/Content/Images/icn_ln_non_selected_dislike.png" />
+                        <img class="dislike_sel likebtn noinit" src="~/Content/Images/icn_ln_selected_dislike.png" />
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <img src="~/Content/Images/icn_chat_bubble.png" />
+                        <div class="notify-count noinit">
+                            <img src="~/Content/Images/icn_alert_circle.png" />
+                            <span>00</span>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="~/Content/Images/icn_cal_B1.png"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <p>Other Notes:</p>
+            <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnum aliquam quaerat voluptatem. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnum aliquam quaerat voluptatem. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,</p>
+        </div>
+    </div>
 </div>
 
 @Styles.Render("~/Styling/housing")
 
 <script>
-    // row selection handler
+    var $lastFilter;
+
     document.addEventListener("DOMContentLoaded", function () {
-        $('div#housing tbody tr').click(function () {
-//            $('div#transferee').css("background-color", "black");
-//            $('div#transferee').css("opacity", "0.3");
+        $lastFilter = null;
 
-//            $('div#chat').css("background-color", "white");
-//            $('div#chat').css("opacity", "1.0");
+        // filters
+        $("div#housing div.notfirst input[name='choice']").click(function () {
+            if ($lastFilter !== null)
+               $($lastFilter.next()).removeClass("selected");
+ 
+            $lastFilter = $(this);
+            $($lastFilter.next()).addClass("selected");
 
-            $('div#chat').css("display", "block");
+            // apply filter
+            $('div#housing tbody tr').each(function () {
+                if ($(this).attr("sel") !== $lastFilter.attr('value'))
+                    $(this).css("display", "none");
+                else
+                    $(this).css("display", "table-row");
+            });
         });
 
-        $($('div#chat button')[0]).click(function () {
-            $('div#chat').css("display", "none");
+        // add property
+        $('div#housing div#add').click(function () {
+            alert("Add New Property");
+        });
 
-//            $('div#transferee').css("background-color", "white");
-//            $('div#transferee').css("opacity", "1.0");
+        // new/like/dislike
+        $('div.likebtns img').click(function () {
+            var likeSel;
+            $(this).css("display", "none");
+
+            if ($(this).hasClass('new')) {
+                likeSel = "like";
+                $(this).next().css("display", "inline");
+                $(this).parent().parent().parent().attr("sel", "like");
+            }
+            else if ($(this).hasClass('like')) {
+                likeSel = "dislike";
+                $(this).next().css("display", "inline");
+                $(this).parent().parent().parent().attr("sel", "dislike");
+            }
+            else {
+                likeSel = "new";
+                $(this).prev().prev().css("display", "inline");
+                $(this).parent().parent().parent().attr("sel", "new");
+            }
+
+            // apply current filter
+            if ($lastFilter !== null && $lastFilter.attr('value') !== likeSel) {
+                $(this).parent().parent().parent().css("display", "none");
+            }
+        });
+
+        // open chat window
+        $('div#housing tbody div.comments').click(function () {
+            if ($(this).find('div.notify-count').hasClass('noinit') === false)
+                $('div#chat').css("display", "block");
+        });
+
+        // close chat window
+        $($('div#housing div#chat button')[0]).click(function () {
+            $('div#chat').css("display", "none");
+        });
+
+        // open property window
+        $('div#housing tbody img.location').click(function () {
+            $('div#property').css("display", "block");
+        });
+
+        // close property window
+        $('div#housing div#property img#closeproperty').click(function () {
+            $('div#property').css("display", "none");
+        });
+
+        // propery window like btns
+        $('div#housing div#property img.likebtn').each(function () {
+            $(this).click(function () {
+                $(this).css("display", "none");
+
+                if ($(this).hasClass('non_like_sel')) {
+                    $(this).next().css("display", "inline");
+                } else if ($(this).hasClass('like_sel')) {
+                    $(this).prev().css("display", "inline");
+                } else if ($(this).hasClass('non_dislike_sel')) {
+                    $(this).next().css("display", "inline");
+                } else {
+                    $(this).prev().css("display", "inline");
+                }
+            });
         });
     });
 </script>

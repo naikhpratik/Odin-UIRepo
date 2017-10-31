@@ -71,7 +71,7 @@ namespace Odin.Controllers
             vm.PossibleServices =
                 _mapper.Map<IEnumerable<ServiceType>, IEnumerable<ServiceTypeViewModel>>(filtPossible);
 
-
+            
             return View(vm);
         }
     }
