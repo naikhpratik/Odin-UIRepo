@@ -75,7 +75,6 @@ namespace Odin
             CreateMap<OrdersTransfereeIntakeRentDto, Rent>();
             CreateMap<OrdersTransfereeIntakeLeaseDto, Order>();
             CreateMap<OrdersTransfereeDetailsServiceDto, Service>();
-            CreateMap<Order, OrdersTransfereeDetailsViewModel>();
         }
     }
 }

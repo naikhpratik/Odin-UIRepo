@@ -11,7 +11,7 @@
             $(this).addClass('selected');
             var actionName = $(this).attr('data-panel');
 
-            $('#orderContainer').load('/orders/' + actionName + 'Partial/' + GorderId);
+            $('#orderContainer').load('/orders/' + actionName + 'Partial/' + currentOrderId);
 
             //$('div.col-md-10 > div > div').each(function () { $(this).css("display", "none"); });            
             //$('div.col > div.frame').each(function () { $(this).css("display", "none"); });

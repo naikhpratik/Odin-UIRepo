@@ -42,12 +42,13 @@
     @Scripts.Render("~/Scripts/transferee")
     
     <script>
-    var GorderId = '@Model.Id';
-    $(document).ready(function () {
-        OrdersPageController.TransfereeInit();
-        TransfereeIntakeController.init();
-        TransfereeDetailsController.init();
-    });
+        var currentOrderId = '@Model.Id';
+
+        $(document).ready(function () {
+            OrdersPageController.TransfereeInit();
+            TransfereeIntakeController.init();
+            TransfereeDetailsController.init();
+        });
     </script>
 
 }

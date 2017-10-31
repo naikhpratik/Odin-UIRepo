@@ -35,14 +35,22 @@ namespace Odin.Controllers
 
             return View();
         }
+
+        // GET Partials
         public ActionResult DetailsPartial(string id)
         {
             var order = _unitOfWork.Orders.GetOrderById(id);
-
-            OrdersTransfereeDetailsViewModel vm = _mapper.Map<Order, OrdersTransfereeDetailsViewModel>(order);
-                        
-            return PartialView("~/views/orders/partials/_Details.cshtml",vm);  
+            OrdersTransfereeViewModel viewModel = viewModelForOrder(order);
+            return PartialView("~/views/orders/partials/_Details.cshtml",viewModel); 
         }
+
+        public ActionResult IntakePartial(string id)
+        {
+            var order = _unitOfWork.Orders.GetOrderById(id);
+            OrdersTransfereeViewModel viewModel = viewModelForOrder(order);
+            return PartialView("~/views/orders/partials/_Intake.cshtml", viewModel);
+        }
+
         public ActionResult Details(string orderId)
         {
             var userId = User.Identity.GetUserId();
@@ -86,6 +94,29 @@ namespace Odin.Controllers
             vm.BrokerFeeTypes = _unitOfWork.BrokerFeeTypes.GetBorkerBrokerFeeTypes();
             
             return View(vm);
+        }
+
+        private OrdersTransfereeViewModel viewModelForOrder(Order order)
+        {
+            OrdersTransfereeViewModel vm = _mapper.Map<Order, OrdersTransfereeViewModel>(order);
+
+            var cats = order.Services.Select(s => s.ServiceType.Category).ToList();
+            var ids = order.Services.Select(s => s.ServiceType.Id).ToList();
+
+            //Remove service types that already have services.
+            var filtPossible = _unitOfWork.ServiceTypes.GetPossibleServiceTypes(cats, ids);
+
+            vm.PossibleServices =
+                _mapper.Map<IEnumerable<ServiceType>, IEnumerable<ServiceTypeViewModel>>(filtPossible);
+
+            vm.NumberOfBathrooms = _unitOfWork.NumberOfBathrooms.GetNumberOfBathroomsList();
+            vm.HousingTypes = _unitOfWork.HousingTypes.GetHousingTypesList();
+            vm.AreaTypes = _unitOfWork.AreaTypes.GetAreaTypesList();
+            vm.TransportationTypes = _unitOfWork.TransportationTypes.GetTransportationTypes();
+            vm.DepositTypes = _unitOfWork.DepositTypes.GetDepositTypesList();
+            vm.BrokerFeeTypes = _unitOfWork.BrokerFeeTypes.GetBorkerBrokerFeeTypes();
+
+            return vm;
         }
     }
     
