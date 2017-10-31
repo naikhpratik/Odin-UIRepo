@@ -30,7 +30,6 @@ namespace Odin.Data.Core.Dtos
         public bool IsRush { get; set; }
         public bool IsVip { get; set; }
 
-        [Required]
         public RentDto Rent { get; set; }
 
         [Required]

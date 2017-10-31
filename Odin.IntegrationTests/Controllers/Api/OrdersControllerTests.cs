@@ -11,6 +11,7 @@ using Odin.Extensions;
 using Odin.IntegrationTests.Extensions;
 using Odin.IntegrationTests.TestAttributes;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -548,6 +549,134 @@ namespace Odin.IntegrationTests.Controllers.Api
             var order = Context.Orders.Where(o => o.TrackingId == orderDto.TrackingId).Include(o => o.Services).SingleOrDefault();
             order.Should().BeNull();
         }
+        [Test, Isolated]
+        public async Task UpsertOrderDetails_ServicesTest_ServiceExists()
+        {
+            // arrange
+            ServiceType serviceType = Context.ServiceTypes.First();
 
+            Service service = new Service()
+            {
+                ServiceType = serviceType,
+                ServiceTypeId = serviceType.Id,
+                ScheduledDate = DateTime.Now,
+                CompletedDate = DateTime.Now,
+            };
+
+            var order = OrderBuilder.New().First();
+            order.TrackingId = TokenHelper.NewToken();
+            order.Transferee = transferee;
+            order.Consultant = dsc;
+            order.ProgramManager = pm;
+            order.Services.Add(service);
+            order.DestinationCity = "integration city";
+            Context.Orders.Add(order);
+            Context.SaveChanges();
+            Context.Entry(order).Reload();
+
+            //modify the service
+            DateTime changedDate = DateTime.Now.AddDays(4);
+            List<OrdersTransfereeDetailsServiceDto> oTranDetailServices = new List<OrdersTransfereeDetailsServiceDto>();
+            OrdersTransfereeDetailsServiceDto oTranDetailService = new OrdersTransfereeDetailsServiceDto(){ ScheduledDate = changedDate};
+            oTranDetailServices.Add(oTranDetailService);
+            OrdersTransfereeDetailsServicesDto svc = new OrdersTransfereeDetailsServicesDto();
+            svc.Services = oTranDetailServices;
+            svc.Id = order.Id;
+
+            // Act
+            var controller = SetUpOrdersController();
+            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+
+            // Assert
+            var result = controller.UpsertDetailsServices(svc);
+            Context.Entry(order).Reload();
+            Context.Entry(service).Reload();
+            service.ScheduledDate.Should().Equals(changedDate);
+        }
+        [Test, Isolated]
+        public async Task UpsertOrderDetails_ServicesTest_ServiceDoesNotExist()
+        {
+            // arrange
+            ServiceType serviceType = Context.ServiceTypes.First();
+
+            Service service = new Service()
+            {
+                ServiceType = serviceType,
+                ServiceTypeId = serviceType.Id,
+                ScheduledDate = DateTime.Now,
+                CompletedDate = DateTime.Now,
+            };
+
+            var order = OrderBuilder.New().First();
+            order.TrackingId = TokenHelper.NewToken();
+            order.Transferee = transferee;
+            order.Consultant = dsc;
+            order.ProgramManager = pm;
+            order.Services.Add(service);
+            order.DestinationCity = "integration city";
+            Context.Orders.Add(order);
+            Context.SaveChanges();
+            Context.Entry(order).Reload();
+
+            //modify the service
+            DateTime changedDate = DateTime.Now.AddDays(4);
+            List<OrdersTransfereeDetailsServiceDto> oTranDetailServices = new List<OrdersTransfereeDetailsServiceDto>();
+            OrdersTransfereeDetailsServiceDto oTranDetailService = new OrdersTransfereeDetailsServiceDto() { ScheduledDate = changedDate };
+            oTranDetailService.Id += "FF";
+            oTranDetailServices.Add(oTranDetailService);
+            OrdersTransfereeDetailsServicesDto svc = new OrdersTransfereeDetailsServicesDto();
+            svc.Services = oTranDetailServices;
+            svc.Id = order.Id;
+
+            // Act
+            var controller = SetUpOrdersController();
+            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+
+            // Assert
+            var result = controller.UpsertDetailsServices(svc);
+            result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
+        }
+        [Test, Isolated]
+        public async Task UpsertOrderDetails_ServicesTest_OrderDoesNotExist()
+        {
+            // arrange
+            ServiceType serviceType = Context.ServiceTypes.First();
+
+            Service service = new Service()
+            {
+                ServiceType = serviceType,
+                ServiceTypeId = serviceType.Id,
+                ScheduledDate = DateTime.Now,
+                CompletedDate = DateTime.Now,
+            };
+
+            var order = OrderBuilder.New().First();
+            order.TrackingId = TokenHelper.NewToken();
+            order.Transferee = transferee;
+            order.Consultant = dsc;
+            order.ProgramManager = pm;
+            order.Services.Add(service);
+            order.DestinationCity = "integration city";
+            Context.Orders.Add(order);
+            Context.SaveChanges();
+            Context.Entry(order).Reload();
+
+            //modify the service
+            DateTime changedDate = DateTime.Now.AddDays(4);
+            List<OrdersTransfereeDetailsServiceDto> oTranDetailServices = new List<OrdersTransfereeDetailsServiceDto>();
+            OrdersTransfereeDetailsServiceDto oTranDetailService = new OrdersTransfereeDetailsServiceDto() { ScheduledDate = changedDate };
+            oTranDetailServices.Add(oTranDetailService);
+            OrdersTransfereeDetailsServicesDto svc = new OrdersTransfereeDetailsServicesDto();
+            svc.Services = oTranDetailServices;
+            svc.Id = order.Id + "FF";
+
+            // Act
+            var controller = SetUpOrdersController();
+            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+
+            // Assert
+            var result = controller.UpsertDetailsServices(svc);
+            result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
+        }
     }
 }

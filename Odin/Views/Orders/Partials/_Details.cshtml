@@ -150,6 +150,7 @@
                     </div>
                     <div class="col-sm-3 details-col">
                         @Html.DatePicker("time", "ScheduledTime", Model.Services.ElementAt(i).ScheduledTimeDisplay)
+                        <div class="text-danger" style="display:none;" data-entity-id="@Model.Services.ElementAt(i).Id" data-valmsg-replace="true" ><div for="ScheduledTime">Schedule time is required.</div></div>
                     </div>
                     <div class="col-sm-3 details-col">
                         @Html.DatePicker("date", "CompletedDate", Model.Services.ElementAt(i).CompletedDateDisplay)

@@ -30,7 +30,7 @@ return {
         pnlDetails.find(".details-header").find("span").on("click",
             function () {
                 var cols = $(this).parents(".details-blocks").find(".details-row > .details-col");                                                                                           
-                    cols.find("span").css("display", "block");                
+                cols.find("span").css("display", "block");                  
             });
 
         //Init Variables
@@ -46,7 +46,7 @@ return {
         var detailsBlock = $(e.target).parents(".details-blocks");
         var block = detailsBlock.attr("data-block");
         var rows = detailsBlock.find(".details-row[data-entity-id]");
-
+        var err = false;
         var saveSuccess = function () {
             toast('changes to service dates are successful', 'success');
         }
@@ -55,18 +55,22 @@ return {
         }
 
         var data = { "Id": orderId };
-
+       
         rows.each(function () {
+            if (err)
+                return;
             var row = $(this);
             var rowInputs = row.find(":input").not("input[type='hidden']");
-
             if (hasAttr(row, 'data-entity-collection')) {
                 if (!isCollectionRowEmpty(rowInputs)) {
                     var collectionKey = row.attr("data-entity-collection");
                     var collectionData = { "Id": row.attr("data-entity-id") };
                     
-                    fillPostData(collectionData, rowInputs);
-
+                    var ret = fillPostData(collectionData, rowInputs);
+                    if (ret == -1) {
+                        err = true;
+                        return;
+                    }
                     if (!(collectionKey in data)) {
                         data[collectionKey] = [];
                     }
@@ -77,7 +81,7 @@ return {
             }
             
         });
-        
+         if (!err)            
         TransfereeDetailsService.updateDetailsBlock(block, data, saveSuccess, saveFail);
     }
 
@@ -91,7 +95,14 @@ return {
             st = input.attr("name") == "ScheduledTime" ? input.val() : st;
             cd = input.attr("name") == "CompletedDate" ? input.val() : cd;
         });
-        data["ScheduledDate"] = sd + ' ' + st;
+        if (sd.length > 0 && st == '') {            
+            $('.text-danger[data-entity-id="' + data['Id'] + '"]').show();
+            return -1;            
+        }
+        else           
+            $('.text-danger[data-entity-id="' + data['Id'] + '"]').hide();
+
+        data["ScheduledDate"] = sd + ' ' + st;        
         data["CompletedDate"] = cd;
         
     }
