@@ -543,7 +543,7 @@ namespace Odin.IntegrationTests.Controllers.Api
             order.Should().BeNull();
         }
         [Test, Isolated]
-        public async Task UpsertOrderDetails_ServicesTest_ServiceExists()
+        public async Task UpsertOrderDetails_UpdateExistingService_ShouldChangeDate()
         {
             // arrange
             ServiceType serviceType = Context.ServiceTypes.First();
@@ -579,15 +579,15 @@ namespace Odin.IntegrationTests.Controllers.Api
             // Act
             var controller = SetUpOrdersController();
             controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            var result = controller.UpsertDetailsServices(svc);
 
             // Assert
-            var result = controller.UpsertDetailsServices(svc);
             Context.Entry(order).Reload();
             Context.Entry(service).Reload();
             service.ScheduledDate.Should().Equals(changedDate);
         }
         [Test, Isolated]
-        public async Task UpsertOrderDetails_ServicesTest_ServiceDoesNotExist()
+        public async Task UpsertOrderDetails_ServiceDoesNotExist_ShouldReturnNotFound()
         {
             // arrange
             ServiceType serviceType = Context.ServiceTypes.First();
@@ -629,8 +629,9 @@ namespace Odin.IntegrationTests.Controllers.Api
             var result = controller.UpsertDetailsServices(svc);
             result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
         }
+
         [Test, Isolated]
-        public async Task UpsertOrderDetails_ServicesTest_OrderDoesNotExist()
+        public async Task UpsertOrderDetails_OrderDOesNotExist_ShouldReturnNotFound()
         {
             // arrange
             ServiceType serviceType = Context.ServiceTypes.First();
@@ -666,9 +667,9 @@ namespace Odin.IntegrationTests.Controllers.Api
             // Act
             var controller = SetUpOrdersController();
             controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            var result = controller.UpsertDetailsServices(svc);
 
             // Assert
-            var result = controller.UpsertDetailsServices(svc);
             result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
         }
     }
