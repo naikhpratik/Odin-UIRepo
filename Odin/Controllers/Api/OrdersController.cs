@@ -247,7 +247,7 @@ namespace Odin.Controllers.Api
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize]                
         [Route("api/orders/transferee/details/services")]
         public IHttpActionResult UpsertDetailsServices(OrdersTransfereeDetailsServicesDto dto)
         {
@@ -259,20 +259,21 @@ namespace Odin.Controllers.Api
             {
                 return NotFound();
             }
-
-            foreach (var serviceDto in dto.Services)
-            {
-                var service = order.Services.FirstOrDefault(s => !String.IsNullOrEmpty(serviceDto.Id) && s.Id == serviceDto.Id);
-                if (service == null)
+            if (dto.Services != null)
+               {
+                foreach (var serviceDto in dto.Services)
                 {
-                    return NotFound();
-                }
-                else
-                {
-                    _mapper.Map<OrdersTransfereeDetailsServiceDto, Service>(serviceDto, service);
+                    var service = order.Services.FirstOrDefault(s => !String.IsNullOrEmpty(serviceDto.Id) && s.Id == serviceDto.Id);
+                    if (service == null)
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        _mapper.Map<OrdersTransfereeDetailsServiceDto, Service>(serviceDto, service);
+                    }
                 }
             }
-
             _unitOfWork.Complete();
             return Ok();
         }
