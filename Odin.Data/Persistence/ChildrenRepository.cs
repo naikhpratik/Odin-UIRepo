@@ -13,9 +13,9 @@ namespace Odin.Data.Persistence
             _context = context;
         }
 
-        public Child GetChildById(string id)
+        public Child GetChildFor(string userId, string id)
         {
-            return _context.Children.SingleOrDefault(c => c.Id == id);
+            return _context.Children.SingleOrDefault(c => c.Id == id && c.Order.ConsultantId == userId);
         }
 
     }

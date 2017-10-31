@@ -71,6 +71,12 @@ namespace Odin.Controllers
             vm.PossibleServices =
                 _mapper.Map<IEnumerable<ServiceType>, IEnumerable<ServiceTypeViewModel>>(filtPossible);
 
+            vm.NumberOfBathrooms = _unitOfWork.NumberOfBathrooms.GetNumberOfBathroomsList();
+            vm.HousingTypes = _unitOfWork.HousingTypes.GetHousingTypesList();
+            vm.AreaTypes = _unitOfWork.AreaTypes.GetAreaTypesList();
+            vm.TransportationTypes = _unitOfWork.TransportationTypes.GetTransportationTypes();
+            vm.DepositTypes = _unitOfWork.DepositTypes.GetDepositTypesList();
+            vm.BrokerFeeTypes = _unitOfWork.BrokerFeeTypes.GetBorkerBrokerFeeTypes();
             
             return View(vm);
         }

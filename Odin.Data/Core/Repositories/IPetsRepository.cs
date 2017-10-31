@@ -4,6 +4,6 @@ namespace Odin.Data.Core.Repositories
 {
     public interface IPetsRepository
     {
-        Pet GetChildById(string id);
+        Pet GetPetFor(string userId, string id);
     }
 }

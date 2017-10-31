@@ -29,6 +29,12 @@ namespace Odin.Data.Persistence.Migrations
             SeedInitialUsers(context);
             CreateOrderData(context);
             PopulateSeContactUids(context);
+            SeedNumberOfBathrooms(context);
+            SeedHousingTypes(context);
+            SeedAreaTypes(context);
+            SeedTransportationTypes(context);
+            SeedDepositTypes(context);
+            SeedBrokerFeeTypes(context);
         }
 
         private void PopulateSeContactUids(ApplicationDbContext context)
@@ -61,7 +67,6 @@ namespace Odin.Data.Persistence.Migrations
                     orders[i].Consultant = dsc;
                     orders[i].ProgramManager = pm;
                     orders[i].Transferee = CreateRandomTransferee(context);
-                    orders[i].Lease = LeaseBuilder.New();
                     orders[i].Services.Add(new Service()
                     {
                         ServiceType = context.ServiceTypes.First()
@@ -228,6 +233,158 @@ namespace Odin.Data.Persistence.Migrations
             {
                 adminRole = new IdentityRole(UserRoles.Admin);
                 roleManager.Create(adminRole);
+            }
+        }
+
+        private void SeedNumberOfBathrooms(ApplicationDbContext context)
+        {
+            
+            if (!context.NumberOfBathrooms.Any(n => n.Id == 1))
+            {
+                context.NumberOfBathrooms.Add(new NumberOfBathroomsType() {Id = 1, Name = "0",SeValue = "0"});
+            }
+
+            if (!context.NumberOfBathrooms.Any(n => n.Id == 2))
+            {
+                context.NumberOfBathrooms.Add(new NumberOfBathroomsType() { Id = 2, Name = "1/2", SeValue = "1/2" });
+            }
+
+            if (!context.NumberOfBathrooms.Any(n => n.Id == 3))
+            {
+                context.NumberOfBathrooms.Add(new NumberOfBathroomsType() { Id = 3, Name = "1", SeValue = "1"});
+            }
+
+            if (!context.NumberOfBathrooms.Any(n => n.Id == 4))
+            {
+                context.NumberOfBathrooms.Add(new NumberOfBathroomsType() { Id = 4, Name = "1 1/2", SeValue = "1 1/2" });
+            }
+
+            if (!context.NumberOfBathrooms.Any(n => n.Id == 5))
+            {
+                context.NumberOfBathrooms.Add(new NumberOfBathroomsType() { Id = 5, Name = "2", SeValue = "2"});
+            }
+
+            if (!context.NumberOfBathrooms.Any(n => n.Id == 6))
+            {
+                context.NumberOfBathrooms.Add(new NumberOfBathroomsType() { Id = 6, Name = "2 1/2", SeValue = "2 1/2" });
+            }
+
+            if (!context.NumberOfBathrooms.Any(n => n.Id == 7))
+            {
+                context.NumberOfBathrooms.Add(new NumberOfBathroomsType() { Id = 7, Name = "3", SeValue = "3" });
+            }
+
+            if (!context.NumberOfBathrooms.Any(n => n.Id == 8))
+            {
+                context.NumberOfBathrooms.Add(new NumberOfBathroomsType() { Id = 8, Name = "3 1/2", SeValue = "3 1/2" });
+            }
+
+            if (!context.NumberOfBathrooms.Any(n => n.Id == 9))
+            {
+                context.NumberOfBathrooms.Add(new NumberOfBathroomsType() { Id = 9, Name = "4", SeValue = "4" });
+            }
+
+            if (!context.NumberOfBathrooms.Any(n => n.Id == 10))
+            {
+                context.NumberOfBathrooms.Add(new NumberOfBathroomsType() { Id = 10, Name = "4 1/2", SeValue = "4 1/2" });
+            }
+
+            if (!context.NumberOfBathrooms.Any(n => n.Id == 11))
+            {
+                context.NumberOfBathrooms.Add(new NumberOfBathroomsType() { Id = 11, Name = "5", SeValue = "5" });
+            }
+
+            if (!context.NumberOfBathrooms.Any(n => n.Id == 12))
+            {
+                context.NumberOfBathrooms.Add(new NumberOfBathroomsType() { Id = 12, Name = "5 1/2", SeValue = "5 1/2" });
+            }
+
+            if (!context.NumberOfBathrooms.Any(n => n.Id == 13))
+            {
+                context.NumberOfBathrooms.Add(new NumberOfBathroomsType() { Id = 13, Name = "5+", SeValue = "5+" });
+            }
+
+        }
+
+        private void SeedHousingTypes(ApplicationDbContext context)
+        {
+
+            if (!context.HousingTypes.Any(h => h.Id == 1))
+            {
+                context.HousingTypes.Add(new HousingType() { Id = 1, Name = "House", SeValue = "HOUSE" });
+            }
+
+            if (!context.HousingTypes.Any(h => h.Id == 2))
+            {
+                context.HousingTypes.Add(new HousingType() { Id = 2, Name = "Town House", SeValue = "TOWNRH" });
+            }
+
+            if (!context.HousingTypes.Any(h => h.Id == 3))
+            {
+                context.HousingTypes.Add(new HousingType() { Id = 3, Name = "Apartment", SeValue = "APARTM" });
+            }
+
+            if (!context.HousingTypes.Any(h => h.Id == 4))
+            {
+                context.HousingTypes.Add(new HousingType() { Id = 4, Name = "Condo", SeValue = "CONDOM" });
+            }
+        }
+
+        private void SeedAreaTypes(ApplicationDbContext context)
+        {
+
+            if (!context.AreaTypes.Any(a => a.Id == 1))
+            {
+                context.AreaTypes.Add(new AreaType() { Id = 1, Name = "Suburban"});
+            }
+
+            if (!context.AreaTypes.Any(a => a.Id == 2))
+            {
+                context.AreaTypes.Add(new AreaType() { Id = 2, Name = "Urban" });
+            }
+
+            if (!context.AreaTypes.Any(a => a.Id == 3))
+            {
+                context.AreaTypes.Add(new AreaType() { Id = 3, Name = "Rural" });
+            }
+        }
+
+        private void SeedTransportationTypes(ApplicationDbContext context)
+        {
+            if (!context.TransportationTypes.Any(t => t.Id == 1))
+            {
+                context.TransportationTypes.Add(new TransportationType() { Id = 1, Name = "Automobile",SeValue = "AUTOMO"});
+            }
+
+            if (!context.TransportationTypes.Any(t => t.Id == 2))
+            {
+                context.TransportationTypes.Add(new TransportationType() { Id = 2, Name = "Public Transportation", SeValue = "PUBLIC" });
+            }
+        }
+
+        private void SeedDepositTypes(ApplicationDbContext context)
+        {
+            if (!context.DepositTypes.Any(d => d.Id == 1))
+            {
+                context.DepositTypes.Add(new DepositType() { Id = 1, Name = "Individual", SeValue = "INDIVI" });
+            }
+
+            if (!context.DepositTypes.Any(d => d.Id == 2))
+            {
+                context.DepositTypes.Add(new DepositType() { Id = 2, Name = "Company", SeValue = "COMPAN" });
+            }
+        }
+
+        private void SeedBrokerFeeTypes(ApplicationDbContext context)
+        {
+            if (!context.BrokerFeeTypes.Any(b => b.Id == 1))
+            {
+                context.BrokerFeeTypes.Add(new BrokerFeeType() { Id = 1, Name = "Individual", SeValue = "INDIVI" });
+            }
+
+            if (!context.BrokerFeeTypes.Any(b => b.Id == 2))
+            {
+                context.BrokerFeeTypes.Add(new BrokerFeeType() { Id = 2, Name = "Company", SeValue = "COMPAN" });
             }
         }
     }

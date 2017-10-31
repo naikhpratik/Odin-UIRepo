@@ -13,6 +13,12 @@ namespace Odin.Data.Core
         IServiceTypesRepository ServiceTypes { get; }
         IChildrenRepository Children { get; }
         IPetsRepository Pets { get; }
+        INumberOfBathroomsTypesRepository NumberOfBathrooms { get; }
+        IHousingTypesRepository HousingTypes { get; }
+        IAreaTypesRepository AreaTypes { get; }
+        ITransportationTypesRepository TransportationTypes { get; }
+        IDepositTypesRepository DepositTypes { get; }
+        IBrokerFeeTypesRepository BrokerFeeTypes { get; }
         void Complete();
     }
 }
