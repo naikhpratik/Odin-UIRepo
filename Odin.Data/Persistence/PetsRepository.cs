@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Odin.Data.Core.Models;
+﻿using Odin.Data.Core.Models;
 using Odin.Data.Core.Repositories;
+using System.Linq;
 
 namespace Odin.Data.Persistence
 {
@@ -17,9 +13,9 @@ namespace Odin.Data.Persistence
             _context = context;
         }
 
-        public Pet GetChildById(string id)
+        public Pet GetPetFor(string userId, string id)
         {
-            return _context.Pets.SingleOrDefault(c => c.Id == id);
+            return _context.Pets.SingleOrDefault(p => p.Id == id && p.Order.ConsultantId == userId);
         }
     }
 }

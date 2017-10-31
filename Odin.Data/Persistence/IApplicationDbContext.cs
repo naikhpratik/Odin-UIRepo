@@ -12,5 +12,11 @@ namespace Odin.Data.Persistence
         DbSet<Manager> Managers { get; set; }
         DbSet<Child> Children { get; set; }
         DbSet<Pet> Pets { get; set; }
+        DbSet<NumberOfBathroomsType> NumberOfBathrooms { get; set; }
+        DbSet<HousingType> HousingTypes { get; set; }
+        DbSet<AreaType> AreaTypes { get; set; }
+        DbSet<TransportationType> TransportationTypes { get; set; }
+        DbSet<DepositType> DepositTypes { get; set; }
+        DbSet<BrokerFeeType> BrokerFeeTypes { get; set; }
     }
 }

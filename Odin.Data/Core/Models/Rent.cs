@@ -9,11 +9,11 @@
 
         public int? NumberOfBedrooms { get; set; }
 
-        public NumberOfBathroomsType NumberOfBathroomsType { get; set; }
+        public NumberOfBathroomsType NumberOfBathrooms { get; set; }
 
         public byte? NumberOfBathroomsTypeId { get; set; }
 
-        public int SquareFootage { get; set; }
+        public int? SquareFootage { get; set; }
         
         public OwnershipType OwnershipType { get; set; }
 
@@ -31,6 +31,8 @@
 
         public bool? HasParking { get; set; }
 
+        public bool? HasLaundry { get; set; }
+
         public bool? HasAC { get; set; }
 
         public bool? HasExerciseRoom { get; set; }
@@ -40,5 +42,7 @@
         public AreaType AreaType { get; set; }
 
         public byte? AreaTypeId { get; set; }
+
+        public int? NumberOfCarsOwned { get; set; }
     }
 }

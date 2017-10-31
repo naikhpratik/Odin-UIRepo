@@ -2,6 +2,7 @@
 using Odin.Helpers;
 using Odin.ViewModels.Shared;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -85,13 +86,118 @@ namespace Odin.ViewModels.Orders.Transferee
 
         public TransfereeViewModel Transferee { get; set; }
 
-        public string RentId { get; set; }
-        public RentViewModel Rent { get; set; }
-
         public string ProgramManagerId { get; set; }
         public virtual Manager ProgramManager { get; set; }
         public string SeCustNumb { get; set; }
         public string Client { get; set; }
         public string ClientFileNumber { get; set; }
+
+        public string RentId { get; set; }
+        public RentViewModel Rent { get; set; }
+
+        public string HousingBudgetDisplay => (Rent != null && Rent.HousingBudget.HasValue)
+            ? Rent.HousingBudget.ToString()
+            : String.Empty;
+
+        public string NumberOfBathroomsDisplay => (Rent != null && Rent.NumberOfBathrooms != null)
+           ? Rent.NumberOfBathrooms.Name
+            : String.Empty;
+
+        public string NumberOfBedroomsDisplay => (Rent != null && Rent.NumberOfBedrooms.HasValue)
+            ? Rent.NumberOfBedrooms.Value.ToString()
+                : String.Empty;
+
+        public string SquareFootageDisplay => (Rent != null && Rent.SquareFootage.HasValue)
+            ? Rent.SquareFootage.Value.ToString()
+            : String.Empty;
+
+        public string HousingTypeDisplay => (Rent != null && Rent.HousingType != null)
+            ? Rent.HousingType.Name
+            : String.Empty;
+
+        public string TransportationTypeDisplay => (Rent != null && Rent.TransportationType != null)
+            ? Rent.TransportationType.Name
+            : String.Empty;
+
+        public string IsFurnishedDisplay => (Rent != null && Rent.IsFurnished.HasValue)
+            ? Rent.IsFurnished.Value ? "Yes" : "No"
+            : String.Empty;
+
+        public string MaxCommuteDisplay => (Rent != null && Rent.MaxCommute.HasValue)
+            ? Rent.MaxCommute.Value.ToString()
+            : String.Empty;
+
+        public string HasParkingDisplay => (Rent != null && Rent.HasParking.HasValue)
+            ? Rent.HasParking.Value ? "Yes" : "No"
+            : String.Empty;
+
+        public string HasACDisplay => (Rent != null && Rent.HasAC.HasValue)
+            ? Rent.HasAC.Value ? "Yes" : "No"
+            : String.Empty;
+
+        public string HasExerciseRoomDisplay => (Rent != null && Rent.HasExerciseRoom.HasValue)
+            ? Rent.HasExerciseRoom.Value ? "Yes" : "No"
+            : String.Empty;
+
+        public string CommentsDisplay => (Rent != null && !String.IsNullOrEmpty(Rent.Comments))
+            ? Rent.Comments
+            : String.Empty;
+
+        public string AreaTypeDisplay => (Rent != null && Rent.AreaType != null)
+            ? Rent.AreaType.Name
+            : String.Empty;
+
+        public string HasLaundryDisplay => (Rent != null && Rent.HasLaundry.HasValue)
+            ? Rent.HasLaundry.Value ? "Yes" : "No"
+            : String.Empty;
+
+        public string NumberOfCarsOwnedDisplay => (Rent != null && Rent.NumberOfCarsOwned.HasValue)
+            ? Rent.NumberOfCarsOwned.Value.ToString()
+            : String.Empty;
+
+        public IEnumerable<NumberOfBathroomsType> NumberOfBathrooms { get; set; }
+
+        public IEnumerable YesNoDropDown
+        {
+            get
+            {
+                return new[]
+                {
+                    new {Value = "True", Text = "Yes"},
+                    new {Value = "False", Text = "No"},
+                };
+            }
+        }
+
+        public IEnumerable<HousingType> HousingTypes { get; set; }
+
+        public IEnumerable<AreaType> AreaTypes { get; set; }
+
+        public IEnumerable<TransportationType> TransportationTypes { get; set; }
+
+        public DepositType DepositType { get; set; }
+
+        public int? LeaseTerm { get; set; }
+
+        public BrokerFeeType BrokerFeeType { get; set; }
+
+        public IEnumerable<BrokerFeeType> BrokerFeeTypes { get; set; }
+
+        public byte? BrokerFeeTypeId { get; set; }
+
+        public string BrokerFeeTypeDisplay => (BrokerFeeType != null)
+            ? BrokerFeeType.Name
+            : String.Empty;
+
+        public int? LengthOfAssignment { get; set; }
+
+        public IEnumerable<DepositType> DepositTypes { get; set; }
+
+        public byte? DepositTypeId { get; set; }
+
+        public string DepositTypeDisplay => (DepositType != null)
+            ? DepositType.Name
+            : String.Empty;
+
     }
 }

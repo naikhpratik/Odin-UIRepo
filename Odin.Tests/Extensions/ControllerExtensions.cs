@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Moq;
 using System.Security.Claims;
 using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web.Http;
 using System.Web.Mvc;
-using Moq;
 
 namespace Odin.Tests.Extensions
 {
@@ -23,6 +19,22 @@ namespace Odin.Tests.Extensions
             controllerContext.SetupGet(x => x.HttpContext.User).Returns(principal.Object);
 
             controller.ControllerContext = controllerContext.Object;
+        }
+
+        public static void MockCurrentUser(this ApiController controller, string userId, string username)
+        {
+            var identity = new GenericIdentity(username);
+            identity.AddClaim(
+                new Claim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name",
+                    username));
+
+            identity.AddClaim(
+                new Claim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier",
+                    userId));
+
+            var principal = new GenericPrincipal(identity, null);
+
+            controller.ControllerContext.RequestContext.Principal = principal;
         }
     }
 }
