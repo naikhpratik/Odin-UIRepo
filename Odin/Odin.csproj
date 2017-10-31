@@ -333,7 +333,6 @@
     <Compile Include="ViewModels\Authentication\VerifyCodeViewModel.cs" />
     <Compile Include="ViewModels\Authentication\VerifyPhoneNumberViewModel.cs" />
     <Compile Include="ViewModels\Mailers\SetNewPasswordViewModel.cs" />
-    <Compile Include="ViewModels\Orders\HistoryViewModel.cs" />
     <Compile Include="ViewModels\Orders\Index\OrdersIndexViewModel.cs" />
     <Compile Include="ViewModels\Mailers\ViewRenderer.cs" />
     <Compile Include="ViewModels\Orders\Transferee\OrdersTransfereeViewModel.cs" />
