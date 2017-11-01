@@ -37,6 +37,14 @@ namespace Odin.Controllers
         }
 
         // GET Partials
+        public ActionResult HousingPartial(string id)
+        {
+            //var order = _unitOfWork.Orders.GetOrderById(id);
+            //OrdersTransfereeViewModel viewModel = viewModelForOrder(order);
+            return PartialView("~/views/orders/partials/_Housing.cshtml");
+        }
+
+        // GET Partials
         public ActionResult DetailsPartial(string id)
         {
             var order = _unitOfWork.Orders.GetOrderById(id);
