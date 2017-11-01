@@ -156,6 +156,7 @@
     <Compile Include="Core\Models\AzureTest.cs" />
     <Compile Include="Core\Models\BrokerFeeType.cs" />
     <Compile Include="Core\Models\Child.cs" />
+    <Compile Include="Core\Models\Property.cs" />
     <Compile Include="Core\Models\Consultant.cs" />
     <Compile Include="Core\Models\DepositType.cs" />
     <Compile Include="Core\Models\ErrorResponse.cs" />

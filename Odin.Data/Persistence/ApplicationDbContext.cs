@@ -32,6 +32,7 @@ namespace Odin.Data.Persistence
         public virtual DbSet<DepositType> DepositTypes { get; set; }
         public virtual DbSet<BrokerFeeType> BrokerFeeTypes { get; set; }
 
+        public DbSet<Property> Properties { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
