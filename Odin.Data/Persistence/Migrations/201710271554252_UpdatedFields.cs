@@ -130,7 +130,6 @@ namespace Odin.Data.Persistence.Migrations
             AddColumn("dbo.Orders", "IsInternational", c => c.Boolean(nullable: false));
             AddColumn("dbo.Orders", "IsAssignment", c => c.Boolean(nullable: false));
             AddColumn("dbo.Orders", "EstimatedDepartureDate", c => c.DateTime());
-            AddColumn("dbo.Orders", "WorkStartDate", c => c.DateTime());
             AddColumn("dbo.Rents", "NumberOfBathroomsTypeId", c => c.Byte());
             AddColumn("dbo.Rents", "HousingTypeId", c => c.Byte());
             AddColumn("dbo.Rents", "TransportationTypeId", c => c.Byte());
@@ -184,7 +183,6 @@ namespace Odin.Data.Persistence.Migrations
             DropColumn("dbo.Rents", "TransportationTypeId");
             DropColumn("dbo.Rents", "HousingTypeId");
             DropColumn("dbo.Rents", "NumberOfBathroomsTypeId");
-            DropColumn("dbo.Orders", "WorkStartDate");
             DropColumn("dbo.Orders", "EstimatedDepartureDate");
             DropColumn("dbo.Orders", "IsAssignment");
             DropColumn("dbo.Orders", "IsInternational");

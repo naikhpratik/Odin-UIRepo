@@ -1,4 +1,5 @@
 ﻿using System;
+using Odin.Helpers;
 
 namespace Odin.ViewModels.Shared
 {
@@ -7,11 +8,13 @@ namespace Odin.ViewModels.Shared
         public string Id { get; set; }
 
         public DateTime? ScheduledDate { get; set; }
-        public string ScheduledDateDisplay => ScheduledDate.HasValue ? ScheduledDate.Value.ToString("d") : String.Empty;
-        public string ScheduledTimeDisplay => ScheduledDate.HasValue ? ScheduledDate.Value.ToString("t") : String.Empty;
+        
+        public string ScheduledDateDisplay => DateHelper.GetViewFormat(ScheduledDate, false);
+
+        public string ScheduledTimeDisplay => DateHelper.GetViewFormat(ScheduledDate, true);
 
         public DateTime? CompletedDate { get; set; }
-        public string CompletedDateDisplay => CompletedDate.HasValue ? CompletedDate.Value.ToString("d") : String.Empty;
+        public string CompletedDateDisplay => DateHelper.GetViewFormat(CompletedDate, false);
 
         public bool Selected { get; set; }
 
