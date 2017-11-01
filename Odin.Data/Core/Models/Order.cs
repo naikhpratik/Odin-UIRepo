@@ -33,6 +33,8 @@ namespace Odin.Data.Core.Models
         public DateTime? TempHousingEndDate { get; set; }
         public string SchoolDistrict { get; set; }
         public string FamilyDetails { get; set; }
+        
+        public float? DaysAuthorized { get; set; }
 
         public bool TransfereeInviteEnabled { get; set; }
         public string SeCustNumb { get; set; }
@@ -42,7 +44,7 @@ namespace Odin.Data.Core.Models
         public string Client { get; set; }
         public string ClientFileNumber { get; set; }
 
-        public DateTime? LastContactedDate{get; set; }
+        public DateTime? LastContactedDate {get; set; }
 
         public bool IsRush { get; set; }
         public bool IsVip { get; set; }

@@ -631,7 +631,7 @@ namespace Odin.IntegrationTests.Controllers.Api
         }
 
         [Test, Isolated]
-        public async Task UpsertOrderDetails_OrderDOesNotExist_ShouldReturnNotFound()
+        public async Task UpsertOrderDetails_OrderDoesNotExist_ShouldReturnNotFound()
         {
             // arrange
             ServiceType serviceType = Context.ServiceTypes.First();

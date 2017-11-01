@@ -30,7 +30,11 @@ namespace Odin.Data.Core.Dtos
         public bool IsRush { get; set; }
         public bool IsVip { get; set; }
         
-        public RentDto Rent { get; set; }
+        public string SpouseName { get; set; }
+        public string RmcContact { get; set; }
+        public string RmcContactEmail { get; set; }
+        
+        public float? DaysAuthorized { get; set; }
 
         [Required]
         public TransfereeDto Transferee { get; set; }

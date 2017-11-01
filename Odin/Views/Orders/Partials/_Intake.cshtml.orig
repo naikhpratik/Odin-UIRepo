@@ -322,7 +322,11 @@
         {
             <div class="row intake-row collapse in" data-entity-id="@Model.Services.ElementAt(i).Id" data-entity-collection="services">
                 <div class="col-xs-2 col-sm-1 intake-col">
+<<<<<<< HEAD
                     <input type="checkbox" class="intake-input intake-service-input" name="Selected"  @(Model.Services.ElementAt(i).Selected ? "checked =\"checked\"" : String.Empty)/>
+=======
+                    <input type="checkbox" class="intake-service-input" name="Selected"  @(Model.Services.ElementAt(i).Selected ? "checked='checked'" : String.Empty)/>
+>>>>>>> master
                 </div>
                 <div class="col-xs-10 col-sm-5 intake-col">
                     <span class="intake-span">@Model.Services.ElementAt(i).Name</span>

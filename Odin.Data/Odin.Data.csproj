@@ -378,6 +378,10 @@
     <Compile Include="Persistence\Migrations\201710271758539_MergedMattA5.Designer.cs">
       <DependentUpon>201710271758539_MergedMattA5.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201710312056472_AddNewFieldsToOrder.cs" />
+    <Compile Include="Persistence\Migrations\201710312056472_AddNewFieldsToOrder.Designer.cs">
+      <DependentUpon>201710312056472_AddNewFieldsToOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\201710272005424_RentChanges.cs" />
     <Compile Include="Persistence\Migrations\201710272005424_RentChanges.Designer.cs">
       <DependentUpon>201710272005424_RentChanges.cs</DependentUpon>
@@ -389,6 +393,10 @@
     <Compile Include="Persistence\Migrations\201710302022397_MovedLeaseToOrder.cs" />
     <Compile Include="Persistence\Migrations\201710302022397_MovedLeaseToOrder.Designer.cs">
       <DependentUpon>201710302022397_MovedLeaseToOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710312109349_MergeAddNewEtlFields.cs" />
+    <Compile Include="Persistence\Migrations\201710312109349_MergeAddNewEtlFields.Designer.cs">
+      <DependentUpon>201710312109349_MergeAddNewEtlFields.cs</DependentUpon>
     </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\NumberOfBathroomsTypesRepository.cs" />
@@ -540,6 +548,9 @@
     <EmbeddedResource Include="Persistence\Migrations\201710271758539_MergedMattA5.resx">
       <DependentUpon>201710271758539_MergedMattA5.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710312056472_AddNewFieldsToOrder.resx">
+      <DependentUpon>201710312056472_AddNewFieldsToOrder.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201710272005424_RentChanges.resx">
       <DependentUpon>201710272005424_RentChanges.cs</DependentUpon>
     </EmbeddedResource>
@@ -548,6 +559,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201710302022397_MovedLeaseToOrder.resx">
       <DependentUpon>201710302022397_MovedLeaseToOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710312109349_MergeAddNewEtlFields.resx">
+      <DependentUpon>201710312109349_MergeAddNewEtlFields.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

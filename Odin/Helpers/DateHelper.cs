@@ -8,5 +8,12 @@ namespace Odin.Helpers
         {
             return date.HasValue ? date.Value.ToString("MM/dd/yy") : String.Empty;
         }
+        public static string GetViewFormat(DateTime? date, bool isTime)
+        {
+            if (isTime)
+                return date.HasValue ? date.Value.ToString("t") : String.Empty;
+            else
+                return date.HasValue ? date.Value.ToString("MM/dd/yy") : String.Empty;
+        }
     }
 }

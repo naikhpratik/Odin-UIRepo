@@ -7,15 +7,11 @@
         $('#intake').css("display", "block");
 
         $('.item').click(function () {
-            $('.item').removeClass('selected');
-            
+            $('.item.selected').removeClass('selected');            
             $(this).addClass('selected');
+            var actionName = $(this).attr('data-panel');
 
-            $('div.col-md-10 > div > div').each(function () { $(this).css("display", "none"); });
-            
-            //$('div.col > div.frame').each(function () { $(this).css("display", "none"); });
-
-            $('div#' + $(this).attr('data-panel')).css("display", "block");
+            $('#orderContainer').load('/orders/' + actionName + 'Partial/' + currentOrderId);
         });
 
         // ensure icon spacing is adequate on mobile
