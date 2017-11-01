@@ -216,7 +216,7 @@ namespace Odin.Controllers.Api
         [HttpPost]
         [Authorize]
         [Route("api/orders/transferee/intake/services")]
-        public IHttpActionResult UpsertIntakeServices(OrdersTransfereeIntakeServicesDto dto)
+        public IHttpActionResult UpdateIntakeServices(OrdersTransfereeIntakeServicesDto dto)
         {
 
             var userId = User.Identity.GetUserId();
@@ -232,9 +232,7 @@ namespace Odin.Controllers.Api
                 var service = order.Services.FirstOrDefault(s => !String.IsNullOrEmpty(serviceDto.Id) && s.Id == serviceDto.Id);
                 if (service == null)
                 {
-                    service = _mapper.Map<OrdersTransfereeIntakeServiceDto, Service>(serviceDto);
-                    service.Id = Guid.NewGuid().ToString();
-                    order.Services.Add(service);
+                    return NotFound();
                 }
                 else
                 {
