@@ -31,6 +31,7 @@ namespace Odin
             CreateMap<Order, OrdersIndexViewModel>();
             CreateMap<Order, OrdersTransfereeViewModel>();
 
+            CreateMap<Rent, HousingViewModel>();
 
             /*DTO Mappings*/
 
