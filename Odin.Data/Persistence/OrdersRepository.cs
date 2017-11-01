@@ -50,6 +50,12 @@ namespace Odin.Data.Persistence
                 .Include(o => o.Rent)
                 .Include(o => o.Services.Select(s => s.ServiceType))
                 .Include(o => o.Rent)
+                .Include(o => o.Rent.NumberOfBathrooms)
+                .Include(o => o.Rent.HousingType)
+                .Include(o => o.Rent.AreaType)
+                .Include(o => o.Rent.TransportationType)
+                .Include(o => o.DepositType)
+                .Include(o => o.BrokerFeeType)
                 .SingleOrDefault<Order>();
         }
 
@@ -59,6 +65,14 @@ namespace Odin.Data.Persistence
                 .Where(o => o.Id == orderId && o.ConsultantId == userId)
                 .Include(o => o.Services)
                 .Include(o => o.Rent)
+                .Include(o => o.Services.Select(s => s.ServiceType))
+                .Include(o => o.Rent)
+                .Include(o => o.Rent.NumberOfBathrooms)
+                .Include(o => o.Rent.HousingType)
+                .Include(o => o.Rent.AreaType)
+                .Include(o => o.Rent.TransportationType)
+                .Include(o => o.DepositType)
+                .Include(o => o.BrokerFeeType)
                 .SingleOrDefault<Order>();
         }
     }

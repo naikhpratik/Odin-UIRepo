@@ -65,12 +65,11 @@ namespace Odin.Controllers.Api
         [HttpPost]
         [Authorize]
         [Route("api/orders/transferee/intake/destination")]
-        public IHttpActionResult UpsertIntakeDestination(OrdersTransfereeIntakeDestinationDto dto)
+        public IHttpActionResult UpdateIntakeDestination(OrdersTransfereeIntakeDestinationDto dto)
         {
 
             var userId = User.Identity.GetUserId();
-
-            var order = _unitOfWork.Orders.GetOrderById(dto.Id);
+            var order = _unitOfWork.Orders.GetOrderFor(userId,dto.Id);
 
             if (order == null)
             {
@@ -86,12 +85,11 @@ namespace Odin.Controllers.Api
         [HttpPost]
         [Authorize]
         [Route("api/orders/transferee/intake/origin")]
-        public IHttpActionResult UpsertIntakeOrigin(OrdersTransfereeIntakeOriginDto dto)
+        public IHttpActionResult UpdateIntakeOrigin(OrdersTransfereeIntakeOriginDto dto)
         {
 
             var userId = User.Identity.GetUserId();
-
-            var order = _unitOfWork.Orders.GetOrderById(dto.Id);
+            var order = _unitOfWork.Orders.GetOrderFor(userId,dto.Id);
 
             if (order == null)
             {
@@ -110,7 +108,7 @@ namespace Odin.Controllers.Api
         public IHttpActionResult UpsertIntakeFamily(OrdersTransfereeIntakeFamilyDto dto)
         {
             var userId = User.Identity.GetUserId();
-            var order = _unitOfWork.Orders.GetOrderById(dto.Id);
+            var order = _unitOfWork.Orders.GetOrderFor(userId,dto.Id);
 
             if (order == null)
             {
@@ -160,7 +158,7 @@ namespace Odin.Controllers.Api
         public IHttpActionResult InsertChild(string orderId)
         {
             var userId = User.Identity.GetUserId();
-            var order = _unitOfWork.Orders.GetOrderById(orderId);
+            var order = _unitOfWork.Orders.GetOrderFor(userId,orderId);
 
             if (order == null)
             {
@@ -180,15 +178,15 @@ namespace Odin.Controllers.Api
         [Route("api/orders/transferee/children/{id}")]
         public IHttpActionResult DeleteChild(string id)
         {
-
             var userId = User.Identity.GetUserId();
-            var child = _unitOfWork.Children.GetChildById(id);
+            var child = _unitOfWork.Children.GetChildFor(userId,id);
 
             if (child == null)
             {
                 return NotFound();
             }
-            child.Deleted = true;
+
+            child.Delete();
             _unitOfWork.Complete();
             return Ok();
         }
@@ -200,7 +198,7 @@ namespace Odin.Controllers.Api
         {
 
             var userId = User.Identity.GetUserId();
-            var order = _unitOfWork.Orders.GetOrderById(orderId);
+            var order = _unitOfWork.Orders.GetOrderFor(userId,orderId);
 
             if (order == null)
             {
@@ -222,7 +220,7 @@ namespace Odin.Controllers.Api
         {
 
             var userId = User.Identity.GetUserId();
-            var order = _unitOfWork.Orders.GetOrderById(dto.Id);
+            var order = _unitOfWork.Orders.GetOrderFor(userId,dto.Id);
 
             if (order == null)
             {
@@ -249,7 +247,7 @@ namespace Odin.Controllers.Api
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize]                
         [Route("api/orders/transferee/details/services")]
         public IHttpActionResult UpsertDetailsServices(OrdersTransfereeDetailsServicesDto dto)
         {
@@ -261,20 +259,21 @@ namespace Odin.Controllers.Api
             {
                 return NotFound();
             }
-
-            foreach (var serviceDto in dto.Services)
-            {
-                var service = order.Services.FirstOrDefault(s => !String.IsNullOrEmpty(serviceDto.Id) && s.Id == serviceDto.Id);
-                if (service == null)
+            if (dto.Services != null)
+               {
+                foreach (var serviceDto in dto.Services)
                 {
-                    return NotFound();
-                }
-                else
-                {
-                    _mapper.Map<OrdersTransfereeDetailsServiceDto, Service>(serviceDto, service);
+                    var service = order.Services.FirstOrDefault(s => !String.IsNullOrEmpty(serviceDto.Id) && s.Id == serviceDto.Id);
+                    if (service == null)
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        _mapper.Map<OrdersTransfereeDetailsServiceDto, Service>(serviceDto, service);
+                    }
                 }
             }
-
             _unitOfWork.Complete();
             return Ok();
         }
@@ -282,12 +281,11 @@ namespace Odin.Controllers.Api
         [HttpPost]
         [Authorize]
         [Route("api/orders/transferee/intake/rmc")]
-        public IHttpActionResult UpsertIntakeRmc(OrdersTransfereeIntakeRmcDto dto)
+        public IHttpActionResult UpdateIntakeRmc(OrdersTransfereeIntakeRmcDto dto)
         {
 
             var userId = User.Identity.GetUserId();
-
-            var order = _unitOfWork.Orders.GetOrderById(dto.Id);
+            var order = _unitOfWork.Orders.GetOrderFor(userId, dto.Id);
 
             if (order == null)
             {
@@ -306,7 +304,7 @@ namespace Odin.Controllers.Api
         public IHttpActionResult InsertPet(string orderId)
         {
             var userId = User.Identity.GetUserId();
-            var order = _unitOfWork.Orders.GetOrderById(orderId);
+            var order = _unitOfWork.Orders.GetOrderFor(userId,orderId);
 
             if (order == null)
             {
@@ -328,13 +326,13 @@ namespace Odin.Controllers.Api
         {
 
             var userId = User.Identity.GetUserId();
-            var pet = _unitOfWork.Pets.GetChildById(id);
+            var pet = _unitOfWork.Pets.GetPetFor(userId, id);
 
             if (pet == null)
             {
                 return NotFound();
             }
-            pet.Deleted = true;
+            pet.Delete();
             _unitOfWork.Complete();
             return Ok();
         }
@@ -342,12 +340,12 @@ namespace Odin.Controllers.Api
         [HttpPost]
         [Authorize]
         [Route("api/orders/transferee/intake/temphousing")]
-        public IHttpActionResult UpsertIntakeTempHousing(OrdersTransfereeIntakeTempHousingDto dto)
+        public IHttpActionResult UpdateIntakeTempHousing(OrdersTransfereeIntakeTempHousingDto dto)
         {
 
             var userId = User.Identity.GetUserId();
 
-            var order = _unitOfWork.Orders.GetOrderById(dto.Id);
+            var order = _unitOfWork.Orders.GetOrderFor(userId, dto.Id);
 
             if (order == null)
             {
@@ -367,7 +365,7 @@ namespace Odin.Controllers.Api
         {
             var userId = User.Identity.GetUserId();
 
-            var order = _unitOfWork.Orders.GetOrderById(dto.Id);
+            var order = _unitOfWork.Orders.GetOrderFor(userId, dto.Id);
 
             if (order == null)
             {
@@ -383,6 +381,25 @@ namespace Odin.Controllers.Api
                 _mapper.Map<OrdersTransfereeIntakeRentDto, Rent>(dto, order.Rent);
             }
 
+            _unitOfWork.Complete();
+
+            return Ok();
+        }
+
+        [HttpPost]
+        [Authorize]
+        [Route("api/orders/transferee/intake/lease")]
+        public IHttpActionResult UpdateIntakeLease(OrdersTransfereeIntakeLeaseDto dto)
+        {
+            var userId = User.Identity.GetUserId();
+            var order = _unitOfWork.Orders.GetOrderFor(userId,dto.Id);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            _mapper.Map<OrdersTransfereeIntakeLeaseDto, Order>(dto, order);
             _unitOfWork.Complete();
 
             return Ok();

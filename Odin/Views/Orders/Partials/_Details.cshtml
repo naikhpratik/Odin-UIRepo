@@ -1,4 +1,5 @@
 ﻿@model Odin.ViewModels.Orders.Transferee.OrdersTransfereeViewModel
+
 <div id="details" data-order-id="@Model.Id">
     <div class="row details-title">
         <p>Profile Summary</p>
@@ -47,7 +48,7 @@
                 Housing Details:
             </P>
         </div>
-       @*<div class="row details-row">
+       <div class="row details-row">
         <div class="col-sm-3 details-col">
             <label>Monthly Budget:</label>
             <span>@string.Format("{0: $#,###.00}", @Model.Rent.HousingBudget)</span>
@@ -63,7 +64,7 @@
 
         <div class="col-sm-3 details-col">
             <label>BD/BA:</label>
-            <span>@Model.Rent.NumberOfBedrooms.ToString()/@Model.Rent.NumberOfBathrooms.ToString()</span>
+            <span>@Model.Rent.NumberOfBedrooms.ToString()/@(Model.Rent.NumberOfBathrooms != null ? Model.Rent.NumberOfBathrooms.ToString() : "NA")</span>
         </div>
         <div class="col-sm-3 details-col">
             <label>Sq.Ft:</label>
@@ -73,7 +74,7 @@
             <label>Rent or Own:</label>
             <span>@Model.Rent.OwnershipType</span>
         </div>
-    </div>*@
+    </div>
     </div>
     }
     <div class="details-block">
@@ -150,6 +151,7 @@
                     </div>
                     <div class="col-sm-3 details-col">
                         @Html.DatePicker("time", "ScheduledTime", Model.Services.ElementAt(i).ScheduledTimeDisplay)
+                        <div class="text-danger" style="display:none;" data-entity-id="@Model.Services.ElementAt(i).Id" data-valmsg-replace="true" ><div for="ScheduledTime">Schedule time is required.</div></div>
                     </div>
                     <div class="col-sm-3 details-col">
                         @Html.DatePicker("date", "CompletedDate", Model.Services.ElementAt(i).CompletedDateDisplay)

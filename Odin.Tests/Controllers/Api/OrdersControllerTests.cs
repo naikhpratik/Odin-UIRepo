@@ -1,16 +1,18 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using AutoMapper;
+﻿using AutoMapper;
 using FluentAssertions;
-using System.Net;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using Odin.Data.Core;
 using Odin.Data.Core.Dtos;
 using Odin.Data.Core.Models;
 using Odin.Data.Core.Repositories;
 using Odin.Interfaces;
+using Odin.Tests.Extensions;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Results;
 
 namespace Odin.Tests.Controllers.Api
 {
@@ -19,18 +21,29 @@ namespace Odin.Tests.Controllers.Api
     {
         private Odin.Controllers.Api.OrdersController _controller;
         private Mock<IOrdersRepository> _mockRepository;
+        private Mock<IChildrenRepository> _mockChildrenRepository;
         private Mock<IMapper> _mockMapper;
+        private string _userId;
+        private string _userName;
 
         [TestInitialize]
         public void TestInitialize()
         {
             _mockRepository = new Mock<IOrdersRepository>();
             _mockMapper = new Mock<IMapper>();
+            _mockChildrenRepository = new Mock<IChildrenRepository>();
 
             var mockUnitOfWork = new Mock<IUnitOfWork>();
             mockUnitOfWork.SetupGet(u => u.Orders).Returns(_mockRepository.Object);
+            mockUnitOfWork.SetupGet(u => u.Children).Returns(_mockChildrenRepository.Object);
+
+
             var mockAccountHelper = new Mock<IAccountHelper>();
-            _controller = new Odin.Controllers.Api.OrdersController(mockUnitOfWork.Object, _mockMapper.Object);            
+            _controller = new Odin.Controllers.Api.OrdersController(mockUnitOfWork.Object, _mockMapper.Object);
+
+            _userId = "1";
+            _userName = "TestUser";
+            _controller.MockCurrentUser(_userId,_userName);
         }
 
         [TestMethod]
@@ -48,6 +61,7 @@ namespace Odin.Tests.Controllers.Api
             var result = _controller.UpsertDetailsServices(dtos) as IHttpActionResult;
             result.Should().BeOfType<System.Web.Http.Results.OkResult>();
         }
+
         [TestMethod]
         public void UpsertDetailsServicesTest_OrderNotFound()
         {
@@ -63,6 +77,7 @@ namespace Odin.Tests.Controllers.Api
             var result = _controller.UpsertDetailsServices(dtos) as IHttpActionResult;
             result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
         }
+
         [TestMethod]
         public void UpsertDetailsServicesTest_ServiceNotFound()
         {
@@ -78,5 +93,185 @@ namespace Odin.Tests.Controllers.Api
             var result = _controller.UpsertDetailsServices(dtos) as IHttpActionResult;
             result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
         }
+
+        [TestMethod]
+        public void UpdateIntakeDestination_ValidDto_ReturnOk()
+        {
+            var orderId = "1";
+
+            Order order = new Order() { Id = orderId, DestinationCity = "Houston", DestinationCountry = "USA", DestinationState = "Texas"};
+            _mockRepository.Setup(r => r.GetOrderFor(_userId,orderId)).Returns(order);
+
+            var dto = new OrdersTransfereeIntakeDestinationDto() { Id = orderId, DestinationCountry = "Canada", DestinationCity = "Toronto", DestinationState = "Alberta"};         
+            
+            var result = _controller.UpdateIntakeDestination(dto) as IHttpActionResult;
+            result.Should().BeOfType<System.Web.Http.Results.OkResult>();
+        }
+
+        [TestMethod]
+        public void UpdateIntakeDestination_NoOrder_ReturnNotFound()
+        {
+            var orderId = "1";
+            Order order = null;
+
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+
+            var dto = new OrdersTransfereeIntakeDestinationDto() { Id = orderId, DestinationCountry = "Canada", DestinationCity = "Toronto", DestinationState = "Alberta" };
+
+            var result = _controller.UpdateIntakeDestination(dto) as IHttpActionResult;
+            result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
+        }
+
+        [TestMethod]
+        public void UpdateIntakeOrigin_ValidDto_ReturnOk()
+        {
+            var orderId = "1";
+
+            Order order = new Order() { Id = orderId};
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+
+            var dto = new OrdersTransfereeIntakeOriginDto() { Id = orderId, OriginCountry = "Canada", OriginCity = "Toronto", OriginState = "Alberta" };
+
+            var result = _controller.UpdateIntakeOrigin(dto) as IHttpActionResult;
+            result.Should().BeOfType<System.Web.Http.Results.OkResult>();
+        }
+
+        [TestMethod]
+        public void UpdateIntakeOrigin_NoOrder_ReturnNotFound()
+        {
+            var orderId = "1";
+            Order order = null;
+
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+
+            var dto = new OrdersTransfereeIntakeOriginDto() { Id = orderId, OriginCountry = "Canada", OriginCity = "Toronto", OriginState = "Alberta" };
+
+            var result = _controller.UpdateIntakeOrigin(dto) as IHttpActionResult;
+            result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
+        }
+
+        [TestMethod]
+        public void UpdateIntakeFamily_ValidDto_ReturnOk()
+        {
+            var orderId = "1";
+
+            Order order = new Order() { Id = orderId };
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+
+            var dto = new OrdersTransfereeIntakeFamilyDto() { Id = orderId, SpouseName = "Test Name"};
+
+            var result = _controller.UpsertIntakeFamily(dto) as IHttpActionResult;
+            result.Should().BeOfType<System.Web.Http.Results.OkResult>();
+        }
+
+        [TestMethod]
+        public void UpsertIntakeFamily_NoOrder_ReturnNotFound()
+        {
+            var orderId = "1";
+            Order order = null;
+
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+
+            var dto = new OrdersTransfereeIntakeFamilyDto() { Id = orderId, SpouseName = "Test Name" };
+
+            var result = _controller.UpsertIntakeFamily(dto) as IHttpActionResult;
+            result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
+        }
+
+        [TestMethod]
+        public void InsertChild_ValidOrder_ReturnOkWithNewChildId()
+        {
+            var orderId = "1";
+
+            Order order = new Order() { Id = orderId };
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+
+            
+            var result = _controller.InsertChild(orderId) as IHttpActionResult;
+            result.Should().BeOfType<System.Web.Http.Results.OkNegotiatedContentResult<string>>();
+            order.Children.Count.Should().Be(1);
+            ((OkNegotiatedContentResult<string>) result).Content.Should().NotBeNullOrEmpty();
+
+        }
+
+        [TestMethod]
+        public void InsertChild_NoOrder_ReturnNotFound()
+        {
+            var orderId = "1";
+            Order order = null;
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+
+            var result = _controller.InsertChild(orderId) as IHttpActionResult;
+            result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
+        }
+
+        [TestMethod]
+        public void DeleteChild_ValidChild_ReturnOkWithChildDeleted()
+        {
+            var childId = "1";
+
+            Child child = new Child() { Id = childId };
+            _mockChildrenRepository.Setup(r => r.GetChildFor(_userId, childId)).Returns(child);
+
+            var result = _controller.DeleteChild(child.Id) as IHttpActionResult;
+            result.Should().BeOfType<System.Web.Http.Results.OkResult>();
+            child.Deleted.Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void DeleteChild_NoChild_ReturnNotFound()
+        {
+            var childId = "1";
+
+            Child child = null;
+            _mockChildrenRepository.Setup(r => r.GetChildFor(_userId, childId)).Returns(child);
+
+            var result = _controller.DeleteChild(childId) as IHttpActionResult;
+            result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
+        }
+
+        [TestMethod]
+        public void InsertService_ValidOrder_ReturnOkWithNewServiceId()
+        {
+            var orderId = "1";
+            var serviceTypeId = 1;
+
+            Order order = new Order() { Id = orderId };
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+
+            var result = _controller.InsertService(order.Id,serviceTypeId) as IHttpActionResult;
+            result.Should().BeOfType<System.Web.Http.Results.OkNegotiatedContentResult<string>>();
+            order.Services.Count.Should().Be(1);
+            order.Services.FirstOrDefault().ServiceTypeId.Should().Be(serviceTypeId);
+            ((OkNegotiatedContentResult<string>)result).Content.Should().NotBeNullOrEmpty();
+        }
+
+        [TestMethod]
+        public void InsertService_NoOrder_ReturnNotFound()
+        {
+            var orderId = "1";
+            var serviceTypeId = 1;
+
+            Order order = null;
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+
+            var result = _controller.InsertService(orderId, serviceTypeId) as IHttpActionResult;
+            result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
+        }
+
+        [TestMethod]
+        public void UpsertIntakeServices_NoOrder_ReturnNotFound()
+        {
+            var orderId = "1";
+
+            Order order = null;
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+
+            var dto = new OrdersTransfereeIntakeServicesDto() { Id = orderId };
+
+            var result = _controller.UpsertIntakeServices(dto) as IHttpActionResult;
+            result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
+        }
+
     }
 }

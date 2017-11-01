@@ -25,7 +25,12 @@ namespace Odin.Data.Persistence
         public virtual DbSet<Transferee> Transferees { get; set; }
         public virtual DbSet<Child> Children { get; set; }
         public virtual DbSet<Pet> Pets { get; set; }
-        public virtual DbSet<Lease> Leases { get; set; }
+        public virtual DbSet<NumberOfBathroomsType> NumberOfBathrooms { get; set; }
+        public virtual DbSet<HousingType> HousingTypes { get; set; }
+        public virtual DbSet<AreaType> AreaTypes { get; set; }
+        public virtual DbSet<TransportationType> TransportationTypes { get; set; }
+        public virtual DbSet<DepositType> DepositTypes { get; set; }
+        public virtual DbSet<BrokerFeeType> BrokerFeeTypes { get; set; }
 
 
         public ApplicationDbContext()
@@ -42,8 +47,7 @@ namespace Odin.Data.Persistence
         {
             modelBuilder.Configurations.Add(new OrderConfiguration());
             modelBuilder.Configurations.Add(new RentConfiguration());
-            modelBuilder.Configurations.Add(new LeaseConfiguration());
-
+            
             //modelBuilder.Entity<Child>()
             //    .Map(m => m.Requires("Deleted").HasValue(false))
             //    .Ignore(m => m.Deleted);

@@ -117,7 +117,6 @@
     <Compile Include="Builders\ConsultantBuilder.cs" />
     <Compile Include="Builders\ConsultantDtoBuilder.cs" />
     <Compile Include="Builders\ConsultantImportDtoBuilder.cs" />
-    <Compile Include="Builders\LeaseBuilder.cs" />
     <Compile Include="Builders\PetBuilder.cs" />
     <Compile Include="Builders\ProgramManagerDtoBuilder.cs" />
     <Compile Include="Builders\RentBuilder.cs" />
@@ -135,6 +134,7 @@
     <Compile Include="Core\Dtos\OrdersTransfereeDetailsServicesDto.cs" />
     <Compile Include="Core\Dtos\OrdersTransfereeIntakeFamilyDto.cs" />
     <Compile Include="Core\Dtos\OrdersTransfereeIntakeDestinationDto.cs" />
+    <Compile Include="Core\Dtos\OrdersTransfereeIntakeLeaseDto.cs" />
     <Compile Include="Core\Dtos\OrdersTransfereeIntakeOriginDto.cs" />
     <Compile Include="Core\Dtos\OrdersTransfereeIntakeRentDto.cs" />
     <Compile Include="Core\Dtos\OrdersTransfereeIntakeRmcDto.cs" />
@@ -160,7 +160,6 @@
     <Compile Include="Core\Models\DepositType.cs" />
     <Compile Include="Core\Models\ErrorResponse.cs" />
     <Compile Include="Core\Models\HousingType.cs" />
-    <Compile Include="Core\Models\Lease.cs" />
     <Compile Include="Core\Models\MobileTable.cs" />
     <Compile Include="Core\Models\NumberOfBathroomsType.cs" />
     <Compile Include="Core\Models\Order.cs" />
@@ -175,14 +174,20 @@
     <Compile Include="Core\Models\Transferee.cs" />
     <Compile Include="Core\Models\TransportationType.cs" />
     <Compile Include="Core\Models\UserRoles.cs" />
+    <Compile Include="Core\Repositories\IAreaTypesRepository.cs" />
+    <Compile Include="Core\Repositories\IBrokerFeeTypesRepository.cs" />
     <Compile Include="Core\Repositories\IChildrenRepository.cs" />
     <Compile Include="Core\Repositories\IConsultantsRepository.cs" />
+    <Compile Include="Core\Repositories\IDepositTypesRepository.cs" />
+    <Compile Include="Core\Repositories\IHousingTypesRepository.cs" />
     <Compile Include="Core\Repositories\IManagersRepository.cs" />
+    <Compile Include="Core\Repositories\INumberOfBathroomsTypesRepository.cs" />
     <Compile Include="Core\Repositories\IOrdersRepository.cs" />
     <Compile Include="Core\Repositories\IPetsRepository.cs" />
     <Compile Include="Core\Repositories\IServicesRepository.cs" />
     <Compile Include="Core\Repositories\IServiceTypesRepository.cs" />
     <Compile Include="Core\Repositories\ITransfereesRepository.cs" />
+    <Compile Include="Core\Repositories\ITransportationTypesRepository.cs" />
     <Compile Include="Core\Repositories\IUsersRepository.cs" />
     <Compile Include="Extensions\ModelStateExtensions.cs" />
     <Compile Include="Helpers\PasswordHelper.cs" />
@@ -191,11 +196,14 @@
     <Compile Include="Persistence\ApplicationDbContext.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Persistence\ApplicationUserRepository.cs" />
+    <Compile Include="Persistence\AreaTypesRepository.cs" />
+    <Compile Include="Persistence\BrokerFeeTypesRepository.cs" />
     <Compile Include="Persistence\ChildrenRepository.cs" />
     <Compile Include="Persistence\ConsultantsRepository.cs" />
-    <Compile Include="Persistence\EntityConfigurations\LeaseConfiguration.cs" />
+    <Compile Include="Persistence\DepositTypesRepository.cs" />
     <Compile Include="Persistence\EntityConfigurations\OrderConfiguration.cs" />
     <Compile Include="Persistence\EntityConfigurations\RentConfiguration.cs" />
+    <Compile Include="Persistence\HousingTypesRepository.cs" />
     <Compile Include="Persistence\IApplicationDbContext.cs" />
     <Compile Include="Persistence\ManagersRepository.cs" />
     <Compile Include="Persistence\Migrations\201708281308044_InitialMigration.cs" />
@@ -374,13 +382,31 @@
     <Compile Include="Persistence\Migrations\201710312056472_AddNewFieldsToOrder.Designer.cs">
       <DependentUpon>201710312056472_AddNewFieldsToOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201710272005424_RentChanges.cs" />
+    <Compile Include="Persistence\Migrations\201710272005424_RentChanges.Designer.cs">
+      <DependentUpon>201710272005424_RentChanges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710272025228_MoreRentChanges.cs" />
+    <Compile Include="Persistence\Migrations\201710272025228_MoreRentChanges.Designer.cs">
+      <DependentUpon>201710272025228_MoreRentChanges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710302022397_MovedLeaseToOrder.cs" />
+    <Compile Include="Persistence\Migrations\201710302022397_MovedLeaseToOrder.Designer.cs">
+      <DependentUpon>201710302022397_MovedLeaseToOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201710312109349_MergeAddNewEtlFields.cs" />
+    <Compile Include="Persistence\Migrations\201710312109349_MergeAddNewEtlFields.Designer.cs">
+      <DependentUpon>201710312109349_MergeAddNewEtlFields.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
+    <Compile Include="Persistence\NumberOfBathroomsTypesRepository.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
     <Compile Include="Persistence\PetsRepository.cs" />
     <Compile Include="Persistence\RentsRepository.cs" />
     <Compile Include="Persistence\ServicesRepository.cs" />
     <Compile Include="Persistence\ServiceTypesRepository.cs" />
     <Compile Include="Persistence\TransfereesRepository.cs" />
+    <Compile Include="Persistence\TransportationTypesRepository.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
     <Compile Include="Persistence\UsersRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -524,6 +550,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201710312056472_AddNewFieldsToOrder.resx">
       <DependentUpon>201710312056472_AddNewFieldsToOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710272005424_RentChanges.resx">
+      <DependentUpon>201710272005424_RentChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710272025228_MoreRentChanges.resx">
+      <DependentUpon>201710272025228_MoreRentChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710302022397_MovedLeaseToOrder.resx">
+      <DependentUpon>201710302022397_MovedLeaseToOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201710312109349_MergeAddNewEtlFields.resx">
+      <DependentUpon>201710312109349_MergeAddNewEtlFields.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

@@ -69,8 +69,19 @@ namespace Odin.Data.Core.Models
         public string ConsultantId { get; set; }
         public virtual Consultant Consultant { get; set; }
 
+        public DepositType DepositType { get; set; }
+
+        public byte? DepositTypeId { get; set; }
+
+        public int? LeaseTerm { get; set; }
+
+        public BrokerFeeType BrokerFeeType { get; set; }
+
+        public byte? BrokerFeeTypeId { get; set; }
+
+        public int? LengthOfAssignment { get; set; }
+
         public Rent Rent { get; set; }
-        public Lease Lease { get; set; }
 
         public virtual ICollection<Service> Services { get; private set; }
 

@@ -7,15 +7,15 @@
         $('#intake').css("display", "block");
 
         $('.item').click(function () {
-            $('.item').removeClass('selected');
-            
+            $('.item.selected').removeClass('selected');            
             $(this).addClass('selected');
+            var actionName = $(this).attr('data-panel');
 
-            $('div.col-md-10 > div > div').each(function () { $(this).css("display", "none"); });
-            
+            $('#orderContainer').load('/orders/' + actionName + 'Partial/' + currentOrderId);
+
+            //$('div.col-md-10 > div > div').each(function () { $(this).css("display", "none"); });            
             //$('div.col > div.frame').each(function () { $(this).css("display", "none"); });
-
-            $('div#' + $(this).attr('data-panel')).css("display", "block");
+            //$('div#' + $(this).attr('data-panel')).css("display", "block");
         });
 
         // ensure icon spacing is adequate on mobile
