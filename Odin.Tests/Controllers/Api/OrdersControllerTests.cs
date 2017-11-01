@@ -272,7 +272,7 @@ namespace Odin.Tests.Controllers.Api
 
             var dto = new OrdersTransfereeIntakeServicesDto() {Id = orderId};
 
-            var result = _controller.UpsertIntakeServices(dto) as IHttpActionResult;
+            var result = _controller.UpdateIntakeServices(dto) as IHttpActionResult;
             result.Should().BeOfType<System.Web.Http.Results.OkResult>();
         }
 
@@ -286,7 +286,7 @@ namespace Odin.Tests.Controllers.Api
 
             var dto = new OrdersTransfereeIntakeServicesDto() { Id = orderId };
 
-            var result = _controller.UpsertIntakeServices(dto) as IHttpActionResult;
+            var result = _controller.UpdateIntakeServices(dto) as IHttpActionResult;
             result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
         }
 
