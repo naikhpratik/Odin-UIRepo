@@ -55,7 +55,7 @@
         </div>
         <div class="col-sm-3 details-col">
             <label>Housing:</label>
-            <span>@Model.Rent.HousingType</span>
+            <span>@(Model.Rent.HousingType != null ? Model.Rent.HousingType.ToString() : "TBD")</span>
         </div>
         <div class="col-sm-3 details-col">
             <label>School District:</label>
@@ -64,7 +64,7 @@
 
         <div class="col-sm-3 details-col">
             <label>BD/BA:</label>
-            <span>@Model.Rent.NumberOfBedrooms.ToString()/@(Model.Rent.NumberOfBathrooms != null ? Model.Rent.NumberOfBathrooms.ToString() : "NA")</span>
+            <span>@Model.Rent.NumberOfBedrooms.ToString()/@(Model.Rent.NumberOfBathrooms != null ? Model.Rent.NumberOfBathrooms.ToString() : "TBD")</span>
         </div>
         <div class="col-sm-3 details-col">
             <label>Sq.Ft:</label>
@@ -102,7 +102,7 @@
             </div>
             <div class="col-sm-3 details-col">
                 <label>Client Number:</label>
-                <span>@Model.ClientFileNumber</span>
+                <span>@(Model.ClientFileNumber != null ? Model.ClientFileNumber.ToString() : "TBD")</span>
             </div>
         </div>
     </div>
@@ -118,8 +118,7 @@
             </p>
             <span class="details-blue">Please fill out any items that are not already auto-generated that could aid in the help of your clients placement.</span>
         </div>
-        
-       
+    
         <hr />
         <div class="details-block" id="scheduledServices">
             <div class="row details-row">
@@ -140,8 +139,11 @@
                     <H5>Notes:</H5>
                 </div>
             </div>
-            @for (int i = 0; i < @Model.Services.Count(); i++)
-            {
+
+                @for (int i = 0; i < Model.Services.Count(); i++)
+                {
+                    if (Model.Services.ElementAt(i).Selected)
+                    {
                 <div class="row details-row" data-entity-id="@Model.Services.ElementAt(i).Id" data-entity-collection="services">
                     <div class="col-sm-3 details-col">
                         <label>@Model.Services.ElementAt(i).Name.</label>
@@ -159,9 +161,12 @@
                     <div class="col-sm-3 details-col">
                         <p>@Html.TextAreaFor(s => @Model.Services.ElementAt(i).Notes, new { @class = "form-control intake-service-input" })</p>
                     </div>
-                </div>               
-            }
+                </div>
+                    }
+                }
+           
         </div>
+    
     </div>
 </div>
 @Styles.Render("~/Styling/details")
