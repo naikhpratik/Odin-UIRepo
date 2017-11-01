@@ -156,6 +156,7 @@
     <Compile Include="Core\Models\AzureTest.cs" />
     <Compile Include="Core\Models\BrokerFeeType.cs" />
     <Compile Include="Core\Models\Child.cs" />
+    <Compile Include="Core\Models\HomeFindingProperty.cs" />
     <Compile Include="Core\Models\Property.cs" />
     <Compile Include="Core\Models\Consultant.cs" />
     <Compile Include="Core\Models\DepositType.cs" />
@@ -403,6 +404,10 @@
     <Compile Include="Persistence\Migrations\201711011841252_AddPropertyModel.Designer.cs">
       <DependentUpon>201711011841252_AddPropertyModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201711011848429_AddHomeFindingPropertyJoin.cs" />
+    <Compile Include="Persistence\Migrations\201711011848429_AddHomeFindingPropertyJoin.Designer.cs">
+      <DependentUpon>201711011848429_AddHomeFindingPropertyJoin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\NumberOfBathroomsTypesRepository.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
@@ -570,6 +575,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201711011841252_AddPropertyModel.resx">
       <DependentUpon>201711011841252_AddPropertyModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711011848429_AddHomeFindingPropertyJoin.resx">
+      <DependentUpon>201711011848429_AddHomeFindingPropertyJoin.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

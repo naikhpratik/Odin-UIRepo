@@ -33,6 +33,7 @@ namespace Odin.Data.Persistence
         public virtual DbSet<BrokerFeeType> BrokerFeeTypes { get; set; }
 
         public DbSet<Property> Properties { get; set; }
+        public DbSet<HomeFindingProperty> HomeFindingProperties { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
