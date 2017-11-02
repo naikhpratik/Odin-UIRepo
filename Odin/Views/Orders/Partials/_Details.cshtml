@@ -28,15 +28,15 @@
 
             <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 details-col">
                 <label>Final Arrival:</label>
-                <span>@(Model.FinalArrivalDate.HasValue ? Model.FinalArrivalDate.Value.ToString("MM/dd/yy") : "TBD")</span>
+                <span>@Model.FinalArrivalDateDisplay</span>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 details-col">
                 <label>Home Finding Date:</label>
-                <span>@(Model.HomeFindingDate.HasValue ? Model.HomeFindingDate.Value.ToString("MM/dd/yy") : "TBD")</span>
+                <span>@Model.HomeFindingDateDisplay</span>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 details-col">
                 <label>Temp Housing Last Day:</label>
-                <span>@(Model.TempHousingEndDate.HasValue ? Model.TempHousingEndDate.Value.ToString("MM/dd/yy") : "TBD")</span>
+                <span>@Model.TempHousingEndDateDisplay</span>
             </div>
         </div>
     </div>
@@ -51,24 +51,24 @@
        <div class="row details-row">
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 details-col">
             <label>Monthly Budget:</label>
-            <span>@string.Format("{0: $#,###.00}", @Model.Rent.HousingBudget)</span>
+            <span>@Model.HousingBudgetDisplay</span>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 details-col">
             <label>Housing:</label>
-            <span>@(Model.Rent.HousingType != null ? Model.Rent.HousingType.ToString() : "TBD")</span>
+            <span>@Model.HousingTypeDisplay</span>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 details-col">
             <label>School District:</label>
-            <span>@(Model.SchoolDistrict != null ? Model.SchoolDistrict : "TBD") </span>
+            <span>@Model.SchoolDistrictDisplay </span>
         </div>
 
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 details-col">
             <label>BD/BA:</label>
-            <span>@Model.Rent.NumberOfBedrooms.ToString()/@(Model.Rent.NumberOfBathrooms != null ? Model.Rent.NumberOfBathrooms.ToString() : "TBD")</span>
+            <span>@Model.NumberOfBedroomsDisplay/@Model.NumberOfBathroomsDisplay</span>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 details-col">
             <label>Sq.Ft:</label>
-            <span>@string.Format("{0: #,###.00}", @Model.Rent.SquareFootage)</span>
+            <span>@Model.SquareFootageDisplay</span>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 details-col">
             <label>Rent or Own:</label>
@@ -94,15 +94,15 @@
             </div>
             <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 details-col">
                 <label>Manager #:</label>
-                <span> @String.Format("{0:###'.'###'.'####}", double.Parse(@Model.ProgramManager.PhoneNumber))</span>
+                <span> @Model.PhoneNumberDisplay</span>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 details-col">
                 <label>SE Number:</label>
-                <span>@Model.ProgramManager.SeContactUid</span>
+                <span>@Model.SeContactUidDisplay</span>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 details-col">
                 <label>Client Number:</label>
-                <span>@(Model.ClientFileNumber != null ? Model.ClientFileNumber.ToString() : "TBD")</span>
+                <span>@Model.ClientFileNumberDisplay</span>
             </div>
         </div>
     </div>

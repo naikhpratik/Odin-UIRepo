@@ -12,7 +12,6 @@ namespace Odin.ViewModels.Orders.Transferee
     public class HousingViewModel
     {
         [Display(Name = "Budget:")]
-
         [DisplayFormat(DataFormatString = "{0:c}", NullDisplayText = "NA")]
         public decimal? HousingBudget { get; set; }
 
@@ -21,13 +20,27 @@ namespace Odin.ViewModels.Orders.Transferee
         public int? NumberOfBedrooms { get; set; }
 
         [Display(Name = "Bathrooms:")]
-        [DisplayFormat(NullDisplayText = "NA")]
-        public String NumberOfBathroomsString { get { return this.NumberOfBathrooms.Name; } }
+        public String NumberOfBathroomsString { get { return this.NumberOfBathrooms != null ? this.NumberOfBathrooms.Name : "NA"; } }
         public NumberOfBathroomsType NumberOfBathrooms { private get; set; }
 
         [Display(Name = "Housing Type:")]
-        [DisplayFormat(NullDisplayText = "NA")]
-        public String HousingTypeString { get { return this.HousingType.Name; } }
+        public String HousingTypeString { get { return this.HousingType != null ? this.HousingType.Name : "NA"; } }
         public HousingType HousingType { private get; set; }
+
+        [Display(Name = "Pets:")]
+        [DisplayFormat(NullDisplayText = "No Pets")]
+        public int NumberOfPets { get; set; }
+
+        [Display(Name = "Spouse/Kids:")]
+        [DisplayFormat(NullDisplayText = "No Family")]
+        public string SpouceAndKids { get; set; }
+
+        [Display(Name = "Distance From Work:")]
+        [DisplayFormat(NullDisplayText = "NA")]
+        public int? MaxCommute { get; set; }
+
+        [Display(Name = "Transportation:")]
+        public String TransportationTypeString { get { return this.TransportationType != null ? this.TransportationType.Name : "NA"; } }
+        public TransportationType TransportationType { private get; set; }
     }
 }
