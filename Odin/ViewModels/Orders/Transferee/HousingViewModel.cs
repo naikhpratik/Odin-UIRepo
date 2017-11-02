@@ -22,10 +22,12 @@ namespace Odin.ViewModels.Orders.Transferee
 
         [Display(Name = "Bathrooms:")]
         [DisplayFormat(NullDisplayText = "NA")]
-        public NumberOfBathroomsType NumberOfBathrooms { get; set; }
+        public String NumberOfBathroomsString { get { return this.NumberOfBathrooms.Name; } }
+        public NumberOfBathroomsType NumberOfBathrooms { private get; set; }
 
         [Display(Name = "Housing Type:")]
         [DisplayFormat(NullDisplayText = "NA")]
-        public HousingType HousingType { get; set; }
+        public String HousingTypeString { get { return this.HousingType.Name; } }
+        public HousingType HousingType { private get; set; }
     }
 }
