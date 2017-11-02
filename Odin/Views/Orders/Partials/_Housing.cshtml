@@ -1,15 +1,17 @@
-﻿<div id="housing" class="frame">
+﻿@model Odin.ViewModels.Orders.Transferee.HousingViewModel
+
+<div id="housing" class="frame">
     <div class="row">
         <div class="col-md-6">
             <p id="caption">Housing Summary</p>
             <div class="col-md-5">
                 <div>
-                    <p>Budget:</p>
-                    <span>$6,000</span>
+                    <p>@Html.DisplayNameFor(model => model.HousingBudget)</p>
+                    <span>@Html.DisplayFor(model => model.HousingBudget)</span>
                 </div>
                 <div>
-                    <p>Bedrooms:</p>
-                    <span>2-3</span>
+                    <p>@Html.DisplayNameFor(model => model.NumberOfBedrooms)</p>
+                    <span>@Html.DisplayFor(model => model.NumberOfBedrooms)</span>
                 </div>
                 <div>
                     <p>Pets:</p>
@@ -22,12 +24,12 @@
             </div>
             <div class="col-md-6">
                 <div>
-                    <p>Housing Type:</p>
-                    <span>Apartment, Condo, Townhouse</span>
+                    <p>@Html.DisplayNameFor(model => model.HousingTypeString)</p>
+                    <span>@Html.DisplayFor(model => model.HousingTypeString)</span>
                 </div>
                 <div>
-                    <p>Bathrooms:</p>
-                    <span>2 +</span>
+                    <p>@Html.DisplayNameFor(model => model.NumberOfBathroomsString)</p>
+                    <span>@Html.DisplayFor(model => model.NumberOfBathroomsString)</span>
                 </div>
                 <div>
                     <p>Distance from Work:</p>
@@ -43,6 +45,7 @@
             <img src="~/Content/Images/map_placeholder.png"/>
         </div>
     </div>
+    
     <div class="row notfirst">
         <div>
             <span>Filter:</span>
