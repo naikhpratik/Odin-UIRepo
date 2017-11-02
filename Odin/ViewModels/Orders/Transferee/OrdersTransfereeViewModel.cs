@@ -16,7 +16,7 @@ namespace Odin.ViewModels.Orders.Transferee
             Children = new List<ChildViewModel>();
             Services = new List<ServiceViewModel>();
             PossibleServices = new List<ServiceTypeViewModel>();
-            Rent = new RentViewModel();
+            HomeFinding = new HomeFindingViewModel();
         }
 
         public string Id { get; set; }
@@ -93,66 +93,66 @@ namespace Odin.ViewModels.Orders.Transferee
         public string ClientFileNumber { get; set; }
 
         public string RentId { get; set; }
-        public RentViewModel Rent { get; set; }
+        public HomeFindingViewModel HomeFinding { get; set; }
 
-        public string HousingBudgetDisplay => (Rent != null && Rent.HousingBudget.HasValue)
-            ? Rent.HousingBudget.ToString()
+        public string HousingBudgetDisplay => (HomeFinding != null && HomeFinding.HousingBudget.HasValue)
+            ? HomeFinding.HousingBudget.ToString()
             : String.Empty;
 
-        public string NumberOfBathroomsDisplay => (Rent != null && Rent.NumberOfBathrooms != null)
-           ? Rent.NumberOfBathrooms.Name
+        public string NumberOfBathroomsDisplay => (HomeFinding != null && HomeFinding.NumberOfBathrooms != null)
+           ? HomeFinding.NumberOfBathrooms.Name
             : String.Empty;
 
-        public string NumberOfBedroomsDisplay => (Rent != null && Rent.NumberOfBedrooms.HasValue)
-            ? Rent.NumberOfBedrooms.Value.ToString()
+        public string NumberOfBedroomsDisplay => (HomeFinding != null && HomeFinding.NumberOfBedrooms.HasValue)
+            ? HomeFinding.NumberOfBedrooms.Value.ToString()
                 : String.Empty;
 
-        public string SquareFootageDisplay => (Rent != null && Rent.SquareFootage.HasValue)
-            ? Rent.SquareFootage.Value.ToString()
+        public string SquareFootageDisplay => (HomeFinding != null && HomeFinding.SquareFootage.HasValue)
+            ? HomeFinding.SquareFootage.Value.ToString()
             : String.Empty;
 
-        public string HousingTypeDisplay => (Rent != null && Rent.HousingType != null)
-            ? Rent.HousingType.Name
+        public string HousingTypeDisplay => (HomeFinding != null && HomeFinding.HousingType != null)
+            ? HomeFinding.HousingType.Name
             : String.Empty;
 
-        public string TransportationTypeDisplay => (Rent != null && Rent.TransportationType != null)
-            ? Rent.TransportationType.Name
+        public string TransportationTypeDisplay => (HomeFinding != null && HomeFinding.TransportationType != null)
+            ? HomeFinding.TransportationType.Name
             : String.Empty;
 
-        public string IsFurnishedDisplay => (Rent != null && Rent.IsFurnished.HasValue)
-            ? Rent.IsFurnished.Value ? "Yes" : "No"
+        public string IsFurnishedDisplay => (HomeFinding != null && HomeFinding.IsFurnished.HasValue)
+            ? HomeFinding.IsFurnished.Value ? "Yes" : "No"
             : String.Empty;
 
-        public string MaxCommuteDisplay => (Rent != null && Rent.MaxCommute.HasValue)
-            ? Rent.MaxCommute.Value.ToString()
+        public string MaxCommuteDisplay => (HomeFinding != null && HomeFinding.MaxCommute.HasValue)
+            ? HomeFinding.MaxCommute.Value.ToString()
             : String.Empty;
 
-        public string HasParkingDisplay => (Rent != null && Rent.HasParking.HasValue)
-            ? Rent.HasParking.Value ? "Yes" : "No"
+        public string HasParkingDisplay => (HomeFinding != null && HomeFinding.HasParking.HasValue)
+            ? HomeFinding.HasParking.Value ? "Yes" : "No"
             : String.Empty;
 
-        public string HasACDisplay => (Rent != null && Rent.HasAC.HasValue)
-            ? Rent.HasAC.Value ? "Yes" : "No"
+        public string HasACDisplay => (HomeFinding != null && HomeFinding.HasAC.HasValue)
+            ? HomeFinding.HasAC.Value ? "Yes" : "No"
             : String.Empty;
 
-        public string HasExerciseRoomDisplay => (Rent != null && Rent.HasExerciseRoom.HasValue)
-            ? Rent.HasExerciseRoom.Value ? "Yes" : "No"
+        public string HasExerciseRoomDisplay => (HomeFinding != null && HomeFinding.HasExerciseRoom.HasValue)
+            ? HomeFinding.HasExerciseRoom.Value ? "Yes" : "No"
             : String.Empty;
 
-        public string CommentsDisplay => (Rent != null && !String.IsNullOrEmpty(Rent.Comments))
-            ? Rent.Comments
+        public string CommentsDisplay => (HomeFinding != null && !String.IsNullOrEmpty(HomeFinding.Comments))
+            ? HomeFinding.Comments
             : String.Empty;
 
-        public string AreaTypeDisplay => (Rent != null && Rent.AreaType != null)
-            ? Rent.AreaType.Name
+        public string AreaTypeDisplay => (HomeFinding != null && HomeFinding.AreaType != null)
+            ? HomeFinding.AreaType.Name
             : String.Empty;
 
-        public string HasLaundryDisplay => (Rent != null && Rent.HasLaundry.HasValue)
-            ? Rent.HasLaundry.Value ? "Yes" : "No"
+        public string HasLaundryDisplay => (HomeFinding != null && HomeFinding.HasLaundry.HasValue)
+            ? HomeFinding.HasLaundry.Value ? "Yes" : "No"
             : String.Empty;
 
-        public string NumberOfCarsOwnedDisplay => (Rent != null && Rent.NumberOfCarsOwned.HasValue)
-            ? Rent.NumberOfCarsOwned.Value.ToString()
+        public string NumberOfCarsOwnedDisplay => (HomeFinding != null && HomeFinding.NumberOfCarsOwned.HasValue)
+            ? HomeFinding.NumberOfCarsOwned.Value.ToString()
             : String.Empty;
 
         public IEnumerable<NumberOfBathroomsType> NumberOfBathrooms { get; set; }

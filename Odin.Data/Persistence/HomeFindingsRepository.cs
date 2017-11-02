@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Odin.Data.Persistence
 {
-    public class RentsRepository
+    public class HomeFindingsRepository
     {
         private readonly IApplicationDbContext _context;
 
-        public RentsRepository(IApplicationDbContext context)
+        public HomeFindingsRepository(IApplicationDbContext context)
         {
             _context = context;
         }

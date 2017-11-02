@@ -370,13 +370,13 @@ namespace Odin.Controllers.Api
                 return NotFound();
             }
 
-            if (order.Rent == null)
+            if (order.HomeFinding == null)
             {
-                order.Rent = _mapper.Map<OrdersTransfereeIntakeRentDto, Rent>(dto);
+                order.HomeFinding = _mapper.Map<OrdersTransfereeIntakeRentDto, HomeFinding>(dto);
             }
             else
             {
-                _mapper.Map<OrdersTransfereeIntakeRentDto, Rent>(dto, order.Rent);
+                _mapper.Map<OrdersTransfereeIntakeRentDto, HomeFinding>(dto, order.HomeFinding);
             }
 
             _unitOfWork.Complete();

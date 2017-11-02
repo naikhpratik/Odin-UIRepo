@@ -119,7 +119,7 @@
     <Compile Include="Builders\ConsultantImportDtoBuilder.cs" />
     <Compile Include="Builders\PetBuilder.cs" />
     <Compile Include="Builders\ProgramManagerDtoBuilder.cs" />
-    <Compile Include="Builders\RentBuilder.cs" />
+    <Compile Include="Builders\HomeFindingBuilder.cs" />
     <Compile Include="Builders\TransfereeBuilder.cs" />
     <Compile Include="Builders\OrderBuilder.cs" />
     <Compile Include="Builders\OrderDtoBuilder.cs" />
@@ -166,7 +166,7 @@
     <Compile Include="Core\Models\Manager.cs" />
     <Compile Include="Core\Models\OwnershipType.cs" />
     <Compile Include="Core\Models\Pet.cs" />
-    <Compile Include="Core\Models\Rent.cs" />
+    <Compile Include="Core\Models\HomeFinding.cs" />
     <Compile Include="Core\Models\SEDropDownType.cs" />
     <Compile Include="Core\Models\Service.cs" />
     <Compile Include="Core\Models\ServiceCategory.cs" />
@@ -202,7 +202,7 @@
     <Compile Include="Persistence\ConsultantsRepository.cs" />
     <Compile Include="Persistence\DepositTypesRepository.cs" />
     <Compile Include="Persistence\EntityConfigurations\OrderConfiguration.cs" />
-    <Compile Include="Persistence\EntityConfigurations\RentConfiguration.cs" />
+    <Compile Include="Persistence\EntityConfigurations\HomeFindingConfiguration.cs" />
     <Compile Include="Persistence\HousingTypesRepository.cs" />
     <Compile Include="Persistence\IApplicationDbContext.cs" />
     <Compile Include="Persistence\ManagersRepository.cs" />
@@ -398,11 +398,15 @@
     <Compile Include="Persistence\Migrations\201710312109349_MergeAddNewEtlFields.Designer.cs">
       <DependentUpon>201710312109349_MergeAddNewEtlFields.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201711021336284_ChangeRentTableToHomeFinding.cs" />
+    <Compile Include="Persistence\Migrations\201711021336284_ChangeRentTableToHomeFinding.Designer.cs">
+      <DependentUpon>201711021336284_ChangeRentTableToHomeFinding.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\NumberOfBathroomsTypesRepository.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
     <Compile Include="Persistence\PetsRepository.cs" />
-    <Compile Include="Persistence\RentsRepository.cs" />
+    <Compile Include="Persistence\HomeFindingsRepository.cs" />
     <Compile Include="Persistence\ServicesRepository.cs" />
     <Compile Include="Persistence\ServiceTypesRepository.cs" />
     <Compile Include="Persistence\TransfereesRepository.cs" />
@@ -562,6 +566,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201710312109349_MergeAddNewEtlFields.resx">
       <DependentUpon>201710312109349_MergeAddNewEtlFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711021336284_ChangeRentTableToHomeFinding.resx">
+      <DependentUpon>201711021336284_ChangeRentTableToHomeFinding.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
