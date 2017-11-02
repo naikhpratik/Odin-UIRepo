@@ -33,13 +33,16 @@ namespace Odin.ViewModels.Orders.Transferee
         public bool IsVip { get; set; }
 
         public DateTime? PreTripDate { get; set; }
+        public string PreTripDateDisplay => DateHelper.GetViewFormat(PreTripDate);
+
         public int TempHousingDays { get; set; }
         public DateTime? TempHousingEndDate { get; set; }
         public DateTime? FinalArrivalDate { get; set; }
         public DateTime? HomeFindingDate { get; set; }
 
         public DateTime? WorkStartDate { get; set; }
-        
+        public string WorkStartDateDisplay => DateHelper.GetViewFormat(WorkStartDate);
+
         public string SpouseName { get; set; }
         public string SpouseVisaType { get; set; }
 
