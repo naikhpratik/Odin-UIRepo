@@ -276,7 +276,7 @@ namespace Odin.ViewModels.Orders.Transferee
             }
         }
 
-        [DisplayName("Max Commute:")]
+        [DisplayName("Max Commute (Minutes):")]
         public string MaxCommuteDisplay
         {
             get
@@ -405,7 +405,7 @@ namespace Odin.ViewModels.Orders.Transferee
             }
         }
 
-        [DisplayName("Length Of Assignment:")]
+        [DisplayName("Length Of Assignment (Months):")]
         public int? LengthOfAssignment { get; set; }
 
         public IEnumerable<DepositType> DepositTypes { get; set; }
