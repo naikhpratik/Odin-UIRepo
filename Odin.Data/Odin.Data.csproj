@@ -410,6 +410,9 @@
     <Compile Include="Persistence\Migrations\201711022044450_RemovedDuplicateArrivalDate.cs" />
     <Compile Include="Persistence\Migrations\201711022044450_RemovedDuplicateArrivalDate.Designer.cs">
       <DependentUpon>201711022044450_RemovedDuplicateArrivalDate.cs</DependentUpon>
+    <Compile Include="Persistence\Migrations\201711061758565_ChangeTriggerOnHomeFindingTable.cs" />
+    <Compile Include="Persistence\Migrations\201711061758565_ChangeTriggerOnHomeFindingTable.Designer.cs">
+      <DependentUpon>201711061758565_ChangeTriggerOnHomeFindingTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\NumberOfBathroomsTypesRepository.cs" />
@@ -584,6 +587,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201711022044450_RemovedDuplicateArrivalDate.resx">
       <DependentUpon>201711022044450_RemovedDuplicateArrivalDate.cs</DependentUpon>
+    <EmbeddedResource Include="Persistence\Migrations\201711061758565_ChangeTriggerOnHomeFindingTable.resx">
+      <DependentUpon>201711061758565_ChangeTriggerOnHomeFindingTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
