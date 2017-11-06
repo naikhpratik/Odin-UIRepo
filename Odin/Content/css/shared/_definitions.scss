@@ -11,100 +11,10 @@ $DW_Gray: #b7a998;
 $DW_Purple: #621f65;
 
 
-//---- mixins
-@mixin header {
+$logoHeight: 3rem;
+$primaryNavHeightLg: $logoHeight + 5rem;
+$primaryNavHeightSm: $logoHeight + 2rem;
 
-    div#main {
-        position: fixed;
-        width: 100%;
-        top: 0;
-        z-index: 1;
-        background-color: white;
-        border-bottom: 2px solid #c7c7c7;
-
-        div#caption {
-            width: 48%;
-            height: 118px;
-            padding-top: 44px;
-            vertical-align: top;
-            display: inline-block;
-
-            @include logo(0px, left, 30px);
-        }
-
-        div#icons {
-            float: right;
-            width: 50%;
-            height: 118px;
-            margin-right: 3px;
-            padding-top: 30px;
-            vertical-align: top;
-            display: inline-block;
-
-            div {
-                float: right;
-                display: inline-block;
-
-                &.icons_notify {
-                    font-size: small;
-                    color: white;
-                    position: relative;
-                    font-weight: bold;
-                    display: inline-block;
-                    width: 10px;
-                    text-align: center;
-
-                    img {
-                        width: 26px;
-                    }
-
-                    &.icons_notify_messages {
-                        top: -2px;
-                        left: -321px;
-
-                        span {
-                            position: relative;
-                            top: -33px;
-                            left: -19px;
-                        }
-                    }
-
-                    &.icons_notify_alerts {
-                        top: -2px;
-                        left: -104px;
-
-                        span {
-                            position: relative;
-                            top: -33px;
-                            left: -17px;
-                        }
-                    }
-
-                    &.icons_notify_appts {
-                        top: -2px;
-                        left: -204px;
-
-                        span {
-                            position: relative;
-                            top: -33px;
-                            left: -18px;
-                        }
-                    }
-                }
-
-                img {
-                    float: right;
-                    width: 50px;
-                    margin: 8px;
-
-                    &.icons_notify {
-                        margin-right: 40px;
-                    }
-                }
-            }
-        }
-    }
-}
 
 @mixin mobile_header {
     div#caption {
@@ -183,3 +93,11 @@ $DW_Purple: #621f65;
         }
     }
  }
+
+
+
+
+
+
+
+

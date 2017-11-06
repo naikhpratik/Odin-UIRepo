@@ -11,6 +11,13 @@ namespace Odin.ViewModels.Orders.Transferee
 {
     public class HousingViewModel
     {
+        public HousingViewModel()
+        {
+            Properties = new List<HousingPropertyViewModel>();
+        }
+
+        public string Id { get; set; }
+
         [Display(Name = "Budget:")]
         [DisplayFormat(DataFormatString = "{0:c}", NullDisplayText = "NA")]
         public decimal? HousingBudget { get; set; }
@@ -42,5 +49,7 @@ namespace Odin.ViewModels.Orders.Transferee
         [Display(Name = "Transportation:")]
         public String TransportationTypeString { get { return this.TransportationType != null ? this.TransportationType.Name : "NA"; } }
         public TransportationType TransportationType { private get; set; }
+
+        public IEnumerable<HousingPropertyViewModel> Properties { get; set; }
     }
 }

@@ -1,57 +1,58 @@
-﻿div#details {
+﻿#details {
   padding-top: 10px;
   padding-left: 50px; }
-  div#details div.row {
-    text-align: left; }
-  div#details .details-title {
-    padding-bottom: 30px; }
-  div#details P {
+  #details p {
     padding-bottom: 0px;
     margin-bottom: 0px;
-    font-size: 18px;
+    font-size: 24px;
     color: #231F20; }
-  div#details .details-save {
+  #details div.row {
+    text-align: left; }
+  #details .details-title {
+    padding-bottom: 30px; }
+  #details .details-save {
     font-size: small;
     color: #a7ce39;
     cursor: pointer; }
-  div#details hr {
+  #details hr {
     margin-top: 0px;
     margin-bottom: 0px; }
-  div#details .details-blue {
-    color: #31a4dd; }
-  div#details .details-lime {
+  #details .details-blue {
+    color: #35A2DB;
+    font-size: 16px; }
+  #details .details-lime {
     color: #a7ce39; }
-  div#details .details-block {
+  #details .details-block {
     padding-top: 15px;
     padding-bottom: 15px; }
-    div#details .details-block .details-header p {
+    #details .details-block .details-header p {
       margin: 0px;
-      font-size: 16px;
+      font-size: 18px;
       font-weight: 200;
       color: #8e1a55; }
-  div#details .details-row .details-col {
+  #details .details-row .details-col {
     padding-top: 15px;
     padding-left: 0px;
     width: 16%; }
-    div#details .details-row .details-col h5 {
+    #details .details-row .details-col h5 {
       display: block;
       font-size: 16px;
       font-weight: 200;
       margin-bottom: -5px;
       color: #6c6e70; }
-    div#details .details-row .details-col label {
+    #details .details-row .details-col label {
       display: block;
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 200;
       color: #858585; }
-    div#details .details-row .details-col span {
-      color: #31a4dd;
-      font-size: 14px; }
-    div#details .details-row .details-col input {
+    #details .details-row .details-col span {
+      color: #35A2DB;
+      font-size: 16px; }
+    #details .details-row .details-col input {
       color: #31a4dd;
       font-size: small;
       display: none; }
-    div#details .details-row .details-col textarea {
+    #details .details-row .details-col textarea {
       display: none;
       width: 100%;
       max-width: 100%;

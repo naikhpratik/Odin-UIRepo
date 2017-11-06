@@ -33,8 +33,10 @@ namespace Odin
             bundles.Add(new StyleBundle("~/Content/cssBundle").Include(
                       "~/Content/bootstrap-paper.css",
                       "~/Content/bootstrap-datetimepicker.css",
-                      "~/Content/site.css",                     
+                      "~/Content/site.css",
+                      "~/Content/css/primaryNav.css",
                       "~/Content/datatables/css/datatables.bootstrap.css"));
+
 
             // Page Styling
             bundles.Add(new StyleBundle("~/Styling/orders").Include("~/Content/css/orders.css"));
