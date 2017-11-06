@@ -38,10 +38,16 @@ namespace Odin.Controllers
 
         public ActionResult HousingPartial(string id)
         {
-            var order = _unitOfWork.Orders.GetOrderById(id);
+            var userId = User.Identity.GetUserId();
+            var order = _unitOfWork.Orders.GetOrderFor(userId, id); ;
 
-            HousingViewModel viewModel = _mapper.Map<Rent, HousingViewModel>(order.Rent);
-
+            HousingViewModel viewModel = _mapper.Map<HomeFinding, HousingViewModel>(order.HomeFinding);
+            viewModel.NumberOfPets = order.Pets.Count();
+            int numKids = order.Children == null ? 0 : order.Children.Count();
+            if (numKids == 0 && order.SpouseName == "")
+                viewModel.SpouceAndKids = null;
+            else
+                viewModel.SpouceAndKids = (order.SpouseName == "" ? "No" : "Yes") + " / " + numKids.ToString();
             return PartialView("~/views/orders/partials/_Housing.cshtml", viewModel);
         }
 
