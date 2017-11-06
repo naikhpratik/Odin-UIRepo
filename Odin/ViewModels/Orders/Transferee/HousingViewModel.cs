@@ -36,11 +36,28 @@ namespace Odin.ViewModels.Orders.Transferee
 
         [Display(Name = "Pets:")]
         [DisplayFormat(NullDisplayText = "No Pets")]
-        public int NumberOfPets { get; set; }
+        public int PetsCount { get; set; }
+
+        public int ChildrenCount { get; set; }
+        public String SpouseName { get; set; }
 
         [Display(Name = "Spouse/Kids:")]
         [DisplayFormat(NullDisplayText = "No Family")]
-        public string SpouceAndKids { get; set; }
+        public string SpouseAndKids
+        {
+            get
+            {
+                bool hasSpouse = SpouseName != null && SpouseName.Length > 0;
+                bool hasChildren = ChildrenCount > 0;
+
+                if (hasSpouse || hasChildren)
+                {
+                   return (hasSpouse ? "Yes":"No") + " / " + ChildrenCount.ToString();
+                }
+                   
+                return null;
+            }
+        }
 
         [Display(Name = "Distance From Work:")]
         [DisplayFormat(NullDisplayText = "NA")]
