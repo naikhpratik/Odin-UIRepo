@@ -112,7 +112,7 @@ namespace Odin.ViewModels.Orders.Transferee
         public HomeFindingViewModel HomeFinding { get; set; }
 
         public string HousingBudgetDisplay => (HomeFinding != null && HomeFinding.HousingBudget.HasValue)
-            ? DateHelper.GetViewFormat(Rent.HousingBudget)
+            ? DateHelper.GetViewFormat(HomeFinding.HousingBudget)
             : String.Empty;
 
         public string NumberOfBathroomsDisplay => (HomeFinding != null && HomeFinding.NumberOfBathrooms != null)

@@ -413,6 +413,10 @@
     <Compile Include="Persistence\Migrations\201711021336284_ChangeRentTableToHomeFinding.Designer.cs">
       <DependentUpon>201711021336284_ChangeRentTableToHomeFinding.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201711061648062_MergeHomeFindingChanges.cs" />
+    <Compile Include="Persistence\Migrations\201711061648062_MergeHomeFindingChanges.Designer.cs">
+      <DependentUpon>201711061648062_MergeHomeFindingChanges.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\NumberOfBathroomsTypesRepository.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
@@ -586,6 +590,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201711021336284_ChangeRentTableToHomeFinding.resx">
       <DependentUpon>201711021336284_ChangeRentTableToHomeFinding.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711061648062_MergeHomeFindingChanges.resx">
+      <DependentUpon>201711061648062_MergeHomeFindingChanges.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
