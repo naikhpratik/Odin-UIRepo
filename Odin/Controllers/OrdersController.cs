@@ -38,7 +38,8 @@ namespace Odin.Controllers
 
         public ActionResult HousingPartial(string id)
         {
-            var order = _unitOfWork.Orders.GetOrderById(id);
+            var userId = User.Identity.GetUserId();
+            var order = _unitOfWork.Orders.GetOrderFor(userId, id); ;
 
             HousingViewModel viewModel = _mapper.Map<HomeFinding, HousingViewModel>(order.HomeFinding);
             viewModel.NumberOfPets = order.Pets.Count();
