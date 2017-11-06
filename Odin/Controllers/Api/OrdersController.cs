@@ -402,5 +402,25 @@ namespace Odin.Controllers.Api
 
             return Ok();
         }
+
+        [HttpPost]
+        [Authorize]
+        [Route("api/orders/transferee/intake/relocation")]
+        public IHttpActionResult UpdateIntakeRelocation(OrdersTransfereeIntakeRelocationDto dto)
+        {
+
+            var userId = User.Identity.GetUserId();
+            var order = _unitOfWork.Orders.GetOrderFor(userId, dto.Id);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            _mapper.Map<OrdersTransfereeIntakeRelocationDto, Order>(dto, order);
+            _unitOfWork.Complete();
+
+            return Ok();
+        }
     }
 }

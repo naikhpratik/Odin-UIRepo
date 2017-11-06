@@ -136,6 +136,7 @@
     <Compile Include="Core\Dtos\OrdersTransfereeIntakeDestinationDto.cs" />
     <Compile Include="Core\Dtos\OrdersTransfereeIntakeLeaseDto.cs" />
     <Compile Include="Core\Dtos\OrdersTransfereeIntakeOriginDto.cs" />
+    <Compile Include="Core\Dtos\OrdersTransfereeIntakeRelocationDto.cs" />
     <Compile Include="Core\Dtos\OrdersTransfereeIntakeRentDto.cs" />
     <Compile Include="Core\Dtos\OrdersTransfereeIntakeRmcDto.cs" />
     <Compile Include="Core\Dtos\OrdersTransfereeIntakeServiceDto.cs" />
@@ -402,6 +403,14 @@
     <Compile Include="Persistence\Migrations\201711021336284_ChangeRentTableToHomeFinding.Designer.cs">
       <DependentUpon>201711021336284_ChangeRentTableToHomeFinding.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201711021822440_AddedPreTripNotes.cs" />
+    <Compile Include="Persistence\Migrations\201711021822440_AddedPreTripNotes.Designer.cs">
+      <DependentUpon>201711021822440_AddedPreTripNotes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201711022044450_RemovedDuplicateArrivalDate.cs" />
+    <Compile Include="Persistence\Migrations\201711022044450_RemovedDuplicateArrivalDate.Designer.cs">
+      <DependentUpon>201711022044450_RemovedDuplicateArrivalDate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\NumberOfBathroomsTypesRepository.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
@@ -569,6 +578,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201711021336284_ChangeRentTableToHomeFinding.resx">
       <DependentUpon>201711021336284_ChangeRentTableToHomeFinding.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711021822440_AddedPreTripNotes.resx">
+      <DependentUpon>201711021822440_AddedPreTripNotes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711022044450_RemovedDuplicateArrivalDate.resx">
+      <DependentUpon>201711022044450_RemovedDuplicateArrivalDate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
