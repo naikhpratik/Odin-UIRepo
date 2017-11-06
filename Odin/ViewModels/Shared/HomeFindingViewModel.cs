@@ -1,11 +1,10 @@
-﻿namespace Odin.Data.Core.Models
+﻿using Odin.Data.Core.Models;
+
+namespace Odin.ViewModels.Shared
 {
-    public class Rent : MobileTable
+    public class HomeFindingViewModel
     {
         public decimal? HousingBudget { get; set; }
-        //TODO: The rest of the Housing Preferences
-        
-        public Order Order { get; set; }
 
         public int? NumberOfBedrooms { get; set; }
 
@@ -14,10 +13,10 @@
         public byte? NumberOfBathroomsTypeId { get; set; }
 
         public int? SquareFootage { get; set; }
-        
+
         public OwnershipType OwnershipType { get; set; }
 
-        public HousingType HousingType  { get; set; }
+        public HousingType HousingType { get; set; }
 
         public byte? HousingTypeId { get; set; }
 
@@ -31,8 +30,6 @@
 
         public bool? HasParking { get; set; }
 
-        public bool? HasLaundry { get; set; }
-
         public bool? HasAC { get; set; }
 
         public bool? HasExerciseRoom { get; set; }
@@ -43,6 +40,9 @@
 
         public byte? AreaTypeId { get; set; }
 
+        public bool? HasLaundry { get; set; }
+
         public int? NumberOfCarsOwned { get; set; }
+
     }
 }

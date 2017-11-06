@@ -216,7 +216,7 @@ namespace Odin.Controllers.Api
         [HttpPost]
         [Authorize]
         [Route("api/orders/transferee/intake/services")]
-        public IHttpActionResult UpsertIntakeServices(OrdersTransfereeIntakeServicesDto dto)
+        public IHttpActionResult UpdateIntakeServices(OrdersTransfereeIntakeServicesDto dto)
         {
 
             var userId = User.Identity.GetUserId();
@@ -232,9 +232,7 @@ namespace Odin.Controllers.Api
                 var service = order.Services.FirstOrDefault(s => !String.IsNullOrEmpty(serviceDto.Id) && s.Id == serviceDto.Id);
                 if (service == null)
                 {
-                    service = _mapper.Map<OrdersTransfereeIntakeServiceDto, Service>(serviceDto);
-                    service.Id = Guid.NewGuid().ToString();
-                    order.Services.Add(service);
+                    return NotFound();
                 }
                 else
                 {
@@ -372,13 +370,13 @@ namespace Odin.Controllers.Api
                 return NotFound();
             }
 
-            if (order.Rent == null)
+            if (order.HomeFinding == null)
             {
-                order.Rent = _mapper.Map<OrdersTransfereeIntakeRentDto, Rent>(dto);
+                order.HomeFinding = _mapper.Map<OrdersTransfereeIntakeRentDto, HomeFinding>(dto);
             }
             else
             {
-                _mapper.Map<OrdersTransfereeIntakeRentDto, Rent>(dto, order.Rent);
+                _mapper.Map<OrdersTransfereeIntakeRentDto, HomeFinding>(dto, order.HomeFinding);
             }
 
             _unitOfWork.Complete();

@@ -322,7 +322,11 @@
         {
             <div class="row intake-row collapse in" data-entity-id="@Model.Services.ElementAt(i).Id" data-entity-collection="services">
                 <div class="col-xs-2 col-sm-1 intake-col">
+<<<<<<< HEAD
                     <input type="checkbox" class="intake-input intake-service-input" name="Selected"  @(Model.Services.ElementAt(i).Selected ? "checked =\"checked\"" : String.Empty)/>
+=======
+                    <input type="checkbox" class="intake-service-input" name="Selected"  @(Model.Services.ElementAt(i).Selected ? "checked='checked'" : String.Empty)/>
+>>>>>>> master
                 </div>
                 <div class="col-xs-10 col-sm-5 intake-col">
                     <span class="intake-span">@Model.Services.ElementAt(i).Name</span>
@@ -413,102 +417,102 @@
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 <label>Budget</label>
                 <span class="intake-span">@Model.HousingBudgetDisplay</span>
-                @Html.TextBoxFor(m => @Model.HomeFinding.HousingBudget, new { @class = "form-control intake-input", Name = "HousingBudget" })
-                @Html.HiddenFor(m => @Model.HomeFinding.HousingBudget, new { @class = "intake-hidden", Name = "HousingBudget" })
+                @Html.TextBoxFor(m => @Model.Rent.HousingBudget, new { @class = "form-control intake-input", Name = "HousingBudget" })
+                @Html.HiddenFor(m => @Model.Rent.HousingBudget, new { @class = "intake-hidden", Name = "HousingBudget" })
             </div>
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 <label>Number of Bedrooms:</label>
                 <span class="intake-span">@Model.NumberOfBedroomsDisplay</span>
-                @Html.TextBoxFor(m => @Model.HomeFinding.NumberOfBedrooms, new {@class = "form-control intake-input", Name = "NumberOfBedrooms"})
-                @Html.HiddenFor(m => @Model.HomeFinding.NumberOfBedrooms, new {@class = "intake-hidden", Name = "NumberOfBedrooms"})
+                @Html.TextBoxFor(m => @Model.Rent.NumberOfBedrooms, new {@class = "form-control intake-input", Name = "NumberOfBedrooms"})
+                @Html.HiddenFor(m => @Model.Rent.NumberOfBedrooms, new {@class = "intake-hidden", Name = "NumberOfBedrooms"})
             </div>
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 <label>Number of Bathrooms:</label>
                 <span class="intake-span">@Model.NumberOfBathroomsDisplay</span>
-                @Html.DropDownListFor(m => @Model.HomeFinding.NumberOfBathrooms, new SelectList(Model.NumberOfBathrooms,"Id","Name"),new {@class = "form-control intake-input", Name = "NumberOfBathroomsTypeId"})
-                @Html.HiddenFor(m => @Model.HomeFinding.NumberOfBathroomsTypeId, new {@class = "intake-hidden", Name = "NumberOfBathroomsTypeId"})
+                @Html.DropDownListFor(m => @Model.Rent.NumberOfBathrooms, new SelectList(Model.NumberOfBathrooms,"Id","Name"),new {@class = "form-control intake-input", Name = "NumberOfBathroomsTypeId"})
+                @Html.HiddenFor(m => @Model.Rent.NumberOfBathroomsTypeId, new {@class = "intake-hidden", Name = "NumberOfBathroomsTypeId"})
             </div>
         </div>
         <div class="row intake-row collapse in">
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 <label>Square Footage:</label>
                 <span class="intake-span">@Model.SquareFootageDisplay</span>
-                @Html.TextBoxFor(m => @Model.HomeFinding.SquareFootage, new { @class = "form-control intake-input", Name = "SquareFootage" })
-                @Html.HiddenFor(m => @Model.HomeFinding.SquareFootage, new { @class = "intake-hidden", Name = "SquareFootage" })
+                @Html.TextBoxFor(m => @Model.Rent.SquareFootage, new { @class = "form-control intake-input", Name = "SquareFootage" })
+                @Html.HiddenFor(m => @Model.Rent.SquareFootage, new { @class = "intake-hidden", Name = "SquareFootage" })
             </div>
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 <label>Housing Type:</label>
                 <span class="intake-span">@Model.HousingTypeDisplay</span>
-                @Html.DropDownListFor(m => @Model.HomeFinding.HousingTypeId, new SelectList(Model.HousingTypes,"Id","Name"),new { @class = "form-control intake-input", Name = "HousingTypeId" })
-                @Html.HiddenFor(m => @Model.HomeFinding.HousingTypeId, new { @class = "intake-hidden", Name = "HousingTypeId" })
+                @Html.DropDownListFor(m => @Model.Rent.HousingTypeId, new SelectList(Model.HousingTypes,"Id","Name"),new { @class = "form-control intake-input", Name = "HousingTypeId" })
+                @Html.HiddenFor(m => @Model.Rent.HousingTypeId, new { @class = "intake-hidden", Name = "HousingTypeId" })
             </div>
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 <label>Preferred Area:</label>
                 <span class="intake-span">@Model.AreaTypeDisplay</span>
-                @Html.DropDownListFor(m => @Model.HomeFinding.AreaTypeId, new SelectList(Model.AreaTypes,"Id","Name"),new { @class = "form-control intake-input", Name = "AreaTypeId" })
-                @Html.HiddenFor(m => @Model.HomeFinding.AreaTypeId, new { @class = "intake-hidden", Name = "AreaTypeId" })
+                @Html.DropDownListFor(m => @Model.Rent.AreaTypeId, new SelectList(Model.AreaTypes,"Id","Name"),new { @class = "form-control intake-input", Name = "AreaTypeId" })
+                @Html.HiddenFor(m => @Model.Rent.AreaTypeId, new { @class = "intake-hidden", Name = "AreaTypeId" })
             </div>
         </div>
         <div class="row intake-row collapse in">
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 <label>Furnished:</label>
                 <span class="intake-span">@Model.IsFurnishedDisplay</span>
-                @Html.DropDownListFor(m => @Model.HomeFinding.IsFurnished, new SelectList(Model.YesNoDropDown,"Value","Text"), new { @class = "form-control intake-input", Name = "IsFurnished" })
-                @Html.HiddenFor(m => @Model.HomeFinding.IsFurnished, new { @class = "intake-hidden", Name = "IsFurnished" })
+                @Html.DropDownListFor(m => @Model.Rent.IsFurnished, new SelectList(Model.YesNoDropDown,"Value","Text"), new { @class = "form-control intake-input", Name = "IsFurnished" })
+                @Html.HiddenFor(m => @Model.Rent.IsFurnished, new { @class = "intake-hidden", Name = "IsFurnished" })
             </div>
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 <label>Laundry:</label>
                 <span class="intake-span">@Model.HasLaundryDisplay</span>
-                @Html.DropDownListFor(m => @Model.HomeFinding.HasLaundry, new SelectList(Model.YesNoDropDown, "Value", "Text"), new { @class = "form-control intake-input", Name = "HasLaundry" })
-                @Html.HiddenFor(m => @Model.HomeFinding.HasLaundry, new { @class = "intake-hidden", Name = "HasLaundry" })
+                @Html.DropDownListFor(m => @Model.Rent.HasLaundry, new SelectList(Model.YesNoDropDown, "Value", "Text"), new { @class = "form-control intake-input", Name = "HasLaundry" })
+                @Html.HiddenFor(m => @Model.Rent.HasLaundry, new { @class = "intake-hidden", Name = "HasLaundry" })
             </div>
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 <label>Exercise Room:</label>
                 <span class="intake-span">@Model.HasExerciseRoomDisplay</span>
-                @Html.DropDownListFor(m => @Model.HomeFinding.HasExerciseRoom, new SelectList(Model.YesNoDropDown, "Value", "Text"), new { @class = "form-control intake-input", Name = "HasExerciseRoom" })
-                @Html.HiddenFor(m => @Model.HomeFinding.HasExerciseRoom, new { @class = "intake-hidden", Name = "HasExerciseRoom" })
+                @Html.DropDownListFor(m => @Model.Rent.HasExerciseRoom, new SelectList(Model.YesNoDropDown, "Value", "Text"), new { @class = "form-control intake-input", Name = "HasExerciseRoom" })
+                @Html.HiddenFor(m => @Model.Rent.HasExerciseRoom, new { @class = "intake-hidden", Name = "HasExerciseRoom" })
             </div>
         </div>
         <div class="row intake-row collapse in">
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 <label>AC/Central Air:</label>
                 <span class="intake-span">@Model.HasACDisplay</span>
-                @Html.DropDownListFor(m => @Model.HomeFinding.HasAC, new SelectList(Model.YesNoDropDown, "Value", "Text"), new { @class = "form-control intake-input", Name = "HasAC" })
-                @Html.HiddenFor(m => @Model.HomeFinding.HasAC, new { @class = "intake-hidden", Name = "HasAC" })
+                @Html.DropDownListFor(m => @Model.Rent.HasAC, new SelectList(Model.YesNoDropDown, "Value", "Text"), new { @class = "form-control intake-input", Name = "HasAC" })
+                @Html.HiddenFor(m => @Model.Rent.HasAC, new { @class = "intake-hidden", Name = "HasAC" })
             </div>
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 <label>Preferred Transportation:</label>
                 <span class="intake-span">@Model.TransportationTypeDisplay</span>
-                @Html.DropDownListFor(m => @Model.HomeFinding.TransportationTypeId, new SelectList(Model.TransportationTypes,"Id","Name"),new { @class = "form-control intake-input", Name = "TransportationTypeId" })
-                @Html.HiddenFor(m => @Model.HomeFinding.TransportationTypeId, new { @class = "intake-hidden", Name = "TransportationTypeId" })
+                @Html.DropDownListFor(m => @Model.Rent.TransportationTypeId, new SelectList(Model.TransportationTypes,"Id","Name"),new { @class = "form-control intake-input", Name = "TransportationTypeId" })
+                @Html.HiddenFor(m => @Model.Rent.TransportationTypeId, new { @class = "intake-hidden", Name = "TransportationTypeId" })
             </div>
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 <label>Max Commute:</label>
                 <span class="intake-span">@Model.MaxCommuteDisplay</span>
-                @Html.TextBoxFor(m => @Model.HomeFinding.MaxCommute, new { @class = "form-control intake-input", Name = "MaxCommute" })
-                @Html.HiddenFor(m => @Model.HomeFinding.MaxCommute, new { @class = "intake-hidden", Name = "MaxCommute" })
+                @Html.TextBoxFor(m => @Model.Rent.MaxCommute, new { @class = "form-control intake-input", Name = "MaxCommute" })
+                @Html.HiddenFor(m => @Model.Rent.MaxCommute, new { @class = "intake-hidden", Name = "MaxCommute" })
             </div>           
         </div>
         <div class="row intake-row collapse in">
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 <label>Cars Owned:</label>
                 <span class="intake-span">@Model.NumberOfCarsOwnedDisplay</span>
-                @Html.TextBoxFor(m => @Model.HomeFinding.NumberOfCarsOwned, new { @class = "form-control intake-input", Name = "NumberOfCarsOwned" })
-                @Html.HiddenFor(m => @Model.HomeFinding.NumberOfCarsOwned, new { @class = "intake-hidden", Name = "NumberOfCarsOwned" })
+                @Html.TextBoxFor(m => @Model.Rent.NumberOfCarsOwned, new { @class = "form-control intake-input", Name = "NumberOfCarsOwned" })
+                @Html.HiddenFor(m => @Model.Rent.NumberOfCarsOwned, new { @class = "intake-hidden", Name = "NumberOfCarsOwned" })
             </div>
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 <label>Parking:</label>
                 <span class="intake-span">@Model.HasParkingDisplay</span>
-                @Html.DropDownListFor(m => @Model.HomeFinding.HasParking, new SelectList(Model.YesNoDropDown,"Value","Text"),new {@class = "form-control intake-input", Name = "HasParking"})
-                @Html.HiddenFor(m => @Model.HomeFinding.HasParking, new {@class = "intake-hidden", Name = "HasParking"})
+                @Html.DropDownListFor(m => @Model.Rent.HasParking, new SelectList(Model.YesNoDropDown,"Value","Text"),new {@class = "form-control intake-input", Name = "HasParking"})
+                @Html.HiddenFor(m => @Model.Rent.HasParking, new {@class = "intake-hidden", Name = "HasParking"})
             </div>
         </div>
         <div class="row intake-row collapse in">
             <div class="col-sm-12 intake-col">
                 <label>Comments:</label>
                 <span class="intake-span">@Model.CommentsDisplay</span>
-                @Html.TextAreaFor(m => @Model.HomeFinding.Comments, new { @class = "form-control intake-input", Name = "Comments" })
-                @Html.HiddenFor(m => @Model.HomeFinding.Comments, new { @class = "intake-hidden", Name = "Comments" })
+                @Html.TextAreaFor(m => @Model.Rent.Comments, new { @class = "form-control intake-input", Name = "Comments" })
+                @Html.HiddenFor(m => @Model.Rent.Comments, new { @class = "intake-hidden", Name = "Comments" })
             </div>
         </div>
     </div>

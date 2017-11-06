@@ -570,7 +570,7 @@ namespace Odin.IntegrationTests.Controllers.Api
             //modify the service
             DateTime changedDate = DateTime.Now.AddDays(4);
             List<OrdersTransfereeDetailsServiceDto> oTranDetailServices = new List<OrdersTransfereeDetailsServiceDto>();
-            OrdersTransfereeDetailsServiceDto oTranDetailService = new OrdersTransfereeDetailsServiceDto(){ ScheduledDate = changedDate};
+            OrdersTransfereeDetailsServiceDto oTranDetailService = new OrdersTransfereeDetailsServiceDto(){ Id = service.Id, ScheduledDate = changedDate};
             oTranDetailServices.Add(oTranDetailService);
             OrdersTransfereeDetailsServicesDto svc = new OrdersTransfereeDetailsServicesDto();
             svc.Services = oTranDetailServices;
@@ -584,7 +584,7 @@ namespace Odin.IntegrationTests.Controllers.Api
             // Assert
             Context.Entry(order).Reload();
             Context.Entry(service).Reload();
-            service.ScheduledDate.Should().Equals(changedDate);
+            service.ScheduledDate.ToString().Should().Be(changedDate.ToString());
         }
         [Test, Isolated]
         public async Task UpsertOrderDetails_ServiceDoesNotExist_ShouldReturnNotFound()
@@ -631,7 +631,7 @@ namespace Odin.IntegrationTests.Controllers.Api
         }
 
         [Test, Isolated]
-        public async Task UpsertOrderDetails_OrderDOesNotExist_ShouldReturnNotFound()
+        public async Task UpsertOrderDetails_OrderDoesNotExist_ShouldReturnNotFound()
         {
             // arrange
             ServiceType serviceType = Context.ServiceTypes.First();
@@ -672,5 +672,742 @@ namespace Odin.IntegrationTests.Controllers.Api
             // Assert
             result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
         }
+
+        [Test, Isolated]
+        public async Task UpdateIntakeDestination_ValidOrder_ShouldChangeDestination()
+        {
+            // arrange
+
+            var order = OrderBuilder.New().First();
+            order.TrackingId = TokenHelper.NewToken();
+            order.Transferee = transferee;
+            order.Consultant = dsc;
+            order.ProgramManager = pm;
+            order.DestinationCity = "integration city";
+            Context.Orders.Add(order);
+            Context.SaveChanges();
+            Context.Entry(order).Reload();
+
+            //modify the order
+            var dto = new OrdersTransfereeIntakeDestinationDto()
+            {
+                Id = order.Id,
+                DestinationCountry = order.DestinationCountry + " 2",
+                DestinationCity = order.DestinationCity + " 2",
+                DestinationState = order.DestinationState + " 2"
+            };
+
+            // Act
+            var controller = SetUpOrdersController();
+            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            var result = controller.UpdateIntakeDestination(dto);
+
+            // Assert
+            Context.Entry(order).Reload();
+            result.Should().BeOfType<System.Web.Http.Results.OkResult>();
+            order.DestinationCountry.Should().Be(dto.DestinationCountry);
+            order.DestinationState.Should().Be(dto.DestinationState);
+            order.DestinationCity.Should().Be(dto.DestinationCity);
+        }
+
+        [Test, Isolated]
+        public async Task UpdateIntakeDestination_OrderDoesNotExist_ShouldReturnNotFound()
+        {
+            // arrange
+            var dto = new OrdersTransfereeIntakeDestinationDto()
+            {
+                Id = "-1",
+                DestinationCountry = "BadOrderCounty",
+                DestinationCity = "BadOrderCity",
+                DestinationState = "BadOrderState"
+            };
+
+            // Act
+            var controller = SetUpOrdersController();
+            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            var result = controller.UpdateIntakeDestination(dto);
+
+            // Assert
+            result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
+        }
+
+        [Test, Isolated]
+        public async Task UpdateIntakeOrigin_ValidOrder_ShouldChangeOrigin()
+        {
+            // arrange
+
+            var order = OrderBuilder.New().First();
+            order.TrackingId = TokenHelper.NewToken();
+            order.Transferee = transferee;
+            order.Consultant = dsc;
+            order.ProgramManager = pm;
+            order.DestinationCity = "integration city";
+            Context.Orders.Add(order);
+            Context.SaveChanges();
+            Context.Entry(order).Reload();
+
+            //modify the order
+            var dto = new OrdersTransfereeIntakeOriginDto()
+            {
+                Id = order.Id,
+                OriginCountry = order.OriginCountry + " 2",
+                OriginCity = order.OriginCity + " 2",
+                OriginState = order.OriginState + " 2"
+            };
+
+            // Act
+            var controller = SetUpOrdersController();
+            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            var result = controller.UpdateIntakeOrigin(dto);
+
+            // Assert
+            Context.Entry(order).Reload();
+            result.Should().BeOfType<System.Web.Http.Results.OkResult>();
+            order.OriginCountry.Should().Be(dto.OriginCountry);
+            order.OriginState.Should().Be(dto.OriginState);
+            order.OriginCity.Should().Be(dto.OriginCity);
+        }
+
+        [Test, Isolated]
+        public async Task UpdateIntakeOrigin_OrderDoesNotExist_ShouldReturnNotFound()
+        {
+            // arrange
+            var dto = new OrdersTransfereeIntakeOriginDto()
+            {
+                Id = "-1",
+                OriginCountry = "BadOrderCounty",
+                OriginCity = "BadOrderCity",
+                OriginState = "BadOrderState"
+            };
+
+            // Act
+            var controller = SetUpOrdersController();
+            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            var result = controller.UpdateIntakeOrigin(dto);
+
+            // Assert
+            result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
+        }
+
+        [Test, Isolated]
+        public async Task UpsertIntakeFamily_ValidOrder_ShouldChangeFamily()
+        {
+            // arrange
+
+            var child = ChildBuilder.New();
+            var pet = PetBuilder.New();
+
+            var order = OrderBuilder.New().First();
+            order.TrackingId = TokenHelper.NewToken();
+            order.Transferee = transferee;
+            order.Consultant = dsc;
+            order.ProgramManager = pm;
+            order.DestinationCity = "integration city";
+            order.Children.Add(child);
+            order.Pets.Add(pet);
+            Context.Orders.Add(order);
+            Context.SaveChanges();
+            Context.Entry(order).Reload();
+
+            //modify the order
+            var dto = new OrdersTransfereeIntakeFamilyDto()
+            {
+                Id = order.Id,
+                SpouseName = order.SpouseName + " 2",
+                SpouseVisaType = order.SpouseVisaType + " 2",
+                ChildrenEducationPreferences = order.ChildrenEducationPreferences + " 2",
+                PetNotes = order.PetNotes + " 2",
+                Children = new List<ChildDto>()
+                {
+                    new ChildDto()
+                    {
+                        Id = child.Id,
+                        Name = child.Name + "2",
+                        Age = child.Age + 2,
+                        Grade = child.Grade + 2
+                    }
+                },
+                Pets = new List<PetDto>()
+                {
+                    new PetDto
+                    {
+                        Id = pet.Id,
+                        Breed = pet.Breed + " 2",
+                        Type = pet.Type + " 2"
+                    }
+                }
+            };
+
+            // Act
+            var controller = SetUpOrdersController();
+            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            var result = controller.UpsertIntakeFamily(dto);
+
+            // Assert
+            Context.Entry(order).Reload();
+            Context.Entry(child).Reload();
+            Context.Entry(pet).Reload();
+
+            result.Should().BeOfType<System.Web.Http.Results.OkResult>();
+            order.SpouseName.Should().Be(dto.SpouseName);
+            order.SpouseVisaType.Should().Be(dto.SpouseVisaType);
+            order.ChildrenEducationPreferences.Should().Be(dto.ChildrenEducationPreferences);
+            order.PetNotes.Should().Be(dto.PetNotes);
+            child.Age.Should().Be(dto.Children.FirstOrDefault().Age);
+            child.Name.Should().Be(dto.Children.FirstOrDefault().Name);
+            child.Grade.Should().Be(dto.Children.FirstOrDefault().Grade);
+            pet.Breed.Should().Be(dto.Pets.FirstOrDefault().Breed);
+            pet.Type.Should().Be(dto.Pets.FirstOrDefault().Type);
+            pet.Size.Should().Be(dto.Pets.FirstOrDefault().Size);
+        }
+
+        [Test, Isolated]
+        public async Task UpsertIntakeFamily_OrderDoesNotExist_ShouldReturnNotFound()
+        {
+            // arrange
+            var dto = new OrdersTransfereeIntakeFamilyDto()
+            {
+                Id = "-1",
+                SpouseName = "BadSpouseName"
+            };
+
+            // Act
+            var controller = SetUpOrdersController();
+            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            var result = controller.UpsertIntakeFamily(dto);
+
+            // Assert
+            result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
+        }
+
+        [Test, Isolated]
+        public async Task UpsertIntakeFamily_NewChildNewPet_ShouldAddBoth()
+        {
+            // arrange
+            var child = ChildBuilder.New();
+            var pet = PetBuilder.New();
+
+            var order = OrderBuilder.New().First();
+            order.TrackingId = TokenHelper.NewToken();
+            order.Transferee = transferee;
+            order.Consultant = dsc;
+            order.ProgramManager = pm;
+            order.DestinationCity = "integration city";
+            Context.Orders.Add(order);
+            Context.SaveChanges();
+            Context.Entry(order).Reload();
+
+            //modify the order
+            var dto = new OrdersTransfereeIntakeFamilyDto()
+            {
+                Id = order.Id,
+                SpouseName = order.SpouseName + " 2",
+                SpouseVisaType = order.SpouseVisaType + " 2",
+                ChildrenEducationPreferences = order.ChildrenEducationPreferences + " 2",
+                PetNotes = order.PetNotes + " 2",
+                Children = new List<ChildDto>()
+                {
+                    new ChildDto()
+                    {
+                        Id = child.Id,
+                        Name = child.Name,
+                        Age = child.Age,
+                        Grade = child.Grade
+                    }
+                },
+                Pets = new List<PetDto>()
+                {
+                    new PetDto
+                    {
+                        Id = pet.Id,
+                        Breed = pet.Breed,
+                        Type = pet.Type
+                    }
+                }
+            };
+
+            // Act
+            var controller = SetUpOrdersController();
+            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            var result = controller.UpsertIntakeFamily(dto);
+
+            // Assert
+            Context.Entry(order).Reload();
+            result.Should().BeOfType<System.Web.Http.Results.OkResult>();
+            order.SpouseName.Should().Be(dto.SpouseName);
+            order.SpouseVisaType.Should().Be(dto.SpouseVisaType);
+            order.ChildrenEducationPreferences.Should().Be(dto.ChildrenEducationPreferences);
+            order.PetNotes.Should().Be(dto.PetNotes);
+            order.Children.Count.Should().Be(1);
+            order.Children.FirstOrDefault().Age.Should().Be(dto.Children.FirstOrDefault().Age);
+            order.Children.FirstOrDefault().Name.Should().Be(dto.Children.FirstOrDefault().Name);
+            order.Children.FirstOrDefault().Grade.Should().Be(dto.Children.FirstOrDefault().Grade);
+            order.Pets.Count.Should().Be(1);
+            order.Pets.First().Breed.Should().Be(dto.Pets.FirstOrDefault().Breed);
+            order.Pets.First().Type.Should().Be(dto.Pets.FirstOrDefault().Type);
+            order.Pets.First().Size.Should().Be(dto.Pets.FirstOrDefault().Size);
+        }
+
+        [Test, Isolated]
+        public async Task InsertChild_ValidOrder_ShouldAddChild()
+        {
+            // arrange
+            var order = OrderBuilder.New().First();
+            order.TrackingId = TokenHelper.NewToken();
+            order.Transferee = transferee;
+            order.Consultant = dsc;
+            order.ProgramManager = pm;
+            order.DestinationCity = "integration city";
+            
+            Context.Orders.Add(order);
+            Context.SaveChanges();
+            Context.Entry(order).Reload();
+
+            // Act
+            var controller = SetUpOrdersController();
+            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            var result = controller.InsertChild(order.Id);
+
+            // Assert
+            Context.Entry(order).Reload();
+
+            result.Should().BeOfType<System.Web.Http.Results.OkNegotiatedContentResult<string>>();
+            order.Children.Count.Should().Be(1);
+            ((OkNegotiatedContentResult<string>) result).Content.Should().Be(order.Children.FirstOrDefault().Id);
+        }
+
+        [Test, Isolated]
+        public async Task InsertChild_NoOrder_ShouldReturnNotFound()
+        {
+            // arrange
+            
+
+            // Act
+            var controller = SetUpOrdersController();
+            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            var result = controller.InsertChild("-1");
+
+            // Assert
+            result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
+        }
+
+        [Test, Isolated]
+        public async Task DeleteChild_ValidChild_ShouldDeleteChild()
+        {
+            // arrange
+            var child = ChildBuilder.New();
+            
+            var order = OrderBuilder.New().First();
+            order.TrackingId = TokenHelper.NewToken();
+            order.Transferee = transferee;
+            order.Consultant = dsc;
+            order.ProgramManager = pm;
+            order.DestinationCity = "integration city";
+            order.Children.Add(child);
+            Context.Orders.Add(order);
+            Context.SaveChanges();
+            Context.Entry(order).Reload();
+
+            
+            // Act
+            var controller = SetUpOrdersController();
+            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            var result = controller.DeleteChild(child.Id);
+
+            // Assert
+            Context.Entry(order).Reload();
+
+            result.Should().BeOfType<System.Web.Http.Results.OkResult>();
+            order.Children.FirstOrDefault().Deleted.Should().BeTrue();
+        }
+
+        [Test, Isolated]
+        public async Task DeleteChild_NoOrder_ShouldReturnNotFound()
+        {
+            // arrange
+
+            // Act
+            var controller = SetUpOrdersController();
+            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            var result = controller.DeleteChild("-1");
+
+            // Assert
+            result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
+        }
+
+        [Test, Isolated]
+        public async Task InsertService_ValidOrder_ShouldAddService()
+        {
+            // arrange
+
+            int serviceTypeId = Context.ServiceTypes.FirstOrDefault().Id;
+
+            var order = OrderBuilder.New().First();
+            order.TrackingId = TokenHelper.NewToken();
+            order.Transferee = transferee;
+            order.Consultant = dsc;
+            order.ProgramManager = pm;
+            order.DestinationCity = "integration city";
+
+            Context.Orders.Add(order);
+            Context.SaveChanges();
+            Context.Entry(order).Reload();
+
+            // Act
+            var controller = SetUpOrdersController();
+            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            var result = controller.InsertService(order.Id, serviceTypeId);
+
+            // Assert
+            Context.Entry(order).Reload();
+
+            result.Should().BeOfType<System.Web.Http.Results.OkNegotiatedContentResult<string>>();
+            order.Services.Count.Should().Be(1);
+            ((OkNegotiatedContentResult<string>)result).Content.Should().Be(order.Services.FirstOrDefault().Id);
+        }
+
+        [Test, Isolated]
+        public async Task InsertService_NoOrder_ShouldReturnNotFound()
+        {
+            // arrange
+            int serviceTypeId = Context.ServiceTypes.FirstOrDefault().Id;
+
+            // Act
+            var controller = SetUpOrdersController();
+            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            var result = controller.InsertService("-1", serviceTypeId);
+
+            // Assert
+            result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
+        }
+
+        [Test, Isolated]
+        public async Task UpdateIntakeServices_ValidOrder_ShouldChangeServices()
+        {
+            // arrange
+            int serviceTypeId = Context.ServiceTypes.FirstOrDefault().Id;
+            Service service = new Odin.Data.Core.Models.Service() {ServiceTypeId = serviceTypeId, Notes = "Some Notes", Selected = true};
+           
+            var order = OrderBuilder.New().First();
+            order.TrackingId = TokenHelper.NewToken();
+            order.Transferee = transferee;
+            order.Consultant = dsc;
+            order.ProgramManager = pm;
+            order.DestinationCity = "integration city";
+            order.Services.Add(service);
+            Context.Orders.Add(order);
+            Context.SaveChanges();
+            Context.Entry(order).Reload();
+
+            //modify the order
+            var dto = new OrdersTransfereeIntakeServicesDto()
+            {
+                Id = order.Id,
+                Services = new List<OrdersTransfereeIntakeServiceDto>()
+                {
+                    new OrdersTransfereeIntakeServiceDto()
+                    {
+                        Id = service.Id,
+                        Notes = service.Notes + " 2",
+                        Selected = !service.Selected
+                    }
+                }
+            };
+
+            // Act
+            var controller = SetUpOrdersController();
+            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            var result = controller.UpdateIntakeServices(dto);
+
+            // Assert
+            Context.Entry(order).Reload();
+
+            result.Should().BeOfType<System.Web.Http.Results.OkResult>();
+            service.Notes.Should().Be(dto.Services.FirstOrDefault().Notes);
+            service.Selected.Should().Be(dto.Services.FirstOrDefault().Selected);
+        }
+
+        [Test, Isolated]
+        public async Task UpdateIntakeServices_OrderDoesNotExist_ShouldReturnNotFound()
+        {
+            // arrange
+            var dto = new OrdersTransfereeIntakeServicesDto()
+            {
+                Id = "-1",
+            };
+
+            // Act
+            var controller = SetUpOrdersController();
+            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            var result = controller.UpdateIntakeServices(dto);
+
+            // Assert
+            result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
+        }
+
+        [Test, Isolated]
+        public async Task UpdateIntakeServices_InvalidService_ShouldReturnNotFound()
+        {
+
+            var order = OrderBuilder.New().First();
+            order.TrackingId = TokenHelper.NewToken();
+            order.Transferee = transferee;
+            order.Consultant = dsc;
+            order.ProgramManager = pm;
+            order.DestinationCity = "integration city";
+            Context.Orders.Add(order);
+            Context.SaveChanges();
+            Context.Entry(order).Reload();
+
+            //modify the order
+
+            //modify the order
+            var dto = new OrdersTransfereeIntakeServicesDto()
+            {
+                Id = order.Id,
+                Services = new List<OrdersTransfereeIntakeServiceDto>()
+                {
+                    new OrdersTransfereeIntakeServiceDto()
+                    {
+                        Id = "-1",
+                        Notes = "Notes",
+                        Selected = true
+                    }
+                }
+            };
+
+            // Act
+            var controller = SetUpOrdersController();
+            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            var result = controller.UpdateIntakeServices(dto);
+
+            // Assert
+            result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
+        }
+
+        [Test, Isolated]
+        public async Task UpdateIntakeRmc_ValidOrder_ShouldChangeDestination()
+        {
+            // arrange
+
+            var order = OrderBuilder.New().First();
+            order.TrackingId = TokenHelper.NewToken();
+            order.Transferee = transferee;
+            order.Consultant = dsc;
+            order.ProgramManager = pm;
+            order.DestinationCity = "integration city";
+            Context.Orders.Add(order);
+            Context.SaveChanges();
+            Context.Entry(order).Reload();
+
+            //modify the order
+            var dto = new OrdersTransfereeIntakeRmcDto()
+            {
+                Id = order.Id,
+                Rmc = order.Rmc + " 2",
+                RmcContact = order.RmcContact + " 2",
+                RmcContactEmail = order.RmcContactEmail + " 2"
+            };
+
+            // Act
+            var controller = SetUpOrdersController();
+            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            var result = controller.UpdateIntakeRmc(dto);
+
+            // Assert
+            Context.Entry(order).Reload();
+            result.Should().BeOfType<System.Web.Http.Results.OkResult>();
+            order.Rmc.Should().Be(dto.Rmc);
+            order.RmcContact.Should().Be(dto.RmcContact);
+            order.RmcContactEmail.Should().Be(dto.RmcContactEmail);
+        }
+
+        [Test, Isolated]
+        public async Task UpdateIntakeRmc_OrderDoesNotExist_ShouldReturnNotFound()
+        {
+            // arrange
+            var dto = new OrdersTransfereeIntakeRmcDto()
+            {
+                Id = "-1",
+                Rmc = "BadRmc",
+                RmcContact = "BadRmcContact",
+                RmcContactEmail = "BadRmcContactEmail"
+            };
+
+            // Act
+            var controller = SetUpOrdersController();
+            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            var result = controller.UpdateIntakeRmc(dto);
+
+            // Assert
+            result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
+        }
+
+        [Test, Isolated]
+        public async Task InsertPet_ValidOrder_ShouldAddPet()
+        {
+            // arrange
+            var order = OrderBuilder.New().First();
+            order.TrackingId = TokenHelper.NewToken();
+            order.Transferee = transferee;
+            order.Consultant = dsc;
+            order.ProgramManager = pm;
+            order.DestinationCity = "integration city";
+
+            Context.Orders.Add(order);
+            Context.SaveChanges();
+            Context.Entry(order).Reload();
+
+            // Act
+            var controller = SetUpOrdersController();
+            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            var result = controller.InsertPet(order.Id);
+
+            // Assert
+            Context.Entry(order).Reload();
+
+            result.Should().BeOfType<System.Web.Http.Results.OkNegotiatedContentResult<string>>();
+            order.Pets.Count.Should().Be(1);
+            ((OkNegotiatedContentResult<string>)result).Content.Should().Be(order.Pets.FirstOrDefault().Id);
+        }
+
+        [Test, Isolated]
+        public async Task InsertPet_NoOrder_ShouldReturnNotFound()
+        {
+            // arrange
+
+
+            // Act
+            var controller = SetUpOrdersController();
+            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            var result = controller.InsertPet("-1");
+
+            // Assert
+            result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
+        }
+
+        [Test, Isolated]
+        public async Task UpdateIntakeTempHousing_ValidOrder_ShouldChangeTempHousing()
+        {
+            // arrange
+
+            var order = OrderBuilder.New().First();
+            order.TrackingId = TokenHelper.NewToken();
+            order.Transferee = transferee;
+            order.Consultant = dsc;
+            order.ProgramManager = pm;
+            order.DestinationCity = "integration city";
+            order.TempHousingEndDate = DateTime.Now;
+            order.TempHousingDays = 12;
+            Context.Orders.Add(order);
+            Context.SaveChanges();
+            Context.Entry(order).Reload();
+
+
+            //modify the order
+            var dto = new OrdersTransfereeIntakeTempHousingDto()
+            {
+                Id = order.Id,
+                TempHousingEndDate = order.TempHousingEndDate.Value.AddDays(5),
+                TempHousingDays = order.TempHousingDays + 1
+            };
+
+            // Act
+            var controller = SetUpOrdersController();
+            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            var result = controller.UpdateIntakeTempHousing(dto);
+
+            // Assert
+            Context.Entry(order).Reload();
+            result.Should().BeOfType<System.Web.Http.Results.OkResult>();
+            order.TempHousingEndDate.ToString().Should().Be(dto.TempHousingEndDate.ToString());
+            order.TempHousingDays.Should().Be(dto.TempHousingDays);
+        }
+
+        [Test, Isolated]
+        public async Task UpdateIntakeTempHousing_OrderDoesNotExist_ShouldReturnNotFound()
+        {
+            // arrange
+            var dto = new OrdersTransfereeIntakeTempHousingDto()
+            {
+                Id = "-1",
+                TempHousingEndDate = DateTime.Now,
+                TempHousingDays = 25
+            };
+
+            // Act
+            var controller = SetUpOrdersController();
+            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            var result = controller.UpdateIntakeTempHousing(dto);
+
+            // Assert
+            result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
+        }
+
+        [Test, Isolated]
+        public async Task UpdateIntakeLease_ValidOrder_ShouldChangeLease()
+        {
+            // arrange
+
+            var order = OrderBuilder.New().First();
+            order.TrackingId = TokenHelper.NewToken();
+            order.Transferee = transferee;
+            order.Consultant = dsc;
+            order.ProgramManager = pm;
+            order.DestinationCity = "integration city";
+            order.LeaseTerm = 12;
+            order.DepositType = Context.DepositTypes.FirstOrDefault();
+            order.BrokerFeeType = Context.BrokerFeeTypes.FirstOrDefault();
+            order.LengthOfAssignment = 12;
+
+            Context.Orders.Add(order);
+            Context.SaveChanges();
+            Context.Entry(order).Reload();
+
+
+            //modify the order
+            var dto = new OrdersTransfereeIntakeLeaseDto()
+            {
+                Id = order.Id,
+                LeaseTerm = order.LeaseTerm + 1,
+                DepositTypeId = Context.DepositTypes.OrderByDescending(d => d.Id).FirstOrDefault().Id,
+                LengthOfAssignment = order.LengthOfAssignment,
+                BrokerFeeTypeId = Context.BrokerFeeTypes.OrderByDescending(d => d.Id).FirstOrDefault().Id
+            };
+
+            // Act
+            var controller = SetUpOrdersController();
+            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            var result = controller.UpdateIntakeLease(dto);
+
+            // Assert
+            Context.Entry(order).Reload();
+            result.Should().BeOfType<System.Web.Http.Results.OkResult>();
+            order.LeaseTerm.Should().Be(dto.LeaseTerm);
+            order.DepositTypeId.Should().Be(dto.DepositTypeId);
+            order.LengthOfAssignment.Should().Be(dto.LengthOfAssignment);
+            order.BrokerFeeTypeId.Should().Be(dto.DepositTypeId);
+        }
+
+        [Test, Isolated]
+        public async Task UpdateIntakeLease_OrderDoesNotExist_ShouldReturnNotFound()
+        {
+            // arrange
+            var dto = new OrdersTransfereeIntakeTempHousingDto()
+            {
+                Id = "-1",
+                TempHousingEndDate = DateTime.Now,
+                TempHousingDays = 25
+            };
+
+            // Act
+            var controller = SetUpOrdersController();
+            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            var result = controller.UpdateIntakeTempHousing(dto);
+
+            // Assert
+            result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
+        }
+
     }
 }

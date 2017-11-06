@@ -81,7 +81,7 @@ namespace Odin.Data.Core.Models
 
         public int? LengthOfAssignment { get; set; }
 
-        public Rent Rent { get; set; }
+        public HomeFinding HomeFinding { get; set; }
 
         public virtual ICollection<Service> Services { get; private set; }
 
