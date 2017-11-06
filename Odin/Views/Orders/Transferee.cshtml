@@ -33,22 +33,18 @@
         </div>
     </div>
 </div>
-t
+
+@section styles
+{
+    @Styles.Render("~/Styling/transferee")
+}
 
 @section scripts
 {
-    
-    @Styles.Render("~/Styling/transferee")
     @Scripts.Render("~/Scripts/transferee")
     
     <script>
         var currentOrderId = '@Model.Id';
-
-        $(document).ready(function () {
-            OrdersPageController.TransfereeInit();
-            TransfereeIntakeController.init();
-            TransfereeDetailsController.init();
-        });
+        $(document).ready(OrdersPageController.TransfereeInit);
     </script>
-
 }

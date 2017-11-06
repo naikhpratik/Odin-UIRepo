@@ -1,6 +1,6 @@
 ﻿namespace Odin.Data.Core.Dtos
 {
-    public class OrdersTransfereeIntakeRentDto
+    public class OrdersTransfereeIntakeHomeFindingDto
     {
         public string Id { get; set; }
 

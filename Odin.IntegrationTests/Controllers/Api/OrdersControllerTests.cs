@@ -1393,17 +1393,219 @@ namespace Odin.IntegrationTests.Controllers.Api
         public async Task UpdateIntakeLease_OrderDoesNotExist_ShouldReturnNotFound()
         {
             // arrange
-            var dto = new OrdersTransfereeIntakeTempHousingDto()
+            var dto = new OrdersTransfereeIntakeLeaseDto()
             {
                 Id = "-1",
-                TempHousingEndDate = DateTime.Now,
-                TempHousingDays = 25
+                LeaseTerm = 1,
+                DepositTypeId = Context.DepositTypes.OrderByDescending(d => d.Id).FirstOrDefault().Id,
+                LengthOfAssignment = 12,
+                BrokerFeeTypeId = Context.BrokerFeeTypes.OrderByDescending(d => d.Id).FirstOrDefault().Id
             };
 
             // Act
             var controller = SetUpOrdersController();
             controller.MockCurrentUser(dsc.Id, dsc.UserName);
-            var result = controller.UpdateIntakeTempHousing(dto);
+            var result = controller.UpdateIntakeLease(dto);
+
+            // Assert
+            result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
+        }
+
+        [Test, Isolated]
+        public async Task UpdateIntakeRelocation_ValidOrder_ShouldChangeRelocation()
+        {
+            // arrange
+
+            var order = OrderBuilder.New().First();
+            order.TrackingId = TokenHelper.NewToken();
+            order.Transferee = transferee;
+            order.Consultant = dsc;
+            order.ProgramManager = pm;
+            order.DestinationCity = "integration city";
+            order.LeaseTerm = 12;
+            order.DepositType = Context.DepositTypes.FirstOrDefault();
+            order.BrokerFeeType = Context.BrokerFeeTypes.FirstOrDefault();
+            order.LengthOfAssignment = 12;
+
+            Context.Orders.Add(order);
+            Context.SaveChanges();
+            Context.Entry(order).Reload();
+
+
+            //modify the order
+            var dto = new OrdersTransfereeIntakeRelocationDto()
+            { 
+                Id = order.Id,
+                PreTripDate = order.PreTripDate.HasValue ? order.PreTripDate.Value.AddDays(5) : DateTime.Now,
+                PreTripNotes = order.PreTripNotes + "1",
+                EstimatedArrivalDate = order.EstimatedArrivalDate.HasValue ? order.EstimatedArrivalDate.Value.AddDays(5) : DateTime.Now,
+                WorkStartDate = order.WorkStartDate.HasValue ? order.WorkStartDate.Value.AddDays(5) : DateTime.Now,
+                EstimatedDepartureDate = order.EstimatedDepartureDate.HasValue ? order.EstimatedDepartureDate.Value.AddDays(5) : DateTime.Now
+            };
+
+            // Act
+            var controller = SetUpOrdersController();
+            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            var result = controller.UpdateIntakeRelocation(dto);
+
+            // Assert
+            Context.Entry(order).Reload();
+            result.Should().BeOfType<System.Web.Http.Results.OkResult>();
+            order.PreTripDate.ToString().Should().Be(dto.PreTripDate.ToString());
+            order.PreTripNotes.Should().Be(dto.PreTripNotes);
+            order.EstimatedArrivalDate.ToString().Should().Be(dto.EstimatedArrivalDate.ToString());
+            order.WorkStartDate.ToString().Should().Be(dto.WorkStartDate.ToString());
+            order.EstimatedDepartureDate.ToString().Should().Be(dto.EstimatedDepartureDate.ToString());
+        }
+
+        [Test, Isolated]
+        public async Task UpdateIntakeRelocation_OrderDoesNotExist_ShouldReturnNotFound()
+        {
+            // arrange
+            var dto = new OrdersTransfereeIntakeRelocationDto()
+            {
+                Id = "-1",
+                PreTripDate = DateTime.Now,
+                PreTripNotes = "Notes",
+                EstimatedArrivalDate = DateTime.Now,
+                WorkStartDate = DateTime.Now,
+                EstimatedDepartureDate = DateTime.Now
+            };
+
+            // Act
+            var controller = SetUpOrdersController();
+            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            var result = controller.UpdateIntakeRelocation(dto);
+
+            // Assert
+            result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
+        }
+
+        [Test, Isolated]
+        public async Task UpdateIntakeHomeFinding_ValidOrderNoHomeFinding_ShouldAddHomeFinding()
+        {
+            // arrange
+
+            var order = OrderBuilder.New().First();
+            order.TrackingId = TokenHelper.NewToken();
+            order.Transferee = transferee;
+            order.Consultant = dsc;
+            order.ProgramManager = pm;
+            order.DestinationCity = "integration city";
+            order.LeaseTerm = 12;
+            order.DepositType = Context.DepositTypes.FirstOrDefault();
+            order.BrokerFeeType = Context.BrokerFeeTypes.FirstOrDefault();
+            order.LengthOfAssignment = 12;
+
+            Context.Orders.Add(order);
+            Context.SaveChanges();
+            Context.Entry(order).Reload();
+
+
+            //modify the order
+            var dto = new OrdersTransfereeIntakeHomeFindingDto()
+            {
+                Id = order.Id,
+                NumberOfBedrooms = 5
+            };
+
+            // Act
+            var controller = SetUpOrdersController();
+            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            var result = controller.UpsertIntakeHomeFinding(dto);
+
+            // Assert
+            Context.Entry(order).Reload();
+            result.Should().BeOfType<System.Web.Http.Results.OkResult>();
+            order.HomeFinding.Should().NotBeNull();
+            order.HomeFinding.NumberOfBedrooms.Should().Be(dto.NumberOfBedrooms);
+        }
+
+        [Test, Isolated]
+        public async Task UpdateIntakeHomeFinding_ValidOrderWithHomeFinding_ShouldUpdateHomeFinding()
+        {
+            // arrange
+
+            var order = OrderBuilder.New().First();
+            order.TrackingId = TokenHelper.NewToken();
+            order.Transferee = transferee;
+            order.Consultant = dsc;
+            order.ProgramManager = pm;
+            order.DestinationCity = "integration city";
+           
+            order.HomeFinding = HomeFindingBuilder.New();
+            order.HomeFinding.NumberOfBathrooms = Context.NumberOfBathrooms.FirstOrDefault();
+            order.HomeFinding.HousingType = Context.HousingTypes.FirstOrDefault();
+            order.HomeFinding.AreaType = Context.AreaTypes.FirstOrDefault();
+            order.HomeFinding.TransportationType = Context.TransportationTypes.FirstOrDefault();
+            
+
+            Context.Orders.Add(order);
+            Context.SaveChanges();
+            Context.Entry(order).Reload();
+
+
+            //modify the order
+            var dto = new OrdersTransfereeIntakeHomeFindingDto()
+            {
+                Id = order.Id,
+                NumberOfBedrooms = order.HomeFinding.NumberOfBedrooms + 1,
+                NumberOfBathroomsTypeId = Context.NumberOfBathrooms.OrderByDescending(n => n.Id).FirstOrDefault().Id,
+                HousingBudget = order.HomeFinding.HousingBudget + 1000,
+                SquareFootage = order.HomeFinding.SquareFootage + 100,
+                MaxCommute = order.HomeFinding.MaxCommute + 10,
+                Comments = order.HomeFinding.Comments + "1",
+                NumberOfCarsOwned = order.HomeFinding.NumberOfCarsOwned + 2,
+                IsFurnished = !order.HomeFinding.IsFurnished.Value,
+                HasParking =  !order.HomeFinding.HasParking,
+                HasLaundry = !order.HomeFinding.HasLaundry,
+                HasAC = !order.HomeFinding.HasAC,
+                HasExerciseRoom = !order.HomeFinding.HasExerciseRoom,
+                HousingTypeId = Context.HousingTypes.OrderByDescending(n => n.Id).FirstOrDefault().Id,
+                AreaTypeId = Context.AreaTypes.OrderByDescending(n => n.Id).FirstOrDefault().Id,
+                TransportationTypeId = Context.TransportationTypes.OrderByDescending(n => n.Id).FirstOrDefault().Id
+            };
+
+            // Act
+            var controller = SetUpOrdersController();
+            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            var result = controller.UpsertIntakeHomeFinding(dto);
+
+            // Assert
+            Context.Entry(order).Reload();
+            result.Should().BeOfType<System.Web.Http.Results.OkResult>();
+            order.HomeFinding.Should().NotBeNull();
+            order.HomeFinding.NumberOfBedrooms.Should().Be(dto.NumberOfBedrooms);
+            order.HomeFinding.NumberOfBathroomsTypeId.Should().Be(dto.NumberOfBathroomsTypeId);
+            order.HomeFinding.HousingBudget.Should().Be(dto.HousingBudget);
+            order.HomeFinding.SquareFootage.Should().Be(dto.SquareFootage);
+            order.HomeFinding.MaxCommute.Should().Be(dto.MaxCommute);
+            order.HomeFinding.Comments.Should().Be(dto.Comments);
+            order.HomeFinding.NumberOfCarsOwned.Should().Be(dto.NumberOfCarsOwned);
+            order.HomeFinding.IsFurnished.Should().Be(dto.IsFurnished);
+            order.HomeFinding.HasParking.Should().Be(dto.HasParking);
+            order.HomeFinding.HasLaundry.Should().Be(dto.HasLaundry);
+            order.HomeFinding.HasAC.Should().Be(dto.HasAC);
+            order.HomeFinding.HasExerciseRoom.Should().Be(dto.HasExerciseRoom);
+            order.HomeFinding.HousingTypeId.Should().Be(dto.HousingTypeId);
+            order.HomeFinding.AreaTypeId.Should().Be(dto.AreaTypeId);
+            order.HomeFinding.TransportationTypeId.Should().Be(dto.TransportationTypeId);
+        }
+
+        [Test, Isolated]
+        public async Task UpdateIntakeHomeFinding_OrderDoesNotExist_ShouldReturnNotFound()
+        {
+            // arrange
+            var dto = new OrdersTransfereeIntakeHomeFindingDto()
+            {
+                Id = "-1",
+                NumberOfBedrooms = 1
+            };
+
+            // Act
+            var controller = SetUpOrdersController();
+            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            var result = controller.UpsertIntakeHomeFinding(dto);
 
             // Assert
             result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();

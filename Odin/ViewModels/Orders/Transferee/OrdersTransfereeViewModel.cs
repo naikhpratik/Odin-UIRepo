@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using PetViewModel = Odin.ViewModels.Shared.PetViewModel;
 
 
 namespace Odin.ViewModels.Orders.Transferee
@@ -16,6 +17,7 @@ namespace Odin.ViewModels.Orders.Transferee
         {
             Children = new List<ChildViewModel>();
             Services = new List<ServiceViewModel>();
+            Pets = new List<PetViewModel>();
             PossibleServices = new List<ServiceTypeViewModel>();
             HomeFinding = new HomeFindingViewModel();
         }
@@ -23,27 +25,27 @@ namespace Odin.ViewModels.Orders.Transferee
         public string Id { get; set; }
 
        
-        [DisplayName("City")]
+        [DisplayName("City:")]
         public string DestinationCity { get; set; }
 
-        [DisplayName("State")]
+        [DisplayName("State:")]
         public string DestinationState { get; set; }
 
-        [DisplayName("Country")]
+        [DisplayName("Country:")]
         public string DestinationCountry { get; set; }
 
-        [DisplayName("City")]
+        [DisplayName("City:")]
         public string OriginCity { get; set; }
 
-        [DisplayName("State")]
+        [DisplayName("State:")]
         public string OriginState { get; set; }
 
-        [DisplayName("Country")]
+        [DisplayName("Country:")]
         public string OriginCountry { get; set; }
 
         public bool IsRush { private get; set; }
 
-        [DisplayName("Rush")]
+        [DisplayName("Rush:")]
         public string IsRushDisplay {
             get
             {
@@ -53,7 +55,7 @@ namespace Odin.ViewModels.Orders.Transferee
 
         public bool IsVip { private get; set; }
 
-        [DisplayName("Vip")]
+        [DisplayName("Vip:")]
         public string IsVipDisplay
         {
             get
@@ -62,31 +64,31 @@ namespace Odin.ViewModels.Orders.Transferee
             }
         }
 
-        [DisplayName("Length(Days)")]
+        [DisplayName("Length(Days):")]
         public int TempHousingDays { get; set; }
 
         
         public DateTime? TempHousingEndDate { get; set; }
 
-        [DisplayName("Last Day")]
+        [DisplayName("Last Day:")]
         public string TempHousingEndDateDisplay {
             get { return DateHelper.GetViewFormat(TempHousingEndDate); }
         }
 
         public DateTime? PreTripDate {get; set; }
-        [DisplayName("Familiarization Trip")]
+        [DisplayName("Familiarization Trip:")]
         public string PreTripDateDisplay
         {
             get { return DateHelper.GetViewFormat(PreTripDate); }
         }
 
-        [DisplayName("Trip Notes")]
+        [DisplayName("Trip Notes:")]
         public string PreTripNotes { get; set; }
 
         
-        public DateTime? HomeFindingDate { private get; set; }
+        public DateTime? HomeFindingDate { get; set; }
 
-        [DisplayName("Home Finding")]
+        [DisplayName("Home Finding:")]
         public string HomeFindingDateDisplay
         {
             get { return DateHelper.GetViewFormat(HomeFindingDate); }
@@ -94,7 +96,7 @@ namespace Odin.ViewModels.Orders.Transferee
 
 
         public bool IsAssignment {get; set; }
-        [DisplayName("Assignment")]
+        [DisplayName("Assignment:")]
         public string IsAssignmentDisplay
         {
             get { return IsAssignment ? "Yes" : "No"; }
@@ -102,7 +104,7 @@ namespace Odin.ViewModels.Orders.Transferee
         }
 
         public bool IsInternational { get; set; }
-        [DisplayName("International")]
+        [DisplayName("International:")]
         public string IsInternationalDisplay
         {
             get { return IsInternational ? "Yes" : "No"; }
@@ -111,7 +113,7 @@ namespace Odin.ViewModels.Orders.Transferee
 
         public DateTime? EstimatedArrivalDate {get; set; }
 
-        [DisplayName("Final Arrival")]
+        [DisplayName("Final Arrival:")]
         public string EstimatedArrivalDateDisplay
         {
             get { return DateHelper.GetViewFormat(EstimatedArrivalDate); }
@@ -119,7 +121,7 @@ namespace Odin.ViewModels.Orders.Transferee
         
         public DateTime? WorkStartDate { get; set; }
 
-        [DisplayName("Work Start")]
+        [DisplayName("Work Start:")]
         public string WorkStartDateDisplay {
             get { return DateHelper.GetViewFormat(WorkStartDate); }
             
@@ -127,25 +129,25 @@ namespace Odin.ViewModels.Orders.Transferee
 
         public DateTime? EstimatedDepartureDate {get; set; }
 
-        [DisplayName("Estimated Departure")]
+        [DisplayName("Estimated Departure:")]
         public string EstimatedDepartureDateDisplay
         {
             get { return DateHelper.GetViewFormat(EstimatedDepartureDate); }
         }
 
-        [DisplayName("Spouse/Partner")]
+        [DisplayName("Spouse/Partner:")]
         public string SpouseName { get; set; }
 
-        [DisplayName("Visa Type")]
+        [DisplayName("Visa Type:")]
         public string SpouseVisaType { get; set; }
 
-        [DisplayName("RMC")]
+        [DisplayName("RMC:")]
         public string Rmc { get; set; }
 
-        [DisplayName("Contact")]
+        [DisplayName("Contact:")]
         public string RmcContact { get; set; }
 
-        [DisplayName("Email")]
+        [DisplayName("Email:")]
         public string RmcContactEmail { get; set; }
 
         private IEnumerable<ChildViewModel> _children;
@@ -161,10 +163,10 @@ namespace Odin.ViewModels.Orders.Transferee
             }
         }
 
-        [DisplayName("Education Preferences")]
+        [DisplayName("Education Preferences:")]
         public string ChildrenEducationPreferences { get; set; }
 
-        [DisplayName("School District")]
+        [DisplayName("School District:")]
         public string SchoolDistrict { get; set; }
 
         private IEnumerable<PetViewModel> _pets;
@@ -180,7 +182,7 @@ namespace Odin.ViewModels.Orders.Transferee
             }
         }
 
-        [DisplayName("Pet Notes")]
+        [DisplayName("Pet Notes:")]
         public string PetNotes { get; set; }
 
         public IEnumerable<ServiceViewModel> Services { get; set; }
@@ -197,18 +199,18 @@ namespace Odin.ViewModels.Orders.Transferee
         public string RentId { get; set; }
         public HomeFindingViewModel HomeFinding { get; set; }
 
-        [DisplayName("Budget")]
+        [DisplayName("Budget:")]
         public string HousingBudgetDisplay
         {
             get
             {
                 return (HomeFinding != null && HomeFinding.HousingBudget.HasValue)
-                    ? HomeFinding.HousingBudget.ToString()
+                    ? HomeFinding.HousingBudget.Value.ToString("C")
                     : String.Empty;
             }
         }
 
-        [DisplayName("Number of Bathrooms")]
+        [DisplayName("Number of Bathrooms:")]
         public string NumberOfBathroomsDisplay
         {
             get
@@ -219,7 +221,7 @@ namespace Odin.ViewModels.Orders.Transferee
             }
         }
 
-        [DisplayName("Number of Bedrooms")]
+        [DisplayName("Number of Bedrooms:")]
         public string NumberOfBedroomsDisplay
         {
             get
@@ -230,7 +232,7 @@ namespace Odin.ViewModels.Orders.Transferee
             }
         }
 
-        [DisplayName("Square Footage")]
+        [DisplayName("Square Footage:")]
         public string SquareFootageDisplay
         {
             get
@@ -241,7 +243,7 @@ namespace Odin.ViewModels.Orders.Transferee
             }
         }
 
-        [DisplayName("Housing Type")]
+        [DisplayName("Housing Type:")]
         public string HousingTypeDisplay
         {
             get
@@ -252,7 +254,7 @@ namespace Odin.ViewModels.Orders.Transferee
             }
         }
 
-        [DisplayName("Preferred Transportation")]
+        [DisplayName("Preferred Transportation:")]
         public string TransportationTypeDisplay
         {
             get
@@ -263,7 +265,7 @@ namespace Odin.ViewModels.Orders.Transferee
             }
         }
 
-        [DisplayName("Furnished")]
+        [DisplayName("Furnished:")]
         public string IsFurnishedDisplay
         {
             get
@@ -274,7 +276,7 @@ namespace Odin.ViewModels.Orders.Transferee
             }
         }
 
-        [DisplayName("Max Commute")]
+        [DisplayName("Max Commute:")]
         public string MaxCommuteDisplay
         {
             get
@@ -285,7 +287,7 @@ namespace Odin.ViewModels.Orders.Transferee
             }
         }
 
-        [DisplayName("Parking")]
+        [DisplayName("Parking:")]
         public string HasParkingDisplay
         {
             get
@@ -296,7 +298,7 @@ namespace Odin.ViewModels.Orders.Transferee
             }
         }
 
-        [DisplayName("AC/Central Air")]
+        [DisplayName("AC/Central Air:")]
         public string HasACDisplay
         {
             get
@@ -307,7 +309,7 @@ namespace Odin.ViewModels.Orders.Transferee
             }
         }
 
-        [DisplayName("Exercise Room")]
+        [DisplayName("Exercise Room:")]
         public string HasExerciseRoomDisplay
         {
             get
@@ -318,7 +320,7 @@ namespace Odin.ViewModels.Orders.Transferee
             }
         }
 
-        [DisplayName("Comments")]
+        [DisplayName("Comments:")]
         public string CommentsDisplay
         {
             get
@@ -329,7 +331,7 @@ namespace Odin.ViewModels.Orders.Transferee
             }
         }
 
-        [DisplayName("Preferred Area")]
+        [DisplayName("Preferred Area:")]
         public string AreaTypeDisplay
         {
             get
@@ -340,7 +342,7 @@ namespace Odin.ViewModels.Orders.Transferee
             }
         }
 
-        [DisplayName("Laundry")]
+        [DisplayName("Laundry:")]
         public string HasLaundryDisplay
         {
             get
@@ -351,7 +353,7 @@ namespace Odin.ViewModels.Orders.Transferee
             }
         }
 
-        [DisplayName("Cars Owned")]
+        [DisplayName("Cars Owned:")]
         public string NumberOfCarsOwnedDisplay
         {
             get
@@ -383,7 +385,7 @@ namespace Odin.ViewModels.Orders.Transferee
 
         public IEnumerable<TransportationType> TransportationTypes { get; set; }
 
-        [DisplayName("Lease Term(Months)")]
+        [DisplayName("Lease Term(Months):")]
         public int? LeaseTerm { get; set; }
 
         public IEnumerable<BrokerFeeType> BrokerFeeTypes { get; set; }
@@ -392,7 +394,7 @@ namespace Odin.ViewModels.Orders.Transferee
 
         public byte? BrokerFeeTypeId { get; set; }
 
-        [DisplayName("Broker Fee Paid By")]
+        [DisplayName("Broker Fee Paid By:")]
         public string BrokerFeeTypeDisplay
         {
             get
@@ -403,7 +405,7 @@ namespace Odin.ViewModels.Orders.Transferee
             }
         }
 
-        [DisplayName("Length Of Assignment")]
+        [DisplayName("Length Of Assignment:")]
         public int? LengthOfAssignment { get; set; }
 
         public IEnumerable<DepositType> DepositTypes { get; set; }
@@ -412,7 +414,7 @@ namespace Odin.ViewModels.Orders.Transferee
 
         public byte? DepositTypeId { get; set; }
 
-        [DisplayName("Rent/Deposit Paid By")]
+        [DisplayName("Rent/Deposit Paid By:")]
         public string DepositTypeDisplay
         {
             get

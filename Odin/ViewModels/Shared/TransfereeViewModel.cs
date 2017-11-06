@@ -8,17 +8,17 @@ namespace Odin.ViewModels.Shared
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        [DisplayName("Email")]
+        [DisplayName("Email:")]
         public string Email { get; set; }
 
         private string _phoneNumber;
-        [DisplayName("Phone")]
+        [DisplayName("Phone:")]
         public string PhoneNumber {
             get { return _phoneNumber ?? String.Empty; }
             set { _phoneNumber = value; }
         }
 
-        [DisplayName("Name")]
+        [DisplayName("Name:")]
         public string FullName
         {
             get

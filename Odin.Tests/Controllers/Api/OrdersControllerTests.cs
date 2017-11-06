@@ -399,30 +399,30 @@ namespace Odin.Tests.Controllers.Api
         }
 
         [TestMethod]
-        public void UpsertIntakeRent_ValidDto_ReturnOk()
+        public void UpsertIntakeHomeFinding_ValidDto_ReturnOk()
         {
             var orderId = "1";
 
             Order order = new Order() { Id = orderId };
             _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
 
-            var dto = new OrdersTransfereeIntakeRentDto() { Id = orderId };
+            var dto = new OrdersTransfereeIntakeHomeFindingDto() { Id = orderId };
 
-            var result = _controller.UpsertIntakeRent(dto) as IHttpActionResult;
+            var result = _controller.UpsertIntakeHomeFinding(dto) as IHttpActionResult;
             result.Should().BeOfType<System.Web.Http.Results.OkResult>();
         }
 
         [TestMethod]
-        public void UpsertIntakeRent_ValidOrder_ReturnNotFound()
+        public void UpsertIntakeHomeFinding_ValidOrder_ReturnNotFound()
         {
             var orderId = "1";
 
             Order order = null;
             _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
 
-            var dto = new OrdersTransfereeIntakeRentDto() { Id = orderId };
+            var dto = new OrdersTransfereeIntakeHomeFindingDto() { Id = orderId };
 
-            var result = _controller.UpsertIntakeRent(dto) as IHttpActionResult;
+            var result = _controller.UpsertIntakeHomeFinding(dto) as IHttpActionResult;
             result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
         }
 
@@ -454,5 +454,32 @@ namespace Odin.Tests.Controllers.Api
             result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
         }
 
+        [TestMethod]
+        public void UpdateIntakeRelocation_ValidDto_ReturnOk()
+        {
+            var orderId = "1";
+
+            Order order = new Order() { Id = orderId };
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+
+            var dto = new OrdersTransfereeIntakeRelocationDto() { Id = orderId };
+
+            var result = _controller.UpdateIntakeRelocation(dto) as IHttpActionResult;
+            result.Should().BeOfType<System.Web.Http.Results.OkResult>();
+        }
+
+        [TestMethod]
+        public void UpdateIntakeRelocation_ValidOrder_ReturnNotFound()
+        {
+            var orderId = "1";
+
+            Order order = null;
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+
+            var dto = new OrdersTransfereeIntakeRelocationDto() { Id = orderId };
+
+            var result = _controller.UpdateIntakeRelocation(dto) as IHttpActionResult;
+            result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
+        }
     }
 }

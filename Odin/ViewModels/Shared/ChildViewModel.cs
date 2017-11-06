@@ -6,13 +6,13 @@ namespace Odin.ViewModels.Shared
     {
         public string Id { get; set; }
 
-        [DisplayName("Name")]
+        [DisplayName("Name:")]
         public string Name { get; set; }
 
-        [DisplayName("Age")]
+        [DisplayName("Age:")]
         public int? Age { get; set; }
 
-        [DisplayName("Grade")]
+        [DisplayName("Grade:")]
         public int? Grade { get; set; }
 
         public bool Deleted { get; set; }

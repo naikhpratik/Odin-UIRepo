@@ -147,11 +147,16 @@
     </div>
 </div>
 
-@Styles.Render("~/Styling/orders")
-@Scripts.Render("~/Scripts/orders")
+@section styles
+{
+    @Styles.Render("~/Styling/orders")
+}
+
 
 @section scripts
 {
+    @Scripts.Render("~/Scripts/orders")
+    
     <script>
         $(document).ready(OrdersPageController.OrdersPageInit);
     </script>
