@@ -36,18 +36,24 @@ namespace Odin.Controllers
             return View();
         }
 
+        // GET Partials
         public ActionResult HousingPartial(string id)
         {
             var userId = User.Identity.GetUserId();
-            var order = _unitOfWork.Orders.GetOrderFor(userId, id); ;
+            var order = _unitOfWork.Orders.GetOrderFor(userId, id);
 
             HousingViewModel viewModel = _mapper.Map<HomeFinding, HousingViewModel>(order.HomeFinding);
             viewModel = _mapper.Map<Order, HousingViewModel>(order, viewModel);
 
+            ICollection<HomeFindingProperty> homeFindingProperties = order.HomeFinding.HomeFindingProperties;
+            ICollection<HousingPropertyViewModel> propertyViewModels;
+            propertyViewModels = _mapper.Map<ICollection<HomeFindingProperty>, ICollection<HousingPropertyViewModel>>(homeFindingProperties);
+
+            viewModel.Properties = propertyViewModels;
+
             return PartialView("~/views/orders/partials/_Housing.cshtml", viewModel);
         }
 
-        // GET Partials
         public ActionResult DetailsPartial(string id)
         {
             var order = _unitOfWork.Orders.GetOrderById(id);
