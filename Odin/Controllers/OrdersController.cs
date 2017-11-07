@@ -42,6 +42,7 @@ namespace Odin.Controllers
             var order = _unitOfWork.Orders.GetOrderFor(userId, id); ;
 
             HousingViewModel viewModel = _mapper.Map<HomeFinding, HousingViewModel>(order.HomeFinding);
+            viewModel = _mapper.Map<Order, HousingViewModel>(order, viewModel);
 
             return PartialView("~/views/orders/partials/_Housing.cshtml", viewModel);
         }

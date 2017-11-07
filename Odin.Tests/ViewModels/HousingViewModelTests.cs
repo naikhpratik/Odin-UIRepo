@@ -20,6 +20,7 @@ namespace Odin.Tests.ViewModels
         {
             var orderId = "1";
             order = new Order() { Id = orderId };
+            order.HomeFinding = new HomeFinding();
 
             var config = new MapperConfiguration(c => c.AddProfile(new MappingProfile()));
             mapper = config.CreateMapper();
@@ -94,6 +95,30 @@ namespace Odin.Tests.ViewModels
             HousingViewModel viewModel = mapper.Map<Order, HousingViewModel>(order);
 
             (viewModel.PetsCount).Should().Be(numberOfTestPets);
+        }
+
+        [TestMethod]
+        public void TestDisplayForHousingType()
+        {
+            String housingTypeName = "My Great Housing Type";
+            HousingType housingType = new HousingType { Name = housingTypeName };
+            order.HomeFinding.HousingType = housingType;
+
+            HousingViewModel viewModel = mapper.Map<HomeFinding, HousingViewModel>(order.HomeFinding);
+
+            (viewModel.HousingTypeName).Should().Be(housingTypeName);
+        }
+
+        [TestMethod]
+        public void TestDisplayForNumberOfBaths()
+        {
+            String bathTypeName = "2 1/2";
+            NumberOfBathroomsType bathType = new NumberOfBathroomsType { Name = bathTypeName };
+            order.HomeFinding.NumberOfBathrooms = bathType;
+
+            HousingViewModel viewModel = mapper.Map<HomeFinding, HousingViewModel>(order.HomeFinding);
+
+            (viewModel.NumberOfBathroomsName).Should().Be(bathTypeName);
         }
     }
 }

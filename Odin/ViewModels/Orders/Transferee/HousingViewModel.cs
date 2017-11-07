@@ -27,12 +27,12 @@ namespace Odin.ViewModels.Orders.Transferee
         public int? NumberOfBedrooms { get; set; }
 
         [Display(Name = "Bathrooms:")]
-        public String NumberOfBathroomsString { get { return this.NumberOfBathrooms != null ? this.NumberOfBathrooms.Name : "NA"; } }
-        public NumberOfBathroomsType NumberOfBathrooms { private get; set; }
+        [DisplayFormat(NullDisplayText = "NA")]
+        public String NumberOfBathroomsName { get; set; }
 
         [Display(Name = "Housing Type:")]
-        public String HousingTypeString { get { return this.HousingType != null ? this.HousingType.Name : "NA"; } }
-        public HousingType HousingType { private get; set; }
+        [DisplayFormat(NullDisplayText = "No Preference")]
+        public String HousingTypeName { get; set; }
 
         [Display(Name = "Pets:")]
         [DisplayFormat(NullDisplayText = "No Pets")]
@@ -41,7 +41,7 @@ namespace Odin.ViewModels.Orders.Transferee
         public int ChildrenCount { get; set; }
         public String SpouseName { get; set; }
 
-        [Display(Name = "Spouse/Kids:")]
+        [Display(Name = "Spouse and Kids:")]
         [DisplayFormat(NullDisplayText = "No Family")]
         public string SpouseAndKids
         {
@@ -59,13 +59,13 @@ namespace Odin.ViewModels.Orders.Transferee
             }
         }
 
-        [Display(Name = "Distance From Work:")]
+        [Display(Name = "Distance From Work (min):")]
         [DisplayFormat(NullDisplayText = "NA")]
         public int? MaxCommute { get; set; }
 
-        [Display(Name = "Transportation:")]
-        public String TransportationTypeString { get { return this.TransportationType != null ? this.TransportationType.Name : "NA"; } }
-        public TransportationType TransportationType { private get; set; }
+        //[Display(Name = "Transportation:")]
+        //public String TransportationTypeString { get { return this.TransportationType != null ? this.TransportationType.Name : "NA"; } }
+        //public TransportationType TransportationType { private get; set; }
 
         public IEnumerable<HousingPropertyViewModel> Properties { get; set; }
     }
