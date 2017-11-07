@@ -98,6 +98,15 @@ namespace Odin.Tests.ViewModels
         }
 
         [TestMethod]
+        public void TestZeroPetsReturnsNull()
+        {
+            HousingViewModel viewModel = new HousingViewModel();
+            viewModel.PetsCount = 0;
+
+            (viewModel.PetsCount).Should().Be(null);
+        }
+
+        [TestMethod]
         public void TestDisplayForHousingType()
         {
             String housingTypeName = "My Great Housing Type";

@@ -34,9 +34,20 @@ namespace Odin.ViewModels.Orders.Transferee
         [DisplayFormat(NullDisplayText = "No Preference")]
         public String HousingTypeName { get; set; }
 
+        private int? _PetsCount;
         [Display(Name = "Pets:")]
         [DisplayFormat(NullDisplayText = "No Pets")]
-        public int PetsCount { get; set; }
+        public int? PetsCount
+        {
+            get { return _PetsCount; }
+            set
+            {
+                if (value > 0)
+                {
+                    _PetsCount = value;
+                }
+            }
+        }
 
         public int ChildrenCount { get; set; }
         public String SpouseName { get; set; }
