@@ -119,6 +119,7 @@
     <Compile Include="Builders\ConsultantImportDtoBuilder.cs" />
     <Compile Include="Builders\PetBuilder.cs" />
     <Compile Include="Builders\ProgramManagerDtoBuilder.cs" />
+    <Compile Include="Builders\HomeFindingPropertiesBuilder.cs" />
     <Compile Include="Builders\PropertyBuilder.cs" />
     <Compile Include="Builders\HomeFindingBuilder.cs" />
     <Compile Include="Builders\TransfereeBuilder.cs" />
