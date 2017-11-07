@@ -5,7 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/cssBundle")
+    @RenderSection("styles", required: false)
+
     @Scripts.Render("~/bundles/modernizr")
+
+    @Scripts.Render("~/bundles/lib")
+    @Scripts.Render("~/bundles/app")
+    @RenderSection("scripts", required: false)
 </head>
 <body>
     
@@ -13,9 +19,5 @@
 
     @RenderBody()
 
-
-    @Scripts.Render("~/bundles/lib")
-    @Scripts.Render("~/bundles/app")
-    @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -30,8 +30,9 @@ namespace Odin
             /*Order - Index*/
             CreateMap<Order, OrdersIndexViewModel>();
             CreateMap<Order, OrdersTransfereeViewModel>();
-            
-                
+
+            CreateMap<HomeFinding, HousingViewModel>();
+
             /*DTO Mappings*/
 
             CreateMap<OrderDto, Order>()

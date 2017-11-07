@@ -1,32 +1,8 @@
 ﻿@import "../shared/_definitions.scss";
 
-.scheduledServiceTitle {
-    display: block;
-    font-size: 1.5rem;
-    font-weight: 500;
-    color: #858585;
-}
-
-
-
-
-
-
-
-
-
-
-
-/*#details {
+div#details {
     padding-top: 10px;
     padding-left: 50px;
-
-    p {
-        padding-bottom: 0px;
-        margin-bottom: 0px;
-        font-size: 25px;
-        color: #231F20;
-    }
 
     div.row {
         text-align: left;
@@ -34,7 +10,13 @@
 
     .details-title {
         padding-bottom: 30px;
+    }
 
+    P {
+        padding-bottom: 0px;
+        margin-bottom: 0px;
+        font-size: 18px;
+        color: #231F20;
     }
 
     .details-save {
@@ -49,10 +31,8 @@
     }
 
     .details-blue {
-        color: #35A2DB;
-        font-size: 16px;
+        color: $DW_Blue;
     }
-
 
     .details-lime {
         color: $DW_Lime;
@@ -65,7 +45,7 @@
         .details-header {
             p {
                 margin: 0px;
-                font-size: 18px;
+                font-size: 16px;
                 font-weight: 200;
                 color: #8e1a55;
             }
@@ -89,14 +69,14 @@
 
             label {
                 display: block;
-                font-size: 16px;
+                font-size: 14px;
                 font-weight: 200;
                 color: #858585;
             }
 
             span {
-                color: #35A2DB;
-                font-size: 16px;
+                color: $DW_Blue;
+                font-size: 14px;
             }
 
             input {
@@ -114,4 +94,4 @@
             }
         }
     }
-}*/
+}
