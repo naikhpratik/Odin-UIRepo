@@ -67,7 +67,11 @@ namespace Odin.ViewModels.Orders.Transferee
         [DisplayName("Length(Days):")]
         public int TempHousingDays { get; set; }
 
-        
+
+        public DateTime? FinalArrivalDate { get; set; }
+        public string FinalArrivalDateDisplay => DateHelper.GetViewFormat(FinalArrivalDate);
+
+
         public DateTime? TempHousingEndDate { get; set; }
 
         [DisplayName("Last Day:")]
@@ -168,6 +172,7 @@ namespace Odin.ViewModels.Orders.Transferee
 
         [DisplayName("School District:")]
         public string SchoolDistrict { get; set; }
+        public string SchoolDistrictDisplay => (SchoolDistrict != null ? SchoolDistrict : string.Empty);
 
         private IEnumerable<PetViewModel> _pets;
         public virtual IEnumerable<PetViewModel> Pets
@@ -192,9 +197,19 @@ namespace Odin.ViewModels.Orders.Transferee
 
         public string ProgramManagerId { get; set; }
         public virtual Manager ProgramManager { get; set; }
+
+        public string PhoneNumberDisplay => (ProgramManager != null && ProgramManager.PhoneNumber != null)
+           ? DateHelper.GetViewFormat(ProgramManager.PhoneNumber)
+           : String.Empty;
+        public string SeContactUidDisplay => (ProgramManager != null && ProgramManager.SeContactUid != null)
+           ? ProgramManager.SeContactUid.ToString()
+           : String.Empty;
+
         public string SeCustNumb { get; set; }
         public string Client { get; set; }
         public string ClientFileNumber { get; set; }
+        public string ClientFileNumberDisplay => ClientFileNumber ?? ClientFileNumber;
+           
 
         public string RentId { get; set; }
         public HomeFindingViewModel HomeFinding { get; set; }

@@ -36,12 +36,18 @@ namespace Odin.Controllers
             return View();
         }
 
-        // GET Partials
         public ActionResult HousingPartial(string id)
         {
-            //var order = _unitOfWork.Orders.GetOrderById(id);
-            //OrdersTransfereeViewModel viewModel = viewModelForOrder(order);
-            return PartialView("~/views/orders/partials/_Housing.cshtml");
+            var order = _unitOfWork.Orders.GetOrderById(id);
+
+            HousingViewModel viewModel = _mapper.Map<HomeFinding, HousingViewModel>(order.HomeFinding);
+            viewModel.NumberOfPets = order.Pets.Count();
+            int numKids = order.Children == null ? 0 : order.Children.Count();
+            if (numKids == 0 && order.SpouseName == "")
+                viewModel.SpouceAndKids = null;
+            else
+                viewModel.SpouceAndKids = (order.SpouseName == "" ? "No" : "Yes") + " / " + numKids.ToString();
+            return PartialView("~/views/orders/partials/_Housing.cshtml", viewModel);
         }
 
         // GET Partials

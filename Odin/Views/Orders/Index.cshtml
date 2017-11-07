@@ -3,7 +3,7 @@
     Layout = "~/Views/Shared/_Common.cshtml";
 }
 
-<div id="list">
+<div class="container-fluid" id="list">
     <div id="search">
             <input id="searchbox"/><button>Search</button>
         </div>
@@ -147,11 +147,8 @@
     </div>
 </div>
 
-@section styles
-{
-    @Styles.Render("~/Styling/orders")
-}
-
+@Styles.Render("~/Styling/orders")
+@Scripts.Render("~/Scripts/orders")
 
 @section scripts
 {

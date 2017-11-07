@@ -13,7 +13,7 @@ namespace Odin.Tests.Helpers
         {
             DateTime? date = Convert.ToDateTime("10/1/2017");
             var result = DateHelper.GetViewFormat(date);
-            result.Should().Be("10/01/17");
+            result.Should().Be("10/1/2017");
         }
 
         [TestMethod]
