@@ -1,8 +1,32 @@
 ﻿@import "../shared/_definitions.scss";
 
-div#details {
+.scheduledServiceTitle {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #858585;
+}
+
+
+
+
+
+
+
+
+
+
+
+/*#details {
     padding-top: 10px;
     padding-left: 50px;
+
+    p {
+        padding-bottom: 0px;
+        margin-bottom: 0px;
+        font-size: 25px;
+        color: #231F20;
+    }
 
     div.row {
         text-align: left;
@@ -10,13 +34,7 @@ div#details {
 
     .details-title {
         padding-bottom: 30px;
-    }
 
-    P {
-        padding-bottom: 0px;
-        margin-bottom: 0px;
-        font-size: 18px;
-        color: #231F20;
     }
 
     .details-save {
@@ -31,8 +49,10 @@ div#details {
     }
 
     .details-blue {
-        color: $DW_Blue;
+        color: #35A2DB;
+        font-size: 16px;
     }
+
 
     .details-lime {
         color: $DW_Lime;
@@ -45,7 +65,7 @@ div#details {
         .details-header {
             p {
                 margin: 0px;
-                font-size: 16px;
+                font-size: 18px;
                 font-weight: 200;
                 color: #8e1a55;
             }
@@ -59,23 +79,24 @@ div#details {
             padding-left: 0px;
             width: 16%;
 
-h5 {
-    display: block;
-    font-size: 16px;
-    font-weight: 200;
-    margin-bottom: -5px;
-    color: #6c6e70;
-}
+            h5 {
+                display: block;
+                font-size: 16px;
+                font-weight: 200;
+                margin-bottom: -5px;
+                color: #6c6e70;
+            }
+
             label {
                 display: block;
-                font-size: 14px;
+                font-size: 16px;
                 font-weight: 200;
                 color: #858585;
             }
 
             span {
-                color: $DW_Blue;
-                font-size: 14px;
+                color: #35A2DB;
+                font-size: 16px;
             }
 
             input {
@@ -93,4 +114,4 @@ h5 {
             }
         }
     }
-}
+}*/

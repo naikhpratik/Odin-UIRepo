@@ -1,184 +1,150 @@
 ﻿@import "../shared/_definitions.scss";
 
-@include header;
 
-body {
-    padding: 0px;
+$sideNavWidth: 15rem; //height of primary nav divided by base font size
+
+#orderContainer {
+    margin-left: $sideNavWidth;
+    margin-top: $primaryNavHeightLg;
+    width: auto;
 }
 
-@media screen and (max-width: 842px) {
-    @include mobile_header;
-}
+nav#transfereeSideNav {
+    background-color: $DW_Lime;
+    position: fixed;
+    top: $primaryNavHeightSm;
+    left: 0;
+    width: $sideNavWidth;
+    height: calc(100vh - #{$primaryNavHeightSm});
+    color: white;
 
-div#transferee {
-    text-align: center;
-    @media screen and (max-width: 842px) {
-        margin-top: 20px;
-    }
+    .transfereeSideNav__person {
+        text-align: center;
+        margin-bottom: 2rem;
 
-    > div.col-md-2 {
-        color: white;
-        //height: 850px;
-        //padding: 30px 0px 0px 0px;
-        background-color: $DW_Lime;
-
-        img {
-            width: 70px;
-            margin-bottom: 10px;
+        img.person {
+            width: 50%;
+            margin: 2rem auto 1.25rem auto;
         }
 
         p {
+            margin-bottom: 0;
+            line-height: 1.75rem;
+        }
+
+        .eeName {
             font-weight: bold;
-            margin-bottom: 0px;
-            font-size: initial;
-        }
-
-        span.hdr {
-            top: -6px;
-            position: relative;
-
-            &:nth-of-type(3) {
-                top: -15px;
-            }
-        }
-
-        ul {
-            top: -19px;
-            position: relative;
-            line-height: 57px;
-            font-size: 20px;
-            font-weight: 300;
-            list-style: none;
-            padding-left: 0px;
-
-            img {
-                left: -10px;
-                margin: 0px;
-                width: 22px;
-                position: relative;
-            }
-
-            @media screen and (min-width: 991px) {
-
-                li[data-panel="intake"] {
-                    padding-right: 16px !important;
-                }
-
-                li[data-panel="details"] {
-                    padding-right: 11px !important;
-                }
-
-                li[data-panel="history"] {
-                    padding-right: 10px !important;
-                }
-            }
-
-            li[data-panel="housing"] {
-                padding-left: 1px;
-            }
-
-            li[data-panel="messages"] {
-                padding-left: 13px;
-            }
-
-            li:first-of-type {
-                height: 16px;
-                margin-top: 22px;
-                border-top: 1px solid;
-            }
-
-            li:nth-child(7) {
-                margin-bottom: 20px;
-                border-bottom: 1px solid;
-            }
-
-            li.item {
-                height: 60px;
-
-                &:hover {
-                    background-color: $DW_Gray;
-                }
-            }
-
-            li.unselectable {
-                pointer-events: none;
-
-                &:first-of-type {
-                    margin-bottom: 18px;
-                }
-            }
-
-            li.selected {
-                background-color: $DW_Red;
-            }
-        }
-
-        @media screen and (max-width: 991px) {
-            padding-left: 32px;
-            height: auto !important;
-
-            p {
-                float: left;
-            }
-
-            > span {
-                display: none;
-            }
-
-            > img {
-                display: none;
-            }
-
-            ul {
-                text-align: left;
-                padding-bottom: 23px;
-                margin: 11px 0px 0px 10px;
-
-                li {
-                    > span {
-                        display: none;
-                    }
-
-                    > img:hover {
-                        background-color: $DW_Gray;
-                    }
-
-                    &.item:hover {
-                        background-color: unset;
-                    }
-
-                    &.selected {
-                        background-color: unset;
-
-                        > img {
-                            background-color: $DW_Red;
-                        }
-                    }
-                    &.unselectable {
-                        display: none;
-                    }
-                }
-
-                li[data-panel="intake"],
-                li[data-panel="details"],
-                li[data-panel="housing"],
-                li[data-panel="history"],
-                li[data-panel="messages"],
-                li[data-panel="calendar"] {
-                    display: inline;
-                }
-            }
         }
     }
 
-    > div.col-md-10 {
-        //height: 850px;
-        //overflow-y: scroll;
-        //border-top: 1px solid;
-        font-family:sans-serif;
-        overflow-y:scroll;
-        div.noinit {
-            display: none;
-        }        
+    hr.transfereeSideNav__rule {
+        border: 0px;
+        border-top: 1px solid white;
+        width: 85%;
+        margin: 1rem 7.5%;
+    }
+
+    ul.transfereeSideNav__items {
+        color: white;
+        list-style: none;
+        margin: 0 0;
+        padding: 0;
+
+        li {
+            padding: 2vh 10%;
+
+            img {
+                width: 1.5rem;
+            }
+
+            label {
+                font-size: 1.5rem;
+                margin-left: 0.75rem;
+            }
+
+            &:hover {
+                background-color: rgba(0,0,0,0.2);
+            }
+        }
+
+        li.selected {
+            background-color: #8E1A55; //purple-ish from mockups
+        }
+    }
+
+    .transfereeSideNav__sub-items {
+    }
+
+    @media screen and (min-width: 48rem) {
+        height: calc(100vh - #{$primaryNavHeightLg});
+        top: $primaryNavHeightLg;
+    }
+}
+
+
+.sectionTitle {
+    padding-bottom: 0px;
+    margin: 2rem 0 0 0;
+    font-size: 2.5rem;
+    color: #231F20;
+}
+
+.sectionSubHead {
+    margin: 2.5rem 0 0.5rem 0;
+    font-size: 1.725rem;
+    font-weight: 500;
+    color: #8e1a55;
+}
+
+.sectionSave {
+    font-size: small;
+    color: $DW_Lime;
+    cursor: pointer;
+}
+
+.sectionInstruction {
+    color: #35A2DB;
+    font-size: 16px;
+}
+
+.sectionList {
+    list-style: none;
+    line-height: 1.875rem;
+    margin: 2rem 0 0 0;
+    padding: 0;
+
+    li {
+        margin: 0 0 1rem 0;
+        padding: 0;
+
+
+        label {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #858585;
+            padding: 0;
+            margin: 0;
+        }
+
+        p {
+            color: #35A2DB;
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin: 0;
+            padding: 0 1.25rem 0 0;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            -ms-word-break: break-all;
+            word-break: break-all;
+            word-break: break-word;
+        }
+
+        .input-group > input {
+            color: #35A2DB;
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin: 0;
+        }
     }
 }

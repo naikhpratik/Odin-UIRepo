@@ -33,24 +33,29 @@ namespace Odin.ViewModels.Orders.Transferee
         public bool IsVip { get; set; }
 
         public DateTime? PreTripDate { get; set; }
+        public string PreTripDateDisplay => DateHelper.GetViewFormat(PreTripDate);
+
         public int TempHousingDays { get; set; }
-        public DateTime? TempHousingEndDate { get; set; }
+        public DateTime? TempHousingEndDate { get; set; }       
+        public string TempHousingEndDateDisplay =>
+            DateHelper.GetViewFormat(TempHousingEndDate);
+
         public DateTime? FinalArrivalDate { get; set; }
+        public string FinalArrivalDateDisplay => DateHelper.GetViewFormat(FinalArrivalDate);
+
         public DateTime? HomeFindingDate { get; set; }
+        public string HomeFindingDateDisplay => DateHelper.GetViewFormat(HomeFindingDate);
 
         public DateTime? WorkStartDate { get; set; }
-        
+        public string WorkStartDateDisplay => DateHelper.GetViewFormat(WorkStartDate);
+
         public string SpouseName { get; set; }
         public string SpouseVisaType { get; set; }
 
         public string Rmc { get; set; }
         public string RmcContact { get; set; }
         public string RmcContactEmail { get; set; }
-
-
-        public string TempHousingEndDateDisplay =>
-            DateHelper.GetViewFormat(TempHousingEndDate);
-
+        
         private IEnumerable<ChildViewModel> _children;
         public virtual IEnumerable<ChildViewModel> Children
         {
@@ -65,6 +70,7 @@ namespace Odin.ViewModels.Orders.Transferee
         }
         public string ChildrenEducationPreferences { get; set; }
         public string SchoolDistrict { get; set; }
+        public string SchoolDistrictDisplay => (SchoolDistrict != null ? SchoolDistrict : string.Empty);
 
         private IEnumerable<PetViewModel> _pets;
         public virtual IEnumerable<PetViewModel> Pets
@@ -88,15 +94,25 @@ namespace Odin.ViewModels.Orders.Transferee
 
         public string ProgramManagerId { get; set; }
         public virtual Manager ProgramManager { get; set; }
+
+        public string PhoneNumberDisplay => (ProgramManager != null && ProgramManager.PhoneNumber != null)
+           ? DateHelper.GetViewFormat(ProgramManager.PhoneNumber)
+           : String.Empty;
+        public string SeContactUidDisplay => (ProgramManager != null && ProgramManager.SeContactUid != null)
+           ? ProgramManager.SeContactUid.ToString()
+           : String.Empty;
+
         public string SeCustNumb { get; set; }
         public string Client { get; set; }
         public string ClientFileNumber { get; set; }
+        public string ClientFileNumberDisplay => ClientFileNumber ?? ClientFileNumber;
+           
 
         public string RentId { get; set; }
         public RentViewModel Rent { get; set; }
-
+        
         public string HousingBudgetDisplay => (Rent != null && Rent.HousingBudget.HasValue)
-            ? Rent.HousingBudget.ToString()
+            ? DateHelper.GetViewFormat(Rent.HousingBudget)
             : String.Empty;
 
         public string NumberOfBathroomsDisplay => (Rent != null && Rent.NumberOfBathrooms != null)
@@ -108,7 +124,7 @@ namespace Odin.ViewModels.Orders.Transferee
                 : String.Empty;
 
         public string SquareFootageDisplay => (Rent != null && Rent.SquareFootage.HasValue)
-            ? Rent.SquareFootage.Value.ToString()
+            ? string.Format("{0: #,###.00}", Rent.SquareFootage)
             : String.Empty;
 
         public string HousingTypeDisplay => (Rent != null && Rent.HousingType != null)

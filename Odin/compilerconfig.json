@@ -1,5 +1,9 @@
 ﻿[
   {
+    "inputFile": "Content/css/primaryNav.scss",
+    "outputFile": "Content/css/primaryNav.css"
+  },
+  {
     "inputFile": "Content/css/orders.scss",
     "outputFile": "Content/css/orders.css"
   },

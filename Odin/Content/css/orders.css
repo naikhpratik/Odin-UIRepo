@@ -3,92 +3,11 @@
   body div.container-fluid {
     padding: 0px; }
 
-div#main {
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 1;
-  background-color: white;
-  border-bottom: 2px solid #c7c7c7; }
-  div#main div#caption {
-    width: 48%;
-    height: 118px;
-    padding-top: 44px;
-    vertical-align: top;
-    display: inline-block; }
-    div#main div#caption div#dwellworks {
-      margin-top: 0px;
-      text-align: left;
-      padding-left: 30px; }
-      div#main div#caption div#dwellworks.mailer {
-        margin-top: 40px; }
-      div#main div#caption div#dwellworks p {
-        display: inline-block; }
-        div#main div#caption div#dwellworks p:first-of-type {
-          border-left: 1px solid gray;
-          margin-left: 4px;
-          top: -2px;
-          height: 21px;
-          position: relative; }
-        div#main div#caption div#dwellworks p:last-of-type {
-          top: -3px;
-          font-size: large;
-          color: #49ae44;
-          font-size: 20px;
-          font-family: sans-serif; }
-  div#main div#icons {
-    float: right;
-    width: 50%;
-    height: 118px;
-    margin-right: 3px;
-    padding-top: 30px;
-    vertical-align: top;
-    display: inline-block; }
-    div#main div#icons div {
-      float: right;
-      display: inline-block; }
-      div#main div#icons div.icons_notify {
-        font-size: small;
-        color: white;
-        position: relative;
-        font-weight: bold;
-        display: inline-block;
-        width: 10px;
-        text-align: center; }
-        div#main div#icons div.icons_notify img {
-          width: 26px; }
-        div#main div#icons div.icons_notify.icons_notify_messages {
-          top: -2px;
-          left: -321px; }
-          div#main div#icons div.icons_notify.icons_notify_messages span {
-            position: relative;
-            top: -33px;
-            left: -19px; }
-        div#main div#icons div.icons_notify.icons_notify_alerts {
-          top: -2px;
-          left: -104px; }
-          div#main div#icons div.icons_notify.icons_notify_alerts span {
-            position: relative;
-            top: -33px;
-            left: -17px; }
-        div#main div#icons div.icons_notify.icons_notify_appts {
-          top: -2px;
-          left: -204px; }
-          div#main div#icons div.icons_notify.icons_notify_appts span {
-            position: relative;
-            top: -33px;
-            left: -18px; }
-      div#main div#icons div img {
-        float: right;
-        width: 50px;
-        margin: 8px; }
-        div#main div#icons div img.icons_notify {
-          margin-right: 40px; }
-
 div#list {
   height: auto;
   padding-bottom: 45px; }
   div#list div#search {
+    margin-top: 5rem;
     height: 72px;
     padding-top: 21px;
     padding-left: 43px;
@@ -104,6 +23,9 @@ div#list {
       font-size: 15px;
       margin-left: 15px;
       background-color: #31a4dd; }
+    @media screen and (min-width: 40rem) {
+      div#list div#search {
+        margin-top: 8rem; } }
   div#list img.arrow {
     cursor: cell; }
   div#list img.expand {

@@ -31,7 +31,8 @@ namespace Odin
             CreateMap<Order, OrdersIndexViewModel>();
             CreateMap<Order, OrdersTransfereeViewModel>();
 
-
+            CreateMap<Rent, HousingViewModel>();
+                
             /*DTO Mappings*/
 
             CreateMap<OrderDto, Order>()
@@ -39,6 +40,7 @@ namespace Odin
                 .ForMember(m => m.Consultant, opt => opt.Ignore())
                 .ForMember(m => m.ProgramManager, opt => opt.Ignore())
                 .ForMember(m => m.Services, opt => opt.Ignore());
+
             CreateMap<TransfereeDto, Transferee>();
             CreateMap<ProgramManagerDto, Manager>();
             CreateMap<ConsultantDto, Consultant>();
