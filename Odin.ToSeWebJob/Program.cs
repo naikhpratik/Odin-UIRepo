@@ -26,9 +26,7 @@ namespace Odin.ToSeWebJob
                 {
                     config.UseDevelopmentSettings();
                 }
-
-                config.UseServiceBus();
-
+                
                 var host = new JobHost(config);
                 // The following code ensures that the WebJob will be running continuously
                 host.RunAndBlock();

@@ -1,4 +1,7 @@
+using Microsoft.WindowsAzure.Storage.Queue;
 using Odin;
+using Odin.Domain;
+using Odin.Interfaces;
 
 //[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(MyDwellworks.App_Start.NinjectWebCommon), "Start")]
 //[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(MyDwellworks.App_Start.NinjectWebCommon), "Stop")]
@@ -16,6 +19,8 @@ namespace MyDwellworks.App_Start
     using AutoMapper;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
+    using Microsoft.WindowsAzure.Storage;
+    using Microsoft.Azure;
 
     public static class NinjectWebCommon 
     {
@@ -68,11 +73,6 @@ namespace MyDwellworks.App_Start
                 });
                 
 
-                var config = new MapperConfiguration(c => c.AddProfile(new MappingProfile()));
-
-                var mapper = config.CreateMapper();
-                kernel.Bind<IMapper>().ToConstant(mapper);
-
                 return kernel;
             }
             catch
@@ -88,7 +88,18 @@ namespace MyDwellworks.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            var config = new MapperConfiguration(c => c.AddProfile(new MappingProfile()));
 
+            var mapper = config.CreateMapper();
+            kernel.Bind<IMapper>().ToConstant(mapper);
+
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
+                CloudConfigurationManager.GetSetting("StorageConnectionString"));
+            CloudQueueClient queueClient = storageAccount.CreateCloudQueueClient();
+            CloudQueue queue = queueClient.GetQueueReference("odintose");
+            queue.CreateIfNotExists();
+
+            kernel.Bind<ICloudQueueStore>().ToConstant(new CloudQueueStore(queue));
         }        
     }
 }

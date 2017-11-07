@@ -5,7 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs;
+using Newtonsoft.Json;
 using Odin.Data.Core;
+using Odin.Data.Core.Models;
 using Odin.Data.Persistence;
 
 namespace Odin.ToSeWebJob
@@ -21,12 +23,11 @@ namespace Odin.ToSeWebJob
 
         // This function will get triggered/executed when a new message is written 
         // on an Azure Queue called queue.
-        public async Task ProcessQueueMessage([ServiceBusTrigger("odintose")] string message, TextWriter log)
+        public async Task ProcessQueueMessage([QueueTrigger("odintose")] string message, TextWriter log)
         {
-            var order = _unitOfWork.Orders.GetOrderByTrackingId("41");
-            log.WriteLine(order.DestinationState);
+            log.WriteLine(message);
+            var queueEntry = JsonConvert.DeserializeObject<QueueEntry>(message);
+            log.WriteLine(queueEntry.ObjectId);
         }
-
-        
     }
 }
