@@ -74,9 +74,9 @@ namespace Odin.ViewModels.Orders.Transferee
         [DisplayFormat(NullDisplayText = "NA")]
         public int? MaxCommute { get; set; }
 
-        //[Display(Name = "Transportation:")]
-        //public String TransportationTypeString { get { return this.TransportationType != null ? this.TransportationType.Name : "NA"; } }
-        //public TransportationType TransportationType { private get; set; }
+        [Display(Name = "Transportation:")]
+        [DisplayFormat(NullDisplayText = "NA")]
+        public String TransportationTypeName { get; set; }
 
         public IEnumerable<HousingPropertyViewModel> Properties { get; set; }
     }
