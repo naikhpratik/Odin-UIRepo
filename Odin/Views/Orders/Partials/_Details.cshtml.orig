@@ -17,6 +17,7 @@
             <p>@Model.TempHousingDays</p>
         </li>
 
+<<<<<<< HEAD
         <li class="col-sm-2">
             <label>Final Arrival:</label>
             <p>@Model.FinalArrivalDateDisplay</p>
@@ -30,7 +31,7 @@
             <p>@Model.TempHousingEndDateDisplay</p>
         </li>
     </ul>
-    @if (@Model.HomeFinding != null)
+    @if (@Model.Rent != null)
     {
         <h2 class="sectionSubHead">Housing Details</h2>
         <ul class="row sectionList">
@@ -57,9 +58,61 @@
             </li>
             <li class="col-sm-2">
                 <label>Rent or Own:</label>
-                <p>@Model.HomeFinding.OwnershipType</p>
+                <p>@Model.Rent.OwnershipType</p>
             </li>
         </ul>
+=======
+            <div class="col-sm-3 details-col">
+                <label>Final Arrival:</label>
+                <span>@(Model.EstimatedArrivalDate.HasValue ? Model.EstimatedArrivalDate.Value.ToString("MM/dd/yy") : "TBD")</span>
+            </div>
+            <div class="col-sm-3 details-col">
+                <label>Home Finding Date:</label>
+                <span>@(Model.HomeFindingDate.HasValue ? Model.HomeFindingDate.Value.ToString("MM/dd/yy") : "TBD")</span>
+            </div>
+            <div class="col-sm-3 details-col">
+                <label>Temp Housing Last Day:</label>
+                <span>@(Model.TempHousingEndDate.HasValue ? Model.TempHousingEndDate.Value.ToString("MM/dd/yy") : "TBD")</span>
+            </div>
+        </div>
+    </div>
+    @if (@Model.HomeFinding != null)
+    {
+    <div class="details-block">
+        <div class="row details-header">
+            <P>
+                Housing Details:
+            </P>
+        </div>
+       <div class="row details-row">
+        <div class="col-sm-3 details-col">
+            <label>Monthly Budget:</label>
+            <span>@string.Format("{0: $#,###.00}", @Model.HomeFinding.HousingBudget)</span>
+        </div>
+        <div class="col-sm-3 details-col">
+            <label>Housing:</label>
+            <span>@(Model.HomeFinding.HousingType != null ? Model.HomeFinding.HousingType.ToString() : "TBD")</span>
+        </div>
+        <div class="col-sm-3 details-col">
+            <label>School District:</label>
+            <span>@(Model.SchoolDistrict != null ? Model.SchoolDistrict : "TBD") </span>
+        </div>
+
+        <div class="col-sm-3 details-col">
+            <label>BD/BA:</label>
+            <span>@Model.HomeFinding.NumberOfBedrooms.ToString()/@(Model.HomeFinding.NumberOfBathrooms != null ? Model.HomeFinding.NumberOfBathrooms.ToString() : "TBD")</span>
+        </div>
+        <div class="col-sm-3 details-col">
+            <label>Sq.Ft:</label>
+            <span>@string.Format("{0: #,###.00}", @Model.HomeFinding.SquareFootage)</span>
+        </div>
+        <div class="col-sm-3 details-col">
+            <label>Rent or Own:</label>
+            <span>@Model.HomeFinding.OwnershipType</span>
+        </div>
+    </div>
+    </div>
+>>>>>>> master
     }
     <h2 class="sectionSubHead">Housing Details</h2>
     <ul class="row sectionList">

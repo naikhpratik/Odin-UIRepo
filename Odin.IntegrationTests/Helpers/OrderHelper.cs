@@ -71,7 +71,7 @@ namespace Odin.IntegrationTests.Helpers
                 .Where(o => o.TrackingId.Contains("integration") || o.DestinationCity.Contains("integration"))
                 .Include(o => o.Transferee)
                 .Include(s => s.Services)
-                .Include(o => o.Rent)
+                .Include(o => o.HomeFinding)
                 .Include(o => o.Pets)
                 .Include(o => o.Children)
                 .ToList();
@@ -105,8 +105,8 @@ namespace Odin.IntegrationTests.Helpers
                     }
                 }
                 
-                if (order.Rent != null)
-                    context.Rents.Remove(order.Rent);
+                if (order.HomeFinding != null)
+                    context.HomeFindings.Remove(order.HomeFinding);
             }             
 
             context.SaveChanges();

@@ -8,14 +8,14 @@ using Odin.Data.Core.Models;
 
 namespace Odin.Data.Persistence.EntityConfigurations
 {
-    public class RentConfiguration : EntityTypeConfiguration<Rent>
+    public class HomeFindingConfiguration : EntityTypeConfiguration<HomeFinding>
     {
-        public RentConfiguration()
+        public HomeFindingConfiguration()
         {
             HasKey(r => r.Id);
 
             HasRequired(r => r.Order)
-                .WithOptional(o => o.Rent)
+                .WithOptional(o => o.HomeFinding)
                 .WillCascadeOnDelete(false);
             
         }

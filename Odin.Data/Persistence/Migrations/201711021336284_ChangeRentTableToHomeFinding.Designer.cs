@@ -7,13 +7,13 @@ namespace Odin.Data.Persistence.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddPropertyModel : IMigrationMetadata
+    public sealed partial class ChangeRentTableToHomeFinding : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddPropertyModel));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(ChangeRentTableToHomeFinding));
         
         string IMigrationMetadata.Id
         {
-            get { return "201711011841252_AddPropertyModel"; }
+            get { return "201711021336284_ChangeRentTableToHomeFinding"; }
         }
         
         string IMigrationMetadata.Source

@@ -26,7 +26,7 @@ namespace Odin.Data.Core.Models
         public string OriginCountry { get; set; }
         public DateTime? EstimatedArrivalDate { get; set; }
         public DateTime? PreTripDate { get; set; }
-        public DateTime? FinalArrivalDate { get; set; }
+        public string PreTripNotes { get; set; }
         public DateTime? HomeFindingDate { get; set; }
         public DateTime? WorkStartDate { get; set; }
         public int TempHousingDays { get; set; }
@@ -81,7 +81,7 @@ namespace Odin.Data.Core.Models
 
         public int? LengthOfAssignment { get; set; }
 
-        public Rent Rent { get; set; }
+        public HomeFinding HomeFinding { get; set; }
 
         public virtual ICollection<Service> Services { get; private set; }
 

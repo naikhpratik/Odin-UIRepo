@@ -5,17 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/cssBundle")
+    @RenderSection("styles", required: false)
+    
     @Scripts.Render("~/bundles/modernizr")
-</head>
+    @Scripts.Render("~/bundles/lib")
+    @Scripts.Render("~/bundles/app")
+    @RenderSection("scripts", required: false)
+ </head>
 <body>
     
     @Html.Partial("~/Views/Shared/Partials/_header.cshtml")
 
+<<<<<<< HEAD
     @RenderBody()
 
 
     @Scripts.Render("~/bundles/lib")
     @Scripts.Render("~/bundles/app")
     @RenderSection("scripts", required: false)
+=======
+    <div class="page-content">
+        @RenderBody()
+    </div> 
+   
+>>>>>>> master
 </body>
 </html>

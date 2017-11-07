@@ -17,7 +17,7 @@ namespace Odin.Data.Persistence
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
     {
         public DbSet<Order> Orders { get; set; }
-        public DbSet<Rent> Rents { get; set; }
+        public DbSet<HomeFinding> HomeFindings { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<ServiceType> ServiceTypes { get; set; }
         public virtual DbSet<Manager> Managers { get; set; }
@@ -32,9 +32,6 @@ namespace Odin.Data.Persistence
         public virtual DbSet<DepositType> DepositTypes { get; set; }
         public virtual DbSet<BrokerFeeType> BrokerFeeTypes { get; set; }
 
-        public DbSet<Property> Properties { get; set; }
-        public DbSet<HomeFindingProperty> HomeFindingProperties { get; set; }
-
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
@@ -48,7 +45,7 @@ namespace Odin.Data.Persistence
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new OrderConfiguration());
-            modelBuilder.Configurations.Add(new RentConfiguration());
+            modelBuilder.Configurations.Add(new HomeFindingConfiguration());
             
             //modelBuilder.Entity<Child>()
             //    .Map(m => m.Requires("Deleted").HasValue(false))

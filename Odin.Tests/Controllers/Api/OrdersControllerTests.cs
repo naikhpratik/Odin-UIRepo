@@ -22,6 +22,7 @@ namespace Odin.Tests.Controllers.Api
         private Odin.Controllers.Api.OrdersController _controller;
         private Mock<IOrdersRepository> _mockRepository;
         private Mock<IChildrenRepository> _mockChildrenRepository;
+        private Mock<IPetsRepository> _mockPetsRepository;
         private Mock<IMapper> _mockMapper;
         private string _userId;
         private string _userName;
@@ -32,10 +33,12 @@ namespace Odin.Tests.Controllers.Api
             _mockRepository = new Mock<IOrdersRepository>();
             _mockMapper = new Mock<IMapper>();
             _mockChildrenRepository = new Mock<IChildrenRepository>();
+            _mockPetsRepository = new Mock<IPetsRepository>();
 
             var mockUnitOfWork = new Mock<IUnitOfWork>();
             mockUnitOfWork.SetupGet(u => u.Orders).Returns(_mockRepository.Object);
             mockUnitOfWork.SetupGet(u => u.Children).Returns(_mockChildrenRepository.Object);
+            mockUnitOfWork.SetupGet(u => u.Pets).Returns(_mockPetsRepository.Object);
 
 
             var mockAccountHelper = new Mock<IAccountHelper>();
@@ -179,18 +182,18 @@ namespace Odin.Tests.Controllers.Api
         }
 
         [TestMethod]
-        public void InsertChild_ValidOrder_ReturnOkWithNewChildId()
+        public void InsertChild_ValidOrder_ReturnOkWithNewChild()
         {
             var orderId = "1";
 
             Order order = new Order() { Id = orderId };
             _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
 
-            
+
             var result = _controller.InsertChild(orderId) as IHttpActionResult;
             result.Should().BeOfType<System.Web.Http.Results.OkNegotiatedContentResult<string>>();
             order.Children.Count.Should().Be(1);
-            ((OkNegotiatedContentResult<string>) result).Content.Should().NotBeNullOrEmpty();
+            ((OkNegotiatedContentResult<string>)result).Content.Should().NotBeNullOrEmpty();
 
         }
 
@@ -260,6 +263,20 @@ namespace Odin.Tests.Controllers.Api
         }
 
         [TestMethod]
+        public void UpsertIntakeServices_ValidDto_ReturnOk()
+        {
+            var orderId = "1";
+           
+            Order order = new Order(){Id = orderId};
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+
+            var dto = new OrdersTransfereeIntakeServicesDto() {Id = orderId};
+
+            var result = _controller.UpdateIntakeServices(dto) as IHttpActionResult;
+            result.Should().BeOfType<System.Web.Http.Results.OkResult>();
+        }
+
+        [TestMethod]
         public void UpsertIntakeServices_NoOrder_ReturnNotFound()
         {
             var orderId = "1";
@@ -269,9 +286,200 @@ namespace Odin.Tests.Controllers.Api
 
             var dto = new OrdersTransfereeIntakeServicesDto() { Id = orderId };
 
-            var result = _controller.UpsertIntakeServices(dto) as IHttpActionResult;
+            var result = _controller.UpdateIntakeServices(dto) as IHttpActionResult;
             result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
         }
 
+        [TestMethod]
+        public void UpdateIntakeRmc_ValidDto_ReturnOk()
+        {
+            var orderId = "1";
+
+            Order order = new Order() { Id = orderId };
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+
+            var dto = new OrdersTransfereeIntakeRmcDto() { Id = orderId };
+
+            var result = _controller.UpdateIntakeRmc(dto) as IHttpActionResult;
+            result.Should().BeOfType<System.Web.Http.Results.OkResult>();
+        }
+
+        [TestMethod]
+        public void UpdateIntakeRmc_NoOrder_ReturnNotFound()
+        {
+            var orderId = "1";
+
+            Order order = null;
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+
+            var dto = new OrdersTransfereeIntakeRmcDto() { Id = orderId };
+
+            var result = _controller.UpdateIntakeRmc(dto) as IHttpActionResult;
+            result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
+        }
+
+
+        [TestMethod]
+        public void InsertPet_ValidOrder_ReturnOkWithNewPetId()
+        {
+            var orderId = "1";
+
+            Order order = new Order() { Id = orderId };
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+
+            var result = _controller.InsertPet(orderId) as IHttpActionResult;
+            result.Should().BeOfType<System.Web.Http.Results.OkNegotiatedContentResult<string>>();
+            order.Pets.Count.Should().Be(1);
+            ((OkNegotiatedContentResult<string>)result).Content.Should().NotBeNullOrEmpty();
+
+        }
+
+        [TestMethod]
+        public void InsertPet_NoOrder_ReturnNotFound()
+        {
+            var orderId = "1";
+            Order order = null;
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+
+            var result = _controller.InsertPet(orderId) as IHttpActionResult;
+            result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
+        }
+
+        [TestMethod]
+        public void DeletePet_ValidPet_ReturnOkWithPetDeleted()
+        {
+            var petId = "1";
+
+            Pet pet = new Pet() { Id = petId };
+            _mockPetsRepository.Setup(r => r.GetPetFor(_userId, petId)).Returns(pet);
+
+            var result = _controller.DeletePet(pet.Id) as IHttpActionResult;
+            result.Should().BeOfType<System.Web.Http.Results.OkResult>();
+            pet.Deleted.Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void DeletePet_NoPet_ReturnNotFound()
+        {
+            var petId = "1";
+
+            Pet pet = null;
+            _mockPetsRepository.Setup(r => r.GetPetFor(_userId, petId)).Returns(pet);
+
+            var result = _controller.DeletePet(petId) as IHttpActionResult;
+            result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
+        }
+
+        [TestMethod]
+        public void UpdateIntakeTempHousing_ValidDto_ReturnOk()
+        {
+            var orderId = "1";
+
+            Order order = new Order() { Id = orderId };
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+
+            var dto = new OrdersTransfereeIntakeTempHousingDto() { Id = orderId };
+
+            var result = _controller.UpdateIntakeTempHousing(dto) as IHttpActionResult;
+            result.Should().BeOfType<System.Web.Http.Results.OkResult>();
+        }
+
+        [TestMethod]
+        public void UpdateIntakeTempHousing_ValidOrder_ReturnNotFound()
+        {
+            var orderId = "1";
+
+            Order order = null;
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+
+            var dto = new OrdersTransfereeIntakeTempHousingDto() { Id = orderId };
+
+            var result = _controller.UpdateIntakeTempHousing(dto) as IHttpActionResult;
+            result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
+        }
+
+        [TestMethod]
+        public void UpsertIntakeHomeFinding_ValidDto_ReturnOk()
+        {
+            var orderId = "1";
+
+            Order order = new Order() { Id = orderId };
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+
+            var dto = new OrdersTransfereeIntakeHomeFindingDto() { Id = orderId };
+
+            var result = _controller.UpsertIntakeHomeFinding(dto) as IHttpActionResult;
+            result.Should().BeOfType<System.Web.Http.Results.OkResult>();
+        }
+
+        [TestMethod]
+        public void UpsertIntakeHomeFinding_ValidOrder_ReturnNotFound()
+        {
+            var orderId = "1";
+
+            Order order = null;
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+
+            var dto = new OrdersTransfereeIntakeHomeFindingDto() { Id = orderId };
+
+            var result = _controller.UpsertIntakeHomeFinding(dto) as IHttpActionResult;
+            result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
+        }
+
+        [TestMethod]
+        public void UpdateIntakeLease_ValidDto_ReturnOk()
+        {
+            var orderId = "1";
+
+            Order order = new Order() { Id = orderId };
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+
+            var dto = new OrdersTransfereeIntakeLeaseDto() { Id = orderId };
+
+            var result = _controller.UpdateIntakeLease(dto) as IHttpActionResult;
+            result.Should().BeOfType<System.Web.Http.Results.OkResult>();
+        }
+
+        [TestMethod]
+        public void UpdateIntakeLease_ValidOrder_ReturnNotFound()
+        {
+            var orderId = "1";
+
+            Order order = null;
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+
+            var dto = new OrdersTransfereeIntakeLeaseDto() { Id = orderId };
+
+            var result = _controller.UpdateIntakeLease(dto) as IHttpActionResult;
+            result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
+        }
+
+        [TestMethod]
+        public void UpdateIntakeRelocation_ValidDto_ReturnOk()
+        {
+            var orderId = "1";
+
+            Order order = new Order() { Id = orderId };
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+
+            var dto = new OrdersTransfereeIntakeRelocationDto() { Id = orderId };
+
+            var result = _controller.UpdateIntakeRelocation(dto) as IHttpActionResult;
+            result.Should().BeOfType<System.Web.Http.Results.OkResult>();
+        }
+
+        [TestMethod]
+        public void UpdateIntakeRelocation_ValidOrder_ReturnNotFound()
+        {
+            var orderId = "1";
+
+            Order order = null;
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+
+            var dto = new OrdersTransfereeIntakeRelocationDto() { Id = orderId };
+
+            var result = _controller.UpdateIntakeRelocation(dto) as IHttpActionResult;
+            result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
+        }
     }
 }

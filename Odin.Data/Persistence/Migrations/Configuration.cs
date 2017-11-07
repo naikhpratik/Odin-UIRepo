@@ -77,9 +77,9 @@ namespace Odin.Data.Persistence.Migrations
                     });
                     context.Orders.Add(orders[i]);
 
-                    var rent = RentBuilder.New();
-                    rent.Id = orders[i].Id;
-                    context.Rents.Add(rent);
+                    var homeFinding = HomeFindingBuilder.New();
+                    homeFinding.Id = orders[i].Id;
+                    context.HomeFindings.Add(homeFinding);
 
                     orders[i].Children.Add(ChildBuilder.New());
                     orders[i].Children.Add(ChildBuilder.New());

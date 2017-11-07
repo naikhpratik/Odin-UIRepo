@@ -7,13 +7,13 @@ namespace Odin.Data.Persistence.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddHomeFindingPropertyJoin : IMigrationMetadata
+    public sealed partial class RemovedDuplicateArrivalDate : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddHomeFindingPropertyJoin));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(RemovedDuplicateArrivalDate));
         
         string IMigrationMetadata.Id
         {
-            get { return "201711011848429_AddHomeFindingPropertyJoin"; }
+            get { return "201711022044450_RemovedDuplicateArrivalDate"; }
         }
         
         string IMigrationMetadata.Source

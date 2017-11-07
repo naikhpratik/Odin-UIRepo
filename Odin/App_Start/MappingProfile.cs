@@ -25,13 +25,12 @@ namespace Odin
             CreateMap<Child, ChildViewModel>();
             CreateMap<Pet, PetViewModel>();
             CreateMap<ServiceType, ServiceTypeViewModel>();
-            CreateMap<Rent, RentViewModel>();
+            CreateMap<HomeFinding, HomeFindingViewModel>();
 
             /*Order - Index*/
             CreateMap<Order, OrdersIndexViewModel>();
             CreateMap<Order, OrdersTransfereeViewModel>();
-
-            CreateMap<Rent, HousingViewModel>();
+            
                 
             /*DTO Mappings*/
 
@@ -74,9 +73,10 @@ namespace Odin
             CreateMap<OrdersTransfereeIntakeServiceDto, Service>();
             CreateMap<OrdersTransfereeIntakeRmcDto, Order>();
             CreateMap<OrdersTransfereeIntakeTempHousingDto, Order>();
-            CreateMap<OrdersTransfereeIntakeRentDto, Rent>();
+            CreateMap<OrdersTransfereeIntakeHomeFindingDto, HomeFinding>();
             CreateMap<OrdersTransfereeIntakeLeaseDto, Order>();
             CreateMap<OrdersTransfereeDetailsServiceDto, Service>();
+            CreateMap<OrdersTransfereeIntakeRelocationDto, Order>();
         }
     }
 }

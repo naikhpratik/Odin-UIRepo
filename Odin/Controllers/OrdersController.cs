@@ -40,7 +40,7 @@ namespace Odin.Controllers
         {
             var order = _unitOfWork.Orders.GetOrderById(id);
 
-            HousingViewModel viewModel = _mapper.Map<Rent, HousingViewModel>(order.Rent);
+            HousingViewModel viewModel = _mapper.Map<HomeFinding, HousingViewModel>(order.HomeFinding);
             viewModel.NumberOfPets = order.Pets.Count();
             int numKids = order.Children == null ? 0 : order.Children.Count();
             if (numKids == 0 && order.SpouseName == "")

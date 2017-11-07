@@ -120,7 +120,7 @@
     <Compile Include="Builders\PetBuilder.cs" />
     <Compile Include="Builders\ProgramManagerDtoBuilder.cs" />
     <Compile Include="Builders\PropertyBuilder.cs" />
-    <Compile Include="Builders\RentBuilder.cs" />
+    <Compile Include="Builders\HomeFindingBuilder.cs" />
     <Compile Include="Builders\TransfereeBuilder.cs" />
     <Compile Include="Builders\OrderBuilder.cs" />
     <Compile Include="Builders\OrderDtoBuilder.cs" />
@@ -137,7 +137,8 @@
     <Compile Include="Core\Dtos\OrdersTransfereeIntakeDestinationDto.cs" />
     <Compile Include="Core\Dtos\OrdersTransfereeIntakeLeaseDto.cs" />
     <Compile Include="Core\Dtos\OrdersTransfereeIntakeOriginDto.cs" />
-    <Compile Include="Core\Dtos\OrdersTransfereeIntakeRentDto.cs" />
+    <Compile Include="Core\Dtos\OrdersTransfereeIntakeRelocationDto.cs" />
+    <Compile Include="Core\Dtos\OrdersTransfereeIntakeHomeFindingDto.cs" />
     <Compile Include="Core\Dtos\OrdersTransfereeIntakeRmcDto.cs" />
     <Compile Include="Core\Dtos\OrdersTransfereeIntakeServiceDto.cs" />
     <Compile Include="Core\Dtos\OrdersTransfereeIntakeServicesDto.cs" />
@@ -169,7 +170,7 @@
     <Compile Include="Core\Models\Manager.cs" />
     <Compile Include="Core\Models\OwnershipType.cs" />
     <Compile Include="Core\Models\Pet.cs" />
-    <Compile Include="Core\Models\Rent.cs" />
+    <Compile Include="Core\Models\HomeFinding.cs" />
     <Compile Include="Core\Models\SEDropDownType.cs" />
     <Compile Include="Core\Models\Service.cs" />
     <Compile Include="Core\Models\ServiceCategory.cs" />
@@ -205,7 +206,7 @@
     <Compile Include="Persistence\ConsultantsRepository.cs" />
     <Compile Include="Persistence\DepositTypesRepository.cs" />
     <Compile Include="Persistence\EntityConfigurations\OrderConfiguration.cs" />
-    <Compile Include="Persistence\EntityConfigurations\RentConfiguration.cs" />
+    <Compile Include="Persistence\EntityConfigurations\HomeFindingConfiguration.cs" />
     <Compile Include="Persistence\HousingTypesRepository.cs" />
     <Compile Include="Persistence\IApplicationDbContext.cs" />
     <Compile Include="Persistence\ManagersRepository.cs" />
@@ -401,19 +402,31 @@
     <Compile Include="Persistence\Migrations\201710312109349_MergeAddNewEtlFields.Designer.cs">
       <DependentUpon>201710312109349_MergeAddNewEtlFields.cs</DependentUpon>
     </Compile>
-    <Compile Include="Persistence\Migrations\201711011841252_AddPropertyModel.cs" />
-    <Compile Include="Persistence\Migrations\201711011841252_AddPropertyModel.Designer.cs">
-      <DependentUpon>201711011841252_AddPropertyModel.cs</DependentUpon>
+    <Compile Include="Persistence\Migrations\201711021336284_ChangeRentTableToHomeFinding.cs" />
+    <Compile Include="Persistence\Migrations\201711021336284_ChangeRentTableToHomeFinding.Designer.cs">
+      <DependentUpon>201711021336284_ChangeRentTableToHomeFinding.cs</DependentUpon>
     </Compile>
-    <Compile Include="Persistence\Migrations\201711011848429_AddHomeFindingPropertyJoin.cs" />
-    <Compile Include="Persistence\Migrations\201711011848429_AddHomeFindingPropertyJoin.Designer.cs">
-      <DependentUpon>201711011848429_AddHomeFindingPropertyJoin.cs</DependentUpon>
+    <Compile Include="Persistence\Migrations\201711021822440_AddedPreTripNotes.cs" />
+    <Compile Include="Persistence\Migrations\201711021822440_AddedPreTripNotes.Designer.cs">
+      <DependentUpon>201711021822440_AddedPreTripNotes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201711022044450_RemovedDuplicateArrivalDate.cs" />
+    <Compile Include="Persistence\Migrations\201711022044450_RemovedDuplicateArrivalDate.Designer.cs">
+      <DependentUpon>201711022044450_RemovedDuplicateArrivalDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201711061758565_ChangeTriggerOnHomeFindingTable.cs" />
+    <Compile Include="Persistence\Migrations\201711061758565_ChangeTriggerOnHomeFindingTable.Designer.cs">
+      <DependentUpon>201711061758565_ChangeTriggerOnHomeFindingTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201711061818328_MergedInTriggerUpdateFromMaster.cs" />
+    <Compile Include="Persistence\Migrations\201711061818328_MergedInTriggerUpdateFromMaster.Designer.cs">
+      <DependentUpon>201711061818328_MergedInTriggerUpdateFromMaster.cs</DependentUpon>
     </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\NumberOfBathroomsTypesRepository.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
     <Compile Include="Persistence\PetsRepository.cs" />
-    <Compile Include="Persistence\RentsRepository.cs" />
+    <Compile Include="Persistence\HomeFindingsRepository.cs" />
     <Compile Include="Persistence\ServicesRepository.cs" />
     <Compile Include="Persistence\ServiceTypesRepository.cs" />
     <Compile Include="Persistence\TransfereesRepository.cs" />
@@ -574,11 +587,20 @@
     <EmbeddedResource Include="Persistence\Migrations\201710312109349_MergeAddNewEtlFields.resx">
       <DependentUpon>201710312109349_MergeAddNewEtlFields.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Persistence\Migrations\201711011841252_AddPropertyModel.resx">
-      <DependentUpon>201711011841252_AddPropertyModel.cs</DependentUpon>
+    <EmbeddedResource Include="Persistence\Migrations\201711021336284_ChangeRentTableToHomeFinding.resx">
+      <DependentUpon>201711021336284_ChangeRentTableToHomeFinding.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Persistence\Migrations\201711011848429_AddHomeFindingPropertyJoin.resx">
-      <DependentUpon>201711011848429_AddHomeFindingPropertyJoin.cs</DependentUpon>
+    <EmbeddedResource Include="Persistence\Migrations\201711021822440_AddedPreTripNotes.resx">
+      <DependentUpon>201711021822440_AddedPreTripNotes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711022044450_RemovedDuplicateArrivalDate.resx">
+      <DependentUpon>201711022044450_RemovedDuplicateArrivalDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711061758565_ChangeTriggerOnHomeFindingTable.resx">
+      <DependentUpon>201711061758565_ChangeTriggerOnHomeFindingTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711061818328_MergedInTriggerUpdateFromMaster.resx">
+      <DependentUpon>201711061818328_MergedInTriggerUpdateFromMaster.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
