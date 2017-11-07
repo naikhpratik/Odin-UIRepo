@@ -49,7 +49,7 @@ namespace Odin.Data.Persistence
         {
             modelBuilder.Configurations.Add(new OrderConfiguration());
             modelBuilder.Configurations.Add(new HomeFindingConfiguration());
-            
+
             //modelBuilder.Entity<Child>()
             //    .Map(m => m.Requires("Deleted").HasValue(false))
             //    .Ignore(m => m.Deleted);

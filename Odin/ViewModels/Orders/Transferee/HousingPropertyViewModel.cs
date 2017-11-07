@@ -49,6 +49,5 @@ namespace Odin.ViewModels.Orders.Transferee
 
         //[Display(Name = "Property\nComments:")]
         //public IEnumerable<string> Comments { get; set; }
-
     }
 }

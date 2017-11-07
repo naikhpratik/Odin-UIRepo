@@ -65,7 +65,7 @@ namespace Odin.ViewModels.Orders.Transferee
                 {
                    return (hasSpouse ? "Yes":"No") + " / " + ChildrenCount.ToString();
                 }
-                   
+
                 return null;
             }
         }

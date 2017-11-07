@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Web;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Web;
 using System.Web.Mvc;
 
-    public static class DatePickerHelper
+public static class DatePickerHelper
 {
         //For calling the helper that takes a model as a parameter                
         //use the following code    
@@ -26,7 +26,7 @@ using System.Web.Mvc;
             return html;
         }
 
-        public static IHtmlString DatePicker(this HtmlHelper htmlhelper, string clss, string name)
+        public static IHtmlString DatePicker(this HtmlHelper htmlhelper, string clss, string name, bool includePlaceHolder = true)
         {
             string icon = "calendar";
             string wid = "100%";
@@ -46,7 +46,11 @@ using System.Web.Mvc;
             tagInput.Attributes.Add("type", "text");
             tagInput.Attributes.Add("name", name);
             tagInput.Attributes.Add("style", "display:block;width:85%");
-            tagInput.Attributes.Add("placeholder", "Enter " + clss + " or hit " + icon);
+
+            if (includePlaceHolder)
+            {
+                tagInput.Attributes.Add("placeholder", "Enter " + clss + " or hit " + icon);
+            }
             tagInput.Attributes.Add("data-date-today-highlight", "true");
             tagInput.Attributes.Add("data-date-today-btn", "true");
         
@@ -68,7 +72,7 @@ using System.Web.Mvc;
             return html;
         }
 
-        public static IHtmlString DatePicker(this HtmlHelper htmlHelper, string clss, string name, DateTime value)
+        public static IHtmlString DatePicker(this HtmlHelper htmlHelper, string clss, string name, DateTime value, bool includePlaceHolder = true)
         {
             if (String.IsNullOrEmpty(clss) || String.IsNullOrEmpty(name))
                 throw new ArgumentNullException("helper");
@@ -91,7 +95,11 @@ using System.Web.Mvc;
             tagInput.AddCssClass("form-control");            
             tagInput.Attributes.Add("type", "text");
             tagInput.Attributes.Add("style", "display:block;width:85%");
-            tagInput.Attributes.Add("placeholder", "Enter " + clss + " or hit "+icon);
+
+            if (includePlaceHolder)
+            {
+                tagInput.Attributes.Add("placeholder", "Enter " + clss + " or hit " + icon);
+            }
             tagInput.Attributes.Add("data-date-today-highlight", "true");
             tagInput.Attributes.Add("data-date-today-btn", "true");
             tagInput.Attributes.Add("value", value.ToString("yyyy-MM-dd"));
@@ -159,6 +167,14 @@ using System.Web.Mvc;
         HtmlString html = new HtmlString(res);
         return html;
     }
+
+    public static IHtmlString DatePicker(this HtmlHelper htmlHelper, string clss, string name, DateTime? dateValue)
+    {
+        return dateValue.HasValue
+            ? DatePicker(htmlHelper, clss, name, dateValue.Value, false)
+            : DatePicker(htmlHelper, clss, name, false);
+    }
+    
 
     private static string buildTags(string name, IDictionary<string, object> validationAttributes)
         {

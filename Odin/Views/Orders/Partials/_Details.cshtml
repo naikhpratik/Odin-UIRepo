@@ -9,6 +9,36 @@
     <div class="details-block">
         <div class="row details-header">
             <P>
+                File Details:
+            </P>
+        </div>
+        <div class="row details-row">
+            <div class="col-sm-3 details-col">
+                <label>Manager:</label>
+                <span>@Model.ProgramManager.FullName</span>
+            </div>
+            <div class="col-sm-3 details-col">
+                <label>Manager Email:</label>
+                <span>@Model.ProgramManager.Email</span>
+            </div>
+            <div class="col-sm-3 details-col">
+                <label>Manager #:</label>
+                <span> @String.Format("{0:###'.'###'.'####}", double.Parse(@Model.ProgramManager.PhoneNumber))</span>
+            </div>
+            <div class="col-sm-3 details-col">
+                <label>SE Number:</label>
+                <span>@Model.ProgramManager.SeContactUid</span>
+            </div>
+            <div class="col-sm-3 details-col">
+                <label>Client Number:</label>
+                <span>@(Model.ClientFileNumber != null ? Model.ClientFileNumber.ToString() : "TBD")</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="details-block">
+        <div class="row details-header">
+            <P>
                 Important Dates:
             </P>
         </div>
@@ -42,70 +72,41 @@
     </div>
     @if (@Model.HomeFinding != null)
     {
-    <div class="details-block">
-        <div class="row details-header">
-            <P>
-                Housing Details:
-            </P>
-        </div>
-       <div class="row details-row">
-        <div class="col-sm-3 details-col">
-            <label>Monthly Budget:</label>
-            <span>@string.Format("{0: $#,###.00}", @Model.HomeFinding.HousingBudget)</span>
-        </div>
-        <div class="col-sm-3 details-col">
-            <label>Housing:</label>
-            <span>@(Model.HomeFinding.HousingType != null ? Model.HomeFinding.HousingType.ToString() : "TBD")</span>
-        </div>
-        <div class="col-sm-3 details-col">
-            <label>School District:</label>
-            <span>@(Model.SchoolDistrict != null ? Model.SchoolDistrict : "TBD") </span>
-        </div>
+        <div class="details-block">
+            <div class="row details-header">
+                <P>
+                    Housing Details:
+                </P>
+            </div>
+            <div class="row details-row">
+                <div class="col-sm-3 details-col">
+                    <label>Monthly Budget:</label>
+                    <span>@string.Format("{0: $#,###.00}", @Model.HomeFinding.HousingBudget)</span>
+                </div>
+                <div class="col-sm-3 details-col">
+                    <label>Housing:</label>
+                    <span>@(Model.HomeFinding.HousingType != null ? Model.HomeFinding.HousingType.ToString() : "TBD")</span>
+                </div>
+                <div class="col-sm-3 details-col">
+                    <label>School District:</label>
+                    <span>@(Model.SchoolDistrict != null ? Model.SchoolDistrict : "TBD") </span>
+                </div>
 
-        <div class="col-sm-3 details-col">
-            <label>BD/BA:</label>
-            <span>@Model.HomeFinding.NumberOfBedrooms.ToString()/@(Model.HomeFinding.NumberOfBathrooms != null ? Model.HomeFinding.NumberOfBathrooms.ToString() : "TBD")</span>
+                <div class="col-sm-3 details-col">
+                    <label>BD/BA:</label>
+                    <span>@Model.HomeFinding.NumberOfBedrooms.ToString()/@(Model.HomeFinding.NumberOfBathrooms != null ? Model.HomeFinding.NumberOfBathrooms.ToString() : "TBD")</span>
+                </div>
+                <div class="col-sm-3 details-col">
+                    <label>Sq.Ft:</label>
+                    <span>@string.Format("{0: #,###.00}", @Model.HomeFinding.SquareFootage)</span>
+                </div>
+                <div class="col-sm-3 details-col">
+                    <label>Rent or Own:</label>
+                    <span>@Model.HomeFinding.OwnershipType</span>
+                </div>
+            </div>
         </div>
-        <div class="col-sm-3 details-col">
-            <label>Sq.Ft:</label>
-            <span>@string.Format("{0: #,###.00}", @Model.HomeFinding.SquareFootage)</span>
-        </div>
-        <div class="col-sm-3 details-col">
-            <label>Rent or Own:</label>
-            <span>@Model.HomeFinding.OwnershipType</span>
-        </div>
-    </div>
-    </div>
     }
-    <div class="details-block">
-        <div class="row details-header">
-            <P>
-                Other Details:
-            </P>
-        </div>
-        <div class="row details-row">
-            <div class="col-sm-3 details-col">
-                <label>Manager:</label>
-                <span>@Model.ProgramManager.FullName</span>
-            </div>
-            <div class="col-sm-3 details-col">
-                <label>Manager Email:</label>
-                <span>@Model.ProgramManager.Email</span>
-            </div>
-            <div class="col-sm-3 details-col">
-                <label>Manager #:</label>
-                <span> @String.Format("{0:###'.'###'.'####}", double.Parse(@Model.ProgramManager.PhoneNumber))</span>
-            </div>
-            <div class="col-sm-3 details-col">
-                <label>SE Number:</label>
-                <span>@Model.ProgramManager.SeContactUid</span>
-            </div>
-            <div class="col-sm-3 details-col">
-                <label>Client Number:</label>
-                <span>@(Model.ClientFileNumber != null ? Model.ClientFileNumber.ToString() : "TBD")</span>
-            </div>
-        </div>
-    </div>
 
     <hr />
     <div class="details-blocks" data-block="services">
@@ -118,7 +119,7 @@
             </p>
             <span class="details-blue">Please fill out any items that are not already auto-generated that could aid in the help of your clients placement.</span>
         </div>
-    
+
         <hr />
         <div class="details-block" id="scheduledServices">
             <div class="row details-row">
@@ -134,45 +135,45 @@
                 <div class="col-sm-3 details-col">
                     <H5>Completed Date:</H5>
                 </div>
-                
+
                 <div class="col-sm-3 details-col">
                     <H5>Notes:</H5>
                 </div>
             </div>
 
-                @for (int i = 0; i < Model.Services.Count(); i++)
+            @for (int i = 0; i < Model.Services.Count(); i++)
+            {
+                if (Model.Services.ElementAt(i).Selected)
                 {
-                    if (Model.Services.ElementAt(i).Selected)
-                    {
-                <div class="row details-row" data-entity-id="@Model.Services.ElementAt(i).Id" data-entity-collection="services">
-                    <div class="col-sm-3 details-col">
-                        <label>@Model.Services.ElementAt(i).Name.</label>
+                    <div class="row details-row" data-entity-id="@Model.Services.ElementAt(i).Id" data-entity-collection="services">
+                        <div class="col-sm-3 details-col">
+                            <label>@Model.Services.ElementAt(i).Name.</label>
+                        </div>
+                        <div class="col-sm-3 details-col">
+                            @Html.DatePicker("date", "ScheduledDate", Model.Services.ElementAt(i).ScheduledDateDisplay)
+                        </div>
+                        <div class="col-sm-3 details-col">
+                            @Html.DatePicker("time", "ScheduledTime", Model.Services.ElementAt(i).ScheduledTimeDisplay)
+                            <div class="text-danger" style="display:none;" data-entity-id="@Model.Services.ElementAt(i).Id" data-valmsg-replace="true"><div for="ScheduledTime">Schedule time is required.</div></div>
+                        </div>
+                        <div class="col-sm-3 details-col">
+                            @Html.DatePicker("date", "CompletedDate", Model.Services.ElementAt(i).CompletedDateDisplay)
+                        </div>
+                        <div class="col-sm-3 details-col">
+                            <p>@Html.TextAreaFor(s => @Model.Services.ElementAt(i).Notes, new { @class = "form-control intake-service-input" })</p>
+                        </div>
                     </div>
-                    <div class="col-sm-3 details-col">
-                        @Html.DatePicker("date", "ScheduledDate", Model.Services.ElementAt(i).ScheduledDateDisplay)
-                    </div>
-                    <div class="col-sm-3 details-col">
-                        @Html.DatePicker("time", "ScheduledTime", Model.Services.ElementAt(i).ScheduledTimeDisplay)
-                        <div class="text-danger" style="display:none;" data-entity-id="@Model.Services.ElementAt(i).Id" data-valmsg-replace="true" ><div for="ScheduledTime">Schedule time is required.</div></div>
-                    </div>
-                    <div class="col-sm-3 details-col">
-                        @Html.DatePicker("date", "CompletedDate", Model.Services.ElementAt(i).CompletedDateDisplay)
-                    </div>                        
-                    <div class="col-sm-3 details-col">
-                        <p>@Html.TextAreaFor(s => @Model.Services.ElementAt(i).Notes, new { @class = "form-control intake-service-input" })</p>
-                    </div>
-                </div>
-                    }
                 }
-           
+            }
+
         </div>
-    
+
     </div>
 </div>
 @Styles.Render("~/Styling/details")
 
 <script>
-    $(document).ready(function () {        
+    $(document).ready(function () {
         TransfereeDetailsController.init();
     });
 </script>

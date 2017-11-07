@@ -3,52 +3,62 @@
     Layout = "~/Views/Shared/_Common.cshtml";
 }
 
-<div id="transferee" class="row">
-    <div class="col-md-2 transferee-sidenav">
-        <img src="~/Content/Images/icn_person.png"/>
-        <p>Victoria A. Sporer</p>
-        <span class="hdr">Domestic | VIP</span><br />
-        <span class="hdr">Acme</span><br />
-        <span class="hdr">Road Runner LLC.</span>
-        <ul>
-            <li class="unselectable">&nbsp;</li>
-            <li class="item selected" data-panel="intake"><img src="~/Content/Images/icn_intake.png"/><span>Intake</span></li>
-            <li class="item" data-panel="details"><img src="~/Content/Images/icn_details.png"/><span>Details</span></li>
-            <li class="item" data-panel="housing"><img src="~/Content/Images/icn_housing.png"/><span>Housing</span></li>
-            <li class="item" data-panel="history"><img src="~/Content/Images/icn_history.png"/><span>History</span></li>
-            <li class="unselectable">&nbsp;</li>
-            <li class="unselectable">&nbsp;</li>
-            <li class="item" data-panel="messages"><img src="~/Content/Images/icn_internal_messages.png"/><span>Messages</span></li>
-            <li class="item" data-panel="itinerary"><img src="~/Content/Images/icn_internal_itinerary.png"/><span>Itinerary</span></li>
-        </ul>
-    </div>
-    <div class="col-md-10 col-md-offset-2">
-        <div id="orderContainer" class="row" style="overflow-x: hidden;">
-            @Html.Partial("~/Views/Orders/Partials/_Intake.cshtml")
-            @*@Html.Partial("~/Views/Orders/Partials/_Details.cshtml")
-            @Html.Partial("~/Views/Orders/Partials/_Housing.cshtml")
-            @Html.Partial("~/Views/Orders/Partials/_History.cshtml")
-            @Html.Partial("~/Views/Orders/Partials/_Messages.cshtml")
-            @Html.Partial("~/Views/Orders/Partials/_Itinerary.cshtml")*@
-        </div>
-    </div>
-</div>
+    <header class="container-fluid">
+        <nav id="transfereeSideNav">
+            <div class="transfereeSideNav__person">
+                <img class="person" src="~/Content/Images/icn_person.png"/>
+                <p class="eeName">Victoria A. Sporer</p>
+                <p>Domestic | VIP</p>
+                <p>Acme</p>
+                <p>Road Runner LLC.</p>
+            </div>
+            <hr class="transfereeSideNav__rule"/>
+            <ul class="transfereeSideNav__items">
+                <li class="item selected" data-panel="intake">
+                    <img src="~/Content/Images/icn_intake.png" />
+                    <label>Intake</label>
+                </li>
+                <li class="item" data-panel="details">
+                    <img src="~/Content/Images/icn_details.png" />
+                    <label>Details</label>
+                </li>
+                <li class="item" data-panel="housing">
+                    <img src="~/Content/Images/icn_housing.png" />
+                    <label>Housing</label>
+                </li>
+                <li class="item" data-panel="history">
+                    <img src="~/Content/Images/icn_history.png" />
+                    <label>History</label>
+                </li>
+                <hr class="transfereeSideNav__rule" />
+                <li class="item" data-panel="messages">
+                    <img src="~/Content/Images/icn_internal_messages.png" />
+                    <label>Messages</label>
+                </li>
+                <li class="item" data-panel="itinerary">
+                    <img src="~/Content/Images/icn_internal_itinerary.png" />
+                    <label>Itinerary</label>
+                </li>
+            </ul>
+        </nav>
+    </header>
 
+    <div class="container" id="orderContainer">
+        @Html.Partial("~/Views/Orders/Partials/_Intake.cshtml")
+    </div>
 
 @section scripts
 {
-    
     @Styles.Render("~/Styling/transferee")
     @Scripts.Render("~/Scripts/transferee")
-    
+
     <script>
-        var currentOrderId = '@Model.Id';
+            var currentOrderId = '@Model.Id';
 
-        $(document).ready(function () {
-            OrdersPageController.TransfereeInit();
-            TransfereeIntakeController.init();
-            TransfereeDetailsController.init();
-        });
+            $(document).ready(function () {
+                OrdersPageController.TransfereeInit();
+                TransfereeIntakeController.init();
+                TransfereeDetailsController.init();
+            });
     </script>
-
 }

@@ -1,352 +1,210 @@
 ﻿@model Odin.ViewModels.Orders.Transferee.HousingViewModel
 
-<div id="housing" class="frame">
+<div class="container-fluid" id="housing">
+
     <div class="row">
-        <div class="col-md-6">
-            <p id="caption">Housing Summary</p>
-            <div class="col-md-5">
-                <div>
-                    <p>@Html.DisplayNameFor(model => model.HousingBudget)</p>
-                    <span>@Html.DisplayFor(model => model.HousingBudget)</span>
-                </div>
-                <div>
-                    <p>@Html.DisplayNameFor(model => model.NumberOfBedrooms)</p>
-                    <span>@Html.DisplayFor(model => model.NumberOfBedrooms)</span>
-                </div>
-                <div>
-                    <p>@Html.DisplayNameFor(model => model.PetsCount)</p>
-                    <span>@Html.DisplayFor(model => model.PetsCount)</span>
-                </div>
-                <div>
-                    <p>@Html.DisplayNameFor(model => model.TransportationTypeName)</p>
-                    <span>@Html.DisplayFor(model => model.TransportationTypeName)</span>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div>
-                    <p>@Html.DisplayNameFor(model => model.HousingTypeName)</p>
-                    <span>@Html.DisplayFor(model => model.HousingTypeName)</span>
-                </div>
-                <div>
-                    <p>@Html.DisplayNameFor(model => model.NumberOfBathroomsName)</p>
-                    <span>@Html.DisplayFor(model => model.NumberOfBathroomsName)</span>
-                </div>
-                <div>
-                    <p>@Html.DisplayNameFor(model => model.MaxCommute)</p>
-                    <span>@Html.DisplayFor(model => model.MaxCommute)</span>
-                </div>
-                <div>
-                    <p>@Html.DisplayNameFor(model => model.SpouseAndKids)</p>
-                    <span>@Html.DisplayFor(model => model.SpouseAndKids)</span>
-                </div>
-            </div>
+        <div class="col-md-4">
+            <h1 class="sectionTitle">Housing Summary</h1>
+            <ul class="row sectionList">
+                <li class="col-md-6">
+                    <label>@Html.DisplayNameFor(model => model.HousingBudget)</label>
+                    <p>@Html.DisplayFor(model => model.HousingBudget)</p>
+                </li>
+                <li class="col-md-6">
+                    <label>@Html.DisplayNameFor(model => model.NumberOfBedrooms)</label>
+                    <p>@Html.DisplayFor(model => model.NumberOfBedrooms)</p>
+                </li>
+                <li class="col-md-6">
+                    <label>@Html.DisplayNameFor(model => model.NumberOfPets)</label>
+                    <p>@Html.DisplayFor(model => model.NumberOfPets) </p>
+                </li>
+                <li class="col-md-6">
+                    <label>@Html.DisplayNameFor(model => model.TransportationTypeString)</label>
+                    <p>@Html.DisplayFor(model => model.TransportationTypeString)</p>
+                </li>
+                <li class="col-md-6">
+                    <label>@Html.DisplayNameFor(model => model.HousingTypeString)</label>
+                    <p>@Html.DisplayFor(model => model.HousingTypeString)</p>
+                </li>
+                <li class="col-md-6">
+                    <label>@Html.DisplayNameFor(model => model.NumberOfBathroomsString)</label>
+                    <p>@Html.DisplayFor(model => model.NumberOfBathroomsString)</p>
+                </li>
+                <li class="col-md-6">
+                    <label>@Html.DisplayNameFor(model => model.MaxCommute)</label>
+                    <p>@Html.DisplayFor(model => model.MaxCommute)</p>
+                </li>
+                <li class="col-md-6">
+                    <label>@Html.DisplayNameFor(model => model.SpouceAndKids)</label>
+                    <p>@Html.DisplayFor(model => model.SpouceAndKids)</p>
+                </li>
+            </ul>
         </div>
-        <div class="col-md-6">
-            <img src="~/Content/Images/map_placeholder.png"/>
+        <div class="col-md-8 mapWrapper">
+            <img src="~/Content/Images/map_placeholder.png" />
         </div>
     </div>
-    
-    <div class="row notfirst">
-        <div>
-            <!--
+
+    <hr />
+    <div class="row" id="propertiesFilterAdd">
+
+        <div class="col-md-1">
             <span>Filter:</span>
-            <div>
+        </div>
+        <div class="col-md-9">
                 <input type="radio" name="choice" value="new"><span>New</span>
                 <input type="radio" name="choice" value="like"><span>Like</span>
                 <input type="radio" name="choice" value="dislike"><span>Dislike</span>
-            </div>
-            -->
         </div>
-        <div id="add">
+        <div id="add" class="col-md-2">
             <img src="~/Content/Images/btn_add_home.png" />
             <span>Add Property</span>
         </div>
+
     </div>
-    <div class="row notfirst">
-        <div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>
-                            <p>Location</p>
-                            <p>Photos:</p>
-                        </th>
-                        <th>
-                            <p>Address:</p>
-                            <p>&nbsp;</p>
-                        </th>
-                        <th>
-                            <p>Available or Not</p>
-                            <p>Date:</p>
-                        </th>
-                        <th>
-                            <p>BD | BA</p>
-                            <p>Rent | Sq.Ft:</p>
-                        </th>
-                        <th>
-                            <p>Schedule</p>
-                            <p>a Viewing:</p>
-                        </th>
-                        <th>
-                            <p>Like or</p>
-                            <p>Dislike:</p>
-                        </th>
-                        <th>
-                            <p>Property</p>
-                            <p>Comments:</p>
-                        </th>
-                </tr>
-                </thead>
-                <tbody>
-                    <tr sel="new">
-                        <td>
+    <hr />
+    <div id="properties" class="row">
+
+            <div id="propertiesHeader" class="row">
+                <div class="col-sm-2">
+                    <p>@Html.DisplayNameFor(model => model.Properties.ElementAt(0).Photos)</p>
+                </div>
+                <div class="col-sm-2">
+                    <p>@Html.DisplayNameFor(model => model.Properties.ElementAt(0).Address)</p>
+                </div>
+                <div class="col-sm-2">
+                    <p>@Html.DisplayNameFor(model => model.Properties.ElementAt(0).Availability)</p>
+                </div>
+                <div class="col-sm-2">
+                    <p>@Html.DisplayNameFor(model => model.Properties.ElementAt(0).Specifications)</p>
+                </div>
+                <div class="col-sm-2">
+                    <p>@Html.DisplayNameFor(model => model.Properties.ElementAt(0).ViewingDateDisplay)</p>
+                </div>
+                <div class="col-sm-1">
+                    <p>@Html.DisplayNameFor(model => model.Properties.ElementAt(0).IsLike)</p>
+                </div>
+                <div class="col-sm-1">
+                    <p>@Html.DisplayNameFor(model => model.Properties.ElementAt(0).Comments)</p>
+                </div>
+            </div>
+
+                @for (int i = 0; i < Model.Properties.Count(); i++)
+                {
+                    <div class="row" sel="new">
+                        <div class="col-md-2">
                             <img class="location" src="~/Content/Images/popout_sml_img.png" />
-                        </td>
-                        <td>
-                            <p>1234 Meadow Rd</p>
-                            <p>Renton WA</p>
-                        </td>
-                        <td>
-                            <p>Available</p>
-                            <p>11/12/17</p>
-                        </td>
-                        <td>
-                            <p>2 | 2</p>
-                            <p>$3,200 | 1,300</p>
-                        </td>
-                        <td>
-                            <img src="~/Content/Images/icn_cal_B1.png" />
-                        </td>
-                        <td>
+                        </div>
+                        <div class="col-md-2">
+                            <p>@Html.DisplayFor(model => model.Properties.ElementAt(i).Address)</p>
+                        </div>
+                        <div class="col-md-2">
+                            <p>@Html.DisplayFor(model => model.Properties.ElementAt(i).Availability)</p>
+                        </div>
+                        <div class="col-md-2">
+                            <p>@Html.DisplayFor(model => model.Properties.ElementAt(i).Specifications)</p>
+                        </div>
+                        <div class="col-md-2">
+                            <p>@Html.DisplayFor(model => Html.DatePicker("date", "ViewingDate", model.Properties.ElementAt(i).ViewingDateDisplay))</p>
+                        </div>
+                        <div class="col-md-1">
                             <div class="likebtns">
-                                <img class="new" src="~/Content/Images/icn_ln_non_selected_like.png" />
-                                <img class="like noinit" src="~/Content/Images/icn_ln_selected_like.png" />
-                                <img class="dislike noinit" src="~/Content/Images/icn_ln_selected_dislike.png" />
+                                @if (Model.Properties.ElementAt(i).IsLike == false)
+                                {
+                                    <img class="dislike noinit" src="~/Content/Images/icn_ln_selected_dislike.png" />
+                                }
+                                else if (Model.Properties.ElementAt(i).IsLike == true)
+                                {
+                                    <img class="like noinit" src="~/Content/Images/icn_ln_selected_like.png" />
+                                }
+                                else
+                                {
+                                    <img class="new" src="~/Content/Images/icn_ln_non_selected_like.png" />
+                                }
                             </div>
-                        </td>
-                        <td>
+                        </div>
+                        <div class="col-md-1">
                             <div class="comments">
                                 <img class="comment" src="~/Content/Images/icn_chat_bubble.png" />
-                                <div class="notify-count">
-                                    <img src="~/Content/Images/icn_alert_circle.png" />
-                                    <span>03</span>
-                                </div>
+                                @if (Model.Properties.ElementAt(i).Comments.Count() > 0)
+                                {
+                                    <div class="notify-count">
+                                        <img src="~/Content/Images/icn_alert_circle.png" />
+                                        <span> Model.Properties.ElementAt(i).Comments.Count().ToString("##00") </span>
+                                    </div>
+                                }
                             </div>
-                        </td>
-                    </tr>
-                    <tr sel="new">
-                        <td>
-                            <img class="location" src="~/Content/Images/popout_sml_img.png" />
-                        </td>
-                        <td>
-                            <p>5252 Gala Cr.</p>
-                            <p>Ballard WA</p>
-                        </td>
-                        <td>
-                            <p>Available</p>
-                            <p>11/01/17</p>
-                        </td>
-                        <td>
-                            <p>3 | 2</p>
-                            <p>$1,800 | 950</p>
-                        </td>
-                        <td>
-                            <img src="~/Content/Images/icn_cal_B1.png" />
-                        </td>
-                        <td>
-                            <div class="likebtns">
-                                <img class="new" src="~/Content/Images/icn_ln_non_selected_like.png" />
-                                <img class="like noinit" src="~/Content/Images/icn_ln_selected_like.png" />
-                                <img class="dislike noinit" src="~/Content/Images/icn_ln_selected_dislike.png" />
-                            </div>
-                        </td>
-                        <td>
-                            <div class="comments">
-                                <img class="comment" src="~/Content/Images/icn_chat_bubble.png" />
-                                <div class="notify-count noinit">
-                                    <img src="~/Content/Images/icn_alert_circle.png" />
-                                    <span>00</span>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr sel="new">
-                        <td>
-                            <img class="location" src="~/Content/Images/popout_sml_img.png" />
-                        </td>
-                        <td>
-                            <p>6143 Asdar Rd</p>
-                            <p>Belltown WA</p>
-                        </td>
-                        <td>
-                            <p>Not</p>
-                            <p>Available</p>
-                        </td>
-                        <td>
-                            <p>1 | 1</p>
-                            <p>$1,200 | 750</p>
-                        </td>
-                        <td>
-                            <img src="~/Content/Images/icn_cal_B1.png" />
-                        </td>
-                        <td>
-                            <div class="likebtns">
-                                <img class="new" src="~/Content/Images/icn_ln_non_selected_like.png" />
-                                <img class="like noinit" src="~/Content/Images/icn_ln_selected_like.png" />
-                                <img class="dislike noinit" src="~/Content/Images/icn_ln_selected_dislike.png" />
-                            </div>
-                        </td>
-                        <td>
-                            <div class="comments">
-                                <img class="comment" src="~/Content/Images/icn_chat_bubble.png" />
-                                <div class="notify-count noinit">
-                                    <img src="~/Content/Images/icn_alert_circle.png" />
-                                    <span>00</span>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr sel="new">
-                        <td>
-                            <img class="location" src="~/Content/Images/popout_sml_img.png" />
-                        </td>
-                        <td>
-                            <p>5252 Meadowbrook</p>
-                            <p>Ballard WA</p>
-                        </td>
-                        <td>
-                            <p>Available</p>
-                            <p>11/12/17</p>
-                        </td>
-                        <td>
-                            <p>2 | 1.5</p>
-                            <p>$1,500 | 800</p>
-                        </td>
-                        <td>
-                            <img src="~/Content/Images/icn_cal_B1.png" />
-                        </td>
-                        <td>
-                            <div class="likebtns">
-                                <img class="new" src="~/Content/Images/icn_ln_non_selected_like.png" />
-                                <img class="like noinit" src="~/Content/Images/icn_ln_selected_like.png" />
-                                <img class="dislike noinit" src="~/Content/Images/icn_ln_selected_dislike.png" />
-                            </div>
-                        </td>
-                        <td>
-                            <div class="comments">
-                                <img class="comment" src="~/Content/Images/icn_chat_bubble.png" />
-                                <div class="notify-count">
-                                    <img src="~/Content/Images/icn_alert_circle.png" />
-                                    <span>01</span>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr sel="new">
-                        <td>
-                            <img class="location" src="~/Content/Images/popout_sml_img.png" />
-                        </td>
-                        <td>
-                            <p>1234 Meadow Rd</p>
-                            <p>Renton WA</p>
-                        </td>
-                        <td>
-                            <p>Not</p>
-                            <p>Available</p>
-                        </td>
-                        <td>
-                            <p>2 | 2</p>
-                            <p>$3,200 | 1,300</p>
-                        </td>
-                        <td>
-                            <img src="~/Content/Images/icn_cal_B1.png" />
-                        </td>
-                        <td>
-                            <div class="likebtns">
-                                <img class="new" src="~/Content/Images/icn_ln_non_selected_like.png" />
-                                <img class="like noinit" src="~/Content/Images/icn_ln_selected_like.png" />
-                                <img class="dislike noinit" src="~/Content/Images/icn_ln_selected_dislike.png" />
-                            </div>
-                        </td>
-                        <td>
-                            <div class="comments">
-                                <img class="comment" src="~/Content/Images/icn_chat_bubble.png" />
-                                <div class="notify-count noinit">
-                                    <img src="~/Content/Images/icn_alert_circle.png" />
-                                    <span>00</span>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+                        </div>
+                    </div>
+                }
+            </div>
+       </div>
+    @*closing the properties div*@
     <div id="chat">
-        <div id="addr">
-            <span>Last Message</span><span id="lastchat"> 01:45 PM</span>
+        <div id = "addr" >
+            <span> Last Message</span><span id = "lastchat" > 01:45 PM</span>
         </div>
-        <div id="chatwrapper">
+        <div id = "chatwrapper" >
             <div id="chatframe">
                 <ul>
                     <li>
-                        <img src="~/Content/Images/icn_chat_2.png"/><span>Joyce Damino</span>
+                        <img src="~/Content/Images/icn_chat_2.png" /><span > Joyce Damino</span>
                         <div>
                             <p>Would you like to go see 1234 MeadowRd on the 11th of November?</p>
                         </div>
                     </li>
                     <li>
-                        <img src="~/Content/Images/icn_chat_1.png" /><span>Victoria Sporer</span>
+                        <img src="~/Content/Images/icn_chat_1.png" /><span > Victoria Sporer</span>
                         <div>
-                            <p>Yes, I would like to go visit 1234 Meadow Rd. That will work well, I am bringing the kids.</p>
+                            <p>Yes, I would like to go visit 1234 Meadow Rd.That will work well, I am bringing the kids.</p>
                         </div>
                     </li>
                     <li>
-                        <img src="~/Content/Images/icn_chat_2.png" /><span>Joyce Damino</span>
+                        <img src="~/Content/Images/icn_chat_2.png" /><span > Joyce Damino</span>
                         <div>
                             <p>Sounds good, I will see you all there at 10am?</p>
                         </div>
                     </li>
                     <li>
-                        <img src="~/Content/Images/icn_chat_2.png" /><span>Joyce Damino</span>
+                        <img src="~/Content/Images/icn_chat_2.png" /><span > Joyce Damino</span>
                         <div>
                             <p>Would you like to go see 1232 RoseLn on the 11th of November</p>
                         </div>
                     </li>
                     <li>
-                        <img src="~/Content/Images/icn_chat_1.png" /><span>Victoria Sporer</span>
+                        <img src="~/Content/Images/icn_chat_1.png" /><span > Victoria Sporer</span>
                         <div>
-                            <p>Yes, I would like to go visit 1232 RoseLn. That will work well, we can do this one in the afternoon.</p>
+                            <p>Yes, I would like to go visit 1232 RoseLn.That will work well, we can do this one in the afternoon.</p>
                         </div>
                     </li>
                     <li>
-                        <img src="~/Content/Images/icn_chat_2.png" /><span>Joyce Damino</span>
+                        <img src="~/Content/Images/icn_chat_2.png" /><span > Joyce Damino</span>
                         <div>
                             <p>Sounds good, I will call and make sure we can get in then.</p>
                         </div>
                     </li>
                 </ul>
             </div>
-            <div id="comment">
-                <p>Comment</p>
-            </div>
-            <button>Close</button>
-            <button>Send</button>
-        </div>
-    </div>
-    <div id="property">
+            <div id = "comment" >
+                < p > Comment </ p >
+            </div >
+            < button > Close </ button >
+            < button > Send </ button >
+        </div >
+    </div >
+    <div id= "property" >
         <div class="row">
             <div class="col-md-5">
                 <span>Available: </span><span>November 12th 2017</span>
             </div>
             <div class="col-md-5">
-                <img id="closeproperty" src="~/Content/Images/icn_close_pg.png"/>
+                <img id = "closeproperty" src="~/Content/Images/icn_close_pg.png"/>
             </div>
         </div>
         <div class="row">
             <div class="col-md-8">
-                <img src="~/Content/Images/image_placeholder_large.png"/>
-            </div>
+                <img src="~/Content/Images/image_placeholder_large.png" />
+            </div >
             <div class="col-md-4">
                 <div>
                     <span>Address:</span>
@@ -356,7 +214,7 @@
                     <p>$1,200 a month</p>
 
                     <span>Housing Type and Sq.Ft:</span>
-                    <p>900 Sq.Ft. Condo</p>
+                    <p>900 Sq.Ft.Condo</p>
 
                     <span>Bedrooms and Bathrooms:</span>
                     <p>2.2</p>
@@ -379,9 +237,9 @@
         <div class="row">
             <div class="col-md-8">
                 <img src="~/Content/Images/Desktop_ln_image_placeholder.png" />
+                < img src="~/Content/Images/Desktop_ln_image_placeholder.png" />
                 <img src="~/Content/Images/Desktop_ln_image_placeholder.png" />
-                <img src="~/Content/Images/Desktop_ln_image_placeholder.png" />
-                <img src="~/Content/Images/Desktop_ln_image_placeholder.png" />
+                < img src="~/Content/Images/Desktop_ln_image_placeholder.png" />
             </div>
             <div class="col-md-4">
                 <div>
@@ -399,18 +257,18 @@
                         <img src="~/Content/Images/icn_chat_bubble.png" />
                         <div class="notify-count noinit">
                             <img src="~/Content/Images/icn_alert_circle.png" />
-                            <span>00</span>
-                        </div>
-                    </div>
-                    <div>
-                        <img src="~/Content/Images/icn_cal_B1.png"/>
+                            <span > 00 </span >
+                        </div >
+                    </div >
+                    <div >
+                        < img src="~/Content/Images/icn_cal_B1.png"/>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
             <p>Other Notes:</p>
-            <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnum aliquam quaerat voluptatem. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnum aliquam quaerat voluptatem. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,</p>
+            <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnum aliquam quaerat voluptatem.Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnum aliquam quaerat voluptatem. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,</p>
         </div>
     </div>
 </div>
@@ -427,7 +285,7 @@
         $("div#housing div.notfirst input[name='choice']").click(function () {
             if ($lastFilter !== null)
                $($lastFilter.next()).removeClass("selected");
- 
+
             $lastFilter = $(this);
             $($lastFilter.next()).addClass("selected");
 

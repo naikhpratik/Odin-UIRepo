@@ -21,7 +21,7 @@ namespace Odin.Controllers
         public OrdersController(IUnitOfWork unitOfWork, IMapper mapper,IAccountHelper accountHelper)
         {
             _unitOfWork = unitOfWork;
-            _mapper = mapper;           
+            _mapper = mapper;
         }
 
         // GET: Orders
@@ -50,7 +50,6 @@ namespace Odin.Controllers
             propertyViewModels = _mapper.Map<ICollection<HomeFindingProperty>, ICollection<HousingPropertyViewModel>>(homeFindingProperties);
 
             viewModel.Properties = propertyViewModels;
-
             return PartialView("~/views/orders/partials/_Housing.cshtml", viewModel);
         }
 
@@ -58,7 +57,7 @@ namespace Odin.Controllers
         {
             var order = _unitOfWork.Orders.GetOrderById(id);
             OrdersTransfereeViewModel viewModel = viewModelForOrder(order);
-            return PartialView("~/views/orders/partials/_Details.cshtml",viewModel); 
+            return PartialView("~/views/orders/partials/_Details.cshtml",viewModel);
         }
 
         public ActionResult IntakePartial(string id)
@@ -84,7 +83,7 @@ namespace Odin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.Unauthorized, "Unauthorized Order");
             }
 
-            return View();            
+            return View();
         }
 
         // GET: Transferee
@@ -96,7 +95,7 @@ namespace Odin.Controllers
 
             var cats = order.Services.Select(s => s.ServiceType.Category).ToList();
             var ids = order.Services.Select(s => s.ServiceType.Id).ToList();
-            
+
             //Remove service types that already have services.
             var filtPossible = _unitOfWork.ServiceTypes.GetPossibleServiceTypes(cats, ids);
 
@@ -109,7 +108,7 @@ namespace Odin.Controllers
             vm.TransportationTypes = _unitOfWork.TransportationTypes.GetTransportationTypes();
             vm.DepositTypes = _unitOfWork.DepositTypes.GetDepositTypesList();
             vm.BrokerFeeTypes = _unitOfWork.BrokerFeeTypes.GetBorkerBrokerFeeTypes();
-            
+
             return View(vm);
         }
 
@@ -136,5 +135,5 @@ namespace Odin.Controllers
             return vm;
         }
     }
-    
+
 }

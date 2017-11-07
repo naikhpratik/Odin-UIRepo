@@ -358,8 +358,8 @@ namespace Odin.Controllers.Api
 
         [HttpPost]
         [Authorize]
-        [Route("api/orders/transferee/intake/rent")]
-        public IHttpActionResult UpsertIntakeRent(OrdersTransfereeIntakeRentDto dto)
+        [Route("api/orders/transferee/intake/homefinding")]
+        public IHttpActionResult UpsertIntakeHomeFinding(OrdersTransfereeIntakeHomeFindingDto dto)
         {
             var userId = User.Identity.GetUserId();
 
@@ -372,11 +372,11 @@ namespace Odin.Controllers.Api
 
             if (order.HomeFinding == null)
             {
-                order.HomeFinding = _mapper.Map<OrdersTransfereeIntakeRentDto, HomeFinding>(dto);
+                order.HomeFinding = _mapper.Map<OrdersTransfereeIntakeHomeFindingDto, HomeFinding>(dto);
             }
             else
             {
-                _mapper.Map<OrdersTransfereeIntakeRentDto, HomeFinding>(dto, order.HomeFinding);
+                _mapper.Map<OrdersTransfereeIntakeHomeFindingDto, HomeFinding>(dto, order.HomeFinding);
             }
 
             _unitOfWork.Complete();
@@ -398,6 +398,26 @@ namespace Odin.Controllers.Api
             }
 
             _mapper.Map<OrdersTransfereeIntakeLeaseDto, Order>(dto, order);
+            _unitOfWork.Complete();
+
+            return Ok();
+        }
+
+        [HttpPost]
+        [Authorize]
+        [Route("api/orders/transferee/intake/relocation")]
+        public IHttpActionResult UpdateIntakeRelocation(OrdersTransfereeIntakeRelocationDto dto)
+        {
+
+            var userId = User.Identity.GetUserId();
+            var order = _unitOfWork.Orders.GetOrderFor(userId, dto.Id);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            _mapper.Map<OrdersTransfereeIntakeRelocationDto, Order>(dto, order);
             _unitOfWork.Complete();
 
             return Ok();

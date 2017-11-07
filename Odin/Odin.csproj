@@ -360,10 +360,10 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\transferee\details.css">
-      <DependentUpon>details.scss</DependentUpon>
-    </Content>
+	<DependentUpon>details.scss</DependentUpon>
+	</Content>
     <Content Include="Content\css\transferee\details.min.css">
-      <DependentUpon>details.css</DependentUpon>
+	<DependentUpon>details.css</DependentUpon>
     </Content>
     <Content Include="Content\css\transferee\history.css">
       <DependentUpon>history.scss</DependentUpon>
@@ -698,6 +698,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\css\primaryNav.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
@@ -854,6 +855,7 @@
     </None>
     <None Include="Web.Staging.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>

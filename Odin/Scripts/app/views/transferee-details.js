@@ -10,7 +10,7 @@ return {
 }
 
 }();
-    var TransfereeDetailsController = function (transfereeDetailseService) {
+var TransfereeDetailsController = function (transfereeDetailseService) {
     
     var init = function () {
        
@@ -142,4 +142,4 @@ return {
     return {
         init: init
     };
-    }(TransfereeDetailsService);
+}(TransfereeDetailsService);

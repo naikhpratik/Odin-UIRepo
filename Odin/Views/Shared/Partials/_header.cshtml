@@ -1,25 +1,39 @@
-﻿<div id="main">
-    <div id="caption">
-        @Html.Partial("~/Views/Shared/Partials/_logo.cshtml")
-    </div>
-    <div id="icons">
-        <div class="icons_notify icons_notify_messages">
-            <img src="~/Content/Images/icn_alert_circle.png" />
-            <span>10</span>
-        </div>
-        <div class="icons_notify icons_notify_appts">
-                <img src="~/Content/Images/icn_alert_circle.png" />
-                <span>01</span>
-            </div>
-        <div class="icons_notify icons_notify_alerts">
-                <img src="~/Content/Images/icn_alert_circle.png" />
-                <span>01</span>
-            </div>
-        <div>
-            <img src="~/Content/Images/icn_profile_B1.png" />
-            <img class="icons_notify" src="~/Content/Images/icn_alert_B1.png" />
-            <img class="icons_notify" src="~/Content/Images/icn_cal_B1.png" />
-            <img class="icons_notify" src="~/Content/Images/icn_chat_B1.png">
-        </div>
-    </div>
-</div>
+﻿
+<header>
+    <nav id="primaryNav">
+        <a class="primaryNavHome" href="#">
+            <img class="primaryNavHome__logo--mobile" src="./img/dw_logo_mobile.png">
+            <img class="primaryNavHome__logo" src="~/Content/Images/dwellworks_icon.png">
+            <p>Odin</p>
+        </a>
+        <ul class="primaryNavIconList">
+            <li class="primaryNavIconList__item dropdown">
+                <div class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <span>9+</span>
+                    <img src="~/Content/Images/icn_alert_B1.png">
+                </div>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li>Hello</li>
+                </ul>
+            </li>
+            <li class="primaryNavIconList__item dropdown">
+                <div class="dropdown-toggle" id="dropdownMenu2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <span>9+</span>
+                    <img src="~/Content/Images/icn_cal_B1.png">
+                </div>
+                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
+                    <li>Hello</li>
+                </ul>
+            </li>
+            <li class="primaryNavIconList__item dropdown">
+                <div class="dropdown-toggle" id="dropdownMenu3" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <span>9+</span>
+                    <img src="~/Content/Images/icn_chat_B1.png">
+                </div>
+                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu3">
+                    <li>Hello</li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</header>
