@@ -1,13 +1,30 @@
 ﻿@import "../shared/_definitions.scss";
 
-#details {
+.scheduledServiceTitle {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #858585;
+}
+
+
+
+
+
+
+
+
+
+
+
+/*#details {
     padding-top: 10px;
     padding-left: 50px;
 
     p {
         padding-bottom: 0px;
         margin-bottom: 0px;
-        font-size: 24px;
+        font-size: 25px;
         color: #231F20;
     }
 
@@ -35,6 +52,7 @@
         color: #35A2DB;
         font-size: 16px;
     }
+
 
     .details-lime {
         color: $DW_Lime;
@@ -96,4 +114,4 @@
             }
         }
     }
-}
+}*/

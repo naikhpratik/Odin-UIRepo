@@ -1,69 +1,70 @@
 ﻿@model Odin.ViewModels.Orders.Transferee.HousingViewModel
 
-<div id="housing" class="frame">
-    <div class="row">
-        <div class="col-md-6">
-            <p id="caption">Housing Summary</p>
-            <div class="col-md-5">
-                <div>
-                    <p>@Html.DisplayNameFor(model => model.HousingBudget)</p>
-                    <span>@Html.DisplayFor(model => model.HousingBudget)</span>
-                </div>
-                <div>
-                    <p>@Html.DisplayNameFor(model => model.NumberOfBedrooms)</p>
-                    <span>@Html.DisplayFor(model => model.NumberOfBedrooms)</span>
-                </div>
-                <div>
-                    <p>@Html.DisplayNameFor(model => model.NumberOfPets)</p>
-                    <span>@Html.DisplayFor(model => model.NumberOfPets) </span>
-                </div>
-                <div>
-                    <p>@Html.DisplayNameFor(model => model.TransportationTypeString)</p>
-                    <span>@Html.DisplayFor(model => model.TransportationTypeString)</span>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div>
-                    <p>@Html.DisplayNameFor(model => model.HousingTypeString)</p>
-                    <span>@Html.DisplayFor(model => model.HousingTypeString)</span>
-                </div>
-                <div>
-                    <p>@Html.DisplayNameFor(model => model.NumberOfBathroomsString)</p>
-                    <span>@Html.DisplayFor(model => model.NumberOfBathroomsString)</span>
-                </div>
-                <div>
-                    <p>@Html.DisplayNameFor(model => model.MaxCommute)</p>
-                    <span>@Html.DisplayFor(model => model.MaxCommute)</span>
-                </div>
-                <div>
-                    <p>@Html.DisplayNameFor(model => model.SpouceAndKids)</p>
-                    <span>@Html.DisplayFor(model => model.SpouceAndKids)</span>
-                </div>
-            </div>
+<div class="container-fluid" id="housing">
+    
+    <div class="row">        
+        <div class="col-md-4">
+            <h1 class="sectionTitle">Housing Summary</h1>
+            <ul class="row sectionList">
+                <li class="col-md-6">
+                    <label>@Html.DisplayNameFor(model => model.HousingBudget)</label>
+                    <p>@Html.DisplayFor(model => model.HousingBudget)</p>
+                </li>
+                <li class="col-md-6">
+                    <label>@Html.DisplayNameFor(model => model.NumberOfBedrooms)</label>
+                    <p>@Html.DisplayFor(model => model.NumberOfBedrooms)</p>
+                </li>
+                <li class="col-md-6">
+                    <label>@Html.DisplayNameFor(model => model.NumberOfPets)</label>
+                    <p>@Html.DisplayFor(model => model.NumberOfPets) </p>
+                </li>
+                <li class="col-md-6">
+                    <label>@Html.DisplayNameFor(model => model.TransportationTypeString)</label>
+                    <p>@Html.DisplayFor(model => model.TransportationTypeString)</p>
+                </li>
+                <li class="col-md-6">
+                    <label>@Html.DisplayNameFor(model => model.HousingTypeString)</label>
+                    <p>@Html.DisplayFor(model => model.HousingTypeString)</p>
+                </li>
+                <li class="col-md-6">
+                    <label>@Html.DisplayNameFor(model => model.NumberOfBathroomsString)</label>
+                    <p>@Html.DisplayFor(model => model.NumberOfBathroomsString)</p>
+                </li>
+                <li class="col-md-6">
+                    <label>@Html.DisplayNameFor(model => model.MaxCommute)</label>
+                    <p>@Html.DisplayFor(model => model.MaxCommute)</p>
+                </li>
+                <li class="col-md-6">
+                    <label>@Html.DisplayNameFor(model => model.SpouceAndKids)</label>
+                    <p>@Html.DisplayFor(model => model.SpouceAndKids)</p>
+                </li>
+            </ul>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-8 mapWrapper">
             <img src="~/Content/Images/map_placeholder.png" />
         </div>
     </div>
 
-
+    <hr />
     <div class="row" id="propertiesFilterAdd">
-        <div>
+        
+        <div class="col-md-1">
             <span>Filter:</span>
-            <div>
-                <input type = "radio" name="choice" value="new"><span>New</span>
-                <input type = "radio" name="choice" value="like"><span>Like</span>
-                <input type = "radio" name="choice" value="dislike"><span>Dislike</span>
-            </div>
         </div>
-        <div id = "add" >
+        <div class="col-md-9">
+                <input type="radio" name="choice" value="new"><span>New</span>
+                <input type="radio" name="choice" value="like"><span>Like</span>
+                <input type="radio" name="choice" value="dislike"><span>Dislike</span>
+        </div>
+        <div id="add" class="col-md-2">
             <img src="~/Content/Images/btn_add_home.png" />
             <span>Add Property</span>
         </div>
+        
     </div>
-
-    <div id="properties" class="row notfirst">
-        <div class="col-sm-12">
+    <hr />
+    <div id="properties" class="row">
+        
             <div id="propertiesHeader" class="row">
                 <div class="col-sm-2">
                     <p>@Html.DisplayNameFor(model => model.Properties.ElementAt(0).Photos)</p>
@@ -86,28 +87,27 @@
                 <div class="col-sm-1">
                     <p>@Html.DisplayNameFor(model => model.Properties.ElementAt(0).Comments)</p>
                 </div>
-            </div>
-        </div>
-            @*<tbody>
+            </div>       
+            
                 @for (int i = 0; i < Model.Properties.Count(); i++)
                 {
-                    <tr sel="new">
-                        <td>
+                    <div class="row" sel="new">
+                        <div class="col-md-2">
                             <img class="location" src="~/Content/Images/popout_sml_img.png" />
-                        </td>
-                        <td>
+                        </div>
+                        <div class="col-md-2">
                             <p>@Html.DisplayFor(model => model.Properties.ElementAt(i).Address)</p>
-                        </td>
-                        <td>
+                        </div>
+                        <div class="col-md-2">
                             <p>@Html.DisplayFor(model => model.Properties.ElementAt(i).Availability)</p>
-                        </td>
-                        <td>
+                        </div>
+                        <div class="col-md-2">
                             <p>@Html.DisplayFor(model => model.Properties.ElementAt(i).Specifications)</p>
-                        </td>
-                        <td>
+                        </div>
+                        <div class="col-md-2">
                             <p>@Html.DisplayFor(model => Html.DatePicker("date", "ViewingDate", model.Properties.ElementAt(i).ViewingDateDisplay))</p>
-                        </td>
-                        <td>
+                        </div>
+                        <div class="col-md-1">
                             <div class="likebtns">
                                 @if (Model.Properties.ElementAt(i).IsLike == false)
                                 {
@@ -122,8 +122,8 @@
                                     <img class="new" src="~/Content/Images/icn_ln_non_selected_like.png" />
                                 }
                             </div>
-                        </td>
-                        <td>
+                        </div>
+                        <div class="col-md-1">
                             <div class="comments">
                                 <img class="comment" src="~/Content/Images/icn_chat_bubble.png" />
                                 @if (Model.Properties.ElementAt(i).Comments.Count() > 0)
@@ -134,13 +134,11 @@
                                     </div>
                                 }
                             </div>
-                        </td>
-                    </tr>
+                        </div>
+                    </div>
                 }
-            </tbody>
-            </table >*@
-
-        </div> 
+            </div>
+       </div> 
     @*closing the properties div*@
     <div id="chat">
         <div id = "addr" >

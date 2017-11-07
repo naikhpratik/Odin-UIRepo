@@ -1,61 +1,105 @@
-﻿#details {
-  padding-top: 10px;
-  padding-left: 50px; }
-  #details p {
-    padding-bottom: 0px;
-    margin-bottom: 0px;
-    font-size: 24px;
-    color: #231F20; }
-  #details div.row {
-    text-align: left; }
-  #details .details-title {
-    padding-bottom: 30px; }
-  #details .details-save {
-    font-size: small;
-    color: #a7ce39;
-    cursor: pointer; }
-  #details hr {
-    margin-top: 0px;
-    margin-bottom: 0px; }
-  #details .details-blue {
-    color: #35A2DB;
-    font-size: 16px; }
-  #details .details-lime {
-    color: #a7ce39; }
-  #details .details-block {
-    padding-top: 15px;
-    padding-bottom: 15px; }
-    #details .details-block .details-header p {
-      margin: 0px;
-      font-size: 18px;
-      font-weight: 200;
-      color: #8e1a55; }
-  #details .details-row .details-col {
-    padding-top: 15px;
-    padding-left: 0px;
-    width: 16%; }
-    #details .details-row .details-col h5 {
-      display: block;
-      font-size: 16px;
-      font-weight: 200;
-      margin-bottom: -5px;
-      color: #6c6e70; }
-    #details .details-row .details-col label {
-      display: block;
-      font-size: 16px;
-      font-weight: 200;
-      color: #858585; }
-    #details .details-row .details-col span {
-      color: #35A2DB;
-      font-size: 16px; }
-    #details .details-row .details-col input {
-      color: #31a4dd;
-      font-size: small;
-      display: none; }
-    #details .details-row .details-col textarea {
-      display: none;
-      width: 100%;
-      max-width: 100%;
-      color: #31a4dd;
-      font-size: small; }
+﻿.scheduledServiceTitle {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #858585; }
+
+/*#details {
+    padding-top: 10px;
+    padding-left: 50px;
+
+    p {
+        padding-bottom: 0px;
+        margin-bottom: 0px;
+        font-size: 25px;
+        color: #231F20;
+    }
+
+    div.row {
+        text-align: left;
+    }
+
+    .details-title {
+        padding-bottom: 30px;
+
+    }
+
+    .details-save {
+        font-size: small;
+        color: $DW_Lime;
+        cursor: pointer;
+    }
+
+    hr {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .details-blue {
+        color: #35A2DB;
+        font-size: 16px;
+    }
+
+
+    .details-lime {
+        color: $DW_Lime;
+    }
+
+    .details-block {
+        padding-top: 15px;
+        padding-bottom: 15px;
+
+        .details-header {
+            p {
+                margin: 0px;
+                font-size: 18px;
+                font-weight: 200;
+                color: #8e1a55;
+            }
+        }
+    }
+
+    .details-row {
+
+        .details-col {
+            padding-top: 15px;
+            padding-left: 0px;
+            width: 16%;
+
+            h5 {
+                display: block;
+                font-size: 16px;
+                font-weight: 200;
+                margin-bottom: -5px;
+                color: #6c6e70;
+            }
+
+            label {
+                display: block;
+                font-size: 16px;
+                font-weight: 200;
+                color: #858585;
+            }
+
+            span {
+                color: #35A2DB;
+                font-size: 16px;
+            }
+
+            input {
+                color: $DW_Blue;
+                font-size: small;
+                display: none;
+            }
+
+            textarea {
+                display: none;
+                width: 100%;
+                max-width: 100%;
+                color: $DW_Blue;
+                font-size: small;
+            }
+        }
+    }
+}*/
 

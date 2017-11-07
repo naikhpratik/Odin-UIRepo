@@ -1,4 +1,8 @@
-﻿#propertiesFilterAdd .filterNewLikeDislike input:checked:before {
+﻿.mapWrapper img {
+  display: block;
+  width: 100%; }
+
+#propertiesFilterAdd .filterNewLikeDislike input:checked:before {
   background-color: #621f65; }
 
 #propertiesFilterAdd .filterNewLikeDislike input:checked:after {
@@ -7,4 +11,69 @@
 #propertiesHeader p {
   color: #31a4dd;
   white-space: pre-line; }
+
+/*#housing 
+    padding-top: 10px;
+    padding-left: 50px;
+
+    p#caption {
+        padding-bottom: 0px;
+        margin-bottom: 0px;
+        font-size: 25px;
+        color: #231F20;
+    }
+
+    div.row {
+        text-align: left;
+    }
+
+    .row {
+
+       label {
+                display: block;
+                font-size: 16px;
+                font-weight: 200;
+                color: #858585;
+            }
+
+            span {
+                color: #35A2DB;
+                font-size: 16px;
+            }
+        }
+
+        #properties {
+        }
+
+        #propertiesFilterAdd {
+
+            .filterNewLikeDislike {
+                input {
+
+                    &:checked:before {
+                        background-color: $DW_Purple;
+                    }
+
+                    &:checked:after {
+                        border: none;
+                    }
+
+                    &:after {
+                    }
+                }
+            }
+        }
+
+        button#addProperty {
+        }
+
+
+
+        #propertiesHeader {
+            p {
+                color: $DW_Blue;
+                white-space: pre-line;
+            }
+        }
+     }*/
 
