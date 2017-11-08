@@ -1,4 +1,9 @@
-﻿body {
+﻿#orderContainer {
+  margin-left: 18rem;
+  margin-top: 8rem;
+  width: auto; }
+
+body {
   padding: 0px; }
   body div.container-fluid {
     padding: 0px; }

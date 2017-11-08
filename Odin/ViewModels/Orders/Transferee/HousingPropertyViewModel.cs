@@ -8,14 +8,28 @@ namespace Odin.ViewModels.Orders.Transferee
 {
     public class HousingPropertyViewModel
     {
+        [DisplayFormat(ConvertEmptyStringToNull = true, NullDisplayText ="", HtmlEncode = false)]
+        public string PropertyAddress { get
+            {
+                var addressMarkup = PropertyStreet1 + "<br />";
+                if (PropertyStreet2 != null && PropertyStreet2.Length > 0)
+                {
+                    addressMarkup += PropertyStreet2 + "<br />";
+                }
+                addressMarkup += PropertyCity + ", " + PropertyState;
+
+                return addressMarkup;
+            }
+        }
+
         public string PropertyStreet1 { get; set; }
         public string PropertyStreet2 { get; set; }
         public string PropertyCity { get; set; }
         public string PropertyState { get; set; }
 
-        [Display(Name = "Available or Not Date:")]
-        [DisplayFormat(DataFormatString = "0:d", NullDisplayText = "Unknown")]
-        public DateTime? AvailabilityDate { get; set; }
+        [Display(Name = "Availability Date:")]
+        [DisplayFormat(NullDisplayText = "Unknown", DataFormatString = "{0:d}")]
+        public DateTime? PropertyAvailabilityDate { get; set; }
 
         //public string Id { get; set; }
 

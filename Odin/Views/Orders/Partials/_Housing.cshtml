@@ -1,8 +1,7 @@
-﻿@model Odin.ViewModels.Orders.Transferee.HousingViewModel
+@model Odin.ViewModels.Orders.Transferee.HousingViewModel
 
 <div class="container-fluid" id="housing">
-
-    <div class="row">
+    <div class="row" id="housingSummaryMap">
         <div class="col-md-4">
             <h1 class="sectionTitle">Housing Summary</h1>
             <ul class="row sectionList">
@@ -44,109 +43,145 @@
             <img src="~/Content/Images/map_placeholder.png" />
         </div>
     </div>
-
-    <hr />
-    <div class="row" id="propertiesFilterAdd">
-
-        <div class="col-md-1">
-            <span>Filter:</span>
-        </div>
-        <div class="col-md-9">
-                <input type="radio" name="choice" value="new"><span>New</span>
-                <input type="radio" name="choice" value="like"><span>Like</span>
-                <input type="radio" name="choice" value="dislike"><span>Dislike</span>
-        </div>
-        <div id="add" class="col-md-2">
-            <img src="~/Content/Images/btn_add_home.png" />
+    <div class="row" id="propertiesControls">
+        <!--
+        <form class="col-sm-6" id="housingFilter">
+            <label class="housingFilter__title">Filter:</label>
+            <label>
+                @Html.RadioButton("Filter", "New", true)
+                <span>New</span>
+            </label>
+            <label>
+                @Html.RadioButton("Filter", "Like", false)
+                <span>Like</span>
+            </label>
+            <label>
+                @Html.RadioButton("Filter", "Dislike", false)
+                <span>Dislike</span>
+            </label>
+        </form>
+        -->
+        <div class="col-sm-6" id="addProperty" >
             <span>Add Property</span>
+            <img src="~/Content/Images/btn_add_home.png" />
         </div>
-
     </div>
-    <hr />
-    <div id="properties" class="row">
 
-            <div id="propertiesHeader" class="row">
-                <div class="col-sm-2">
-                    <p>Location Photos:</p>
-                </div>
-                <div class="col-sm-2">
-                    <p>Address:</p>
-                </div>
-                <div class="col-sm-2">
-                    <p>Available or Not Date:</p>
-                </div>
-                <div class="col-sm-2">
-                    <p>BD | BA | Rent | Sq. Ft:</p>
-                </div>
-                <div class="col-sm-2">
-                    <p>Schedule a Viewing</p>
-                </div>
-                <div class="col-sm-1">
-                    <p>Like or Dislike:</p>
-                </div>
-                <div class="col-sm-1">
-                    <p>Property Comments:</p>
-                </div>
+    <ul class="row" id="propertiesList">
+        <li class="row" id="propertiesHeader">
+            <!--
+            <div class="col-md-1">
+                <p>Location Photos:</p>
+            </div>
+            -->
+            <div class="col-md-2">
+                <p>Address:</p>
+            </div>
+            <div class="col-md-2">
+                <p>Availability Date:</p>
+            </div>
+            <div class="col-md-2">
+                <p>BD | BA | Rent | Sq. Ft:</p>
             </div>
 
-                @for (int i = 0; i < Model.Properties.Count(); i++)
+            <!--
+            <div class="col-md-3">
+                <p>Schedule a Viewing</p>
+            </div>
+            <div class="col-md-1">
+                <p>Like or Dislike:</p>
+            </div>
+            <div class="col-md-1">
+                <p>Property Comments:</p>
+            </div>
+            -->
+        </li>
+        
+        @foreach (var propertyVM in Model.Properties)
+        {
+        <li class="row propertyItem">
+            <!--
+            <div class="col-md-1">
+                <img class="location" src="~/Content/Images/popout_sml_img.png" />
+            </div>
+            -->
+            <div class="col-md-2">
+                <p>
+                    @Html.DisplayFor(m => propertyVM.PropertyAddress)
+                </p>
+            </div>
+            <div class="col-md-2">
+                <p>
+                    @Html.DisplayFor(m => propertyVM.PropertyAvailabilityDate)
+                </p>
+            </div>
+            <div class="col-md-2">
+                <p>
+                    4 | 3<br />
+                    2,200 sq.ft
+                </p>
+            </div>
+            <!--
+            <div class="col-md-3">
+                @Html.DatePicker("date", "ViewingDate", false)
+            </div>
+            <div class="col-md-1 like">
+                <img src="~/Content/Images/icn_ln_selected_like.png" />
+            </div>
+            <div class="col-md-1 comments">
+                <img src="~/Content/Images/icn_chat_bubble.png" />
+                <span>09</span>
+            </div>
+            -->
+        </li>
+        }
+        
+    </ul>
+    @*@for (int i = 0; i < Model.Properties.Count(); i++)
+    {
+        <div class="row" sel="new" style="display: none;">
+            <div class="col-md-2">
+                <img class="location" src="~/Content/Images/popout_sml_img.png" />
+            </div>
+            <div class="col-md-2">
+                <p>@Html.DisplayFor(model => model.Properties.ElementAt(i).Address)</p>
+            </div>
+            <div class="col-md-2">
+                <p>@Html.DisplayFor(model => model.Properties.ElementAt(i).Availability)</p>
+            </div>
+            <div class="col-md-2">
+                <p>@Html.DisplayFor(model => model.Properties.ElementAt(i).Specifications)</p>
+            </div>
+            <div class="col-md-2">
+                <p>@Html.DisplayFor(model => Html.DatePicker("date", "ViewingDate", model.Properties.ElementAt(i).ViewingDateDisplay))</p>
+            </div>
+            <div class="col-md-1 likebtns">
+                @if (Model.Properties.ElementAt(i).IsLike == false)
                 {
-                    <div class="row" sel="new">
-                        <div class="col-md-2">
-                            <img class="location" src="~/Content/Images/popout_sml_img.png" />
-                        </div>
-                        <div class="col-md-2">
-                            <p>1234 Meadow Rd Renton WA</p>
-                        </div>
-                        <div class="col-md-2">
-                            <p>Available 11/12/17</p>
-                        </div>
-                        <div class="col-md-2">
-                            <p>2 | 2 | $3,200 | 1,300</p>
-                        </div>
-                        <div class="col-md-2">
-                            <p>???</p>
-                        </div>
-                        <div class="col-md-1">
-                            <div class="likebtns">
-                                <img class="dislike noinit" src="~/Content/Images/icn_ln_selected_dislike.png" />
-                                <!-- 
-                                if (Model.Properties.ElementAt(i).IsLike == false)
-                                {
-                                    <img class="dislike noinit" src="~/Content/Images/icn_ln_selected_dislike.png" />
-                                }
-                                else if (Model.Properties.ElementAt(i).IsLike == true)
-                                {
-                                    <img class="like noinit" src="~/Content/Images/icn_ln_selected_like.png" />
-                                }
-                                else
-                                {
-                                    <img class="new" src="~/Content/Images/icn_ln_non_selected_like.png" />
-                                }
-                                -->
-                            </div>
-                        </div>
-                        <div class="col-md-1">
-                            <div class="comments">
-                                <img class="comment" src="~/Content/Images/icn_chat_bubble.png" />
-                                <!-- 
-                                if (Model.Properties.ElementAt(i).Comments.Count() > 0)
-                                {
-                                    <div class="notify-count">
-                                        <img src="~/Content/Images/icn_alert_circle.png" />
-                                        <span> Model.Properties.ElementAt(i).Comments.Count().ToString("##00") </span>
-                                    </div>
-                                }
-                                -->
-                            </div>
-                        </div>
-                    </div>
+                    <img class="dislike noinit" src="~/Content/Images/icn_ln_selected_dislike.png" />
+                }
+                else if (Model.Properties.ElementAt(i).IsLike == true)
+                {
+                    <img class="like noinit" src="~/Content/Images/icn_ln_selected_like.png" />
+                }
+                else
+                {
+                    <img class="new" src="~/Content/Images/icn_ln_non_selected_like.png" />
                 }
             </div>
-       </div>
+            <div class="col-md-2 comments">
+                <img class="comment" src="~/Content/Images/icn_chat_bubble.png" />
+                @if (Model.Properties.ElementAt(i).Comments.Count() > 0)
+                {
+                    <span> Model.Properties.ElementAt(i).Comments.Count().ToString("##00")</span>
+                }
+            </div>
+        </div>
+    }*@
+
     @*closing the properties div*@
-<!--   
-<div id="chat">
+
+    <div id="chat" style="display: none;">
         <div id = "addr" >
             <span> Last Message</span><span id = "lastchat" > 01:45 PM</span>
         </div>
@@ -198,7 +233,7 @@
             < button > Send </ button >
         </div >
     </div >
-    <div id= "property" >
+    <div id= "property" style="display: none;" >
         <div class="row">
             <div class="col-md-5">
                 <span>Available: </span><span>November 12th 2017</span>
@@ -278,7 +313,6 @@
         </div>
     </div>
 </div>
--->
 
 @Styles.Render("~/Styling/housing")
 

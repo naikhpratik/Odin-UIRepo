@@ -1,5 +1,5 @@
 ﻿#orderContainer {
-  margin-left: 15rem;
+  margin-left: 18rem;
   margin-top: 8rem;
   width: auto; }
 
@@ -8,14 +8,14 @@ nav#transfereeSideNav {
   position: fixed;
   top: 5rem;
   left: 0;
-  width: 15rem;
+  width: 18rem;
   height: calc(100vh - 5rem);
   color: white; }
   nav#transfereeSideNav .transfereeSideNav__person {
     text-align: center;
     margin-bottom: 2rem; }
     nav#transfereeSideNav .transfereeSideNav__person img.person {
-      width: 50%;
+      width: 6rem;
       margin: 2rem auto 1.25rem auto; }
     nav#transfereeSideNav .transfereeSideNav__person p {
       margin-bottom: 0;
@@ -57,7 +57,7 @@ nav#transfereeSideNav {
 .sectionSubHead {
   margin: 2.5rem 0 0.5rem 0;
   font-size: 1.725rem;
-  font-weight: 500;
+  font-weight: 400;
   color: #8e1a55; }
 
 .sectionSave {
@@ -72,7 +72,7 @@ nav#transfereeSideNav {
 .sectionList {
   list-style: none;
   line-height: 1.875rem;
-  margin: 2rem 0 0 0;
+  margin: 1rem 0 0 0;
   padding: 0; }
   .sectionList li {
     margin: 0 0 1rem 0;
@@ -80,7 +80,7 @@ nav#transfereeSideNav {
     .sectionList li label {
       display: block;
       font-size: 1.5rem;
-      font-weight: 500;
+      font-weight: 400;
       color: #858585;
       padding: 0;
       margin: 0; }
