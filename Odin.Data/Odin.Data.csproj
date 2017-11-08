@@ -439,6 +439,10 @@
     <Compile Include="Persistence\Migrations\201711061818328_MergedInTriggerUpdateFromMaster.Designer.cs">
       <DependentUpon>201711061818328_MergedInTriggerUpdateFromMaster.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201711072024247_MergeMasterMigrationNov7.cs" />
+    <Compile Include="Persistence\Migrations\201711072024247_MergeMasterMigrationNov7.Designer.cs">
+      <DependentUpon>201711072024247_MergeMasterMigrationNov7.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\NumberOfBathroomsTypesRepository.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
@@ -630,6 +634,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201711061818328_MergedInTriggerUpdateFromMaster.resx">
       <DependentUpon>201711061818328_MergedInTriggerUpdateFromMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711072024247_MergeMasterMigrationNov7.resx">
+      <DependentUpon>201711072024247_MergeMasterMigrationNov7.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
