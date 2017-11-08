@@ -15,28 +15,28 @@
                     <p>@Html.DisplayFor(model => model.NumberOfBedrooms)</p>
                 </li>
                 <li class="col-md-6">
-                    <label>@Html.DisplayNameFor(model => model.NumberOfPets)</label>
-                    <p>@Html.DisplayFor(model => model.NumberOfPets) </p>
+                    <label>@Html.DisplayNameFor(model => model.PetsCount)</label>
+                    <p>@Html.DisplayFor(model => model.PetsCount) </p>
                 </li>
                 <li class="col-md-6">
-                    <label>@Html.DisplayNameFor(model => model.TransportationTypeString)</label>
-                    <p>@Html.DisplayFor(model => model.TransportationTypeString)</p>
+                    <label>@Html.DisplayNameFor(model => model.TransportationTypeName)</label>
+                    <p>@Html.DisplayFor(model => model.TransportationTypeName)</p>
                 </li>
                 <li class="col-md-6">
-                    <label>@Html.DisplayNameFor(model => model.HousingTypeString)</label>
-                    <p>@Html.DisplayFor(model => model.HousingTypeString)</p>
+                    <label>@Html.DisplayNameFor(model => model.HousingTypeName)</label>
+                    <p>@Html.DisplayFor(model => model.HousingTypeName)</p>
                 </li>
                 <li class="col-md-6">
-                    <label>@Html.DisplayNameFor(model => model.NumberOfBathroomsString)</label>
-                    <p>@Html.DisplayFor(model => model.NumberOfBathroomsString)</p>
+                    <label>@Html.DisplayNameFor(model => model.NumberOfBathroomsName)</label>
+                    <p>@Html.DisplayFor(model => model.NumberOfBathroomsName)</p>
                 </li>
                 <li class="col-md-6">
                     <label>@Html.DisplayNameFor(model => model.MaxCommute)</label>
                     <p>@Html.DisplayFor(model => model.MaxCommute)</p>
                 </li>
                 <li class="col-md-6">
-                    <label>@Html.DisplayNameFor(model => model.SpouceAndKids)</label>
-                    <p>@Html.DisplayFor(model => model.SpouceAndKids)</p>
+                    <label>@Html.DisplayNameFor(model => model.SpouseAndKids)</label>
+                    <p>@Html.DisplayFor(model => model.SpouseAndKids)</p>
                 </li>
             </ul>
         </div>
@@ -67,25 +67,25 @@
 
             <div id="propertiesHeader" class="row">
                 <div class="col-sm-2">
-                    <p>@Html.DisplayNameFor(model => model.Properties.ElementAt(0).Photos)</p>
+                    <p>Location Photos:</p>
                 </div>
                 <div class="col-sm-2">
-                    <p>@Html.DisplayNameFor(model => model.Properties.ElementAt(0).Address)</p>
+                    <p>Address:</p>
                 </div>
                 <div class="col-sm-2">
-                    <p>@Html.DisplayNameFor(model => model.Properties.ElementAt(0).Availability)</p>
+                    <p>Available or Not Date:</p>
                 </div>
                 <div class="col-sm-2">
-                    <p>@Html.DisplayNameFor(model => model.Properties.ElementAt(0).Specifications)</p>
+                    <p>BD | BA | Rent | Sq. Ft:</p>
                 </div>
                 <div class="col-sm-2">
-                    <p>@Html.DisplayNameFor(model => model.Properties.ElementAt(0).ViewingDateDisplay)</p>
+                    <p>Schedule a Viewing</p>
                 </div>
                 <div class="col-sm-1">
-                    <p>@Html.DisplayNameFor(model => model.Properties.ElementAt(0).IsLike)</p>
+                    <p>Like or Dislike:</p>
                 </div>
                 <div class="col-sm-1">
-                    <p>@Html.DisplayNameFor(model => model.Properties.ElementAt(0).Comments)</p>
+                    <p>Property Comments:</p>
                 </div>
             </div>
 
@@ -96,20 +96,22 @@
                             <img class="location" src="~/Content/Images/popout_sml_img.png" />
                         </div>
                         <div class="col-md-2">
-                            <p>@Html.DisplayFor(model => model.Properties.ElementAt(i).Address)</p>
+                            <p>1234 Meadow Rd Renton WA</p>
                         </div>
                         <div class="col-md-2">
-                            <p>@Html.DisplayFor(model => model.Properties.ElementAt(i).Availability)</p>
+                            <p>Available 11/12/17</p>
                         </div>
                         <div class="col-md-2">
-                            <p>@Html.DisplayFor(model => model.Properties.ElementAt(i).Specifications)</p>
+                            <p>2 | 2 | $3,200 | 1,300</p>
                         </div>
                         <div class="col-md-2">
-                            <p>@Html.DisplayFor(model => Html.DatePicker("date", "ViewingDate", model.Properties.ElementAt(i).ViewingDateDisplay))</p>
+                            <p>???</p>
                         </div>
                         <div class="col-md-1">
                             <div class="likebtns">
-                                @if (Model.Properties.ElementAt(i).IsLike == false)
+                                <img class="dislike noinit" src="~/Content/Images/icn_ln_selected_dislike.png" />
+                                <!-- 
+                                if (Model.Properties.ElementAt(i).IsLike == false)
                                 {
                                     <img class="dislike noinit" src="~/Content/Images/icn_ln_selected_dislike.png" />
                                 }
@@ -121,18 +123,21 @@
                                 {
                                     <img class="new" src="~/Content/Images/icn_ln_non_selected_like.png" />
                                 }
+                                -->
                             </div>
                         </div>
                         <div class="col-md-1">
                             <div class="comments">
                                 <img class="comment" src="~/Content/Images/icn_chat_bubble.png" />
-                                @if (Model.Properties.ElementAt(i).Comments.Count() > 0)
+                                <!-- 
+                                if (Model.Properties.ElementAt(i).Comments.Count() > 0)
                                 {
                                     <div class="notify-count">
                                         <img src="~/Content/Images/icn_alert_circle.png" />
                                         <span> Model.Properties.ElementAt(i).Comments.Count().ToString("##00") </span>
                                     </div>
                                 }
+                                -->
                             </div>
                         </div>
                     </div>
@@ -140,7 +145,8 @@
             </div>
        </div>
     @*closing the properties div*@
-    <div id="chat">
+<!--   
+<div id="chat">
         <div id = "addr" >
             <span> Last Message</span><span id = "lastchat" > 01:45 PM</span>
         </div>
@@ -272,6 +278,7 @@
         </div>
     </div>
 </div>
+-->
 
 @Styles.Render("~/Styling/housing")
 
