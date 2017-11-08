@@ -19,9 +19,9 @@ namespace Odin.Controllers.Api
         private readonly IOrderImporter _orderImporter;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        private readonly ICloudQueueStore _queueStore;
+        private readonly IQueueStore _queueStore;
 
-        public OrdersController(IUnitOfWork unitOfWork, IMapper mapper, ICloudQueueStore queueStore)
+        public OrdersController(IUnitOfWork unitOfWork, IMapper mapper, IQueueStore queueStore)
         {
             _orderImporter = new OrderImporter(unitOfWork, mapper);
             _unitOfWork = unitOfWork;

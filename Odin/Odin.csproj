@@ -298,7 +298,8 @@
     <Compile Include="Controllers\Api\OrdersController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
-    <Compile Include="Domain\CloudQueueStore.cs" />
+    <Compile Include="Domain\ImageStore.cs" />
+    <Compile Include="Domain\QueueStore.cs" />
     <Compile Include="Domain\ConsultantImporter.cs" />
     <Compile Include="Domain\ManagerImporter.cs" />
     <Compile Include="Domain\OrderImporter.cs" />
@@ -315,7 +316,8 @@
     <Compile Include="Helpers\DateHelper.cs" />
     <Compile Include="Helpers\EmailHelper.cs" />
     <Compile Include="Helpers\ViewRenderer.cs" />
-    <Compile Include="Interfaces\ICloudQueueStore.cs" />
+    <Compile Include="Interfaces\IImageStore.cs" />
+    <Compile Include="Interfaces\IQueueStore.cs" />
     <Compile Include="Interfaces\IConfigHelper.cs" />
     <Compile Include="Interfaces\IConsultantImporter.cs" />
     <Compile Include="Interfaces\IManagerImporter.cs" />

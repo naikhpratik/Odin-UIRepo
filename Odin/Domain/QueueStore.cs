@@ -11,16 +11,21 @@ using Odin.Interfaces;
 
 namespace Odin.Domain
 {
-    public class CloudQueueStore : ICloudQueueStore
+    /// <summary>
+    /// Adding items to the queue store will stage them to be pushed back to service engine.
+    /// </summary>
+    public class QueueStore : IQueueStore
     {
         private readonly CloudQueue _queue;
+        private const string StorageConnectionKey = "StorageConnectionString";
+        private const string QueueName = "odintose";
 
-        public CloudQueueStore(string storageConnectionKey, string queueName)
+        public QueueStore()
         {
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
-                CloudConfigurationManager.GetSetting(storageConnectionKey));
+                CloudConfigurationManager.GetSetting(StorageConnectionKey));
             CloudQueueClient queueClient = storageAccount.CreateCloudQueueClient();
-            CloudQueue queue = queueClient.GetQueueReference(queueName);
+            CloudQueue queue = queueClient.GetQueueReference(QueueName);
             queue.CreateIfNotExists();
             _queue = queue;
         }

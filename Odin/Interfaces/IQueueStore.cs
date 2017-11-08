@@ -8,7 +8,7 @@ using Odin.Data.Core.Models;
 
 namespace Odin.Interfaces
 {
-    public interface ICloudQueueStore
+    public interface IQueueStore
     {
         void Add(QueueEntry entry);
     }

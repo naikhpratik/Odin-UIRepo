@@ -77,8 +77,6 @@ namespace MyDwellworks.App_Start
                 var mapper = config.CreateMapper();
                 kernel.Bind<IMapper>().ToConstant(mapper);
 
-                kernel.Bind<ICloudQueueStore>().ToConstructor(_ => new CloudQueueStore("StorageConnectionString", "odintose"));
-
                 return kernel;
             }
             catch
@@ -94,7 +92,6 @@ namespace MyDwellworks.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-
         }        
     }
 }

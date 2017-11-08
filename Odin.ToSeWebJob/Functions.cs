@@ -23,6 +23,9 @@ namespace Odin.ToSeWebJob
 
         // This function will get triggered/executed when a new message is written 
         // on an Azure Queue called queue.
+
+        // Test throwing exception and make sure item does not get dequeued.
+
         public async Task ProcessQueueMessage([QueueTrigger("odintose")] string message, TextWriter log)
         {
             log.WriteLine(message);

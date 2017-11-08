@@ -31,8 +31,8 @@ namespace Odin.IntegrationTests.Controllers.Api
             var config = new MapperConfiguration(c => c.AddProfile(new MappingProfile()));
             var mapper = config.CreateMapper();
             var unitOfWork = new UnitOfWork(Context);
-            var mockCloudQueueStore = new Mock<ICloudQueueStore>();
-            return new OrdersController(unitOfWork, mapper, mockCloudQueueStore.Object);
+            var mockQueueStore = new Mock<IQueueStore>();
+            return new OrdersController(unitOfWork, mapper, mockQueueStore.Object);
         }
 
         [Test, Isolated]
