@@ -81,7 +81,7 @@
                 <p>Availability Date:</p>
             </div>
             <div class="col-md-2">
-                <p>BD | BA | Rent | Sq. Ft:</p>
+                <p>BD | BA<br />Rent | Sq. Ft:</p>
             </div>
 
             <!--
@@ -117,8 +117,8 @@
             </div>
             <div class="col-md-2">
                 <p>
-                    4 | 3<br />
-                    2,200 sq.ft
+                    @Html.DisplayFor(m => propertyVM.PropertyNumberOfBedrooms) | @Html.DisplayFor(m => propertyVM.PropertyNumberOfBathroomsName)<br />
+                    @Html.DisplayFor(m => propertyVM.PropertyAmount) | @Html.DisplayFor(m => propertyVM.PropertySquareFootage)
                 </p>
             </div>
             <!--
