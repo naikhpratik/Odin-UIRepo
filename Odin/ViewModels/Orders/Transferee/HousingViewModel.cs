@@ -19,15 +19,15 @@ namespace Odin.ViewModels.Orders.Transferee
         public string Id { get; set; }
 
         [Display(Name = "Budget:")]
-        [DisplayFormat(DataFormatString = "{0:c}", NullDisplayText = "NA")]
+        [DisplayFormat(DataFormatString = "{0:c}", NullDisplayText = "No Preference")]
         public decimal? HousingBudget { get; set; }
 
         [Display(Name = "Bedrooms:")]
-        [DisplayFormat(NullDisplayText = "NA")]
+        [DisplayFormat(NullDisplayText = "No Preference")]
         public int? NumberOfBedrooms { get; set; }
 
         [Display(Name = "Bathrooms:")]
-        [DisplayFormat(NullDisplayText = "NA")]
+        [DisplayFormat(NullDisplayText = "No Preference")]
         public String NumberOfBathroomsName { get; set; }
 
         [Display(Name = "Housing Type:")]
@@ -71,11 +71,11 @@ namespace Odin.ViewModels.Orders.Transferee
         }
 
         [Display(Name = "Distance From Work (min):")]
-        [DisplayFormat(NullDisplayText = "NA")]
+        [DisplayFormat(NullDisplayText = "No Preference")]
         public int? MaxCommute { get; set; }
 
         [Display(Name = "Transportation:")]
-        [DisplayFormat(NullDisplayText = "NA")]
+        [DisplayFormat(NullDisplayText = "No Preference")]
         public String TransportationTypeName { get; set; }
 
         public IEnumerable<HousingPropertyViewModel> Properties { get; set; }
