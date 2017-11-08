@@ -1,14 +1,6 @@
 ﻿@import "../shared/_definitions.scss";
 
 
-$sideNavWidth: 15rem; //height of primary nav divided by base font size
-
-#orderContainer {
-    margin-left: $sideNavWidth;
-    margin-top: $primaryNavHeightLg;
-    width: auto;
-}
-
 nav#transfereeSideNav {
     background-color: $DW_Lime;
     position: fixed;
@@ -23,7 +15,7 @@ nav#transfereeSideNav {
         margin-bottom: 2rem;
 
         img.person {
-            width: 50%;
+            width: 6rem;
             margin: 2rem auto 1.25rem auto;
         }
 
@@ -92,7 +84,7 @@ nav#transfereeSideNav {
 .sectionSubHead {
     margin: 2.5rem 0 0.5rem 0;
     font-size: 1.725rem;
-    font-weight: 500;
+    font-weight: 400;
     color: #8e1a55;
 }
 
@@ -110,7 +102,7 @@ nav#transfereeSideNav {
 .sectionList {
     list-style: none;
     line-height: 1.875rem;
-    margin: 2rem 0 0 0;
+    margin: 1rem 0 0 0;
     padding: 0;
 
     li {
@@ -121,7 +113,7 @@ nav#transfereeSideNav {
         label {
             display: block;
             font-size: 1.5rem;
-            font-weight: 500;
+            font-weight: 400;
             color: #858585;
             padding: 0;
             margin: 0;
