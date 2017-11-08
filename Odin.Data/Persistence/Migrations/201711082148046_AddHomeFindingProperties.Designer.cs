@@ -7,13 +7,13 @@ namespace Odin.Data.Persistence.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class MergeMasterMigrationNov7 : IMigrationMetadata
+    public sealed partial class AddHomeFindingProperties : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(MergeMasterMigrationNov7));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddHomeFindingProperties));
         
         string IMigrationMetadata.Id
         {
-            get { return "201711072024247_MergeMasterMigrationNov7"; }
+            get { return "201711082148046_AddHomeFindingProperties"; }
         }
         
         string IMigrationMetadata.Source

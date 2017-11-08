@@ -404,14 +404,6 @@
     <Compile Include="Persistence\Migrations\201710312109349_MergeAddNewEtlFields.Designer.cs">
       <DependentUpon>201710312109349_MergeAddNewEtlFields.cs</DependentUpon>
     </Compile>
-    <Compile Include="Persistence\Migrations\201711011841252_AddPropertyModel.cs" />
-    <Compile Include="Persistence\Migrations\201711011841252_AddPropertyModel.Designer.cs">
-      <DependentUpon>201711011841252_AddPropertyModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Persistence\Migrations\201711011848429_AddHomeFindingPropertyJoin.cs" />
-    <Compile Include="Persistence\Migrations\201711011848429_AddHomeFindingPropertyJoin.Designer.cs">
-      <DependentUpon>201711011848429_AddHomeFindingPropertyJoin.cs</DependentUpon>
-    </Compile>
     <Compile Include="Persistence\Migrations\201711021336284_ChangeRentTableToHomeFinding.cs" />
     <Compile Include="Persistence\Migrations\201711021336284_ChangeRentTableToHomeFinding.Designer.cs">
       <DependentUpon>201711021336284_ChangeRentTableToHomeFinding.cs</DependentUpon>
@@ -428,29 +420,13 @@
     <Compile Include="Persistence\Migrations\201711061758565_ChangeTriggerOnHomeFindingTable.Designer.cs">
       <DependentUpon>201711061758565_ChangeTriggerOnHomeFindingTable.cs</DependentUpon>
     </Compile>
-    <Compile Include="Persistence\Migrations\201711061648062_MergeHomeFindingChanges.cs" />
-    <Compile Include="Persistence\Migrations\201711061648062_MergeHomeFindingChanges.Designer.cs">
-      <DependentUpon>201711061648062_MergeHomeFindingChanges.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Persistence\Migrations\201711071449420_SwitchHomeFindingServiceInHomeFindingProperty.cs" />
-    <Compile Include="Persistence\Migrations\201711071449420_SwitchHomeFindingServiceInHomeFindingProperty.Designer.cs">
-      <DependentUpon>201711071449420_SwitchHomeFindingServiceInHomeFindingProperty.cs</DependentUpon>
-    </Compile>
     <Compile Include="Persistence\Migrations\201711061818328_MergedInTriggerUpdateFromMaster.cs" />
     <Compile Include="Persistence\Migrations\201711061818328_MergedInTriggerUpdateFromMaster.Designer.cs">
       <DependentUpon>201711061818328_MergedInTriggerUpdateFromMaster.cs</DependentUpon>
     </Compile>
-    <Compile Include="Persistence\Migrations\201711072024247_MergeMasterMigrationNov7.cs" />
-    <Compile Include="Persistence\Migrations\201711072024247_MergeMasterMigrationNov7.Designer.cs">
-      <DependentUpon>201711072024247_MergeMasterMigrationNov7.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Persistence\Migrations\201711081637050_AddHasManyHomeFindingPropertiesToHomeFinding.cs" />
-    <Compile Include="Persistence\Migrations\201711081637050_AddHasManyHomeFindingPropertiesToHomeFinding.Designer.cs">
-      <DependentUpon>201711081637050_AddHasManyHomeFindingPropertiesToHomeFinding.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Persistence\Migrations\201711081642096_AddCascadeDeleteForHomeFindingPropertiesRelationship.cs" />
-    <Compile Include="Persistence\Migrations\201711081642096_AddCascadeDeleteForHomeFindingPropertiesRelationship.Designer.cs">
-      <DependentUpon>201711081642096_AddCascadeDeleteForHomeFindingPropertiesRelationship.cs</DependentUpon>
+    <Compile Include="Persistence\Migrations\201711082148046_AddHomeFindingProperties.cs" />
+    <Compile Include="Persistence\Migrations\201711082148046_AddHomeFindingProperties.Designer.cs">
+      <DependentUpon>201711082148046_AddHomeFindingProperties.cs</DependentUpon>
     </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\NumberOfBathroomsTypesRepository.cs" />
@@ -617,12 +593,6 @@
     <EmbeddedResource Include="Persistence\Migrations\201710312109349_MergeAddNewEtlFields.resx">
       <DependentUpon>201710312109349_MergeAddNewEtlFields.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Persistence\Migrations\201711011841252_AddPropertyModel.resx">
-      <DependentUpon>201711011841252_AddPropertyModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Persistence\Migrations\201711011848429_AddHomeFindingPropertyJoin.resx">
-      <DependentUpon>201711011848429_AddHomeFindingPropertyJoin.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201711021336284_ChangeRentTableToHomeFinding.resx">
       <DependentUpon>201711021336284_ChangeRentTableToHomeFinding.cs</DependentUpon>
     </EmbeddedResource>
@@ -635,23 +605,11 @@
     <EmbeddedResource Include="Persistence\Migrations\201711061758565_ChangeTriggerOnHomeFindingTable.resx">
       <DependentUpon>201711061758565_ChangeTriggerOnHomeFindingTable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Persistence\Migrations\201711061648062_MergeHomeFindingChanges.resx">
-      <DependentUpon>201711061648062_MergeHomeFindingChanges.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Persistence\Migrations\201711071449420_SwitchHomeFindingServiceInHomeFindingProperty.resx">
-      <DependentUpon>201711071449420_SwitchHomeFindingServiceInHomeFindingProperty.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201711061818328_MergedInTriggerUpdateFromMaster.resx">
       <DependentUpon>201711061818328_MergedInTriggerUpdateFromMaster.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Persistence\Migrations\201711072024247_MergeMasterMigrationNov7.resx">
-      <DependentUpon>201711072024247_MergeMasterMigrationNov7.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Persistence\Migrations\201711081637050_AddHasManyHomeFindingPropertiesToHomeFinding.resx">
-      <DependentUpon>201711081637050_AddHasManyHomeFindingPropertiesToHomeFinding.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Persistence\Migrations\201711081642096_AddCascadeDeleteForHomeFindingPropertiesRelationship.resx">
-      <DependentUpon>201711081642096_AddCascadeDeleteForHomeFindingPropertiesRelationship.cs</DependentUpon>
+    <EmbeddedResource Include="Persistence\Migrations\201711082148046_AddHomeFindingProperties.resx">
+      <DependentUpon>201711082148046_AddHomeFindingProperties.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
