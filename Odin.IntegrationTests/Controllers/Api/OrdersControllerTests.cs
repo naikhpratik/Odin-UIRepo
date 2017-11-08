@@ -18,6 +18,8 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http.Results;
+using Moq;
+using Odin.Interfaces;
 
 namespace Odin.IntegrationTests.Controllers.Api
 {
@@ -29,7 +31,8 @@ namespace Odin.IntegrationTests.Controllers.Api
             var config = new MapperConfiguration(c => c.AddProfile(new MappingProfile()));
             var mapper = config.CreateMapper();
             var unitOfWork = new UnitOfWork(Context);
-            return new OrdersController(unitOfWork, mapper);
+            var mockCloudQueueStore = new Mock<ICloudQueueStore>();
+            return new OrdersController(unitOfWork, mapper, mockCloudQueueStore.Object);
         }
 
         [Test, Isolated]

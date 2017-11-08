@@ -40,9 +40,9 @@ namespace Odin.Tests.Controllers.Api
             mockUnitOfWork.SetupGet(u => u.Children).Returns(_mockChildrenRepository.Object);
             mockUnitOfWork.SetupGet(u => u.Pets).Returns(_mockPetsRepository.Object);
 
-
+            var mockCloudQueueStore = new Mock<ICloudQueueStore>();
             var mockAccountHelper = new Mock<IAccountHelper>();
-            _controller = new Odin.Controllers.Api.OrdersController(mockUnitOfWork.Object, _mockMapper.Object);
+            _controller = new Odin.Controllers.Api.OrdersController(mockUnitOfWork.Object, _mockMapper.Object, mockCloudQueueStore.Object);
 
             _userId = "1";
             _userName = "TestUser";
