@@ -9,11 +9,7 @@ namespace Odin.Data.Persistence.EntityConfigurations
     public class HomeFindingPropertiesConfiguration : EntityTypeConfiguration<HomeFindingProperty>
     {
         public HomeFindingPropertiesConfiguration()
-        {
-            //HasRequired(hfp => hfp.HomeFinding)
-            //    .WithMany(hf => hf.HomeFindingProperties)
-            //    .WillCascadeOnDelete(true);
-            
+        {           
             HasRequired(hfp => hfp.Property)
                 .WithMany()
                 .WillCascadeOnDelete(true);
