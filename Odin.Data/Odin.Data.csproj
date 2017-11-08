@@ -206,6 +206,7 @@
     <Compile Include="Persistence\ChildrenRepository.cs" />
     <Compile Include="Persistence\ConsultantsRepository.cs" />
     <Compile Include="Persistence\DepositTypesRepository.cs" />
+    <Compile Include="Persistence\EntityConfigurations\HomeFindingPropertiesConfiguration.cs" />
     <Compile Include="Persistence\EntityConfigurations\OrderConfiguration.cs" />
     <Compile Include="Persistence\EntityConfigurations\HomeFindingConfiguration.cs" />
     <Compile Include="Persistence\HousingTypesRepository.cs" />
@@ -447,6 +448,10 @@
     <Compile Include="Persistence\Migrations\201711081637050_AddHasManyHomeFindingPropertiesToHomeFinding.Designer.cs">
       <DependentUpon>201711081637050_AddHasManyHomeFindingPropertiesToHomeFinding.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201711081642096_AddCascadeDeleteForHomeFindingPropertiesRelationship.cs" />
+    <Compile Include="Persistence\Migrations\201711081642096_AddCascadeDeleteForHomeFindingPropertiesRelationship.Designer.cs">
+      <DependentUpon>201711081642096_AddCascadeDeleteForHomeFindingPropertiesRelationship.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\NumberOfBathroomsTypesRepository.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
@@ -644,6 +649,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201711081637050_AddHasManyHomeFindingPropertiesToHomeFinding.resx">
       <DependentUpon>201711081637050_AddHasManyHomeFindingPropertiesToHomeFinding.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711081642096_AddCascadeDeleteForHomeFindingPropertiesRelationship.resx">
+      <DependentUpon>201711081642096_AddCascadeDeleteForHomeFindingPropertiesRelationship.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
