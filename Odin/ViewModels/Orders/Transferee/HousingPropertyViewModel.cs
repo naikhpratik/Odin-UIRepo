@@ -14,7 +14,7 @@ namespace Odin.ViewModels.Orders.Transferee
         public string PropertyState { get; set; }
 
         [Display(Name = "Available or Not Date:")]
-        [DisplayFormat(DataFormatString = "0:d", NullDisplayText = "NA")]
+        [DisplayFormat(DataFormatString = "0:d", NullDisplayText = "Unknown")]
         public DateTime? AvailabilityDate { get; set; }
 
         //public string Id { get; set; }
