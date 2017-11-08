@@ -31,7 +31,7 @@ namespace MyDwellworks.App_Start
         /// </summary>
         public static void Start() 
         {
-            //DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
+            DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
             //DynamicModuleUtility.RegisterModule(typeof(NinjectHttpModule));
             bootstrapper.Initialize(CreateKernel);
         }
@@ -71,7 +71,13 @@ namespace MyDwellworks.App_Start
                         .SelectAllClasses()
                         .BindDefaultInterface();
                 });
-                
+
+                var config = new MapperConfiguration(c => c.AddProfile(new MappingProfile()));
+
+                var mapper = config.CreateMapper();
+                kernel.Bind<IMapper>().ToConstant(mapper);
+
+                kernel.Bind<ICloudQueueStore>().ToConstructor(_ => new CloudQueueStore("StorageConnectionString", "odintose"));
 
                 return kernel;
             }
@@ -88,18 +94,7 @@ namespace MyDwellworks.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            var config = new MapperConfiguration(c => c.AddProfile(new MappingProfile()));
 
-            var mapper = config.CreateMapper();
-            kernel.Bind<IMapper>().ToConstant(mapper);
-
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
-                CloudConfigurationManager.GetSetting("StorageConnectionString"));
-            CloudQueueClient queueClient = storageAccount.CreateCloudQueueClient();
-            CloudQueue queue = queueClient.GetQueueReference("odintose");
-            queue.CreateIfNotExists();
-
-            kernel.Bind<ICloudQueueStore>().ToConstant(new CloudQueueStore(queue));
         }        
     }
 }
