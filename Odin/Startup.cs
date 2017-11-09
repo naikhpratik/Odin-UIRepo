@@ -5,6 +5,7 @@ using MyDwellworks.App_Start;
 using Ninject.Web.Common.OwinHost;
 using Ninject.Web.WebApi.OwinHost;
 using Odin;
+using Odin.App_Start;
 using Owin;
 
 [assembly: OwinStartup(typeof(Startup))]
@@ -20,6 +21,7 @@ namespace Odin
             ConfigureAuth(app);
             app.UseNinjectMiddleware(NinjectWebCommon.CreateKernel);
             app.UseNinjectWebApi(configuration);
+            AzureStorageStartup.StartLocalAzureStorageEmulator();
         }
     }
 }
