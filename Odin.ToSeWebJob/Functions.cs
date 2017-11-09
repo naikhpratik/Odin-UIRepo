@@ -31,6 +31,7 @@ namespace Odin.ToSeWebJob
             log.WriteLine(message);
             var queueEntry = JsonConvert.DeserializeObject<QueueEntry>(message);
             log.WriteLine(queueEntry.ObjectId);
+            log.WriteLine("From VSTS");
         }
     }
 }
