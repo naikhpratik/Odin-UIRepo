@@ -1,9 +1,9 @@
-﻿using System;
+﻿using System.Configuration;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Odin.Helpers;
 
-namespace Odin.Tests.Helpers
+namespace Odin.IntegrationTests.Helpers
 {
     [TestClass]
     public class AzureStorageEmulatorManagerTests
@@ -22,6 +22,8 @@ namespace Odin.Tests.Helpers
 
         private void StopStorageEmulatorIfRunning()
         {
+            if (ConfigurationManager.AppSettings["IsLocalTestingEnvironment"].Equals("false"))
+                return;
             if (AzureStorageEmulatorManager.IsProcessRunning())
             {
                 AzureStorageEmulatorManager.StopStorageEmulator();
@@ -31,6 +33,8 @@ namespace Odin.Tests.Helpers
         [TestMethod]
         public void StartStorageEmulator_WhenRunning_ShouldStartEmulator()
         {
+            if (ConfigurationManager.AppSettings["IsLocalTestingEnvironment"].Equals("false"))
+                return;
             if (AzureStorageEmulatorManager.IsProcessRunning())
             {
                 AzureStorageEmulatorManager.StopStorageEmulator();
@@ -44,6 +48,8 @@ namespace Odin.Tests.Helpers
         [TestMethod]
         public void StopStorageEmulator_WhenRunning_EmulatorShouldBeStopped()
         {
+            if (ConfigurationManager.AppSettings["IsLocalTestingEnvironment"].Equals("false"))
+                return;
             if (!AzureStorageEmulatorManager.IsProcessRunning())
             {
                 AzureStorageEmulatorManager.StartStorageEmulator();
