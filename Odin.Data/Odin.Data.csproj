@@ -422,6 +422,10 @@
     <Compile Include="Persistence\Migrations\201711061818328_MergedInTriggerUpdateFromMaster.Designer.cs">
       <DependentUpon>201711061818328_MergedInTriggerUpdateFromMaster.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201711071800307_AddServiceFlagToOrder.cs" />
+    <Compile Include="Persistence\Migrations\201711071800307_AddServiceFlagToOrder.Designer.cs">
+      <DependentUpon>201711071800307_AddServiceFlagToOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\NumberOfBathroomsTypesRepository.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
@@ -601,6 +605,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201711061818328_MergedInTriggerUpdateFromMaster.resx">
       <DependentUpon>201711061818328_MergedInTriggerUpdateFromMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711071800307_AddServiceFlagToOrder.resx">
+      <DependentUpon>201711071800307_AddServiceFlagToOrder.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

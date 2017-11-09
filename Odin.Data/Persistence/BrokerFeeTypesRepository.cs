@@ -1,7 +1,7 @@
 ﻿using Odin.Data.Core.Models;
+using Odin.Data.Core.Repositories;
 using System.Collections.Generic;
 using System.Linq;
-using Odin.Data.Core.Repositories;
 
 namespace Odin.Data.Persistence
 {
@@ -14,9 +14,14 @@ namespace Odin.Data.Persistence
             _context = context;
         }
 
-        public IEnumerable<BrokerFeeType> GetBorkerBrokerFeeTypes()
+        public IEnumerable<BrokerFeeType> GetBrokerFeeTypes()
         {
             return _context.BrokerFeeTypes.ToList();
+        }
+
+        public BrokerFeeType GetBrokerFeeType(string seValue)
+        {
+            return _context.BrokerFeeTypes.SingleOrDefault(b => b.SeValue == seValue);
         }
     }
 }

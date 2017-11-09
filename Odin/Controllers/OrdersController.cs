@@ -5,6 +5,7 @@ using Odin.Data.Core.Models;
 using Odin.Interfaces;
 using Odin.ViewModels.Orders.Transferee;
 using Odin.ViewModels.Shared;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -53,15 +54,13 @@ namespace Odin.Controllers
         // GET Partials
         public ActionResult DetailsPartial(string id)
         {
-            var order = _unitOfWork.Orders.GetOrderById(id);
-            OrdersTransfereeViewModel viewModel = viewModelForOrder(order);
+            OrdersTransfereeViewModel viewModel = GetViewModelForOrder(id);
             return PartialView("~/views/orders/partials/_Details.cshtml",viewModel); 
         }
 
         public ActionResult IntakePartial(string id)
         {
-            var order = _unitOfWork.Orders.GetOrderById(id);
-            OrdersTransfereeViewModel viewModel = viewModelForOrder(order);
+            OrdersTransfereeViewModel viewModel = GetViewModelForOrder(id);
             return PartialView("~/views/orders/partials/_Intake.cshtml", viewModel);
         }
 
@@ -85,50 +84,56 @@ namespace Odin.Controllers
         }
 
         // GET: Transferee
-        public ViewResult Transferee(string id)
+        public ActionResult Transferee(string id)
         {
-            var order = _unitOfWork.Orders.GetOrderById(id);
+            var userId = User.Identity.GetUserId();
+            var order = _unitOfWork.Orders.GetOrderFor(userId, id);
 
-            OrdersTransfereeViewModel vm = _mapper.Map<Order, OrdersTransfereeViewModel>(order);
-
-            var cats = order.Services.Select(s => s.ServiceType.Category).ToList();
-            var ids = order.Services.Select(s => s.ServiceType.Id).ToList();
-            
-            //Remove service types that already have services.
-            var filtPossible = _unitOfWork.ServiceTypes.GetPossibleServiceTypes(cats, ids);
-
-            vm.PossibleServices =
-                _mapper.Map<IEnumerable<ServiceType>, IEnumerable<ServiceTypeViewModel>>(filtPossible);
-
-            vm.NumberOfBathrooms = _unitOfWork.NumberOfBathrooms.GetNumberOfBathroomsList();
-            vm.HousingTypes = _unitOfWork.HousingTypes.GetHousingTypesList();
-            vm.AreaTypes = _unitOfWork.AreaTypes.GetAreaTypesList();
-            vm.TransportationTypes = _unitOfWork.TransportationTypes.GetTransportationTypes();
-            vm.DepositTypes = _unitOfWork.DepositTypes.GetDepositTypesList();
-            vm.BrokerFeeTypes = _unitOfWork.BrokerFeeTypes.GetBorkerBrokerFeeTypes();
-            
-            return View(vm);
+            if (order == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound, "Not found");
+            }
+            ViewBag.Id = id;
+            return View();
         }
 
-        private OrdersTransfereeViewModel viewModelForOrder(Order order)
+        private OrdersTransfereeViewModel GetViewModelForOrder(string id)
         {
-            OrdersTransfereeViewModel vm = _mapper.Map<Order, OrdersTransfereeViewModel>(order);
+            var userId = User.Identity.GetUserId();
+            var order = _unitOfWork.Orders.GetOrderFor(userId,id);
 
-            var cats = order.Services.Select(s => s.ServiceType.Category).ToList();
+            OrdersTransfereeViewModel vm = _mapper.Map<Order, OrdersTransfereeViewModel>(order);
+            vm.Services = vm.Services.OrderBy(s => s.Category);
+
+            //Get list of all service categories
+            var catEnums = Enum.GetValues(typeof(ServiceCategory)).Cast<ServiceCategory>();
+
+            //Populate list of service categories available for this order.
+            var cats = new List<ServiceCategory>();
+            foreach (var cat in catEnums)
+            {
+                //Use service bit flag on order to determine what categories have been selected in SE.
+                if ((order.ServiceFlag & (int)cat) > 0)
+                {
+                    cats.Add(cat);
+                }
+            }
+
+            //Get all service types that the order already has.
             var ids = order.Services.Select(s => s.ServiceType.Id).ToList();
 
             //Remove service types that already have services.
             var filtPossible = _unitOfWork.ServiceTypes.GetPossibleServiceTypes(cats, ids);
 
             vm.PossibleServices =
-                _mapper.Map<IEnumerable<ServiceType>, IEnumerable<ServiceTypeViewModel>>(filtPossible);
+                _mapper.Map<IEnumerable<ServiceType>, IEnumerable<ServiceTypeViewModel>>(filtPossible).OrderBy(s => s.Category);
 
             vm.NumberOfBathrooms = _unitOfWork.NumberOfBathrooms.GetNumberOfBathroomsList();
             vm.HousingTypes = _unitOfWork.HousingTypes.GetHousingTypesList();
             vm.AreaTypes = _unitOfWork.AreaTypes.GetAreaTypesList();
             vm.TransportationTypes = _unitOfWork.TransportationTypes.GetTransportationTypes();
             vm.DepositTypes = _unitOfWork.DepositTypes.GetDepositTypesList();
-            vm.BrokerFeeTypes = _unitOfWork.BrokerFeeTypes.GetBorkerBrokerFeeTypes();
+            vm.BrokerFeeTypes = _unitOfWork.BrokerFeeTypes.GetBrokerFeeTypes();
 
             return vm;
         }

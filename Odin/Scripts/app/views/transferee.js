@@ -6,6 +6,8 @@
 
         $('#intake').css("display", "block");
 
+        $('#orderContainer').load('/orders/IntakePartial/' + currentOrderId);
+
         $('.item').click(function () {
             $('.item.selected').removeClass('selected');            
             $(this).addClass('selected');

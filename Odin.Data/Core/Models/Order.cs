@@ -83,6 +83,8 @@ namespace Odin.Data.Core.Models
 
         public HomeFinding HomeFinding { get; set; }
 
+        public int ServiceFlag { get; set; }
+
         public virtual ICollection<Service> Services { get; private set; }
 
         public bool HasService(int serviceTypeId)

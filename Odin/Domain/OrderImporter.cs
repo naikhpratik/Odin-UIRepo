@@ -3,7 +3,6 @@ using Odin.Data.Core;
 using Odin.Data.Core.Dtos;
 using Odin.Data.Core.Models;
 using Odin.Interfaces;
-using System;
 
 namespace Odin.Domain
 {
@@ -30,39 +29,22 @@ namespace Odin.Domain
             {
                 order = _mapper.Map<OrderDto, Order>(orderDto);
 
-                //Add new services
-                foreach (var serviceDto in orderDto.Services)
-                {
-                    if (!order.HasService(serviceDto.ServiceTypeId))
-                    {
-                        var newService = _mapper.Map<ServiceDto, Service>(serviceDto);
-                        newService.Id = Guid.NewGuid().ToString();
-                        order.Services.Add(newService);
-                    }
-                }
-
                 if (transferee == null)
                 {
                     transferee = _mapper.Map<TransfereeDto, Transferee>(orderDto.Transferee);
                     _unitOfWork.Transferees.Add(transferee);
-                }                
+                }
+                
+                //Map type values
+                order.BrokerFeeType = _unitOfWork.BrokerFeeTypes.GetBrokerFeeType(orderDto.BrokerFeeTypeSeValue);
+                order.DepositType = _unitOfWork.DepositTypes.GetDepositType(orderDto.DepositTypeSeValue);
+
 
                 _unitOfWork.Orders.Add(order);
             }
             else
             {
                 _mapper.Map<OrderDto, Order>(orderDto, order);
-
-                //Add new services
-                foreach (var serviceDto in orderDto.Services)
-                {
-                    if (!order.HasService(serviceDto.ServiceTypeId))
-                    {
-                        var newService = _mapper.Map<ServiceDto, Service>(serviceDto);
-                        newService.Id = Guid.NewGuid().ToString();
-                        order.Services.Add(newService);
-                    }
-                }
 
                 if (transferee == null)
                 {

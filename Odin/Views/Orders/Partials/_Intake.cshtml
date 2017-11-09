@@ -365,7 +365,14 @@
                     <span class="intake-span">@Model.Services.ElementAt(i).Name</span>
                 </div>
                 <div class="col-xs-12 col-sm-5 intake-col">
-                    @Html.TextBoxFor(s => @Model.Services.ElementAt(i).Notes, new { @class = "form-control intake-input intake-service-input" })
+                    @if (Model.Services.ElementAt(i).Selected)
+                    {
+                        @Html.TextBoxFor(s => @Model.Services.ElementAt(i).Notes, new { @class = "form-control intake-input intake-service-input" })
+                    }
+                    else
+                    {
+                        @Html.TextBoxFor(s => @Model.Services.ElementAt(i).Notes, new { @class = "form-control intake-input intake-service-input", disabled = "disabled" })
+                    }
                 </div>
             </div>
             
@@ -380,7 +387,7 @@
                     <span class="intake-span">@Model.PossibleServices.ElementAt(i).Name</span>
                 </div>
                 <div class="col-sm-5 intake-col">
-                    <input type="text" name="Notes" class="form-control intake-input intake-service-input"/>    
+                    <input type="text" name="Notes" class="form-control intake-input intake-service-input" disabled="disabled"/>    
                 </div>
             </div>
         }

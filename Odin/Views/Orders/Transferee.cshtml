@@ -44,7 +44,7 @@
     </header>
 
     <div class="container" id="orderContainer">
-        @Html.Partial("~/Views/Orders/Partials/_Intake.cshtml")
+        @*@Html.Partial("~/Views/Orders/Partials/_Intake.cshtml")*@
     </div>
 
 @section scripts
@@ -53,7 +53,7 @@
     @Scripts.Render("~/Scripts/transferee")
 
     <script>
-            var currentOrderId = '@Model.Id';
+            var currentOrderId = '@ViewBag.Id';
 
             $(document).ready(function () {
                 OrdersPageController.TransfereeInit();

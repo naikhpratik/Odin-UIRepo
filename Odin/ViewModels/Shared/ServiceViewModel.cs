@@ -1,5 +1,5 @@
-﻿using System;
-using Odin.Helpers;
+﻿using Odin.Helpers;
+using System;
 
 namespace Odin.ViewModels.Shared
 {
@@ -21,5 +21,7 @@ namespace Odin.ViewModels.Shared
         public string Notes { get; set; }
 
         public string Name { get; set; }
+
+        public int Category { get; set; }
     }
 }

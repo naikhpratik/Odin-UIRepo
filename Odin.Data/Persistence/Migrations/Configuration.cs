@@ -25,16 +25,20 @@ namespace Odin.Data.Persistence.Migrations
 
         protected override void Seed(ApplicationDbContext context)
         {
-            SeedInitialRoles(context);
-            SeedInitialUsers(context);
-            CreateOrderData(context);
-            PopulateSeContactUids(context);
+            //Note for Seeding types:  byte primary keys can be specified during insert. 
+            //int primary keys can't; no identity insert, just autoincrementing.
             SeedNumberOfBathrooms(context);
             SeedHousingTypes(context);
             SeedAreaTypes(context);
             SeedTransportationTypes(context);
             SeedDepositTypes(context);
             SeedBrokerFeeTypes(context);
+            SeedServiceTypes(context);
+
+            SeedInitialRoles(context);
+            SeedInitialUsers(context);
+            CreateOrderData(context);
+            PopulateSeContactUids(context);
         }
 
         private void PopulateSeContactUids(ApplicationDbContext context)
@@ -69,11 +73,13 @@ namespace Odin.Data.Persistence.Migrations
                     orders[i].Transferee = CreateRandomTransferee(context);
                     orders[i].Services.Add(new Service()
                     {
-                        ServiceType = context.ServiceTypes.First()
+                        ServiceType = context.ServiceTypes.First(),
+                        Selected = true
                     });
                     orders[i].Services.Add(new Service()
                     {
-                        ServiceType = context.ServiceTypes.OrderByDescending(st=>st.Id).First()
+                        ServiceType = context.ServiceTypes.OrderByDescending(st=>st.Id).First(),
+                        Selected = true
                     });
                     context.Orders.Add(orders[i]);
 
@@ -385,6 +391,179 @@ namespace Odin.Data.Persistence.Migrations
             if (!context.BrokerFeeTypes.Any(b => b.Id == 2))
             {
                 context.BrokerFeeTypes.Add(new BrokerFeeType() { Id = 2, Name = "Company", SeValue = "COMPAN" });
+            }
+        }
+
+        private void SeedServiceTypes(ApplicationDbContext context)
+        {
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Initial/Pre-Arrival Consultation".ToUpper()))
+            {
+                context.ServiceTypes.Add(new ServiceType() { Name = "Initial/Pre-Arrival Consultation", Category =  ServiceCategory.InitialConsultation});
+            }
+
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Welcome Packet".ToUpper()))
+            {
+                context.ServiceTypes.Add(new ServiceType() { Name = "Welcome Packet", Category = ServiceCategory.WelcomePacket });
+            }
+
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Social Security Registration".ToUpper()))
+            {
+                context.ServiceTypes.Add(new ServiceType() { Name = "Social Security Registration", Category = ServiceCategory.SettlingIn });
+            }
+
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Colleges/Universities".ToUpper()))
+            {
+                context.ServiceTypes.Add(new ServiceType() { Name = "Colleges/Universities", Category = ServiceCategory.SettlingIn });
+            }
+
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Language Assistance".ToUpper()))
+            {
+                context.ServiceTypes.Add(new ServiceType() { Name = "Language Assistance", Category = ServiceCategory.SettlingIn });
+            }
+
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Telephone systems".ToUpper()))
+            {
+                context.ServiceTypes.Add(new ServiceType() { Name = "Telephone systems", Category = ServiceCategory.SettlingIn });
+            }
+
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Utility hook-up".ToUpper()))
+            {
+                context.ServiceTypes.Add(new ServiceType() { Name = "Utility hook-up", Category = ServiceCategory.SettlingIn });
+            }
+
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Internet service providers".ToUpper()))
+            {
+                context.ServiceTypes.Add(new ServiceType() { Name = "Internet service providers", Category = ServiceCategory.SettlingIn });
+            }
+
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Furniture Rental".ToUpper()))
+            {
+                context.ServiceTypes.Add(new ServiceType() { Name = "Furniture Rental", Category = ServiceCategory.SettlingIn });
+            }
+
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Furniture Purchase".ToUpper()))
+            {
+                context.ServiceTypes.Add(new ServiceType() { Name = "Furniture Purchase", Category = ServiceCategory.SettlingIn });
+            }
+
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Appliances(compatibility / purchase)".ToUpper()))
+            {
+                context.ServiceTypes.Add(new ServiceType() {  Name = "Appliances(compatibility / purchase)", Category = ServiceCategory.SettlingIn });
+            }
+
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Driving/auto info (licensing / driving schools)".ToUpper()))
+            {
+                context.ServiceTypes.Add(new ServiceType() { Name = "Driving/auto info (licensing / driving schools)", Category = ServiceCategory.SettlingIn });
+            }
+
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Transportation options".ToUpper()))
+            {
+                context.ServiceTypes.Add(new ServiceType() { Name = "Transportation options", Category = ServiceCategory.SettlingIn });
+            }
+
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Homeowner's services".ToUpper()))
+            {
+                context.ServiceTypes.Add(new ServiceType() { Name = "Homeowner's services", Category = ServiceCategory.SettlingIn });
+            }
+
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Insurance (auto / renter / homeowner)".ToUpper()))
+            {
+                context.ServiceTypes.Add(new ServiceType() { Name = "Insurance (auto / renter / homeowner)", Category = ServiceCategory.SettlingIn });
+            }
+
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Medical/dental information".ToUpper()))
+            {
+                context.ServiceTypes.Add(new ServiceType() { Name = "Medical/dental information", Category = ServiceCategory.SettlingIn });
+            }
+
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Money issues/banking".ToUpper()))
+            {
+                context.ServiceTypes.Add(new ServiceType() { Name = "Money issues/banking", Category = ServiceCategory.SettlingIn });
+            }
+
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Mail services".ToUpper()))
+            {
+                context.ServiceTypes.Add(new ServiceType() { Name = "Mail services", Category = ServiceCategory.SettlingIn});
+            }
+
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Domestic services(maid / cook / driver)".ToUpper()))
+            {
+                context.ServiceTypes.Add(new ServiceType() { Name = "Domestic services(maid / cook / driver)", Category = ServiceCategory.SettlingIn });
+            }
+
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Pets (care/licensing/etc.)".ToUpper()))
+            {
+                context.ServiceTypes.Add(new ServiceType() { Name = "Pets (care/licensing/etc.)", Category = ServiceCategory.SettlingIn });
+            }
+
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Childcare".ToUpper()))
+            {
+                context.ServiceTypes.Add(new ServiceType() { Name = "Childcare", Category = ServiceCategory.SettlingIn });
+            }
+
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Eldercare".ToUpper()))
+            {
+                context.ServiceTypes.Add(new ServiceType() { Name = "Eldercare", Category = ServiceCategory.SettlingIn });
+            }
+
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Area Orientation / Overview".ToUpper()))
+            {
+                context.ServiceTypes.Add(new ServiceType() { Name = "Area Orientation/Overview", Category = ServiceCategory.AreaOrientation });
+            }
+
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Housing/Neighborhoods".ToUpper()))
+            {
+                context.ServiceTypes.Add(new ServiceType() {  Name = "Housing/Neighborhoods", Category = ServiceCategory.AreaOrientation });
+            }
+
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Religious workship".ToUpper()))
+            {
+                context.ServiceTypes.Add(new ServiceType() { Name = "Religious workship", Category = ServiceCategory.AreaOrientation });
+            }
+
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Shopping information".ToUpper()))
+            {
+                context.ServiceTypes.Add(new ServiceType() { Name = "Shopping information", Category = ServiceCategory.AreaOrientation });
+            }
+
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Restaurants".ToUpper()))
+            {
+                context.ServiceTypes.Add(new ServiceType() { Name = "Restaurants", Category = ServiceCategory.AreaOrientation });
+            }
+
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Arts and leisure facilities".ToUpper()))
+            {
+                context.ServiceTypes.Add(new ServiceType() { Name = "Arts and leisure facilities", Category = ServiceCategory.AreaOrientation });
+            }
+
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Clubs (social / health / recreational)".ToUpper()))
+            {
+                context.ServiceTypes.Add(new ServiceType() { Name = "Clubs (social / health / recreational)", Category = ServiceCategory.AreaOrientation });
+            }
+
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Sports information".ToUpper()))
+            {
+                context.ServiceTypes.Add(new ServiceType() { Name = "Sports information", Category = ServiceCategory.AreaOrientation });
+            }
+
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Volunteer associations".ToUpper()))
+            {
+                context.ServiceTypes.Add(new ServiceType() { Name = "Volunteer associations", Category = ServiceCategory.AreaOrientation });
+            }
+
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Library".ToUpper()))
+            {
+                context.ServiceTypes.Add(new ServiceType() { Name = "Library", Category = ServiceCategory.AreaOrientation });
+            }
+
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Emergency/police/fire".ToUpper()))
+            {
+                context.ServiceTypes.Add(new ServiceType() { Name = "Emergency/police/fire", Category = ServiceCategory.AreaOrientation });
+            }
+
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Local/Regional/Government Holidays".ToUpper()))
+            {
+                context.ServiceTypes.Add(new ServiceType() { Name = "Local/Regional/Government Holidays", Category = ServiceCategory.AreaOrientation });
             }
         }
     }
