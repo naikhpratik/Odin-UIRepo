@@ -351,6 +351,7 @@
     <Compile Include="ViewModels\Mailers\ViewRenderer.cs" />
     <Compile Include="ViewModels\Orders\Transferee\HousingPropertyViewModel.cs" />
     <Compile Include="ViewModels\Orders\Transferee\HousingViewModel.cs" />
+    <Compile Include="ViewModels\Orders\Transferee\OrdersTransfereeItineraryViewModel.cs" />
     <Compile Include="ViewModels\Orders\Transferee\OrdersTransfereeViewModel.cs" />
     <Compile Include="ViewModels\Shared\ChildViewModel.cs" />
     <Compile Include="ViewModels\Shared\ManagerViewModel.cs" />
@@ -675,6 +676,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\app\controllers\userManagementController.js" />
     <Content Include="Scripts\app\services\userManagementService.js" />
+    <Content Include="Scripts\app\views\transferee-housing.js" />
     <Content Include="Scripts\app\views\transferee-details.js" />
     <Content Include="Scripts\app\views\transferee-intake.js" />
     <Content Include="Scripts\app\views\transferee.js" />

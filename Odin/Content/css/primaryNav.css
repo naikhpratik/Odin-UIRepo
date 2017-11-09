@@ -1,4 +1,9 @@
-﻿#primaryNav {
+﻿#orderContainer {
+  margin-left: 18rem;
+  margin-top: 8rem;
+  width: auto; }
+
+#primaryNav {
   position: fixed;
   z-index: 2;
   height: 5rem;
