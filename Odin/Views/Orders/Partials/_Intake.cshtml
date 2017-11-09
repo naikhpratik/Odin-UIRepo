@@ -9,8 +9,7 @@
                 <img class="intake-collapse-img" src="/Content/Images/collapse.png" />
                 <img class="intake-expand-img" src="/Content/Images/expand.png" />
                 <h2 class="sectionSubHead">Contact Information</h2>
-            </div>
-           
+            </div>           
         </div>
         <ul class="row sectionList intake-row collapse in">
             <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
@@ -58,14 +57,14 @@
                 <img class="intake-collapse-img" src="/Content/Images/collapse.png" />
                 <img class="intake-expand-img" src="/Content/Images/expand.png" />
                 <h2 class="sectionSubHead">Destination Location</h2>
-                <span class="intake-edit">
-                    + Edit
-                </span>
-                <span class="intake-cancel">
-                    x Cancel
-                </span>
             </div>
-            </div>
+            <span class="sectionSave intake-edit">
+                + Edit
+            </span>
+            <span class="sectionSave intake-cancel">
+                x Cancel
+            </span>            
+        </div>
         <ul class="row sectionList intake-row collapse in">
             <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.DestinationCity)
@@ -94,14 +93,14 @@
                 <img class="intake-collapse-img" src="/Content/Images/collapse.png" />
                 <img class="intake-expand-img" src="/Content/Images/expand.png" />
                 <h2 class="sectionSubHead">Departure Location</h2>
-                <span class="intake-edit">
-                    + Edit
-                </span>
-                <span class="intake-cancel">
-                    x Cancel
-                </span>
             </div>
-            </div>
+            <span class="sectionSave intake-edit">
+                + Edit
+            </span>
+            <span class="sectionSave intake-cancel">
+                x Cancel
+            </span>
+        </div>            
         <ul class="row sectionList intake-row collapse in">
             <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.OriginCity)
@@ -130,19 +129,19 @@
                 <img class="intake-collapse-img" src="/Content/Images/collapse.png" />
                 <img class="intake-expand-img" src="/Content/Images/expand.png" />
                 <h2 class="sectionSubHead">Relocation Dates</h2>
-                <span class="intake-edit">
-                    + Edit
-                </span>
-                <span class="intake-cancel">
-                    x Cancel
-                </span>
             </div>
-            </div>
+            <span class="sectionSave intake-edit">
+                + Edit
+            </span>
+            <span class="sectionSave intake-cancel">
+                x Cancel
+            </span>
+        </div>
         <div class="row intake-row collapse in">
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.PreTripDateDisplay)
                 <span class="intake-span">@Model.PreTripDateDisplay</span>
-                @Html.DatePicker("intake-date date", "PreTripDate", @Model.PreTripDate)
+                @Html.DatePicker("intake-date date", "PreTripDate", Model.PreTripDate)
                 @Html.HiddenFor(model => @Model.PreTripDateDisplay, new {@class="intake-hidden"})
             </div>
             <div class="col-xs-6 col-sm-6 col-md-7 col-lg-7 intake-col">
@@ -180,10 +179,12 @@
     </div>
     <hr/>
     <div class="intake-block">
-        <div class="intake-collapse intake-header">
-           <img class="intake-collapse-img" src="/Content/Images/collapse.png" />
-           <img class="intake-expand-img" src="/Content/Images/expand.png" />
-           <h2 class="sectionSubHead">General</h2>
+        <div class="intake-header">
+            <div class="intake-collapse">
+                <img class="intake-collapse-img" src="/Content/Images/collapse.png" />
+                <img class="intake-expand-img" src="/Content/Images/expand.png" />
+                <h2 class="sectionSubHead">General</h2>
+            </div>
         </div>
         <div class="row intake-row collapse in">
             <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 intake-col">
@@ -211,10 +212,10 @@
                 <img class="intake-collapse-img" src="/Content/Images/collapse.png" />
                 <img class="intake-expand-img" src="/Content/Images/expand.png" />
                 <h2 class="sectionSubHead">Family And Pets</h2>
-                <span class="intake-edit">
+                <span class="sectionSave intake-edit">
                     + Edit
                 </span>
-                <span class="intake-cancel">
+                <span class="sectionSave intake-cancel">
                     x Cancel
                 </span>
             </div>
@@ -329,11 +330,11 @@
                 <img class="intake-collapse-img" src="/Content/Images/collapse.png" />
                 <img class="intake-expand-img" src="/Content/Images/expand.png" />
                 <h2 class="sectionSubHead">Services</h2>
-                <span class="intake-save">
-                    - Save
-                </span>
             </div>
-            </div>
+            <span class="sectionSave intake-save">
+                - Save
+            </span>            
+        </div>
         @for(int i = 0; i < @Model.Services.Count(); i++)
         {
             <div class="row intake-row collapse in" data-entity-id="@Model.Services.ElementAt(i).Id" data-entity-collection="services">
@@ -344,7 +345,7 @@
                     <span class="intake-span">@Model.Services.ElementAt(i).Name</span>
                 </div>
                 <div class="col-xs-12 col-sm-5 intake-col">
-                    @Html.TextBoxFor(s => @Model.Services.ElementAt(i).Notes, new { @class = "form-control intake-input intake-service-input" })
+                    @Html.TextBoxFor(s => @Model.Services.ElementAt(i).Notes, new { @class = "form-control intake-input intake-service-input", @placeholder = "Enter or Edit Notes" })
                 </div>
             </div>
             
@@ -367,15 +368,17 @@
     <hr/>
     <div class="intake-block" data-block="temphousing">
         <div class="intake-header">
-            <img class="intake-collapse-img" src="/Content/Images/collapse.png" />
-            <img class="intake-expand-img" src="/Content/Images/expand.png" />
-            <h2 class="sectionSubHead">Temporary Housing</h2>
-                <span class="intake-edit">
-                    + Edit
-                </span>
-                <span class="intake-cancel">
-                    x Cancel
-                </span>
+            <div class="intake-collapse">
+                <img class="intake-collapse-img" src="/Content/Images/collapse.png" />
+                <img class="intake-expand-img" src="/Content/Images/expand.png" />
+                <h2 class="sectionSubHead">Temporary Housing</h2>
+            </div>
+            <span class="sectionSave intake-edit">
+                + Edit
+            </span>
+            <span class="sectionSave intake-cancel">
+                x Cancel
+            </span>
         </div>
         <div class="row intake-row collapse in">
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
@@ -387,7 +390,7 @@
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.TempHousingEndDateDisplay)
                 <span class="intake-span">@Model.TempHousingEndDateDisplay</span>
-                @Html.DatePicker("intake-date date", "TempHousingEndDateDisplay", Model.TempHousingEndDateDisplay)
+                @Html.DatePicker("intake-date date", "TempHousingEndDateDisplay", Model.TempHousingEndDate)
                 @Html.HiddenFor(Model => @Model.TempHousingEndDateDisplay, new { @class = "intake-hidden" })
             </div>
         </div>
@@ -399,14 +402,14 @@
                 <img class="intake-collapse-img" src="/Content/Images/collapse.png" />
                 <img class="intake-expand-img" src="/Content/Images/expand.png" />
                 <h2 class="sectionSubHead">Housing Preferences</h2>
-                <span class="intake-edit">
-                    + Edit
-                </span>
-                <span class="intake-cancel">
-                    x Cancel
-                </span>
             </div>
-            </div>
+            <span class="sectionSave intake-edit">
+                + Edit
+            </span>
+            <span class="sectionSave intake-cancel">
+                x Cancel
+            </span>           
+        </div>
         <div class="row intake-row collapse in">
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.HousingBudgetDisplay)
@@ -517,14 +520,14 @@
                 <img class="intake-collapse-img" src="/Content/Images/collapse.png" />
                 <img class="intake-expand-img" src="/Content/Images/expand.png" />
                 <h2 class="sectionSubHead">Leasing</h2>
-                <span class="intake-edit">
-                    + Edit
-                </span>
-                <span class="intake-cancel">
-                    x Cancel
-                </span>
             </div>
-            </div>
+            <span class="sectionSave intake-edit">
+                + Edit
+            </span>
+            <span class="sectionSave intake-cancel">
+                x Cancel
+            </span>            
+        </div>
         <div class="row intake-row collapse in">
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.DepositTypeDisplay)

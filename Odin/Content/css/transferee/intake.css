@@ -43,15 +43,9 @@ div#intake .intake-block {
       margin-right: 8px;
       height: 1.6rem;
       width: 1.5rem; }
-  div#intake .intake-block .intake-header .intake-edit, div#intake .intake-block .intake-header .intake-save {
-    font-size: 20px;
-    color: #a7ce39;
-    cursor: pointer; }
   div#intake .intake-block .intake-header .intake-cancel {
     display: none;
-    font-size: 20px;
     color: #e53c2e;
-    cursor: pointer;
     padding-left: 15px; }
   div#intake .intake-block .intake-header .intake-expand-img {
     display: none; }

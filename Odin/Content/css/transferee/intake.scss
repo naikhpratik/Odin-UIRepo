@@ -58,19 +58,11 @@ div#intake {
                     height:1.6rem;
                     width: 1.5rem;
                 }
-            }
-
-            .intake-edit, .intake-save {
-                font-size: 20px;
-                color: $DW_Lime;
-                cursor: pointer;
-            }
+            }                      
 
             .intake-cancel {
                 display: none;
-                font-size: 20px;
-                color: $DW_Red;
-                cursor: pointer;
+                color: $DW_Red;                
                 padding-left: 15px;
             }
 

@@ -13,13 +13,16 @@ return {
 var TransfereeHousingController = function (TransfereeHousingProperty) {
     
     var init = function () {
+
+        var pnlHousing = $("div#housing");
+        var propertiesBlock = pnlHousing.find("#propertiesBlock");
        
-        $('.date').datetimepicker({                
+        propertiesBlock.find('.date').datetimepicker({                
             useCurrent:true,
             keepOpen: false
         });
         
-        pnlHousing = $("div#housing");
+        
 
         //pnlHousing.find(".details-header").find("span").on("click",
         //    function () {

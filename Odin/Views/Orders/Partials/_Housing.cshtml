@@ -64,65 +64,66 @@
             <img src="~/Content/Images/btn_add_home.png" />
         </div>
     </div>
-
-    <ul class="row" id="propertiesList">
-        <li class="row" id="propertiesHeader">
-            <div class="col-md-1">
-                <p>@Html.DisplayNameFor(model => model.Properties.ElementAt(0).Photos)</p>
-            </div>
-            <div class="col-md-2">
-                <p>@Html.DisplayNameFor(model => model.Properties.ElementAt(0).Address)</p>
-            </div>
-            <div class="col-md-2">
-                <p>@Html.DisplayNameFor(model => model.Properties.ElementAt(0).Availability)</p>
-            </div>
-            <div class="col-md-2">
-                <p>@Html.DisplayNameFor(model => model.Properties.ElementAt(0).Specifications)</p>
-            </div>
-            <div class="col-md-3">
-                <p>@Html.DisplayNameFor(model => model.Properties.ElementAt(0).ViewingDateDisplay)</p>
-            </div>
-            <div class="col-md-1">
-                <p>@Html.DisplayNameFor(model => model.Properties.ElementAt(0).IsLike)</p>
-            </div>
-            <div class="col-md-1">
-                <p>@Html.DisplayNameFor(model => model.Properties.ElementAt(0).Comments)</p>
-            </div>
-        </li>
-        <li class="row propertyItem">
-            <div class="col-md-1">
-                <img class="location" src="~/Content/Images/popout_sml_img.png" />
-            </div>
-            <div class="col-md-2">
-                <p>
-                    1234 Meadow Rd<br />
-                    Renton, WA
-                </p>
-            </div>
-            <div class="col-md-2">
-                <p>
-                    Available<br />
-                    12/12/2018
-                </p>
-            </div>
-            <div class="col-md-2">
-                <p>
-                    4 | 3<br />
-                    2,200 sq.ft
-                </p>
-            </div>
-            <div class="col-md-3">
-                @Html.DatePicker("date", "ViewingDate", false)
-            </div>
-            <div class="col-md-1 like">
-                <img src="~/Content/Images/icn_ln_selected_like.png" />
-            </div>
-            <div class="col-md-1 comments">
-                <img src="~/Content/Images/icn_chat_bubble.png" />
-                <span>09</span>
-            </div>
-        </li>    
-    </ul>
+    <div id="propertiesBlock">
+        <ul class="row" id="propertiesList">
+            <li class="row" id="propertiesHeader">
+                <div class="col-md-1">
+                    <p>@Html.DisplayNameFor(model => model.Properties.ElementAt(0).Photos)</p>
+                </div>
+                <div class="col-md-2">
+                    <p>@Html.DisplayNameFor(model => model.Properties.ElementAt(0).Address)</p>
+                </div>
+                <div class="col-md-2">
+                    <p>@Html.DisplayNameFor(model => model.Properties.ElementAt(0).Availability)</p>
+                </div>
+                <div class="col-md-2">
+                    <p>@Html.DisplayNameFor(model => model.Properties.ElementAt(0).Specifications)</p>
+                </div>
+                <div class="col-md-3">
+                    <p>@Html.DisplayNameFor(model => model.Properties.ElementAt(0).ViewingDateDisplay)</p>
+                </div>
+                <div class="col-md-1">
+                    <p>@Html.DisplayNameFor(model => model.Properties.ElementAt(0).IsLike)</p>
+                </div>
+                <div class="col-md-1">
+                    <p>@Html.DisplayNameFor(model => model.Properties.ElementAt(0).Comments)</p>
+                </div>
+            </li>
+            <li class="row propertyItem">
+                <div class="col-md-1">
+                    <img class="location" src="~/Content/Images/popout_sml_img.png" />
+                </div>
+                <div class="col-md-2">
+                    <p>
+                        1234 Meadow Rd<br />
+                        Renton, WA
+                    </p>
+                </div>
+                <div class="col-md-2">
+                    <p>
+                        Available<br />
+                        12/12/2018
+                    </p>
+                </div>
+                <div class="col-md-2">
+                    <p>
+                        4 | 3<br />
+                        2,200 sq.ft
+                    </p>
+                </div>
+                <div class="col-md-3">
+                    @Html.DatePicker("date", "ViewingDate", false)
+                </div>
+                <div class="col-md-1 like">
+                    <img src="~/Content/Images/icn_ln_selected_like.png" />
+                </div>
+                <div class="col-md-1 comments">
+                    <img src="~/Content/Images/icn_chat_bubble.png" />
+                    <span>09</span>
+                </div>
+            </li>
+        </ul>
+    </div>
     @*@for (int i = 0; i < Model.Properties.Count(); i++)
     {
         <div class="row" sel="new" style="display: none;">

@@ -29,11 +29,11 @@ public static class DatePickerHelper
         public static IHtmlString DatePicker(this HtmlHelper htmlhelper, string clss, string name, bool includePlaceHolder = true)
         {
             string icon = "calendar";
-            string wid = "100%";
+            //string wid = "100%";
             if (name == "time")
             {
                 icon = "time";
-                wid = "92%";
+              //  wid = "92%";
             }
             string res = "";
             TagBuilder tagDiv = new TagBuilder("div");
@@ -45,7 +45,7 @@ public static class DatePickerHelper
             tagInput.AddCssClass("form-control");
             tagInput.Attributes.Add("type", "text");
             tagInput.Attributes.Add("name", name);
-            //tagInput.Attributes.Add("style", "display:block;width:85%");
+           tagInput.Attributes.Add("style", "display:block;");
 
             if (includePlaceHolder)
             {
@@ -78,11 +78,11 @@ public static class DatePickerHelper
                 throw new ArgumentNullException("helper");
 
             string icon = "calendar";
-            string wid = "100%";
+            //string wid = "100%";
             if (clss == "time")
             {
                 icon = "time";
-                wid = "92%";
+               // wid = "92%";
             }
             string res = "";
             TagBuilder tagDiv = new TagBuilder("div");        
@@ -94,7 +94,7 @@ public static class DatePickerHelper
             tagInput.Attributes.Add("name", name);
             tagInput.AddCssClass("form-control");            
             tagInput.Attributes.Add("type", "text");
-            //tagInput.Attributes.Add("style", "display:block;width:85%");
+            tagInput.Attributes.Add("style", "display:block;");
 
             if (includePlaceHolder)
             {
@@ -128,11 +128,11 @@ public static class DatePickerHelper
             throw new ArgumentNullException("helper");
 
         string icon = "calendar";
-        string wid = "100%";
+        //string wid = "100%";
         if (clss == "time")
         {
             icon = "time";
-            wid = "92%";
+           // wid = "92%";
         }
         string res = "";
         TagBuilder tagDiv = new TagBuilder("div");
@@ -144,7 +144,7 @@ public static class DatePickerHelper
         tagInput.Attributes.Add("name", name);
         tagInput.AddCssClass("form-control");
         tagInput.Attributes.Add("type", "text");
-        //tagInput.Attributes.Add("style", "display:block;width:85%");
+        tagInput.Attributes.Add("style", "display:block;");
         tagInput.Attributes.Add("placeholder", "Enter " + clss + " or hit " + icon);
         tagInput.Attributes.Add("data-date-today-highlight", "true");
         tagInput.Attributes.Add("data-date-today-btn", "true");
@@ -179,22 +179,22 @@ public static class DatePickerHelper
     private static string buildTags(string name, IDictionary<string, object> validationAttributes)
         {
             string icon = "calendar";
-            string wid = "100%";
+            //string wid = "100%";
             if (name == "time")
             {
                 icon = "time";
-                wid = "92%";
+                //wid = "92%";
             }
             string res = "";
             TagBuilder tagDiv = new TagBuilder("div");
             tagDiv.Attributes.Add("name", name);
-            tagDiv.Attributes.Add("style", "width:" + wid);
+            //tagDiv.Attributes.Add("style", "width:" + wid);
             res = tagDiv.ToString(TagRenderMode.StartTag);
 
             TagBuilder tagInput = new TagBuilder("input");
             tagInput.AddCssClass("form-control");
             tagInput.Attributes.Add("type", "text");
-            tagInput.Attributes.Add("style", "display:block;width:85%");
+            //tagInput.Attributes.Add("style", "display:block;width:85%");
             tagInput.Attributes.Add("placeholder", "Enter " + name + " or hit " + icon);
             tagInput.Attributes.Add("data-date-today-highlight", "true");
             tagInput.Attributes.Add("data-date-today-btn", "true");
