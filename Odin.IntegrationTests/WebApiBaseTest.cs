@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Formatting;
@@ -16,6 +17,7 @@ using Ninject.Web.WebApi;
 using NUnit.Framework;
 using Odin.Data.Core.Models;
 using Odin.Data.Persistence;
+using Odin.Helpers;
 
 namespace Odin.IntegrationTests
 {
