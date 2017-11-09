@@ -183,6 +183,7 @@
     <Compile Include="Controllers\Api\ManagersControllerTests.cs" />
     <Compile Include="Domain\QueueStoreTests.cs" />
     <Compile Include="Extensions\HttpActionResultExtensions.cs" />
+    <Compile Include="Helpers\AzureStorageEmulatorManagerTests.cs" />
     <Compile Include="Helpers\ResultHelper.cs" />
     <Compile Include="TestAttributes\CleanData.cs" />
     <Compile Include="Controllers\Api\OrdersControllerTests.cs" />
