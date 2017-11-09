@@ -430,6 +430,10 @@
     <Compile Include="Persistence\Migrations\201711082148046_AddHomeFindingProperties.Designer.cs">
       <DependentUpon>201711082148046_AddHomeFindingProperties.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201711091945348_MergeHomesModelBranch.cs" />
+    <Compile Include="Persistence\Migrations\201711091945348_MergeHomesModelBranch.Designer.cs">
+      <DependentUpon>201711091945348_MergeHomesModelBranch.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\NumberOfBathroomsTypesRepository.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
@@ -612,6 +616,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201711082148046_AddHomeFindingProperties.resx">
       <DependentUpon>201711082148046_AddHomeFindingProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711091945348_MergeHomesModelBranch.resx">
+      <DependentUpon>201711091945348_MergeHomesModelBranch.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
