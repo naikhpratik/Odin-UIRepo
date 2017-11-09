@@ -13,8 +13,13 @@ $DW_Purple: #621f65;
 $logoHeight: 3rem;
 $primaryNavHeightLg: $logoHeight + 5rem;
 $primaryNavHeightSm: $logoHeight + 2rem;
+$sideNavWidth: 18rem; //height of primary nav divided by base font size
 
-
+#orderContainer {
+    margin-left: $sideNavWidth;
+    margin-top: $primaryNavHeightLg;
+    width: auto;
+}
 
 
 

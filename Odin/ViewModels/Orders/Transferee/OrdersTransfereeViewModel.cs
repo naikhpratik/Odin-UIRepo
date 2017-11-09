@@ -24,7 +24,7 @@ namespace Odin.ViewModels.Orders.Transferee
 
         public string Id { get; set; }
 
-       
+
         [DisplayName("City:")]
         public string DestinationCity { get; set; }
 
@@ -54,7 +54,6 @@ namespace Odin.ViewModels.Orders.Transferee
         }
 
         public bool IsVip { private get; set; }
-
         [DisplayName("Vip:")]
         public string IsVipDisplay
         {
@@ -67,10 +66,8 @@ namespace Odin.ViewModels.Orders.Transferee
         [DisplayName("Length(Days):")]
         public int TempHousingDays { get; set; }
 
-
         public DateTime? FinalArrivalDate { get; set; }
         public string FinalArrivalDateDisplay => DateHelper.GetViewFormat(FinalArrivalDate);
-
 
         public DateTime? TempHousingEndDate { get; set; }
 
@@ -89,9 +86,7 @@ namespace Odin.ViewModels.Orders.Transferee
         [DisplayName("Trip Notes:")]
         public string PreTripNotes { get; set; }
 
-        
         public DateTime? HomeFindingDate { get; set; }
-
         [DisplayName("Home Finding:")]
         public string HomeFindingDateDisplay
         {
@@ -104,7 +99,7 @@ namespace Odin.ViewModels.Orders.Transferee
         public string IsAssignmentDisplay
         {
             get { return IsAssignment ? "Yes" : "No"; }
-            
+
         }
 
         public bool IsInternational { get; set; }
@@ -122,13 +117,13 @@ namespace Odin.ViewModels.Orders.Transferee
         {
             get { return DateHelper.GetViewFormat(EstimatedArrivalDate); }
         }
-        
+
         public DateTime? WorkStartDate { get; set; }
 
         [DisplayName("Work Start:")]
         public string WorkStartDateDisplay {
             get { return DateHelper.GetViewFormat(WorkStartDate); }
-            
+
         }
 
         public DateTime? EstimatedDepartureDate {get; set; }
@@ -147,7 +142,6 @@ namespace Odin.ViewModels.Orders.Transferee
 
         [DisplayName("RMC:")]
         public string Rmc { get; set; }
-
         [DisplayName("Contact:")]
         public string RmcContact { get; set; }
 
@@ -209,7 +203,6 @@ namespace Odin.ViewModels.Orders.Transferee
         public string Client { get; set; }
         public string ClientFileNumber { get; set; }
         public string ClientFileNumberDisplay => ClientFileNumber ?? ClientFileNumber;
-           
 
         public string RentId { get; set; }
         public HomeFindingViewModel HomeFinding { get; set; }

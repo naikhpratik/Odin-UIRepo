@@ -1,476 +1,141 @@
 ﻿@import "../shared/_definitions.scss";
 
+.mapWrapper img {
+    display: block;
+    width: 100%;
+}
 
-div#housing {
+#propertiesControls {
+    border-top: 1px solid $DW_Gray;
+    border-bottom: 1px solid $DW_Gray;
+    padding: 1.5rem 0;
+    margin-top: 2rem;
+}
 
-    .row {
-        text-align: left;
-        padding-left: 10px;
-        padding-bottom: 20px;
-        border-bottom: 2px solid lightgray;
-        margin: 0px 20px 0px 20px;
+#housingFilter {
+    margin: 0;
+    padding: 0;
 
-        &.notfirst {
-            font-size: 20px;
-            padding-top: 18px;
+    label {
+        margin: 0 0 0 0;
+        margin-right: 1rem;
+        cursor: pointer;
+
+        &:last-child {
+            margin-right: 0;
         }
 
-        &:nth-child(2) {
+        input[type=radio] {
+            box-sizing: border-box;
 
-            div {
-                display: inline-block;
-
-                span {
-                    margin-right: 8px;
-                }
-
-                &:nth-child(2) {
-                    color: lightgray;
-
-                    span {
-                        margin-right: 15px;
-                    }
-
-                    input {
-                        top: 6px;
-                        margin-right: 10px;
-
-                        &:checked:before {
-                            left: -3px;
-                            background-color: $DW_Purple;
-                        }
-
-                        &:checked:after {
-                            border: none;
-                        }
-
-                        &:after {
-                            top: 0px;
-                            width: 12px;
-                            height: 12px;
-                        }
-
-                        + span.selected {
-                            color: $DW_LtPurple;
-                        }
-                    }
-                }
+            + span {
+                font-weight: 300;
+                color: $DW_Gray;
             }
 
-            div#add {
-                float: right;
-                cursor: pointer;
-                margin-right: 60px;
+            &:checked {
 
-                img {
-                    width: 38px;
-                }
-
-                span {
-                    color: $DW_Blue;
-                }
-            }
-        }
-
-        &:nth-child(3) {
-            max-height: 388px;
-            overflow-y: scroll;
-            border-bottom: unset;
-
-            table {
-                left: -36px;
-                width: 100%;
-                text-align: center;
-                position: relative;
-                font-size: 16px;
-                font-weight: 500;
-                font-family: sans-serif;
-
-                th {
-                    text-align: center;
-                    font-weight: normal;
-                    line-height: 22px;
-                    padding-top: 8px;
-                    color: $DW_LtBlue;
-                }
-
-                tbody tr:hover {
-                    background-color: lightgray;
-                }
-
-                td {
-                    height: 84px;
-                    line-height: 18px;
-
-                    img {
-                        width: 35px;
-                        cursor: pointer;
-
-                        &.noinit {
-                            display: none;
-                        }
-
-                        &.location {
-                            width: 60px;
-                        }
-
-                        &.comment {
-                            width: 21px;
-                        }
-                    }
-
-                    div.likebtns img {
-                        width: 22px
-                    }
-
-                    div.notify-count {
-                        top: 14px;
-                        left: -18px;
-                        width: 10px;
-                        cursor: pointer;
-                        font-weight: bold;
-                        position: relative;
-                        display: inline-block;
-                        text-align: center;
-
-                        &.noinit {
-                            display: none;
-                        }
-
-                        img {
-                            width: 22px;
-                        }
-
-                        span {
-                            top: -21px;
-                            left: 5px;
-                            color: white;
-                            font-size: 10px;
-                            position: relative;
-                        }
-                    }
-                }
-
-                p {
-                    margin-bottom: 0px
-                }
-
-                span {
-                    color: $DW_LtPurple;
-                }
-            }
-        }
-
-        .col-md-6 {
-            p#caption {
-                color: black;
-                font-size: 30px;
-                margin: 30px 0px 15px 0px;
-            }
-
-            &:nth-child(2) {
-                padding: 0px;
-                margin-top: 20px;
-                max-height: 342px;
-                overflow: hidden;
-                //TODO: temporary until real map is in place
-                img {
-                    width: 100%;
-                }
-            }
-
-            .col-md-5, .col-md-6 {
-                padding-left: 0px;
-
-                p {
-                    font-size: 20px;
-                    font-weight: 400;
-                    margin-top: 10px;
-                    margin-bottom: 0px;
-
-                    &:first-of-type {
-                        margin-top: 0px;
-                    }
-                }
-
-                span {
-                    top: -9px;
-                    font-size: 16px;
-                    color: $DW_Blue;
-                    position: relative;
+                + span {
+                    font-weight: 500;
+                    color: #8e1a55;
                 }
             }
         }
     }
 
-    div#chat {
-        top: 92px;
-        left: 642px;
-        color: white;
-        width: 600px;
-        display: none;
-        padding-top: 35px;
-        position: absolute;
-        border: 1px solid black;
-        background-color: $DW_Lime;
+    .housingFilter__title {
+        font-size: 1.5rem;
+    }
+}
 
-        div#addr {
-            font-size: 16px;
-            text-align: right;
-            padding-right: 40px;
-            margin-bottom: 30px;
+#addProperty {
+    text-align: right;
+    cursor: pointer;
 
-            span#lastchat {
-                font-weight: bold;
-            }
-        }
+    > img {
+        width: 3rem;
+    }
 
-        div#chatwrapper {
-            padding: 10px 10px 42px 10px;
-            background-color: white;
-        }
+    > * {
+        display: inline-block;
+        vertical-align: middle;
 
-        div#chatframe {
-            color: lightgray;
-            text-align: left;
-            margin-bottom: 14px;
-            padding: 0px 8px 1px 8px;
-            background-color: white;
-
-            ul {
-                font-size: 16px;
-                list-style: none;
-                padding: 12px 0px 0px 12px;
-
-                li {
-                    span {
-                        color: gray;
-                    }
-
-                    p {
-                        color: lightgray;
-                        line-height: 18px;
-                    }
-                }
-            }
-
-            img {
-                width: 25px;
-                margin-right: 20px;
-            }
-
-            div {
-                margin-left: 46px;
-            }
-        }
-
-        div#comment {
-            height: 100px;
-            color: lightgray;
-            text-align: left;
-            padding: 10px;
-            margin: 0px 18px 20px 18px;
-            border: 1px solid lightgray;
-            border-top: 2px solid darkgray;
-        }
-
-        button {
-            color: lightgray;
-            width: 60px;
-            height: 23px;
-            line-height: 10px;
-            border: 2px solid gray;
-            background-color: white;
-
-            &:first-of-type {
-                float: left;
-                margin-left: 18px;
-            }
-
-            &:last-of-type {
-                float: right;
-                color: $DW_Purple;
-                margin-right: 18px;
-                border: 2px solid $DW_Purple;
-            }
+        &:nth-child(1) {
+            margin-right: 1rem;
         }
     }
 
-    div#property {
-        top: 34px;
-        left: 338px;
-        width: 1234px;
-        display: none;
-        font-size: 18px;
-        border: 1px solid;
-        position: absolute;
-        background-color: white;
+    @media screen and (min-width: 76.8rem) {
+        float: right;
+    }
+}
 
-        span {
-            color: black;
-        }
+#propertiesList {
+    list-style: none;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+}
+
+#propertiesHeader {
+    margin: 0;
+    margin-top: 2rem;
+    padding: 0;
+    list-style: none;
+
+    div {
+        margin: 0;
+        padding: 0;
 
         p {
-            color: $DW_LtBlue;
-            margin-bottom: 0px;
-        }
-
-        div.row {
-            overflow: unset;
-            border-bottom: none;
-
-            &:nth-child(1) {
-                div:nth-child(1) {
-                    padding: 36px 0px 0px 30px;
-
-                    span {
-                        color: $DW_LtPurple;
-
-                        &:first-of-type {
-                            font-weight: bold;
-                        }
-                    }
-                }
-
-                div:nth-child(2) {
-                    float: right;
-                    padding: 20px 0px 0px 0px;
-
-                    img {
-                        float: right;
-                        cursor: pointer;
-                    }
-                }
-            }
-
-            &:nth-child(2) {
-                img {
-                    width: 750px;
-                }
-
-                div.col-md-4 {
-                    width: 28.3%;
-                    padding: 0px;
-                    margin-left: 40px;
-                    line-height: 30px;
-                    border-bottom: 2px solid lightgray;
-
-                    p {
-                        top: -8px;
-                        position: relative;
-                    }
-
-                    div {
-                        &:nth-child(1) {
-                            padding-top: 10px;
-                        }
-
-                        &:nth-child(2) {
-                            margin-top: 20px;
-                            padding-bottom: 20px;
-                        }
-                    }
-                }
-            }
-
-            &:nth-child(3) {
-                text-align: center;
-
-                div.col-md-8 {
-                    padding-right: 60px;
-
-                    img {
-                        width: 136px;
-                        padding: 0px 10px 0px 10px;
-                    }
-                }
-
-                div.col-md-4 {
-                    width: 28.3%;
-                    margin-left: 40px;
-                    padding: 14px 0px 32px 0px;
-                    border-bottom: 2px solid lightgray;
-
-                    div {
-                        height: 34px;
-                    }
-
-                    div:nth-child(1) {
-                        width: 28%;
-                        float: left;
-                        text-align: left;
-                        display: inline-block;
-
-                        div.dislike {
-                            margin-top: 10px;
-
-                            img.dislike_sel {
-                                top: -4px;
-                                left: -4px;
-                                position: relative;
-                            }
-                        }
-                    }
-
-                    div:nth-child(2) {
-                        width: 36%;
-                        float: right;
-                        text-align: right;
-
-                        img:nth-child(1) {
-                            float: left;
-                        }
-
-                        div.notify-count {
-                            top: -33px;
-                            left: -13px;
-                            width: 10px;
-                            cursor: pointer;
-                            font-weight: bold;
-                            position: relative;
-                            display: inline-block;
-                            text-align: center;
-
-                            &.noinit {
-                                display: none;
-                            }
-
-                            img {
-                                width: 25px;
-                            }
-
-                            span {
-                                top: -32px;
-                                left: 7px;
-                                color: white;
-                                font-size: 10px;
-                                position: relative;
-                            }
-                        }
-                    }
-
-                    img {
-                        width: 30px;
-
-                        &.noinit {
-                            display: none;
-                        }
-                    }
-                }
-            }
-
-            &:nth-child(4) {
-                p {
-                    &:first-child {
-                        color: black;
-                    }
-
-                    &:last-child {
-                        line-height: 26px;
-                        margin: 10px 0px 20px 0px;
-                    }
-                }
-            }
+            color: #31a4dd;
+            line-height: 1.25rem;
+            white-space: pre-line;
+            text-align: center;
         }
     }
 }
+
+.propertyItem {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+
+    div {
+        text-align: center;
+
+        p {
+            color: #858585;
+            text-align: center;
+            line-height: 1.5rem;
+        }
+
+        img {
+            width: 5rem;
+            margin: 0 auto;
+        }
+    }
+
+    .like, .comments{
+        img{
+            width: 3rem;
+        }
+    }
+
+    .comments{
+        position: relative;
+
+        span{
+            position: absolute;
+            top: 0;
+            left: 50%;
+            background-color: $DW_Red;
+            color: white;
+            font-size: 1.25rem;
+            line-height: 1.25rem;
+            min-width: 2.5rem;
+            padding: 0.625rem;
+            border-radius: 1.25rem;
+            z-index: 1;
+        }
+    }
+}
+

@@ -18,5 +18,8 @@ namespace Odin.Data.Persistence
         DbSet<TransportationType> TransportationTypes { get; set; }
         DbSet<DepositType> DepositTypes { get; set; }
         DbSet<BrokerFeeType> BrokerFeeTypes { get; set; }
+
+        DbSet<Property> Properties { get; set; }
+        DbSet<HomeFindingProperty> HomeFindingProperties { get; set; }
     }
 }

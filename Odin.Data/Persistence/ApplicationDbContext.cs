@@ -32,6 +32,9 @@ namespace Odin.Data.Persistence
         public virtual DbSet<DepositType> DepositTypes { get; set; }
         public virtual DbSet<BrokerFeeType> BrokerFeeTypes { get; set; }
 
+        public virtual DbSet<Property> Properties { get; set; }
+        public virtual DbSet<HomeFindingProperty> HomeFindingProperties { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
@@ -46,10 +49,7 @@ namespace Odin.Data.Persistence
         {
             modelBuilder.Configurations.Add(new OrderConfiguration());
             modelBuilder.Configurations.Add(new HomeFindingConfiguration());
-            
-            //modelBuilder.Entity<Child>()
-            //    .Map(m => m.Requires("Deleted").HasValue(false))
-            //    .Ignore(m => m.Deleted);
+            modelBuilder.Configurations.Add(new HomeFindingPropertiesConfiguration());
 
             modelBuilder.Conventions.Add(
                 new AttributeToColumnAnnotationConvention<TableColumnAttribute, string>(
