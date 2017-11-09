@@ -38,14 +38,14 @@ public static class DatePickerHelper
             string res = "";
             TagBuilder tagDiv = new TagBuilder("div");
             tagDiv.AddCssClass("input-group " + clss);
-            tagDiv.Attributes.Add("style", "width:" + wid);
+            //tagDiv.Attributes.Add("style", "width:" + wid);
             res = tagDiv.ToString(TagRenderMode.StartTag);
 
             TagBuilder tagInput = new TagBuilder("input");
             tagInput.AddCssClass("form-control");
             tagInput.Attributes.Add("type", "text");
             tagInput.Attributes.Add("name", name);
-            tagInput.Attributes.Add("style", "display:block;width:85%");
+            //tagInput.Attributes.Add("style", "display:block;width:85%");
 
             if (includePlaceHolder)
             {
@@ -87,14 +87,14 @@ public static class DatePickerHelper
             string res = "";
             TagBuilder tagDiv = new TagBuilder("div");        
             tagDiv.AddCssClass("input-group " + clss);
-            tagDiv.Attributes.Add("style", "width:" + wid);        
+            //tagDiv.Attributes.Add("style", "width:" + wid);        
             res = tagDiv.ToString(TagRenderMode.StartTag);
 
             TagBuilder tagInput = new TagBuilder("input");
             tagInput.Attributes.Add("name", name);
             tagInput.AddCssClass("form-control");            
             tagInput.Attributes.Add("type", "text");
-            tagInput.Attributes.Add("style", "display:block;width:85%");
+            //tagInput.Attributes.Add("style", "display:block;width:85%");
 
             if (includePlaceHolder)
             {
@@ -137,14 +137,14 @@ public static class DatePickerHelper
         string res = "";
         TagBuilder tagDiv = new TagBuilder("div");
         tagDiv.AddCssClass("input-group " + clss);
-        tagDiv.Attributes.Add("style", "width:" + wid);
+        //tagDiv.Attributes.Add("style", "width:" + wid);
         res = tagDiv.ToString(TagRenderMode.StartTag);
 
         TagBuilder tagInput = new TagBuilder("input");
         tagInput.Attributes.Add("name", name);
         tagInput.AddCssClass("form-control");
         tagInput.Attributes.Add("type", "text");
-        tagInput.Attributes.Add("style", "display:block;width:85%");
+        //tagInput.Attributes.Add("style", "display:block;width:85%");
         tagInput.Attributes.Add("placeholder", "Enter " + clss + " or hit " + icon);
         tagInput.Attributes.Add("data-date-today-highlight", "true");
         tagInput.Attributes.Add("data-date-today-btn", "true");

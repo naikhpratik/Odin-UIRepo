@@ -48,6 +48,12 @@ nav#transfereeSideNav {
       height: calc(100vh - 8rem);
       top: 8rem; } }
 
+.input-group.date, .input-group.time {
+  /*margin: 0 auto;*/
+  /*> input.form-control{
+        text-align: center;
+    }*/ }
+
 .sectionTitle {
   padding-bottom: 0px;
   margin: 2rem 0 0 0;
@@ -58,7 +64,8 @@ nav#transfereeSideNav {
   margin: 2.5rem 0 0.5rem 0;
   font-size: 1.725rem;
   font-weight: 400;
-  color: #8e1a55; }
+  color: #8e1a55;
+  display: inline-block; }
 
 .sectionSave {
   font-size: small;

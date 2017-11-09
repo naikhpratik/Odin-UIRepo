@@ -360,10 +360,10 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\transferee\details.css">
-	<DependentUpon>details.scss</DependentUpon>
-	</Content>
+      <DependentUpon>details.scss</DependentUpon>
+    </Content>
     <Content Include="Content\css\transferee\details.min.css">
-	<DependentUpon>details.css</DependentUpon>
+      <DependentUpon>details.css</DependentUpon>
     </Content>
     <Content Include="Content\css\transferee\history.css">
       <DependentUpon>history.scss</DependentUpon>
@@ -661,6 +661,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\app\controllers\userManagementController.js" />
     <Content Include="Scripts\app\services\userManagementService.js" />
+    <Content Include="Scripts\app\views\transferee-housing.js" />
     <Content Include="Scripts\app\views\transferee-details.js" />
     <Content Include="Scripts\app\views\transferee-intake.js" />
     <Content Include="Scripts\app\views\transferee.js" />
