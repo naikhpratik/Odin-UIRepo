@@ -144,6 +144,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="App.Release.config" />
+    <None Include="App.Staging.config" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\odin-staging-web - Web Deploy.pubxml" />
     <None Include="Properties\webjob-publish-settings.json" />
