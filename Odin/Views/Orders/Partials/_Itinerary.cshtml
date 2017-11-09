@@ -1,5 +1,83 @@
-﻿<div id="itinerary" class="frame noinit">
-    <h2>Itinerary Panel</h2>
+﻿@model Odin.ViewModels.Orders.Transferee.OrdersTransfereeItineraryViewModel
+<div class="container-fluid" data-order-id="Model.Id" id="itinerary">
+    <h1 class="sectionTitle">Scheduled Events</h1>
+    <h2 class="sectionSubHead">Pre-Arrival Consultation</h2>
+    <div class="item">
+        <ul class="row sectionList">
+            <li class="col-sm-2">
+                <label>Date:</label>
+                <p>Event.date</p>
+            </li>
+            <li class="col-sm-2">
+                <label>Day:</label>
+                <p>Event.day</p>
+            </li>
+            <li class="col-sm-2">
+                <label>Time:</label>
+                <p>Event.time</p>
+            </li>
+            <li class="col-sm-2">
+                <label>Type:</label>
+                <p>Event.type</p>
+            </li>
+            <li class="col-sm-2">
+                <label>Description:</label>
+                <p>Event.description</p>
+            </li>
+            <li class="col-sm-2">
+                <label>Outcome:</label>
+                <p>Event.outcome</p>
+            </li>
+        </ul>       
+        
+        <ul class="row sectionList more_text" style="display:none">
+            <li class="col-sm-2">
+                <label>Date:</label>
+                <p>Event.date</p>
+            </li>
+            <li class="col-sm-2">
+                <label>Day:</label>
+                <p>Event.day</p>
+            </li>
+            <li class="col-sm-2">
+                <label>Time:</label>
+                <p>Event.time</p>
+            </li>
+            <li class="col-sm-2">
+                <label>Type:</label>
+                <p>Event.type</p>
+            </li>
+            <li class="col-sm-2">
+                <label>Description:</label>
+                <p>Event.description</p>
+            </li>
+            <li class="col-sm-2">
+                <label>Outcome:</label>
+                <p>Event.outcome</p>
+            </li>
+        </ul>
+        <a href="#" id="moreorless" class="read_more" style="text-decoration:none">More...</a><br />
+    </div>
+    
+    <hr>
 </div>
+<script>
+    $(function () { /* to make sure the script runs after page load */
+
+        $('a.read_more').click(function (event) { /* find all a.read_more elements and bind the following code to them */
+
+            event.preventDefault(); /* prevent the a from changing the url */
+            if ($('#moreorless').text() == "Less...") {
+                $(this).parents('.item').find('.more_text').animate().hide(); /* show the .more_text span */
+                $('#moreorless').text("More...");
+            }
+            else {
+                $(this).parents('.item').find('.more_text').animate().show(); /* show the .more_text span */
+                $('#moreorless').text("Less...");
+            }            
+        });
+
+    });
+</script>
 
 @Styles.Render("~/Styling/itinerary")
