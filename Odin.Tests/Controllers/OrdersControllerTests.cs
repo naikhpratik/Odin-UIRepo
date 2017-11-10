@@ -81,5 +81,7 @@ namespace Odin.Tests.Controllers
             var result = _controller.Details(orderId) as ViewResult;
             result.Should().NotBeNull();
         }
+
+
     }
 }

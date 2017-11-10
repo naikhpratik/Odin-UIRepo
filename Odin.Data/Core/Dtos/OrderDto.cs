@@ -54,6 +54,8 @@ namespace Odin.Data.Core.Dtos
         public string BrokerFeeTypeSeValue { get; set; }
         public string DepositTypeSeValue { get; set; }
 
+        public string SeCustStatus { get; set;  }
+
 
         [Required]
         public TransfereeDto Transferee { get; set; }
