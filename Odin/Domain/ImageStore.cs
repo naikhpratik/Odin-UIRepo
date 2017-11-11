@@ -43,17 +43,17 @@ namespace Odin.Domain
                 SharedAccessStartTime = DateTime.Now.AddMinutes(-15),
                 SharedAccessExpiryTime = DateTime.Now.AddMinutes(30)
             };
-            var container = _client.GetContainerReference("images");
+            var container = _client.GetContainerReference(ContainerName);
             var blob = container.GetBlockBlobReference(imageId);
             var sasToken = blob.GetSharedAccessSignature(sasPolicy);
 
             // Using storage emulator
             if (_client.BaseUri.IsLoopback)
             {
-                return new Uri($"{_client.BaseUri}/images/{imageId}");
+                return new Uri($"{_client.BaseUri}/{ContainerName}/{imageId}");
             }
 
-            return new Uri($"{_client.BaseUri}images/{imageId}{sasToken}");
+            return new Uri($"{_client.BaseUri}{ContainerName}/{imageId}{sasToken}");
         }
     }
 }
