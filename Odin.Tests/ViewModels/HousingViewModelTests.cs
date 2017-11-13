@@ -6,6 +6,8 @@ using Odin.Data.Builders;
 using Odin.ViewModels.Orders.Transferee;
 using FluentAssertions;
 using System.Collections.ObjectModel;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Odin.Tests.ViewModels
 {
@@ -16,7 +18,7 @@ namespace Odin.Tests.ViewModels
         private IMapper mapper;
 
         [TestInitialize]
-        public void TestInit ()
+        public void TestInit()
         {
             var orderId = "1";
             order = new Order() { Id = orderId };
@@ -128,6 +130,54 @@ namespace Odin.Tests.ViewModels
             HousingViewModel viewModel = mapper.Map<HomeFinding, HousingViewModel>(order.HomeFinding);
 
             (viewModel.NumberOfBathroomsName).Should().Be(bathTypeName);
+        }
+
+        [TestMethod]
+        public void TestViewModelFromOrderAndMapper()
+        {
+            String spouseName = "Some Name";
+            order.SpouseName = spouseName;
+
+            String housingTypeName = "My Great Housing Type";
+            HousingType housingType = new HousingType { Name = housingTypeName };
+            order.HomeFinding.HousingType = housingType;
+
+            HousingViewModel viewModel = new HousingViewModel(order, mapper);
+
+            viewModel.Should().NotBeNull();
+            viewModel.HousingTypeName.Should().Be(housingTypeName);
+            viewModel.SpouseName.Should().Be(spouseName);
+        }
+
+
+        [TestMethod]
+        public void TestViewModelFromOrderLoadsPropertiesInOrder()
+        {
+            DateTime now = DateTime.Now;
+
+            DateTime firstDate = now;
+            DateTime secondDate = now.AddDays(1);
+            DateTime thirdDate = now.AddDays(5);
+
+            DateTime[] dates = new[] { thirdDate, firstDate, secondDate };
+
+            foreach (DateTime d in dates)
+            {
+                HomeFindingProperty hfp = new HomeFindingProperty();
+                hfp.CreatedAt = d;
+                hfp.Property = new Property();
+                hfp.Property.Street1 = d.ToString();
+
+                order.HomeFinding.HomeFindingProperties.Add(hfp);
+            }
+
+            HousingViewModel viewModel = new HousingViewModel(order, mapper);
+
+            IEnumerable<HousingPropertyViewModel> propertyViewModels = viewModel.Properties;
+
+            propertyViewModels.ElementAt(0).PropertyStreet1.Should().Be(firstDate.ToString());
+            propertyViewModels.ElementAt(1).PropertyStreet1.Should().Be(secondDate.ToString());
+            propertyViewModels.ElementAt(2).PropertyStreet1.Should().Be(thirdDate.ToString());
         }
     }
 }

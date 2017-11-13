@@ -45,9 +45,9 @@ namespace Odin.Controllers
             HousingViewModel viewModel = _mapper.Map<HomeFinding, HousingViewModel>(order.HomeFinding);
             viewModel = _mapper.Map<Order, HousingViewModel>(order, viewModel);
 
-            ICollection<HomeFindingProperty> homeFindingProperties = order.HomeFinding.HomeFindingProperties;
-            ICollection<HousingPropertyViewModel> propertyViewModels;
-            propertyViewModels = _mapper.Map<ICollection<HomeFindingProperty>, ICollection<HousingPropertyViewModel>>(homeFindingProperties);
+            IOrderedEnumerable<HomeFindingProperty> homeFindingProperties = order.HomeFinding.HomeFindingProperties.OrderBy(hfp => hfp.CreatedAt);
+            IOrderedEnumerable<HousingPropertyViewModel> propertyViewModels;
+            propertyViewModels = _mapper.Map<IOrderedEnumerable<HomeFindingProperty>, IOrderedEnumerable<HousingPropertyViewModel>>(homeFindingProperties);
 
             viewModel.Properties = propertyViewModels;
             return PartialView("~/views/orders/partials/_Housing.cshtml", viewModel);

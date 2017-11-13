@@ -6,11 +6,25 @@ using System.Web;
 using Odin.ViewModels.Shared;
 using System.ComponentModel.DataAnnotations;
 using Odin.Data.Core.Models;
+using AutoMapper;
 
 namespace Odin.ViewModels.Orders.Transferee
 {
     public class HousingViewModel
-    {
+    {   
+        public HousingViewModel(Order order, IMapper mapper) : this()
+        {
+
+            mapper.Map<HomeFinding, HousingViewModel>(order.HomeFinding, this);
+            mapper.Map<Order, HousingViewModel>(order, this);
+
+            IEnumerable<HomeFindingProperty> homeFindingProperties = order.HomeFinding.HomeFindingProperties.OrderBy(hfp => hfp.CreatedAt);
+            IEnumerable<HousingPropertyViewModel> propertyViewModels;
+            propertyViewModels = mapper.Map<IEnumerable<HomeFindingProperty>, IEnumerable<HousingPropertyViewModel>>(homeFindingProperties);
+
+            this.Properties = propertyViewModels;
+        }
+
         public HousingViewModel()
         {
             Properties = new List<HousingPropertyViewModel>();
