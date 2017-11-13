@@ -9,6 +9,6 @@ namespace Odin.Data.Core.Models
     public class HomeFindingProperty : MobileTable
     {
         public Property Property { get; set; }
-        public HomeFinding HomeFindingService { get; set; }
+        public HomeFinding HomeFinding { get; set; }
     }
 }

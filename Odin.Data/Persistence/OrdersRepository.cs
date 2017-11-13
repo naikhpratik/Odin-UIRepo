@@ -71,6 +71,7 @@ namespace Odin.Data.Persistence
                 .Include(o => o.HomeFinding.HousingType)
                 .Include(o => o.HomeFinding.AreaType)
                 .Include(o => o.HomeFinding.TransportationType)
+                .Include(o => o.HomeFinding.HomeFindingProperties.Select(hfp => hfp.Property))
                 .Include(o => o.DepositType)
                 .Include(o => o.BrokerFeeType)
                 .SingleOrDefault<Order>();
