@@ -13,28 +13,31 @@ return {
 var TransfereeDetailsController = function (transfereeDetailseService) {
     
     var init = function () {
-       
-        $('.date').datetimepicker({    
+
+        var pnlDetails = $("div#details");
+        var detailsBlocks = pnlDetails.find("#servicesBlock");
+
+        detailsBlocks.find('.date').datetimepicker({    
             format: "MM/DD/YY",
             useCurrent:true,
             keepOpen: false
         });
-        $('.time').datetimepicker({
+        detailsBlocks.find('.time').datetimepicker({
             format: 'LT',
             showClose: true,
             toolbarPlacement: 'bottom',
             icons: { close: 'custom-icon-check'}
         });
-        pnlDetails = $("div#details");
+        
 
-        pnlDetails.find(".details-header").find("span").on("click",
+        pnlDetails.find(".details-services").find("span").on("click",
             function () {
-                var cols = $(this).parents(".details-blocks").find(".details-row > .details-col");                                                                                           
+                var cols = $(this).parents("[data-entity-collection = 'services']").find(".service-col");                                                                                           
                 cols.find("span").css("display", "block");                  
             });
 
         //Init Variables
-        detailsBlocks = pnlDetails.find(".details-blocks");
+        detailsBlocks = pnlDetails.find(".details-services");
         orderId = pnlDetails.attr("data-order-id");
 
         //Save Event for Services
@@ -43,7 +46,7 @@ var TransfereeDetailsController = function (transfereeDetailseService) {
 
     var saveBlock = function (e) {
 
-        var detailsBlock = $(e.target).parents(".details-blocks");
+        var detailsBlock = $(e.target).parents(".details-services");
         var block = detailsBlock.attr("data-block");
         var rows = detailsBlock.find(".details-row[data-entity-id]");
         var err = false;

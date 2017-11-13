@@ -95,7 +95,7 @@
         <hr>
     }    
 
-    <div data-block="services">
+    <div class="details-services" data-block="services">
         <h1 class="sectionTitle">
             Scheduled Services
             <span class="sectionSave">
@@ -104,7 +104,7 @@
         </h1>
         <p class="sectionInstruction">Please fill out any items that are not already auto-generated that could aid in the help of your clients placement.</p>
 
-        <ul class="row sectionList">
+        <ul class="row sectionList" id="scheduledServices">
             <li class="col-xs-12 col-sm-2">
                 <h2 class="sectionSubHead">Service:</h2>
             </li>
@@ -121,30 +121,32 @@
                 <h2 class="sectionSubHead">Notes:</h2>
             </li>
         </ul>
-        @for (int i = 0; i < Model.Services.Count(); i++)
-        {
-            if (Model.Services.ElementAt(i).Selected)
+        <div id="servicesBlock">
+            @for (int i = 0; i < Model.Services.Count(); i++)
             {
-                <ul class="row sectionList" data-entity-id="@Model.Services.ElementAt(i).Id" data-entity-collection="services">
-                    <li class="col-xs-12 col-sm-2 scheduledServiceTitle">
-                        @Model.Services.ElementAt(i).Name
-                    </li>
-                    <li class="col-xs-12 col-sm-2">
-                        @Html.DatePicker("date", "ScheduledDate", Model.Services.ElementAt(i).ScheduledDateDisplay)
-                    </li>
-                    <li class="col-xs-12 col-sm-2">
-                        @Html.DatePicker("time", "ScheduledTime", Model.Services.ElementAt(i).ScheduledTimeDisplay)
-                        <div class="text-danger" style="display:none;" data-entity-id="@Model.Services.ElementAt(i).Id" data-valmsg-replace="true"><div for="ScheduledTime">Schedule time is required.</div></div>
-                    </li>
-                    <li class="col-xs-12 col-sm-2">
-                        @Html.DatePicker("date", "CompletedDate", Model.Services.ElementAt(i).CompletedDateDisplay)
-                    </li>
-                    <li class="col-xs-12 col-sm-4">
-                        <p>@Model.Services.ElementAt(i).Notes</p>
-                    </li>
-                </ul>
+                if (Model.Services.ElementAt(i).Selected)
+                {
+                    <ul class="row sectionList details-row" data-entity-id="@Model.Services.ElementAt(i).Id" data-entity-collection="services">
+                        <li class="service-col col-xs-12 col-sm-2 scheduledServiceTitle">
+                            @Model.Services.ElementAt(i).Name
+                        </li>
+                        <li class="service-col col-xs-12 col-sm-2">
+                            @Html.DatePicker("date", "ScheduledDate", Model.Services.ElementAt(i).ScheduledDateDisplay)
+                        </li>
+                        <li class="service-col col-xs-12 col-sm-2">
+                            @Html.DatePicker("time", "ScheduledTime", Model.Services.ElementAt(i).ScheduledTimeDisplay)
+                            <div class="text-danger" style="display:none;" data-entity-id="@Model.Services.ElementAt(i).Id" data-valmsg-replace="true"><div for="ScheduledTime">Schedule time is required.</div></div>
+                        </li>
+                        <li class="service-col col-xs-12 col-sm-2">
+                            @Html.DatePicker("date", "CompletedDate", Model.Services.ElementAt(i).CompletedDateDisplay)
+                        </li>
+                        <li class="col-xs-12 col-sm-4">
+                            <p>@Model.Services.ElementAt(i).Notes</p>
+                        </li>
+                    </ul>
+                }
             }
-        }
+        </div>
     </div>
 </div>
 

@@ -66,77 +66,77 @@
             <img src="~/Content/Images/btn_add_home.png" />
         </div>
     </div>
+    <div id="propertiesBlock">
+        <ul class="row" id="propertiesList">
+            <li class="row" id="propertiesHeader">
+                <!--
+                <div class="col-md-1">
+                    <p>Location Photos:</p>
+                </div>
+                -->
+                <div class="col-md-2">
+                    <p>Address:</p>
+                </div>
+                <div class="col-md-2">
+                    <p>Availability Date:</p>
+                </div>
+                <div class="col-md-2">
+                    <p>BD | BA<br />Rent | Sq. Ft:</p>
+                </div>
+                <!--
+                <div class="col-md-3">
+                    <p>Schedule a Viewing</p>
+                </div>
+                <div class="col-md-1">
+                    <p>Like or Dislike:</p>
+                </div>
+                <div class="col-md-1">
+                    <p>Property Comments:</p>
+                </div>
+                -->
+            </li>
 
-    <ul class="row" id="propertiesList">
-        <li class="row" id="propertiesHeader">
-            <!--
-            <div class="col-md-1">
-                <p>Location Photos:</p>
-            </div>
-            -->
-            <div class="col-md-2">
-                <p>Address:</p>
-            </div>
-            <div class="col-md-2">
-                <p>Availability Date:</p>
-            </div>
-            <div class="col-md-2">
-                <p>BD | BA<br />Rent | Sq. Ft:</p>
-            </div>
-
-            <!--
-            <div class="col-md-3">
-                <p>Schedule a Viewing</p>
-            </div>
-            <div class="col-md-1">
-                <p>Like or Dislike:</p>
-            </div>
-            <div class="col-md-1">
-                <p>Property Comments:</p>
-            </div>
-            -->
-        </li>
-        
-        @foreach (var propertyVM in Model.Properties)
-        {
-        <li class="row propertyItem">
-            <!--
-            <div class="col-md-1">
-                <img class="location" src="~/Content/Images/popout_sml_img.png" />
-            </div>
-            -->
-            <div class="col-md-2">
-                <p>
-                    @Html.DisplayFor(m => propertyVM.PropertyAddress)
-                </p>
-            </div>
-            <div class="col-md-2">
-                <p>
-                    @Html.DisplayFor(m => propertyVM.PropertyAvailabilityDate)
-                </p>
-            </div>
-            <div class="col-md-2">
-                <p>
-                    @Html.DisplayFor(m => propertyVM.PropertyNumberOfBedrooms) | @Html.DisplayFor(m => propertyVM.PropertyNumberOfBathroomsName)<br />
-                    @Html.DisplayFor(m => propertyVM.PropertyAmount) | @Html.DisplayFor(m => propertyVM.PropertySquareFootage)
-                </p>
-            </div>
-            <!--
-            <div class="col-md-3">
-                @Html.DatePicker("date", "ViewingDate", false)
-            </div>
-            <div class="col-md-1 like">
-                <img src="~/Content/Images/icn_ln_selected_like.png" />
-            </div>
-            <div class="col-md-1 comments">
-                <img src="~/Content/Images/icn_chat_bubble.png" />
-                <span>09</span>
-            </div>
-            -->
-        </li>
-        }
-        
-    </ul>
+            @foreach (var propertyVM in Model.Properties)
+            {
+                <li class="row propertyItem">
+                    <!--
+                    <div class="col-md-1">
+                        <img class="location" src="~/Content/Images/popout_sml_img.png" />
+                    </div>
+                    -->
+                    <div class="col-md-2">
+                        <p>
+                            @Html.DisplayFor(m => propertyVM.PropertyAddress)
+                        </p>
+                    </div>
+                    <div class="col-md-2">
+                        <p>
+                            @Html.DisplayFor(m => propertyVM.PropertyAvailabilityDate)
+                        </p>
+                    </div>
+                    <div class="col-md-2">
+                        <p>
+                            @Html.DisplayFor(m => propertyVM.PropertyNumberOfBedrooms) | @Html.DisplayFor(m => propertyVM.PropertyNumberOfBathroomsName)<br />
+                            @Html.DisplayFor(m => propertyVM.PropertyAmount) | @Html.DisplayFor(m => propertyVM.PropertySquareFootage)
+                        </p>
+                    </div>
+                    <!--
+                    <div class="col-md-3">
+                        @Html.DatePicker("date", "ViewingDate", false)
+                    </div>
+                    <div class="col-md-1 like">
+                        <img src="~/Content/Images/icn_ln_selected_like.png" />
+                    </div>
+                    <div class="col-md-1 comments">
+                        <img src="~/Content/Images/icn_chat_bubble.png" />
+                        <span>09</span>
+                    </div>
+                    -->
+                </li>
+            }
+ 
+        </ul>
+    </div>
     @*@for (int i = 0; i < Model.Properties.Count(); i++)
     {
         <div class="row" sel="new" style="display: none;">
@@ -315,6 +315,11 @@
 </div>
 
 @Styles.Render("~/Styling/housing")
+<script>
+    $(document).ready(function () {
+        TransfereeHousingController.init();
+    });
+</script>
 
 @*<script>
     var $lastFilter;
