@@ -3,7 +3,6 @@ using Odin.Data.Core;
 using Odin.Data.Core.Dtos;
 using Odin.Data.Core.Models;
 using Odin.Interfaces;
-using System;
 
 namespace Odin.Domain
 {
@@ -36,18 +35,6 @@ namespace Odin.Domain
                     _unitOfWork.Transferees.Add(transferee);
                 }
 
-
-                //Map type values
-                if (!String.IsNullOrEmpty(orderDto.BrokerFeeTypeSeValue))
-                {
-                    order.BrokerFeeType = _unitOfWork.BrokerFeeTypes.GetBrokerFeeType(orderDto.BrokerFeeTypeSeValue);
-                }
-
-                if (!String.IsNullOrEmpty(orderDto.DepositTypeSeValue))
-                {
-                    order.DepositType = _unitOfWork.DepositTypes.GetDepositType(orderDto.DepositTypeSeValue);
-                }
-
                 _unitOfWork.Orders.Add(order);
             }
             else
@@ -60,6 +47,10 @@ namespace Odin.Domain
                     _unitOfWork.Transferees.Add(transferee);
                 }
             }
+
+            //Map type values
+            order.BrokerFeeType = _unitOfWork.BrokerFeeTypes.GetBrokerFeeType(orderDto.BrokerFeeTypeSeValue);
+            order.DepositType = _unitOfWork.DepositTypes.GetDepositType(orderDto.DepositTypeSeValue);
 
             order.TransfereeId = transferee.Id;
             order.ConsultantId = consultantId;
