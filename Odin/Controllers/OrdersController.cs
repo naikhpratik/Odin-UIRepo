@@ -22,7 +22,7 @@ namespace Odin.Controllers
         public OrdersController(IUnitOfWork unitOfWork, IMapper mapper,IAccountHelper accountHelper)
         {
             _unitOfWork = unitOfWork;
-            _mapper = mapper;           
+            _mapper = mapper;
         }
 
         // GET: Orders
@@ -37,25 +37,21 @@ namespace Odin.Controllers
             return View();
         }
 
+        // GET Partials
         public ActionResult HousingPartial(string id)
         {
-            var order = _unitOfWork.Orders.GetOrderById(id);
+            var userId = User.Identity.GetUserId();
+            var order = _unitOfWork.Orders.GetOrderFor(userId, id);
 
-            HousingViewModel viewModel = _mapper.Map<HomeFinding, HousingViewModel>(order.HomeFinding);
-            viewModel.NumberOfPets = order.Pets.Count();
-            int numKids = order.Children == null ? 0 : order.Children.Count();
-            if (numKids == 0 && order.SpouseName == "")
-                viewModel.SpouceAndKids = null;
-            else
-                viewModel.SpouceAndKids = (order.SpouseName == "" ? "No" : "Yes") + " / " + numKids.ToString();
+            HousingViewModel viewModel = new HousingViewModel(order, _mapper);
+
             return PartialView("~/views/orders/partials/_Housing.cshtml", viewModel);
         }
 
-        // GET Partials
         public ActionResult DetailsPartial(string id)
         {
             OrdersTransfereeViewModel viewModel = GetViewModelForOrder(id);
-            return PartialView("~/views/orders/partials/_Details.cshtml",viewModel); 
+            return PartialView("~/views/orders/partials/_Details.cshtml",viewModel);
         }
 
         public ActionResult IntakePartial(string id)
@@ -86,7 +82,7 @@ namespace Odin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.Unauthorized, "Unauthorized Order");
             }
 
-            return View();            
+            return View();
         }
 
         // GET: Transferee
@@ -144,5 +140,5 @@ namespace Odin.Controllers
             return vm;
         }
     }
-    
+
 }

@@ -3,6 +3,8 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Azure.Mobile.Server.Tables;
 using Odin.Data.Builders;
 using Odin.Data.Core.Models;
+using System;
+using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 
@@ -25,7 +27,7 @@ namespace Odin.Data.Persistence.Migrations
 
         protected override void Seed(ApplicationDbContext context)
         {
-            //Note for Seeding types:  byte primary keys can be specified during insert. 
+            //Note for Seeding types:  byte primary keys can be specified during insert.
             //int primary keys can't; no identity insert, just autoincrementing.
             SeedNumberOfBathrooms(context);
             SeedHousingTypes(context);
@@ -39,11 +41,12 @@ namespace Odin.Data.Persistence.Migrations
             SeedInitialUsers(context);
             CreateOrderData(context);
             PopulateSeContactUids(context);
+            SeedHomeFindingPropertiesIfNone(context);
         }
 
         private void PopulateSeContactUids(ApplicationDbContext context)
         {
-            
+
             var users = context.Users.Where(u => !u.SeContactUid.HasValue);
             if (users.Any())
             {
@@ -101,7 +104,7 @@ namespace Odin.Data.Persistence.Migrations
         {
             var userStore = new UserStore<Transferee>(context);
             var userManager = new UserManager<Transferee>(userStore);
-            
+
             var user = TransfereeBuilder.New();
             userManager.Create(user, "Transferee5$");
             return user;
@@ -244,7 +247,7 @@ namespace Odin.Data.Persistence.Migrations
 
         private void SeedNumberOfBathrooms(ApplicationDbContext context)
         {
-            
+
             if (!context.NumberOfBathrooms.Any(n => n.Id == 1))
             {
                 context.NumberOfBathrooms.Add(new NumberOfBathroomsType() {Id = 1, Name = "0",SeValue = "0"});
@@ -566,5 +569,20 @@ namespace Odin.Data.Persistence.Migrations
                 context.ServiceTypes.Add(new ServiceType() { Name = "Local/Regional/Government Holidays", Category = ServiceCategory.AreaOrientation });
             }
         }
+
+        private void SeedHomeFindingPropertiesIfNone(ApplicationDbContext context)
+        {
+            if (!context.HomeFindingProperties.Any())
+            {
+                DbSet<HomeFinding> homeFindings = context.HomeFindings;
+                foreach (HomeFinding hf in homeFindings)
+                {
+                    hf.HomeFindingProperties = HomeFindingPropertiesBuilder.New();
+                }
+
+                context.SaveChanges();
+            }
+        }
+
     }
 }

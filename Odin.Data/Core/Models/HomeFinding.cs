@@ -1,7 +1,15 @@
-﻿namespace Odin.Data.Core.Models
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+
+namespace Odin.Data.Core.Models
 {
     public class HomeFinding : MobileTable
     {
+        public HomeFinding()
+        {
+            HomeFindingProperties = new Collection<HomeFindingProperty>();
+        }
+
         public decimal? HousingBudget { get; set; }
         //TODO: The rest of the Housing Preferences
         
@@ -44,5 +52,7 @@
         public byte? AreaTypeId { get; set; }
 
         public int? NumberOfCarsOwned { get; set; }
+
+        public virtual ICollection<HomeFindingProperty> HomeFindingProperties { get; set; }
     }
 }
