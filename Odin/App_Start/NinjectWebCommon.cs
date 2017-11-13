@@ -1,4 +1,7 @@
+using Microsoft.WindowsAzure.Storage.Queue;
 using Odin;
+using Odin.Domain;
+using Odin.Interfaces;
 
 //[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(MyDwellworks.App_Start.NinjectWebCommon), "Start")]
 //[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(MyDwellworks.App_Start.NinjectWebCommon), "Stop")]
@@ -16,6 +19,8 @@ namespace MyDwellworks.App_Start
     using AutoMapper;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
+    using Microsoft.WindowsAzure.Storage;
+    using Microsoft.Azure;
 
     public static class NinjectWebCommon 
     {
@@ -26,7 +31,7 @@ namespace MyDwellworks.App_Start
         /// </summary>
         public static void Start() 
         {
-            //DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
+            DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
             //DynamicModuleUtility.RegisterModule(typeof(NinjectHttpModule));
             bootstrapper.Initialize(CreateKernel);
         }
@@ -66,7 +71,6 @@ namespace MyDwellworks.App_Start
                         .SelectAllClasses()
                         .BindDefaultInterface();
                 });
-                
 
                 var config = new MapperConfiguration(c => c.AddProfile(new MappingProfile()));
 
@@ -88,7 +92,6 @@ namespace MyDwellworks.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-
         }        
     }
 }

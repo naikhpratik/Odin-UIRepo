@@ -10,9 +10,7 @@ div[data-notify].alert-danger {
 
 
 div#intake {
-    padding-top: 30px;
-    padding-left: 25px;
-    margin-left: 20px;    
+
 
     div.row {
         text-align: left;
@@ -52,24 +50,19 @@ div#intake {
 
             .intake-collapse {
                 cursor: pointer;
-            }
+                display: inline;
 
-            h5 {
-                margin-top: 0px;
-                font-size: 22px
-            }
-
-            .intake-edit, .intake-save {
-                font-size: 20px;
-                color: $DW_Lime;
-                cursor: pointer;
-            }
+                img {
+                    margin-bottom:3px;
+                    margin-right:8px;
+                    height:1.6rem;
+                    width: 1.5rem;
+                }
+            }                      
 
             .intake-cancel {
                 display: none;
-                font-size: 20px;
-                color: $DW_Red;
-                cursor: pointer;
+                color: $DW_Red;                
                 padding-left: 15px;
             }
 
@@ -81,18 +74,16 @@ div#intake {
         .intake-row {
 
             .intake-col {
-                padding-top:10px;
+                padding-top: 10px;
                 min-height: 70px;
 
                 label {
                     display: block;
-                    font-size: 20px;
-                    margin-bottom: -5px;
                 }
 
                 .intake-span {
                     color: $DW_Blue;
-                    font-size: 16px;
+                    font-size: 1.6rem;
                 }
 
                 .intake-add {

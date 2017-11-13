@@ -64,6 +64,12 @@ namespace Odin.Controllers
             return PartialView("~/views/orders/partials/_Intake.cshtml", viewModel);
         }
 
+        public ActionResult ItineraryPartial(string id)
+        {
+            //var order = _unitOfWork.Orders.GetOrderById(id);
+            //OrdersTransfereeViewModel viewModel = viewModelForOrder(order);
+            return PartialView("~/views/orders/partials/_Itinerary.cshtml", null);
+        }
         public ActionResult Details(string orderId)
         {
             var userId = User.Identity.GetUserId();

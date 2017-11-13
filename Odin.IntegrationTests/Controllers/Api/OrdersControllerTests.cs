@@ -17,6 +17,9 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http.Results;
+using Moq;
+using Odin.Domain;
+using Odin.Interfaces;
 
 namespace Odin.IntegrationTests.Controllers.Api
 {
@@ -28,7 +31,7 @@ namespace Odin.IntegrationTests.Controllers.Api
             var config = new MapperConfiguration(c => c.AddProfile(new MappingProfile()));
             var mapper = config.CreateMapper();
             var unitOfWork = new UnitOfWork(Context);
-            return new OrdersController(unitOfWork, mapper);
+            return new OrdersController(unitOfWork, mapper, new QueueStore());
         }
 
         [Test, Isolated]

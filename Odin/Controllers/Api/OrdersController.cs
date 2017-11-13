@@ -19,12 +19,14 @@ namespace Odin.Controllers.Api
         private readonly IOrderImporter _orderImporter;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IQueueStore _queueStore;
 
-        public OrdersController(IUnitOfWork unitOfWork, IMapper mapper)
+        public OrdersController(IUnitOfWork unitOfWork, IMapper mapper, IQueueStore queueStore)
         {
             _orderImporter = new OrderImporter(unitOfWork, mapper);
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _queueStore = queueStore;
         }
 
         // POST /api/orders
@@ -98,6 +100,8 @@ namespace Odin.Controllers.Api
 
             _mapper.Map<OrdersTransfereeIntakeOriginDto, Order>(dto, order);
             _unitOfWork.Complete();
+
+            _queueStore.Add(new QueueEntry(order.Id, QueueType.Order));
 
             return Ok();
         }
