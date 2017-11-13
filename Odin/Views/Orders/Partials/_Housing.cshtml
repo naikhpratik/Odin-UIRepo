@@ -61,7 +61,8 @@
             </label>
         </form>
         -->
-        <div class="col-sm-6" id="addProperty" >
+        @* Change to col-sm-6 when readding the above filters *@
+        <div class="col-sm-12" id="addProperty" >
             <span>Add Property</span>
             <img src="~/Content/Images/btn_add_home.png" />
         </div>
@@ -74,13 +75,14 @@
                     <p>Location Photos:</p>
                 </div>
                 -->
-                <div class="col-md-2">
+                @* Switch next 3 columns to col-md-2 when adding remaining columns *@
+                <div class="col-md-4">
                     <p>Address:</p>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-4">
                     <p>Availability Date:</p>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-4">
                     <p>BD | BA<br />Rent | Sq. Ft:</p>
                 </div>
                 <!--
@@ -104,17 +106,19 @@
                         <img class="location" src="~/Content/Images/popout_sml_img.png" />
                     </div>
                     -->
-                    <div class="col-md-2">
+
+                    @* Switch next 3 columns to col-md-2 when adding remaining columns *@
+                    <div class="col-md-4">
                         <p>
                             @Html.DisplayFor(m => propertyVM.PropertyAddress)
                         </p>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-4">
                         <p>
                             @Html.DisplayFor(m => propertyVM.PropertyAvailabilityDate)
                         </p>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-4">
                         <p>
                             @Html.DisplayFor(m => propertyVM.PropertyNumberOfBedrooms) | @Html.DisplayFor(m => propertyVM.PropertyNumberOfBathroomsName)<br />
                             @Html.DisplayFor(m => propertyVM.PropertyAmount) | @Html.DisplayFor(m => propertyVM.PropertySquareFootage)
