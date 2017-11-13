@@ -45,7 +45,7 @@ namespace Odin.Data.Core.Dtos
         public bool IsRush { get; set; }
         public bool IsVip { get; set; }
 
-        public int ServicesFlag { get; set; }
+        public int ServiceFlag { get; set; }
         public bool IsInternational { get; set; }
         public bool IsAssignment { get; set; }
 

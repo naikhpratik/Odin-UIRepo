@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using Odin.Data.Core;
 using Odin.Data.Core.Dtos;
 using Odin.Data.Core.Models;
@@ -49,8 +50,15 @@ namespace Odin.Domain
             }
 
             //Map type values
-            order.BrokerFeeType = _unitOfWork.BrokerFeeTypes.GetBrokerFeeType(orderDto.BrokerFeeTypeSeValue);
-            order.DepositType = _unitOfWork.DepositTypes.GetDepositType(orderDto.DepositTypeSeValue);
+            if (!String.IsNullOrWhiteSpace(orderDto.BrokerFeeTypeSeValue))
+            {
+                order.BrokerFeeType = _unitOfWork.BrokerFeeTypes.GetBrokerFeeType(orderDto.BrokerFeeTypeSeValue);
+            }
+
+            if (!String.IsNullOrWhiteSpace(orderDto.DepositTypeSeValue))
+            {
+                order.DepositType = _unitOfWork.DepositTypes.GetDepositType(orderDto.DepositTypeSeValue);
+            }
 
             order.TransfereeId = transferee.Id;
             order.ConsultantId = consultantId;
