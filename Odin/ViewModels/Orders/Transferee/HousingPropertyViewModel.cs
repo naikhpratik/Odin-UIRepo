@@ -8,39 +8,43 @@ namespace Odin.ViewModels.Orders.Transferee
 {
     public class HousingPropertyViewModel
     {
-        
-        public string Id { get; set; }
+        [DisplayFormat(ConvertEmptyStringToNull = true, NullDisplayText ="", HtmlEncode = false)]
+        public string PropertyAddress { get
+            {
+                var addressMarkup = PropertyStreet1 + "<br />";
+                if (PropertyStreet2 != null && PropertyStreet2.Length > 0)
+                {
+                    addressMarkup += PropertyStreet2 + "<br />";
+                }
+                addressMarkup += PropertyCity + ", " + PropertyState;
 
-        [Display(Name = "Location\nPhotos:")]
-        public string Photos { get; set; }
+                return addressMarkup;
+            }
+        }
 
-        public string Street1 { get; set; }
-        public string Street2 { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
-        [Display(Name = "Address:")]
-        public string Address => Street1 + (Street2 ?? "") + (City) + (State);
+        public string PropertyStreet1 { get; set; }
+        public string PropertyStreet2 { get; set; }
+        public string PropertyCity { get; set; }
+        public string PropertyState { get; set; }
 
-        public DateTime? AvailabilityDate { get; set; }
-        [Display(Name = "Available or Not\nDate:")]
-        public string Availability => AvailabilityDate >= DateTime.Now ? "Available " + DateHelper.GetViewFormat(AvailabilityDate) : "Not Available";
+        [Display(Name = "Availability Date:")]
+        [DisplayFormat(NullDisplayText = "Unknown", DataFormatString = "{0:d}")]
+        public DateTime? PropertyAvailabilityDate { get; set; }
 
-        public NumberOfBathroomsType NumberOfBathrooms { get; set; }
-        public int? NumberOfBedrooms { get; set; }
-        public decimal Amount { get; set; }
-        public int? SquareFootage { get; set; }
-        [Display(Name = "BD | BA\nRent | Sq. Ft:")]
-        public string Specifications => NumberOfBedrooms + " | " + NumberOfBathrooms + Amount + " | " + SquareFootage;
+        [Display(Name = "BD")]
+        [DisplayFormat(NullDisplayText = "NA")]
+        public int PropertyNumberOfBedrooms { get; set; }
 
-        public DateTime? ViewingDate { get; set; }
-        [Display(Name = "Schedule\na Viewing:")]
-        public string ViewingDateDisplay => DateHelper.GetViewFormat(ViewingDate);
+        [Display(Name = "BA")]
+        [DisplayFormat(NullDisplayText = "NA", ConvertEmptyStringToNull = true)]
+        public String PropertyNumberOfBathroomsName { get; set; }
 
-        [Display(Name = "Like or\nDislike:")]
-        public bool? IsLike { get; set; }
+        [Display(Name = "Sq. Ft.")]
+        [DisplayFormat(NullDisplayText = "NA", DataFormatString = "{0:N0}")]
+        public int? PropertySquareFootage { get; set; }
 
-        [Display(Name = "Property\nComments:")]
-        public IEnumerable<string> Comments { get; set; }
-        
+        [Display(Name = "Rent")]
+        [DisplayFormat(NullDisplayText = "NA", DataFormatString = "{0:c}")]
+        public decimal? PropertyAmount { get; set; }
     }
 }
