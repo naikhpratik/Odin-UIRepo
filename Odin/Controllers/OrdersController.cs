@@ -42,14 +42,8 @@ namespace Odin.Controllers
             var userId = User.Identity.GetUserId();
             var order = _unitOfWork.Orders.GetOrderFor(userId, id);
 
-            HousingViewModel viewModel = _mapper.Map<HomeFinding, HousingViewModel>(order.HomeFinding);
-            viewModel = _mapper.Map<Order, HousingViewModel>(order, viewModel);
-
-            IOrderedEnumerable<HomeFindingProperty> homeFindingProperties = order.HomeFinding.HomeFindingProperties.OrderBy(hfp => hfp.CreatedAt);
-            IOrderedEnumerable<HousingPropertyViewModel> propertyViewModels;
-            propertyViewModels = _mapper.Map<IOrderedEnumerable<HomeFindingProperty>, IOrderedEnumerable<HousingPropertyViewModel>>(homeFindingProperties);
-
-            viewModel.Properties = propertyViewModels;
+            HousingViewModel viewModel = new HousingViewModel(order, _mapper);
+            
             return PartialView("~/views/orders/partials/_Housing.cshtml", viewModel);
         }
 
