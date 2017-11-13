@@ -103,9 +103,15 @@ nav#transfereeSideNav {
     display:inline-block;
 }
 
-.sectionSave {
+.sectionSave, .sectionAdd {
     font-size: small;
     color: $DW_Lime;
+    cursor: pointer;
+}
+
+.sectionDelete {
+    font-size: small;
+    color: $DW_Red;
     cursor: pointer;
 }
 
