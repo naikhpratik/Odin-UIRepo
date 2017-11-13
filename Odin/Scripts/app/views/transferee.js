@@ -6,11 +6,10 @@
 
         $('#intake').css("display", "block");
 
-        $('.item').click(function () {
+        $('.item').click(function () {            
             $('.item.selected').removeClass('selected');            
             $(this).addClass('selected');
             var actionName = $(this).attr('data-panel');
-
             $('#orderContainer').load('/orders/' + actionName + 'Partial/' + currentOrderId);
         });
 

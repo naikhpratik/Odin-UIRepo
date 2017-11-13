@@ -11,9 +11,9 @@ using PetViewModel = Odin.ViewModels.Shared.PetViewModel;
 
 namespace Odin.ViewModels.Orders.Transferee
 {
-    public class OrdersTransfereeViewModel
+    public class OrdersTransfereeItineraryViewModel
     {
-        public OrdersTransfereeViewModel()
+        public OrdersTransfereeItineraryViewModel()
         {
             Children = new List<ChildViewModel>();
             Services = new List<ServiceViewModel>();

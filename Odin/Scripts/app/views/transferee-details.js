@@ -41,11 +41,10 @@ var TransfereeDetailsController = function (transfereeDetailseService) {
         orderId = pnlDetails.attr("data-order-id");
 
         //Save Event for Services
-        detailsBlocks.on("click", ".details-save", saveBlock);
+        detailsBlocks.on("click", ".sectionSave", saveBlock);
     };
 
-    var saveBlock = function (e) {
-
+    var saveBlock = function (e) {;
         var detailsBlock = $(e.target).parents(".details-services");
         var block = detailsBlock.attr("data-block");
         var rows = detailsBlock.find(".details-row[data-entity-id]");

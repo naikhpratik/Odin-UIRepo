@@ -47,9 +47,14 @@
         @Html.Partial("~/Views/Orders/Partials/_Intake.cshtml")
     </div>
 
-@section scripts
+@section styles
 {
     @Styles.Render("~/Styling/transferee")
+}
+
+@section scripts
+{
+    
     @Scripts.Render("~/Scripts/transferee")
 
     <script>
@@ -57,7 +62,6 @@
 
             $(document).ready(function () {
                 OrdersPageController.TransfereeInit();
-                TransfereeIntakeController.init();
                 TransfereeDetailsController.init();
                 TransfereeHousingController.init();
             });

@@ -55,6 +55,19 @@ namespace Odin.ViewModels.Orders.Transferee
 
         public bool IsVip { private get; set; }
 
+<<<<<<< HEAD
+        public DateTime? PreTripDate { get; set; }
+        public string PreTripDateDisplay => DateHelper.GetViewFormat(PreTripDate);
+
+        public int TempHousingDays { get; set; }
+        public DateTime? TempHousingEndDate { get; set; }       
+        public string TempHousingEndDateDisplay =>
+            DateHelper.GetViewFormat(TempHousingEndDate);
+
+        public DateTime? FinalArrivalDate { get; set; }
+        public string FinalArrivalDateDisplay => DateHelper.GetViewFormat(FinalArrivalDate);
+
+=======
         [DisplayName("Vip:")]
         public string IsVipDisplay
         {
@@ -67,11 +80,7 @@ namespace Odin.ViewModels.Orders.Transferee
         [DisplayName("Length(Days):")]
         public int TempHousingDays { get; set; }
 
-
-        public DateTime? FinalArrivalDate { get; set; }
-        public string FinalArrivalDateDisplay => DateHelper.GetViewFormat(FinalArrivalDate);
-
-
+        
         public DateTime? TempHousingEndDate { get; set; }
 
         [DisplayName("Last Day:")]
@@ -90,8 +99,15 @@ namespace Odin.ViewModels.Orders.Transferee
         public string PreTripNotes { get; set; }
 
         
+>>>>>>> master
         public DateTime? HomeFindingDate { get; set; }
+        public string HomeFindingDateDisplay => DateHelper.GetViewFormat(HomeFindingDate);
 
+<<<<<<< HEAD
+        public DateTime? WorkStartDate { get; set; }
+        public string WorkStartDateDisplay => DateHelper.GetViewFormat(WorkStartDate);
+
+=======
         [DisplayName("Home Finding:")]
         public string HomeFindingDateDisplay
         {
@@ -140,6 +156,7 @@ namespace Odin.ViewModels.Orders.Transferee
         }
 
         [DisplayName("Spouse/Partner:")]
+>>>>>>> master
         public string SpouseName { get; set; }
 
         [DisplayName("Visa Type:")]
@@ -147,6 +164,11 @@ namespace Odin.ViewModels.Orders.Transferee
 
         [DisplayName("RMC:")]
         public string Rmc { get; set; }
+<<<<<<< HEAD
+        public string RmcContact { get; set; }
+        public string RmcContactEmail { get; set; }
+        
+=======
 
         [DisplayName("Contact:")]
         public string RmcContact { get; set; }
@@ -154,6 +176,7 @@ namespace Odin.ViewModels.Orders.Transferee
         [DisplayName("Email:")]
         public string RmcContactEmail { get; set; }
 
+>>>>>>> master
         private IEnumerable<ChildViewModel> _children;
         public virtual IEnumerable<ChildViewModel> Children
         {
@@ -212,6 +235,13 @@ namespace Odin.ViewModels.Orders.Transferee
            
 
         public string RentId { get; set; }
+<<<<<<< HEAD
+        public RentViewModel Rent { get; set; }
+        
+        public string HousingBudgetDisplay => (Rent != null && Rent.HousingBudget.HasValue)
+            ? DateHelper.GetViewFormat(Rent.HousingBudget)
+            : String.Empty;
+=======
         public HomeFindingViewModel HomeFinding { get; set; }
 
         [DisplayName("Budget:")]
@@ -224,6 +254,7 @@ namespace Odin.ViewModels.Orders.Transferee
                     : String.Empty;
             }
         }
+>>>>>>> master
 
         [DisplayName("Number of Bathrooms:")]
         public string NumberOfBathroomsDisplay
@@ -247,6 +278,11 @@ namespace Odin.ViewModels.Orders.Transferee
             }
         }
 
+<<<<<<< HEAD
+        public string SquareFootageDisplay => (Rent != null && Rent.SquareFootage.HasValue)
+            ? string.Format("{0: #,###.00}", Rent.SquareFootage)
+            : String.Empty;
+=======
         [DisplayName("Square Footage:")]
         public string SquareFootageDisplay
         {
@@ -257,6 +293,7 @@ namespace Odin.ViewModels.Orders.Transferee
                     : String.Empty;
             }
         }
+>>>>>>> master
 
         [DisplayName("Housing Type:")]
         public string HousingTypeDisplay
