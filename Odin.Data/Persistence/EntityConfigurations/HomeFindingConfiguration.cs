@@ -17,7 +17,10 @@ namespace Odin.Data.Persistence.EntityConfigurations
             HasRequired(r => r.Order)
                 .WithOptional(o => o.HomeFinding)
                 .WillCascadeOnDelete(false);
-            
+
+            HasMany(hf => hf.HomeFindingProperties).
+                WithRequired(hfp => hfp.HomeFinding).
+                WillCascadeOnDelete(true);
         }
     }
 }

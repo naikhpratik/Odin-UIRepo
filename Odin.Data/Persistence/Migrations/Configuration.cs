@@ -3,6 +3,8 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Azure.Mobile.Server.Tables;
 using Odin.Data.Builders;
 using Odin.Data.Core.Models;
+using System;
+using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 
@@ -35,6 +37,7 @@ namespace Odin.Data.Persistence.Migrations
             SeedTransportationTypes(context);
             SeedDepositTypes(context);
             SeedBrokerFeeTypes(context);
+            SeedHomeFindingPropertiesIfNone(context);
         }
 
         private void PopulateSeContactUids(ApplicationDbContext context)
@@ -387,5 +390,21 @@ namespace Odin.Data.Persistence.Migrations
                 context.BrokerFeeTypes.Add(new BrokerFeeType() { Id = 2, Name = "Company", SeValue = "COMPAN" });
             }
         }
+
+
+        private void SeedHomeFindingPropertiesIfNone(ApplicationDbContext context)
+        {
+            if (!context.HomeFindingProperties.Any())
+            {
+                DbSet<HomeFinding> homeFindings = context.HomeFindings;
+                foreach (HomeFinding hf in homeFindings)
+                {
+                    hf.HomeFindingProperties = HomeFindingPropertiesBuilder.New();
+                }
+
+                context.SaveChanges();
+            }
+        }
+
     }
 }
