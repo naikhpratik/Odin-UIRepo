@@ -27,16 +27,16 @@ namespace Odin.Controllers.Api
         // POST /api/homefindingproperties
         [HttpPost]
         [Authorize]
-        public IHttpActionResult Index(HomeFindingPropertyDto propertyDto)
+        public IHttpActionResult Index(HousingPropertyViewModel propertyVM)
         {
             var userId = User.Identity.GetUserId();
-            Order order = _unitOfWork.Orders.GetOrderFor(userId, propertyDto.OrderId);
-            HomeFinding homeFinding = order.HomeFinding;
 
-            Property property = _mapper.Map<HomeFindingPropertyDto, Property>(propertyDto);
-            HomeFindingProperty hfp = new HomeFindingProperty();
-            hfp.Property = property;
-            homeFinding.HomeFindingProperties.Add(hfp);
+            HomeFindingProperty homeFindingProperty = _mapper.Map<HousingPropertyViewModel, HomeFindingProperty>(propertyVM);
+
+            // !!!: This relies that the HomeFinding Id is the same of the Order. Refactor later
+            Order order = _unitOfWork.Orders.GetOrderFor(userId, propertyVM.Id);
+            HomeFinding homeFinding = order.HomeFinding;
+            homeFinding.HomeFindingProperties.Add(homeFindingProperty);
 
             _unitOfWork.Complete();
 

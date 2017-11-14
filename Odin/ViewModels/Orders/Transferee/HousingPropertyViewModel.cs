@@ -8,6 +8,8 @@ namespace Odin.ViewModels.Orders.Transferee
 {
     public class HousingPropertyViewModel
     {
+        public String Id { get; set; }
+
         [DisplayFormat(ConvertEmptyStringToNull = true, NullDisplayText ="", HtmlEncode = false)]
         public string PropertyAddress { get
             {

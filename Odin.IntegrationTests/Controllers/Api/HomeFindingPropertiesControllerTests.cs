@@ -14,9 +14,9 @@ using Odin.Extensions;
 using Odin.Data.Core.Models;
 using FluentAssertions;
 using System.Net;
-using Odin.Data.Core.Dtos;
 using Odin.Data.Builders;
 using System.Collections.ObjectModel;
+using Odin.ViewModels.Orders.Transferee;
 
 namespace Odin.IntegrationTests.Controllers.Api
 {
@@ -43,14 +43,14 @@ namespace Odin.IntegrationTests.Controllers.Api
             Context.SaveChanges();
             Context.Entry(order).Reload();
 
-            HomeFindingPropertyDto propertyDto = new HomeFindingPropertyDto();
-            propertyDto.Street1 = "abc";
-            propertyDto.Street2 = "apt 123";
-            propertyDto.OrderId = order.Id;
+            HousingPropertyViewModel propertyVM = new HousingPropertyViewModel();
+            propertyVM.PropertyStreet1 = "abc";
+            propertyVM.PropertyStreet2 = "apt 123";
+            propertyVM.Id = order.HomeFinding.Id;
 
             // Act
             HomeFindingPropertiesController controller = SetUpHomeFindingPropertiesController();
-            controller.Index(propertyDto);
+            controller.Index(propertyVM);
 
             // Assert
             Context.Entry(order).Reload();
@@ -58,8 +58,8 @@ namespace Odin.IntegrationTests.Controllers.Api
 
             HomeFindingProperty hfp = order.HomeFinding.HomeFindingProperties.First();
             Property property = hfp.Property;
-            property.Street1.Should().Be(propertyDto.Street1);
-            property.Street2.Should().Be(propertyDto.Street2);
+            property.Street1.Should().Be(propertyVM.PropertyStreet1);
+            property.Street2.Should().Be(propertyVM.PropertyStreet2);
         }
 
         private Order BuildOrder()

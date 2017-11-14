@@ -34,7 +34,7 @@ namespace Odin
 
             CreateMap<Order, HousingViewModel>();
             CreateMap<HomeFinding, HousingViewModel>();
-            CreateMap<HomeFindingProperty, HousingPropertyViewModel>();
+            CreateMap<HomeFindingProperty, HousingPropertyViewModel>().ReverseMap();
 
             /*DTO Mappings*/
 
@@ -81,7 +81,6 @@ namespace Odin
             CreateMap<OrdersTransfereeIntakeLeaseDto, Order>();
             CreateMap<OrdersTransfereeDetailsServiceDto, Service>();
             CreateMap<OrdersTransfereeIntakeRelocationDto, Order>();
-            CreateMap<HomeFindingPropertyDto, Property>();
         }
     }
 }
