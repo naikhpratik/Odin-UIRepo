@@ -119,6 +119,7 @@
     <Compile Include="Builders\ConsultantImportDtoBuilder.cs" />
     <Compile Include="Builders\PetBuilder.cs" />
     <Compile Include="Builders\ProgramManagerDtoBuilder.cs" />
+    <Compile Include="Builders\HomeFindingPropertiesBuilder.cs" />
     <Compile Include="Builders\PropertyBuilder.cs" />
     <Compile Include="Builders\HomeFindingBuilder.cs" />
     <Compile Include="Builders\TransfereeBuilder.cs" />
@@ -171,6 +172,8 @@
     <Compile Include="Core\Models\OwnershipType.cs" />
     <Compile Include="Core\Models\Pet.cs" />
     <Compile Include="Core\Models\HomeFinding.cs" />
+    <Compile Include="Core\Models\QueueEntry.cs" />
+    <Compile Include="Core\Models\QueueType.cs" />
     <Compile Include="Core\Models\SEDropDownType.cs" />
     <Compile Include="Core\Models\Service.cs" />
     <Compile Include="Core\Models\ServiceCategory.cs" />
@@ -205,6 +208,7 @@
     <Compile Include="Persistence\ChildrenRepository.cs" />
     <Compile Include="Persistence\ConsultantsRepository.cs" />
     <Compile Include="Persistence\DepositTypesRepository.cs" />
+    <Compile Include="Persistence\EntityConfigurations\HomeFindingPropertiesConfiguration.cs" />
     <Compile Include="Persistence\EntityConfigurations\OrderConfiguration.cs" />
     <Compile Include="Persistence\EntityConfigurations\HomeFindingConfiguration.cs" />
     <Compile Include="Persistence\HousingTypesRepository.cs" />
@@ -422,6 +426,18 @@
     <Compile Include="Persistence\Migrations\201711061818328_MergedInTriggerUpdateFromMaster.Designer.cs">
       <DependentUpon>201711061818328_MergedInTriggerUpdateFromMaster.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201711082148046_AddHomeFindingProperties.cs" />
+    <Compile Include="Persistence\Migrations\201711082148046_AddHomeFindingProperties.Designer.cs">
+      <DependentUpon>201711082148046_AddHomeFindingProperties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201711091945348_MergeHomesModelBranch.cs" />
+    <Compile Include="Persistence\Migrations\201711091945348_MergeHomesModelBranch.Designer.cs">
+      <DependentUpon>201711091945348_MergeHomesModelBranch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201711141303411_AddActionLabel2ServiceTypes.cs" />
+    <Compile Include="Persistence\Migrations\201711141303411_AddActionLabel2ServiceTypes.Designer.cs">
+      <DependentUpon>201711141303411_AddActionLabel2ServiceTypes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\NumberOfBathroomsTypesRepository.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
@@ -601,6 +617,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201711061818328_MergedInTriggerUpdateFromMaster.resx">
       <DependentUpon>201711061818328_MergedInTriggerUpdateFromMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711082148046_AddHomeFindingProperties.resx">
+      <DependentUpon>201711082148046_AddHomeFindingProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711091945348_MergeHomesModelBranch.resx">
+      <DependentUpon>201711091945348_MergeHomesModelBranch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711141303411_AddActionLabel2ServiceTypes.resx">
+      <DependentUpon>201711141303411_AddActionLabel2ServiceTypes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

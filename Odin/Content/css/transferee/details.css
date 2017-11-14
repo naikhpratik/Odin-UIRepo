@@ -1,9 +1,4 @@
-﻿#orderContainer {
-  margin-left: 18rem;
-  margin-top: 8rem;
-  width: auto; }
-
-.scheduledServiceTitle {
+﻿.scheduledServiceTitle {
   display: block;
   font-size: 1.5rem;
   font-weight: 500;

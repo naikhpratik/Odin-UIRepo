@@ -12,7 +12,7 @@ namespace Odin.Data.Builders
                 .RuleFor(p => p.Street2, f => f.Address.SecondaryAddress())
                 .RuleFor(p => p.City, f => f.Address.City())
                 .RuleFor(p => p.PostalCode, f => f.Address.ZipCode())
-                .RuleFor(p => p.State, f => f.Address.State())
+                .RuleFor(p => p.State, f => f.Address.StateAbbr())
                 .RuleFor(p => p.CountryCode, "USA")
 
                 // !!!: Can't figure out this one just yet

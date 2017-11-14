@@ -50,16 +50,13 @@
 @section scripts
 {
     @Styles.Render("~/Styling/transferee")
+    @Styles.Render("~/Styling/sideNav")
     @Scripts.Render("~/Scripts/transferee")
 
     <script>
             var currentOrderId = '@Model.Id';
-
             $(document).ready(function () {
-                OrdersPageController.TransfereeInit();
-                TransfereeIntakeController.init();
-                TransfereeDetailsController.init();
-                TransfereeHousingController.init();
+                OrdersPageController.TransfereeInit();                
             });
     </script>
 }

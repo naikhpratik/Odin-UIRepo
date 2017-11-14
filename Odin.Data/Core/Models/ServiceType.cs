@@ -6,6 +6,8 @@
 
         public string Name { get; set; }
 
+        public string ActionLabel { get; set; }
+
         public ServiceCategory Category { get; set; }
     }
 }

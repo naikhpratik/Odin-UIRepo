@@ -21,7 +21,8 @@ namespace Odin
             CreateMap<Transferee, TransfereeViewModel>();
             CreateMap<Manager, ManagerViewModel>();
             CreateMap<Service, ServiceViewModel>()
-                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.ServiceType.Name));
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.ServiceType.Name))
+                .ForMember(dest => dest.ActionLabel, opt => opt.MapFrom(src => src.ServiceType.ActionLabel));
             CreateMap<Child, ChildViewModel>();
             CreateMap<Pet, PetViewModel>();
             CreateMap<ServiceType, ServiceTypeViewModel>();
@@ -30,6 +31,7 @@ namespace Odin
             /*Order - Index*/
             CreateMap<Order, OrdersIndexViewModel>();
             CreateMap<Order, OrdersTransfereeViewModel>();
+            CreateMap<Order, OrdersTransfereeItineraryViewModel>();
 
             CreateMap<HomeFinding, HousingViewModel>();
 

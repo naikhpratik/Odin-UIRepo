@@ -65,6 +65,13 @@ namespace Odin.Controllers
             return PartialView("~/views/orders/partials/_Intake.cshtml", viewModel);
         }
 
+        public ActionResult ItineraryPartial(string id)
+        {
+            var order = _unitOfWork.Orders.GetOrderById(id);
+            OrdersTransfereeItineraryViewModel viewModel = itineraryViewModelForOrder(order);
+            return PartialView("~/views/orders/partials/_Itinerary.cshtml", viewModel);
+        }
+
         public ActionResult Details(string orderId)
         {
             var userId = User.Identity.GetUserId();
@@ -130,6 +137,12 @@ namespace Odin.Controllers
             vm.DepositTypes = _unitOfWork.DepositTypes.GetDepositTypesList();
             vm.BrokerFeeTypes = _unitOfWork.BrokerFeeTypes.GetBorkerBrokerFeeTypes();
 
+            return vm;
+        }
+        private OrdersTransfereeItineraryViewModel itineraryViewModelForOrder(Order order)
+        {
+            OrdersTransfereeItineraryViewModel vm = _mapper.Map<Order, OrdersTransfereeItineraryViewModel>(order);
+            vm.Services = vm.Services.OrderBy(s => s.ScheduledDate);            
             return vm;
         }
     }

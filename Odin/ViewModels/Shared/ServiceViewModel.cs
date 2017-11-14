@@ -7,8 +7,7 @@ namespace Odin.ViewModels.Shared
     {
         public string Id { get; set; }
 
-        public DateTime? ScheduledDate { get; set; }
-        
+        public DateTime? ScheduledDate { get; set; }        
         public string ScheduledDateDisplay => DateHelper.GetViewFormat(ScheduledDate, false);
 
         public string ScheduledTimeDisplay => DateHelper.GetViewFormat(ScheduledDate, true);
@@ -21,5 +20,7 @@ namespace Odin.ViewModels.Shared
         public string Notes { get; set; }
 
         public string Name { get; set; }
+
+        public string ActionLabel { get; set; }
     }
 }

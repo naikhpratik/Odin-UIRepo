@@ -1,5 +1,36 @@
-﻿<div id="itinerary" class="frame noinit">
-    <h2>Itinerary Panel</h2>
+﻿@model Odin.ViewModels.Orders.Transferee.OrdersTransfereeItineraryViewModel
+<div class="container-fluid" data-order-id="@Model.Id" id="itinerary">  
+    @for (int i = 0; i < Model.Services.Count(); i++)
+    {
+        if (Model.Services.ElementAt(i).Selected)
+        {
+            if (ViewBag.SameAs == null || DateTime.Parse(ViewBag.SameAs.ToString()).ToShortDateString() != Model.Services.ElementAt(i).ScheduledDate.Value.ToShortDateString())
+            {
+               ViewBag.SameAs = Model.Services.ElementAt(i).ScheduledDate.Value;
+               
+            <div class="event-item row" data-entity-id="@Model.Services.ElementAt(i).Id">
+                <div class="dayTitle">
+                    <h2 class="dayNumber">
+                        @(Model.Services.ElementAt(i).ScheduledDate != null ? Model.Services.ElementAt(i).ScheduledDate.Value.ToString("dd") : "NA")
+                    </h2>
+                    <div class="dayText">
+                        <p class="dayName"><span>@(Model.Services.ElementAt(i).ScheduledDate != null ? Model.Services.ElementAt(i).ScheduledDate.Value.ToString("dddd") : "NA")</span></p>
+                        <p class="mmyyyy">@(Model.Services.ElementAt(i).ScheduledDate != null ? Model.Services.ElementAt(i).ScheduledDate.Value.ToString("MMMM yyyy") : "NA")</p>
+                    </div>
+                </div>
+            </div>
+            }
+            <div class="eventNotes">
+                <p>
+                    <span class="eventTime">@(Model.Services.ElementAt(i).ScheduledDate != null ? Model.Services.ElementAt(i).ScheduledDate.Value.ToString("hh:mm tt") : "NA")</span>
+                    <span class="eventNote">@Model.Services.ElementAt(i).ActionLabel</span>
+                </p>                
+            </div>
+        }
+    }
+    <hr>
 </div>
-
 @Styles.Render("~/Styling/itinerary")
+<script type="text/javascript">
+    $(document).ready(TransfereeItineraryController.init);
+</script>

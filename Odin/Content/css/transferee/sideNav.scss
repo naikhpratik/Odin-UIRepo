@@ -1,0 +1,75 @@
+﻿@import "../shared/_definitions.scss";
+
+nav#transfereeSideNav {
+    background-color: $DW_Lime;
+    position: fixed;
+    top: $primaryNavHeightSm;
+    left: 0;
+    width: $sideNavWidth;
+    height: calc(100vh - #{$primaryNavHeightSm});
+    color: white;
+    display: none;
+
+    .transfereeSideNav__person {
+        text-align: center;
+        margin-bottom: 2rem;
+
+        img.person {
+            width: 6rem;
+            margin: 2rem auto 1.25rem auto;
+        }
+
+        p {
+            margin-bottom: 0;
+            line-height: 1.75rem;
+        }
+
+        .eeName {
+            font-weight: bold;
+        }
+    }
+
+    hr.transfereeSideNav__rule {
+        border: 0px;
+        border-top: 1px solid white;
+        width: 85%;
+        margin: 1rem 7.5%;
+    }
+
+    ul.transfereeSideNav__items {
+        color: white;
+        list-style: none;
+        margin: 0 0;
+        padding: 0;
+
+        li {
+            padding: 2vh 10%;
+
+            img {
+                width: 1.5rem;
+            }
+
+            label {
+                font-size: 1.5rem;
+                margin-left: 0.75rem;
+            }
+
+            &:hover {
+                background-color: rgba(0,0,0,0.2);
+            }
+        }
+
+        li.selected {
+            background-color: #8E1A55; //purple-ish from mockups
+        }
+    }
+
+    .transfereeSideNav__sub-items {
+    }
+
+    @media screen and (min-width: 48rem) {
+        height: calc(100vh - #{$primaryNavHeightLg});
+        top: $primaryNavHeightLg;
+        display: block;
+    }
+}

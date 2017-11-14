@@ -337,6 +337,7 @@
     <Compile Include="ViewModels\Mailers\ViewRenderer.cs" />
     <Compile Include="ViewModels\Orders\Transferee\HousingPropertyViewModel.cs" />
     <Compile Include="ViewModels\Orders\Transferee\HousingViewModel.cs" />
+    <Compile Include="ViewModels\Orders\Transferee\OrdersTransfereeItineraryViewModel.cs" />
     <Compile Include="ViewModels\Orders\Transferee\OrdersTransfereeViewModel.cs" />
     <Compile Include="ViewModels\Shared\ChildViewModel.cs" />
     <Compile Include="ViewModels\Shared\ManagerViewModel.cs" />
@@ -394,6 +395,12 @@
     </Content>
     <Content Include="Content\css\transferee\messages.min.css">
       <DependentUpon>messages.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\transferee\sideNav.css">
+      <DependentUpon>sideNav.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\transferee\sideNav.min.css">
+      <DependentUpon>sideNav.css</DependentUpon>
     </Content>
     <Content Include="Content\css\transferee\transferee.css">
       <DependentUpon>transferee.scss</DependentUpon>
@@ -663,6 +670,7 @@
     <Content Include="Scripts\app\services\userManagementService.js" />
     <Content Include="Scripts\app\views\transferee-housing.js" />
     <Content Include="Scripts\app\views\transferee-details.js" />
+    <Content Include="Scripts\app\views\transferee-itinerary.js" />
     <Content Include="Scripts\app\views\transferee-intake.js" />
     <Content Include="Scripts\app\views\transferee.js" />
     <Content Include="Scripts\app\views\forgotPassword.js" />
@@ -700,6 +708,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\css\primaryNav.scss" />
+    <Content Include="Content\css\transferee\sideNav.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
