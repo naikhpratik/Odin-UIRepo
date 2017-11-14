@@ -298,6 +298,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\AccountController.cs" />
     <Compile Include="Controllers\Api\ConsultantsController.cs" />
+    <Compile Include="Controllers\Api\HomeFindingPropertiesController.cs" />
     <Compile Include="Controllers\Api\ManagersController.cs" />
     <Compile Include="Controllers\Api\OrdersController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -883,6 +884,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\HomeFindingProperties\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">

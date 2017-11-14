@@ -124,6 +124,7 @@
     <Compile Include="Core\Dtos\ConsultantDto.cs" />
     <Compile Include="Core\Dtos\ConsultantImportDto.cs" />
     <Compile Include="Core\Dtos\ConsultantsDto.cs" />
+    <Compile Include="Core\Dtos\HomeFindingPropertyDto.cs" />
     <Compile Include="Core\Dtos\OrderDto.cs" />
     <Compile Include="Core\Dtos\OrderIndexDto.cs" />
     <Compile Include="Core\Dtos\OrdersTransfereeDetailsServiceDto.cs" />
