@@ -11,6 +11,7 @@ namespace Odin.Data.Core
         IManagersRepository Managers { get; }
         IServicesRepository Services { get; }
         IServiceTypesRepository ServiceTypes { get; }
+        IAppointmentsRepository Appointments { get; }
         IChildrenRepository Children { get; }
         IPetsRepository Pets { get; }
         INumberOfBathroomsTypesRepository NumberOfBathrooms { get; }

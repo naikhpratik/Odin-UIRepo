@@ -13,6 +13,7 @@ namespace Odin.Data.Core.Models
             Services = new Collection<Service>();
             Children = new Collection<Child>();
             Pets = new Collection<Pet>();
+            Appointments =  new Collection<Appointment>();
         }
 
         public string TrackingId { get; set; }
@@ -82,6 +83,8 @@ namespace Odin.Data.Core.Models
         public int? LengthOfAssignment { get; set; }
 
         public HomeFinding HomeFinding { get; set; }
+
+        public virtual ICollection<Appointment> Appointments { get; private set; }
 
         public virtual ICollection<Service> Services { get; private set; }
 
