@@ -42,11 +42,8 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
-    </Reference>
-    <Reference Include="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    <Reference Include="AutoMapper, Version=6.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.1.1\lib\net45\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="Bogus, Version=17.0.1.0, Culture=neutral, PublicKeyToken=fa1bb3f3f218129a, processorArchitecture=MSIL">
       <HintPath>..\packages\Bogus.17.0.1\lib\net40\Bogus.dll</HintPath>
@@ -72,13 +69,11 @@
     <Reference Include="Microsoft.Azure.Mobile.Server.Tables, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Azure.Mobile.Server.Tables.1.1.157.1\lib\net45\Microsoft.Azure.Mobile.Server.Tables.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Data.Edm, Version=5.6.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Data.Edm.5.6.4\lib\net40\Microsoft.Data.Edm.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Microsoft.Data.Edm, Version=5.8.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.Edm.5.8.2\lib\net40\Microsoft.Data.Edm.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Data.OData, Version=5.6.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Data.OData.5.6.4\lib\net40\Microsoft.Data.OData.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Microsoft.Data.OData, Version=5.8.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.OData.5.8.2\lib\net40\Microsoft.Data.OData.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -93,9 +88,8 @@
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
-    <Reference Include="System.Spatial, Version=5.6.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Spatial.5.6.4\lib\net40\System.Spatial.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="System.Spatial, Version=5.8.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Spatial.5.8.2\lib\net40\System.Spatial.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
@@ -119,12 +113,9 @@
     <Compile Include="Builders\ConsultantImportDtoBuilder.cs" />
     <Compile Include="Builders\PetBuilder.cs" />
     <Compile Include="Builders\ProgramManagerDtoBuilder.cs" />
-<<<<<<< HEAD
+    <Compile Include="Builders\HomeFindingPropertiesBuilder.cs" />
     <Compile Include="Builders\PropertyBuilder.cs" />
-    <Compile Include="Builders\RentBuilder.cs" />
-=======
     <Compile Include="Builders\HomeFindingBuilder.cs" />
->>>>>>> master
     <Compile Include="Builders\TransfereeBuilder.cs" />
     <Compile Include="Builders\OrderBuilder.cs" />
     <Compile Include="Builders\OrderDtoBuilder.cs" />
@@ -175,10 +166,13 @@
     <Compile Include="Core\Models\OwnershipType.cs" />
     <Compile Include="Core\Models\Pet.cs" />
     <Compile Include="Core\Models\HomeFinding.cs" />
+    <Compile Include="Core\Models\QueueEntry.cs" />
+    <Compile Include="Core\Models\QueueType.cs" />
     <Compile Include="Core\Models\SEDropDownType.cs" />
     <Compile Include="Core\Models\Service.cs" />
     <Compile Include="Core\Models\ServiceCategory.cs" />
     <Compile Include="Core\Models\ServiceType.cs" />
+    <Compile Include="Core\Models\DefaultType.cs" />
     <Compile Include="Core\Models\Transferee.cs" />
     <Compile Include="Core\Models\TransportationType.cs" />
     <Compile Include="Core\Models\UserRoles.cs" />
@@ -209,6 +203,7 @@
     <Compile Include="Persistence\ChildrenRepository.cs" />
     <Compile Include="Persistence\ConsultantsRepository.cs" />
     <Compile Include="Persistence\DepositTypesRepository.cs" />
+    <Compile Include="Persistence\EntityConfigurations\HomeFindingPropertiesConfiguration.cs" />
     <Compile Include="Persistence\EntityConfigurations\OrderConfiguration.cs" />
     <Compile Include="Persistence\EntityConfigurations\HomeFindingConfiguration.cs" />
     <Compile Include="Persistence\HousingTypesRepository.cs" />
@@ -406,15 +401,6 @@
     <Compile Include="Persistence\Migrations\201710312109349_MergeAddNewEtlFields.Designer.cs">
       <DependentUpon>201710312109349_MergeAddNewEtlFields.cs</DependentUpon>
     </Compile>
-<<<<<<< HEAD
-    <Compile Include="Persistence\Migrations\201711011841252_AddPropertyModel.cs" />
-    <Compile Include="Persistence\Migrations\201711011841252_AddPropertyModel.Designer.cs">
-      <DependentUpon>201711011841252_AddPropertyModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Persistence\Migrations\201711011848429_AddHomeFindingPropertyJoin.cs" />
-    <Compile Include="Persistence\Migrations\201711011848429_AddHomeFindingPropertyJoin.Designer.cs">
-      <DependentUpon>201711011848429_AddHomeFindingPropertyJoin.cs</DependentUpon>
-=======
     <Compile Include="Persistence\Migrations\201711021336284_ChangeRentTableToHomeFinding.cs" />
     <Compile Include="Persistence\Migrations\201711021336284_ChangeRentTableToHomeFinding.Designer.cs">
       <DependentUpon>201711021336284_ChangeRentTableToHomeFinding.cs</DependentUpon>
@@ -434,6 +420,23 @@
     <Compile Include="Persistence\Migrations\201711061818328_MergedInTriggerUpdateFromMaster.cs" />
     <Compile Include="Persistence\Migrations\201711061818328_MergedInTriggerUpdateFromMaster.Designer.cs">
       <DependentUpon>201711061818328_MergedInTriggerUpdateFromMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201711071800307_AddServiceFlagToOrder.cs" />
+    <Compile Include="Persistence\Migrations\201711071800307_AddServiceFlagToOrder.Designer.cs">
+      <DependentUpon>201711071800307_AddServiceFlagToOrder.cs</DependentUpon>
+    </Compile>
+<<<<<<< HEAD
+    <Compile Include="Persistence\Migrations\201711141618317_AddSortOrderAndDefault.cs" />
+    <Compile Include="Persistence\Migrations\201711141618317_AddSortOrderAndDefault.Designer.cs">
+      <DependentUpon>201711141618317_AddSortOrderAndDefault.cs</DependentUpon>
+=======
+    <Compile Include="Persistence\Migrations\201711082148046_AddHomeFindingProperties.cs" />
+    <Compile Include="Persistence\Migrations\201711082148046_AddHomeFindingProperties.Designer.cs">
+      <DependentUpon>201711082148046_AddHomeFindingProperties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201711131931315_MergeNov13.cs" />
+    <Compile Include="Persistence\Migrations\201711131931315_MergeNov13.Designer.cs">
+      <DependentUpon>201711131931315_MergeNov13.cs</DependentUpon>
 >>>>>>> master
     </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
@@ -601,13 +604,6 @@
     <EmbeddedResource Include="Persistence\Migrations\201710312109349_MergeAddNewEtlFields.resx">
       <DependentUpon>201710312109349_MergeAddNewEtlFields.cs</DependentUpon>
     </EmbeddedResource>
-<<<<<<< HEAD
-    <EmbeddedResource Include="Persistence\Migrations\201711011841252_AddPropertyModel.resx">
-      <DependentUpon>201711011841252_AddPropertyModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Persistence\Migrations\201711011848429_AddHomeFindingPropertyJoin.resx">
-      <DependentUpon>201711011848429_AddHomeFindingPropertyJoin.cs</DependentUpon>
-=======
     <EmbeddedResource Include="Persistence\Migrations\201711021336284_ChangeRentTableToHomeFinding.resx">
       <DependentUpon>201711021336284_ChangeRentTableToHomeFinding.cs</DependentUpon>
     </EmbeddedResource>
@@ -622,10 +618,22 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201711061818328_MergedInTriggerUpdateFromMaster.resx">
       <DependentUpon>201711061818328_MergedInTriggerUpdateFromMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711071800307_AddServiceFlagToOrder.resx">
+      <DependentUpon>201711071800307_AddServiceFlagToOrder.cs</DependentUpon>
+    </EmbeddedResource>
+<<<<<<< HEAD
+    <EmbeddedResource Include="Persistence\Migrations\201711141618317_AddSortOrderAndDefault.resx">
+      <DependentUpon>201711141618317_AddSortOrderAndDefault.cs</DependentUpon>
+=======
+    <EmbeddedResource Include="Persistence\Migrations\201711082148046_AddHomeFindingProperties.resx">
+      <DependentUpon>201711082148046_AddHomeFindingProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711131931315_MergeNov13.resx">
+      <DependentUpon>201711131931315_MergeNov13.cs</DependentUpon>
 >>>>>>> master
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
 </Project>

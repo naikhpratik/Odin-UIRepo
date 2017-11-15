@@ -11,5 +11,7 @@ namespace Odin.Data.Core.Repositories
 
         IEnumerable<ServiceType> GetPossibleServiceTypes(IEnumerable<ServiceCategory> cat,
             IEnumerable<int> existingServiceTypeIds);
+
+        IEnumerable<ServiceType> GetDefaultServiceTypes(IEnumerable<ServiceCategory> cat, IEnumerable<int> existingServiceTypeIds, bool isInternational);
     }
 }

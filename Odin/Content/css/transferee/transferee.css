@@ -71,9 +71,14 @@ nav#transfereeSideNav {
   color: #8e1a55;
   display: inline-block; }
 
-.sectionSave {
+.sectionSave, .sectionAdd {
   font-size: small;
   color: #a7ce39;
+  cursor: pointer; }
+
+.sectionDelete {
+  font-size: small;
+  color: #e53c2e;
   cursor: pointer; }
 
 .sectionInstruction {

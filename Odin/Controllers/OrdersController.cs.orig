@@ -2,10 +2,10 @@
 using Microsoft.AspNet.Identity;
 using Odin.Data.Core;
 using Odin.Data.Core.Models;
-using Odin.Helpers;
 using Odin.Interfaces;
 using Odin.ViewModels.Orders.Transferee;
 using Odin.ViewModels.Shared;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -40,22 +40,28 @@ namespace Odin.Controllers
         // GET Partials
         public ActionResult HousingPartial(string id)
         {
+<<<<<<< HEAD
+            var order = _unitOfWork.Orders.GetOrderById(id);
+
+            HousingViewModel viewModel = order.HomeFinding != null
+                ? _mapper.Map<HomeFinding, HousingViewModel>(order.HomeFinding)
+                : new HousingViewModel();
+
+            viewModel.NumberOfPets = order.Pets.Count();
+
+            int numKids = order.Children == null ? 0 : order.Children.Count();
+            if (numKids == 0 && order.SpouseName == "")
+                viewModel.SpouceAndKids = null;
+            else
+                viewModel.SpouceAndKids = (order.SpouseName == "" ? "No" : "Yes") + " / " + numKids.ToString();
+=======
             var userId = User.Identity.GetUserId();
             var order = _unitOfWork.Orders.GetOrderFor(userId, id);
 
             HousingViewModel viewModel = new HousingViewModel(order, _mapper);
 
+>>>>>>> master
             return PartialView("~/views/orders/partials/_Housing.cshtml", viewModel);
-        }
-
-        public ActionResult PropertiesPartial(string id)
-        {
-            var userId = User.Identity.GetUserId();
-            var order = _unitOfWork.Orders.GetOrderFor(userId, id);
-
-            HousingViewModel viewModel = new HousingViewModel(order, _mapper);
-
-            return PartialView("~/views/orders/partials/_HousingProperties.cshtml", viewModel.Properties);
         }
 
         public ActionResult DetailsPartial(string id)
@@ -115,10 +121,21 @@ namespace Odin.Controllers
             var order = _unitOfWork.Orders.GetOrderFor(userId,id);
 
             OrdersTransfereeViewModel vm = _mapper.Map<Order, OrdersTransfereeViewModel>(order);
-            vm.Services = vm.Services.OrderBy(s => s.ServiceTypeSortOrder);
-            
+            vm.Services = vm.Services.OrderBy(s => s.Category);
+
+            //Get list of all service categories
+            var catEnums = Enum.GetValues(typeof(ServiceCategory)).Cast<ServiceCategory>();
+
             //Populate list of service categories available for this order.
-            var cats = ServiceHelper.GetCategoriesForServiceFlag(order.ServiceFlag);
+            var cats = new List<ServiceCategory>();
+            foreach (var cat in catEnums)
+            {
+                //Use service bit flag on order to determine what categories have been selected in SE.
+                if ((order.ServiceFlag & (int)cat) > 0)
+                {
+                    cats.Add(cat);
+                }
+            }
 
             //Get all service types that the order already has.
             var ids = order.Services.Select(s => s.ServiceType.Id).ToList();
@@ -127,7 +144,7 @@ namespace Odin.Controllers
             var filtPossible = _unitOfWork.ServiceTypes.GetPossibleServiceTypes(cats, ids);
 
             vm.PossibleServices =
-                _mapper.Map<IEnumerable<ServiceType>, IEnumerable<ServiceTypeViewModel>>(filtPossible).OrderBy(s => s.SortOrder);
+                _mapper.Map<IEnumerable<ServiceType>, IEnumerable<ServiceTypeViewModel>>(filtPossible).OrderBy(s => s.Category);
 
             vm.NumberOfBathrooms = _unitOfWork.NumberOfBathrooms.GetNumberOfBathroomsList();
             vm.HousingTypes = _unitOfWork.HousingTypes.GetHousingTypesList();

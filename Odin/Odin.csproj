@@ -321,6 +321,7 @@
     <Compile Include="Helpers\ConfigHelper.cs" />
     <Compile Include="Helpers\DateHelper.cs" />
     <Compile Include="Helpers\EmailHelper.cs" />
+    <Compile Include="Helpers\ServiceHelper.cs" />
     <Compile Include="Helpers\ViewRenderer.cs" />
     <Compile Include="Interfaces\IImageStore.cs" />
     <Compile Include="Interfaces\IQueueStore.cs" />
@@ -636,6 +637,12 @@
     </Content>
     <Content Include="Content\css\orders.min.css">
       <DependentUpon>orders.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\primaryNav.css">
+      <DependentUpon>primaryNav.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\primaryNav.min.css">
+      <DependentUpon>primaryNav.css</DependentUpon>
     </Content>
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />

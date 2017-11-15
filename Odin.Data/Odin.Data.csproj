@@ -172,6 +172,7 @@
     <Compile Include="Core\Models\Service.cs" />
     <Compile Include="Core\Models\ServiceCategory.cs" />
     <Compile Include="Core\Models\ServiceType.cs" />
+    <Compile Include="Core\Models\DefaultType.cs" />
     <Compile Include="Core\Models\Transferee.cs" />
     <Compile Include="Core\Models\TransportationType.cs" />
     <Compile Include="Core\Models\UserRoles.cs" />
@@ -424,6 +425,10 @@
     <Compile Include="Persistence\Migrations\201711071800307_AddServiceFlagToOrder.Designer.cs">
       <DependentUpon>201711071800307_AddServiceFlagToOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201711141618317_AddSortOrderAndDefault.cs" />
+    <Compile Include="Persistence\Migrations\201711141618317_AddSortOrderAndDefault.Designer.cs">
+      <DependentUpon>201711141618317_AddSortOrderAndDefault.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\201711082148046_AddHomeFindingProperties.cs" />
     <Compile Include="Persistence\Migrations\201711082148046_AddHomeFindingProperties.Designer.cs">
       <DependentUpon>201711082148046_AddHomeFindingProperties.cs</DependentUpon>
@@ -432,9 +437,17 @@
     <Compile Include="Persistence\Migrations\201711131931315_MergeNov13.Designer.cs">
       <DependentUpon>201711131931315_MergeNov13.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201711151608086_MergeAddSortOrderAndDefault.cs" />
+    <Compile Include="Persistence\Migrations\201711151608086_MergeAddSortOrderAndDefault.Designer.cs">
+      <DependentUpon>201711151608086_MergeAddSortOrderAndDefault.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\201711151901404_SwitchNumberOfBathsOnProperty.cs" />
     <Compile Include="Persistence\Migrations\201711151901404_SwitchNumberOfBathsOnProperty.Designer.cs">
       <DependentUpon>201711151901404_SwitchNumberOfBathsOnProperty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201711152045272_MergeNov15.cs" />
+    <Compile Include="Persistence\Migrations\201711152045272_MergeNov15.Designer.cs">
+      <DependentUpon>201711152045272_MergeNov15.cs</DependentUpon>
     </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\NumberOfBathroomsTypesRepository.cs" />
@@ -619,14 +632,23 @@
     <EmbeddedResource Include="Persistence\Migrations\201711071800307_AddServiceFlagToOrder.resx">
       <DependentUpon>201711071800307_AddServiceFlagToOrder.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711141618317_AddSortOrderAndDefault.resx">
+      <DependentUpon>201711141618317_AddSortOrderAndDefault.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201711082148046_AddHomeFindingProperties.resx">
       <DependentUpon>201711082148046_AddHomeFindingProperties.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201711131931315_MergeNov13.resx">
       <DependentUpon>201711131931315_MergeNov13.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711151608086_MergeAddSortOrderAndDefault.resx">
+      <DependentUpon>201711151608086_MergeAddSortOrderAndDefault.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201711151901404_SwitchNumberOfBathsOnProperty.resx">
       <DependentUpon>201711151901404_SwitchNumberOfBathsOnProperty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711152045272_MergeNov15.resx">
+      <DependentUpon>201711152045272_MergeNov15.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
