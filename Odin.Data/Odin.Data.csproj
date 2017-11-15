@@ -171,6 +171,7 @@
     <Compile Include="Core\Models\Service.cs" />
     <Compile Include="Core\Models\ServiceCategory.cs" />
     <Compile Include="Core\Models\ServiceType.cs" />
+    <Compile Include="Core\Models\DefaultType.cs" />
     <Compile Include="Core\Models\Transferee.cs" />
     <Compile Include="Core\Models\TransportationType.cs" />
     <Compile Include="Core\Models\UserRoles.cs" />
@@ -422,6 +423,10 @@
     <Compile Include="Persistence\Migrations\201711071800307_AddServiceFlagToOrder.Designer.cs">
       <DependentUpon>201711071800307_AddServiceFlagToOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201711141618317_AddSortOrderAndDefault.cs" />
+    <Compile Include="Persistence\Migrations\201711141618317_AddSortOrderAndDefault.Designer.cs">
+      <DependentUpon>201711141618317_AddSortOrderAndDefault.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\NumberOfBathroomsTypesRepository.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
@@ -604,6 +609,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201711071800307_AddServiceFlagToOrder.resx">
       <DependentUpon>201711071800307_AddServiceFlagToOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711141618317_AddSortOrderAndDefault.resx">
+      <DependentUpon>201711141618317_AddSortOrderAndDefault.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

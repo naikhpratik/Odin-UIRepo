@@ -22,6 +22,8 @@ namespace Odin.ViewModels.Shared
 
         public string Name { get; set; }
 
+        public int ServiceTypeSortOrder { get; set; }
+
         public int Category { get; set; }
     }
 }

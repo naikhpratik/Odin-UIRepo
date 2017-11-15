@@ -1,9 +1,12 @@
-﻿using System;
-using AutoMapper;
+﻿using AutoMapper;
 using Odin.Data.Core;
 using Odin.Data.Core.Dtos;
 using Odin.Data.Core.Models;
+using Odin.Helpers;
 using Odin.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Odin.Domain
 {
@@ -47,6 +50,25 @@ namespace Odin.Domain
                     transferee = _mapper.Map<TransfereeDto, Transferee>(orderDto.Transferee);
                     _unitOfWork.Transferees.Add(transferee);
                 }
+            }
+
+            //Add default services
+            //Populate list of service categories available for this order.
+            var cats = ServiceHelper.GetCategoriesForServiceFlag(order.ServiceFlag);
+
+            //Get all service types that the order already has.
+            var ids = order.Services.Select(s => s.ServiceTypeId).ToList();
+
+            IEnumerable<ServiceType> defServTypes =
+                _unitOfWork.ServiceTypes.GetDefaultServiceTypes(cats, ids, order.IsInternational);
+
+            foreach (var servType in defServTypes)
+            {
+                order.Services.Add(new Service()
+                {
+                    Selected = true,
+                    ServiceType = servType
+                });
             }
 
             //Map type values

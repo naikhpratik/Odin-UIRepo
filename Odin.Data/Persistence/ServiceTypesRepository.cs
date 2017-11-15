@@ -35,5 +35,12 @@ namespace Odin.Data.Persistence
             return _context.ServiceTypes.Where(st =>
                 cat.Contains(st.Category) && !existingServiceTypeIds.Contains(st.Id)).ToList();
         }
+
+        public IEnumerable<ServiceType> GetDefaultServiceTypes(IEnumerable<ServiceCategory> cat, IEnumerable<int> existingServiceTypeIds, bool isInternational)
+        {
+            int defFlag = isInternational ? (int)DefaultType.International : (int)DefaultType.Domestic;
+            return _context.ServiceTypes.Where(st =>
+                cat.Contains(st.Category) && !existingServiceTypeIds.Contains(st.Id) && (st.Default & defFlag) > 0 ).ToList();
+        }
     }
 }

@@ -320,6 +320,7 @@
     <Compile Include="Helpers\ConfigHelper.cs" />
     <Compile Include="Helpers\DateHelper.cs" />
     <Compile Include="Helpers\EmailHelper.cs" />
+    <Compile Include="Helpers\ServiceHelper.cs" />
     <Compile Include="Helpers\ViewRenderer.cs" />
     <Compile Include="Interfaces\IImageStore.cs" />
     <Compile Include="Interfaces\IQueueStore.cs" />

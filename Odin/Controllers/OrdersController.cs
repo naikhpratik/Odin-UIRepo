@@ -2,10 +2,10 @@
 using Microsoft.AspNet.Identity;
 using Odin.Data.Core;
 using Odin.Data.Core.Models;
+using Odin.Helpers;
 using Odin.Interfaces;
 using Odin.ViewModels.Orders.Transferee;
 using Odin.ViewModels.Shared;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -109,21 +109,10 @@ namespace Odin.Controllers
             var order = _unitOfWork.Orders.GetOrderFor(userId,id);
 
             OrdersTransfereeViewModel vm = _mapper.Map<Order, OrdersTransfereeViewModel>(order);
-            vm.Services = vm.Services.OrderBy(s => s.Category);
-
-            //Get list of all service categories
-            var catEnums = Enum.GetValues(typeof(ServiceCategory)).Cast<ServiceCategory>();
-
+            vm.Services = vm.Services.OrderBy(s => s.ServiceTypeSortOrder);
+            
             //Populate list of service categories available for this order.
-            var cats = new List<ServiceCategory>();
-            foreach (var cat in catEnums)
-            {
-                //Use service bit flag on order to determine what categories have been selected in SE.
-                if ((order.ServiceFlag & (int)cat) > 0)
-                {
-                    cats.Add(cat);
-                }
-            }
+            var cats = ServiceHelper.GetCategoriesForServiceFlag(order.ServiceFlag);
 
             //Get all service types that the order already has.
             var ids = order.Services.Select(s => s.ServiceType.Id).ToList();
@@ -132,7 +121,7 @@ namespace Odin.Controllers
             var filtPossible = _unitOfWork.ServiceTypes.GetPossibleServiceTypes(cats, ids);
 
             vm.PossibleServices =
-                _mapper.Map<IEnumerable<ServiceType>, IEnumerable<ServiceTypeViewModel>>(filtPossible).OrderBy(s => s.Category);
+                _mapper.Map<IEnumerable<ServiceType>, IEnumerable<ServiceTypeViewModel>>(filtPossible).OrderBy(s => s.SortOrder);
 
             vm.NumberOfBathrooms = _unitOfWork.NumberOfBathrooms.GetNumberOfBathroomsList();
             vm.HousingTypes = _unitOfWork.HousingTypes.GetHousingTypesList();
