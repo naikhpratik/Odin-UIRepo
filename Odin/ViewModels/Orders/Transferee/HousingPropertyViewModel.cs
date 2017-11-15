@@ -49,15 +49,16 @@ namespace Odin.ViewModels.Orders.Transferee
 
         [Display(Name = "BD")]
         [DisplayFormat(NullDisplayText = "NA")]
-        public int PropertyNumberOfBedrooms { get; set; }
+        public int? PropertyNumberOfBedrooms { get; set; }
 
-        //[Display(Name = "BA")]
-        //[DisplayFormat(NullDisplayText = "NA", ConvertEmptyStringToNull = true)]
-        //public String PropertyNumberOfBathroomsName { get; set; }
+        [Display(Name = "BA")]
+        [RegularExpression(@"^(\d{0,2})(.{0,1})([0,5]{0,1})$", ErrorMessage = "Baths must be in increments of .5")]
+        [DisplayFormat(NullDisplayText = "NA")]
+        public decimal? PropertyNumberOfBathrooms { get; set; }
 
         [Display(Name = "Sq. Ft.")]
         [DisplayFormat(NullDisplayText = "NA", DataFormatString = "{0:N0}")]
-        public int PropertySquareFootage { get; set; }
+        public int? PropertySquareFootage { get; set; }
 
         [Display(Name = "Rent")]
         [DisplayFormat(NullDisplayText = "NA", DataFormatString = "{0:c}")]

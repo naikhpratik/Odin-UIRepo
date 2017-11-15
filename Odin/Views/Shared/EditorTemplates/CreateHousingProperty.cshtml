@@ -60,7 +60,13 @@
                 @Html.ValidationMessageFor(model => model.PropertyNumberOfBedrooms, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        <div class="form-group">
+            @Html.LabelFor(model => model.PropertyNumberOfBathrooms, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PropertyNumberOfBathrooms, new { htmlAttributes = new { @class = "form-control", @min = "0", @step = "0.5", @type = "number" } })
+                @Html.ValidationMessageFor(model => model.PropertyNumberOfBathrooms, "", new { @class = "text-danger" })
+            </div>
+        </div>
         <div class="form-group">
             @Html.LabelFor(model => model.PropertySquareFootage, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
