@@ -46,7 +46,7 @@ namespace Odin.IntegrationTests.Controllers.Api
             HousingPropertyViewModel propertyVM = new HousingPropertyViewModel();
             propertyVM.PropertyStreet1 = "abc";
             propertyVM.PropertyStreet2 = "apt 123";
-            propertyVM.Id = order.HomeFinding.Id;
+            propertyVM.OrderId = order.Id;
 
             // Act
             HomeFindingPropertiesController controller = SetUpHomeFindingPropertiesController();
