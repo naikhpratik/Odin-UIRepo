@@ -43,6 +43,15 @@
             <img src="~/Content/Images/map_placeholder.png" />
         </div>
     </div>
+
+    <div id="result"></div>
+    
+    @{  var property = new Odin.ViewModels.Orders.Transferee.HousingPropertyViewModel();
+        property.OrderId = Model.Id;
+    }
+
+    @Html.Partial("~/Views/Shared/EditorTemplates/CreateHousingProperty.cshtml", property)
+
     <div class="row" id="propertiesControls">
         <!--
         <form class="col-sm-6" id="housingFilter">
@@ -318,6 +327,7 @@
     </div>
 </div>
 
+@Scripts.Render("~/Scripts/jquery.validate.js")
 @Styles.Render("~/Styling/housing")
 <script>
     $(document).ready(function () {

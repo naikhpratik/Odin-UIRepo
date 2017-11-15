@@ -874,6 +874,7 @@
     <Content Include="Views\Orders\Partials\_Itinerary.cshtml" />
     <Content Include="Views\Orders\Partials\_Messages.cshtml" />
     <Content Include="Views\Orders\Partials\_History.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\CreateHousingProperty.cshtml" />
     <None Include="Web.Azure.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -884,7 +885,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\HomeFindingProperties\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">

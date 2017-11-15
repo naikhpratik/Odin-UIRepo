@@ -31,16 +31,16 @@ namespace Odin.Controllers.Api
         {
             var userId = User.Identity.GetUserId();
 
-            HomeFindingProperty homeFindingProperty = _mapper.Map<HousingPropertyViewModel, HomeFindingProperty>(propertyVM);
+            HomeFindingProperty homeFindingProperty = new HomeFindingProperty();
+            homeFindingProperty = _mapper.Map<HousingPropertyViewModel, HomeFindingProperty>(propertyVM, homeFindingProperty);
 
-            // !!!: This relies that the HomeFinding Id is the same of the Order. Refactor later
-            Order order = _unitOfWork.Orders.GetOrderFor(userId, propertyVM.Id);
+            Order order = _unitOfWork.Orders.GetOrderFor(userId, propertyVM.OrderId);
             HomeFinding homeFinding = order.HomeFinding;
             homeFinding.HomeFindingProperties.Add(homeFindingProperty);
 
             _unitOfWork.Complete();
 
-            return Ok();
+            return Ok("This is the OK");
         }
     }
 }
