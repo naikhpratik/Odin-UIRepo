@@ -36,9 +36,10 @@ namespace Odin.ViewModels.Orders.Transferee
         [Required(ErrorMessage = "City is required")]
         public String PropertyCity { get; set; }
 
-        [Display(Name = "State Abbr:")]
-        [Required(ErrorMessage = "State Abbr. is required")]
+        [Display(Name = "State:")]
+        [Required(ErrorMessage = "State is required")]
         [MaxLength(2)]
+        [DataType("UnitedStates")]
         public String PropertyState { get; set; }
 
         [Display(Name = "Availability Date:")]

@@ -876,6 +876,7 @@
     <Content Include="Views\Orders\Partials\_History.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\CreateHousingProperty.cshtml" />
     <Content Include="Views\Orders\Partials\_HousingProperties.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\UnitedStates.cshtml" />
     <None Include="Web.Azure.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
