@@ -1,33 +1,81 @@
 ﻿@model Odin.ViewModels.Orders.Transferee.OrdersTransfereeItineraryViewModel
 <div class="container-fluid" data-order-id="@Model.Id" id="itinerary">  
-    @for (int i = 0; i < Model.Services.Count(); i++)
+    @for (int i = 0; i < Model.Sorted.Count(); i++)
     {
-        if (Model.Services.ElementAt(i).Selected)
+        string al = "";
+        DateTime? dt = null;
+        string id = "";
+        string link = "";
+        if (Model.Sorted.ElementAt(i) is Odin.ViewModels.Shared.ServiceViewModel)
         {
-            if (ViewBag.SameAs == null || DateTime.Parse(ViewBag.SameAs.ToString()).ToShortDateString() != Model.Services.ElementAt(i).ScheduledDate.Value.ToShortDateString())
-            {
-               ViewBag.SameAs = Model.Services.ElementAt(i).ScheduledDate.Value;
-               
-            <div class="event-item row" data-entity-id="@Model.Services.ElementAt(i).Id">
+            dt = (DateTime?)((Odin.ViewModels.Shared.ServiceViewModel)Model.Sorted.ElementAt(i)).ScheduledDate;
+            al = (string)((Odin.ViewModels.Shared.ServiceViewModel)Model.Sorted.ElementAt(i)).ActionLabel;
+            id = (string)((Odin.ViewModels.Shared.ServiceViewModel)Model.Sorted.ElementAt(i)).Id;
+            link = "@Url.Action('Orders', 'DetailsPartial', new { id = @Model.Id })";
+            
+        }
+        else
+        {
+            dt = (DateTime?)((Odin.Data.Core.Models.Appointment)Model.Sorted.ElementAt(i)).ScheduledDate;
+            al = (string)((Odin.Data.Core.Models.Appointment)Model.Sorted.ElementAt(i)).Description;
+            id = (string)((Odin.Data.Core.Models.Appointment)Model.Sorted.ElementAt(i)).Id;
+            link = "";
+        }
+        if (ViewBag.SameAs == null || DateTime.Parse(ViewBag.SameAs.ToString()).ToShortDateString() != dt.Value.ToShortDateString())
+        {
+            ViewBag.SameAs = dt;
+
+
+            <div class="event-item row" data-entity-id="@id">
                 <div class="dayTitle">
                     <h2 class="dayNumber">
-                        @(Model.Services.ElementAt(i).ScheduledDate != null ? Model.Services.ElementAt(i).ScheduledDate.Value.ToString("dd") : "NA")
+                        @(dt.HasValue ? dt.Value.ToString("dd") : "NA")
                     </h2>
                     <div class="dayText">
-                        <p class="dayName"><span>@(Model.Services.ElementAt(i).ScheduledDate != null ? Model.Services.ElementAt(i).ScheduledDate.Value.ToString("dddd") : "NA")</span></p>
-                        <p class="mmyyyy">@(Model.Services.ElementAt(i).ScheduledDate != null ? Model.Services.ElementAt(i).ScheduledDate.Value.ToString("MMMM yyyy") : "NA")</p>
+                        <p class="dayName"><span>@(dt.HasValue ? dt.Value.ToString("dddd") : "NA")</span></p>
+                        <p class="mmyyyy">@(dt.HasValue ?dt.Value.ToString("MMMM yyyy") : "NA")</p>
                     </div>
                 </div>
             </div>
             }
             <div class="eventNotes">
                 <p>
-                    <span class="eventTime">@(Model.Services.ElementAt(i).ScheduledDate != null ? Model.Services.ElementAt(i).ScheduledDate.Value.ToString("hh:mm tt") : "NA")</span>
-                    <span class="eventNote">@Model.Services.ElementAt(i).ActionLabel</span>
+                    <span class="eventTime">@(dt.HasValue ? dt.Value.ToString("hh:mm tt") : "NA")</span>
+                    <span class="eventNote">@Html.ActionLink(al, "detailspartial", "orders", new { id = @Model.Id }, null)</span>
+    
                 </p>                
             </div>
-        }
+        
     }
+    <hr>
+
+    @*@{ViewBag.SameAs = null; }
+    @for (int i = 0; i < Model.Appointments.Count(); i++)
+    {
+        if (ViewBag.SameAs == null || DateTime.Parse(ViewBag.SameAs.ToString()).ToShortDateString() != Model.Appointments.ElementAt(i).ScheduledDate.Value.ToShortDateString())
+        {
+            ViewBag.SameAs = Model.Appointments.ElementAt(i).ScheduledDate.Value;
+
+            <div class="event-item row" data-entity-id="@Model.Appointments.ElementAt(i).Id">
+                <div class="dayTitle">
+                    <h2 class="dayNumber">
+                        @(Model.Appointments.ElementAt(i).ScheduledDate.HasValue ? Model.Appointments.ElementAt(i).ScheduledDate.Value.ToString("dd") : "NA")
+                    </h2>
+                    <div class="dayText">
+                        <p class="dayName"><span>@(Model.Appointments.ElementAt(i).ScheduledDate.HasValue ? Model.Appointments.ElementAt(i).ScheduledDate.Value.ToString("dddd") : "NA")</span></p>
+                        <p class="mmyyyy">@(Model.Appointments.ElementAt(i).ScheduledDate.HasValue ? Model.Appointments.ElementAt(i).ScheduledDate.Value.ToString("MMMM yyyy") : "NA")</p>
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="eventNotes">
+            <p>
+                <span class="eventTime">@(Model.Appointments.ElementAt(i).ScheduledDate.HasValue ? Model.Appointments.ElementAt(i).ScheduledDate.Value.ToString("hh:mm tt") : "NA")</span>
+                <span class="eventNote">@Model.Appointments.ElementAt(i).Description</span>
+            </p>
+        </div>
+    }*@
+
     <hr>
 </div>
 @Styles.Render("~/Styling/itinerary")

@@ -5,6 +5,7 @@ using Odin.Data.Core.Models;
 using Odin.Interfaces;
 using Odin.ViewModels.Orders.Transferee;
 using Odin.ViewModels.Shared;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -142,7 +143,12 @@ namespace Odin.Controllers
         private OrdersTransfereeItineraryViewModel itineraryViewModelForOrder(Order order)
         {
             OrdersTransfereeItineraryViewModel vm = _mapper.Map<Order, OrdersTransfereeItineraryViewModel>(order);
-            vm.Services = vm.Services.OrderBy(s => s.ScheduledDate);            
+            //vm.Services = vm.Services.OrderBy(s => s.ScheduledDate);            
+            vm.Sorted = vm.Services
+                .Concat<object>(vm.Appointments)
+                .OrderBy(n => n is ServiceViewModel
+                     ? (DateTime?)((ServiceViewModel)n).ScheduledDate
+                     : ((Appointment)n).ScheduledDate);
             return vm;
         }
     }

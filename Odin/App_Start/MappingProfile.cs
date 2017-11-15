@@ -41,6 +41,7 @@ namespace Odin
                 .ForMember(m => m.Transferee, opt => opt.Ignore())
                 .ForMember(m => m.Consultant, opt => opt.Ignore())
                 .ForMember(m => m.ProgramManager, opt => opt.Ignore())
+                .ForMember(m => m.Appointments, opt => opt.Ignore())
                 .ForMember(m => m.Services, opt => opt.Ignore());
 
             CreateMap<TransfereeDto, Transferee>();
@@ -52,6 +53,7 @@ namespace Odin
             CreateMap<ManagerDto, Manager>();
             CreateMap<ConsultantImportDto, Consultant>();
             CreateMap<ServiceDto, Service>();
+            CreateMap<AppointmentDto, Appointment>();
 
             CreateMap<ChildDto, Child>();
             CreateMap<PetDto, Pet>();

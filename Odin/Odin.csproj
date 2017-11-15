@@ -307,6 +307,7 @@
     <Compile Include="Helpers\ViewRenderer.cs" />
     <Compile Include="Interfaces\IConfigHelper.cs" />
     <Compile Include="Interfaces\IConsultantImporter.cs" />
+    <Compile Include="Interfaces\IItinerary.cs" />
     <Compile Include="Interfaces\IManagerImporter.cs" />
     <Compile Include="Interfaces\IEmailHelper.cs" />
     <Compile Include="Interfaces\IAccountHelper.cs" />
