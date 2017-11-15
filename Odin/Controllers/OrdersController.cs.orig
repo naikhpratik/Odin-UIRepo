@@ -40,11 +40,27 @@ namespace Odin.Controllers
         // GET Partials
         public ActionResult HousingPartial(string id)
         {
+<<<<<<< HEAD
+            var order = _unitOfWork.Orders.GetOrderById(id);
+
+            HousingViewModel viewModel = order.HomeFinding != null
+                ? _mapper.Map<HomeFinding, HousingViewModel>(order.HomeFinding)
+                : new HousingViewModel();
+
+            viewModel.NumberOfPets = order.Pets.Count();
+
+            int numKids = order.Children == null ? 0 : order.Children.Count();
+            if (numKids == 0 && order.SpouseName == "")
+                viewModel.SpouceAndKids = null;
+            else
+                viewModel.SpouceAndKids = (order.SpouseName == "" ? "No" : "Yes") + " / " + numKids.ToString();
+=======
             var userId = User.Identity.GetUserId();
             var order = _unitOfWork.Orders.GetOrderFor(userId, id);
 
             HousingViewModel viewModel = new HousingViewModel(order, _mapper);
 
+>>>>>>> master
             return PartialView("~/views/orders/partials/_Housing.cshtml", viewModel);
         }
 

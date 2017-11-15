@@ -19,7 +19,8 @@ namespace Odin.Data.Builders
                 .RuleFor(r => r.HasParking, f => f.Random.Bool())
                 .RuleFor(r => r.HasLaundry, f => f.Random.Bool())
                 .RuleFor(r => r.HasAC, f => f.Random.Bool())
-                .RuleFor(r => r.HasExerciseRoom, f => f.Random.Bool());
+                .RuleFor(r => r.HasExerciseRoom, f => f.Random.Bool())
+                .RuleFor(r => r.HomeFindingProperties, HomeFindingPropertiesBuilder.New());
 
             return homeFinding;
         }

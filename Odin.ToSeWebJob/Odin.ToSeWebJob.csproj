@@ -148,6 +148,7 @@
     <None Include="App.Staging.config" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\odin-staging-web - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\odin-web - Web Deploy.pubxml" />
     <None Include="Properties\webjob-publish-settings.json" />
   </ItemGroup>
   <ItemGroup>

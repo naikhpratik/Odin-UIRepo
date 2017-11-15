@@ -113,6 +113,7 @@
     <Compile Include="Builders\ConsultantImportDtoBuilder.cs" />
     <Compile Include="Builders\PetBuilder.cs" />
     <Compile Include="Builders\ProgramManagerDtoBuilder.cs" />
+    <Compile Include="Builders\HomeFindingPropertiesBuilder.cs" />
     <Compile Include="Builders\PropertyBuilder.cs" />
     <Compile Include="Builders\HomeFindingBuilder.cs" />
     <Compile Include="Builders\TransfereeBuilder.cs" />
@@ -201,6 +202,7 @@
     <Compile Include="Persistence\ChildrenRepository.cs" />
     <Compile Include="Persistence\ConsultantsRepository.cs" />
     <Compile Include="Persistence\DepositTypesRepository.cs" />
+    <Compile Include="Persistence\EntityConfigurations\HomeFindingPropertiesConfiguration.cs" />
     <Compile Include="Persistence\EntityConfigurations\OrderConfiguration.cs" />
     <Compile Include="Persistence\EntityConfigurations\HomeFindingConfiguration.cs" />
     <Compile Include="Persistence\HousingTypesRepository.cs" />
@@ -422,6 +424,14 @@
     <Compile Include="Persistence\Migrations\201711071800307_AddServiceFlagToOrder.Designer.cs">
       <DependentUpon>201711071800307_AddServiceFlagToOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201711082148046_AddHomeFindingProperties.cs" />
+    <Compile Include="Persistence\Migrations\201711082148046_AddHomeFindingProperties.Designer.cs">
+      <DependentUpon>201711082148046_AddHomeFindingProperties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201711131931315_MergeNov13.cs" />
+    <Compile Include="Persistence\Migrations\201711131931315_MergeNov13.Designer.cs">
+      <DependentUpon>201711131931315_MergeNov13.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\NumberOfBathroomsTypesRepository.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
@@ -604,6 +614,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201711071800307_AddServiceFlagToOrder.resx">
       <DependentUpon>201711071800307_AddServiceFlagToOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711082148046_AddHomeFindingProperties.resx">
+      <DependentUpon>201711082148046_AddHomeFindingProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711131931315_MergeNov13.resx">
+      <DependentUpon>201711131931315_MergeNov13.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
