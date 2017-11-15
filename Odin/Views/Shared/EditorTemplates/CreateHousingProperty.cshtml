@@ -1,7 +1,10 @@
 ﻿@model Odin.ViewModels.Orders.Transferee.HousingPropertyViewModel
 
-@using (Html.BeginForm("", "api/HomeFindingProperties"))
+@using (Html.BeginForm("", "api/HomeFindingProperties",
+            new { ReturnUrl = ViewBag.ReturnUrl },
+            FormMethod.Post, new { id = "propertyForm" }))
 {
+
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">

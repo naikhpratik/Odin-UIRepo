@@ -2,14 +2,19 @@
 
     var init = function () {
         console.log("Loading Housing");
-        $('form').submit(function (event) {
+        $('#propertyForm').submit(function (event) {
             if ($(this).valid()) {
                 $.ajax({
                     url: this.action,
                     type: this.method,
                     data: $(this).serialize(),
                     success: function (result) {
-                        $('#result').html(result);
+                        $('#propertiesContainer').load('/orders/propertiesPartial/' + currentOrderId);
+                        $(':input', '#propertyForm')
+                            .not(':button, :submit, :reset, :hidden')
+                            .val('')
+                            .removeAttr('checked')
+                            .removeAttr('selected');
                     }
                 });
             }
