@@ -40,7 +40,7 @@ namespace Odin.Controllers.Api
 
             _unitOfWork.Complete();
 
-            return Ok("This is the OK");
+            return Ok();
         }
     }
 }

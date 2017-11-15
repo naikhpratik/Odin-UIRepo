@@ -129,7 +129,7 @@
                     </div>
                     <div class="col-md-4">
                         <p>
-                            @Html.DisplayFor(m => propertyVM.PropertyNumberOfBedrooms) | @Html.DisplayFor(m => propertyVM.PropertyNumberOfBathroomsName)<br />
+                            @Html.DisplayFor(m => propertyVM.PropertyNumberOfBedrooms) | <br />
                             @Html.DisplayFor(m => propertyVM.PropertyAmount) | @Html.DisplayFor(m => propertyVM.PropertySquareFootage)
                         </p>
                     </div>
@@ -327,8 +327,8 @@
     </div>
 </div>
 
-@Scripts.Render("~/Scripts/jquery.validate.js")
 @Styles.Render("~/Styling/housing")
+
 <script>
     $(document).ready(function () {
         TransfereeHousingController.init();

@@ -26,19 +26,20 @@ namespace Odin.ViewModels.Orders.Transferee
         }
         
         [Display(Name = "Street 1:")]
-        [Required(ErrorMessage = "Street is required")]
-        public string PropertyStreet1 { get; set; }
+        [Required(ErrorMessage = "Street 1 is required")]
+        public String PropertyStreet1 { get; set; }
 
         [Display(Name = "Street 2:")]
-        public string PropertyStreet2 { get; set; }
+        public String PropertyStreet2 { get; set; }
 
         [Display(Name = "City:")]
         [Required(ErrorMessage = "City is required")]
-        public string PropertyCity { get; set; }
+        public String PropertyCity { get; set; }
 
         [Display(Name = "State Abbr:")]
         [Required(ErrorMessage = "State Abbr. is required")]
-        public string PropertyState { get; set; }
+        [MaxLength(2)]
+        public String PropertyState { get; set; }
 
         [Display(Name = "Availability Date:")]
         [DisplayFormat(NullDisplayText = "Unknown", DataFormatString = "{0:d}")]
@@ -49,9 +50,9 @@ namespace Odin.ViewModels.Orders.Transferee
         [DisplayFormat(NullDisplayText = "NA")]
         public int PropertyNumberOfBedrooms { get; set; }
 
-        [Display(Name = "BA")]
-        [DisplayFormat(NullDisplayText = "NA", ConvertEmptyStringToNull = true)]
-        public String PropertyNumberOfBathroomsName { get; set; }
+        //[Display(Name = "BA")]
+        //[DisplayFormat(NullDisplayText = "NA", ConvertEmptyStringToNull = true)]
+        //public String PropertyNumberOfBathroomsName { get; set; }
 
         [Display(Name = "Sq. Ft.")]
         [DisplayFormat(NullDisplayText = "NA", DataFormatString = "{0:N0}")]
