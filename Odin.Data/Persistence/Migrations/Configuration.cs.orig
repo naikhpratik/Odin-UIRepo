@@ -3,9 +3,12 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Azure.Mobile.Server.Tables;
 using Odin.Data.Builders;
 using Odin.Data.Core.Models;
+<<<<<<< HEAD
 using System.Collections.Generic;
+=======
 using System;
 using System.Data.Entity;
+>>>>>>> master
 using System.Data.Entity.Migrations;
 using System.Linq;
 
