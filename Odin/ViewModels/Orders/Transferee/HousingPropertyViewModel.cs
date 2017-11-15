@@ -42,6 +42,11 @@ namespace Odin.ViewModels.Orders.Transferee
         [DataType("UnitedStates")]
         public String PropertyState { get; set; }
 
+        [Display(Name = "Postal Code:")]
+        [Required(ErrorMessage = "Postal Code is required")]
+        [DataType(DataType.PostalCode)]
+        public String PropertyPostalCode { get; set; }
+
         [Display(Name = "Availability Date:")]
         [DisplayFormat(NullDisplayText = "Unknown", DataFormatString = "{0:d}")]
         [DataType(DataType.Date)]
