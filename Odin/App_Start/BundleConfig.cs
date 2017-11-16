@@ -16,6 +16,7 @@ namespace Odin
                         "~/Scripts/moment.js",
                         "~/Scripts/bootstrap-datetimepicker.js",                        
                         "~/Scripts/respond.js",
+                        "~/Scripts/jspdf.min.js",
                         "~/Scripts/datatables/jquery.datatables.js",
                         "~/Scripts/datatables/datatables.bootstrap.js"));
 

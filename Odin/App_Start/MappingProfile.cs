@@ -31,7 +31,21 @@ namespace Odin
             /*Order - Index*/
             CreateMap<Order, OrdersIndexViewModel>();
             CreateMap<Order, OrdersTransfereeViewModel>();
-            CreateMap<Order, OrdersTransfereeItineraryViewModel>();
+
+            /*Itinerary */
+            CreateMap<Appointment, ItineraryEntryViewModel>()
+                .ForMember(m => m.ItemType, opt => opt.MapFrom(src => src.GetType().ToString()))
+                .ForMember(m => m.ScheduledDate, opt => opt.MapFrom(src => src.ScheduledDate))
+                .ForMember(m => m.ActionLabel, opt => opt.MapFrom(src => src.Description));
+            CreateMap<HousingPropertyViewModel, ItineraryEntryViewModel>()
+                .ForMember(m => m.ItemType, opt => opt.MapFrom(src => src.GetType().ToString()))
+                .ForMember(m => m.ScheduledDate, opt => opt.MapFrom(src => src.ViewingDate))
+                .ForMember(m => m.ActionLabel, opt => opt.MapFrom(src => src.Address));
+            CreateMap<Service, ItineraryEntryViewModel>()
+                .ForMember(m => m.ItemType, opt => opt.MapFrom(src => src.GetType().ToString()))
+                .ForMember(m => m.ScheduledDate, opt => opt.MapFrom(src => src.ScheduledDate))
+                .ForMember(m => m.ActionLabel, opt => opt.MapFrom(src => src.ServiceType.ActionLabel));
+
 
             CreateMap<HomeFinding, HousingViewModel>();
 

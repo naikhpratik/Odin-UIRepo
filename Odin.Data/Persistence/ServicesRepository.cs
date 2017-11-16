@@ -1,6 +1,8 @@
 ﻿using Odin.Data.Core.Models;
 using Odin.Data.Core.Repositories;
-
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 
 namespace Odin.Data.Persistence
 {
@@ -16,6 +18,13 @@ namespace Odin.Data.Persistence
         public void Add(Service service)
         {
             _context.Services.Add(service);
+        }
+        public IEnumerable<Service> GetServicesByOrderId(string id)
+        {
+            return _context.Services
+                .Where(s => s.OrderId == id)
+                .Include(s => s.ServiceType)
+                .ToList();
         }
     }
 }

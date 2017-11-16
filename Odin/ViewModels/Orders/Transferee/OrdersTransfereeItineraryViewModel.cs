@@ -15,18 +15,10 @@ namespace Odin.ViewModels.Orders.Transferee
     {
         public OrdersTransfereeItineraryViewModel()
         {
-            
-            Services = new List<ServiceViewModel>();
-            // HomeFinding = new HomeFindingViewModel();
-            Appointments = new List<Appointment>();
-            Sorted = new List<object>();
+             Itinerary = new List<ItineraryEntryViewModel>();
         }
 
-        public string Id { get; set; }      
-              
-        public IEnumerable<ServiceViewModel> Services { get; set; }
-        //public HomeFindingViewModel HomeFinding { get; set; }
-        public IEnumerable<Appointment> Appointments { get; set; }
-        public IEnumerable<object> Sorted { get; set; }
+        public string Id { get; set; }
+        public IEnumerable<ItineraryEntryViewModel> Itinerary { get; set; }
     }
 }

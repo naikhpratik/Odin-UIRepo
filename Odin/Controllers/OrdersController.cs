@@ -5,7 +5,7 @@ using Odin.Data.Core.Models;
 using Odin.Interfaces;
 using Odin.ViewModels.Orders.Transferee;
 using Odin.ViewModels.Shared;
-using System;
+using Odin.Data.Extensions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -67,9 +67,9 @@ namespace Odin.Controllers
         }
 
         public ActionResult ItineraryPartial(string id)
-        {
-            var order = _unitOfWork.Orders.GetOrderById(id);
-            OrdersTransfereeItineraryViewModel viewModel = itineraryViewModelForOrder(order);
+        {            
+            OrdersTransfereeItineraryViewModel viewModel = GetItineraryByOrderId(id);
+            viewModel.Id = id;
             return PartialView("~/views/orders/partials/_Itinerary.cshtml", viewModel);
         }
 
@@ -140,15 +140,18 @@ namespace Odin.Controllers
 
             return vm;
         }
-        private OrdersTransfereeItineraryViewModel itineraryViewModelForOrder(Order order)
+        private OrdersTransfereeItineraryViewModel GetItineraryByOrderId(string id)
         {
-            OrdersTransfereeItineraryViewModel vm = _mapper.Map<Order, OrdersTransfereeItineraryViewModel>(order);
-            //vm.Services = vm.Services.OrderBy(s => s.ScheduledDate);            
-            vm.Sorted = vm.Services
-                .Concat<object>(vm.Appointments)
-                .OrderBy(n => n is ServiceViewModel
-                     ? (DateTime?)((ServiceViewModel)n).ScheduledDate
-                     : ((Appointment)n).ScheduledDate);
+            var itinService = _unitOfWork.Services.GetServicesByOrderId(id);
+            var itinAppointments = _unitOfWork.Appointments.GetAppointmentsByOrderId(id);
+            //var itinViewings = _unitOfWork.HousingTypes.GetViewingsByOrderId(id);
+            var itinerary1 = _mapper.Map<IEnumerable<Service>, IEnumerable<ItineraryEntryViewModel>>(itinService);
+            var itinerary2 = _mapper.Map<IEnumerable<Appointment>, IEnumerable<ItineraryEntryViewModel>>(itinAppointments);
+            //var itinerary3 = _mapper.Map<IEnumerable<HousingPropertyViewModel>, IEnumerable<ItineraryEntryViewModel>>(itinViewings);
+            //var itinerary = itinerary1.Concat(itinerary2).Concat(itinerary3).OrderBy(s => s.ScheduledDate);
+            var itinerary = itinerary1.Concat(itinerary2).OrderBy(s => s.ScheduledDate);
+            OrdersTransfereeItineraryViewModel vm = new OrdersTransfereeItineraryViewModel();
+            vm.Itinerary = itinerary;            
             return vm;
         }
     }
