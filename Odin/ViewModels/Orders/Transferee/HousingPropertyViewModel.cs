@@ -63,6 +63,7 @@ namespace Odin.ViewModels.Orders.Transferee
 
         [Display(Name = "Sq. Ft.")]
         [DisplayFormat(NullDisplayText = "NA")]
+        [Range(0, 99999)]
         public int? PropertySquareFootage { get; set; }
 
         [Display(Name = "Rent:")]
