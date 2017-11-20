@@ -15,6 +15,7 @@
                             .val('')
                             .removeAttr('checked')
                             .removeAttr('selected');
+                        $('#addPropertyModal').modal('hide');
                     }
                 });
             }
