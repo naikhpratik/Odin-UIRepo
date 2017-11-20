@@ -70,5 +70,10 @@ namespace Odin.ViewModels.Orders.Transferee
         [DisplayFormat(NullDisplayText = "NA", DataFormatString = "{0:c}")]
         [DataType(DataType.Currency)]
         public Decimal PropertyAmount { get; set; }
+
+        [Display(Name = "Description:")]
+        [DataType(DataType.MultilineText)]
+        [DisplayFormat(ConvertEmptyStringToNull = true)]
+        public String PropertyDescription { get; set; }
     }
 }
