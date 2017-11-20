@@ -44,107 +44,102 @@
         </div>
     </div>
 
-    <div id="result"></div>
-    
-    @{  var property = new Odin.ViewModels.Orders.Transferee.HousingPropertyViewModel();
-        property.OrderId = Model.Id;
-    }
-    @Html.Partial("~/Views/Shared/EditorTemplates/CreateHousingProperty.cshtml", property)
-
     <div class="row" id="propertiesControls">
-        <!--
-        <form class="col-sm-6" id="housingFilter">
-            <label class="housingFilter__title">Filter:</label>
-            <label>
-                @Html.RadioButton("Filter", "New", true)
-                <span>New</span>
-            </label>
-            <label>
-                @Html.RadioButton("Filter", "Like", false)
-                <span>Like</span>
-            </label>
-            <label>
-                @Html.RadioButton("Filter", "Dislike", false)
-                <span>Dislike</span>
-            </label>
-        </form>
-        -->
-        @* Change to col-sm-6 when readding the above filters *@
-        <div class="col-sm-12" id="addProperty" >
+
+                        <!--
+                        <form class="col-sm-6" id="housingFilter">
+                            <label class="housingFilter__title">Filter:</label>
+                            <label>
+                                @Html.RadioButton("Filter", "New", true)
+                                <span>New</span>
+                            </label>
+                            <label>
+                                @Html.RadioButton("Filter", "Like", false)
+                                <span>Like</span>
+                            </label>
+                            <label>
+                                @Html.RadioButton("Filter", "Dislike", false)
+                                <span>Dislike</span>
+                            </label>
+                        </form>
+                        -->
+                        @* Change to col-sm-6 when readding the above filters *@
+
+        <div class="col-sm-12" id="addProperty" data-toggle="modal" data-target="#addPropertyModal">
             <span>Add Property</span>
             <img src="~/Content/Images/btn_add_home.png" />
         </div>
     </div>
 
     <div id="propertiesContainer">
-    @Html.Partial("~/Views/Orders/Partials/_HousingProperties.cshtml", Model.Properties)
+        @Html.Partial("~/Views/Orders/Partials/_HousingProperties.cshtml", Model.Properties)
     </div>
 
     <div id="chat" style="display: none;">
-        <div id = "addr" >
-            <span> Last Message</span><span id = "lastchat" > 01:45 PM</span>
+        <div id="addr">
+            <span> Last Message</span><span id="lastchat"> 01:45 PM</span>
         </div>
-        <div id = "chatwrapper" >
+        <div id="chatwrapper">
             <div id="chatframe">
                 <ul>
                     <li>
-                        <img src="~/Content/Images/icn_chat_2.png" /><span > Joyce Damino</span>
+                        <img src="~/Content/Images/icn_chat_2.png" /><span> Joyce Damino</span>
                         <div>
                             <p>Would you like to go see 1234 MeadowRd on the 11th of November?</p>
                         </div>
                     </li>
                     <li>
-                        <img src="~/Content/Images/icn_chat_1.png" /><span > Victoria Sporer</span>
+                        <img src="~/Content/Images/icn_chat_1.png" /><span> Victoria Sporer</span>
                         <div>
                             <p>Yes, I would like to go visit 1234 Meadow Rd.That will work well, I am bringing the kids.</p>
                         </div>
                     </li>
                     <li>
-                        <img src="~/Content/Images/icn_chat_2.png" /><span > Joyce Damino</span>
+                        <img src="~/Content/Images/icn_chat_2.png" /><span> Joyce Damino</span>
                         <div>
                             <p>Sounds good, I will see you all there at 10am?</p>
                         </div>
                     </li>
                     <li>
-                        <img src="~/Content/Images/icn_chat_2.png" /><span > Joyce Damino</span>
+                        <img src="~/Content/Images/icn_chat_2.png" /><span> Joyce Damino</span>
                         <div>
                             <p>Would you like to go see 1232 RoseLn on the 11th of November</p>
                         </div>
                     </li>
                     <li>
-                        <img src="~/Content/Images/icn_chat_1.png" /><span > Victoria Sporer</span>
+                        <img src="~/Content/Images/icn_chat_1.png" /><span> Victoria Sporer</span>
                         <div>
                             <p>Yes, I would like to go visit 1232 RoseLn.That will work well, we can do this one in the afternoon.</p>
                         </div>
                     </li>
                     <li>
-                        <img src="~/Content/Images/icn_chat_2.png" /><span > Joyce Damino</span>
+                        <img src="~/Content/Images/icn_chat_2.png" /><span> Joyce Damino</span>
                         <div>
                             <p>Sounds good, I will call and make sure we can get in then.</p>
                         </div>
                     </li>
                 </ul>
             </div>
-            <div id = "comment" >
+            <div id="comment">
                 < p > Comment </ p >
-            </div >
+            </div>
             < button > Close </ button >
             < button > Send </ button >
-        </div >
-    </div >
-    <div id= "property" style="display: none;" >
+        </div>
+    </div>
+    <div id="property" style="display: none;">
         <div class="row">
             <div class="col-md-5">
                 <span>Available: </span><span>November 12th 2017</span>
             </div>
             <div class="col-md-5">
-                <img id = "closeproperty" src="~/Content/Images/icn_close_pg.png"/>
+                <img id="closeproperty" src="~/Content/Images/icn_close_pg.png" />
             </div>
         </div>
         <div class="row">
             <div class="col-md-8">
                 <img src="~/Content/Images/image_placeholder_large.png" />
-            </div >
+            </div>
             <div class="col-md-4">
                 <div>
                     <span>Address:</span>
@@ -197,10 +192,10 @@
                         <img src="~/Content/Images/icn_chat_bubble.png" />
                         <div class="notify-count noinit">
                             <img src="~/Content/Images/icn_alert_circle.png" />
-                            <span > 00 </span >
-                        </div >
-                    </div >
-                    <div >
+                            <span> 00 </span>
+                        </div>
+                    </div>
+                    <div>
                         < img src="~/Content/Images/icn_cal_B1.png"/>
                     </div>
                 </div>
@@ -213,105 +208,122 @@
     </div>
 </div>
 
-@Styles.Render("~/Styling/housing")
+                @Styles.Render("~/Styling/housing")
 
-<script>
-    $(document).ready(function () {
-        TransfereeHousingController.init();
-    });
-</script>
+                <script>
+                    $(document).ready(function () {
+                        TransfereeHousingController.init();
+                    });
+                </script>
 
-@*<script>
-    var $lastFilter;
+                @*<script>
+                        var $lastFilter;
 
-    document.addEventListener("DOMContentLoaded", function () {
-        $lastFilter = null;
+                        document.addEventListener("DOMContentLoaded", function () {
+                            $lastFilter = null;
 
-        // filters
-        $("div#housing div.notfirst input[name='choice']").click(function () {
-            if ($lastFilter !== null)
-               $($lastFilter.next()).removeClass("selected");
+                            // filters
+                            $("div#housing div.notfirst input[name='choice']").click(function () {
+                                if ($lastFilter !== null)
+                                   $($lastFilter.next()).removeClass("selected");
 
-            $lastFilter = $(this);
-            $($lastFilter.next()).addClass("selected");
+                                $lastFilter = $(this);
+                                $($lastFilter.next()).addClass("selected");
 
-            // apply filter
-            $('div#housing tbody tr').each(function () {
-                if ($(this).attr("sel") !== $lastFilter.attr('value'))
-                    $(this).css("display", "none");
-                else
-                    $(this).css("display", "table-row");
-            });
-        });
+                                // apply filter
+                                $('div#housing tbody tr').each(function () {
+                                    if ($(this).attr("sel") !== $lastFilter.attr('value'))
+                                        $(this).css("display", "none");
+                                    else
+                                        $(this).css("display", "table-row");
+                                });
+                            });
 
-        // add property
-        $('div#housing div#add').click(function () {
-            alert("Add New Property");
-        });
+                            // add property
+                            $('div#housing div#add').click(function () {
+                                alert("Add New Property");
+                            });
 
-        // new/like/dislike
-        $('div.likebtns img').click(function () {
-            var likeSel;
-            $(this).css("display", "none");
+                            // new/like/dislike
+                            $('div.likebtns img').click(function () {
+                                var likeSel;
+                                $(this).css("display", "none");
 
-            if ($(this).hasClass('new')) {
-                likeSel = "like";
-                $(this).next().css("display", "inline");
-                $(this).parent().parent().parent().attr("sel", "like");
-            }
-            else if ($(this).hasClass('like')) {
-                likeSel = "dislike";
-                $(this).next().css("display", "inline");
-                $(this).parent().parent().parent().attr("sel", "dislike");
-            }
-            else {
-                likeSel = "new";
-                $(this).prev().prev().css("display", "inline");
-                $(this).parent().parent().parent().attr("sel", "new");
-            }
+                                if ($(this).hasClass('new')) {
+                                    likeSel = "like";
+                                    $(this).next().css("display", "inline");
+                                    $(this).parent().parent().parent().attr("sel", "like");
+                                }
+                                else if ($(this).hasClass('like')) {
+                                    likeSel = "dislike";
+                                    $(this).next().css("display", "inline");
+                                    $(this).parent().parent().parent().attr("sel", "dislike");
+                                }
+                                else {
+                                    likeSel = "new";
+                                    $(this).prev().prev().css("display", "inline");
+                                    $(this).parent().parent().parent().attr("sel", "new");
+                                }
 
-            // apply current filter
-            if ($lastFilter !== null && $lastFilter.attr('value') !== likeSel) {
-                $(this).parent().parent().parent().css("display", "none");
-            }
-        });
+                                // apply current filter
+                                if ($lastFilter !== null && $lastFilter.attr('value') !== likeSel) {
+                                    $(this).parent().parent().parent().css("display", "none");
+                                }
+                            });
 
-        // open chat window
-        $('div#housing tbody div.comments').click(function () {
-            if ($(this).find('div.notify-count').hasClass('noinit') === false)
-                $('div#chat').css("display", "block");
-        });
+                            // open chat window
+                            $('div#housing tbody div.comments').click(function () {
+                                if ($(this).find('div.notify-count').hasClass('noinit') === false)
+                                    $('div#chat').css("display", "block");
+                            });
 
-        // close chat window
-        $($('div#housing div#chat button')[0]).click(function () {
-            $('div#chat').css("display", "none");
-        });
+                            // close chat window
+                            $($('div#housing div#chat button')[0]).click(function () {
+                                $('div#chat').css("display", "none");
+                            });
 
-        // open property window
-        $('div#housing tbody img.location').click(function () {
-            $('div#property').css("display", "block");
-        });
+                            // open property window
+                            $('div#housing tbody img.location').click(function () {
+                                $('div#property').css("display", "block");
+                            });
 
-        // close property window
-        $('div#housing div#property img#closeproperty').click(function () {
-            $('div#property').css("display", "none");
-        });
+                            // close property window
+                            $('div#housing div#property img#closeproperty').click(function () {
+                                $('div#property').css("display", "none");
+                            });
 
-        // propery window like btns
-        $('div#housing div#property img.likebtn').each(function () {
-            $(this).click(function () {
-                $(this).css("display", "none");
+                            // propery window like btns
+                            $('div#housing div#property img.likebtn').each(function () {
+                                $(this).click(function () {
+                                    $(this).css("display", "none");
 
-                if ($(this).hasClass('non_like_sel')) {
-                    $(this).next().css("display", "inline");
-                } else if ($(this).hasClass('like_sel')) {
-                    $(this).prev().css("display", "inline");
-                } else if ($(this).hasClass('non_dislike_sel')) {
-                    $(this).next().css("display", "inline");
-                } else {
-                    $(this).prev().css("display", "inline");
+                                    if ($(this).hasClass('non_like_sel')) {
+                                        $(this).next().css("display", "inline");
+                                    } else if ($(this).hasClass('like_sel')) {
+                                        $(this).prev().css("display", "inline");
+                                    } else if ($(this).hasClass('non_dislike_sel')) {
+                                        $(this).next().css("display", "inline");
+                                    } else {
+                                        $(this).prev().css("display", "inline");
+                                    }
+                                });
+                            });
+                        });
+                    </script>*@
+
+<!-- Modal -->
+@* using data-backdrop="false" because bootstrap was putting the model under the backdrop and I didn't want to spend the time to fix it *@
+<div class="modal" id="addPropertyModal" tabindex="-1" role="dialog" aria-labelledby="addPropertyModalLabel" data-backdrop="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Add Property</h4>
+            </div>
+                @{  var property = new Odin.ViewModels.Orders.Transferee.HousingPropertyViewModel();
+                    property.OrderId = Model.Id;
                 }
-            });
-        });
-    });
-</script>*@
+                @Html.Partial("~/Views/Shared/EditorTemplates/CreateHousingProperty.cshtml", property)            
+        </div>
+    </div>
+</div>
