@@ -34,7 +34,7 @@ namespace Odin.Controllers
 
             //var orderVms = _mapper.Map<IEnumerable<Order>, IEnumerable<OrdersIndexViewModel>>(orders);
 
-            return View();
+            return View(orders);
         }
 
         public ActionResult HousingPartial(string id)
@@ -54,7 +54,16 @@ namespace Odin.Controllers
         // GET Partials
         public ActionResult DetailsPartial(string id)
         {
+            var userId = User.Identity.GetUserId();
             var order = _unitOfWork.Orders.GetOrderById(id);
+            if (order == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound, "Not found");
+            }
+            if (order.ConsultantId != userId)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized, "Unauthorized Order");
+            }
             OrdersTransfereeViewModel viewModel = viewModelForOrder(order);
             return PartialView("~/views/orders/partials/_Details.cshtml",viewModel); 
         }
@@ -128,8 +137,7 @@ namespace Odin.Controllers
             //Remove service types that already have services.
             var filtPossible = _unitOfWork.ServiceTypes.GetPossibleServiceTypes(cats, ids);
 
-            vm.PossibleServices =
-                _mapper.Map<IEnumerable<ServiceType>, IEnumerable<ServiceTypeViewModel>>(filtPossible);
+            //vm.PossibleServices =                _mapper.Map<IEnumerable<ServiceType>, IEnumerable<ServiceTypeViewModel>>(filtPossible);
 
             vm.NumberOfBathrooms = _unitOfWork.NumberOfBathrooms.GetNumberOfBathroomsList();
             vm.HousingTypes = _unitOfWork.HousingTypes.GetHousingTypesList();
@@ -140,6 +148,7 @@ namespace Odin.Controllers
 
             return vm;
         }
+        
         private OrdersTransfereeItineraryViewModel GetItineraryByOrderId(string id)
         {
             var itinService = _unitOfWork.Services.GetServicesByOrderId(id);
@@ -154,6 +163,7 @@ namespace Odin.Controllers
             vm.Itinerary = itinerary;            
             return vm;
         }
+
     }
     
 }

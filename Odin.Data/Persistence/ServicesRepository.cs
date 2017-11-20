@@ -22,7 +22,7 @@ namespace Odin.Data.Persistence
         public IEnumerable<Service> GetServicesByOrderId(string id)
         {
             return _context.Services
-                .Where(s => s.OrderId == id)
+                .Where(s => s.OrderId == id && s.CompletedDate.HasValue == false)
                 .Include(s => s.ServiceType)
                 .ToList();
         }

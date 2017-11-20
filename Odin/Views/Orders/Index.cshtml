@@ -1,160 +1,120 @@
-﻿@{
-    ViewBag.Title = "Orders Page";
-    Layout = "~/Views/Shared/_Common.cshtml";
-}
+﻿@model IEnumerable<Odin.Data.Core.Models.Order>
+    @{
+        ViewBag.Title = "Orders Page";
+        Layout = "~/Views/Shared/_Common.cshtml";
+    }
 
 <div class="container-fluid" id="list">
     <div id="search">
-            <input id="searchbox"/><button>Search</button>
-        </div>
-    <div>
-        <table class="desktop">
-            <thead>
-                <tr>
-                    <th class="first">
-                        <div>
-                            <img class="arrow up name" src="~/Content/Images/icn_up_arrow.png"/>
-                            <img class="arrow down name noinit" src="~/Content/Images/icn_down_arrow.png" />
-                            <img class="arrow upsel name noinit" src="~/Content/Images/icn_up_sel_arrow.png" />
-                        </div>
-                        <p>Transferee</p>
-                    </th>
-                    <th class="second">
-                        <p>Authorized Tasks</p>
-                    </th>
-                    <th class="third">
-                        <div>
-                            <img class="arrow up date"  data-field="lastContacted" src="~/Content/Images/icn_up_arrow.png" />
-                            <img class="arrow down date noinit"  data-field="lastContacted" src="~/Content/Images/icn_down_arrow.png" />
-                            <img class="arrow upsel date noinit" data-field="lastContacted" src="~/Content/Images/icn_up_sel_arrow.png" />
-                        </div>
-                        <p>Last Contacted</p>
-                    </th>
-                    <th class="fourth">
-<!-- until sorting is decided-->
-                        <div style="display: none">
-                            <img class="arrow up" src="~/Content/Images/icn_up_arrow.png" />
-                            <img class="arrow down noinit" src="~/Content/Images/icn_down_arrow.png" />
-                            <img class="arrow upsel noinit" src="~/Content/Images/icn_up_sel_arrow.png" />
-                        </div>
-                        <p style="padding-top: 13px">Manager</p>
-                    </th>
-                    <th class="fifth">
-                        <div>
-                            <img class="arrow up date" data-field="preTrip" src="~/Content/Images/icn_up_arrow.png" />
-                            <img class="arrow down date noinit" data-field="preTrip" src="~/Content/Images/icn_down_arrow.png" />
-                            <img class="arrow upsel date noinit" data-field="preTrip" src="~/Content/Images/icn_up_sel_arrow.png" />
-                        </div>
-                        <p>PreTrip</p>
-                    </th>
-                    <th class="sixth">
-                        <div>
-                            <img class="arrow up date"  data-field="finalArrival" src="~/Content/Images/icn_up_arrow.png" />
-                            <img class="arrow down date noinit"  data-field="finalArrival" src="~/Content/Images/icn_down_arrow.png" />
-                            <img class="arrow upsel date noinit" data-field="finalArrival" src="~/Content/Images/icn_up_sel_arrow.png" />
-                        </div>
-                        <p>Final Arrival</p>
-                    </th>
-                    <th class="seventh">
-                        <div>
-                            <img class="arrow up number" src="~/Content/Images/icn_up_arrow.png" />
-                            <img class="arrow down number noinit" src="~/Content/Images/icn_down_arrow.png" />
-                            <img class="arrow upsel number noinit" src="~/Content/Images/icn_up_sel_arrow.png" />
-                        </div>
-                        <p>Notification</p>
-                    </th>
-                </tr>
-            </thead>
-            <tbody> 
-            </tbody>
-        </table>
-        <table class="tablet">
-            <thead>
-                <tr>
-                    <th class="first">
-                        <div>
-                            <img class="arrow up name" src="~/Content/Images/icn_up_arrow.png" />
-                            <img class="arrow down name noinit" src="~/Content/Images/icn_down_arrow.png" />
-                            <img class="arrow upsel name noinit" src="~/Content/Images/icn_up_sel_arrow.png" />
-                        </div>
-                        <p>Transferee</p>
-                    </th>
-                    <th class="second">
-<!-- until sorting is decided-->
-                        <div style="display: none">
-                            <img class="arrow up" src="~/Content/Images/icn_up_arrow.png" />
-                            <img class="arrow down noinit" src="~/Content/Images/icn_down_arrow.png" />
-                            <img class="arrow upsel noinit" src="~/Content/Images/icn_up_sel_arrow.png" />
-                        </div>
-                        <p style="padding-top: 13px">Manager</p>
-                    </th>
-                    <th class="third">
-                        <div>
-                            <img class="arrow up date"  data-field="lastContacted" src="~/Content/Images/icn_up_arrow.png" />
-                            <img class="arrow down date noinit"  data-field="lastContacted" src="~/Content/Images/icn_down_arrow.png" />
-                            <img class="arrow upsel date noinit" data-field="lastContacted" src="~/Content/Images/icn_up_sel_arrow.png" />
-                        </div>
-                        <p>Last Contacted</p>
-                    </th>
-                    <th class="fourth">
-                        <p>Authorized Tasks</p>
-                    </th>
-                    <th class="fifth">
-                        <div>
-                            <img class="arrow up number" src="~/Content/Images/icn_up_arrow.png" />
-                            <img class="arrow down number noinit" src="~/Content/Images/icn_down_arrow.png" />
-                            <img class="arrow upsel number noinit" src="~/Content/Images/icn_up_sel_arrow.png" />
-                        </div>
-                        <p>Notification</p>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-        <table class="mobile">
-            <thead>
-                <tr>
-                    <th class="first">
-                        <div>
-                            <img class="arrow up name" src="~/Content/Images/icn_up_arrow.png" />
-                            <img class="arrow down name noinit" src="~/Content/Images/icn_down_arrow.png" />
-                            <img class="arrow upsel name noinit" src="~/Content/Images/icn_up_sel_arrow.png" />
-                        </div>
-                        <p>Transferee</p>
-                    </th>
-                    <th class="second">
-                        <div>
-                            <img class="arrow up date"  data-field="lastContacted" src="~/Content/Images/icn_up_arrow.png" />
-                            <img class="arrow down date noinit"  data-field="lastContacted" src="~/Content/Images/icn_down_arrow.png" />
-                            <img class="arrow upsel date noinit" data-field="lastContacted" src="~/Content/Images/icn_up_sel_arrow.png" />
-                        </div>
-                        <p>Last Contacted</p>
-                    </th>
-                    <th class="third">
-                        <div>
-                            <img class="arrow up number" src="~/Content/Images/icn_up_arrow.png" />
-                            <img class="arrow down number noinit" src="~/Content/Images/icn_down_arrow.png" />
-                            <img class="arrow upsel number noinit" src="~/Content/Images/icn_up_sel_arrow.png" />
-                        </div>
-                        <p>Notification</p>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
+        <input id="searchbox" /><button>Search</button>
     </div>
+
+
+    @*<div>
+            <img class="arrow up name" src="~/Content/Images/icn_up_arrow.png" />
+            <img class="arrow down name noinit" src="~/Content/Images/icn_down_arrow.png" />
+            <img class="arrow upsel name noinit" src="~/Content/Images/icn_up_sel_arrow.png" />
+        </div>*@
+    <ul class="container-fluid">
+        <li class="header row">
+            <div class="col-md-2">
+                <label>Transferee Sort +/-</label>
+            </div>
+            <div class="col-md-2">
+                <label>Authorized Tasks  +/-</label>
+            </div>
+            <div class="col-md-2">
+                <label>Manager  +/-</label>
+            </div>
+            <div class="col-md-2">
+                <label>Pre-Trip +/-</label>
+            </div>
+            <div class="col-md-2">
+                <label>Final Arrival +/-</label>
+            </div>
+            <div class="col-md-2">
+                <label>Notifications +/-</label>
+            </div>
+        </li>
+        @if (Model == null)
+        {
+            return;
+        }
+        @for (int j = 0; j < Model.Count(); j++)
+        {
+            var order = (Odin.Data.Core.Models.Order)Model.ElementAt(j);
+            
+            <li class="row clickable" data-order-id="@order.Id">
+                <div class="col-md-2">
+                    <label class="header">Transferee</label>
+                    <p class="eeName">@order.Transferee.FullName</p>
+                    <p class="rmcName">@order.Rmc</p>
+                    <p class="clientName">@order.Client</p>
+                </div>
+                @{
+                    int at = 0;
+                    decimal s = 0;
+                    decimal c = 0;
+                    decimal cwid = 25;
+                    decimal swid = 50;
+                    decimal atwid = 100;
+                    for (int i = 0; i < order.Services.Count; i++)
+                    {
+                        if (order.Services.ElementAt(i).Selected == true)
+                        {
+                            at += 3;
+                        }
+                        if (order.Services.ElementAt(i).ScheduledDate.HasValue)
+                        {
+                            s += 2;
+                        }
+                        if (order.Services.ElementAt(i).CompletedDate.HasValue)
+                        {
+                            c += 1;
+                        }
+                    }
+                    cwid = (at == 0 ? 0 : c / at * 100);
+                    swid = (at == 0 ? 0 : s / at * 10);
+                    atwid = swid == 0?0:100;
+
+                }
+            <div class="col-md-2">
+                <label class="header">Completed/Scheduled/Assigned</label>
+                <div class="progressBar" title="Authorized Tasks">
+                    <progress class="progressCompleted" completed="@c" value="10" max="10" title="Completed Tasks" style="width:@Decimal.ToInt32(cwid)%"></progress>
+                    <progress class="progressScheduled" value="@(Decimal.ToInt32(swid))" max="10" title='@(atwid==0?"Authorized Tasks":"Scheduled Tasks")' style="display:inline-block;"></progress>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <label class="header">Manager</label>
+                <p>@order.ProgramManager.FullName</p>
+                <p class="subTitle">@order.ProgramManager.PhoneNumber</p>
+            </div>
+            <div class="col-md-2">
+                <label class="header">Pre-Trip</label>
+                <p>@order.PreTripDate</p>
+            </div>
+            <div class="col-md-2">
+                <label class="header">Final Arrival</label>
+                <p>@order.EstimatedArrivalDate</p>
+            </div>
+            <div class="col-md-2">
+                <label class="header">Notifications</label>
+                <p>2*</p>
+            </div>
+        </li>
+        }
+    </ul>
 </div>
 
-@Styles.Render("~/Styling/orders")
-@Scripts.Render("~/Scripts/orders")
-
-@section scripts
-{
+    @Styles.Render("~/Styling/orders")
     @Scripts.Render("~/Scripts/orders")
-    
-    <script>
-        $(document).ready(OrdersPageController.OrdersPageInit);
-    </script>
-}
+
+    @section scripts
+{
+        @Scripts.Render("~/Scripts/orders")
+
+        <script>
+            $(document).ready(OrdersPageController.OrdersPageInit);
+        </script>
+    }

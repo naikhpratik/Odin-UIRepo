@@ -9,9 +9,13 @@
         DateTime? dt = (DateTime?)(elem).ScheduledDate;
         string al = (string)(elem).ActionLabel;
         string id = Model.Id;
-        if (Model.Itinerary.ElementAt(i).ItemType.Contains("Details"))
+        if (Model.Itinerary.ElementAt(i).ItemType.Contains("Service"))
         {
             link = "$('.item[data-panel=details]').trigger('click');";
+            if (!dt.HasValue)
+            {
+                break;
+            }
         }
         else if (Model.Itinerary.ElementAt(i).ItemType.Contains("Service"))
         {
@@ -25,7 +29,6 @@
         if (ViewBag.SameAs == null || DateTime.Parse(ViewBag.SameAs.ToString()).ToShortDateString() != dt.Value.ToShortDateString())
         {
             ViewBag.SameAs = dt;
-
 
             <div class="event-item row" data-entity-id="@id">
                 <div class="dayTitle">
