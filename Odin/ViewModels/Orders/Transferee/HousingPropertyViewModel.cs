@@ -52,20 +52,20 @@ namespace Odin.ViewModels.Orders.Transferee
         [DataType(DataType.Date)]
         public DateTime? PropertyAvailabilityDate { get; set; }
 
-        [Display(Name = "BD")]
+        [Display(Name = "Beds:")]
         [DisplayFormat(NullDisplayText = "NA")]
         public int? PropertyNumberOfBedrooms { get; set; }
 
-        [Display(Name = "BA")]
+        [Display(Name = "Baths:")]
         [RegularExpression(@"^(\d{0,2})(.{0,1})([0,5]{0,1})$", ErrorMessage = "Baths must be in increments of .5")]
-        [DisplayFormat(NullDisplayText = "NA")]
+        [DisplayFormat(NullDisplayText = "NA", DataFormatString = "{0:N1}", ApplyFormatInEditMode = true)]
         public decimal? PropertyNumberOfBathrooms { get; set; }
 
         [Display(Name = "Sq. Ft.")]
-        [DisplayFormat(NullDisplayText = "NA", DataFormatString = "{0:N0}")]
+        [DisplayFormat(NullDisplayText = "NA")]
         public int? PropertySquareFootage { get; set; }
 
-        [Display(Name = "Rent")]
+        [Display(Name = "Rent:")]
         [DisplayFormat(NullDisplayText = "NA", DataFormatString = "{0:c}")]
         [DataType(DataType.Currency)]
         public Decimal PropertyAmount { get; set; }
