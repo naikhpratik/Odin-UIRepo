@@ -24,5 +24,11 @@ namespace Odin.Data.Persistence
                 .Where(a => a.OrderId == id)
                 .ToList();
         }
+        public Appointment GetAppointmentsById(string id)
+        {
+            return _context.Appointments
+                .Where(a => a.Id.Equals(id))
+                .SingleOrDefault<Appointment>(); 
+        }
     }
 }

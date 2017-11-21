@@ -12,9 +12,9 @@ div#itinerary .dayTitle {
   align-content: center;
   justify-content: flex-start; }
   div#itinerary .dayTitle .dayNumber {
-    font-size: 4rem;
+    font-size: 4.8rem;
     font-weight: 700;
-    color: #31a4dd;
+    color: #2CBFFC;
     margin: 0 0 0 0; }
   div#itinerary .dayTitle .dayText {
     display: flex;
@@ -23,22 +23,24 @@ div#itinerary .dayTitle {
     justify-content: center;
     margin-left: 10px; }
   div#itinerary .dayTitle .dayName {
-    color: #6c6e70;
-    font-weight: 400; }
+    color: #858585;
+    font-weight: 500;
+    font-size: 1.8rem; }
   div#itinerary .dayTitle .mmyyyy {
     color: #858585;
-    font-weight: 300; }
+    font-weight: 300;
+    font-size: 2rem; }
 
 div#itinerary .eventNote {
-  font-size: 2rem;
-  color: #858585;
-  font-weight: 400;
+  font-size: 1.8rem;
+  color: #4E4E4E;
+  font-weight: 300;
   margin-left: 10px; }
 
 div#itinerary .eventTime {
-  font-size: 2rem;
-  color: #858585;
-  font-weight: 400;
+  font-size: 1.8rem;
+  color: #A7CE39;
+  font-weight: 500;
   margin-left: 0px;
   color: #49ae44; }
 

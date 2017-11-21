@@ -1,80 +1,136 @@
 ﻿@model Odin.ViewModels.Orders.Transferee.OrdersTransfereeItineraryViewModel
 
-<div class="container-fluid" data-order-id="@Model.Id" id="itinerary">  
-    @for (int i = 0; i < Model.Itinerary.Count(); i++)
-    {
-
-        var elem = Model.Itinerary.ElementAt(i);
-        string link = "";
-        DateTime? dt = (DateTime?)(elem).ScheduledDate;
-        string al = (string)(elem).ActionLabel;
-        string id = Model.Id;
-        if (Model.Itinerary.ElementAt(i).ItemType.Contains("Service"))
-        {
-            link = "$('.item[data-panel=details]').trigger('click');";
-            if (!dt.HasValue)
-            {
-                break;
-            }
-        }
-        else if (Model.Itinerary.ElementAt(i).ItemType.Contains("Service"))
-        {
-            link = "$('.item[data-panel=itinerary]').trigger('click');";
-        }
-        else
-        {
-            link = "$('.item[data-panel=housing]').trigger('click');";
-        }
-
-        if (ViewBag.SameAs == null || DateTime.Parse(ViewBag.SameAs.ToString()).ToShortDateString() != dt.Value.ToShortDateString())
-        {
-            ViewBag.SameAs = dt;
-
-            <div class="event-item row" data-entity-id="@id">
-                <div class="dayTitle">
-                    <h2 class="dayNumber">
-                        @(dt.HasValue ? dt.Value.ToString("dd") : "NA")
-                    </h2>
-                    <div class="dayText">
-                        <p class="dayName"><span>@(dt.HasValue ? dt.Value.ToString("dddd") : "NA")</span></p>
-                        <p class="mmyyyy">@(dt.HasValue ? dt.Value.ToString("MMMM yyyy") : "NA")</p>
-                    </div>
-                </div>
-            </div>
-        }
-        <div class="eventNotes">
-            <p>
-                <a onclick="@link"><span class="eventTime">@(dt.HasValue ? dt.Value.ToString("hh:mm tt") : "NA")</span>&nbsp;<span class="eventNote">@al</span></a>
-            </p>
-        </div>
-
-    }
-    <hr>
+<div class="container-fluid" data-order-id="@Model.Id" id="itinerary">
+    <h1 class="sectionTitle">
+        Your Itinerary
+        <button type="button" class="btn btn-secondary" style="float:right">Add Appointment</button>
+    </h1>
     
-</div>
-<div id="editor"></div>
-<button id="cmdEmail">Email to Transferee</button>
-<button id="cmdPDF">Generate PDF</button>
-<hr>
-@Styles.Render("~/Styling/itinerary")
+    <p class="sectionInstruction">
+        What is going on. Check to see what you have planned. To stay on top of things.
+    </p>
+    <ul class="sectionList event-item row" data-entity-id="@Model.Id">
+        @for (int i = 0; i < Model.Itinerary.Count(); i++)
+        {
+            var elem = Model.Itinerary.ElementAt(i);
+            string link = "";
+            DateTime? dt = (DateTime?)(elem).ScheduledDate;
+                        
+            string id = Model.Id;
+            if (Model.Itinerary.ElementAt(i).ItemType.Contains("Service"))
+            {
+                link = "$('.item[data-panel=details]').trigger('click');";
+                if (!dt.HasValue)
+                {
+                    break;
+                }
+            }
+            else if (Model.Itinerary.ElementAt(i).ItemType.Contains("Appointment"))
+            {
+                link = "";
+            }
+            else
+            {
+                link = "$('.item[data-panel=housing]').trigger('click');";
+            }
 
-<script type="text/javascript">
+            <li class="col-md-6">
 
-    $(document).ready(TransfereeItineraryController.init);
-    var doc = new jsPDF();
-    var specialElementHandlers = {
-        '#editor': function (element, renderer) {
-            return true;
+                @if (ViewBag.SameAs == null || DateTime.Parse(ViewBag.SameAs.ToString()).ToShortDateString() != dt.Value.ToShortDateString())
+                {
+
+                    ViewBag.SameAs = dt;
+                    <div class="dayTitle">
+                        <h2 class="dayNumber">
+                            @(dt.HasValue ? dt.Value.ToString("dd") : "NA")
+                        </h2>
+                        <div class="dayText">
+                            <p class="dayName"><span>@(dt.HasValue ? dt.Value.ToString("dddd") : "NA")</span></p>
+                            <p class="mmyyyy">@(dt.HasValue ? dt.Value.ToString("MMMM yyyy") : "NA")</p>
+                        </div>
+                    </div>                        
+                }
+                <ul class="sectionList">
+                    @for (int j = i; j < Model.Itinerary.Count(); j++)
+                    {
+                        string al = (string)(Model.Itinerary.ElementAt(j)).ActionLabel;
+                        DateTime? dt2 = (DateTime?)(Model.Itinerary.ElementAt(j)).ScheduledDate;
+                        if (dt2.Value.ToShortDateString() == dt.Value.ToShortDateString())
+                        {
+                    <li>
+                            @if (Model.Itinerary.ElementAt(j).ItemType.Contains("Appointment"))
+                            {
+                                <div class="modal fade in" id="appointmentModal" tabindex="-100" role="dialog" data-backdrop="static" aria-labelledby="appointmentModalLabel" aria-hidden="true" style="z-index: 2147483647;">
+                                    <div class="modal-dialog" role="document" data-url='@Url.Action("appointmentPartial")/@Model.Id' id="appointment" style="z-index: 2147483647;">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Appointment</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body"></div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary Delete" data-dismiss="modal">Delete</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <div class="bd-example">
+                                        <A id='showAppointment' data-toggle="modal" data-target="#appointmentModal"><span class="eventTime">@(dt2.HasValue ? dt2.Value.ToString("hh:mm tt") : "NA")</span>&nbsp;<span class="eventNote">@al</span></A>
+                                    </div>
+                            }
+                            else
+                            {
+                                <a onclick="@link"><span class="eventTime">@(dt2.HasValue ? dt2.Value.ToString("hh:mm tt") : "NA")</span>&nbsp;<span class="eventNote">@al</span></a>
+                            }
+
+                    </li>
+                        }
+                        else
+                        {
+                            i = j-1;
+                                break;
+                        }
+                    }
+                </ul>
+                <hr>
+            </li>
+
         }
-    };
+    </ul>
 
-    $('#cmdPDF').click(function () {
-        doc.fromHTML($('#itinerary').html(), 15, 15, {
-            'width': 170,
-            'elementHandlers': specialElementHandlers
-        });
-        var nm = $('.eeName').text().replace(/ /g,"").replace(/\./g, "");        
-        doc.save(nm+'_Itinerary.pdf');
-    });
+        </div>
+        <div id="editor"></div>
+        <button id="cmdEmail">Email to Transferee</button>
+        <button id="cmdPDF">Generate PDF</button>
+        <hr>
+                @Styles.Render("~/Styling/itinerary")
 
-</script>
+                <script type="text/javascript">
+
+                    $(document).ready(TransfereeItineraryController.init);
+                    var doc = new jsPDF();
+                    var specialElementHandlers = {
+                        '#editor': function (element, renderer) {
+                            return true;
+                        }
+                    };
+                    $('#showAppointment').click(function () {
+                        var url = $('#appointment').data('url');
+                        $.get(url, function (data) {
+                            $('.modal-body').html(data);
+                        });
+                    });
+                    $('#cmdPDF').click(function () {
+                        doc.fromHTML($('#itinerary').html(), 15, 15, {
+                            'width': 170,
+                            'elementHandlers': specialElementHandlers
+                        });
+                        var nm = $('.eeName').text().replace(/ /g, "").replace(/\./g, "");
+                        doc.save(nm + '_Itinerary.pdf');
+                    });
+
+                </script>

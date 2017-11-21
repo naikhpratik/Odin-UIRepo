@@ -22,9 +22,9 @@ div#itinerary {
         justify-content: flex-start;
 
         .dayNumber {
-            font-size: 4rem;
+            font-size: 4.8rem;
             font-weight: 700;
-            color: $DW_Blue;
+            color: #2CBFFC;
             margin: 0 0 0 0;
         }
 
@@ -37,8 +37,9 @@ div#itinerary {
         }
 
         .dayName {
-            color: #6c6e70;
-            font-weight: 400;
+            color: #858585;
+            font-weight: 500;
+            font-size:1.8rem;
         }
 
         .mmyyyy {
@@ -50,16 +51,16 @@ div#itinerary {
 
 
     .eventNote {
-        font-size: 2rem;
-        color: #858585;
-        font-weight: 400;
+        font-size: 1.8rem;
+        color: #4E4E4E;
+        font-weight: 300;
         margin-left: 10px;
     }
 
     .eventTime {
-        font-size: 2rem;
-        color: #858585;
-        font-weight: 400;
+        font-size: 1.8rem;
+        color: #A7CE39;
+        font-weight: 500;
         margin-left: 0px;
         color: $DW_Green;
     }

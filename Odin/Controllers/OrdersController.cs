@@ -5,7 +5,6 @@ using Odin.Data.Core.Models;
 using Odin.Interfaces;
 using Odin.ViewModels.Orders.Transferee;
 using Odin.ViewModels.Shared;
-using Odin.Data.Extensions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -81,7 +80,12 @@ namespace Odin.Controllers
             viewModel.Id = id;
             return PartialView("~/views/orders/partials/_Itinerary.cshtml", viewModel);
         }
-
+        public ActionResult AppointmentPartial(string id)
+        {            
+            Appointment viewModel = GetAppointmentById(id);
+            viewModel.Id = id;
+            return PartialView("~/views/orders/partials/_Appointment.cshtml", viewModel);
+        }
         public ActionResult Details(string orderId)
         {
             var userId = User.Identity.GetUserId();
@@ -162,6 +166,11 @@ namespace Odin.Controllers
             OrdersTransfereeItineraryViewModel vm = new OrdersTransfereeItineraryViewModel();
             vm.Itinerary = itinerary;            
             return vm;
+        }
+        private Appointment GetAppointmentById(string Id)
+        {
+            var itinAppointment = _unitOfWork.Appointments.GetAppointmentsById(Id);
+            return itinAppointment;
         }
 
     }
