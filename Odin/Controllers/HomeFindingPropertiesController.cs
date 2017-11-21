@@ -5,15 +5,15 @@ using System.Web;
 using Odin.Data.Core;
 using AutoMapper;
 using Odin.Filters;
-using System.Web.Http;
+using System.Web.Mvc;
 using Odin.ViewModels.Orders.Transferee;
-using Odin.Data.Core.Dtos;
-using Microsoft.AspNet.Identity;
 using Odin.Data.Core.Models;
+using System.Net;
+using Microsoft.AspNet.Identity;
 
-namespace Odin.Controllers.Api
+namespace Odin.Controllers
 {
-    public class HomeFindingPropertiesController : ApiController
+    public class HomeFindingPropertiesController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -24,10 +24,10 @@ namespace Odin.Controllers.Api
             _unitOfWork = unitOfWork;
         }
 
-        // POST /api/homefindingproperties
+        // POST /homefindingproperties
         [HttpPost]
         [Authorize]
-        public IHttpActionResult Index(HousingPropertyViewModel propertyVM)
+        public ActionResult Index(HousingPropertyViewModel propertyVM)
         {
             var userId = User.Identity.GetUserId();
 
@@ -40,7 +40,7 @@ namespace Odin.Controllers.Api
 
             _unitOfWork.Complete();
 
-            return Ok();
+            return new HttpStatusCodeResult(HttpStatusCode.NoContent);
         }
     }
 }

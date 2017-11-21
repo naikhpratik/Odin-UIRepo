@@ -1,24 +1,20 @@
-﻿using AutoMapper;
-using NUnit.Framework;
-using Odin.Controllers.Api;
-using Odin.Data.Persistence;
-using Odin.IntegrationTests.TestAttributes;
-using Odin.IntegrationTests.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using Odin.Extensions;
-using Odin.Data.Core.Models;
-using FluentAssertions;
-using System.Net;
-using Odin.Data.Builders;
-using System.Collections.ObjectModel;
-using Odin.ViewModels.Orders.Transferee;
+﻿
 
-namespace Odin.IntegrationTests.Controllers.Api
+using AutoMapper;
+using FluentAssertions;
+using NUnit.Framework;
+using Odin.Controllers;
+using Odin.Data.Builders;
+using Odin.Data.Core.Models;
+using Odin.Data.Persistence;
+using Odin.IntegrationTests.Extensions;
+using Odin.IntegrationTests.TestAttributes;
+using Odin.ViewModels.Orders.Transferee;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Odin.IntegrationTests.Controllers
 {
     [TestFixture]
     public class HomeFindingPropertiesControllerTests :WebApiBaseTest
