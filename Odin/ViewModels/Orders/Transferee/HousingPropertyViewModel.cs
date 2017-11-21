@@ -4,6 +4,7 @@ using Odin.Helpers;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
+using System.Web;
 
 namespace Odin.ViewModels.Orders.Transferee
 {
@@ -75,5 +76,8 @@ namespace Odin.ViewModels.Orders.Transferee
         [DataType(DataType.MultilineText)]
         [DisplayFormat(ConvertEmptyStringToNull = true)]
         public String PropertyDescription { get; set; }
+
+        [Display(Name = "Photos:")]
+        public IEnumerable<HttpPostedFileBase> Photos { get; set; }
     }
 }
