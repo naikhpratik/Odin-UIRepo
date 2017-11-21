@@ -15,7 +15,7 @@ namespace Odin.Data.Core.Models
         public string PostalCode { get; set; }
         public string CountryCode { get; set; }
 
-        public NumberOfBathroomsType NumberOfBathrooms { get; set; }
+        public decimal? NumberOfBathrooms { get; set; }
         public int? NumberOfBedrooms { get; set; }
         public int? SquareFootage { get; set; }
         public decimal? Amount { get; set; }

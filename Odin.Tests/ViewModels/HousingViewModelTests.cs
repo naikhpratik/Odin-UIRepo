@@ -156,8 +156,8 @@ namespace Odin.Tests.ViewModels
             DateTime now = DateTime.Now;
 
             DateTime firstDate = now;
-            DateTime secondDate = now.AddDays(1);
-            DateTime thirdDate = now.AddDays(5);
+            DateTime secondDate = now.AddDays(-1);
+            DateTime thirdDate = now.AddDays(-5);
 
             DateTime[] dates = new[] { thirdDate, firstDate, secondDate };
 

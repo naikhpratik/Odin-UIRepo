@@ -34,7 +34,7 @@ namespace Odin
 
             CreateMap<Order, HousingViewModel>();
             CreateMap<HomeFinding, HousingViewModel>();
-            CreateMap<HomeFindingProperty, HousingPropertyViewModel>();
+            CreateMap<HomeFindingProperty, HousingPropertyViewModel>().ReverseMap();
 
             /*DTO Mappings*/
 
