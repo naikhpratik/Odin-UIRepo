@@ -154,6 +154,7 @@
     <Compile Include="Core\Models\BrokerFeeType.cs" />
     <Compile Include="Core\Models\Child.cs" />
     <Compile Include="Core\Models\HomeFindingProperty.cs" />
+    <Compile Include="Core\Models\Photo.cs" />
     <Compile Include="Core\Models\Property.cs" />
     <Compile Include="Core\Models\Consultant.cs" />
     <Compile Include="Core\Models\DepositType.cs" />
@@ -186,6 +187,7 @@
     <Compile Include="Core\Repositories\INumberOfBathroomsTypesRepository.cs" />
     <Compile Include="Core\Repositories\IOrdersRepository.cs" />
     <Compile Include="Core\Repositories\IPetsRepository.cs" />
+    <Compile Include="Core\Repositories\IPhotosRepository.cs" />
     <Compile Include="Core\Repositories\IServicesRepository.cs" />
     <Compile Include="Core\Repositories\IServiceTypesRepository.cs" />
     <Compile Include="Core\Repositories\ITransfereesRepository.cs" />
@@ -441,11 +443,16 @@
     <Compile Include="Persistence\Migrations\201711151608086_MergeAddSortOrderAndDefault.Designer.cs">
       <DependentUpon>201711151608086_MergeAddSortOrderAndDefault.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201711212055489_AddPhotos.cs" />
+    <Compile Include="Persistence\Migrations\201711212055489_AddPhotos.Designer.cs">
+      <DependentUpon>201711212055489_AddPhotos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\NumberOfBathroomsTypesRepository.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
     <Compile Include="Persistence\PetsRepository.cs" />
     <Compile Include="Persistence\HomeFindingsRepository.cs" />
+    <Compile Include="Persistence\PhotosRepository.cs" />
     <Compile Include="Persistence\ServicesRepository.cs" />
     <Compile Include="Persistence\ServiceTypesRepository.cs" />
     <Compile Include="Persistence\TransfereesRepository.cs" />
@@ -635,6 +642,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201711151608086_MergeAddSortOrderAndDefault.resx">
       <DependentUpon>201711151608086_MergeAddSortOrderAndDefault.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711212055489_AddPhotos.resx">
+      <DependentUpon>201711212055489_AddPhotos.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

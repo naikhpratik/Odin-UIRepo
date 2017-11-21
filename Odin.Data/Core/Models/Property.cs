@@ -22,5 +22,7 @@ namespace Odin.Data.Core.Models
         public DateTime? AvailabilityDate { get; set; }
 
         public string Description { get; set; }
+
+        public ICollection<Photo> Photos { get; set; }
     }
 }
