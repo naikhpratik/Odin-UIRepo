@@ -2,12 +2,16 @@
 
     var init = function () {
         console.log("Loading Housing");
+
         $('#propertyForm').submit(function (event) {
             if ($(this).valid()) {
                 $.ajax({
                     url: this.action,
-                    type: this.method,
-                    data: $(this).serialize(),
+                    type: "POST",
+                    method: "POST",
+                    data: new FormData(this),
+                    contentType: false,
+                    processData: false,
                     success: function (result) {
                         $('#propertiesContainer').load('/orders/propertiesPartial/' + currentOrderId);
                         $(':input', '#propertyForm')
@@ -26,7 +30,7 @@
     };
 
     return {
-      init: init
+        init: init
     };
 
 }();
