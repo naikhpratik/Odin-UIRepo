@@ -9,7 +9,9 @@ using System.Web.Mvc;
 using Odin.ViewModels.Orders.Transferee;
 using Odin.Data.Core.Models;
 using System.Net;
+using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
+using Odin.Interfaces;
 
 namespace Odin.Controllers
 {
@@ -17,17 +19,19 @@ namespace Odin.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IImageStore _imageStore;
 
-        public HomeFindingPropertiesController(IUnitOfWork unitOfWork, IMapper mapper)
+        public HomeFindingPropertiesController(IUnitOfWork unitOfWork, IMapper mapper, IImageStore imageStore)
         {
             _mapper = mapper;
+            _imageStore = imageStore;
             _unitOfWork = unitOfWork;
         }
 
         // POST /homefindingproperties
         [HttpPost]
         [Authorize]
-        public ActionResult Index(HousingPropertyViewModel propertyVM)
+        public async Task<ActionResult> Index(HousingPropertyViewModel propertyVM)
         {
             var userId = User.Identity.GetUserId();
 
@@ -39,6 +43,11 @@ namespace Odin.Controllers
             homeFinding.HomeFindingProperties.Add(homeFindingProperty);
 
             _unitOfWork.Complete();
+
+            foreach (var photo in propertyVM.Photos)
+            {
+                await _imageStore.SaveImage(photo.InputStream, homeFindingProperty.Property.Id);
+            }
 
             return new HttpStatusCodeResult(HttpStatusCode.NoContent);
         }
