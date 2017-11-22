@@ -447,6 +447,14 @@
     <Compile Include="Persistence\Migrations\201711212055489_AddPhotos.Designer.cs">
       <DependentUpon>201711212055489_AddPhotos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201711151901404_SwitchNumberOfBathsOnProperty.cs" />
+    <Compile Include="Persistence\Migrations\201711151901404_SwitchNumberOfBathsOnProperty.Designer.cs">
+      <DependentUpon>201711151901404_SwitchNumberOfBathsOnProperty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201711152045272_MergeNov15.cs" />
+    <Compile Include="Persistence\Migrations\201711152045272_MergeNov15.Designer.cs">
+      <DependentUpon>201711152045272_MergeNov15.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\NumberOfBathroomsTypesRepository.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
@@ -645,6 +653,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201711212055489_AddPhotos.resx">
       <DependentUpon>201711212055489_AddPhotos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711151901404_SwitchNumberOfBathsOnProperty.resx">
+      <DependentUpon>201711151901404_SwitchNumberOfBathsOnProperty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711152045272_MergeNov15.resx">
+      <DependentUpon>201711152045272_MergeNov15.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

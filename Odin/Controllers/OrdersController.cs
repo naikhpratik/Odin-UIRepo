@@ -48,6 +48,16 @@ namespace Odin.Controllers
             return PartialView("~/views/orders/partials/_Housing.cshtml", viewModel);
         }
 
+        public ActionResult PropertiesPartial(string id)
+        {
+            var userId = User.Identity.GetUserId();
+            var order = _unitOfWork.Orders.GetOrderFor(userId, id);
+
+            HousingViewModel viewModel = new HousingViewModel(order, _mapper);
+
+            return PartialView("~/views/orders/partials/_HousingProperties.cshtml", viewModel.Properties);
+        }
+
         public ActionResult DetailsPartial(string id)
         {
             OrdersTransfereeViewModel viewModel = GetViewModelForOrder(id);

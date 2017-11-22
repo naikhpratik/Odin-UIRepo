@@ -57,7 +57,7 @@ namespace Odin.Domain
             var blob = container.GetBlockBlobReference(imageId);
             var sasToken = blob.GetSharedAccessSignature(sasPolicy);
 
-            // Using storage emulator
+            // Using storage emulator.
             if (_client.BaseUri.IsLoopback)
             {
                 return new Uri($"{_client.BaseUri}/{ContainerName}/{imageId}");
