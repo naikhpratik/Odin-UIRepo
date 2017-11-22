@@ -14,5 +14,9 @@ namespace Odin.Data.Core.Models
 
         public string OrderId { get; set; }
         public Order Order { get; set; }
+        public void Delete()
+        {
+            Deleted = true;
+        }
     }
 }

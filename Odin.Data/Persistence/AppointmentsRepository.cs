@@ -21,10 +21,10 @@ namespace Odin.Data.Persistence
         public IEnumerable<Appointment> GetAppointmentsByOrderId(string id)
         {
             return _context.Appointments
-                .Where(a => a.OrderId == id)
+                .Where(a => a.OrderId == id && a.Deleted == false)
                 .ToList();
         }
-        public Appointment GetAppointmentsById(string id)
+        public Appointment GetAppointmentById(string id)
         {
             return _context.Appointments
                 .Where(a => a.Id.Equals(id))

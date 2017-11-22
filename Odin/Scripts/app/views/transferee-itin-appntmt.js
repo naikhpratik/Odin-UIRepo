@@ -1,127 +1,104 @@
-﻿var TransfereeDetailsService = function (){
+﻿var TransfereeItineraryAppointment = function (){
      var route = "/api/orders/transferee/";
 
-var updateAppointmentBlock = function (block, data, success, fail) {
-    var url = route + "/appointment/" + block;
+    var updateAppointment = function (block, data, success, fail) {
+        var url = route + "/itinerary/" + block + "/";
     $.post(url, data).done(success).fail(fail);
      }
-return {
-    updateAppointmentBlock: updateAppointmentBlock
-}
 
+    var deleteAppointment = function (deleteType, apptmtId, success, fail) {
+        var url = route  + "/itinerary/" + deleteType + "/" + apptmtId;        
+    $.ajax({
+        url: url,
+        type: 'DELETE'
+    }).done(success).fail(fail);
+    }
+    return {
+    updateAppointment: updateAppointment,
+    deleteAppointment: deleteAppointment
+    }
 }();
-var TransfereeAppointmentController = function (transfereeAppointment) {
+var TransfereeAppointmentController = function (transfereeItineraryAppointment) {
     
     var init = function () { 
-        var appointmentBlock = $("div#appointmentBlock");
-
-        appointmentBlock.find('.date').datetimepicker({    
-            format: "MM/DD/YYYY HH:mm",
+        var appointmentModal = $("div#appointmentModal");        
+        appointmentModal.find('.date').datetimepicker({               
+            showClose: true,
+            toolbarPlacement: 'bottom',
+            icons: { close: 'custom-icon-check' },
             useCurrent:true,
             keepOpen: false
-        }).on("dp.change", function (e) {
-            saveBlock(e);
-        });        
+        });
 
-        pnlDetails.find(".details-services").find("span").on("click",
-            function () {
-                var cols = $(this).parents("[data-entity-collection = 'services']").find(".service-col");                                                                                           
-                cols.find("span").css("display", "block");                  
-            });
+        var modalParent = appointmentModal.parent().parent()
+        //New Event for Appointment
+        modalParent.on("click", ".new", newAppointment);
+       
+        //Save Event for Appointment
+        modalParent.on("click", ".btn-primary", saveAppointment);
 
-        //Init Variables
-        detailsBlocks = pnlDetails.find(".details-services");
-        orderId = pnlDetails.attr("data-order-id");
-
-        //Save Event for Services
-        detailsBlocks.on("click", ".sectionSave", saveBlock);
+        //Delete Event for Appointment
+        modalParent.on("click", ".delete", deleteAppointment);
     };
 
-    var saveBlock = function (e) {
+    var newAppointment = function (e) {
+        var appointment = $(e.target).parent().parent().parent().find("div#appointmentModal");        
+        appointment.attr("data-appointment-id", '');
+        var dt = appointment.children().find("input[name=ScheduledDate]");
+        dt.val('');
+        var ds = appointment.find("#Description");
+        ds.attr('value', '');
+    }
 
-        var detailsBlock = $(e.target).parents(".details-services");
+    var deleteAppointment = function (e) {        
+        if (confirm("Are you sure you want to delete this appointment?")) {
+            var appointment = $(e.target).parent().parent().parent().find("div#appointmentModal");     
+            var appointmentId = appointment.attr("data-appointment-id");
+            var orderId = $('div#itinerary').attr('data-order-id');
+            var err = false;
 
-        var block = detailsBlock.attr("data-block");
-        var rows = detailsBlock.find(".details-row[data-entity-id]");
+            var deleteSuccess = function () {
+                toast('the appointment was deleted successfully', 'success');
+                $('.item[data-panel=itinerary]').trigger('click');
+            }
+            var deleteFail = function () {
+                toast('the appointment deletion failed', 'danger');                
+            }
+
+            if (orderId === undefined || appointmentId === undefined)
+                err=true;           
+
+            //var data = { "Id": orderId, "AppointmentId": appointmentId };
+
+            if (!err)
+                TransfereeItineraryAppointment.deleteAppointment("appointment", appointmentId, deleteSuccess, deleteFail);
+        }
+    }
+    var saveAppointment = function (e) {
+        
+        var appointment = $(e.target).parent().parent().parent().find("div#appointmentModal");
+        var orderId = $('div#itinerary').attr('data-order-id');
+        var appointmentId = appointment.attr("data-appointment-id");
+        var dt = appointment.children().find("input[name=ScheduledDate]");
+        var ds = appointment.find("#Description");
+
         var err = false;
        
         var saveSuccess = function () {
-            toast('changes to service dates are successful', 'success');
+            toast('changes to the appointment are successful', 'success');
+            $('.item[data-panel=itinerary]').trigger('click');
         }
         var saveFail = function () {
-            toast('changes to service dates failed', 'danger');
+            err = true;
+            toast('changes to the appointment failed', 'danger');
+        }       
+       
+        if (!err) {
+            
+            var data = { "Id": appointmentId, "OrderId": orderId, "ScheduledDate": dt.val(), "Description": ds.val() };
+            TransfereeItineraryAppointment.updateAppointment("appointment", data, saveSuccess, saveFail);
         }
-
-        var data = { "Id": orderId };
-        
-        rows.each(function () {
-            if (err)
-                return;
-            var row = $(this);
-            var rowInputs = row.find(":input").not("input[type='hidden']");
-            if (hasAttr(row, 'data-entity-collection')) {
-                if (!isCollectionRowEmpty(rowInputs)) {
-                    var collectionKey = row.attr("data-entity-collection");
-                    var collectionData = { "Id": row.attr("data-entity-id") };
-                    
-                    var ret = fillPostData(collectionData, rowInputs);
-                    if (ret == -1) {
-                        err = true;
-                        return;
-                    }
-                    if (!(collectionKey in data)) {
-                        data[collectionKey] = [];
-                    }
-                    data[collectionKey].push(collectionData);
-                }
-            } else {
-                fillPostData(data, rowInputs);
-            }            
-        });
-         if (!err)            
-        TransfereeDetailsService.updateDetailsBlock(block, data, saveSuccess, saveFail);
-    }
-
-    var fillPostData = function (data, inputs) {
-        var sd = '';
-        var st = '';
-        var cd = '';
-        var timeTag;
-        inputs.each(function () {
-            var input = $(this);
-            sd = input.attr("name") == "ScheduledDate" ? input.val() : sd;
-            if (input.attr("name") == "ScheduledTime")
-            { 
-                st = input.val();
-                timeTag = input.parent().find('.glyphicon-time');                
-            }
-            cd = input.attr("name") == "CompletedDate" ? input.val() : cd;
-        });
-        if (sd.length > 0 && st == '') {
-            toast('schedule time is required', 'danger');
-            timeTag.click();
-            err = -1;
-            return err;            
-        }
-        
-        data["ScheduledDate"] = sd + ' ' + st;        
-        data["CompletedDate"] = cd;
-        
-    }
-
-    var isCollectionRowEmpty = function (rowInputs) {
-        return rowInputs.filter(function () { return $.trim($(this).val()) !== ""; }).length === 0;
-    }
-
-    var hasAttr = function (obj, attrName) {
-        var attr = obj.attr(attrName);
-        return typeof attr !== typeof undefined && attr !== false && attr !== "" && attr !== null;
-    }
-
-    var contains = function(value, searchFor)
-    {
-        return (value || '').indexOf(searchFor) > -1;
-    }
+    }    
 
     var toast = function (message, type) {
         $.notify({
@@ -144,4 +121,4 @@ var TransfereeAppointmentController = function (transfereeAppointment) {
     return {
         init: init
     };
-}(TransfereeDetailsService);
+}(TransfereeItineraryAppointment);

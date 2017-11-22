@@ -84,7 +84,7 @@ namespace Odin.Data.Core.Models
 
         public HomeFinding HomeFinding { get; set; }
 
-        public virtual ICollection<Appointment> Appointments { get; private set; }
+        public virtual ICollection<Appointment> Appointments { get; set; }
 
         public virtual ICollection<Service> Services { get; private set; }
 

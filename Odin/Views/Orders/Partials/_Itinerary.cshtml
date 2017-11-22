@@ -3,7 +3,7 @@
 <div class="container-fluid" data-order-id="@Model.Id" id="itinerary">
     <h1 class="sectionTitle">
         Your Itinerary
-        <button type="button" class="btn btn-secondary" style="float:right">Add Appointment</button>
+        <button type="button" class="btn btn-secondary showNewAppointment" data-toggle="modal" style="float:right" data-target="#appointmentModalNew" >Add Appointment</button>
     </h1>
     
     <p class="sectionInstruction">
@@ -57,42 +57,51 @@
                         DateTime? dt2 = (DateTime?)(Model.Itinerary.ElementAt(j)).ScheduledDate;
                         if (dt2.Value.ToShortDateString() == dt.Value.ToShortDateString())
                         {
+                            i++;
                     <li>
                             @if (Model.Itinerary.ElementAt(j).ItemType.Contains("Appointment"))
                             {
-                                <div class="modal fade in" id="appointmentModal" tabindex="-100" role="dialog" data-backdrop="static" aria-labelledby="appointmentModalLabel" aria-hidden="true" style="z-index: 2147483647;">
-                                    <div class="modal-dialog" role="document" data-url='@Url.Action("appointmentPartial")/@Model.Id' id="appointment" style="z-index: 2147483647;">
+                                <div class="modal fade" id="appointmentModal@(j.ToString())" tabindex="-100" role="dialog" data-backdrop="static" aria-labelledby="appointmentModalLabel" aria-hidden="true" style="z-index: 2147483647;">
+                                    <div class="modal-dialog" role="document" data-appointment-id="@Model.Itinerary.ElementAt(j).Id" data-url='@Url.Action("appointmentPartial")/@Model.Itinerary.ElementAt(j).Id' id="appointment" style="z-index: 2147483647;">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Appointment</h5>
+                                                <h5 class="modal-title" id="appointmentModalLabel">Appointment</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <div class="modal-body"></div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary Delete" data-dismiss="modal">Delete</button>
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                            <div class="modal-footer row">
+                                                <div class="col-md-3">
+                                                    @*<button type="button" class="btn btn-secondary new">new</button>*@
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <button type="button" class="btn btn-primary save">Save</button>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <button type="button" class="btn btn-secondary delete" data-dismiss="modal">Delete</button>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                     <div class="bd-example">
-                                        <A id='showAppointment' data-toggle="modal" data-target="#appointmentModal"><span class="eventTime">@(dt2.HasValue ? dt2.Value.ToString("hh:mm tt") : "NA")</span>&nbsp;<span class="eventNote">@al</span></A>
+                                        <a id="showAppointment" class="showAppointment" data-toggle="modal" data-target="#appointmentModal@(j.ToString())"><span class="eventTime">@(dt2.HasValue ? dt2.Value.ToString("hh:mm tt") : "NA")</span>&nbsp;<span class="eventNote">@al</span></a>
                                     </div>
                             }
                             else
                             {
                                 <a onclick="@link"><span class="eventTime">@(dt2.HasValue ? dt2.Value.ToString("hh:mm tt") : "NA")</span>&nbsp;<span class="eventNote">@al</span></a>
                             }
-
                     </li>
                         }
                         else
                         {
                             i = j-1;
-                                break;
+                             break;
                         }
                     }
                 </ul>
@@ -101,36 +110,69 @@
 
         }
     </ul>
-
+    <div class="modal fade" id="appointmentModalNew" tabindex="-100" role="dialog" data-backdrop="static" aria-labelledby="appointmentModalLabel" aria-hidden="true" style="z-index: 2147483647;">
+        <div class="modal-dialog" role="document" data-appointment-id="" data-url='@Url.Action("appointmentPartial")/' id="appointment" style="z-index: 2147483647;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="appointmentModalLabel">Appointment</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body new"></div>
+                <div class="modal-footer row">
+                    <div class="col-md-6">
+                        @*<button type="button" class="btn btn-secondary new">new</button>*@
+                    </div>
+                    <div class="col-md-3">
+                        <button type="button" class="btn btn-primary save">Save</button>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div id="editor"></div>
-        <button id="cmdEmail">Email to Transferee</button>
-        <button id="cmdPDF">Generate PDF</button>
-        <hr>
+    </div>
+    <div id="editor"></div>
+    <button id="cmdEmail">Email to Transferee</button>
+    <button id="cmdPDF">Generate PDF</button>
+    <hr>
+        </div>
+        
                 @Styles.Render("~/Styling/itinerary")
 
-                <script type="text/javascript">
+<script type="text/javascript">
 
-                    $(document).ready(TransfereeItineraryController.init);
-                    var doc = new jsPDF();
-                    var specialElementHandlers = {
-                        '#editor': function (element, renderer) {
-                            return true;
-                        }
-                    };
-                    $('#showAppointment').click(function () {
-                        var url = $('#appointment').data('url');
-                        $.get(url, function (data) {
-                            $('.modal-body').html(data);
-                        });
-                    });
-                    $('#cmdPDF').click(function () {
-                        doc.fromHTML($('#itinerary').html(), 15, 15, {
-                            'width': 170,
-                            'elementHandlers': specialElementHandlers
-                        });
-                        var nm = $('.eeName').text().replace(/ /g, "").replace(/\./g, "");
-                        doc.save(nm + '_Itinerary.pdf');
-                    });
-
-                </script>
+    $(document).ready(function () {
+        //TransfereeAppointmentController.init;
+        var doc = new jsPDF();
+        var specialElementHandlers = {
+            '#editor': function (element, renderer) {
+                return true;
+            }
+        };
+        $('#cmdPDF').click(function () {
+            doc.fromHTML($('#itinerary').html(), 15, 15, {
+                'width': 170,
+                'elementHandlers': specialElementHandlers
+            });
+            var nm = $('.eeName').text().replace(/ /g, "").replace(/\./g, "");
+            doc.save(nm + '_Itinerary.pdf');
+        });
+        $('.showAppointment').click(function () {
+            var app = $(this).parent().parent().find('#appointment');
+            var url = app.data('url');
+            $.get(url, function (data) {
+                app.find('.modal-body').html(data);
+            });
+        });
+        $('.showNewAppointment').click(function () {
+            var app = $("#appointmentModalNew");            
+            var url = '/orders/appointmentPartial/';
+            $.get(url, function (data) {
+                app.find('.modal-body.new').html(data);
+            });           
+        });
+    });
+</script>

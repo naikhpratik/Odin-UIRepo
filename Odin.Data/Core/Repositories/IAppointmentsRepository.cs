@@ -7,6 +7,6 @@ namespace Odin.Data.Core.Repositories
     {
         void Add(Appointment appointment);
         IEnumerable<Appointment> GetAppointmentsByOrderId(string id);
-        Appointment GetAppointmentsById(string id);
+        Appointment GetAppointmentById(string id);
     }
 }
