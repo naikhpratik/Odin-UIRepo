@@ -28,7 +28,22 @@ namespace Odin.Domain
             _client = storageAccount.CreateCloudBlobClient();
         }
 
-        public async Task<string> SaveImage(Stream stream)
+        public CloudBlobContainer GetImageContainer()
+        {
+            return _client.GetContainerReference(ContainerName);
+        }
+
+        public string SaveImage(Stream stream)
+        {
+            var id = Guid.NewGuid().ToString();
+            var container = _client.GetContainerReference(ContainerName);
+            var blob = container.GetBlockBlobReference(id);
+            blob.UploadFromStream(stream);
+
+            return id;
+        }
+
+        public async Task<string> SaveImageAsync(Stream stream)
         {
             var id = Guid.NewGuid().ToString();
             var container = _client.GetContainerReference(ContainerName);
@@ -69,5 +84,11 @@ namespace Odin.Domain
 
             return new Uri($"{_client.BaseUri}{ContainerName}/{imageId}");
         }
+
+        public ICloudBlob ImageBlobFor(string imageId)
+        {
+            return _client.GetBlobReferenceFromServer(UriFor(imageId));
+        }
+
     }
 }

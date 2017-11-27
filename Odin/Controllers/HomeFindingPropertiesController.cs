@@ -12,6 +12,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Odin.Interfaces;
+using System.Collections.ObjectModel;
 
 namespace Odin.Controllers
 {
@@ -31,9 +32,11 @@ namespace Odin.Controllers
         // POST /homefindingproperties
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult> Index(HousingPropertyViewModel propertyVM)
+        public ActionResult Index(HousingPropertyViewModel propertyVM)
         {
             var userId = User.Identity.GetUserId();
+
+            //propertyVM.Photos = new Collection<HttpPostedFileBase>();
 
             HomeFindingProperty homeFindingProperty = new HomeFindingProperty();
             homeFindingProperty = _mapper.Map<HousingPropertyViewModel, HomeFindingProperty>(propertyVM, homeFindingProperty);
@@ -44,13 +47,27 @@ namespace Odin.Controllers
 
             foreach (var postedFile in propertyVM.Photos)
             {
-                //var id = await _imageStore.SaveImage(postedFile.InputStream);
-                //var urlStr = _imageStore.UriFor(id).AbsoluteUri;
-                var photo = new Photo(homeFindingProperty.Property.Id, "test", "test");
-                _unitOfWork.Photos.Add(photo);
+                try
+                {
+                    var storageId = _imageStore.SaveImage(postedFile.InputStream);
+                    var urlStr = _imageStore.UriFor(storageId).AbsoluteUri;
+                    var photo = new Photo(storageId, urlStr);
+                    homeFindingProperty.Property.Photos.Add(photo);
+                }
+                catch (Exception e)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.ServiceUnavailable);
+                }
             }
 
-            _unitOfWork.Complete();
+            try
+            {
+                _unitOfWork.Complete();
+            }
+            catch (Exception e)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.ServiceUnavailable);
+            }
 
             return new HttpStatusCodeResult(HttpStatusCode.NoContent);
         }

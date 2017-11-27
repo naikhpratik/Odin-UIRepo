@@ -459,6 +459,10 @@
     <Compile Include="Persistence\Migrations\201711221443006_MergeAddPhotos.Designer.cs">
       <DependentUpon>201711221443006_MergeAddPhotos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201711271705015_CleanUpPhotos.cs" />
+    <Compile Include="Persistence\Migrations\201711271705015_CleanUpPhotos.Designer.cs">
+      <DependentUpon>201711271705015_CleanUpPhotos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\NumberOfBathroomsTypesRepository.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
@@ -666,6 +670,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201711221443006_MergeAddPhotos.resx">
       <DependentUpon>201711221443006_MergeAddPhotos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711271705015_CleanUpPhotos.resx">
+      <DependentUpon>201711271705015_CleanUpPhotos.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

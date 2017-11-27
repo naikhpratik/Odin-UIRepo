@@ -10,6 +10,7 @@ using Odin.Data.Core.Models;
 using Odin.Data.Persistence;
 using Odin.Helpers;
 using Odin.IntegrationTests.Helpers;
+using Odin.Domain;
 
 namespace Odin.IntegrationTests
 {
@@ -23,11 +24,12 @@ namespace Odin.IntegrationTests
 
             Seed();
 
-
             if (ConfigurationManager.AppSettings["IsLocalTestingEnvironment"].Equals("true"))
             {
                 if (!AzureStorageEmulatorManager.IsProcessRunning())
                     AzureStorageEmulatorManager.StartStorageEmulator();
+
+                new ImageStore().GetImageContainer().CreateIfNotExists();
             }
         }
 

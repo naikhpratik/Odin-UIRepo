@@ -18,18 +18,26 @@ using System.Threading.Tasks;
 using System.Web;
 using Odin.Domain;
 using Odin.IntegrationTests.Helpers;
+using Microsoft.WindowsAzure.Storage.Blob;
+using System;
 
 namespace Odin.IntegrationTests.Controllers
 {
     [TestFixture]
     public class HomeFindingPropertiesControllerTests :WebApiBaseTest
     {
+        private MapperConfiguration config;
+        private IMapper mapper;
+        private UnitOfWork unitOfWork;
+        private ImageStore imageStore;
+
         private HomeFindingPropertiesController SetUpHomeFindingPropertiesController()
         {
-            var config = new MapperConfiguration(c => c.AddProfile(new MappingProfile()));
-            var mapper = config.CreateMapper();
-            var unitOfWork = new UnitOfWork(Context);
-            var controller = new HomeFindingPropertiesController(unitOfWork, mapper, new ImageStore());
+            config = new MapperConfiguration(c => c.AddProfile(new MappingProfile()));
+            mapper = config.CreateMapper();
+            unitOfWork = new UnitOfWork(Context);
+            imageStore = new ImageStore();
+            var controller = new HomeFindingPropertiesController(unitOfWork, mapper, imageStore);
             controller.MockCurrentUser(dsc.Id, dsc.UserName);
             return controller;
         }
@@ -51,7 +59,7 @@ namespace Odin.IntegrationTests.Controllers
 
             // Act
             HomeFindingPropertiesController controller = SetUpHomeFindingPropertiesController();
-            await controller.Index(propertyVM);
+            controller.Index(propertyVM);
 
             // Assert
             Context.Entry(order).Reload();
@@ -79,22 +87,24 @@ namespace Odin.IntegrationTests.Controllers
             var stream = Assembly.GetExecutingAssembly()
                 .GetManifestResourceStream("Odin.IntegrationTests.Resources.odin_login.png");
             var postedFile = new HttpPostedFileBaseTesting(stream, "image/png", "odin_login.png");
-            propertyVM.Photos = new List<HttpPostedFileBase> {postedFile};
+            var postedFile2 = new HttpPostedFileBaseTesting(stream, "image/png", "odin_login.png");
+            propertyVM.Photos = new List<HttpPostedFileBase> { postedFile, postedFile2 };
 
             // Act
             HomeFindingPropertiesController controller = SetUpHomeFindingPropertiesController();
-            await controller.Index(propertyVM);
+            controller.Index(propertyVM);
 
             // Assert
             Context.Entry(order).Reload();
-            order.HomeFinding.HomeFindingProperties.Count().Should().Be(1);
-
             HomeFindingProperty hfp = order.HomeFinding.HomeFindingProperties.First();
             Property property = hfp.Property;
-            property.Street1.Should().Be(propertyVM.PropertyStreet1);
-            property.Street2.Should().Be(propertyVM.PropertyStreet2);
 
+            property.Photos.Count().Should().Be(2);
 
+            Photo propertyPhoto = property.Photos.First();
+            ICloudBlob imageReference = imageStore.ImageBlobFor(propertyPhoto.StorageId);
+
+            imageReference.Should().NotBeNull();
         }
 
         private Order BuildOrder()
