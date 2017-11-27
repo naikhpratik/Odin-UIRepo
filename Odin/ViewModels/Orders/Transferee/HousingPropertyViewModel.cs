@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using System.Web;
 using System.Collections.ObjectModel;
+using Odin.ViewModels.Shared;
 
 namespace Odin.ViewModels.Orders.Transferee
 {
@@ -85,5 +86,7 @@ namespace Odin.ViewModels.Orders.Transferee
 
         [Display(Name = "Photos:")]
         public IEnumerable<HttpPostedFileBase> UploadedPhotos { get; set; }
+
+        public IEnumerable<PhotoViewModel> PropertyPhotos { get; set; }
     }
 }
