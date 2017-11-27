@@ -99,10 +99,10 @@
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Photos, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.UploadedPhotos, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.TextBoxFor(model => model.Photos, new { type = "file", multiple = "true", @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.Photos, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(model => model.UploadedPhotos, new { type = "file", multiple = "true", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.UploadedPhotos, "", new { @class = "text-danger" })
                     </div>
                 </div>
 

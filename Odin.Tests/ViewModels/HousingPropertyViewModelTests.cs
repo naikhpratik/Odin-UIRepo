@@ -13,8 +13,8 @@ namespace Odin.Tests.ViewModels
         {
             HousingPropertyViewModel viewModel = new HousingPropertyViewModel();
 
-            viewModel.Photos.Should().NotBeNull();
-            viewModel.Photos.Should().BeEmpty();
+            viewModel.UploadedPhotos.Should().NotBeNull();
+            viewModel.UploadedPhotos.Should().BeEmpty();
         }
     }
 }

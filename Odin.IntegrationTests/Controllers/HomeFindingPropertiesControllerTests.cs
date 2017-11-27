@@ -88,7 +88,7 @@ namespace Odin.IntegrationTests.Controllers
                 .GetManifestResourceStream("Odin.IntegrationTests.Resources.odin_login.png");
             var postedFile = new HttpPostedFileBaseTesting(stream, "image/png", "odin_login.png");
             var postedFile2 = new HttpPostedFileBaseTesting(stream, "image/png", "odin_login.png");
-            propertyVM.Photos = new List<HttpPostedFileBase> { postedFile, postedFile2 };
+            propertyVM.UploadedPhotos = new List<HttpPostedFileBase> { postedFile, postedFile2 };
 
             // Act
             HomeFindingPropertiesController controller = SetUpHomeFindingPropertiesController();

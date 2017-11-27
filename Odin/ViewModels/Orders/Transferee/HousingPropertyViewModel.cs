@@ -13,7 +13,7 @@ namespace Odin.ViewModels.Orders.Transferee
     {
         public HousingPropertyViewModel()
         {
-            Photos = new Collection<HttpPostedFileBase>();
+            UploadedPhotos = new Collection<HttpPostedFileBase>();
         }
 
         public String OrderId { get; set; }
@@ -84,6 +84,6 @@ namespace Odin.ViewModels.Orders.Transferee
         public String PropertyDescription { get; set; }
 
         [Display(Name = "Photos:")]
-        public IEnumerable<HttpPostedFileBase> Photos { get; set; }
+        public IEnumerable<HttpPostedFileBase> UploadedPhotos { get; set; }
     }
 }

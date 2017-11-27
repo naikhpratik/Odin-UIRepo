@@ -36,8 +36,6 @@ namespace Odin.Controllers
         {
             var userId = User.Identity.GetUserId();
 
-            //propertyVM.Photos = new Collection<HttpPostedFileBase>();
-
             HomeFindingProperty homeFindingProperty = new HomeFindingProperty();
             homeFindingProperty = _mapper.Map<HousingPropertyViewModel, HomeFindingProperty>(propertyVM, homeFindingProperty);
 
@@ -45,7 +43,7 @@ namespace Odin.Controllers
             HomeFinding homeFinding = order.HomeFinding;
             homeFinding.HomeFindingProperties.Add(homeFindingProperty);
 
-            foreach (var postedFile in propertyVM.Photos)
+            foreach (var postedFile in propertyVM.UploadedPhotos)
             {
                 try
                 {
