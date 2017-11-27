@@ -5,11 +5,17 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using System.Web;
+using System.Collections.ObjectModel;
 
 namespace Odin.ViewModels.Orders.Transferee
 {
     public class HousingPropertyViewModel
     {
+        public HousingPropertyViewModel()
+        {
+            Photos = new Collection<HttpPostedFileBase>();
+        }
+
         public String OrderId { get; set; }
 
         [DisplayFormat(ConvertEmptyStringToNull = true, NullDisplayText ="", HtmlEncode = false)]
