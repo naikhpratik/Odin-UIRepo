@@ -174,5 +174,9 @@
                 app.find('.modal-body.new').html(data);
             });           
         });
+        $(".new").click(function (e) {
+            e.stopPropagation();
+            return false;
+        })
     });
 </script>

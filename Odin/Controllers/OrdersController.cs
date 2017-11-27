@@ -91,7 +91,7 @@ namespace Odin.Controllers
             }
             else
             {
-                viewModel = new Appointment() { Id = Guid.NewGuid().ToString(), ScheduledDate = DateTime.Now }; ;
+                viewModel = new Appointment() { Id = null, ScheduledDate = DateTime.Now }; ;
             }
             return PartialView("~/views/orders/partials/_Appointment.cshtml", viewModel);
         }

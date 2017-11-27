@@ -442,7 +442,7 @@ namespace Odin.Controllers.Api
         [HttpPost]
         [Authorize]
         [Route("api/orders/transferee/itinerary/appointment")]
-        public IHttpActionResult UpserteItineraryAppointment(AppointmentDto dto)
+        public IHttpActionResult UpsertItineraryAppointment(AppointmentDto dto)
         {
 
             var userId = User.Identity.GetUserId();
