@@ -121,6 +121,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Models\PropertyTests.cs" />
     <Compile Include="Extensions\MockDbSetExtensions.cs" />
     <Compile Include="Persistence\Repositories\ConsultantsRepositoryTests.cs" />
     <Compile Include="Persistence\Repositories\ManagersRepositoryTests.cs" />

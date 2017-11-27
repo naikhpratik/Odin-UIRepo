@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,11 @@ namespace Odin.Data.Core.Models
 {
     public class Property : MobileTable
     {
+        public Property()
+        {
+            Photos = new Collection<Photo>();
+        }
+
         public string Street1 { get; set; }
         public string Street2 { get; set; }
         public string City { get; set; }
