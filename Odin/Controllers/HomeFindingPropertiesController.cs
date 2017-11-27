@@ -42,12 +42,15 @@ namespace Odin.Controllers
             HomeFinding homeFinding = order.HomeFinding;
             homeFinding.HomeFindingProperties.Add(homeFindingProperty);
 
-            _unitOfWork.Complete();
-
-            foreach (var photo in propertyVM.Photos)
+            foreach (var postedFile in propertyVM.Photos)
             {
-                await _imageStore.SaveImage(photo.InputStream, homeFindingProperty.Property.Id);
+                //var id = await _imageStore.SaveImage(postedFile.InputStream);
+                //var urlStr = _imageStore.UriFor(id).AbsoluteUri;
+                var photo = new Photo(homeFindingProperty.Property.Id, "test", "test");
+                _unitOfWork.Photos.Add(photo);
             }
+
+            _unitOfWork.Complete();
 
             return new HttpStatusCodeResult(HttpStatusCode.NoContent);
         }

@@ -15,32 +15,25 @@ namespace Odin.Domain
 {
     public class ImageStore : IImageStore
     {
-        private readonly IUnitOfWork _unitOfWork;
         readonly CloudBlobClient _client;
 
         private const string StorageConnectionKey = "StorageConnectionString";
         private const string ContainerName = "images";
 
-        public ImageStore(IUnitOfWork unitOfWork)
+        public ImageStore()
         {
-            _unitOfWork = unitOfWork;
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
                 CloudConfigurationManager.GetSetting(StorageConnectionKey));
 
             _client = storageAccount.CreateCloudBlobClient();
         }
 
-        public async Task<string> SaveImage(Stream stream, string propertyId)
+        public async Task<string> SaveImage(Stream stream)
         {
             var id = Guid.NewGuid().ToString();
             var container = _client.GetContainerReference(ContainerName);
             var blob = container.GetBlockBlobReference(id);
             await blob.UploadFromStreamAsync(stream);
-
-            var urlStr = UriFor(id).AbsoluteUri;
-            var photo = new Photo(propertyId, id, urlStr);
-            _unitOfWork.Photos.Add(photo);
-            _unitOfWork.Complete();
 
             return id;
         }

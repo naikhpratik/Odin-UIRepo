@@ -9,7 +9,7 @@ namespace Odin.Interfaces
 {
     public interface IImageStore
     {
-        Task<string> SaveImage(Stream stream, string propertyId);
+        Task<string> SaveImage(Stream stream);
         Uri UriFor(string imageId);
     }
 }
