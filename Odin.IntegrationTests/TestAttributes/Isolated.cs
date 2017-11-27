@@ -2,6 +2,9 @@
 using System.Transactions;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
+using Odin.Domain;
+using Microsoft.WindowsAzure.Storage.Blob;
+using System.Threading.Tasks;
 
 namespace Odin.IntegrationTests.TestAttributes
 {
@@ -16,6 +19,8 @@ namespace Odin.IntegrationTests.TestAttributes
         public void AfterTest(ITest test)
         {
             _transactionScope.Dispose();
+            CloudBlobContainer imageContainer = new ImageStore().GetImageContainer();
+            Parallel.ForEach(imageContainer.ListBlobs(useFlatBlobListing: true), x => ((CloudBlob)x).Delete());
         }
 
         public ActionTargets Targets => ActionTargets.Test;
