@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web;
 using System.Collections.ObjectModel;
 using Odin.ViewModels.Shared;
+using System.Linq;
 
 namespace Odin.ViewModels.Orders.Transferee
 {
@@ -88,5 +89,18 @@ namespace Odin.ViewModels.Orders.Transferee
         public IEnumerable<HttpPostedFileBase> UploadedPhotos { get; set; }
 
         public IEnumerable<PhotoViewModel> PropertyPhotos { get; set; }
+
+        public String ThumbnailPhotoUrl {  get
+            {
+                String thumbUrl = "/Content/Images/popout_sml_img.png";
+
+                if (PropertyPhotos.Any())
+                {
+                    thumbUrl = PropertyPhotos.ElementAt(0).PhotoUrl;
+                }
+
+                return thumbUrl;
+            }
+        }
     }
 }

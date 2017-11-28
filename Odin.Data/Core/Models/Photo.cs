@@ -8,6 +8,11 @@ namespace Odin.Data.Core.Models
 {
     public class Photo : MobileTable
     {
+        public Photo()
+        {
+
+        }
+
         public Photo(string storageId, string photoUrl)
         {
             StorageId = storageId;
@@ -15,7 +20,7 @@ namespace Odin.Data.Core.Models
         }
 
         public Property Property { get; set; }
-        public string StorageId { get; private set; }
-        public string PhotoUrl { get; private set; }
+        public string StorageId { get; set; }
+        public string PhotoUrl { get; set; }
     }
 }
