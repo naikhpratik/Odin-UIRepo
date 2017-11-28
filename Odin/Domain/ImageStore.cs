@@ -7,6 +7,8 @@ using System.Web;
 using Microsoft.Azure;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
+using Odin.Data.Core;
+using Odin.Data.Core.Models;
 using Odin.Interfaces;
 
 namespace Odin.Domain
@@ -26,16 +28,32 @@ namespace Odin.Domain
             _client = storageAccount.CreateCloudBlobClient();
         }
 
-        public async Task<string> SaveImage(Stream stream)
+        public CloudBlobContainer GetImageContainer()
+        {
+            return _client.GetContainerReference(ContainerName);
+        }
+
+        public string SaveImage(Stream stream)
+        {
+            var id = Guid.NewGuid().ToString();
+            var container = _client.GetContainerReference(ContainerName);
+            var blob = container.GetBlockBlobReference(id);
+            blob.UploadFromStream(stream);
+
+            return id;
+        }
+
+        public async Task<string> SaveImageAsync(Stream stream)
         {
             var id = Guid.NewGuid().ToString();
             var container = _client.GetContainerReference(ContainerName);
             var blob = container.GetBlockBlobReference(id);
             await blob.UploadFromStreamAsync(stream);
+
             return id;
         }
 
-        public Uri UriFor(string imageId)
+        public Uri PrivateUriFor(string imageId)
         {
             var sasPolicy = new SharedAccessBlobPolicy
             {
@@ -55,5 +73,22 @@ namespace Odin.Domain
 
             return new Uri($"{_client.BaseUri}{ContainerName}/{imageId}{sasToken}");
         }
+
+        public Uri UriFor(string imageId)
+        {
+            // Using storage emulator
+            if (_client.BaseUri.IsLoopback)
+            {
+                return new Uri($"{_client.BaseUri}/{ContainerName}/{imageId}");
+            }
+
+            return new Uri($"{_client.BaseUri}{ContainerName}/{imageId}");
+        }
+
+        public ICloudBlob ImageBlobFor(string imageId)
+        {
+            return _client.GetBlobReferenceFromServer(UriFor(imageId));
+        }
+
     }
 }

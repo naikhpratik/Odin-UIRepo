@@ -21,7 +21,7 @@ namespace Odin.Data.Persistence
         public ITransportationTypesRepository TransportationTypes { get; private set; }
         public IDepositTypesRepository DepositTypes { get; private set; }
         public IBrokerFeeTypesRepository BrokerFeeTypes { get; private set; }
-
+        public IPhotosRepository Photos { get; private set; }
 
         public UnitOfWork(ApplicationDbContext context)
         {
@@ -41,6 +41,7 @@ namespace Odin.Data.Persistence
             TransportationTypes = new TransportationTypesRepository(context);
             DepositTypes = new DepositTypesRepository(context);
             BrokerFeeTypes = new BrokerFeeTypesRepository(context);
+            Photos = new PhotosRepository(context);
         }
         
         public void Complete()

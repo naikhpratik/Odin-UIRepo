@@ -3,16 +3,14 @@
 <div id="propertiesBlock">
     <ul class="row" id="propertiesList">
         <li class="row" id="propertiesHeader">
-            <!--
             <div class="col-md-1">
                 <p>Location Photos:</p>
             </div>
-            -->
             @* Switch next 3 columns to col-md-2 when adding remaining columns *@
             <div class="col-md-4">
                 <p>Address:</p>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <p>Availability Date:</p>
             </div>
             <div class="col-md-4">
@@ -34,18 +32,16 @@
         @foreach (var propertyVM in Model)
             {
             <li class="row propertyItem">
-                <!--
                 <div class="col-md-1">
-                    <img class="location" src="~/Content/Images/popout_sml_img.png" />
+                    <img class="location" src="@propertyVM.ThumbnailPhotoUrl" />
                 </div>
-                -->
                 @* Switch next 3 columns to col-md-2 when adding remaining columns *@
                 <div class="col-md-4">
                     <p>
                         @Html.DisplayFor(m => propertyVM.PropertyAddress)
                     </p>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <p>
                         @Html.DisplayFor(m => propertyVM.PropertyAvailabilityDate)
                     </p>
