@@ -45,16 +45,18 @@ namespace Odin.Controllers
 
             foreach (var postedFile in propertyVM.UploadedPhotos)
             {
-                try
-                {
-                    var storageId = _imageStore.SaveImage(postedFile.InputStream);
-                    var urlStr = _imageStore.UriFor(storageId).AbsoluteUri;
-                    var photo = new Photo(storageId, urlStr);
-                    homeFindingProperty.Property.Photos.Add(photo);
-                }
-                catch (Exception e)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.ServiceUnavailable);
+                if (postedFile != null) {
+                    try
+                    {
+                        var storageId = _imageStore.SaveImage(postedFile.InputStream);
+                        var urlStr = _imageStore.UriFor(storageId).AbsoluteUri;
+                        var photo = new Photo(storageId, urlStr);
+                        homeFindingProperty.Property.Photos.Add(photo);
+                    }
+                    catch (Exception e)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.ServiceUnavailable);
+                    }
                 }
             }
 

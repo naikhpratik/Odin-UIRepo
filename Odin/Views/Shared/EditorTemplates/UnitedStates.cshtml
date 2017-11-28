@@ -59,4 +59,5 @@
 }
 
 @Html.DropDownListFor(x => x,
-    new SelectList(items, "Value", "Text"))
+    new SelectList(items, "Value", "Text"),
+    new { @class = "form-control"})
