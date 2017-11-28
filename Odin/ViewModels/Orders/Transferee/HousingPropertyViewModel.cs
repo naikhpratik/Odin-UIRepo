@@ -85,7 +85,7 @@ namespace Odin.ViewModels.Orders.Transferee
         [DisplayFormat(ConvertEmptyStringToNull = true)]
         public String PropertyDescription { get; set; }
 
-        [Display(Name = "Photos:")]
+        [Display(Name = "Photos")]
         public IEnumerable<HttpPostedFileBase> UploadedPhotos { get; set; }
 
         public IEnumerable<PhotoViewModel> PropertyPhotos { get; set; }
