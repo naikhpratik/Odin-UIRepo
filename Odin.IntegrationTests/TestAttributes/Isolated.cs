@@ -19,8 +19,6 @@ namespace Odin.IntegrationTests.TestAttributes
         public void AfterTest(ITest test)
         {
             _transactionScope.Dispose();
-            CloudBlobContainer imageContainer = new ImageStore().GetImageContainer();
-            Parallel.ForEach(imageContainer.ListBlobs(useFlatBlobListing: true), x => ((CloudBlob)x).Delete());
         }
 
         public ActionTargets Targets => ActionTargets.Test;

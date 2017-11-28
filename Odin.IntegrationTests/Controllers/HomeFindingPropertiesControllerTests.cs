@@ -105,6 +105,13 @@ namespace Odin.IntegrationTests.Controllers
             ICloudBlob imageReference = imageStore.ImageBlobFor(propertyPhoto.StorageId);
 
             imageReference.Should().NotBeNull();
+
+            // Cleanup so we don't flood the azure container
+            foreach(Photo p in property.Photos)
+            {
+                ICloudBlob imageBlob = imageStore.ImageBlobFor(p.StorageId);
+                imageBlob.Delete();
+            }
         }
 
         private Order BuildOrder()

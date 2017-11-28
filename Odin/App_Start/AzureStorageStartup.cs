@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Web;
+﻿using System.Configuration;
 using Odin.Helpers;
-using Odin.Domain;
+
 
 namespace Odin.App_Start
 {
@@ -19,7 +15,7 @@ namespace Odin.App_Start
                     AzureStorageEmulatorManager.StartStorageEmulator();
                 }
 
-                new ImageStore().GetImageContainer().CreateIfNotExists();
+                AzureStorageEmulatorManager.SetupImageContainer();
             }
         }
     }
