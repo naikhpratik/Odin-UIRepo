@@ -19,6 +19,7 @@ namespace Odin.ViewModels.Orders.Transferee
         }
 
         public String OrderId { get; set; }
+        public String Id { get; set; }
 
         [DisplayFormat(ConvertEmptyStringToNull = true, NullDisplayText ="", HtmlEncode = false)]
         public string PropertyAddress { get
@@ -88,6 +89,7 @@ namespace Odin.ViewModels.Orders.Transferee
         [Display(Name = "Photos")]
         public IEnumerable<HttpPostedFileBase> UploadedPhotos { get; set; }
 
+        [DataType("Photos")]
         public IEnumerable<PhotoViewModel> PropertyPhotos { get; set; }
 
         public String ThumbnailPhotoUrl {  get

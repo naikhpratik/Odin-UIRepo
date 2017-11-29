@@ -99,6 +99,11 @@
     margin: 0 0 0 0;
     padding: 0 0 0 0;
 
+    &:hover {
+        background-color: $DW_Hover;
+        cursor: pointer;
+    }
+
     > div {
 
         p {
