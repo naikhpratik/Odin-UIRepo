@@ -298,6 +298,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\AccountController.cs" />
     <Compile Include="Controllers\Api\ConsultantsController.cs" />
+    <Compile Include="Controllers\HomeFindingPropertiesController.cs" />
     <Compile Include="Controllers\Api\ManagersController.cs" />
     <Compile Include="Controllers\Api\OrdersController.cs" />
     <Compile Include="Controllers\BookMarkletController.cs" />
@@ -367,6 +368,7 @@
     <Compile Include="ViewModels\Shared\ManagerViewModel.cs" />
     <Compile Include="ViewModels\Shared\PetViewModel.cs" />
     <Compile Include="ViewModels\Shared\HomeFindingViewModel.cs" />
+    <Compile Include="ViewModels\Shared\PhotoViewModel.cs" />
     <Compile Include="ViewModels\Shared\ServiceTypeViewModel.cs" />
     <Compile Include="ViewModels\Shared\ServiceViewModel.cs" />
     <Compile Include="ViewModels\Shared\TransfereeViewModel.cs" />
@@ -897,6 +899,9 @@
     <Content Include="Views\BookMarklet\Index.cshtml" />
     <Content Include="Views\BookMarklet\Shared\_BookMarklet.cshtml" />
     <Content Include="Views\BookMarklet\Add.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\CreateHousingProperty.cshtml" />
+    <Content Include="Views\Orders\Partials\_HousingProperties.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\UnitedStates.cshtml" />
     <None Include="Web.Azure.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

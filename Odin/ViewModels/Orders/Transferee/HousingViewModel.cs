@@ -18,7 +18,7 @@ namespace Odin.ViewModels.Orders.Transferee
             mapper.Map<HomeFinding, HousingViewModel>(order.HomeFinding, this);
             mapper.Map<Order, HousingViewModel>(order, this);
 
-            IEnumerable<HomeFindingProperty> homeFindingProperties = order.HomeFinding.HomeFindingProperties.OrderBy(hfp => hfp.CreatedAt);
+            IEnumerable<HomeFindingProperty> homeFindingProperties = order.HomeFinding.HomeFindingProperties.OrderByDescending(hfp => hfp.CreatedAt);
             IEnumerable<HousingPropertyViewModel> propertyViewModels;
             propertyViewModels = mapper.Map<IEnumerable<HomeFindingProperty>, IEnumerable<HousingPropertyViewModel>>(homeFindingProperties);
 

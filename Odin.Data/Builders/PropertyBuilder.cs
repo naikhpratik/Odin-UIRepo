@@ -15,8 +15,7 @@ namespace Odin.Data.Builders
                 .RuleFor(p => p.State, f => f.Address.StateAbbr())
                 .RuleFor(p => p.CountryCode, "USA")
 
-                // !!!: Can't figure out this one just yet
-                //.RuleFor(r => r.NumberOfBathrooms, f => f.PickRandom<NumberOfBathroomsType>())
+                .RuleFor(p => p.NumberOfBathrooms, f => f.Random.Int(1, 5))
                 .RuleFor(p => p.NumberOfBedrooms, f => f.Random.Int(1, 10))
                 .RuleFor(p => p.SquareFootage, f => f.Random.Int(500, 4000))
                 .RuleFor(p => p.Amount, f => f.Random.Decimal(500, 12000))
