@@ -42,5 +42,9 @@
   {
     "inputFile": "Content/css/transferee/housing.scss",
     "outputFile": "Content/css/transferee/housing.css"
+  },
+  {
+    "inputFile": "Content/css/bookmarklet.scss",
+    "outputFile": "Content/css/bookmarklet.css"
   }
 ]

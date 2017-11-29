@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Odin.Data.Core.Dtos;
 using Odin.Data.Core.Models;
-
+using Odin.ViewModels.BookMarklet;
 using Odin.ViewModels.Orders.Index;
 using Odin.ViewModels.Orders.Transferee;
 using Odin.ViewModels.Shared;
@@ -35,6 +35,9 @@ namespace Odin
             CreateMap<Order, HousingViewModel>();
             CreateMap<HomeFinding, HousingViewModel>();
             CreateMap<HomeFindingProperty, HousingPropertyViewModel>();
+
+            /*BookMarklet*/
+            CreateMap<Order, BookMarkletViewModel>();
 
             /*DTO Mappings*/
 
