@@ -120,6 +120,7 @@
     <Compile Include="Builders\OrderBuilder.cs" />
     <Compile Include="Builders\OrderDtoBuilder.cs" />
     <Compile Include="Builders\TransfereeDtoBuilder.cs" />
+    <Compile Include="Core\Dtos\BookMarkletDto.cs" />
     <Compile Include="Core\Dtos\ChildDto.cs" />
     <Compile Include="Core\Dtos\ConsultantDto.cs" />
     <Compile Include="Core\Dtos\ConsultantImportDto.cs" />

@@ -1,16 +1,15 @@
-﻿namespace Odin.ViewModels.BookMarklet
+﻿using System.Collections.Generic;
+
+namespace Odin.ViewModels.BookMarklet
 {
     public class BookMarkletViewModel
     {
-        public string Id { get; set; }
-        public string TransfereeFirstName { get; set; }
-        public string TransfereeLastName { get; set; }
-        public string TransfereeFullName
+        public BookMarkletViewModel()
         {
-            get
-            {
-                return $"{TransfereeFirstName} {TransfereeLastName}";
-            }
+            Orders = new List<BookMarkletOrderViewModel>();
         }
+
+        public IEnumerable<BookMarkletOrderViewModel> Orders { get; set;  }
+        public string PropertyUrl { get; set; }
     }
 }

@@ -38,7 +38,7 @@ namespace Odin
             CreateMap<Photo, PhotoViewModel>();
 
             /*BookMarklet*/
-            CreateMap<Order, BookMarkletViewModel>();
+            CreateMap<Order, BookMarkletOrderViewModel>();
 
             /*DTO Mappings*/
 
@@ -85,6 +85,10 @@ namespace Odin
             CreateMap<OrdersTransfereeIntakeLeaseDto, Order>();
             CreateMap<OrdersTransfereeDetailsServiceDto, Service>();
             CreateMap<OrdersTransfereeIntakeRelocationDto, Order>();
+            CreateMap<BookMarkletDto, BookMarkletAddViewModel>();
+
+            /*Web Jobs*/
+            CreateMap<BookMarkletDto, PropBotJobQueueEntry>();
         }
     }
 }

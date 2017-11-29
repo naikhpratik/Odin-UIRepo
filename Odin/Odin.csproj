@@ -355,6 +355,9 @@
     <Compile Include="ViewModels\Authentication\SetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Authentication\VerifyCodeViewModel.cs" />
     <Compile Include="ViewModels\Authentication\VerifyPhoneNumberViewModel.cs" />
+    <Compile Include="ViewModels\BookMarklet\BookMarkletAddViewModel.cs" />
+    <Compile Include="ViewModels\BookMarklet\BookMarkletErrorViewModel.cs" />
+    <Compile Include="ViewModels\BookMarklet\BookMarkletOrderViewModel.cs" />
     <Compile Include="ViewModels\BookMarklet\BookMarkletViewModel.cs" />
     <Compile Include="ViewModels\Mailers\CreatePasswordViewModel.cs" />
     <Compile Include="ViewModels\Mailers\ResetPasswordViewModel.cs" />
@@ -895,13 +898,14 @@
     <Content Include="Views\Orders\Partials\_Itinerary.cshtml" />
     <Content Include="Views\Orders\Partials\_Messages.cshtml" />
     <Content Include="Views\Orders\Partials\_History.cshtml" />
-    <Content Include="Views\BookMarklet\Error.cshtml" />
+    <Content Include="Views\BookMarklet\AuthorizationError.cshtml" />
     <Content Include="Views\BookMarklet\Index.cshtml" />
     <Content Include="Views\BookMarklet\Shared\_BookMarklet.cshtml" />
     <Content Include="Views\BookMarklet\Add.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\CreateHousingProperty.cshtml" />
     <Content Include="Views\Orders\Partials\_HousingProperties.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\UnitedStates.cshtml" />
+    <Content Include="Views\BookMarklet\Error.cshtml" />
     <None Include="Web.Azure.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

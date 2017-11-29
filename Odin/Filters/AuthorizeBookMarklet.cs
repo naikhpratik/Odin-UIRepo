@@ -13,7 +13,7 @@ namespace Odin.Filters
 
             filterContext.Result = new ViewResult()
             {
-                ViewName = "~/views/bookmarklet/Error.cshtml"
+                ViewName = "~/views/bookmarklet/AuthorizationError.cshtml"
             };
 
         }
