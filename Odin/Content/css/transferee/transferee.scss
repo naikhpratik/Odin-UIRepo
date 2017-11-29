@@ -2,9 +2,9 @@
 
 #orderContainer {
     margin-left: 0 !important;
-    margin-top: $primaryNavHeightSm;
+    margin-top: calc(#{$primaryNavHeightSm} + 6rem);
     width: 100%;
-
+    
     @media screen and (min-width: 48rem) {
         margin-left: $sideNavWidth !important;
         margin-top: $primaryNavHeightLg;
@@ -20,31 +20,35 @@
     }*/
 }
 
+.titleGroup {
+    margin-bottom:5rem;
+}
+
 .sectionTitle {
     padding-bottom: 0px;
-    margin: 2rem 0 2.5rem 0;
+    margin: 2rem 0 1rem 0;
     font-size: 2.5rem;
     color: #231F20;
 }
 
-.sectionSubHead {
-    margin: 1rem 0 0.5rem 0;
-    font-size: 1.725rem;
-    font-weight: 400;
-    color: #8e1a55;
-    display:inline-block;
-}
+    .sectionSubHead {
+        margin: 1rem 0 0.5rem 0;
+        font-size: 1.725rem;
+        font-weight: 400;
+        color: #8e1a55;
+        display: inline-block;
+    }
+   
+    .sectionSave {
+        font-size: small;
+        color: $DW_Lime;
+        cursor: pointer;
+    }
 
-.sectionSave {
-    font-size: small;
-    color: $DW_Lime;
-    cursor: pointer;
-}
-
-.sectionInstruction {
-    color: #35A2DB;
-    font-size: 16px;
-}
+    .sectionInstruction {
+        color: #35A2DB;
+        font-size: 16px;
+    }
 
 .sectionList {
     list-style: none;
@@ -85,5 +89,19 @@
             font-weight: 400;
             margin: 0;
         }
+    }
+
+    @media screen and (min-width: 62rem) {
+        label.mobileLabel {
+            display: none;
+        }
+    }
+}
+
+#scheduledServices{
+    display: none;
+
+    @media screen and (min-width: 62rem){
+        display: block;
     }
 }

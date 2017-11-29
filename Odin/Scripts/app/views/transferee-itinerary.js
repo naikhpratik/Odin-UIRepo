@@ -33,6 +33,40 @@ var TransfereeItineraryController = function (transfereeItineraryService) {
         });
         //Bind Events        
         itineraryBlocks.on("click", clickable, toggleCollapse);        
+
+        $('#cmdPDF').click(function () {
+
+            window.location.href = "/Orders/GeneratePDF/" + $('#itinerary').attr("data-order-id");
+
+        });
+        $('#cmdEmail').click(function () {
+
+            var url = "/Orders/EmailGeneratedPDF/" + $('#itinerary').attr("data-order-id") + "?email=" + $("#TransfereeEmail").val();
+            $.ajax({
+                url: url,
+                type: 'POST'
+            }).done(function () { toast("Email sent successfully", "success") }).fail(function () { toast("Email not sent!", "danger") });
+
+        });        
+
+        $('.showAppointment').click(function () {
+            var app = $(this).parent().parent().find('#appointment');
+            var url = app.data('url');
+            $.get(url, function (data) {
+                app.find('.modal-body').html(data);
+            });
+        });
+        $('.showNewAppointment').click(function () {
+            var app = $("#appointmentModalNew");
+            var url = '/orders/appointmentPartial/';
+            $.get(url, function (data) {
+                app.find('.modal-body.new').html(data);
+            });
+        });
+        $(".new").click(function (e) {
+            e.stopPropagation();
+            return false;
+        })        
     };
        
 
@@ -56,6 +90,7 @@ var TransfereeItineraryController = function (transfereeItineraryService) {
         
     }
 
+    
 
     //Utilities
 

@@ -19,6 +19,7 @@ namespace Odin.ViewModels.Orders.Transferee
         }
 
         public string Id { get; set; }
+        public bool mustPrint { get; set; }
         public IEnumerable<ItineraryEntryViewModel> Itinerary { get; set; }
     }
 }

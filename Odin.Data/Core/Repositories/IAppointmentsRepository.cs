@@ -6,6 +6,7 @@ namespace Odin.Data.Core.Repositories
     public interface IAppointmentsRepository
     {
         void Add(Appointment appointment);
+        void Remove(Appointment appointment);
         IEnumerable<Appointment> GetAppointmentsByOrderId(string id);
         Appointment GetAppointmentById(string id);
     }

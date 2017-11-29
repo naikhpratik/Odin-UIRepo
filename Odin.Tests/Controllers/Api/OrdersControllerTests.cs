@@ -542,7 +542,6 @@ namespace Odin.Tests.Controllers.Api
             _mockAppointmentsRepository.Setup(r => r.GetAppointmentById(appointmentId)).Returns(appointment);
             var result = _controller.DeleteAppointment(appointment.Id) as IHttpActionResult;
             result.Should().BeOfType<System.Web.Http.Results.OkResult>();
-            appointment.Deleted.Should().BeTrue();
         }
 
         [TestMethod]

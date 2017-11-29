@@ -13,7 +13,12 @@ namespace Odin
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Orders", action = "Index", id = UrlParameter.Optional }
-            );           
+            );
+            routes.MapRoute(
+               name: "Email",
+               url: "{controller}/{action}/{id}/{email}",
+               defaults: new { controller = "Orders", action = "EmailGeneratedPDF", id = UrlParameter.Optional, email = UrlParameter.Optional}
+           );
         }
     }
 }

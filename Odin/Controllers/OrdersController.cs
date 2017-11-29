@@ -10,6 +10,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using Odin.Helpers;
+using System.IO;
 
 namespace Odin.Controllers
 {
@@ -79,6 +81,7 @@ namespace Odin.Controllers
         {            
             OrdersTransfereeItineraryViewModel viewModel = GetItineraryByOrderId(id);
             viewModel.Id = id;
+            viewModel.mustPrint = false;
             return PartialView("~/views/orders/partials/_Itinerary.cshtml", viewModel);
         }
         public ActionResult AppointmentPartial(string id)
@@ -181,7 +184,27 @@ namespace Odin.Controllers
             var itinAppointment = _unitOfWork.Appointments.GetAppointmentById(Id);
             return itinAppointment;
         }
-
+        
+        public ActionResult GeneratePDF(string id)
+        {
+            OrdersTransfereeItineraryViewModel viewModel = GetItineraryByOrderId(id);
+            viewModel.Id = id;
+            viewModel.mustPrint = true;
+            return new Rotativa.ViewAsPdf("Partials/_Itinerary", viewModel) { FileName = "Itinerary.pdf", PageMargins = new Rotativa.Options.Margins(0, 0, 0, 0) }; 
+        }
+        public ActionResult EmailGeneratedPDF(string id, string email)
+        {
+            OrdersTransfereeItineraryViewModel viewModel = GetItineraryByOrderId(id);
+            viewModel.Id = id;
+            viewModel.mustPrint = true;
+            string filename = "Itinerary" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".pdf";
+            var pdf = new Rotativa.ViewAsPdf("Partials/_Itinerary", viewModel) {FileName = filename, PageMargins = new Rotativa.Options.Margins(0, 0, 0, 0) };
+            byte[] pdfBytes = pdf.BuildFile(ControllerContext);
+            MemoryStream stream = new MemoryStream(pdfBytes);
+            EmailHelper EH = new EmailHelper();
+            EH.SendEmail_FS(email, "Your DwellWorks Itinerary", "Please find attached your itinerary for the upcoming move", SendGrid.MimeType.Html, filename, pdfBytes);
+            return PartialView("~/views/orders/partials/_Itinerary.cshtml", viewModel);
+        }
     }
     
 }

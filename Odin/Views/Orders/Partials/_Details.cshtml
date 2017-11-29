@@ -1,8 +1,9 @@
 ﻿@model Odin.ViewModels.Orders.Transferee.OrdersTransfereeViewModel
 
 <div class="container-fluid" id="details" data-order-id="@Model.Id">
-    <h1 class="sectionTitle">Profile Summary</h1>
-
+    <div class="titleGroup">
+        <h1 class="sectionTitle">Profile Summary</h1>
+    </div>
     <h2 class="sectionSubHead">File Details</h2>
     <ul class="row sectionList">
         <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
@@ -105,19 +106,19 @@
         <p class="sectionInstruction">Please fill out any items that are not already auto-generated that could aid in the help of your clients placement.</p>
 
         <ul class="row sectionList" id="scheduledServices">
-            <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+            <li class="col-md-2">
                 <h2 class="sectionSubHead">Service:</h2>
             </li>
-            <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+            <li class="col-md-2">
                 <h2 class="sectionSubHead">Scheduled Date:</h2>
             </li>
-            <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+            <li class="col-md-2">
                 <h2 class="sectionSubHead">Time:</h2>
             </li>
-            <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+            <li class="col-md-2">
                 <h2 class="sectionSubHead">Completed Date:</h2>
             </li>
-            <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+            <li class="col-md-4">
                 <h2 class="sectionSubHead">Notes:</h2>
             </li>
         </ul>
@@ -127,20 +128,25 @@
                 if (Model.Services.ElementAt(i).Selected)
                 {
                     <ul class="row sectionList details-row" data-entity-id="@Model.Services.ElementAt(i).Id" data-entity-collection="services">
-                        <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 scheduledServiceTitle">
+                        <li class="col-md-2 scheduledServiceTitle">
+                            <label class="mobileLabel">Service</label>
                             @Model.Services.ElementAt(i).Name
                         </li>
-                        <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                        <li class="col-md-2">
+                            <label class="mobileLabel">Scheduled Date</label>
                             @Html.DatePicker("date", "ScheduledDate", Model.Services.ElementAt(i).ScheduledDateDisplay)
                         </li>
-                        <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                        <li class="col-md-2">
+                            <label class="mobileLabel">Time</label>
                             @Html.DatePicker("time", "ScheduledTime", Model.Services.ElementAt(i).ScheduledTimeDisplay)
                             <div class="text-danger" style="display:none;" data-entity-id="@Model.Services.ElementAt(i).Id" data-valmsg-replace="true" />
                         </li>
-                        <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                        <li class="col-md-2">
+                            <label class="mobileLabel">Completed Date</label>
                             @Html.DatePicker("date", "CompletedDate", Model.Services.ElementAt(i).CompletedDateDisplay)
                         </li>
-                        <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                        <li class="col-md-4">
+                            <label class="mobileLabel">Notes</label>
                             <p>@Model.Services.ElementAt(i).Notes</p>
                         </li>
                     </ul>

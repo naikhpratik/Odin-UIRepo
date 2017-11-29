@@ -1,75 +1,178 @@
 ﻿@import "../shared/_definitions.scss";
 
-nav#transfereeSideNav {
-    background-color: $DW_Lime;
+#transfereeSideNav {
     position: fixed;
     top: $primaryNavHeightSm;
-    left: 0;
-    width: $sideNavWidth;
-    height: calc(100vh - #{$primaryNavHeightSm});
+    background-color: $DW_Lime;
+    width: 100%;
+    border-radius: 0;
     color: white;
-    display: none;
+    z-index: 1;
+
+    .navWrapper {
+        padding: 0 0 0 0;
+        margin: 0 0 0 0;
+        height: 100%;
+    }
+
+
+
+    p.eeDetails {
+        margin: 0 1.6rem;
+        padding: 0 0 0 0;
+        line-height: 1.2rem;
+        text-align: left;
+    }
+
+    .eeOriginVipWrap {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        margin-left: 1.6rem;
+
+        p.eeDetails {
+            margin: 0 0;
+        }
+
+        p.eeBar {
+            margin: 0 0.5rem;
+        }
+    }
 
     .transfereeSideNav__person {
-        text-align: center;
-        margin-bottom: 2rem;
+        margin: 0 0 0 0;
+        padding: 0 0 0 0;
+        position: relative;
+        border-bottom: 1px solid $DW_Lime;
 
-        img.person {
-            width: 6rem;
-            margin: 2rem auto 1.25rem auto;
+        .navbar-toggle {
+            margin-right: 0;
         }
 
-        p {
-            margin-bottom: 0;
-            line-height: 1.75rem;
-        }
+        .navbar-brand {
+            margin: 0 0 0 0;
+            padding: 0 0 0 0;
+            display: flex;
+            align-items: center;
 
-        .eeName {
-            font-weight: bold;
+            img.person {
+                width: 3rem;
+                margin-left: 1.6rem;
+            }
+
+            p.eeName {
+                color: white;
+                margin: 0 0 0 1rem;
+                font-size: 1.5rem;
+                font-weight: bold;
+            }
         }
     }
 
-    hr.transfereeSideNav__rule {
-        border: 0px;
-        border-top: 1px solid white;
-        width: 85%;
-        margin: 1rem 7.5%;
-    }
-
-    ul.transfereeSideNav__items {
-        color: white;
-        list-style: none;
+    ul.navbar-nav {
         margin: 0 0;
-        padding: 0;
+        padding: 1vh 0;
+        width: 100%;
+
+        hr.transfereeSideNav__rule {
+            display: block;
+            width: 90%;
+            margin: 2vh auto;
+        }
 
         li {
-            padding: 2vh 10%;
+            float: none;
+            width: 100%;
+            padding: 2vh 1.6rem;
 
-            img {
-                width: 1.5rem;
-            }
+            a {
+                color: white;
 
-            label {
-                font-size: 1.5rem;
-                margin-left: 0.75rem;
+                img {
+                    margin-right: 2rem;
+                }
             }
+        }
+
+        li.item {
 
             &:hover {
-                background-color: rgba(0,0,0,0.2);
+                background-color: rgba(255,255,255,0.2);
             }
         }
 
         li.selected {
-            background-color: #8E1A55; //purple-ish from mockups
+            background-color: #8e1a55;
         }
     }
 
-    .transfereeSideNav__sub-items {
-    }
 
     @media screen and (min-width: 48rem) {
-        height: calc(100vh - #{$primaryNavHeightLg});
         top: $primaryNavHeightLg;
-        display: block;
+        left: 0;
+        width: $sideNavWidth;
+        height: calc(100vh - #{$primaryNavHeightLg});
+
+
+        .eeDetails {
+            text-align: center;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+
+            .eeOriginVipWrap {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-left: 0;
+            }
+
+            p {
+                padding: 0 0;
+                margin: 0 0;
+            }
+
+            p.eeDetails{
+                text-align: center;
+            }
+
+            p.eeOrigin {
+            }
+
+            p.eeBar {
+                margin: 0 0.5rem;
+            }
+
+            p.eeVip {
+            }
+        }
+
+        .transfereeSideNav__person {
+            text-align: center;
+            width: 100%;
+            border-bottom: none;
+
+            .navbar-brand {
+                flex-direction: column;
+                justify-content: center;
+                width: 100%;
+                height: 100%;
+
+                img.person {
+                    width: 8vh;
+                    margin: 2vh auto 1vh auto;
+                }
+
+                p.eeName {
+                    margin-left: 0;
+                }
+            }
+        }
+
+        .navbar-collapse.collapse {
+            padding: 0 0;
+        }
     }
 }

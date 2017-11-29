@@ -11,24 +11,12 @@
             $(this).addClass('selected');
             var actionName = $(this).attr('data-panel');
             $('#orderContainer').load('/orders/' + actionName + 'Partial/' + currentOrderId);
+
+            if ($('.navbar-toggle').css('display') != 'none')
+            {
+                $('.navbar-toggle').click();
+            }
         });
-
-        // ensure icon spacing is adequate on mobile
-        window.addEventListener("resize", resizeFn);
-        resizeFn();
-    };
-
-    var resizeFn = function () {
-        if (window.innerWidth <= 991) {
-            $('li.item').each(function () {
-                $(this).css("padding-right", (window.innerWidth / 6 - 52).toString() + "px");
-            });
-        }
-        else {
-            $('li.item').each(function () {
-                $(this).css("padding-right", "0px");
-            });
-        }
     };
 
     return {

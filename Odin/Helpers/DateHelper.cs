@@ -7,7 +7,7 @@ namespace Odin.Helpers
     {
         public static string GetViewFormat(string phone)
         {
-            return phone ?? @String.Format("{0:###'.'###'.'####}", double.Parse(phone));
+            return string.Format("{0:###'.'###'.'####}", double.Parse(phone));
         }
         public static string GetViewFormat(DateTime? date)
         {

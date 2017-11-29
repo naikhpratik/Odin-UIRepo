@@ -427,7 +427,6 @@ namespace Odin.Controllers.Api
         [Route("api/orders/transferee/itinerary/appointment/{id}")]
         public IHttpActionResult DeleteAppointment(string Id)
         {
-
             var userId = User.Identity.GetUserId();
             var appt = _unitOfWork.Appointments.GetAppointmentById(Id);
 
@@ -435,7 +434,7 @@ namespace Odin.Controllers.Api
             {
                 return NotFound();
             }
-            appt.Delete();
+            _unitOfWork.Appointments.Remove(appt);
             _unitOfWork.Complete();
             return Ok();
         }

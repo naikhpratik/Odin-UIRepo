@@ -1,15 +1,17 @@
 ﻿@model Odin.ViewModels.Orders.Transferee.OrdersTransfereeViewModel
 
 <div class="container-fluid" id="intake" data-order-id="@Model.Id">
-    <h1 class="sectionTitle">Intake</h1>
-    <p class="sectionInstruction">Please fill out any items that are not already auto-generated that could aid in the help of your clients placement.</p>
+    <div class="titleGroup">
+        <h1 class="sectionTitle">Intake</h1>
+        <p class="sectionInstruction">Please fill out any items that are not already auto-generated that could aid in the help of your clients placement.</p>
+    </div>
     <div class="intake-block expanded">
         <div class="intake-header">
             <div class="intake-collapse">
                 <img class="intake-collapse-img" src="/Content/Images/collapse.png" />
                 <img class="intake-expand-img" src="/Content/Images/expand.png" />
                 <h2 class="sectionSubHead">Contact Information</h2>
-            </div>           
+            </div>
         </div>
         <ul class="row sectionList intake-row collapse in">
             <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
@@ -26,16 +28,16 @@
             </li>
         </ul>
     </div>
-    <hr/>
+    <hr />
     <div class="intake-block expanded" data-block="rmc">
-        <div class="intake-header"> 
-            <div  class="intake-collapse">
+        <div class="intake-header">
+            <div class="intake-collapse">
                 <img class="intake-collapse-img" src="/Content/Images/collapse.png" />
                 <img class="intake-expand-img" src="/Content/Images/expand.png" />
                 <h2 class="sectionSubHead">RMC Information</h2>
             </div>
         </div>
-        <ul  class="row sectionList intake-row collapse in">
+        <ul class="row sectionList intake-row collapse in">
             <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
                 @Html.LabelFor(model => @Model.Rmc)
                 <p class="intake-span">@Model.Rmc</p>
@@ -63,7 +65,7 @@
             </span>
             <span class="sectionSave intake-cancel">
                 x Cancel
-            </span>            
+            </span>
         </div>
         <ul class="row sectionList intake-row collapse in">
             <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
@@ -86,7 +88,7 @@
             </li>
         </ul>
     </div>
-    <hr/>
+    <hr />
     <div class="intake-block expanded" data-block="origin">
         <div class="intake-header">
             <div class="intake-collapse">
@@ -100,7 +102,7 @@
             <span class="sectionSave intake-cancel">
                 x Cancel
             </span>
-        </div>            
+        </div>
         <ul class="row sectionList intake-row collapse in">
             <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.OriginCity)
@@ -122,7 +124,7 @@
             </li>
         </ul>
     </div>
-    <hr/>
+    <hr />
     <div class="intake-block" data-block="relocation">
         <div class="intake-header">
             <div class="intake-collapse">
@@ -142,12 +144,12 @@
                 @Html.LabelFor(model => @Model.PreTripDateDisplay)
                 <span class="intake-span">@Model.PreTripDateDisplay</span>
                 @Html.DatePicker("intake-date date", "PreTripDate", Model.PreTripDate)
-                @Html.HiddenFor(model => @Model.PreTripDateDisplay, new {@class="intake-hidden"})
+                @Html.HiddenFor(model => @Model.PreTripDateDisplay, new { @class = "intake-hidden" })
             </div>
             <div class="col-xs-6 col-sm-6 col-md-7 col-lg-7 intake-col">
                 @Html.LabelFor(model => @Model.PreTripNotes)
                 <span class="intake-span">@Model.PreTripNotes</span>
-                @Html.TextBoxFor(model => @Model.PreTripNotes, new {@class="form-control intake-input"})
+                @Html.TextBoxFor(model => @Model.PreTripNotes, new { @class = "form-control intake-input" })
                 @Html.HiddenFor(model => @Model.PreTripNotes, new { @class = "intake-hidden" })
             </div>
         </div>
@@ -156,28 +158,28 @@
                 @Html.LabelFor(model => @Model.EstimatedArrivalDateDisplay)
                 <span class="intake-span">@Model.EstimatedArrivalDateDisplay</span>
                 @Html.DatePicker("intake-date date", "EstimatedArrivalDate", Model.EstimatedArrivalDate)
-                @Html.HiddenFor(model => @Model.EstimatedArrivalDateDisplay, new { @class = "intake-hidden"})
+                @Html.HiddenFor(model => @Model.EstimatedArrivalDateDisplay, new { @class = "intake-hidden" })
             </div>
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.WorkStartDateDisplay)
                 <span class="intake-span">@Model.WorkStartDateDisplay</span>
                 @Html.DatePicker("intake-date date", "WorkStartDate", Model.WorkStartDate)
-                @Html.HiddenFor(model => @Model.WorkStartDateDisplay, new { @class = "intake-hidden"})
+                @Html.HiddenFor(model => @Model.WorkStartDateDisplay, new { @class = "intake-hidden" })
             </div>
         </div>
         @if (@Model.IsAssignment)
-        {
+            {
             <div class="row intake-row collapse in">
                 <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                     @Html.LabelFor(model => @Model.EstimatedDepartureDateDisplay)
                     <span class="intake-span">@Model.EstimatedDepartureDateDisplay</span>
                     @Html.DatePicker("intake-date date", "EstimatedDepartureDate", Model.EstimatedDepartureDate)
-                    @Html.HiddenFor(model => @Model.EstimatedDepartureDateDisplay, new { @class = "intake-hidden"})
+                    @Html.HiddenFor(model => @Model.EstimatedDepartureDateDisplay, new { @class = "intake-hidden" })
                 </div>
             </div>
         }
     </div>
-    <hr/>
+    <hr />
     <div class="intake-block">
         <div class="intake-header">
             <div class="intake-collapse">
@@ -205,9 +207,9 @@
             </div>
         </div>
     </div>
-    <hr/>
+    <hr />
     <div class="intake-block" data-block="family">
-        <div class="intake-header">            
+        <div class="intake-header">
             <div class="intake-collapse">
                 <img class="intake-collapse-img" src="/Content/Images/collapse.png" />
                 <img class="intake-expand-img" src="/Content/Images/expand.png" />
@@ -219,7 +221,7 @@
                     x Cancel
                 </span>
             </div>
-            </div>
+        </div>
         <div class="row intake-row collapse in">
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.SpouseName)
@@ -240,26 +242,26 @@
             </div>
         </div>
         @if (@Model.Children.Count() > 0)
-        {
-            for (int i = 0; i < @Model.Children.Count(); i++)
             {
+                for (int i = 0; i < @Model.Children.Count(); i++)
+                {
                 <div class="row intake-row collapse in" data-entity-id="@Model.Children.ElementAt(i).Id" data-entity-collection="children">
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                         @Html.LabelFor(model => @Model.Children.ElementAt(i).Name)
                         <span class="intake-span">@Model.Children.ElementAt(i).Name</span>
-                        @Html.TextBoxFor(m => @Model.Children.ElementAt(i).Name, new {@class = "form-control intake-input" })
+                        @Html.TextBoxFor(m => @Model.Children.ElementAt(i).Name, new { @class = "form-control intake-input" })
                         @Html.HiddenFor(m => @Model.Children.ElementAt(i).Name, new { @class = "intake-hidden" })
                     </div>
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                         @Html.LabelFor(model => @Model.Children.ElementAt(i).Age)
                         <span class="intake-span">@Model.Children.ElementAt(i).Age</span>
-                        @Html.TextBoxFor(m => @Model.Children.ElementAt(i).Age, new {@class = "form-control intake-input", @type = "number", step = "1", min = "0" })
+                        @Html.TextBoxFor(m => @Model.Children.ElementAt(i).Age, new { @class = "form-control intake-input", @type = "number", step = "1", min = "0" })
                         @Html.HiddenFor(m => @Model.Children.ElementAt(i).Age, new { @class = "intake-hidden" })
                     </div>
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                         @Html.LabelFor(model => @Model.Children.ElementAt(i).Grade)
                         <span class="intake-span">@Model.Children.ElementAt(i).Grade</span>
-                        @Html.TextBoxFor(m => @Model.Children.ElementAt(i).Grade, new {@class = "form-control intake-input", @type = "number", step = "1", min = "0" })
+                        @Html.TextBoxFor(m => @Model.Children.ElementAt(i).Grade, new { @class = "form-control intake-input", @type = "number", step = "1", min = "0" })
                         @Html.HiddenFor(m => @Model.Children.ElementAt(i).Grade, new { @class = "intake-hidden" })
                     </div>
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
@@ -284,26 +286,26 @@
             </div>
         </div>
         @if (@Model.Pets.Count() > 0)
-        {
-            for (int i = 0; i < @Model.Pets.Count(); i++)
             {
+                for (int i = 0; i < @Model.Pets.Count(); i++)
+                {
                 <div class="row intake-row collapse in" data-entity-id="@Model.Pets.ElementAt(i).Id" data-entity-collection="pets">
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                         @Html.LabelFor(model => @Model.Pets.ElementAt(i).Type)
                         <span class="intake-span">@Model.Pets.ElementAt(i).Type</span>
-                        @Html.TextBoxFor(m => @Model.Pets.ElementAt(i).Type, new {@class = "form-control intake-input" })
+                        @Html.TextBoxFor(m => @Model.Pets.ElementAt(i).Type, new { @class = "form-control intake-input" })
                         @Html.HiddenFor(m => @Model.Pets.ElementAt(i).Type, new { @class = "intake-hidden" })
                     </div>
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                         @Html.LabelFor(model => @Model.Pets.ElementAt(i).Breed)
                         <span class="intake-span">@Model.Pets.ElementAt(i).Breed</span>
-                        @Html.TextBoxFor(m => @Model.Pets.ElementAt(i).Breed, new {@class = "form-control intake-input" })
+                        @Html.TextBoxFor(m => @Model.Pets.ElementAt(i).Breed, new { @class = "form-control intake-input" })
                         @Html.HiddenFor(m => @Model.Pets.ElementAt(i).Breed, new { @class = "intake-hidden" })
                     </div>
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                         @Html.LabelFor(model => @Model.Pets.ElementAt(i).Size)
                         <span class="intake-span">@Model.Pets.ElementAt(i).Size</span>
-                        @Html.TextBoxFor(m => @Model.Pets.ElementAt(i).Size, new {@class = "form-control intake-input" })
+                        @Html.TextBoxFor(m => @Model.Pets.ElementAt(i).Size, new { @class = "form-control intake-input" })
                         @Html.HiddenFor(m => @Model.Pets.ElementAt(i).Size, new { @class = "intake-hidden" })
                     </div>
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
@@ -323,7 +325,7 @@
             </div>
         </div>
     </div>
-    <hr/>
+    <hr />
     <div class="intake-block" data-block="services">
         <div class="intake-header">
             <div class="intake-collapse">
@@ -333,13 +335,13 @@
             </div>
             <span class="sectionSave intake-save">
                 - Save
-            </span>            
+            </span>
         </div>
-        @for(int i = 0; i < @Model.Services.Count(); i++)
-        {
+        @for (int i = 0; i < @Model.Services.Count(); i++)
+            {
             <div class="row intake-row collapse in" data-entity-id="@Model.Services.ElementAt(i).Id" data-entity-collection="services">
                 <div class="col-xs-2 col-sm-1 intake-col">
-                    <input type="checkbox" class="intake-input intake-service-input" name="Selected"  @(Model.Services.ElementAt(i).Selected ? "checked =\"checked\"" : String.Empty)/>
+                    <input type="checkbox" class="intake-input intake-service-input" name="Selected" @(Model.Services.ElementAt(i).Selected ? "checked =\"checked\"" : String.Empty) />
                 </div>
                 <div class="col-xs-10 col-sm-5 intake-col">
                     <span class="intake-span">@Model.Services.ElementAt(i).Name</span>
@@ -348,24 +350,24 @@
                     @Html.TextBoxFor(s => @Model.Services.ElementAt(i).Notes, new { @class = "form-control intake-input intake-service-input", @placeholder = "Enter or Edit Notes" })
                 </div>
             </div>
-            
+
         }
-        @for(int i = 0; i < @Model.PossibleServices.Count(); i++)
-        {
+        @for (int i = 0; i < @Model.PossibleServices.Count(); i++)
+            {
             <div class="row intake-row collapse in" data-entity-collection="services" data-entity-type-id="@Model.PossibleServices.ElementAt(i).Id">
                 <div class="col-sm-1 intake-col">
-                    <input type="checkbox" value="false" class="intake-service-input" name="Selected"/>
+                    <input type="checkbox" value="false" class="intake-service-input" name="Selected" />
                 </div>
                 <div class="col-sm-5 intake-col">
                     <span class="intake-span">@Model.PossibleServices.ElementAt(i).Name</span>
                 </div>
                 <div class="col-sm-5 intake-col">
-                    <input type="text" name="Notes" class="form-control intake-input intake-service-input"/>    
+                    <input type="text" name="Notes" class="form-control intake-input intake-service-input" />
                 </div>
             </div>
         }
     </div>
-    <hr/>
+    <hr />
     <div class="intake-block" data-block="temphousing">
         <div class="intake-header">
             <div class="intake-collapse">
@@ -384,7 +386,7 @@
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.TempHousingDays)
                 <span class="intake-span">@Model.TempHousingDays</span>
-                @Html.TextBoxFor(m => @Model.TempHousingDays, new {@class= "form-control intake-input", @type = "number", step = "1", min = "0" })
+                @Html.TextBoxFor(m => @Model.TempHousingDays, new { @class = "form-control intake-input", @type = "number", step = "1", min = "0" })
                 @Html.HiddenFor(m => @Model.TempHousingDays, new { @class = "intake-hidden" })
             </div>
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
@@ -395,7 +397,7 @@
             </div>
         </div>
     </div>
-    <hr/>
+    <hr />
     <div class="intake-block" data-block="homefinding">
         <div class="intake-header">
             <div class="intake-collapse">
@@ -408,26 +410,26 @@
             </span>
             <span class="sectionSave intake-cancel">
                 x Cancel
-            </span>           
+            </span>
         </div>
         <div class="row intake-row collapse in">
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.HousingBudgetDisplay)
                 <span class="intake-span">@Model.HousingBudgetDisplay</span>
-                @Html.TextBoxFor(m => @Model.HomeFinding.HousingBudget, new { @class = "form-control intake-input", Name = "HousingBudget", @type="number", step="0.01",min="0"})
-                @Html.HiddenFor(m => @Model.HomeFinding.HousingBudget, new { @class = "intake-hidden"})
+                @Html.TextBoxFor(m => @Model.HomeFinding.HousingBudget, new { @class = "form-control intake-input", Name = "HousingBudget", @type = "number", step = "0.01", min = "0" })
+                @Html.HiddenFor(m => @Model.HomeFinding.HousingBudget, new { @class = "intake-hidden" })
             </div>
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.NumberOfBedroomsDisplay)
                 <span class="intake-span">@Model.NumberOfBedroomsDisplay</span>
-                @Html.TextBoxFor(m => @Model.HomeFinding.NumberOfBedrooms, new {@class = "form-control intake-input", Name = "NumberOfBedrooms", @type = "number", step = "1", min = "0" })
-                @Html.HiddenFor(m => @Model.HomeFinding.NumberOfBedrooms, new {@class = "intake-hidden"})
+                @Html.TextBoxFor(m => @Model.HomeFinding.NumberOfBedrooms, new { @class = "form-control intake-input", Name = "NumberOfBedrooms", @type = "number", step = "1", min = "0" })
+                @Html.HiddenFor(m => @Model.HomeFinding.NumberOfBedrooms, new { @class = "intake-hidden" })
             </div>
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.NumberOfBathroomsDisplay)
                 <span class="intake-span">@Model.NumberOfBathroomsDisplay</span>
-                @Html.DropDownListFor(m => @Model.HomeFinding.NumberOfBathrooms, new SelectList(Model.NumberOfBathrooms,"Id","Name"),new {@class = "form-control intake-input", Name = "NumberOfBathroomsTypeId"})
-                @Html.HiddenFor(m => @Model.HomeFinding.NumberOfBathroomsTypeId, new {@class = "intake-hidden"})
+                @Html.DropDownListFor(m => @Model.HomeFinding.NumberOfBathrooms, new SelectList(Model.NumberOfBathrooms, "Id", "Name"), new { @class = "form-control intake-input", Name = "NumberOfBathroomsTypeId" })
+                @Html.HiddenFor(m => @Model.HomeFinding.NumberOfBathroomsTypeId, new { @class = "intake-hidden" })
             </div>
         </div>
         <div class="row intake-row collapse in">
@@ -435,39 +437,39 @@
                 @Html.LabelFor(model => @Model.SquareFootageDisplay)
                 <span class="intake-span">@Model.SquareFootageDisplay</span>
                 @Html.TextBoxFor(m => @Model.HomeFinding.SquareFootage, new { @class = "form-control intake-input", Name = "SquareFootage", @type = "number", step = "1", min = "0" })
-                @Html.HiddenFor(m => @Model.HomeFinding.SquareFootage, new { @class = "intake-hidden"})
+                @Html.HiddenFor(m => @Model.HomeFinding.SquareFootage, new { @class = "intake-hidden" })
             </div>
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.HousingTypeDisplay)
                 <span class="intake-span">@Model.HousingTypeDisplay</span>
-                @Html.DropDownListFor(m => @Model.HomeFinding.HousingTypeId, new SelectList(Model.HousingTypes,"Id","Name"),new { @class = "form-control intake-input", Name = "HousingTypeId" })
-                @Html.HiddenFor(m => @Model.HomeFinding.HousingTypeId, new { @class = "intake-hidden"})
+                @Html.DropDownListFor(m => @Model.HomeFinding.HousingTypeId, new SelectList(Model.HousingTypes, "Id", "Name"), new { @class = "form-control intake-input", Name = "HousingTypeId" })
+                @Html.HiddenFor(m => @Model.HomeFinding.HousingTypeId, new { @class = "intake-hidden" })
             </div>
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.AreaTypeDisplay)
                 <span class="intake-span">@Model.AreaTypeDisplay</span>
-                @Html.DropDownListFor(m => @Model.HomeFinding.AreaTypeId, new SelectList(Model.AreaTypes,"Id","Name"),new { @class = "form-control intake-input", Name = "AreaTypeId" })
-                @Html.HiddenFor(m => @Model.HomeFinding.AreaTypeId, new { @class = "intake-hidden"})
+                @Html.DropDownListFor(m => @Model.HomeFinding.AreaTypeId, new SelectList(Model.AreaTypes, "Id", "Name"), new { @class = "form-control intake-input", Name = "AreaTypeId" })
+                @Html.HiddenFor(m => @Model.HomeFinding.AreaTypeId, new { @class = "intake-hidden" })
             </div>
         </div>
         <div class="row intake-row collapse in">
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.IsFurnishedDisplay)
                 <span class="intake-span">@Model.IsFurnishedDisplay</span>
-                @Html.DropDownListFor(m => @Model.HomeFinding.IsFurnished, new SelectList(Model.YesNoDropDown,"Value","Text"), new { @class = "form-control intake-input", Name = "IsFurnished" })
-                @Html.HiddenFor(m => @Model.HomeFinding.IsFurnished, new { @class = "intake-hidden"})
+                @Html.DropDownListFor(m => @Model.HomeFinding.IsFurnished, new SelectList(Model.YesNoDropDown, "Value", "Text"), new { @class = "form-control intake-input", Name = "IsFurnished" })
+                @Html.HiddenFor(m => @Model.HomeFinding.IsFurnished, new { @class = "intake-hidden" })
             </div>
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.HasLaundryDisplay)
                 <span class="intake-span">@Model.HasLaundryDisplay</span>
                 @Html.DropDownListFor(m => @Model.HomeFinding.HasLaundry, new SelectList(Model.YesNoDropDown, "Value", "Text"), new { @class = "form-control intake-input", Name = "HasLaundry" })
-                @Html.HiddenFor(m => @Model.HomeFinding.HasLaundry, new { @class = "intake-hidden"})
+                @Html.HiddenFor(m => @Model.HomeFinding.HasLaundry, new { @class = "intake-hidden" })
             </div>
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.HasExerciseRoomDisplay)
                 <span class="intake-span">@Model.HasExerciseRoomDisplay</span>
                 @Html.DropDownListFor(m => @Model.HomeFinding.HasExerciseRoom, new SelectList(Model.YesNoDropDown, "Value", "Text"), new { @class = "form-control intake-input", Name = "HasExerciseRoom" })
-                @Html.HiddenFor(m => @Model.HomeFinding.HasExerciseRoom, new { @class = "intake-hidden"})
+                @Html.HiddenFor(m => @Model.HomeFinding.HasExerciseRoom, new { @class = "intake-hidden" })
             </div>
         </div>
         <div class="row intake-row collapse in">
@@ -475,33 +477,33 @@
                 @Html.LabelFor(model => @Model.HasACDisplay)
                 <span class="intake-span">@Model.HasACDisplay</span>
                 @Html.DropDownListFor(m => @Model.HomeFinding.HasAC, new SelectList(Model.YesNoDropDown, "Value", "Text"), new { @class = "form-control intake-input", Name = "HasAC" })
-                @Html.HiddenFor(m => @Model.HomeFinding.HasAC, new { @class = "intake-hidden"})
+                @Html.HiddenFor(m => @Model.HomeFinding.HasAC, new { @class = "intake-hidden" })
             </div>
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.TransportationTypeDisplay)
                 <span class="intake-span">@Model.TransportationTypeDisplay</span>
-                @Html.DropDownListFor(m => @Model.HomeFinding.TransportationTypeId, new SelectList(Model.TransportationTypes,"Id","Name"),new { @class = "form-control intake-input", Name = "TransportationTypeId" })
-                @Html.HiddenFor(m => @Model.HomeFinding.TransportationTypeId, new { @class = "intake-hidden"})
+                @Html.DropDownListFor(m => @Model.HomeFinding.TransportationTypeId, new SelectList(Model.TransportationTypes, "Id", "Name"), new { @class = "form-control intake-input", Name = "TransportationTypeId" })
+                @Html.HiddenFor(m => @Model.HomeFinding.TransportationTypeId, new { @class = "intake-hidden" })
             </div>
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.MaxCommuteDisplay)
                 <span class="intake-span">@Model.MaxCommuteDisplay</span>
                 @Html.TextBoxFor(m => @Model.HomeFinding.MaxCommute, new { @class = "form-control intake-input", Name = "MaxCommute", @type = "number", step = "1", min = "0" })
-                @Html.HiddenFor(m => @Model.HomeFinding.MaxCommute, new { @class = "intake-hidden"})
-            </div>           
+                @Html.HiddenFor(m => @Model.HomeFinding.MaxCommute, new { @class = "intake-hidden" })
+            </div>
         </div>
         <div class="row intake-row collapse in">
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.NumberOfCarsOwnedDisplay)
                 <span class="intake-span">@Model.NumberOfCarsOwnedDisplay</span>
                 @Html.TextBoxFor(m => @Model.HomeFinding.NumberOfCarsOwned, new { @class = "form-control intake-input", Name = "NumberOfCarsOwned" })
-                @Html.HiddenFor(m => @Model.HomeFinding.NumberOfCarsOwned, new { @class = "intake-hidden"})
+                @Html.HiddenFor(m => @Model.HomeFinding.NumberOfCarsOwned, new { @class = "intake-hidden" })
             </div>
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.HasParkingDisplay)
                 <span class="intake-span">@Model.HasParkingDisplay</span>
-                @Html.DropDownListFor(m => @Model.HomeFinding.HasParking, new SelectList(Model.YesNoDropDown,"Value","Text"),new {@class = "form-control intake-input", Name = "HasParking"})
-                @Html.HiddenFor(m => @Model.HomeFinding.HasParking, new {@class = "intake-hidden"})
+                @Html.DropDownListFor(m => @Model.HomeFinding.HasParking, new SelectList(Model.YesNoDropDown, "Value", "Text"), new { @class = "form-control intake-input", Name = "HasParking" })
+                @Html.HiddenFor(m => @Model.HomeFinding.HasParking, new { @class = "intake-hidden" })
             </div>
         </div>
         <div class="row intake-row collapse in">
@@ -509,7 +511,7 @@
                 @Html.LabelFor(model => @Model.CommentsDisplay)
                 <span class="intake-span">@Model.CommentsDisplay</span>
                 @Html.TextAreaFor(m => @Model.HomeFinding.Comments, new { @class = "form-control intake-input", Name = "Comments" })
-                @Html.HiddenFor(m => @Model.HomeFinding.Comments, new { @class = "intake-hidden"})
+                @Html.HiddenFor(m => @Model.HomeFinding.Comments, new { @class = "intake-hidden" })
             </div>
         </div>
     </div>
@@ -526,20 +528,20 @@
             </span>
             <span class="sectionSave intake-cancel">
                 x Cancel
-            </span>            
+            </span>
         </div>
         <div class="row intake-row collapse in">
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.DepositTypeDisplay)
                 <span class="intake-span">@Model.DepositTypeDisplay</span>
-                @Html.DropDownListFor(m => @Model.DepositTypeId, new SelectList(Model.DepositTypes,"Id","Name"), new { @class = "form-control intake-input", Name = "DepositTypeId" })
-                @Html.HiddenFor(m => @Model.DepositTypeId, new { @class = "intake-hidden"})
+                @Html.DropDownListFor(m => @Model.DepositTypeId, new SelectList(Model.DepositTypes, "Id", "Name"), new { @class = "form-control intake-input", Name = "DepositTypeId" })
+                @Html.HiddenFor(m => @Model.DepositTypeId, new { @class = "intake-hidden" })
             </div>
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.LeaseTerm)
                 <span class="intake-span">@Model.LeaseTerm</span>
                 @Html.TextBoxFor(m => @Model.LeaseTerm, new { @class = "form-control intake-input", Name = "LeaseTerm", @type = "number", step = "1", min = "0" })
-                @Html.HiddenFor(m => @Model.LeaseTerm, new { @class = "intake-hidden"})
+                @Html.HiddenFor(m => @Model.LeaseTerm, new { @class = "intake-hidden" })
             </div>
         </div>
         <div class="row intake-row collapse in">
@@ -547,13 +549,13 @@
                 @Html.LabelFor(model => @Model.BrokerFeeTypeDisplay)
                 <span class="intake-span">@Model.BrokerFeeTypeDisplay</span>
                 @Html.DropDownListFor(m => @Model.BrokerFeeTypeId, new SelectList(Model.BrokerFeeTypes, "Id", "Name"), new { @class = "form-control intake-input", Name = "BrokerFeeTypeId" })
-                @Html.HiddenFor(m => @Model.BrokerFeeTypeId, new { @class = "intake-hidden"})
+                @Html.HiddenFor(m => @Model.BrokerFeeTypeId, new { @class = "intake-hidden" })
             </div>
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.LengthOfAssignment)
                 <span class="intake-span">@Model.LeaseTerm</span>
                 @Html.TextBoxFor(m => @Model.LengthOfAssignment, new { @class = "form-control intake-input", Name = "LengthOfAssignment", @type = "number", step = "1", min = "0" })
-                @Html.HiddenFor(m => @Model.LengthOfAssignment, new { @class = "intake-hidden"})
+                @Html.HiddenFor(m => @Model.LengthOfAssignment, new { @class = "intake-hidden" })
             </div>
         </div>
     </div>

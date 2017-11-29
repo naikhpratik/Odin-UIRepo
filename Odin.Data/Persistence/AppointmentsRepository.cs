@@ -2,6 +2,7 @@
 using Odin.Data.Core.Repositories;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace Odin.Data.Persistence
 {
@@ -21,7 +22,7 @@ namespace Odin.Data.Persistence
         public IEnumerable<Appointment> GetAppointmentsByOrderId(string id)
         {
             return _context.Appointments
-                .Where(a => a.OrderId == id && a.Deleted == false)
+                .Where(a => a.OrderId == id && a.Deleted == false && a.ScheduledDate >= DateTime.Now)
                 .ToList();
         }
         public Appointment GetAppointmentById(string id)
@@ -29,6 +30,10 @@ namespace Odin.Data.Persistence
             return _context.Appointments
                 .Where(a => a.Id.Equals(id))
                 .SingleOrDefault<Appointment>(); 
+        }
+        public void Remove(Appointment appointment)
+        {
+            _context.Appointments.Remove(appointment);
         }
     }
 }
