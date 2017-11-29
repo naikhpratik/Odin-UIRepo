@@ -101,7 +101,7 @@ namespace Odin.Controllers.Api
             _mapper.Map<OrdersTransfereeIntakeOriginDto, Order>(dto, order);
             _unitOfWork.Complete();
 
-            _queueStore.Add(new QueueEntry(order.Id, QueueType.Order));
+            _queueStore.Add(new OdinToSeQueueEntry(order.Id, QueueType.Order));
 
             return Ok();
         }

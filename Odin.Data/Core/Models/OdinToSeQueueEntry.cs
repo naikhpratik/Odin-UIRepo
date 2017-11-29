@@ -2,9 +2,9 @@
 
 namespace Odin.Data.Core.Models
 {
-    public class QueueEntry
+    public class OdinToSeQueueEntry
     {
-        public QueueEntry(string objectId, QueueType queueType)
+        public OdinToSeQueueEntry(string objectId, QueueType queueType)
         {
             ObjectId = objectId;
             QueueTypeId = (int)queueType;

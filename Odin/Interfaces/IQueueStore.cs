@@ -10,6 +10,7 @@ namespace Odin.Interfaces
 {
     public interface IQueueStore
     {
-        void Add(QueueEntry entry);
+        void Add(OdinToSeQueueEntry entry);
+        void Add(PropBotJobQueueEntry entry);
     }
 }

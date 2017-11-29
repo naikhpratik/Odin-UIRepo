@@ -167,7 +167,8 @@
     <Compile Include="Core\Models\OwnershipType.cs" />
     <Compile Include="Core\Models\Pet.cs" />
     <Compile Include="Core\Models\HomeFinding.cs" />
-    <Compile Include="Core\Models\QueueEntry.cs" />
+    <Compile Include="Core\Models\PropBotJobQueueEntry.cs" />
+    <Compile Include="Core\Models\OdinToSeQueueEntry.cs" />
     <Compile Include="Core\Models\QueueType.cs" />
     <Compile Include="Core\Models\SEDropDownType.cs" />
     <Compile Include="Core\Models\Service.cs" />
