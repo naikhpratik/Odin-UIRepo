@@ -104,3 +104,8 @@
       border-radius: 1.25rem;
       z-index: 1; }
 
+#propertyForm input,
+#propertyForm select,
+#propertyForm textarea {
+  max-width: 100%; }
+

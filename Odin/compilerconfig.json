@@ -50,5 +50,9 @@
   {
     "inputFile": "Content/css/transferee/itinerary.scss",
     "outputFile": "Content/css/transferee/itinerary.css"
+  },
+  {
+    "inputFile": "Content/css/bookmarklet.scss",
+    "outputFile": "Content/css/bookmarklet.css"
   }
 ]

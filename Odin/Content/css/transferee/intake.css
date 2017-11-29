@@ -52,17 +52,6 @@ div#intake .intake-block {
     div#intake .intake-block .intake-row .intake-col .intake-span {
       color: #31a4dd;
       font-size: 1.6rem; }
-    div#intake .intake-block .intake-row .intake-col .intake-add {
-      padding-top: 10px;
-      padding-bottom: 10px;
-      font-size: 20px;
-      color: #a7ce39;
-      cursor: pointer;
-      display: block; }
-    div#intake .intake-block .intake-row .intake-col .intake-del {
-      font-size: 20px;
-      color: #e53c2e;
-      cursor: pointer; }
     div#intake .intake-block .intake-row .intake-col .intake-input {
       color: #31a4dd;
       font-size: 16px;

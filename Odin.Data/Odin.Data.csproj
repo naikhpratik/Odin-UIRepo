@@ -42,11 +42,8 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
-    </Reference>
-    <Reference Include="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    <Reference Include="AutoMapper, Version=6.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.1.1\lib\net45\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="Bogus, Version=17.0.1.0, Culture=neutral, PublicKeyToken=fa1bb3f3f218129a, processorArchitecture=MSIL">
       <HintPath>..\packages\Bogus.17.0.1\lib\net40\Bogus.dll</HintPath>
@@ -72,13 +69,11 @@
     <Reference Include="Microsoft.Azure.Mobile.Server.Tables, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Azure.Mobile.Server.Tables.1.1.157.1\lib\net45\Microsoft.Azure.Mobile.Server.Tables.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Data.Edm, Version=5.6.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Data.Edm.5.6.4\lib\net40\Microsoft.Data.Edm.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Microsoft.Data.Edm, Version=5.8.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.Edm.5.8.2\lib\net40\Microsoft.Data.Edm.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Data.OData, Version=5.6.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Data.OData.5.6.4\lib\net40\Microsoft.Data.OData.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Microsoft.Data.OData, Version=5.8.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.OData.5.8.2\lib\net40\Microsoft.Data.OData.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -93,9 +88,8 @@
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
-    <Reference Include="System.Spatial, Version=5.6.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Spatial.5.6.4\lib\net40\System.Spatial.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="System.Spatial, Version=5.8.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Spatial.5.8.2\lib\net40\System.Spatial.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
@@ -162,6 +156,7 @@
     <Compile Include="Core\Models\BrokerFeeType.cs" />
     <Compile Include="Core\Models\Child.cs" />
     <Compile Include="Core\Models\HomeFindingProperty.cs" />
+    <Compile Include="Core\Models\Photo.cs" />
     <Compile Include="Core\Models\Property.cs" />
     <Compile Include="Core\Models\Consultant.cs" />
     <Compile Include="Core\Models\DepositType.cs" />
@@ -174,12 +169,14 @@
     <Compile Include="Core\Models\OwnershipType.cs" />
     <Compile Include="Core\Models\Pet.cs" />
     <Compile Include="Core\Models\HomeFinding.cs" />
-    <Compile Include="Core\Models\QueueEntry.cs" />
+    <Compile Include="Core\Models\PropBotJobQueueEntry.cs" />
+    <Compile Include="Core\Models\OdinToSeQueueEntry.cs" />
     <Compile Include="Core\Models\QueueType.cs" />
     <Compile Include="Core\Models\SEDropDownType.cs" />
     <Compile Include="Core\Models\Service.cs" />
     <Compile Include="Core\Models\ServiceCategory.cs" />
     <Compile Include="Core\Models\ServiceType.cs" />
+    <Compile Include="Core\Models\DefaultType.cs" />
     <Compile Include="Core\Models\Transferee.cs" />
     <Compile Include="Core\Models\TransportationType.cs" />
     <Compile Include="Core\Models\UserRoles.cs" />
@@ -194,6 +191,7 @@
     <Compile Include="Core\Repositories\IOrdersRepository.cs" />
     <Compile Include="Core\Repositories\IPetsRepository.cs" />
     <Compile Include="Core\Repositories\IAppointmentsRepository.cs" />
+    <Compile Include="Core\Repositories\IPhotosRepository.cs" />
     <Compile Include="Core\Repositories\IServicesRepository.cs" />
     <Compile Include="Core\Repositories\IServiceTypesRepository.cs" />
     <Compile Include="Core\Repositories\ITransfereesRepository.cs" />
@@ -429,6 +427,14 @@
     <Compile Include="Persistence\Migrations\201711061818328_MergedInTriggerUpdateFromMaster.Designer.cs">
       <DependentUpon>201711061818328_MergedInTriggerUpdateFromMaster.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201711071800307_AddServiceFlagToOrder.cs" />
+    <Compile Include="Persistence\Migrations\201711071800307_AddServiceFlagToOrder.Designer.cs">
+      <DependentUpon>201711071800307_AddServiceFlagToOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201711141618317_AddSortOrderAndDefault.cs" />
+    <Compile Include="Persistence\Migrations\201711141618317_AddSortOrderAndDefault.Designer.cs">
+      <DependentUpon>201711141618317_AddSortOrderAndDefault.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\201711082148046_AddHomeFindingProperties.cs" />
     <Compile Include="Persistence\Migrations\201711082148046_AddHomeFindingProperties.Designer.cs">
       <DependentUpon>201711082148046_AddHomeFindingProperties.cs</DependentUpon>
@@ -449,12 +455,45 @@
     <Compile Include="Persistence\Migrations\201711151549288_AppointmentsDateNullable.Designer.cs">
       <DependentUpon>201711151549288_AppointmentsDateNullable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201711131931315_MergeNov13.cs" />
+    <Compile Include="Persistence\Migrations\201711131931315_MergeNov13.Designer.cs">
+      <DependentUpon>201711131931315_MergeNov13.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201711151608086_MergeAddSortOrderAndDefault.cs" />
+    <Compile Include="Persistence\Migrations\201711151608086_MergeAddSortOrderAndDefault.Designer.cs">
+      <DependentUpon>201711151608086_MergeAddSortOrderAndDefault.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201711212055489_AddPhotos.cs" />
+    <Compile Include="Persistence\Migrations\201711212055489_AddPhotos.Designer.cs">
+      <DependentUpon>201711212055489_AddPhotos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201711151901404_SwitchNumberOfBathsOnProperty.cs" />
+    <Compile Include="Persistence\Migrations\201711151901404_SwitchNumberOfBathsOnProperty.Designer.cs">
+      <DependentUpon>201711151901404_SwitchNumberOfBathsOnProperty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201711152045272_MergeNov15.cs" />
+    <Compile Include="Persistence\Migrations\201711152045272_MergeNov15.Designer.cs">
+      <DependentUpon>201711152045272_MergeNov15.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201711221443006_MergeAddPhotos.cs" />
+    <Compile Include="Persistence\Migrations\201711221443006_MergeAddPhotos.Designer.cs">
+      <DependentUpon>201711221443006_MergeAddPhotos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201711271705015_CleanUpPhotos.cs" />
+    <Compile Include="Persistence\Migrations\201711271705015_CleanUpPhotos.Designer.cs">
+      <DependentUpon>201711271705015_CleanUpPhotos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201711292152381_MergedAppointmentsBranch.cs" />
+    <Compile Include="Persistence\Migrations\201711292152381_MergedAppointmentsBranch.Designer.cs">
+      <DependentUpon>201711292152381_MergedAppointmentsBranch.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\NumberOfBathroomsTypesRepository.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
     <Compile Include="Persistence\PetsRepository.cs" />
     <Compile Include="Persistence\HomeFindingsRepository.cs" />
     <Compile Include="Persistence\AppointmentsRepository.cs" />
+    <Compile Include="Persistence\PhotosRepository.cs" />
     <Compile Include="Persistence\ServicesRepository.cs" />
     <Compile Include="Persistence\ServiceTypesRepository.cs" />
     <Compile Include="Persistence\TransfereesRepository.cs" />
@@ -630,9 +669,6 @@
     <EmbeddedResource Include="Persistence\Migrations\201711061818328_MergedInTriggerUpdateFromMaster.resx">
       <DependentUpon>201711061818328_MergedInTriggerUpdateFromMaster.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Persistence\Migrations\201711082148046_AddHomeFindingProperties.resx">
-      <DependentUpon>201711082148046_AddHomeFindingProperties.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201711091945348_MergeHomesModelBranch.resx">
       <DependentUpon>201711091945348_MergeHomesModelBranch.cs</DependentUpon>
     </EmbeddedResource>
@@ -645,8 +681,40 @@
     <EmbeddedResource Include="Persistence\Migrations\201711151549288_AppointmentsDateNullable.resx">
       <DependentUpon>201711151549288_AppointmentsDateNullable.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711071800307_AddServiceFlagToOrder.resx">
+      <DependentUpon>201711071800307_AddServiceFlagToOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711141618317_AddSortOrderAndDefault.resx">
+      <DependentUpon>201711141618317_AddSortOrderAndDefault.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711082148046_AddHomeFindingProperties.resx">
+      <DependentUpon>201711082148046_AddHomeFindingProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711131931315_MergeNov13.resx">
+      <DependentUpon>201711131931315_MergeNov13.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711151608086_MergeAddSortOrderAndDefault.resx">
+      <DependentUpon>201711151608086_MergeAddSortOrderAndDefault.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711212055489_AddPhotos.resx">
+      <DependentUpon>201711212055489_AddPhotos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711151901404_SwitchNumberOfBathsOnProperty.resx">
+      <DependentUpon>201711151901404_SwitchNumberOfBathsOnProperty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711152045272_MergeNov15.resx">
+      <DependentUpon>201711152045272_MergeNov15.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711221443006_MergeAddPhotos.resx">
+      <DependentUpon>201711221443006_MergeAddPhotos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711271705015_CleanUpPhotos.resx">
+      <DependentUpon>201711271705015_CleanUpPhotos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711292152381_MergedAppointmentsBranch.resx">
+      <DependentUpon>201711292152381_MergedAppointmentsBranch.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
 </Project>

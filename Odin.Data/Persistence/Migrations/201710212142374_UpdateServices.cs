@@ -9,8 +9,8 @@ namespace Odin.Data.Persistence.Migrations
             AddColumn("dbo.Services", "Selected", c => c.Boolean(nullable: false));
             AddColumn("dbo.ServiceTypes", "Category", c => c.Int(nullable: false));
 
-            Sql("UPDATE ServiceTypes SET Category = 1 WHERE Id = 1");
-            Sql("UPDATE ServiceTypes SET Category = 2 WHERE Id = 2");
+            //Sql("UPDATE ServiceTypes SET Category = 1 WHERE Id = 1");
+            //Sql("UPDATE ServiceTypes SET Category = 2 WHERE Id = 2");
         }
         
         public override void Down()

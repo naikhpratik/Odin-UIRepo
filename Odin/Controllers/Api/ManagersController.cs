@@ -15,6 +15,7 @@ namespace Odin.Controllers.Api
 {
     public class ManagersController : ApiController
     {
+
         private readonly IManagerImporter _managerImporter;
 
         public ManagersController(IManagerImporter managerImporter)

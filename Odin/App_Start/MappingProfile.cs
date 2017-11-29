@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Odin.Data.Core.Dtos;
 using Odin.Data.Core.Models;
-
+using Odin.ViewModels.BookMarklet;
 using Odin.ViewModels.Orders.Index;
 using Odin.ViewModels.Orders.Transferee;
 using Odin.ViewModels.Shared;
@@ -22,7 +22,8 @@ namespace Odin
             CreateMap<Manager, ManagerViewModel>();
             CreateMap<Service, ServiceViewModel>()
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.ServiceType.Name))
-                .ForMember(dest => dest.ActionLabel, opt => opt.MapFrom(src => src.ServiceType.ActionLabel));
+                .ForMember(dest => dest.ActionLabel, opt => opt.MapFrom(src => src.ServiceType.ActionLabel))
+                .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.ServiceType.Category));
             CreateMap<Child, ChildViewModel>();
             CreateMap<Pet, PetViewModel>();
             CreateMap<ServiceType, ServiceTypeViewModel>();
@@ -37,17 +38,19 @@ namespace Odin
                 .ForMember(m => m.ItemType, opt => opt.MapFrom(src => src.GetType().ToString()))
                 .ForMember(m => m.ScheduledDate, opt => opt.MapFrom(src => src.ScheduledDate))
                 .ForMember(m => m.ActionLabel, opt => opt.MapFrom(src => src.Description));
-            CreateMap<HousingPropertyViewModel, ItineraryEntryViewModel>()
-                .ForMember(m => m.ItemType, opt => opt.MapFrom(src => src.GetType().ToString()))
-                .ForMember(m => m.ScheduledDate, opt => opt.MapFrom(src => src.ViewingDate))
-                .ForMember(m => m.ActionLabel, opt => opt.MapFrom(src => src.Address));
             CreateMap<Service, ItineraryEntryViewModel>()
                 .ForMember(m => m.ItemType, opt => opt.MapFrom(src => src.GetType().ToString()))
                 .ForMember(m => m.ScheduledDate, opt => opt.MapFrom(src => src.ScheduledDate))
                 .ForMember(m => m.ActionLabel, opt => opt.MapFrom(src => src.ServiceType.ActionLabel));
 
 
+            CreateMap<Order, HousingViewModel>();
             CreateMap<HomeFinding, HousingViewModel>();
+            CreateMap<HomeFindingProperty, HousingPropertyViewModel>().ReverseMap();
+            CreateMap<Photo, PhotoViewModel>();
+
+            /*BookMarklet*/
+            CreateMap<Order, BookMarkletViewModel>();
 
             /*DTO Mappings*/
 

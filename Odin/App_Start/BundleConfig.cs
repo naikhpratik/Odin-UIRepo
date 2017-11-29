@@ -45,6 +45,7 @@ namespace Odin
             bundles.Add(new StyleBundle("~/Styling/forgotPassword").Include("~/Content/css/forgotpassword.css",
                 "~/Content/animate.css"));
             bundles.Add(new StyleBundle("~/Styling/transferee").Include("~/Content/css/transferee/transferee.css"));
+            bundles.Add(new StyleBundle("~/Styling/bookmarklet").Include("~/Content/css/bookmarklet.css"));
 
             // Panel Styling
             bundles.Add(new StyleBundle("~/Styling/sideNav").Include("~/Content/css/transferee/sideNav.css"));

@@ -44,8 +44,10 @@ namespace Odin.Tests.Controllers.Api
             mockUnitOfWork.SetupGet(u => u.Appointments).Returns(_mockAppointmentsRepository.Object);
             
 
+
+            var mockQueueStore = new Mock<IQueueStore>();
             var mockAccountHelper = new Mock<IAccountHelper>();
-            _controller = new Odin.Controllers.Api.OrdersController(mockUnitOfWork.Object, _mockMapper.Object);
+            _controller = new Odin.Controllers.Api.OrdersController(mockUnitOfWork.Object, _mockMapper.Object, mockQueueStore.Object);
 
             _userId = "1";
             _userName = "TestUser";

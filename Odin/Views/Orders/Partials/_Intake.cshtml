@@ -238,7 +238,7 @@
         </div>
         <div class="row intake-row collapse in">
             <div class="col-sm-9 intake-col intake-col-add">
-                <span class="intake-add" data-entity-add="children">+Add Child</span>
+                <span class="intake-add sectionAdd" data-entity-add="children">+Add Child</span>
             </div>
         </div>
         @if (@Model.Children.Count() > 0)
@@ -265,7 +265,7 @@
                         @Html.HiddenFor(m => @Model.Children.ElementAt(i).Grade, new { @class = "intake-hidden" })
                     </div>
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
-                        <span class="intake-del">
+                        <span class="intake-del sectionDelete">
                             x Delete
                         </span>
                     </div>
@@ -282,7 +282,7 @@
         </div>
         <div class="row intake-row intake-row-add collapse in">
             <div class="col-sm-9 intake-col intake-col-add">
-                <span class="intake-add" data-entity-add="pets">+Add Pet</span>
+                <span class="intake-add sectionAdd" data-entity-add="pets">+Add Pet</span>
             </div>
         </div>
         @if (@Model.Pets.Count() > 0)
@@ -309,7 +309,7 @@
                         @Html.HiddenFor(m => @Model.Pets.ElementAt(i).Size, new { @class = "intake-hidden" })
                     </div>
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
-                        <span class="intake-del">
+                        <span class="intake-del sectionDelete">
                             x Delete
                         </span>
                     </div>
@@ -347,7 +347,14 @@
                     <span class="intake-span">@Model.Services.ElementAt(i).Name</span>
                 </div>
                 <div class="col-xs-12 col-sm-5 intake-col">
-                    @Html.TextBoxFor(s => @Model.Services.ElementAt(i).Notes, new { @class = "form-control intake-input intake-service-input", @placeholder = "Enter or Edit Notes" })
+                    @if (Model.Services.ElementAt(i).Selected)
+                    {
+                        @Html.TextBoxFor(s => @Model.Services.ElementAt(i).Notes, new { @class = "form-control intake-input intake-service-input", @placeholder = "Enter or Edit Notes" })
+                    }
+                    else
+                    {
+                        @Html.TextBoxFor(s => @Model.Services.ElementAt(i).Notes, new { @class = "form-control intake-input intake-service-input", disabled = "disabled" })
+                    }
                 </div>
             </div>
 
@@ -362,7 +369,7 @@
                     <span class="intake-span">@Model.PossibleServices.ElementAt(i).Name</span>
                 </div>
                 <div class="col-sm-5 intake-col">
-                    <input type="text" name="Notes" class="form-control intake-input intake-service-input" />
+                    <input type="text" name="Notes" class="form-control intake-input intake-service-input" disabled="disabled"/>    
                 </div>
             </div>
         }

@@ -6,13 +6,13 @@ namespace Odin.Data.Persistence.Migrations
     {
         public override void Up()
         {
-            Sql("INSERT INTO ServiceTypes (Name) VALUES ('Initial/Pre-Arrival Consultation')");
-            Sql("INSERT INTO ServiceTypes (Name) VALUES ('Welcome Packet')");
+            //Sql("INSERT INTO ServiceTypes (Name) VALUES ('Initial/Pre-Arrival Consultation')");
+            //Sql("INSERT INTO ServiceTypes (Name) VALUES ('Welcome Packet')");
         }
 
         public override void Down()
         {
-            Sql("DELETE FROM Genres WHERE Name IN ('Initial/Pre-Arrival Consultation','Welcome Packet')");
+            //Sql("DELETE FROM ServiceTypes WHERE Name IN ('Initial/Pre-Arrival Consultation','Welcome Packet')");
         }
     }
 }

@@ -161,3 +161,11 @@
     }
 }
 
+#propertyForm {
+    // Site.css inexplicably sets the max width on inputs to 280. This undoes that
+    input,
+    select,
+    textarea {
+        max-width: 100%;
+    }
+}

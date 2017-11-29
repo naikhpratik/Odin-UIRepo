@@ -2,8 +2,11 @@
 using Odin.Data.Core;
 using Odin.Data.Core.Dtos;
 using Odin.Data.Core.Models;
+using Odin.Helpers;
 using Odin.Interfaces;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Odin.Domain
 {
@@ -30,22 +33,11 @@ namespace Odin.Domain
             {
                 order = _mapper.Map<OrderDto, Order>(orderDto);
 
-                //Add new services
-                foreach (var serviceDto in orderDto.Services)
-                {
-                    if (!order.HasService(serviceDto.ServiceTypeId))
-                    {
-                        var newService = _mapper.Map<ServiceDto, Service>(serviceDto);
-                        newService.Id = Guid.NewGuid().ToString();
-                        order.Services.Add(newService);
-                    }
-                }
-
                 if (transferee == null)
                 {
                     transferee = _mapper.Map<TransfereeDto, Transferee>(orderDto.Transferee);
                     _unitOfWork.Transferees.Add(transferee);
-                }                
+                }
 
                 _unitOfWork.Orders.Add(order);
             }
@@ -53,22 +45,41 @@ namespace Odin.Domain
             {
                 _mapper.Map<OrderDto, Order>(orderDto, order);
 
-                //Add new services
-                foreach (var serviceDto in orderDto.Services)
-                {
-                    if (!order.HasService(serviceDto.ServiceTypeId))
-                    {
-                        var newService = _mapper.Map<ServiceDto, Service>(serviceDto);
-                        newService.Id = Guid.NewGuid().ToString();
-                        order.Services.Add(newService);
-                    }
-                }
-
                 if (transferee == null)
                 {
                     transferee = _mapper.Map<TransfereeDto, Transferee>(orderDto.Transferee);
                     _unitOfWork.Transferees.Add(transferee);
                 }
+            }
+
+            //Add default services
+            //Populate list of service categories available for this order.
+            var cats = ServiceHelper.GetCategoriesForServiceFlag(order.ServiceFlag);
+
+            //Get all service types that the order already has.
+            var ids = order.Services.Select(s => s.ServiceTypeId).ToList();
+
+            IEnumerable<ServiceType> defServTypes =
+                _unitOfWork.ServiceTypes.GetDefaultServiceTypes(cats, ids, order.IsInternational);
+
+            foreach (var servType in defServTypes)
+            {
+                order.Services.Add(new Service()
+                {
+                    Selected = true,
+                    ServiceType = servType
+                });
+            }
+
+            //Map type values
+            if (!String.IsNullOrWhiteSpace(orderDto.BrokerFeeTypeSeValue))
+            {
+                order.BrokerFeeType = _unitOfWork.BrokerFeeTypes.GetBrokerFeeType(orderDto.BrokerFeeTypeSeValue);
+            }
+
+            if (!String.IsNullOrWhiteSpace(orderDto.DepositTypeSeValue))
+            {
+                order.DepositType = _unitOfWork.DepositTypes.GetDepositType(orderDto.DepositTypeSeValue);
             }
 
             order.TransfereeId = transferee.Id;

@@ -29,8 +29,9 @@ namespace Odin.ToSeWebJob
         public async Task ProcessQueueMessage([QueueTrigger("odintose")] string message, TextWriter log)
         {
             log.WriteLine(message);
-            var queueEntry = JsonConvert.DeserializeObject<QueueEntry>(message);
+            var queueEntry = JsonConvert.DeserializeObject<OdinToSeQueueEntry>(message);
             log.WriteLine(queueEntry.ObjectId);
+            log.WriteLine("From VSTS second deploy");
         }
     }
 }

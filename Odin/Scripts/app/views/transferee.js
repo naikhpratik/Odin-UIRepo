@@ -2,14 +2,21 @@
      
     var init = function () {
 
-        $('div.col-md-10 > div > div').each(function () { $(this).css("display", "none"); });
+        //$('div.col-md-10 > div > div').each(function () { $(this).css("display", "none"); });
 
-        $('#intake').css("display", "block");
+        //$('#intake').css("display", "block");
+
+        initPanels();
+
+        $(window).on('hashchange', function () {
+            initPanels();
+        });
 
         $('.item').click(function () {     
             $('.item.selected').removeClass('selected');            
             $(this).addClass('selected');
             var actionName = $(this).attr('data-panel');
+            loadPanel(actionName);
             $('#orderContainer').load('/orders/' + actionName + 'Partial/' + currentOrderId);
 
             if ($('.navbar-toggle').css('display') != 'none')
@@ -17,7 +24,27 @@
                 $('.navbar-toggle').click();
             }
         });
+
+        // ensure icon spacing is adequate on mobile
+        window.addEventListener("resize", resizeFn);
+        resizeFn();
     };
+
+    var initPanels = function() {
+        var actionName = "intake";
+        var urlArray = window.location.href.split("#");
+        if (urlArray.length == 2) {
+            actionName = urlArray[1];
+        }
+        loadPanel(actionName);
+    }
+
+    var loadPanel = function(actionName) {
+        $('.item.selected').removeClass('selected');
+        $("[data-panel=" + actionName + "]").addClass('selected');
+        $('#orderContainer').load('/orders/' + actionName + 'Partial/' + currentOrderId);
+    }
+
 
     return {
         TransfereeInit: init

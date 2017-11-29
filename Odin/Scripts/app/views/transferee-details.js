@@ -46,8 +46,7 @@ var TransfereeDetailsController = function (transfereeDetailseService) {
         detailsBlocks.on("click", ".sectionSave", saveBlock);
     };
 
-    var saveBlock = function (e) {
-
+    var saveBlock = function (e) {;
         var detailsBlock = $(e.target).parents(".details-services");
 
         var block = detailsBlock.attr("data-block");

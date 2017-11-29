@@ -1,0 +1,31 @@
+﻿@import "shared/_definitions.scss";
+
+.bm-message{
+    padding-bottom:25px;
+    line-height:25px;
+}
+
+.bm-container {
+    width: 100%;
+    padding: 0px 40px 0px 40px;
+}
+
+.bm-form-group {
+    padding-bottom: 25px;
+    width: 100%;
+    max-width: 100%;
+
+    .form-control {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+.bm-sub-label {
+    color: $DW_Blue;
+}
+
+.bm-btn-container {
+    width: 100%;
+    text-align: center;
+}

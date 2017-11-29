@@ -3,44 +3,104 @@ using Odin.Data.Core.Models;
 using Odin.Helpers;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
+using System.Web;
+using System.Collections.ObjectModel;
+using Odin.ViewModels.Shared;
+using System.Linq;
 
 namespace Odin.ViewModels.Orders.Transferee
 {
     public class HousingPropertyViewModel
     {
+        public HousingPropertyViewModel()
+        {
+            UploadedPhotos = new Collection<HttpPostedFileBase>();
+        }
+
+        public String OrderId { get; set; }
+
+        [DisplayFormat(ConvertEmptyStringToNull = true, NullDisplayText ="", HtmlEncode = false)]
+        public string PropertyAddress { get
+            {
+                var addressMarkup = PropertyStreet1 + "<br />";
+                if (PropertyStreet2 != null && PropertyStreet2.Length > 0)
+                {
+                    addressMarkup += PropertyStreet2 + "<br />";
+                }
+                addressMarkup += PropertyCity + ", " + PropertyState;
+
+                return addressMarkup;
+            }
+        }
         
-        public string Id { get; set; }
+        [Display(Name = "Street 1")]
+        [Required(ErrorMessage = "Street 1 is required")]
+        public String PropertyStreet1 { get; set; }
 
-        [Display(Name = "Location\nPhotos:")]
-        public string Photos { get; set; }
+        [Display(Name = "Street 2")]
+        public String PropertyStreet2 { get; set; }
 
-        public string Street1 { get; set; }
-        public string Street2 { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
-        [Display(Name = "Address:")]
-        public string Address => Street1 + (Street2 ?? "") + (City) + (State);
+        [Display(Name = "City")]
+        [Required(ErrorMessage = "City is required")]
+        public String PropertyCity { get; set; }
 
-        public DateTime? AvailabilityDate { get; set; }
-        [Display(Name = "Available or Not\nDate:")]
-        public string Availability => AvailabilityDate >= DateTime.Now ? "Available " + DateHelper.GetViewFormat(AvailabilityDate) : "Not Available";
+        [Display(Name = "State")]
+        [Required(ErrorMessage = "State is required")]
+        [MaxLength(2)]
+        [DataType("UnitedStates")]
+        public String PropertyState { get; set; }
 
-        public NumberOfBathroomsType NumberOfBathrooms { get; set; }
-        public int? NumberOfBedrooms { get; set; }
-        public decimal Amount { get; set; }
-        public int? SquareFootage { get; set; }
-        [Display(Name = "BD | BA\nRent | Sq. Ft:")]
-        public string Specifications => NumberOfBedrooms + " | " + NumberOfBathrooms + Amount + " | " + SquareFootage;
+        [Display(Name = "Postal Code")]
+        [Required(ErrorMessage = "Postal Code is required")]
+        [DataType(DataType.PostalCode)]
+        public String PropertyPostalCode { get; set; }
 
-        public DateTime? ViewingDate { get; set; }
-        [Display(Name = "Schedule\na Viewing:")]
-        public string ViewingDateDisplay => DateHelper.GetViewFormat(ViewingDate);
+        [Display(Name = "Availability Date")]
+        [DisplayFormat(NullDisplayText = "Unknown", DataFormatString = "{0:d}")]
+        [DataType(DataType.Date)]
+        public DateTime? PropertyAvailabilityDate { get; set; }
 
-        [Display(Name = "Like or\nDislike:")]
-        public bool? IsLike { get; set; }
+        [Display(Name = "Beds")]
+        [DisplayFormat(NullDisplayText = "NA")]
+        public int? PropertyNumberOfBedrooms { get; set; }
 
-        [Display(Name = "Property\nComments:")]
-        public IEnumerable<string> Comments { get; set; }
-        
+        [Display(Name = "Baths")]
+        [RegularExpression(@"^(\d{0,2})(.{0,1})([0,5]{0,1})$", ErrorMessage = "Baths must be in increments of .5")]
+        [DisplayFormat(NullDisplayText = "NA", DataFormatString = "{0:N1}", ApplyFormatInEditMode = true)]
+        public decimal? PropertyNumberOfBathrooms { get; set; }
+
+        [Display(Name = "Sq. Footage")]
+        [DisplayFormat(NullDisplayText = "NA")]
+        [Range(0, 99999)]
+        public int? PropertySquareFootage { get; set; }
+
+        [Display(Name = "Price Amount")]
+        [DisplayFormat(NullDisplayText = "NA", DataFormatString = "{0:c}")]
+        [DataType(DataType.Currency)]
+        public Decimal PropertyAmount { get; set; }
+
+        [Display(Name = "Description/Notes:")]
+        [DataType(DataType.MultilineText)]
+        [DisplayFormat(ConvertEmptyStringToNull = true)]
+        public String PropertyDescription { get; set; }
+
+        [Display(Name = "Photos")]
+        public IEnumerable<HttpPostedFileBase> UploadedPhotos { get; set; }
+
+        public IEnumerable<PhotoViewModel> PropertyPhotos { get; set; }
+
+        public String ThumbnailPhotoUrl {  get
+            {
+                String thumbUrl = "/Content/Images/popout_sml_img.png";
+
+                if (PropertyPhotos.Any())
+                {
+                    thumbUrl = PropertyPhotos.ElementAt(0).PhotoUrl;
+                }
+
+                return thumbUrl;
+            }
+        }
     }
 }

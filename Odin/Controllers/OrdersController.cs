@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity;
 using Odin.Data.Core;
 using Odin.Data.Core.Models;
+using Odin.Helpers;
 using Odin.Interfaces;
 using Odin.ViewModels.Orders.Transferee;
 using Odin.ViewModels.Shared;
@@ -24,7 +25,7 @@ namespace Odin.Controllers
         public OrdersController(IUnitOfWork unitOfWork, IMapper mapper,IAccountHelper accountHelper)
         {
             _unitOfWork = unitOfWork;
-            _mapper = mapper;           
+            _mapper = mapper;
         }
 
         // GET: Orders
@@ -39,21 +40,27 @@ namespace Odin.Controllers
             return View(orders);
         }
 
+        // GET Partials
         public ActionResult HousingPartial(string id)
         {
-            var order = _unitOfWork.Orders.GetOrderById(id);
+            var userId = User.Identity.GetUserId();
+            var order = _unitOfWork.Orders.GetOrderFor(userId, id);
 
-            HousingViewModel viewModel = _mapper.Map<HomeFinding, HousingViewModel>(order.HomeFinding);
-            viewModel.NumberOfPets = order.Pets.Count();
-            int numKids = order.Children == null ? 0 : order.Children.Count();
-            if (numKids == 0 && order.SpouseName == "")
-                viewModel.SpouceAndKids = null;
-            else
-                viewModel.SpouceAndKids = (order.SpouseName == "" ? "No" : "Yes") + " / " + numKids.ToString();
+            HousingViewModel viewModel = new HousingViewModel(order, _mapper);
+
             return PartialView("~/views/orders/partials/_Housing.cshtml", viewModel);
         }
 
-        // GET Partials
+        public ActionResult PropertiesPartial(string id)
+        {
+            var userId = User.Identity.GetUserId();
+            var order = _unitOfWork.Orders.GetOrderFor(userId, id);
+
+            HousingViewModel viewModel = new HousingViewModel(order, _mapper);
+
+            return PartialView("~/views/orders/partials/_HousingProperties.cshtml", viewModel.Properties);
+        }
+
         public ActionResult DetailsPartial(string id)
         {
             var userId = User.Identity.GetUserId();
@@ -66,14 +73,13 @@ namespace Odin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.Unauthorized, "Unauthorized Order");
             }
-            OrdersTransfereeViewModel viewModel = viewModelForOrder(order);
+            OrdersTransfereeViewModel viewModel = GetViewModelForOrder(id);
             return PartialView("~/views/orders/partials/_Details.cshtml",viewModel); 
         }
 
         public ActionResult IntakePartial(string id)
         {
-            var order = _unitOfWork.Orders.GetOrderById(id);
-            OrdersTransfereeViewModel viewModel = viewModelForOrder(order);
+            OrdersTransfereeViewModel viewModel = GetViewModelForOrder(id);
             return PartialView("~/views/orders/partials/_Intake.cshtml", viewModel);
         }
 
@@ -98,6 +104,7 @@ namespace Odin.Controllers
             }
             return PartialView("~/views/orders/partials/_Appointment.cshtml", viewModel);
         }
+
         public ActionResult Details(string orderId)
         {
             var userId = User.Identity.GetUserId();
@@ -114,53 +121,50 @@ namespace Odin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.Unauthorized, "Unauthorized Order");
             }
 
-            return View();            
+            return View();
         }
 
         // GET: Transferee
-        public ViewResult Transferee(string id)
+        public ActionResult Transferee(string id)
         {
-            var order = _unitOfWork.Orders.GetOrderById(id);
+            var userId = User.Identity.GetUserId();
+            var order = _unitOfWork.Orders.GetOrderFor(userId, id);
+
+            if (order == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound, "Not found");
+            }
+            ViewBag.Id = id;
+            OrdersTransfereeViewModel viewModel = GetViewModelForOrder(id);
+            return View(viewModel);
+        }
+
+        private OrdersTransfereeViewModel GetViewModelForOrder(string id)
+        {
+            var userId = User.Identity.GetUserId();
+            var order = _unitOfWork.Orders.GetOrderFor(userId,id);
 
             OrdersTransfereeViewModel vm = _mapper.Map<Order, OrdersTransfereeViewModel>(order);
-
-            var cats = order.Services.Select(s => s.ServiceType.Category).ToList();
-            var ids = order.Services.Select(s => s.ServiceType.Id).ToList();
+            vm.Services = vm.Services.OrderBy(s => s.ServiceTypeSortOrder);
             
+            //Populate list of service categories available for this order.
+            var cats = ServiceHelper.GetCategoriesForServiceFlag(order.ServiceFlag);
+
+            //Get all service types that the order already has.
+            var ids = order.Services.Select(s => s.ServiceType.Id).ToList();
+
             //Remove service types that already have services.
             var filtPossible = _unitOfWork.ServiceTypes.GetPossibleServiceTypes(cats, ids);
 
             vm.PossibleServices =
-                _mapper.Map<IEnumerable<ServiceType>, IEnumerable<ServiceTypeViewModel>>(filtPossible);
+                _mapper.Map<IEnumerable<ServiceType>, IEnumerable<ServiceTypeViewModel>>(filtPossible).OrderBy(s => s.SortOrder);
 
             vm.NumberOfBathrooms = _unitOfWork.NumberOfBathrooms.GetNumberOfBathroomsList();
             vm.HousingTypes = _unitOfWork.HousingTypes.GetHousingTypesList();
             vm.AreaTypes = _unitOfWork.AreaTypes.GetAreaTypesList();
             vm.TransportationTypes = _unitOfWork.TransportationTypes.GetTransportationTypes();
             vm.DepositTypes = _unitOfWork.DepositTypes.GetDepositTypesList();
-            vm.BrokerFeeTypes = _unitOfWork.BrokerFeeTypes.GetBorkerBrokerFeeTypes();
-            
-            return View(vm);
-        }
-
-        private OrdersTransfereeViewModel viewModelForOrder(Order order)
-        {
-            OrdersTransfereeViewModel vm = _mapper.Map<Order, OrdersTransfereeViewModel>(order);
-
-            var cats = order.Services.Select(s => s.ServiceType.Category).ToList();
-            var ids = order.Services.Select(s => s.ServiceType.Id).ToList();
-
-            //Remove service types that already have services.
-            var filtPossible = _unitOfWork.ServiceTypes.GetPossibleServiceTypes(cats, ids);
-
-            //vm.PossibleServices =                _mapper.Map<IEnumerable<ServiceType>, IEnumerable<ServiceTypeViewModel>>(filtPossible);
-
-            vm.NumberOfBathrooms = _unitOfWork.NumberOfBathrooms.GetNumberOfBathroomsList();
-            vm.HousingTypes = _unitOfWork.HousingTypes.GetHousingTypesList();
-            vm.AreaTypes = _unitOfWork.AreaTypes.GetAreaTypesList();
-            vm.TransportationTypes = _unitOfWork.TransportationTypes.GetTransportationTypes();
-            vm.DepositTypes = _unitOfWork.DepositTypes.GetDepositTypesList();
-            vm.BrokerFeeTypes = _unitOfWork.BrokerFeeTypes.GetBorkerBrokerFeeTypes();
+            vm.BrokerFeeTypes = _unitOfWork.BrokerFeeTypes.GetBrokerFeeTypes();
 
             return vm;
         }
@@ -206,5 +210,5 @@ namespace Odin.Controllers
             return PartialView("~/views/orders/partials/_Itinerary.cshtml", viewModel);
         }
     }
-    
+
 }

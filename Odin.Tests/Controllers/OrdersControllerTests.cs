@@ -101,6 +101,8 @@ namespace Odin.Tests.Controllers
 
             var result = _controller.ItineraryPartial(orderId) as PartialViewResult;
             result.Should().NotBeNull();
-        }        
+        }
+
+
     }
 }

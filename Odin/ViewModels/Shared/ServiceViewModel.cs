@@ -1,5 +1,5 @@
-﻿using System;
-using Odin.Helpers;
+﻿using Odin.Helpers;
+using System;
 
 namespace Odin.ViewModels.Shared
 {
@@ -22,5 +22,8 @@ namespace Odin.ViewModels.Shared
         public string Name { get; set; }
 
         public string ActionLabel { get; set; }
+        public int ServiceTypeSortOrder { get; set; }
+
+        public int Category { get; set; }
     }
 }
