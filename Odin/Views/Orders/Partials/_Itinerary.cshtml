@@ -7,9 +7,18 @@
 }
     <div class="row">
         <div class="col-md-6 titleGroup">
-            <h1 class="sectionTitle">
-                Your Itinerary
-            </h1>
+            @if (Model.mustPrint == true)
+            {
+                <h3 class="sectionTitle" style="padding-top:10px;">
+                    @(Model.TransfereeName + "'s Itinerary")
+                </h3>
+            }
+            else
+            {
+                <h1 class="sectionTitle">
+                    Your Itinerary
+                </h1>
+            }
             <p class="sectionInstruction">
                 What is going on. Check to see what you have planned. To stay on top of things.
             </p>
@@ -156,26 +165,6 @@
     </div>
     <hr>
 </div>
-<script>
-    $(function () { /* to make sure the script runs after page load */
-
-        $('a.read_more').click(function (event) { /* find all a.read_more elements and bind the following code to them */
-
-            event.preventDefault(); /* prevent the a from changing the url */
-            if ($('#moreorless').text() == "Less...") {
-                $(this).parents('.item').find('.more_text').animate().hide(); /* show the .more_text span */
-                $('#moreorless').text("More...");
-            }
-            else {
-                $(this).parents('.item').find('.more_text').animate().show(); /* show the .more_text span */
-                $('#moreorless').text("Less...");
-            }            
-        });
-
-    });
-</script>
-
-
         
                 @Styles.Render("~/Styling/itinerary")
 

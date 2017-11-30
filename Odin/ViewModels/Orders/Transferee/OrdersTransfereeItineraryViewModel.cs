@@ -20,6 +20,8 @@ namespace Odin.ViewModels.Orders.Transferee
 
         public string Id { get; set; }
         public bool mustPrint { get; set; }
+        public string TransfereeName { get; set; }
+        public string TransfereeEmail { get; set; }
         public IEnumerable<ItineraryEntryViewModel> Itinerary { get; set; }
     }
 }

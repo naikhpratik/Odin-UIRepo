@@ -88,6 +88,9 @@ namespace Odin.Controllers
             OrdersTransfereeItineraryViewModel viewModel = GetItineraryByOrderId(id);
             viewModel.Id = id;
             viewModel.mustPrint = false;
+            Transferee ee = GetTransfereeByOrderId(id);
+            viewModel.TransfereeEmail = ee.Email;
+            viewModel.TransfereeName = ee.FullName;
             return PartialView("~/views/orders/partials/_Itinerary.cshtml", viewModel);
         }
         public ActionResult AppointmentPartial(string id)
@@ -168,7 +171,10 @@ namespace Odin.Controllers
 
             return vm;
         }
-        
+        public Transferee GetTransfereeByOrderId(string id)
+        {
+            return _unitOfWork.Transferees.GetTransfereeByOrderId(id);
+        }
         private OrdersTransfereeItineraryViewModel GetItineraryByOrderId(string id)
         {
             var itinService = _unitOfWork.Services.GetServicesByOrderId(id);
@@ -194,6 +200,9 @@ namespace Odin.Controllers
             OrdersTransfereeItineraryViewModel viewModel = GetItineraryByOrderId(id);
             viewModel.Id = id;
             viewModel.mustPrint = true;
+            Transferee ee = GetTransfereeByOrderId(id);
+            viewModel.TransfereeEmail = ee.Email;
+            viewModel.TransfereeName = ee.FullName;
             return new Rotativa.ViewAsPdf("Partials/_Itinerary", viewModel) { FileName = "Itinerary.pdf", PageMargins = new Rotativa.Options.Margins(0, 0, 0, 0) }; 
         }
         public ActionResult EmailGeneratedPDF(string id, string email)
@@ -201,6 +210,9 @@ namespace Odin.Controllers
             OrdersTransfereeItineraryViewModel viewModel = GetItineraryByOrderId(id);
             viewModel.Id = id;
             viewModel.mustPrint = true;
+            Transferee ee = GetTransfereeByOrderId(id);
+            viewModel.TransfereeEmail = ee.Email;
+            viewModel.TransfereeName = ee.FullName;
             string filename = "Itinerary" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".pdf";
             var pdf = new Rotativa.ViewAsPdf("Partials/_Itinerary", viewModel) {FileName = filename, PageMargins = new Rotativa.Options.Margins(0, 0, 0, 0) };
             byte[] pdfBytes = pdf.BuildFile(ControllerContext);
