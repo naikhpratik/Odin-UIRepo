@@ -24,10 +24,6 @@
                 $('.navbar-toggle').click();
             }
         });
-
-        // ensure icon spacing is adequate on mobile
-        window.addEventListener("resize", resizeFn);
-        resizeFn();
     };
 
     var initPanels = function() {
