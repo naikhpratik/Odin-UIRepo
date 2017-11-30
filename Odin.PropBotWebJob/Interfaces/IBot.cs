@@ -1,4 +1,6 @@
-﻿namespace Odin.PropBotWebJob.Interfaces
+﻿using Odin.PropBotWebJob.Dtos;
+
+namespace Odin.PropBotWebJob.Interfaces
 {
     public interface IBot
     {
