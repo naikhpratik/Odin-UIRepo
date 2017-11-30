@@ -13,16 +13,21 @@
         });
 
 <<<<<<< HEAD
-        $('.item').click(function () {
-            var actionName = $(this).attr('data-panel');
-            loadPanel(actionName);
-=======
-        $('.item').click(function () {            
+        $('.item').click(function () {     
             $('.item.selected').removeClass('selected');            
             $(this).addClass('selected');
             var actionName = $(this).attr('data-panel');
             $('#orderContainer').load('/orders/' + actionName + 'Partial/' + currentOrderId);
->>>>>>> master
+
+            if ($('.navbar-toggle').css('display') != 'none')
+            {
+                $('.navbar-toggle').click();
+            }
+        });
+=======
+        $('.item').click(function () {
+            var actionName = $(this).attr('data-panel');
+            loadPanel(actionName);
         });
 
         // ensure icon spacing is adequate on mobile
@@ -56,6 +61,7 @@
                 $(this).css("padding-right", "0px");
             });
         }
+>>>>>>> master
     };
 
     return {

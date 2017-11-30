@@ -143,12 +143,14 @@
     <Compile Include="Core\Dtos\ManagerDto.cs" />
     <Compile Include="Core\Dtos\ManagersDto.cs" />
     <Compile Include="Core\Dtos\RentDto.cs" />
+    <Compile Include="Core\Dtos\AppointmentDto.cs" />
     <Compile Include="Core\Dtos\ServiceDto.cs" />
     <Compile Include="Core\Dtos\ServicesDto.cs" />
     <Compile Include="Core\Dtos\TransfereeDto.cs" />
     <Compile Include="Core\Dtos\TransfereeIndexDto.cs" />
     <Compile Include="Core\Dtos\UserDto.cs" />
     <Compile Include="Core\Models\ApplicationUser.cs" />
+    <Compile Include="Core\Models\Appointment.cs" />
     <Compile Include="Core\Models\AreaType.cs" />
     <Compile Include="Core\Models\AzureTest.cs" />
     <Compile Include="Core\Models\BrokerFeeType.cs" />
@@ -167,7 +169,12 @@
     <Compile Include="Core\Models\OwnershipType.cs" />
     <Compile Include="Core\Models\Pet.cs" />
     <Compile Include="Core\Models\HomeFinding.cs" />
+<<<<<<< HEAD
     <Compile Include="Core\Models\QueueEntry.cs" />
+=======
+    <Compile Include="Core\Models\PropBotJobQueueEntry.cs" />
+    <Compile Include="Core\Models\OdinToSeQueueEntry.cs" />
+>>>>>>> master
     <Compile Include="Core\Models\QueueType.cs" />
     <Compile Include="Core\Models\SEDropDownType.cs" />
     <Compile Include="Core\Models\Service.cs" />
@@ -187,7 +194,11 @@
     <Compile Include="Core\Repositories\INumberOfBathroomsTypesRepository.cs" />
     <Compile Include="Core\Repositories\IOrdersRepository.cs" />
     <Compile Include="Core\Repositories\IPetsRepository.cs" />
+<<<<<<< HEAD
+    <Compile Include="Core\Repositories\IAppointmentsRepository.cs" />
+=======
     <Compile Include="Core\Repositories\IPhotosRepository.cs" />
+>>>>>>> master
     <Compile Include="Core\Repositories\IServicesRepository.cs" />
     <Compile Include="Core\Repositories\IServiceTypesRepository.cs" />
     <Compile Include="Core\Repositories\ITransfereesRepository.cs" />
@@ -423,6 +434,8 @@
     <Compile Include="Persistence\Migrations\201711061818328_MergedInTriggerUpdateFromMaster.Designer.cs">
       <DependentUpon>201711061818328_MergedInTriggerUpdateFromMaster.cs</DependentUpon>
     </Compile>
+<<<<<<< HEAD
+=======
     <Compile Include="Persistence\Migrations\201711071800307_AddServiceFlagToOrder.cs" />
     <Compile Include="Persistence\Migrations\201711071800307_AddServiceFlagToOrder.Designer.cs">
       <DependentUpon>201711071800307_AddServiceFlagToOrder.cs</DependentUpon>
@@ -431,10 +444,28 @@
     <Compile Include="Persistence\Migrations\201711141618317_AddSortOrderAndDefault.Designer.cs">
       <DependentUpon>201711141618317_AddSortOrderAndDefault.cs</DependentUpon>
     </Compile>
+>>>>>>> master
     <Compile Include="Persistence\Migrations\201711082148046_AddHomeFindingProperties.cs" />
     <Compile Include="Persistence\Migrations\201711082148046_AddHomeFindingProperties.Designer.cs">
       <DependentUpon>201711082148046_AddHomeFindingProperties.cs</DependentUpon>
     </Compile>
+<<<<<<< HEAD
+    <Compile Include="Persistence\Migrations\201711091945348_MergeHomesModelBranch.cs" />
+    <Compile Include="Persistence\Migrations\201711091945348_MergeHomesModelBranch.Designer.cs">
+      <DependentUpon>201711091945348_MergeHomesModelBranch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201711141303411_AddActionLabel2ServiceTypes.cs" />
+    <Compile Include="Persistence\Migrations\201711141303411_AddActionLabel2ServiceTypes.Designer.cs">
+      <DependentUpon>201711141303411_AddActionLabel2ServiceTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201711151332369_AppointmentsTable.cs" />
+    <Compile Include="Persistence\Migrations\201711151332369_AppointmentsTable.Designer.cs">
+      <DependentUpon>201711151332369_AppointmentsTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201711151549288_AppointmentsDateNullable.cs" />
+    <Compile Include="Persistence\Migrations\201711151549288_AppointmentsDateNullable.Designer.cs">
+      <DependentUpon>201711151549288_AppointmentsDateNullable.cs</DependentUpon>
+=======
     <Compile Include="Persistence\Migrations\201711131931315_MergeNov13.cs" />
     <Compile Include="Persistence\Migrations\201711131931315_MergeNov13.Designer.cs">
       <DependentUpon>201711131931315_MergeNov13.cs</DependentUpon>
@@ -443,11 +474,10 @@
     <Compile Include="Persistence\Migrations\201711151608086_MergeAddSortOrderAndDefault.Designer.cs">
       <DependentUpon>201711151608086_MergeAddSortOrderAndDefault.cs</DependentUpon>
     </Compile>
-<<<<<<< HEAD
     <Compile Include="Persistence\Migrations\201711212055489_AddPhotos.cs" />
     <Compile Include="Persistence\Migrations\201711212055489_AddPhotos.Designer.cs">
       <DependentUpon>201711212055489_AddPhotos.cs</DependentUpon>
-=======
+    </Compile>
     <Compile Include="Persistence\Migrations\201711151901404_SwitchNumberOfBathsOnProperty.cs" />
     <Compile Include="Persistence\Migrations\201711151901404_SwitchNumberOfBathsOnProperty.Designer.cs">
       <DependentUpon>201711151901404_SwitchNumberOfBathsOnProperty.cs</DependentUpon>
@@ -455,6 +485,14 @@
     <Compile Include="Persistence\Migrations\201711152045272_MergeNov15.cs" />
     <Compile Include="Persistence\Migrations\201711152045272_MergeNov15.Designer.cs">
       <DependentUpon>201711152045272_MergeNov15.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201711221443006_MergeAddPhotos.cs" />
+    <Compile Include="Persistence\Migrations\201711221443006_MergeAddPhotos.Designer.cs">
+      <DependentUpon>201711221443006_MergeAddPhotos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201711271705015_CleanUpPhotos.cs" />
+    <Compile Include="Persistence\Migrations\201711271705015_CleanUpPhotos.Designer.cs">
+      <DependentUpon>201711271705015_CleanUpPhotos.cs</DependentUpon>
 >>>>>>> master
     </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
@@ -462,7 +500,11 @@
     <Compile Include="Persistence\OrdersRepository.cs" />
     <Compile Include="Persistence\PetsRepository.cs" />
     <Compile Include="Persistence\HomeFindingsRepository.cs" />
+<<<<<<< HEAD
+    <Compile Include="Persistence\AppointmentsRepository.cs" />
+=======
     <Compile Include="Persistence\PhotosRepository.cs" />
+>>>>>>> master
     <Compile Include="Persistence\ServicesRepository.cs" />
     <Compile Include="Persistence\ServiceTypesRepository.cs" />
     <Compile Include="Persistence\TransfereesRepository.cs" />
@@ -638,6 +680,22 @@
     <EmbeddedResource Include="Persistence\Migrations\201711061818328_MergedInTriggerUpdateFromMaster.resx">
       <DependentUpon>201711061818328_MergedInTriggerUpdateFromMaster.cs</DependentUpon>
     </EmbeddedResource>
+<<<<<<< HEAD
+    <EmbeddedResource Include="Persistence\Migrations\201711082148046_AddHomeFindingProperties.resx">
+      <DependentUpon>201711082148046_AddHomeFindingProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711091945348_MergeHomesModelBranch.resx">
+      <DependentUpon>201711091945348_MergeHomesModelBranch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711141303411_AddActionLabel2ServiceTypes.resx">
+      <DependentUpon>201711141303411_AddActionLabel2ServiceTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711151332369_AppointmentsTable.resx">
+      <DependentUpon>201711151332369_AppointmentsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711151549288_AppointmentsDateNullable.resx">
+      <DependentUpon>201711151549288_AppointmentsDateNullable.cs</DependentUpon>
+=======
     <EmbeddedResource Include="Persistence\Migrations\201711071800307_AddServiceFlagToOrder.resx">
       <DependentUpon>201711071800307_AddServiceFlagToOrder.cs</DependentUpon>
     </EmbeddedResource>
@@ -653,15 +711,20 @@
     <EmbeddedResource Include="Persistence\Migrations\201711151608086_MergeAddSortOrderAndDefault.resx">
       <DependentUpon>201711151608086_MergeAddSortOrderAndDefault.cs</DependentUpon>
     </EmbeddedResource>
-<<<<<<< HEAD
     <EmbeddedResource Include="Persistence\Migrations\201711212055489_AddPhotos.resx">
       <DependentUpon>201711212055489_AddPhotos.cs</DependentUpon>
-=======
+    </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201711151901404_SwitchNumberOfBathsOnProperty.resx">
       <DependentUpon>201711151901404_SwitchNumberOfBathsOnProperty.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201711152045272_MergeNov15.resx">
       <DependentUpon>201711152045272_MergeNov15.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711221443006_MergeAddPhotos.resx">
+      <DependentUpon>201711221443006_MergeAddPhotos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711271705015_CleanUpPhotos.resx">
+      <DependentUpon>201711271705015_CleanUpPhotos.cs</DependentUpon>
 >>>>>>> master
     </EmbeddedResource>
   </ItemGroup>

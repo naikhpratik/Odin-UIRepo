@@ -476,6 +476,12 @@
                 if (e.type === 'dp.change' && ((e.date && e.date.isSame(e.oldDate)) || (!e.date && !e.oldDate))) {
                     return;
                 }
+
+                //Prevent trigger if initializing, basically if the DateTimePicker
+                //data is not yet set, where still initializing
+                if (!element.data('DateTimePicker')) return;
+                //End mod
+
                 element.trigger(e);
             },
 

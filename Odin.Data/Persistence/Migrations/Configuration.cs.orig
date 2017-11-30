@@ -4,11 +4,11 @@ using Microsoft.Azure.Mobile.Server.Tables;
 using Odin.Data.Builders;
 using Odin.Data.Core.Models;
 <<<<<<< HEAD
-using System.Collections.Generic;
 =======
+using System.Collections.Generic;
+>>>>>>> master
 using System;
 using System.Data.Entity;
->>>>>>> master
 using System.Data.Entity.Migrations;
 using System.Linq;
 
@@ -39,12 +39,15 @@ namespace Odin.Data.Persistence.Migrations
             SeedTransportationTypes(context);
             SeedDepositTypes(context);
             SeedBrokerFeeTypes(context);
+<<<<<<< HEAD
+=======
             SeedServiceTypes(context);
 
             SeedInitialRoles(context);
             SeedInitialUsers(context);
             CreateOrderData(context);
             PopulateSeContactUids(context);
+>>>>>>> master
             SeedHomeFindingPropertiesIfNone(context);
         }
 
@@ -412,6 +415,8 @@ namespace Odin.Data.Persistence.Migrations
             context.SaveChanges();
         }
 
+<<<<<<< HEAD
+=======
         private void SeedServiceTypes(ApplicationDbContext context)
         {
             if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Initial/Pre-Arrival Consultation".ToUpper()))
@@ -1127,6 +1132,7 @@ namespace Odin.Data.Persistence.Migrations
 
             context.SaveChanges();
         }
+>>>>>>> master
 
         private void SeedHomeFindingPropertiesIfNone(ApplicationDbContext context)
         {

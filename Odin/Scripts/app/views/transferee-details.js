@@ -18,9 +18,11 @@ var TransfereeDetailsController = function (transfereeDetailseService) {
         var detailsBlocks = pnlDetails.find("#servicesBlock");
 
         detailsBlocks.find('.date').datetimepicker({    
-            format: "MM/DD/YY",
+            format: "MM/DD/YYYY",
             useCurrent:true,
             keepOpen: false
+        }).on("dp.change", function (e) {
+            saveBlock(e);
         });
         detailsBlocks.find('.time').datetimepicker({
             format: 'LT',
@@ -46,9 +48,11 @@ var TransfereeDetailsController = function (transfereeDetailseService) {
 
     var saveBlock = function (e) {;
         var detailsBlock = $(e.target).parents(".details-services");
+
         var block = detailsBlock.attr("data-block");
         var rows = detailsBlock.find(".details-row[data-entity-id]");
         var err = false;
+       
         var saveSuccess = function () {
             toast('changes to service dates are successful', 'success');
         }
@@ -57,7 +61,7 @@ var TransfereeDetailsController = function (transfereeDetailseService) {
         }
 
         var data = { "Id": orderId };
-       
+        
         rows.each(function () {
             if (err)
                 return;
@@ -80,8 +84,7 @@ var TransfereeDetailsController = function (transfereeDetailseService) {
                 }
             } else {
                 fillPostData(data, rowInputs);
-            }
-            
+            }            
         });
          if (!err)            
         TransfereeDetailsService.updateDetailsBlock(block, data, saveSuccess, saveFail);
@@ -91,19 +94,24 @@ var TransfereeDetailsController = function (transfereeDetailseService) {
         var sd = '';
         var st = '';
         var cd = '';
+        var timeTag;
         inputs.each(function () {
             var input = $(this);
             sd = input.attr("name") == "ScheduledDate" ? input.val() : sd;
-            st = input.attr("name") == "ScheduledTime" ? input.val() : st;
+            if (input.attr("name") == "ScheduledTime")
+            { 
+                st = input.val();
+                timeTag = input.parent().find('.glyphicon-time');                
+            }
             cd = input.attr("name") == "CompletedDate" ? input.val() : cd;
         });
-        if (sd.length > 0 && st == '') {            
-            $('.text-danger[data-entity-id="' + data['Id'] + '"]').show();
-            return -1;            
+        if (sd.length > 0 && st == '') {
+            toast('schedule time is required', 'danger');
+            timeTag.click();
+            err = -1;
+            return err;            
         }
-        else           
-            $('.text-danger[data-entity-id="' + data['Id'] + '"]').hide();
-
+        
         data["ScheduledDate"] = sd + ' ' + st;        
         data["CompletedDate"] = cd;
         

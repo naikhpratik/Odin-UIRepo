@@ -1,8 +1,21 @@
 ﻿@import "../shared/_definitions.scss";
 
-.mapWrapper img {
-    display: block;
-    width: 100%;
+.mapWrapper {
+    height: 27.5rem;
+    overflow: hidden;
+    position: relative;
+
+    background-image: url('');
+    background-position: center;
+    background-size: cover;
+
+    img {
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
+        display: block;
+        width: 100%;
+    }
 }
 
 #propertiesControls {

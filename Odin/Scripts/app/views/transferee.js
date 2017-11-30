@@ -12,9 +12,17 @@
             initPanels();
         });
 
-        $('.item').click(function () {
+        $('.item').click(function () {     
+            $('.item.selected').removeClass('selected');            
+            $(this).addClass('selected');
             var actionName = $(this).attr('data-panel');
             loadPanel(actionName);
+            $('#orderContainer').load('/orders/' + actionName + 'Partial/' + currentOrderId);
+
+            if ($('.navbar-toggle').css('display') != 'none')
+            {
+                $('.navbar-toggle').click();
+            }
         });
 
         // ensure icon spacing is adequate on mobile
@@ -37,18 +45,6 @@
         $('#orderContainer').load('/orders/' + actionName + 'Partial/' + currentOrderId);
     }
 
-    var resizeFn = function () {
-        if (window.innerWidth <= 991) {
-            $('li.item').each(function () {
-                $(this).css("padding-right", (window.innerWidth / 6 - 52).toString() + "px");
-            });
-        }
-        else {
-            $('li.item').each(function () {
-                $(this).css("padding-right", "0px");
-            });
-        }
-    };
 
     return {
         TransfereeInit: init

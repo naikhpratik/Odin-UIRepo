@@ -67,5 +67,7 @@ namespace Odin.Data.Core.Dtos
         public ConsultantDto Consultant { get; set; }
 
         public ICollection<ServiceDto> Services { get; set; }
+
+        public ICollection<AppointmentDto> Appointments { get; set; }
     }
 }

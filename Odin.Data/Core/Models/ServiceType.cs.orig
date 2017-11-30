@@ -1,0 +1,19 @@
+﻿namespace Odin.Data.Core.Models
+{
+    public class ServiceType
+    {
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+
+<<<<<<< HEAD
+        public string ActionLabel { get; set; }
+=======
+        public int SortOrder { get; set; }
+
+        public int Default { get; set; }
+>>>>>>> master
+
+        public ServiceCategory Category { get; set; }
+    }
+}
