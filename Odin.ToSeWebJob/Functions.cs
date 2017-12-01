@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Azure.WebJobs;
+﻿using Microsoft.Azure.WebJobs;
 using Newtonsoft.Json;
 using Odin.Data.Core;
 using Odin.Data.Core.Models;
-using Odin.Data.Persistence;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace Odin.ToSeWebJob
 {

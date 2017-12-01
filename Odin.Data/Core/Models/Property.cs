@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.Entity.Spatial;
 
 namespace Odin.Data.Core.Models
 {
@@ -28,6 +26,10 @@ namespace Odin.Data.Core.Models
         public DateTime? AvailabilityDate { get; set; }
 
         public string Description { get; set; }
+
+        public DbGeography Coordinates { get; set; }
+
+        public string SourceUrl { get; set; }
 
         public ICollection<Photo> Photos { get; set; }
     }

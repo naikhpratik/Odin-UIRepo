@@ -1,10 +1,11 @@
-﻿using Odin.PropBotWebJob.Dtos;
+﻿using System.Collections.Generic;
+using Odin.Data.Core.Models;
 
 namespace Odin.PropBotWebJob.Interfaces
 {
     public interface IBot
     {
-        HousingPropertyDto Bot(string orderId);
-        HousingPropertyImagesDto BotImages(string hpId);
+        Property Bot();
+        IEnumerable<string> BotImages();
     }
 }
