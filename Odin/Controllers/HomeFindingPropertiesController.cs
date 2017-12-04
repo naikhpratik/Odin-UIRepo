@@ -37,11 +37,9 @@ namespace Odin.Controllers
             var userId = User.Identity.GetUserId();
 
             HomeFindingProperty homeFindingProperty = new HomeFindingProperty();
-            // FIXME: mapping wipes out the Id - this is hack to resolve that
-            var homeFindingPropertyId = homeFindingProperty.Id;
+            // mapping wipes out the Id - this is hack to resolve that
+            propertyVM.Id = homeFindingProperty.Id;
             homeFindingProperty = _mapper.Map<HousingPropertyViewModel, HomeFindingProperty>(propertyVM, homeFindingProperty);
-            homeFindingProperty.Id = homeFindingPropertyId;
-
 
             Order order = _unitOfWork.Orders.GetOrderFor(userId, propertyVM.OrderId);
             HomeFinding homeFinding = order.HomeFinding;
