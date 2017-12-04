@@ -173,6 +173,12 @@
     textarea {
         max-width: 100%;
     }
+
+    .input-group-addon {
+        border: 0px;
+        box-shadow: inset 0 -1px 0 #dddddd;
+        padding-left: 0;
+    }
 }
 
 #propertyDetailsModal {
