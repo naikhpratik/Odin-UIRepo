@@ -490,6 +490,10 @@
     <Compile Include="Persistence\Migrations\201711292152381_MergedAppointmentsBranch.Designer.cs">
       <DependentUpon>201711292152381_MergedAppointmentsBranch.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201712042113206_AddProgramNameToOrders.cs" />
+    <Compile Include="Persistence\Migrations\201712042113206_AddProgramNameToOrders.Designer.cs">
+      <DependentUpon>201712042113206_AddProgramNameToOrders.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\NumberOfBathroomsTypesRepository.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
@@ -716,6 +720,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201711292152381_MergedAppointmentsBranch.resx">
       <DependentUpon>201711292152381_MergedAppointmentsBranch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201712042113206_AddProgramNameToOrders.resx">
+      <DependentUpon>201712042113206_AddProgramNameToOrders.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

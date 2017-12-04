@@ -7,6 +7,7 @@ namespace Odin.Data.Core.Repositories
     {
         void Add(Service service);
         IEnumerable<Service> GetServicesByOrderId(string id);
+        Service GetServiceById(string id);
     }
     
 }

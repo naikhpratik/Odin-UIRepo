@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using Odin.Data.Core;
 using Odin.Data.Core.Models;
 using Odin.Data.Persistence;
+using ServicEngineImporter.Models;
 
 namespace Odin.ToSeWebJob
 {
@@ -33,6 +34,51 @@ namespace Odin.ToSeWebJob
             var queueEntry = JsonConvert.DeserializeObject<OdinToSeQueueEntry>(message);
             log.WriteLine(queueEntry.ObjectId);
             log.WriteLine("From VSTS second deploy");
+            if (queueEntry.QueueTypeId == (int) QueueType.Service)
+            {
+                var service = _unitOfWork.Services.GetServiceById(queueEntry.ObjectId);
+                var endPoint = GetEndPointForService(service);
+                var json = GetJsonForService(service);
+                //TODO: Post JSON
+            }
+        }
+
+        public string GetEndPointForService(Service service)
+        {
+            if (((int)service.ServiceType.Category & 3) == 0)
+                return "firstContact";
+            else if (service.Order.ProgramName.Contains("Bundled") && ((int) service.ServiceType.Category & 12) == 0)
+                return "destinationChecklist";
+            else if ((int) service.ServiceType.Category == 4)
+                return "settlingIn";
+            else if ((int) service.ServiceType.Category == 8)
+                return "areaOrientation";
+
+            return string.Empty;
+        }
+
+        public string GetColumnNameForServiceType(ServiceType serviceType)
+        {
+            var columnName = string.Empty;
+
+            return columnName;
+        }
+
+        public string GetJsonForService(Service service)
+        {
+            var json = string.Empty;
+
+            var serviceEngineId = Convert.ToInt32(service.Order.TrackingId);
+            switch (service.ServiceTypeId)
+            {
+                case 1:
+                    var firstContact = new FirstContact(serviceEngineId);
+                    firstContact.FirstFaceToFaceMeetingDate = service.CompletedDate;
+                    json = JsonConvert.SerializeObject(firstContact);
+                    break;
+            }
+
+            return json;
         }
     }
 }

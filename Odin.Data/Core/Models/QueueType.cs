@@ -3,6 +3,7 @@
     public enum QueueType
     {
         Order = 1,
-        Home = 2
+        Home = 2,
+        Service = 4
     }
 }
