@@ -186,6 +186,7 @@
     <Compile Include="Core\Repositories\IChildrenRepository.cs" />
     <Compile Include="Core\Repositories\IConsultantsRepository.cs" />
     <Compile Include="Core\Repositories\IDepositTypesRepository.cs" />
+    <Compile Include="Core\Repositories\IHomeFindingPropertyRepository.cs" />
     <Compile Include="Core\Repositories\IHousingTypesRepository.cs" />
     <Compile Include="Core\Repositories\IManagersRepository.cs" />
     <Compile Include="Core\Repositories\INumberOfBathroomsTypesRepository.cs" />
@@ -213,6 +214,7 @@
     <Compile Include="Persistence\EntityConfigurations\HomeFindingPropertiesConfiguration.cs" />
     <Compile Include="Persistence\EntityConfigurations\OrderConfiguration.cs" />
     <Compile Include="Persistence\EntityConfigurations\HomeFindingConfiguration.cs" />
+    <Compile Include="Persistence\HomeFindingPropertyRepository.cs" />
     <Compile Include="Persistence\HousingTypesRepository.cs" />
     <Compile Include="Persistence\IApplicationDbContext.cs" />
     <Compile Include="Persistence\ManagersRepository.cs" />

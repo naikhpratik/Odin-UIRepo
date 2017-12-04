@@ -400,6 +400,7 @@
     <Content Include="Content\css\bookmarklet.min.css">
       <DependentUpon>bookmarklet.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\shared\thumbnails.carousel.css" />
     <Content Include="Content\css\transferee\details.css">
       <DependentUpon>details.scss</DependentUpon>
     </Content>
@@ -844,6 +845,7 @@
     <Content Include="Scripts\DataTables\responsive.semanticui.js" />
     <Content Include="Scripts\DataTables\responsive.semanticui.min.js" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
+    <Content Include="Scripts\thumbnails.carousel.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
     <Content Include="Scripts\jquery-1.12.4.min.js" />
     <Content Include="Scripts\jquery-1.12.4.min.map" />
@@ -927,6 +929,8 @@
     <Content Include="Views\Orders\Partials\_HousingProperties.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\UnitedStates.cshtml" />
     <Content Include="Views\BookMarklet\Error.cshtml" />
+    <Content Include="Views\Orders\Partials\_PropertyDetails.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Photos.cshtml" />
     <None Include="Web.Azure.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

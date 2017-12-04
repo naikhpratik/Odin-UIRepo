@@ -19,8 +19,10 @@ namespace Odin.ViewModels.Orders.Transferee
         }
 
         public String OrderId { get; set; }
+        public String Id { get; set; }
 
         [DisplayFormat(ConvertEmptyStringToNull = true, NullDisplayText ="", HtmlEncode = false)]
+        [Display(Name = "Address")]
         public string PropertyAddress { get
             {
                 var addressMarkup = PropertyStreet1 + "<br />";
@@ -75,7 +77,7 @@ namespace Odin.ViewModels.Orders.Transferee
         [Range(0, 99999)]
         public int? PropertySquareFootage { get; set; }
 
-        [Display(Name = "Price Amount")]
+        [Display(Name = "Price")]
         [DisplayFormat(NullDisplayText = "NA", DataFormatString = "{0:c}")]
         [DataType(DataType.Currency)]
         public Decimal PropertyAmount { get; set; }
@@ -88,6 +90,7 @@ namespace Odin.ViewModels.Orders.Transferee
         [Display(Name = "Photos")]
         public IEnumerable<HttpPostedFileBase> UploadedPhotos { get; set; }
 
+        [DataType("Photos")]
         public IEnumerable<PhotoViewModel> PropertyPhotos { get; set; }
 
         public String ThumbnailPhotoUrl {  get

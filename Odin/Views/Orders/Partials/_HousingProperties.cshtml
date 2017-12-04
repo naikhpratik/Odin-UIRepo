@@ -31,7 +31,7 @@
 
         @foreach (var propertyVM in Model)
             {
-            <li class="row propertyItem">
+            <li class="row propertyItem" data-property-id="@propertyVM.Id">
                 <div class="col-md-1">
                     <img class="location" src="@propertyVM.ThumbnailPhotoUrl" />
                 </div>
@@ -69,3 +69,17 @@
 
     </ul>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('.propertyItem').click(function (event) {
+            var propertyId = $(event.delegateTarget).data("property-id");
+            var propertyModalUrl = '/homefindingproperties/propertypartial/' + propertyId;
+            $('#propertyModalBody').load(propertyModalUrl, function (response, status, xhr) {
+                if (status == "success") {
+                    $('#propertyDetailsModal').modal('show');
+                }
+            });
+        });
+    });
+</script>

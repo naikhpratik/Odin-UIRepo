@@ -16,6 +16,7 @@ using System.Collections.ObjectModel;
 
 namespace Odin.Controllers
 {
+    [Authorize]
     public class HomeFindingPropertiesController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -31,13 +32,16 @@ namespace Odin.Controllers
 
         // POST /homefindingproperties
         [HttpPost]
-        [Authorize]
         public ActionResult Index(HousingPropertyViewModel propertyVM)
         {
             var userId = User.Identity.GetUserId();
 
             HomeFindingProperty homeFindingProperty = new HomeFindingProperty();
+            // FIXME: mapping wipes out the Id - this is hack to resolve that
+            var homeFindingPropertyId = homeFindingProperty.Id;
             homeFindingProperty = _mapper.Map<HousingPropertyViewModel, HomeFindingProperty>(propertyVM, homeFindingProperty);
+            homeFindingProperty.Id = homeFindingPropertyId;
+
 
             Order order = _unitOfWork.Orders.GetOrderFor(userId, propertyVM.OrderId);
             HomeFinding homeFinding = order.HomeFinding;
@@ -70,6 +74,18 @@ namespace Odin.Controllers
             }
 
             return new HttpStatusCodeResult(HttpStatusCode.NoContent);
+        }
+
+        // GET /homefindingproperties/propertypartial/[propertyId]
+        [HttpGet]
+        public ActionResult PropertyPartial(string id)
+        {
+            HomeFindingProperty homeFindingProperty;
+            homeFindingProperty = _unitOfWork.HomeFindingProperties.GetHomeFindingPropertyById(id);
+
+            HousingPropertyViewModel viewModel = _mapper.Map<HomeFindingProperty, HousingPropertyViewModel>(homeFindingProperty);
+
+            return PartialView("~/views/orders/partials/_PropertyDetails.cshtml", viewModel);
         }
     }
 }

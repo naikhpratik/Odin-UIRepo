@@ -74,6 +74,9 @@
 .propertyItem {
   margin: 0 0 0 0;
   padding: 0 0 0 0; }
+  .propertyItem:hover {
+    background-color: #f5f5f5;
+    cursor: pointer; }
   .propertyItem > div p {
     color: #858585;
     text-align: center;

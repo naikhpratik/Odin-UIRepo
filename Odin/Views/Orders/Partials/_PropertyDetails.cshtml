@@ -1,0 +1,47 @@
+﻿@model Odin.ViewModels.Orders.Transferee.HousingPropertyViewModel
+
+<div class="container-fluid">
+    <h5><strong>Available on:</strong> @Html.DisplayFor(model => model.PropertyAvailabilityDate)</h5>
+    <div class="row">
+        <div class="col-md-8">
+            @Html.DisplayFor(p => p.PropertyPhotos)
+        </div>
+
+        <div class="col-md-4">
+            <ul class="row sectionList">
+                <li class="col-md-12">
+                    <label>@Html.DisplayNameFor(model => model.PropertyAddress)</label>
+                    <p>@Html.DisplayFor(model => model.PropertyAddress)</p>
+                </li>
+
+                <li class="col-md-6">
+                    <label>@Html.DisplayNameFor(model => model.PropertyNumberOfBedrooms)</label>
+                    <p>@Html.DisplayFor(model => model.PropertyNumberOfBedrooms)</p>
+                </li>
+                <li class="col-md-6">
+                    <label>@Html.DisplayNameFor(model => model.PropertyNumberOfBathrooms)</label>
+                    <p>@Html.DisplayFor(model => model.PropertyNumberOfBathrooms)</p>
+                </li>
+
+                <li class="col-md-6">
+                    <label>@Html.DisplayNameFor(model => model.PropertySquareFootage)</label>
+                    <p>@Html.DisplayFor(model => model.PropertySquareFootage)</p>
+                </li>
+                <li class="col-md-6">
+                    <label>@Html.DisplayNameFor(model => model.PropertyAmount)</label>
+                    <p>@Html.DisplayFor(model => model.PropertyAmount)</p>
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="col-md-12">
+            <ul class="row sectionList">
+                <li class="col-md-12">
+                    <label>@Html.DisplayNameFor(model => model.PropertyDescription)</label>
+                    <p>@Html.DisplayFor(model => model.PropertyDescription)</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
