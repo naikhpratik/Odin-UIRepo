@@ -27,6 +27,7 @@ namespace Odin
             CreateMap<Pet, PetViewModel>();
             CreateMap<ServiceType, ServiceTypeViewModel>();
             CreateMap<HomeFinding, HomeFindingViewModel>();
+            CreateMap<UserNotification, NotificationViewModel>();
 
             /*Order - Index*/
             CreateMap<Order, OrdersIndexViewModel>();

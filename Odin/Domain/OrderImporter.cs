@@ -15,6 +15,8 @@ namespace Odin.Domain
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
+
+
         public OrderImporter(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
@@ -24,10 +26,14 @@ namespace Odin.Domain
         public void ImportOrder(OrderDto orderDto)
         {
             var order = _unitOfWork.Orders.GetOrderByTrackingId(orderDto.TrackingId);
-            var consultantId = _unitOfWork.Consultants.GetConsultantBySeContactUid(orderDto.Consultant.SeContactUid).Id;
+            Consultant consultant = _unitOfWork.Consultants.GetConsultantBySeContactUid(orderDto.Consultant.SeContactUid);
+            var consultantId = consultant.Id;
             var transferee = _unitOfWork.Transferees.GetTransfereeByEmail(orderDto.Transferee.Email);
-            
+
+
             var programManagerId = _unitOfWork.Managers.GetManagerBySeContactUid(orderDto.ProgramManager.SeContactUid).Id;
+
+            var IsNew = false;
 
             if (order == null)
             {
@@ -40,6 +46,7 @@ namespace Odin.Domain
                 }
 
                 _unitOfWork.Orders.Add(order);
+                IsNew = true;
             }
             else
             {
@@ -86,10 +93,26 @@ namespace Odin.Domain
             order.ConsultantId = consultantId;
             order.ProgramManagerId = programManagerId;
 
-            _unitOfWork.Complete();
             
+            if (!IsNew)
+            {
+                Notification notification = new Notification()
+                {
+                    NotificationType = NotificationType.OrderCreated,
+                    Message = "A New order is created",
+                    Title = "New Order Creation",
+                    OrderId = order.Id
+                };
+
+                consultant.Notify(notification);
+                
+            }
+            
+            _unitOfWork.Complete();
+
+
         }
-        
-        
+
+
     }
 }

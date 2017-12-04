@@ -17,7 +17,8 @@ namespace Odin
                         "~/Scripts/bootstrap-datetimepicker.js",                        
                         "~/Scripts/respond.js",
                         "~/Scripts/datatables/jquery.datatables.js",
-                        "~/Scripts/datatables/datatables.bootstrap.js"));
+                        "~/Scripts/datatables/datatables.bootstrap.js",
+                        "~/Scripts/app/views/_header.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -35,7 +36,8 @@ namespace Odin
                       "~/Content/bootstrap-datetimepicker.css",
                       "~/Content/site.css",
                       "~/Content/css/primaryNav.css",
-                      "~/Content/datatables/css/datatables.bootstrap.css"));
+                      "~/Content/datatables/css/datatables.bootstrap.css",
+                      "~/Content/animate.css"));
 
 
             // Page Styling

@@ -154,6 +154,8 @@
     <Compile Include="Core\Models\BrokerFeeType.cs" />
     <Compile Include="Core\Models\Child.cs" />
     <Compile Include="Core\Models\HomeFindingProperty.cs" />
+    <Compile Include="Core\Models\Notification.cs" />
+    <Compile Include="Core\Models\NotificationType.cs" />
     <Compile Include="Core\Models\Property.cs" />
     <Compile Include="Core\Models\Consultant.cs" />
     <Compile Include="Core\Models\DepositType.cs" />
@@ -175,6 +177,7 @@
     <Compile Include="Core\Models\DefaultType.cs" />
     <Compile Include="Core\Models\Transferee.cs" />
     <Compile Include="Core\Models\TransportationType.cs" />
+    <Compile Include="Core\Models\UserNotification.cs" />
     <Compile Include="Core\Models\UserRoles.cs" />
     <Compile Include="Core\Repositories\IAreaTypesRepository.cs" />
     <Compile Include="Core\Repositories\IBrokerFeeTypesRepository.cs" />
@@ -190,6 +193,7 @@
     <Compile Include="Core\Repositories\IServiceTypesRepository.cs" />
     <Compile Include="Core\Repositories\ITransfereesRepository.cs" />
     <Compile Include="Core\Repositories\ITransportationTypesRepository.cs" />
+    <Compile Include="Core\Repositories\IUserNotificationRepository.cs" />
     <Compile Include="Core\Repositories\IUsersRepository.cs" />
     <Compile Include="Extensions\ModelStateExtensions.cs" />
     <Compile Include="Helpers\PasswordHelper.cs" />
@@ -441,6 +445,14 @@
     <Compile Include="Persistence\Migrations\201711151608086_MergeAddSortOrderAndDefault.Designer.cs">
       <DependentUpon>201711151608086_MergeAddSortOrderAndDefault.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201711201759564_AddNotification.cs" />
+    <Compile Include="Persistence\Migrations\201711201759564_AddNotification.Designer.cs">
+      <DependentUpon>201711201759564_AddNotification.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201711202009571_AddOrderInfoToNotification.cs" />
+    <Compile Include="Persistence\Migrations\201711202009571_AddOrderInfoToNotification.Designer.cs">
+      <DependentUpon>201711202009571_AddOrderInfoToNotification.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\NumberOfBathroomsTypesRepository.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
@@ -451,6 +463,7 @@
     <Compile Include="Persistence\TransfereesRepository.cs" />
     <Compile Include="Persistence\TransportationTypesRepository.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
+    <Compile Include="Persistence\UserNotificationRepository.cs" />
     <Compile Include="Persistence\UsersRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validations\HasManagerRoleAttribute.cs" />
@@ -635,6 +648,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201711151608086_MergeAddSortOrderAndDefault.resx">
       <DependentUpon>201711151608086_MergeAddSortOrderAndDefault.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711201759564_AddNotification.resx">
+      <DependentUpon>201711201759564_AddNotification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711202009571_AddOrderInfoToNotification.resx">
+      <DependentUpon>201711202009571_AddOrderInfoToNotification.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

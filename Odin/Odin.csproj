@@ -300,8 +300,10 @@
     <Compile Include="Controllers\Api\ConsultantsController.cs" />
     <Compile Include="Controllers\Api\ManagersController.cs" />
     <Compile Include="Controllers\Api\OrdersController.cs" />
+    <Compile Include="Controllers\Api\UserNotificationController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Controllers\UserNotificationController.cs" />
     <Compile Include="Domain\ImageStore.cs" />
     <Compile Include="Domain\QueueStore.cs" />
     <Compile Include="Domain\ConsultantImporter.cs" />
@@ -361,6 +363,7 @@
     <Compile Include="ViewModels\Orders\Transferee\OrdersTransfereeViewModel.cs" />
     <Compile Include="ViewModels\Shared\ChildViewModel.cs" />
     <Compile Include="ViewModels\Shared\ManagerViewModel.cs" />
+    <Compile Include="ViewModels\Shared\NotificationViewModel.cs" />
     <Compile Include="ViewModels\Shared\PetViewModel.cs" />
     <Compile Include="ViewModels\Shared\HomeFindingViewModel.cs" />
     <Compile Include="ViewModels\Shared\ServiceTypeViewModel.cs" />
@@ -696,6 +699,7 @@
     <Content Include="Scripts\app\views\transferee.js" />
     <Content Include="Scripts\app\views\forgotPassword.js" />
     <Content Include="Scripts\app\views\orders.js" />
+    <Content Include="Scripts\app\views\_header.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap-notify.min.js" />
@@ -880,6 +884,7 @@
     <Content Include="Views\Orders\Partials\_Itinerary.cshtml" />
     <Content Include="Views\Orders\Partials\_Messages.cshtml" />
     <Content Include="Views\Orders\Partials\_History.cshtml" />
+    <Content Include="Views\Shared\Partials\_notifications.cshtml" />
     <None Include="Web.Azure.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

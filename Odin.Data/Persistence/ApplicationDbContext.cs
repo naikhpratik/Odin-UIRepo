@@ -35,6 +35,9 @@ namespace Odin.Data.Persistence
         public virtual DbSet<Property> Properties { get; set; }
         public virtual DbSet<HomeFindingProperty> HomeFindingProperties { get; set; }
 
+        public virtual DbSet<Notification> Notifications { get; set; }
+        public virtual DbSet<UserNotification> UserNotifications { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
