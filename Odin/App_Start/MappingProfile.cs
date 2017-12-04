@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Odin.Data.Core.Dtos;
 using Odin.Data.Core.Models;
-
+using Odin.ViewModels.BookMarklet;
 using Odin.ViewModels.Orders.Index;
 using Odin.ViewModels.Orders.Transferee;
 using Odin.ViewModels.Shared;
@@ -22,6 +22,7 @@ namespace Odin
             CreateMap<Manager, ManagerViewModel>();
             CreateMap<Service, ServiceViewModel>()
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.ServiceType.Name))
+                .ForMember(dest => dest.ActionLabel, opt => opt.MapFrom(src => src.ServiceType.ActionLabel))
                 .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.ServiceType.Category));
             CreateMap<Child, ChildViewModel>();
             CreateMap<Pet, PetViewModel>();
@@ -32,10 +33,24 @@ namespace Odin
             CreateMap<Order, OrdersIndexViewModel>();
             CreateMap<Order, OrdersTransfereeViewModel>();
 
+            /*Itinerary */
+            CreateMap<Appointment, ItineraryEntryViewModel>()
+                .ForMember(m => m.ItemType, opt => opt.MapFrom(src => src.GetType().ToString()))
+                .ForMember(m => m.ScheduledDate, opt => opt.MapFrom(src => src.ScheduledDate))
+                .ForMember(m => m.ActionLabel, opt => opt.MapFrom(src => src.Description));
+            CreateMap<Service, ItineraryEntryViewModel>()
+                .ForMember(m => m.ItemType, opt => opt.MapFrom(src => src.GetType().ToString()))
+                .ForMember(m => m.ScheduledDate, opt => opt.MapFrom(src => src.ScheduledDate))
+                .ForMember(m => m.ActionLabel, opt => opt.MapFrom(src => src.ServiceType.ActionLabel));
+
+
             CreateMap<Order, HousingViewModel>();
             CreateMap<HomeFinding, HousingViewModel>();
             CreateMap<HomeFindingProperty, HousingPropertyViewModel>().ReverseMap();
             CreateMap<Photo, PhotoViewModel>();
+
+            /*BookMarklet*/
+            CreateMap<Order, BookMarkletOrderViewModel>();
 
             /*DTO Mappings*/
 
@@ -43,6 +58,7 @@ namespace Odin
                 .ForMember(m => m.Transferee, opt => opt.Ignore())
                 .ForMember(m => m.Consultant, opt => opt.Ignore())
                 .ForMember(m => m.ProgramManager, opt => opt.Ignore())
+                .ForMember(m => m.Appointments, opt => opt.Ignore())
                 .ForMember(m => m.Services, opt => opt.Ignore());
 
             CreateMap<TransfereeDto, Transferee>();
@@ -54,6 +70,7 @@ namespace Odin
             CreateMap<ManagerDto, Manager>();
             CreateMap<ConsultantImportDto, Consultant>();
             CreateMap<ServiceDto, Service>();
+            CreateMap<AppointmentDto, Appointment>();
 
             CreateMap<ChildDto, Child>();
             CreateMap<PetDto, Pet>();
@@ -82,6 +99,10 @@ namespace Odin
             CreateMap<OrdersTransfereeIntakeLeaseDto, Order>();
             CreateMap<OrdersTransfereeDetailsServiceDto, Service>();
             CreateMap<OrdersTransfereeIntakeRelocationDto, Order>();
+            CreateMap<BookMarkletDto, BookMarkletAddViewModel>();
+
+            /*Web Jobs*/
+            CreateMap<BookMarkletDto, PropBotJobQueueEntry>();
         }
     }
 }

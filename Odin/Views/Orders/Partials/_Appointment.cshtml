@@ -1,0 +1,15 @@
+﻿@model Odin.Data.Core.Models.Appointment
+<div id="appointmentModal" data-appointment-id="@Model.Id">
+	
+			@Html.DisplayNameFor(Model => Model.ScheduledDate)
+			@Html.DatePicker("date", "ScheduledDate", Model.ScheduledDate.HasValue ? Model.ScheduledDate.Value.ToString():DateTime.Now.ToShortDateString())
+			@Html.DisplayNameFor(Model => Model.Description)
+			@Html.EditorFor(Model => Model.Description, new { htmlAttributes = new { @class = "form-control", @type="input", @style="max-width:100%" } })
+
+</div>
+@*@Styles.Render("~/Styling/appointment")*@
+<script>
+	$(document).ready(function () {
+        TransfereeAppointmentController.init();
+    });
+</script>

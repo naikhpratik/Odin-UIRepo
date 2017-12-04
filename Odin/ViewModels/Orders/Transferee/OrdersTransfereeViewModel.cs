@@ -45,6 +45,8 @@ namespace Odin.ViewModels.Orders.Transferee
 
         public bool IsRush { private get; set; }
 
+        public string RelocationType { get; set; }
+
         [DisplayName("Rush:")]
         public string IsRushDisplay {
             get

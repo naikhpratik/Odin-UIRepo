@@ -1,9 +1,4 @@
-﻿#orderContainer {
-  margin-left: 18rem;
-  margin-top: 8rem;
-  width: auto; }
-
-div[data-notify].alert-success {
+﻿div[data-notify].alert-success {
   background-color: #8d0b56; }
 
 div[data-notify].alert-danger {

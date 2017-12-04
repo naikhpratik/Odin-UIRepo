@@ -1,5 +1,9 @@
 ﻿[
   {
+    "inputFile": "Content/css/transferee/sideNav.scss",
+    "outputFile": "Content/css/transferee/sideNav.css"
+  },
+  {
     "inputFile": "Content/css/primaryNav.scss",
     "outputFile": "Content/css/primaryNav.css"
   },
@@ -42,5 +46,13 @@
   {
     "inputFile": "Content/css/transferee/housing.scss",
     "outputFile": "Content/css/transferee/housing.css"
+  },
+  {
+    "inputFile": "Content/css/transferee/itinerary.scss",
+    "outputFile": "Content/css/transferee/itinerary.css"
+  },
+  {
+    "inputFile": "Content/css/bookmarklet.scss",
+    "outputFile": "Content/css/bookmarklet.css"
   }
 ]

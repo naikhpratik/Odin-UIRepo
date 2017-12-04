@@ -101,7 +101,7 @@ namespace Odin.Controllers.Api
             _mapper.Map<OrdersTransfereeIntakeOriginDto, Order>(dto, order);
             _unitOfWork.Complete();
 
-            _queueStore.Add(new QueueEntry(order.Id, QueueType.Order));
+            _queueStore.Add(new OdinToSeQueueEntry(order.Id, QueueType.Order));
 
             return Ok();
         }
@@ -415,7 +415,7 @@ namespace Odin.Controllers.Api
 
             var userId = User.Identity.GetUserId();
             var order = _unitOfWork.Orders.GetOrderFor(userId, dto.Id);
-
+            
             if (order == null)
             {
                 return NotFound();
@@ -424,6 +424,57 @@ namespace Odin.Controllers.Api
             _mapper.Map<OrdersTransfereeIntakeRelocationDto, Order>(dto, order);
             _unitOfWork.Complete();
 
+            return Ok();
+        }
+        [HttpDelete]
+        [Authorize]
+        [Route("api/orders/transferee/itinerary/appointment/{id}")]
+        public IHttpActionResult DeleteAppointment(string Id)
+        {
+            var userId = User.Identity.GetUserId();
+            var appt = _unitOfWork.Appointments.GetAppointmentById(Id);
+
+            if (appt == null)
+            {
+                return NotFound();
+            }
+            _unitOfWork.Appointments.Remove(appt);
+            _unitOfWork.Complete();
+            return Ok();
+        }
+        [HttpPost]
+        [Authorize]
+        [Route("api/orders/transferee/itinerary/appointment")]
+        public IHttpActionResult UpsertItineraryAppointment(AppointmentDto dto)
+        {
+
+            var userId = User.Identity.GetUserId();
+            var orderId = dto.OrderId;
+
+            var order = _unitOfWork.Orders.GetOrderFor(userId, orderId);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+            if (dto.Id == null)
+            {
+                var app = new Appointment { Id = Guid.NewGuid().ToString(), OrderId = dto.OrderId, ScheduledDate = dto.ScheduledDate, Deleted = false, Description = dto.Description };
+                order.Appointments.Add(app);
+                _unitOfWork.Complete();
+                return Ok();
+            }
+            
+            var apptment = _unitOfWork.Appointments.GetAppointmentById(dto.Id);
+            if (apptment == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                _mapper.Map<AppointmentDto, Appointment>(dto, apptment);
+            }
+            _unitOfWork.Complete();
             return Ok();
         }
     }

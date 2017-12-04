@@ -23,6 +23,7 @@ namespace Odin.Tests.Controllers.Api
         private Mock<IOrdersRepository> _mockRepository;
         private Mock<IChildrenRepository> _mockChildrenRepository;
         private Mock<IPetsRepository> _mockPetsRepository;
+        private Mock<IAppointmentsRepository> _mockAppointmentsRepository;
         private Mock<IMapper> _mockMapper;
         private string _userId;
         private string _userName;
@@ -34,11 +35,15 @@ namespace Odin.Tests.Controllers.Api
             _mockMapper = new Mock<IMapper>();
             _mockChildrenRepository = new Mock<IChildrenRepository>();
             _mockPetsRepository = new Mock<IPetsRepository>();
+            _mockAppointmentsRepository = new Mock<IAppointmentsRepository>();
 
             var mockUnitOfWork = new Mock<IUnitOfWork>();
             mockUnitOfWork.SetupGet(u => u.Orders).Returns(_mockRepository.Object);
             mockUnitOfWork.SetupGet(u => u.Children).Returns(_mockChildrenRepository.Object);
             mockUnitOfWork.SetupGet(u => u.Pets).Returns(_mockPetsRepository.Object);
+            mockUnitOfWork.SetupGet(u => u.Appointments).Returns(_mockAppointmentsRepository.Object);
+            
+
 
             var mockQueueStore = new Mock<IQueueStore>();
             var mockAccountHelper = new Mock<IAccountHelper>();
@@ -479,6 +484,75 @@ namespace Odin.Tests.Controllers.Api
             var dto = new OrdersTransfereeIntakeRelocationDto() { Id = orderId };
 
             var result = _controller.UpdateIntakeRelocation(dto) as IHttpActionResult;
+            result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
+        }
+        [TestMethod]
+        public void InsertAppointment_ValidOrder_ReturnOkWithNewAppointment()
+        {
+            var orderId = "1";
+
+            Order order = new Order() { Id = orderId };
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+            var dto = new AppointmentDto() { Id = null, OrderId = orderId, ScheduledDate = DateTime.Now, Description="Test Upsert Appointemnt" };
+            var result = _controller.UpsertItineraryAppointment(dto) as IHttpActionResult;
+            result.Should().BeOfType<System.Web.Http.Results.OkResult>();
+            order.Appointments.Count.Should().Be(1);
+        }
+        [TestMethod]
+        public void UpsertItineraryAppointments_NoAppointments_ReturnNotFound()
+        {
+            var orderId = "1";
+            Order order = new Order() { Id = orderId };
+            _mockRepository.Setup(r => r.GetOrderById(orderId)).Returns(order);
+            AppointmentDto dto = new AppointmentDto() { Id = "1", OrderId=orderId, ScheduledDate = DateTime.Now, Description="Test Upsert Appointemnt" };
+            var result = _controller.UpsertItineraryAppointment(dto) as IHttpActionResult;
+            dto.Description = "testing an update, appointment exists";
+            dto.ScheduledDate = DateTime.Now;
+            result = _controller.UpsertItineraryAppointment(dto) as IHttpActionResult;
+            result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
+        }
+
+        [TestMethod]
+        public void UpsertItineraryAppointments_NoAppointments_ReturnOrderNotFound()
+        {
+            var orderId = "1";
+            Order order = null;
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+            AppointmentDto dto = new AppointmentDto() { Id = "1", OrderId = orderId, ScheduledDate = DateTime.Now, Description = "Test Upsert Appointemnt" };
+            var result = _controller.UpsertItineraryAppointment(dto) as IHttpActionResult;
+            result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
+        }
+
+        [TestMethod]
+        public void UpsertItineraryAppointments_NoAppointments_ReturnAppointmentNotFound()
+        {
+            var orderId = "1";
+            Order order = new Order() { Id = orderId };
+            _mockRepository.Setup(r => r.GetOrderById(orderId)).Returns(order);
+            AppointmentDto dto = new AppointmentDto() { Id = "2", OrderId = orderId, ScheduledDate = DateTime.Now, Description = "Test Upsert Appointemnt" };
+            var result = _controller.UpsertItineraryAppointment(dto) as IHttpActionResult;
+            dto.Description = "testing an aupdate, appointment not found";
+            dto.ScheduledDate = DateTime.Now;
+            result = _controller.UpsertItineraryAppointment(dto) as IHttpActionResult;
+            result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
+        }
+        [TestMethod]
+        public void DeleteAppointment_ValidAppointment_ReturnOkWithAppointmentDeleted()
+        {
+            var appointmentId = "1";
+            Appointment appointment = new Appointment() { Id = appointmentId };
+            _mockAppointmentsRepository.Setup(r => r.GetAppointmentById(appointmentId)).Returns(appointment);
+            var result = _controller.DeleteAppointment(appointment.Id) as IHttpActionResult;
+            result.Should().BeOfType<System.Web.Http.Results.OkResult>();
+        }
+
+        [TestMethod]
+        public void DeleteAppointment_NoAppointment_ReturnNotFound()
+        {
+            var appointmentId = "1";
+            Appointment appointment = null;
+            _mockAppointmentsRepository.Setup(r => r.GetAppointmentById(appointmentId)).Returns(appointment);
+            var result = _controller.DeletePet(appointmentId) as IHttpActionResult;
             result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
         }
     }

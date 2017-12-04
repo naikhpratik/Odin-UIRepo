@@ -1,11 +1,16 @@
-﻿#orderContainer {
-  margin-left: 18rem;
-  margin-top: 8rem;
-  width: auto; }
-
-.mapWrapper img {
-  display: block;
-  width: 100%; }
+﻿.mapWrapper {
+  height: 27.5rem;
+  overflow: hidden;
+  position: relative;
+  background-image: url("");
+  background-position: center;
+  background-size: cover; }
+  .mapWrapper img {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    display: block;
+    width: 100%; }
 
 #propertiesControls {
   border-top: 1px solid #b7a998;

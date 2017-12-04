@@ -6,6 +6,7 @@
 
         public string Name { get; set; }
 
+        public string ActionLabel { get; set; }
         public int SortOrder { get; set; }
 
         public int Default { get; set; }

@@ -128,6 +128,9 @@
     <Reference Include="Ninject.Web.WebApi.OwinHost, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.Web.WebApi.OwinHost.3.2.4.0\lib\net45-full\Ninject.Web.WebApi.OwinHost.dll</HintPath>
     </Reference>
+    <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rotativa.1.7.3\lib\net461\Rotativa.dll</HintPath>
+    </Reference>
     <Reference Include="RazorEngine, Version=3.10.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
       <HintPath>..\packages\RazorEngine.3.10.0\lib\net45\RazorEngine.dll</HintPath>
     </Reference>
@@ -301,6 +304,7 @@
     <Compile Include="Controllers\HomeFindingPropertiesController.cs" />
     <Compile Include="Controllers\Api\ManagersController.cs" />
     <Compile Include="Controllers\Api\OrdersController.cs" />
+    <Compile Include="Controllers\BookMarkletController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Domain\ImageStore.cs" />
@@ -311,6 +315,7 @@
     <Compile Include="Extensions\HttpResponseMessageExtensions.cs" />
     <Compile Include="Filters\AiHandleErrorAttribute.cs" />
     <Compile Include="Filters\ApiAuthorizeAttribute.cs" />
+    <Compile Include="Filters\AuthorizeBookMarklet.cs" />
     <Compile Include="Filters\TokenAuthorizeAttribute.cs" />
     <Compile Include="Filters\ValidationActionFilter.cs" />
     <Compile Include="Global.asax.cs">
@@ -318,6 +323,7 @@
     </Compile>
     <Compile Include="Helpers\AccountHelper.cs" />
     <Compile Include="Helpers\AzureStorageEmulatorManager.cs" />
+    <Compile Include="Helpers\BookMarkletHelper.cs" />
     <Compile Include="Helpers\ConfigHelper.cs" />
     <Compile Include="Helpers\DateHelper.cs" />
     <Compile Include="Helpers\EmailHelper.cs" />
@@ -327,6 +333,7 @@
     <Compile Include="Interfaces\IQueueStore.cs" />
     <Compile Include="Interfaces\IConfigHelper.cs" />
     <Compile Include="Interfaces\IConsultantImporter.cs" />
+    <Compile Include="Interfaces\IItinerary.cs" />
     <Compile Include="Interfaces\IManagerImporter.cs" />
     <Compile Include="Interfaces\IEmailHelper.cs" />
     <Compile Include="Interfaces\IAccountHelper.cs" />
@@ -352,6 +359,10 @@
     <Compile Include="ViewModels\Authentication\SetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Authentication\VerifyCodeViewModel.cs" />
     <Compile Include="ViewModels\Authentication\VerifyPhoneNumberViewModel.cs" />
+    <Compile Include="ViewModels\BookMarklet\BookMarkletAddViewModel.cs" />
+    <Compile Include="ViewModels\BookMarklet\BookMarkletErrorViewModel.cs" />
+    <Compile Include="ViewModels\BookMarklet\BookMarkletOrderViewModel.cs" />
+    <Compile Include="ViewModels\BookMarklet\BookMarkletViewModel.cs" />
     <Compile Include="ViewModels\Mailers\CreatePasswordViewModel.cs" />
     <Compile Include="ViewModels\Mailers\ResetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Orders\Index\OrdersIndexViewModel.cs" />
@@ -361,6 +372,7 @@
     <Compile Include="ViewModels\Orders\Transferee\OrdersTransfereeItineraryViewModel.cs" />
     <Compile Include="ViewModels\Orders\Transferee\OrdersTransfereeViewModel.cs" />
     <Compile Include="ViewModels\Shared\ChildViewModel.cs" />
+    <Compile Include="ViewModels\Shared\ItineraryEntryViewModel.cs" />
     <Compile Include="ViewModels\Shared\ManagerViewModel.cs" />
     <Compile Include="ViewModels\Shared\PetViewModel.cs" />
     <Compile Include="ViewModels\Shared\HomeFindingViewModel.cs" />
@@ -382,6 +394,12 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\bookmarklet.css">
+      <DependentUpon>bookmarklet.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\bookmarklet.min.css">
+      <DependentUpon>bookmarklet.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\shared\thumbnails.carousel.css" />
     <Content Include="Content\css\transferee\details.css">
       <DependentUpon>details.scss</DependentUpon>
@@ -418,6 +436,12 @@
     </Content>
     <Content Include="Content\css\transferee\messages.min.css">
       <DependentUpon>messages.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\transferee\sideNav.css">
+      <DependentUpon>sideNav.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\transferee\sideNav.min.css">
+      <DependentUpon>sideNav.css</DependentUpon>
     </Content>
     <Content Include="Content\css\transferee\transferee.css">
       <DependentUpon>transferee.scss</DependentUpon>
@@ -691,14 +715,22 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Rotativa\help-wkhtmltoimage.txt" />
+    <Content Include="Rotativa\help-wkhtmltopdf.txt" />
+    <Content Include="Rotativa\wkhtmltoimage.exe" />
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
     <Content Include="Scripts\app\controllers\userManagementController.js" />
     <Content Include="Scripts\app\services\userManagementService.js" />
+    <Content Include="Scripts\app\views\transferee-itin-appntmt.js" />
     <Content Include="Scripts\app\views\transferee-housing.js" />
     <Content Include="Scripts\app\views\transferee-details.js" />
+    <Content Include="Scripts\app\views\transferee-itinerary.js" />
     <Content Include="Scripts\app\views\transferee-intake.js" />
     <Content Include="Scripts\app\views\transferee.js" />
     <Content Include="Scripts\app\views\forgotPassword.js" />
     <Content Include="Scripts\app\views\orders.js" />
+    <Content Include="Scripts\bookmarklet\bookmarklet.js" />
+    <Content Include="Scripts\bookmarklet\index.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap-notify.min.js" />
@@ -711,6 +743,7 @@
     <Content Include="Content\DataTables\css\semanticui.scss" />
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
+    <Content Include="App_Browsers\qt.browser" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
@@ -732,6 +765,8 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\css\primaryNav.scss" />
+    <Content Include="Content\css\transferee\sideNav.scss" />
+    <Content Include="Content\css\bookmarklet.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
@@ -821,6 +856,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jspdf.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\moment-with-locales.js" />
     <Content Include="Scripts\moment-with-locales.min.js" />
@@ -884,9 +920,15 @@
     <Content Include="Views\Orders\Partials\_Itinerary.cshtml" />
     <Content Include="Views\Orders\Partials\_Messages.cshtml" />
     <Content Include="Views\Orders\Partials\_History.cshtml" />
+    <Content Include="Views\BookMarklet\AuthorizationError.cshtml" />
+    <Content Include="Views\Orders\Partials\_Appointment.cshtml" />
+    <Content Include="Views\BookMarklet\Index.cshtml" />
+    <Content Include="Views\BookMarklet\Shared\_BookMarklet.cshtml" />
+    <Content Include="Views\BookMarklet\Add.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\CreateHousingProperty.cshtml" />
     <Content Include="Views\Orders\Partials\_HousingProperties.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\UnitedStates.cshtml" />
+    <Content Include="Views\BookMarklet\Error.cshtml" />
     <Content Include="Views\Orders\Partials\_PropertyDetails.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Photos.cshtml" />
     <None Include="Web.Azure.config">

@@ -1,0 +1,14 @@
+﻿@model Odin.ViewModels.BookMarklet.BookMarkletAddViewModel
+@{
+    Layout = "~/Views/BookMarklet/Shared/_BookMarklet.cshtml";
+}
+
+<div class="bm-container">
+    <h3 class="bm-message">Yay!</h3>
+    <h5 class="bm-message">
+        The property has been added!  It should appear under the transferee shortly!
+    </h5>
+</div>
+<div class="bm-btn-container">
+    @Html.ActionLink("Go To Order", "Transferee", "Orders", new {Id = Model.OrderId}, new { @class = "btn btn-default btn-lg", target = "_blank" })
+</div>
