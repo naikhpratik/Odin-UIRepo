@@ -3,13 +3,13 @@
 <!-- bootstrap carousel -->
 <div id="photosCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
     <!-- Indicators -->
-    <ol class="carousel-indicators">
+    @*<ol class="carousel-indicators">
         @for (int i = 0; i < Model.Count(); i++)
         {
             var indicatorClass = i > 0 ? "" : "active";
             <li data-target="#photosCarousel" data-slide-to="@i" class="@indicatorClass" }></li>
         }
-    </ol>
+    </ol>*@
 
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
@@ -28,15 +28,17 @@
                 </div>
             </div>
         }
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#photosCarousel" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" href="#photosCarousel" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
     </div>
 
-    <!-- Controls -->
-    <a class="left carousel-control" href="#photosCarousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left"></span>
-    </a>
-    <a class="right carousel-control" href="#photosCarousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right"></span>
-    </a>
+   
 
     <!-- Thumbnails -->
     <ul class="thumbnails-carousel clearfix">
