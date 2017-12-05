@@ -32,7 +32,7 @@ namespace Odin.Controllers
 
         // POST /homefindingproperties
         [HttpPost]
-        public ActionResult Index(HousingPropertyViewModel propertyVM)
+        public ActionResult Create(HousingPropertyViewModel propertyVM)
         {
             var userId = User.Identity.GetUserId();
 

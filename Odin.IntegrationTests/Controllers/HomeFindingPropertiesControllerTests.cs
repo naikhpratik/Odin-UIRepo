@@ -59,7 +59,7 @@ namespace Odin.IntegrationTests.Controllers
 
             // Act
             HomeFindingPropertiesController controller = SetUpHomeFindingPropertiesController();
-            controller.Index(propertyVM);
+            controller.Create(propertyVM);
 
             // Assert
             Context.Entry(order).Reload();
@@ -92,7 +92,7 @@ namespace Odin.IntegrationTests.Controllers
 
             // Act
             HomeFindingPropertiesController controller = SetUpHomeFindingPropertiesController();
-            controller.Index(propertyVM);
+            controller.Create(propertyVM);
 
             // Assert
             Context.Entry(order).Reload();
@@ -114,7 +114,7 @@ namespace Odin.IntegrationTests.Controllers
             }
         }
 
-        private Order BuildOrder()
+        private Order BuildOrder(bool emptyProperties=true)
         {
             Order order = OrderBuilder.New().First();
             order.Transferee = transferee;
