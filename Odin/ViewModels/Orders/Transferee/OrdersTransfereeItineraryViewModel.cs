@@ -1,8 +1,7 @@
 ﻿using Odin.Data.Core.Models;
 using Odin.Interfaces;
 using Odin.ViewModels.Shared;
-using System;
-using System.Collections;
+using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -19,9 +18,8 @@ namespace Odin.ViewModels.Orders.Transferee
         }
 
         public string Id { get; set; }
-        public bool mustPrint { get; set; }
+        public bool IsPdf { get; set; }
         public string TransfereeName { get; set; }
-        public string TransfereeEmail { get; set; }
         public IEnumerable<ItineraryEntryViewModel> Itinerary { get; set; }
     }
 }

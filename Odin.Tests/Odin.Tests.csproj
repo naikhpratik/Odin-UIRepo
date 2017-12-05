@@ -148,6 +148,7 @@
     <Compile Include="Controllers\Api\AccountControllerTests.cs" />
     <Compile Include="Controllers\Api\OrdersControllerTests.cs" />
     <Compile Include="Controllers\OrdersControllerTests.cs" />
+    <Compile Include="Controllers\EmailControllerTests.cs" />
     <Compile Include="Domain\ConsultantImporterTests.cs" />
     <Compile Include="Domain\ManagerImporterTests.cs" />
     <Compile Include="Domain\OrderImporterTests.cs" />

@@ -301,6 +301,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\AccountController.cs" />
     <Compile Include="Controllers\Api\ConsultantsController.cs" />
+    <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\HomeFindingPropertiesController.cs" />
     <Compile Include="Controllers\Api\ManagersController.cs" />
     <Compile Include="Controllers\Api\OrdersController.cs" />
@@ -361,6 +362,7 @@
     <Compile Include="ViewModels\Authentication\VerifyPhoneNumberViewModel.cs" />
     <Compile Include="ViewModels\BookMarklet\BookMarkletViewModel.cs" />
     <Compile Include="ViewModels\Mailers\CreatePasswordViewModel.cs" />
+    <Compile Include="ViewModels\Mailers\EmailViewModel.cs" />
     <Compile Include="ViewModels\Mailers\ResetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Orders\Index\OrdersIndexViewModel.cs" />
     <Compile Include="ViewModels\Mailers\ViewRenderer.cs" />
@@ -923,6 +925,7 @@
     <Content Include="Views\Shared\EditorTemplates\CreateHousingProperty.cshtml" />
     <Content Include="Views\Orders\Partials\_HousingProperties.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\UnitedStates.cshtml" />
+    <Content Include="Views\Mailers\Partials\Email.cshtml" />
     <None Include="Web.Azure.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -933,6 +936,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Email\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">

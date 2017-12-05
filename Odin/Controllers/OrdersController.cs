@@ -73,13 +73,13 @@ namespace Odin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.Unauthorized, "Unauthorized Order");
             }
-            OrdersTransfereeViewModel viewModel = GetViewModelForOrder(id);
+            OrdersTransfereeViewModel viewModel = GetViewModelForOrderDetails(id);
             return PartialView("~/views/orders/partials/_Details.cshtml",viewModel); 
         }
 
         public ActionResult IntakePartial(string id)
         {
-            OrdersTransfereeViewModel viewModel = GetViewModelForOrder(id);
+            OrdersTransfereeViewModel viewModel = GetViewModelForOrderDetails(id);
             return PartialView("~/views/orders/partials/_Intake.cshtml", viewModel);
         }
 
@@ -87,9 +87,10 @@ namespace Odin.Controllers
         {            
             OrdersTransfereeItineraryViewModel viewModel = GetItineraryByOrderId(id);
             viewModel.Id = id;
-            viewModel.mustPrint = false;
+            viewModel.IsPdf = false;
             Transferee ee = GetTransfereeByOrderId(id);
-            viewModel.TransfereeEmail = ee.Email;
+            if (ee == null)
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound, "Not found");
             viewModel.TransfereeName = ee.FullName;
             return PartialView("~/views/orders/partials/_Itinerary.cshtml", viewModel);
         }
@@ -103,7 +104,7 @@ namespace Odin.Controllers
             }
             else
             {
-                viewModel = new Appointment() { Id = null, ScheduledDate = DateTime.Now }; ;
+                viewModel = new Appointment() { Id = null, ScheduledDate = DateTime.Now }; 
             }
             return PartialView("~/views/orders/partials/_Appointment.cshtml", viewModel);
         }
@@ -138,16 +139,20 @@ namespace Odin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.NotFound, "Not found");
             }
             ViewBag.Id = id;
-            OrdersTransfereeViewModel viewModel = GetViewModelForOrder(id);
+            OrdersTransfereeViewModel viewModel = GetViewModelForOrderDetails(id);
             return View(viewModel);
         }
-
-        private OrdersTransfereeViewModel GetViewModelForOrder(string id)
+        public Transferee GetTransfereeByOrderId(string id)
+        {
+            return _unitOfWork.Transferees.GetTransfereeByOrderId(id);
+        }
+        private OrdersTransfereeViewModel GetViewModelForOrderDetails(string id)
         {
             var userId = User.Identity.GetUserId();
-            var order = _unitOfWork.Orders.GetOrderFor(userId,id);
+            var order = _unitOfWork.Orders.GetOrderById(id);
 
             OrdersTransfereeViewModel vm = _mapper.Map<Order, OrdersTransfereeViewModel>(order);
+
             vm.Services = vm.Services.OrderBy(s => s.ServiceTypeSortOrder);
             
             //Populate list of service categories available for this order.
@@ -171,10 +176,7 @@ namespace Odin.Controllers
 
             return vm;
         }
-        public Transferee GetTransfereeByOrderId(string id)
-        {
-            return _unitOfWork.Transferees.GetTransfereeByOrderId(id);
-        }
+        
         private OrdersTransfereeItineraryViewModel GetItineraryByOrderId(string id)
         {
             var itinService = _unitOfWork.Services.GetServicesByOrderId(id);
@@ -199,28 +201,26 @@ namespace Odin.Controllers
         {
             OrdersTransfereeItineraryViewModel viewModel = GetItineraryByOrderId(id);
             viewModel.Id = id;
-            viewModel.mustPrint = true;
+            viewModel.IsPdf = true;
             Transferee ee = GetTransfereeByOrderId(id);
-            viewModel.TransfereeEmail = ee.Email;
             viewModel.TransfereeName = ee.FullName;
             return new Rotativa.ViewAsPdf("Partials/_Itinerary", viewModel) { FileName = "Itinerary.pdf", PageMargins = new Rotativa.Options.Margins(0, 0, 0, 0) }; 
         }
-        public ActionResult EmailGeneratedPDF(string id, string email)
-        {
-            OrdersTransfereeItineraryViewModel viewModel = GetItineraryByOrderId(id);
-            viewModel.Id = id;
-            viewModel.mustPrint = true;
-            Transferee ee = GetTransfereeByOrderId(id);
-            viewModel.TransfereeEmail = ee.Email;
-            viewModel.TransfereeName = ee.FullName;
-            string filename = "Itinerary" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".pdf";
-            var pdf = new Rotativa.ViewAsPdf("Partials/_Itinerary", viewModel) {FileName = filename, PageMargins = new Rotativa.Options.Margins(0, 0, 0, 0) };
-            byte[] pdfBytes = pdf.BuildFile(ControllerContext);
-            MemoryStream stream = new MemoryStream(pdfBytes);
-            EmailHelper EH = new EmailHelper();
-            EH.SendEmail_FS(email, "Your DwellWorks Itinerary", "Please find attached your itinerary for the upcoming move", SendGrid.MimeType.Html, filename, pdfBytes);
-            return PartialView("~/views/orders/partials/_Itinerary.cshtml", viewModel);
-        }
+        //public ActionResult EmailGeneratedPDF(string id, string email)
+        //{
+            //OrdersTransfereeItineraryViewModel viewModel = GetItineraryByOrderId(id);
+            //viewModel.Id = id;
+            //viewModel.IsPdf = true;
+            //Transferee ee = GetTransfereeByOrderId(id);
+            //viewModel.TransfereeName = ee.FullName;
+            //string filename = "Itinerary" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".pdf";
+            //var pdf = new Rotativa.ViewAsPdf("Partials/_Itinerary", viewModel) {FileName = filename, PageMargins = new Rotativa.Options.Margins(0, 0, 0, 0) };
+            //byte[] pdfBytes = pdf.BuildFile(ControllerContext);
+            //MemoryStream stream = new MemoryStream(pdfBytes);
+            //EmailHelper EH = new EmailHelper();
+            //EH.SendEmail_FS(email, "Your DwellWorks Itinerary", "Please find attached your itinerary for the upcoming move", SendGrid.MimeType.Html, filename, pdfBytes);
+            //return PartialView("~/views/orders/partials/_Itinerary.cshtml", viewModel);
+        //}
     }
 
 }

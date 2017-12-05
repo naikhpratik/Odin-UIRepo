@@ -1648,14 +1648,11 @@ namespace Odin.IntegrationTests.Controllers.Api
         public async Task InsertAppointment_NoOrder_ShouldReturnNotFound()
         {
             // arrange
-
-
-            // Act
             var controller = SetUpOrdersController();
             controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            // Act            
             AppointmentDto dto = new AppointmentDto() { OrderId = "-1", Id = null, ScheduledDate = DateTime.Now, Description = "Adding a new appointment" };
             var result = controller.UpsertItineraryAppointment(dto);
-
             // Assert
             result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
         }
@@ -1669,7 +1666,6 @@ namespace Odin.IntegrationTests.Controllers.Api
             order.Transferee = transferee;
             order.Consultant = dsc;
             order.ProgramManager = pm;
-
             Context.Orders.Add(order);
             Context.SaveChanges();
             Context.Entry(order).Reload();
@@ -1679,12 +1675,10 @@ namespace Odin.IntegrationTests.Controllers.Api
             controller.MockCurrentUser(dsc.Id, dsc.UserName);
             var dto = new AppointmentDto() { OrderId = order.Id, Id = null, ScheduledDate = DateTime.Now, Description = "Adding a new appointment" };
             var result = controller.UpsertItineraryAppointment(dto);
-
             result = controller.DeleteAppointment(order.Appointments.First().Id);
 
             // Assert
             Context.Entry(order).Reload();
-
             result.Should().BeOfType<System.Web.Http.Results.OkResult>();
             order.Appointments.Count.Should().Be(0);
         }
@@ -1693,12 +1687,10 @@ namespace Odin.IntegrationTests.Controllers.Api
         public async Task DeleteAppointment_NoAppointment_ShouldReturnNotFound()
         {
             // arrange
-
-            // Act
             var controller = SetUpOrdersController();
             controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            // Act
             var result = controller.DeleteAppointment("-1");
-
             // Assert
             result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
         }

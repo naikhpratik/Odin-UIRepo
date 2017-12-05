@@ -20,13 +20,22 @@ div#itinerary p {
   line-height: 2.5rem;
   margin: 0 0 0 0; }
 
+div#itinerary > .sectionList li.itineraryDay {
+  margin-left: inherit;
+  margin-right: inherit;
+  width: 100%; }
+
 @media screen and (min-width: 62rem) {
-  div#itinerary > .sectionList > li:nth-child(odd) {
-    padding-right: 6rem;
-    clear: left; }
-  div#itinerary > .sectionList > li:nth-child(even) {
-    padding-left: 6rem;
-    clear: right; } }
+  div#itinerary > .sectionList {
+    /*> li:nth-child(odd) {
+                padding-right: 6rem;
+                clear: left;
+            }
+
+            > li:nth-child(even) {
+                padding-left: 6rem;
+                clear: right;
+            }*/ } }
 
 div#itinerary .itineraryDayList {
   list-style: none;
@@ -75,4 +84,15 @@ div#itinerary .eventTime {
   margin: 0px;
   padding: 0;
   color: #49ae44; }
+
+@media screen and (min-width: 48rem) {
+  div#itinerary .sectionList li.itineraryDay {
+    width: 50%; } }
+
+.modal-content {
+  padding: 2rem; }
+  .modal-content .close {
+    position: absolute;
+    top: 3rem;
+    right: 3rem; }
 

@@ -3,6 +3,7 @@
     ViewBag.Title = "Log in";
 }
 
+<div class="loginWrap">
 <div class="row">
     <div class="col-md-4">
         <section id="loginForm">
@@ -11,6 +12,10 @@
                 @Html.AntiForgeryToken()
 
                 <div id="caption">
+                    <div id="logo">
+                        <img id="logoImage" src="~/Content/Images/dwellworks_icon.png" />
+                        <span id="logoOdin">Odin</span>
+                    </div>
                     <span>Sign in to</span><span id="Odin"> Odin</span><span> to</span><br />
                     <span>get started</span>
                 </div>
@@ -40,26 +45,16 @@
                 </div>                
             }
         </section>
-        @Html.Partial("~/Views/Shared/Partials/_logo.cshtml")
+        @*@Html.Partial("~/Views/Shared/Partials/_logo.cshtml")*@
+
     </div>
-    <div class="col">
-        <img src="~/Content/Images/login.jpg"/>
-        <div id="labels-box">
-            <div class="text-lables">
-                <p>We make</p>
-                <p>relocation</p>
-                <p>management</p>
-                <p>simpler.</p>
-            </div>
-            <div class="text-lables">
-                <p>Our job is to make sure those moves</p>
-                <p>are supported with personal care,</p>
-                <p>local expertise, and the highest</p>
-                <p>quality of compliance and business</p>
-                <p>services standards</p>
-            </div>
+    <div class="col-md-8">
+        <div class="loginCopyWrap">
+            <p class="head">We make relocation management simpler.</p>
+            <p class="copy">Our job is to make sure those moves are supported with personal care, local expertise, and the highest quality of compliance and business services standards</p>
         </div>
     </div>
+</div>
 </div>
 
 @Styles.Render("~/Styling/login")

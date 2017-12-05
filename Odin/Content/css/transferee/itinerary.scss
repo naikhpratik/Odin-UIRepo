@@ -32,9 +32,15 @@ div#itinerary {
 
     > .sectionList {
 
+        li.itineraryDay{
+            margin-left: inherit;
+            margin-right: inherit;
+            width: 100%;
+        }
+        
         @media screen and (min-width: 62rem) {
 
-            > li:nth-child(odd) {
+            /*> li:nth-child(odd) {
                 padding-right: 6rem;
                 clear: left;
             }
@@ -42,7 +48,7 @@ div#itinerary {
             > li:nth-child(even) {
                 padding-left: 6rem;
                 clear: right;
-            }
+            }*/
         }
     }
 
@@ -106,5 +112,23 @@ div#itinerary {
         margin: 0px;
         padding:0;
         color: $DW_Green;
+    }
+
+    @media screen and (min-width: 48rem){
+        .sectionList{
+            li.itineraryDay{
+                width: 50%;
+            }
+        }
+    }
+}
+
+.modal-content{
+    padding: 2rem;
+
+    .close{
+        position: absolute;
+        top: 3rem;
+        right: 3rem;
     }
 }
