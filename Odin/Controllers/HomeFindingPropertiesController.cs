@@ -30,7 +30,7 @@ namespace Odin.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        // POST /homefindingproperties
+        // POST /homefindingproperties/create
         [HttpPost]
         public ActionResult Create(HousingPropertyViewModel propertyVM)
         {
@@ -71,6 +71,23 @@ namespace Odin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.ServiceUnavailable);
             }
 
+            return new HttpStatusCodeResult(HttpStatusCode.NoContent);
+        }
+
+        // DELETE /homefindingproperties/delete/[hfpId]
+        [HttpDelete]
+        public ActionResult Delete(string id)
+        {
+            HomeFindingProperty homeFindingProperty;
+            homeFindingProperty = _unitOfWork.HomeFindingProperties.GetHomeFindingPropertyById(id);
+
+            if (homeFindingProperty == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+            }
+
+            homeFindingProperty.Deleted = true;
+            _unitOfWork.Complete();
             return new HttpStatusCodeResult(HttpStatusCode.NoContent);
         }
 

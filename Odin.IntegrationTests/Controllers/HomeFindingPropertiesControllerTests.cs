@@ -20,6 +20,8 @@ using Odin.Domain;
 using Odin.IntegrationTests.Helpers;
 using Microsoft.WindowsAzure.Storage.Blob;
 using System;
+using System.Web.Mvc;
+using System.Net;
 
 namespace Odin.IntegrationTests.Controllers
 {
@@ -114,6 +116,44 @@ namespace Odin.IntegrationTests.Controllers
             }
         }
 
+
+        [Test, Isolated]
+        public void DeleteHomeFindingProperty_SoftDeletesTheRecord()
+        {
+            // Arrange
+            Order order = BuildOrder(false);
+            Context.Orders.Add(order);
+            Context.SaveChanges();
+
+            // Act
+            HomeFindingPropertiesController controller = SetUpHomeFindingPropertiesController();
+
+            HomeFindingProperty hfp = order.HomeFinding.HomeFindingProperties.First();
+            HttpStatusCodeResult response = (HttpStatusCodeResult)controller.Delete(hfp.Id);
+            Context.Entry(order).Reload();
+
+            // Assert
+            // Soft delete does not remove the association
+            order.HomeFinding.HomeFindingProperties.Count().Should().Be(1);
+
+            HomeFindingProperty loadedHfp = order.HomeFinding.HomeFindingProperties.First();
+            loadedHfp.Deleted.Should().BeTrue();
+
+            HttpStatusCodeResult expectedCode = new HttpStatusCodeResult(HttpStatusCode.NoContent);
+            response.StatusCode.Should().Be(expectedCode.StatusCode);
+        }
+
+        [Test, Isolated]
+        public void DeleteHomeFindingProperty_ReturnsRecordNotFoundWithBadId()
+        {
+            HttpStatusCodeResult expectedCode = new HttpStatusCodeResult(HttpStatusCode.NotFound);
+            HomeFindingPropertiesController controller = SetUpHomeFindingPropertiesController();
+
+            HttpStatusCodeResult response = (HttpStatusCodeResult)controller.Delete("SomeNonExisitingRecordId");
+            response.StatusCode.Should().Be(expectedCode.StatusCode);
+        }
+
+        /*-------------------------------------------------*/
         private Order BuildOrder(bool emptyProperties=true)
         {
             Order order = OrderBuilder.New().First();
@@ -122,8 +162,13 @@ namespace Odin.IntegrationTests.Controllers
             order.Consultant = dsc;
 
             HomeFinding homeFinding = HomeFindingBuilder.New();
-            // The builder makes a single property, but we want it empty
-            homeFinding.HomeFindingProperties = new Collection<HomeFindingProperty>();
+
+            if (emptyProperties)
+            {
+                // The builder makes a single property, but we want it empty
+                homeFinding.HomeFindingProperties = new Collection<HomeFindingProperty>();
+            }
+
             order.HomeFinding = homeFinding;
 
             return order;
