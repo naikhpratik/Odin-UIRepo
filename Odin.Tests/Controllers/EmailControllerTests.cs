@@ -8,6 +8,7 @@ using Odin.Data.Core.Models;
 using Odin.Data.Core.Repositories;
 using System.Web.Mvc;
 using System.Net;
+using Odin.ViewModels.Mailers;
 
 namespace Odin.Tests.Controllers
 {
@@ -18,6 +19,8 @@ namespace Odin.Tests.Controllers
         private Mock<IMapper> _mockMapper;
         private Mock<IOrdersRepository> _mockRepository;
         private Mock<ITransfereesRepository> _mockEeRepository;
+        private Mock<IServicesRepository> _mockServicesRepository;
+        private Mock<IAppointmentsRepository> _mockAppointmentsRepository;
 
         [TestInitialize]
         public void TestInitialize()
@@ -25,13 +28,17 @@ namespace Odin.Tests.Controllers
             _mockRepository = new Mock<IOrdersRepository>();
             _mockMapper = new Mock<IMapper>();
             _mockEeRepository = new Mock<ITransfereesRepository>();
+            _mockServicesRepository = new Mock<IServicesRepository>();
+            _mockAppointmentsRepository = new Mock<IAppointmentsRepository>();
             var mockUnitOfWork = new Mock<IUnitOfWork>();
             mockUnitOfWork.SetupGet(u => u.Orders).Returns(_mockRepository.Object);
             mockUnitOfWork.SetupGet(u => u.Transferees).Returns(_mockEeRepository.Object);
+            mockUnitOfWork.SetupGet(u => u.Services).Returns(_mockServicesRepository.Object);
+            mockUnitOfWork.SetupGet(u => u.Appointments).Returns(_mockAppointmentsRepository.Object);
             _controller = new EmailController(mockUnitOfWork.Object, _mockMapper.Object);
         }
         [TestMethod]
-        public void Index_WhenCalled_Returns_Email_PartialView()
+        public void Index_Get_WhenCalled_Returns_Email_PartialView()
         {
             var orderId = "1";
             Order order = new Order() { Id = orderId, ConsultantId = "1" };
@@ -42,7 +49,40 @@ namespace Odin.Tests.Controllers
             result.Should().NotBeNull();
         }
         [TestMethod]
-        public void Index_BadId_WhenCalled_Returns_NotFound()
+        public void Index_Get_BadId_WhenCalled_Returns_NotFound()
+        {
+            var orderId = "1";
+            var result = _controller.Index(orderId);
+
+            result.Should().BeOfType<HttpStatusCodeResult>();
+            Assert.AreEqual(((HttpStatusCodeResult)result).StatusCode, (int)HttpStatusCode.NotFound);
+        }
+        [TestMethod]
+        public void Index_Send_WhenCalled_Returns_Email_PartialView()
+        {
+            var orderId = "1";
+            Order order = new Order() { Id = orderId, ConsultantId = "1" };
+            _mockRepository.Setup(r => r.GetOrderById(orderId)).Returns(order);
+            EmailViewModel vm = new EmailViewModel();
+            vm.id = "1";
+            vm.Email = "faque@email.com";
+            var result = _controller.Index(vm);
+            result.Should().NotBeNull();
+        }
+        [TestMethod]
+        public void Index_Send_No_Recipient_WhenCalled_Returns_NotFound()
+        {
+            var orderId = "1";
+            Order order = new Order() { Id = orderId, ConsultantId = "1" };
+            _mockRepository.Setup(r => r.GetOrderById(orderId)).Returns(order);
+            EmailViewModel vm = new EmailViewModel();
+            vm.id = "1";
+            vm.Email = null;
+            var result = _controller.Index(vm);
+            Assert.AreEqual(((HttpStatusCodeResult)result).StatusCode, (int)HttpStatusCode.NotFound);
+        }
+        [TestMethod]
+        public void Index_Send_BadId_WhenCalled_Returns_NotFound()
         {
             var orderId = "1";
             var result = _controller.Index(orderId);

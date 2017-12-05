@@ -46,6 +46,8 @@ namespace Odin.Controllers
                 viewModel.Id = vm.id;
                 viewModel.IsPdf = true;
                 Transferee ee = GetTransfereeByOrderId(vm.id);
+                if (ee == null)
+                    return new HttpStatusCodeResult(HttpStatusCode.NotFound, "Not found");
                 viewModel.TransfereeName = ee.FullName;
                 string filename = "Itinerary" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".pdf";
                 var pdf = new Rotativa.ViewAsPdf("~/views/Orders/Partials/_Itinerary.cshtml", viewModel) { FileName = filename, PageMargins = new Rotativa.Options.Margins(0, 0, 0, 0) };
