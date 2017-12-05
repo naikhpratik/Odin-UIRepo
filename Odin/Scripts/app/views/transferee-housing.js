@@ -20,6 +20,9 @@
                             .removeAttr('checked')
                             .removeAttr('selected');
                         $('#addPropertyModal').modal('hide');
+                    },
+                    error: function () {
+                        alert("An unknown error has occurred. Please try again later.");
                     }
                 });
             }
