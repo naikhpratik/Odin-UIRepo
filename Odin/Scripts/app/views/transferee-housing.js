@@ -43,6 +43,9 @@
                 success: function (result) {
                     reloadPropertiesPartial();
                     $('#propertyDetailsModal').modal('hide');
+                },
+                error: function () {
+                    alert("An unknown error has occurred. Please try again later.");
                 }
             });
         }
