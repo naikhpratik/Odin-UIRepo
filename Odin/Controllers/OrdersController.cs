@@ -179,17 +179,8 @@ namespace Odin.Controllers
         
         private OrdersTransfereeItineraryViewModel GetItineraryByOrderId(string id)
         {
-            var itinService = _unitOfWork.Services.GetServicesByOrderId(id);
-            var itinAppointments = _unitOfWork.Appointments.GetAppointmentsByOrderId(id);
-            //var itinViewings = _unitOfWork.HousingTypes.GetViewingsByOrderId(id);
-            var itinerary1 = _mapper.Map<IEnumerable<Service>, IEnumerable<ItineraryEntryViewModel>>(itinService);
-            var itinerary2 = _mapper.Map<IEnumerable<Appointment>, IEnumerable<ItineraryEntryViewModel>>(itinAppointments);
-            //var itinerary3 = _mapper.Map<IEnumerable<HousingPropertyViewModel>, IEnumerable<ItineraryEntryViewModel>>(itinViewings);
-            //var itinerary = itinerary1.Concat(itinerary2).Concat(itinerary3).OrderBy(s => s.ScheduledDate);
-            var itinerary = itinerary1.Concat(itinerary2).OrderBy(s => s.ScheduledDate);
-            OrdersTransfereeItineraryViewModel vm = new OrdersTransfereeItineraryViewModel();
-            vm.Itinerary = itinerary;            
-            return vm;
+            IItineraryModelBuilder<OrdersTransfereeItineraryViewModel> builder = new ItineraryModelBuilder(_unitOfWork, _mapper);
+            return builder.Build(id);
         }
         private Appointment GetAppointmentById(string Id)
         {
@@ -205,22 +196,7 @@ namespace Odin.Controllers
             Transferee ee = GetTransfereeByOrderId(id);
             viewModel.TransfereeName = ee.FullName;
             return new Rotativa.ViewAsPdf("Partials/_Itinerary", viewModel) { FileName = "Itinerary.pdf", PageMargins = new Rotativa.Options.Margins(0, 0, 0, 0) }; 
-        }
-        //public ActionResult EmailGeneratedPDF(string id, string email)
-        //{
-            //OrdersTransfereeItineraryViewModel viewModel = GetItineraryByOrderId(id);
-            //viewModel.Id = id;
-            //viewModel.IsPdf = true;
-            //Transferee ee = GetTransfereeByOrderId(id);
-            //viewModel.TransfereeName = ee.FullName;
-            //string filename = "Itinerary" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".pdf";
-            //var pdf = new Rotativa.ViewAsPdf("Partials/_Itinerary", viewModel) {FileName = filename, PageMargins = new Rotativa.Options.Margins(0, 0, 0, 0) };
-            //byte[] pdfBytes = pdf.BuildFile(ControllerContext);
-            //MemoryStream stream = new MemoryStream(pdfBytes);
-            //EmailHelper EH = new EmailHelper();
-            //EH.SendEmail_FS(email, "Your DwellWorks Itinerary", "Please find attached your itinerary for the upcoming move", SendGrid.MimeType.Html, filename, pdfBytes);
-            //return PartialView("~/views/orders/partials/_Itinerary.cshtml", viewModel);
-        //}
+        }       
     }
 
 }

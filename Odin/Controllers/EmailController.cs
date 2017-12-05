@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
- using System;
+using Odin.Interfaces;
+using System.Net;
 using AutoMapper;
 using System.Collections.Generic;    
 using System.Net.Mail;
@@ -8,8 +9,7 @@ using Odin.Helpers;
 using Odin.Data.Core;
 using Odin.Data.Core.Models;
 using Odin.ViewModels.Orders.Transferee;
-using Odin.ViewModels.Shared;
-using System.Linq;
+using System;
 using System.IO;
 
 namespace Odin.Controllers
@@ -18,8 +18,7 @@ namespace Odin.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-               
-
+        
         public EmailController(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
@@ -29,6 +28,8 @@ namespace Odin.Controllers
         public ActionResult Index(string id)
         {
             Transferee ee = GetTransfereeByOrderId(id);
+            if (ee == null)
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound, "Not found");
             var viewModel = new EmailViewModel();
             viewModel.Email = ee.Email;
             viewModel.Name = ee.FullName;
@@ -41,7 +42,7 @@ namespace Odin.Controllers
         {
             try
             {
-                OrdersTransfereeItineraryViewModel viewModel = GetItineraryByOrderId(vm.id);
+                OrdersTransfereeItineraryViewModel viewModel = BuildItineraryByOrderId(vm.id);
                 viewModel.Id = vm.id;
                 viewModel.IsPdf = true;
                 Transferee ee = GetTransfereeByOrderId(vm.id);
@@ -68,19 +69,10 @@ namespace Odin.Controllers
         {
             return _unitOfWork.Transferees.GetTransfereeByOrderId(id);
         }
-        private OrdersTransfereeItineraryViewModel GetItineraryByOrderId(string id)
+        private OrdersTransfereeItineraryViewModel BuildItineraryByOrderId(string id)
         {
-            var itinService = _unitOfWork.Services.GetServicesByOrderId(id);
-            var itinAppointments = _unitOfWork.Appointments.GetAppointmentsByOrderId(id);
-            //var itinViewings = _unitOfWork.HousingTypes.GetViewingsByOrderId(id);
-            var itinerary1 = _mapper.Map<IEnumerable<Service>, IEnumerable<ItineraryEntryViewModel>>(itinService);
-            var itinerary2 = _mapper.Map<IEnumerable<Appointment>, IEnumerable<ItineraryEntryViewModel>>(itinAppointments);
-            //var itinerary3 = _mapper.Map<IEnumerable<HousingPropertyViewModel>, IEnumerable<ItineraryEntryViewModel>>(itinViewings);
-            //var itinerary = itinerary1.Concat(itinerary2).Concat(itinerary3).OrderBy(s => s.ScheduledDate);
-            var itinerary = itinerary1.Concat(itinerary2).OrderBy(s => s.ScheduledDate);
-            OrdersTransfereeItineraryViewModel vm = new OrdersTransfereeItineraryViewModel();
-            vm.Itinerary = itinerary;
-            return vm;
+            IItineraryModelBuilder<OrdersTransfereeItineraryViewModel> builder = new ItineraryModelBuilder(_unitOfWork, _mapper);
+            return builder.Build(id);            
         }
         private static IEnumerable<string> ParseAddress(string addresses)
         {

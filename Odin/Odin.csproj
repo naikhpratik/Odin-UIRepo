@@ -306,6 +306,7 @@
     <Compile Include="Controllers\Api\ManagersController.cs" />
     <Compile Include="Controllers\Api\OrdersController.cs" />
     <Compile Include="Controllers\BookMarkletController.cs" />
+    <Compile Include="Controllers\ItineraryModelBuilder.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Domain\ImageStore.cs" />
@@ -331,6 +332,7 @@
     <Compile Include="Helpers\ServiceHelper.cs" />
     <Compile Include="Helpers\ViewRenderer.cs" />
     <Compile Include="Interfaces\IImageStore.cs" />
+    <Compile Include="Interfaces\IItineraryModelBuilder.cs" />
     <Compile Include="Interfaces\IQueueStore.cs" />
     <Compile Include="Interfaces\IConfigHelper.cs" />
     <Compile Include="Interfaces\IConsultantImporter.cs" />
