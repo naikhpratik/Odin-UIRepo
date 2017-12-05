@@ -34,7 +34,6 @@ namespace Odin.Data.Persistence
                 .Where(s => s.Id.Equals(id))
                 .Include(s => s.Order)
                 .Include(s => s.ServiceType)
-                .Include(s => s.ServiceType.Category)
                 .FirstOrDefault();
         }
     }

@@ -200,6 +200,7 @@
     <Compile Include="Core\Repositories\ITransportationTypesRepository.cs" />
     <Compile Include="Core\Repositories\IUsersRepository.cs" />
     <Compile Include="Extensions\ModelStateExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Helpers\PasswordHelper.cs" />
     <Compile Include="Helpers\TokenHelper.cs" />
     <Compile Include="Helpers\UserHelper.cs" />
