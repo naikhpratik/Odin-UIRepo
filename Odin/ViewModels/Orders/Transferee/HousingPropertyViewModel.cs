@@ -18,6 +18,8 @@ namespace Odin.ViewModels.Orders.Transferee
             UploadedPhotos = new Collection<HttpPostedFileBase>();
         }
 
+        public bool Deleted { get; set; }
+
         public String OrderId { get; set; }
         public String Id { get; set; }
 

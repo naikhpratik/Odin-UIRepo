@@ -1,8 +1,9 @@
 ﻿@model Odin.ViewModels.Orders.Transferee.HousingPropertyViewModel
 
-@using (Html.BeginForm("", "HomeFindingProperties",
-                                                                new { ReturnUrl = ViewBag.ReturnUrl },
-                                                                FormMethod.Post, new { id = "propertyForm", enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Create", 
+                       "HomeFindingProperties",
+                       new { ReturnUrl = ViewBag.ReturnUrl },
+                       FormMethod.Post, new { id = "propertyForm", enctype = "multipart/form-data" }))
 {
     <div class="modal-body">
 
@@ -137,7 +138,7 @@
         <button type="submit" class="btn btn-primary">Save</button>
     </div>
 
-}
+} @* Close Form *@
 
 @Scripts.Render("~/Scripts/jquery.validate.js")
 @Scripts.Render("~/Scripts/jquery.validate.unobtrusive.js")
