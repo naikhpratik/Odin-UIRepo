@@ -75,7 +75,7 @@
         $('.propertyItem').click(function (event) {
             var propertyId = $(event.delegateTarget).data("property-id");
             var propertyModalUrl = '/homefindingproperties/propertypartial/' + propertyId;
-            $('#propertyModalBody').load(propertyModalUrl, function (response, status, xhr) {
+            $('#propertyModalContent').load(propertyModalUrl, function (response, status, xhr) {
                 if (status == "success") {
                     $('#propertyDetailsModal').modal('show');
                 }
