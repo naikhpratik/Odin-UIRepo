@@ -20,13 +20,22 @@ namespace Odin.PropBotWebJob.Bots
         private HtmlDocument _doc;
         private IMapper _mapper;
 
-        public TruliaBot(string url, IMapper mapper)
+        public TruliaBot(string url, IMapper mapper, string html = null)
         {
             _url = url;
             _botType = GetBotType();
-            HtmlWeb web = new HtmlWeb();
-            _doc = web.Load(_url);
             _mapper = mapper;
+
+            if (String.IsNullOrEmpty(html))
+            {
+                HtmlWeb web = new HtmlWeb();
+                _doc = web.Load(_url);
+            }
+            else
+            {
+                _doc = new HtmlDocument();
+                _doc.LoadHtml(html);
+            }
         }
 
         public Property Bot()
@@ -76,7 +85,7 @@ namespace Odin.PropBotWebJob.Bots
         {
             IEnumerable<string> images = null;
 
-            if (_botType == "rental")
+            if (_botType == "rental" || _botType == "rental-community")
             {
                 images = BotRentImageJson();
             }
@@ -112,15 +121,15 @@ namespace Odin.PropBotWebJob.Bots
             //Should blow up if can't find script tag.
             var scriptText = _doc.DocumentNode.SelectSingleNode("//script[contains(text(), 'window.propertyWeb = {')]").InnerText;
 
-            var prop = new Property();
+            Property prop = null;
+
+            var locStr = "{" + scriptText.StringBetween("location: {", "},") + "}";
+            var locDto = JsonConvert.DeserializeObject<TruliaBuyLocationDto>(locStr);
+            prop = _mapper.Map<TruliaBuyLocationDto, Property>(locDto);
 
             var featStr = "{" + scriptText.StringBetween("features: {", "},") + "}";
             var featDto = JsonConvert.DeserializeObject<TruliaBuyFeatureDto>(featStr);
             _mapper.Map<TruliaBuyFeatureDto, Property>(featDto, prop);
-
-            var locStr = "{" + scriptText.StringBetween("location: {", "},") + "}";
-            var locDto = JsonConvert.DeserializeObject<TruliaBuyLocationDto>(locStr);
-            _mapper.Map<TruliaBuyLocationDto, Property>(locDto, prop);
 
             //Get rid of obj because only 1 field?
             var priceStr = "{" + scriptText.StringBetween("listingPrice: {", "},") + "}";
@@ -140,7 +149,7 @@ namespace Odin.PropBotWebJob.Bots
         }
 
         //Back up in case there is no JSON on page.
-        public Property BotRental()
+        private Property BotRental()
         {
             Property prop = new Property();
             AddressParser addrParser = new AddressParser();
@@ -205,7 +214,7 @@ namespace Odin.PropBotWebJob.Bots
             {
                 var priceText = priceTag.InnerText;
                 decimal tempDec;
-                if (Decimal.TryParse(priceText.Split('/')[0].CleanNumeric(), out tempDec))
+                if (Decimal.TryParse(numReg.Match(priceText).Value.CleanNumeric(), out tempDec))
                 {
                     prop.Amount = tempDec;
                 }
@@ -216,7 +225,7 @@ namespace Odin.PropBotWebJob.Bots
         }
 
         //Back up in case there is no JSON on page.
-        public Property BotProperty()
+        private Property BotProperty()
         {
             Property prop = new Property();
             AddressParser addrParser = new AddressParser();
@@ -255,7 +264,7 @@ namespace Odin.PropBotWebJob.Bots
                         prop.NumberOfBathrooms = temp;
                     }
                 }
-                else if (text.Contains("SQFT") && !text.Contains("$"))
+                else if (text.Contains("SQFT") && !text.Contains("/"))
                 {
                     int temp;
                     if (Int32.TryParse(numReg.Match(text).Value, out temp))
@@ -284,11 +293,11 @@ namespace Odin.PropBotWebJob.Bots
             //Should blow up if can't find script tag.
             var scriptText = _doc.DocumentNode.SelectSingleNode("//script[contains(text(), 'window.propertyWeb = {')]").InnerText;
 
-            var prop = new Property();
+            Property prop = null;
 
             var locStr = "{" + scriptText.StringBetween("location: {", "},") + "}";
             var locDto = JsonConvert.DeserializeObject<TruliaBuyLocationDto>(locStr);
-            _mapper.Map<TruliaBuyLocationDto, Property>(locDto, prop);
+            prop = _mapper.Map<TruliaBuyLocationDto, Property>(locDto);
 
             Regex numReg = new Regex(@"[+-]?(\d*\.)?\d+");
             var bathsText = scriptText.StringBetween("\"bathrooms\":\"", "\"").CleanNumeric();
@@ -310,6 +319,23 @@ namespace Odin.PropBotWebJob.Bots
             if (Decimal.TryParse(numReg.Match(priceText).Value, out price))
             {
                 prop.Amount = price;
+            }
+
+            var liTags = _doc.QuerySelectorAll(".listInlineBulleted.man.pts > li");
+            if (liTags != null)
+            {
+                foreach (var tag in liTags)
+                {
+                    var text = tag.InnerText.ToUpper().CleanNumeric();
+                    if (text.Contains("SQFT") && !text.Contains("/"))
+                    {
+                        int sqftOut;
+                        if (Int32.TryParse(numReg.Match(text).Value, out sqftOut))
+                        {
+                            prop.SquareFootage = sqftOut;
+                        }
+                    }
+                }
             }
 
             prop.SourceUrl = _url;

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Data.Entity.Spatial;
 
 namespace Odin.Data.Core.Models
 {
@@ -27,7 +26,8 @@ namespace Odin.Data.Core.Models
 
         public string Description { get; set; }
 
-        public DbGeography Coordinates { get; set; }
+        public decimal? Latitude { get; set; }
+        public decimal? Longitude { get; set; }
 
         public string SourceUrl { get; set; }
 

@@ -1,14 +1,11 @@
 ﻿using AutoMapper;
 using HtmlAgilityPack;
 using Odin.Data.Core.Models;
-using Odin.PropBotWebJob.Dtos;
 using Odin.PropBotWebJob.Extensions;
 using Odin.PropBotWebJob.Interfaces;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using Odin.Data.Helpers;
 
 namespace Odin.PropBotWebJob.Bots
 {
@@ -19,12 +16,21 @@ namespace Odin.PropBotWebJob.Bots
         private HtmlDocument _doc;
         private IMapper _mapper;
 
-        public ApartmentsBot(string url, IMapper mapper)
+        public ApartmentsBot(string url, IMapper mapper, string html = null)
         {
             _url = url;
-            HtmlWeb web = new HtmlWeb();
-            _doc = web.Load(_url);
             _mapper = mapper;
+
+            if (String.IsNullOrEmpty(html))
+            {
+                HtmlWeb web = new HtmlWeb();
+                _doc = web.Load(_url);
+            }
+            else
+            {
+                _doc = new HtmlDocument();
+                _doc.LoadHtml(html);
+            }
         }
 
         public Property Bot()
@@ -63,7 +69,13 @@ namespace Odin.PropBotWebJob.Bots
                 var lng = lngTag.Attributes["content"].Value.CleanNumeric();
                 if (!String.IsNullOrEmpty(lat) && !String.IsNullOrEmpty(lng))
                 {
-                    prop.Coordinates = GeographyHelper.CreateCoordinate(lat,lng);
+                    decimal latOut;
+                    decimal lngOut;
+                    if (decimal.TryParse(lat, out latOut) && decimal.TryParse(lng, out lngOut))
+                    {
+                        prop.Latitude = latOut;
+                        prop.Longitude = lngOut;
+                    }
                 }
             }
 
@@ -148,7 +160,7 @@ namespace Odin.PropBotWebJob.Bots
                 }
             }
 
-            var carouselImgTags = _doc.QuerySelectorAll("#carouselSection img");
+            var carouselImgTags = _doc.QuerySelectorAll(".carouselSection img");
             if (carouselImgTags != null)
             {
                 foreach (var img in carouselImgTags)

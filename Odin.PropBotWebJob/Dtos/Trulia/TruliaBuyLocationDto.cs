@@ -1,6 +1,4 @@
 ﻿using Newtonsoft.Json;
-using Odin.Data.Helpers;
-using System.Data.Entity.Spatial;
 
 namespace Odin.PropBotWebJob.Dtos.Trulia
 {
@@ -34,17 +32,5 @@ namespace Odin.PropBotWebJob.Dtos.Trulia
 
         [JsonProperty("longitude")]
         public decimal? Longitude { get; set; }
-
-        public DbGeography Coordinates
-        {
-            get
-            {
-                if (Latitude.HasValue && Longitude.HasValue)
-                {
-                    return GeographyHelper.CreateCoordinate(Latitude.Value.ToString(), Longitude.Value.ToString());
-                }
-                return null;
-            }
-        }
     }
 }

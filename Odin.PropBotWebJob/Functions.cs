@@ -1,15 +1,17 @@
 ﻿using AutoMapper;
 using Microsoft.Azure.WebJobs;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Odin.Data.Core;
 using Odin.Data.Core.Models;
 using Odin.PropBotWebJob.Bots;
+using Odin.PropBotWebJob.Helpers;
 using Odin.PropBotWebJob.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
-
+using TraceFilter = Microsoft.Azure.WebJobs.Extensions.TraceFilter;
 
 namespace Odin.PropBotWebJob
 {
@@ -30,10 +32,9 @@ namespace Odin.PropBotWebJob
         // on an Azure Queue called propbotqueue.
         public void ProcessQueueMessage([QueueTrigger("propbotqueue")] string message, int dequeueCount, TextWriter log)
         {
-            //Using default MaxDequeueCount - Want to make config based but unable to figure out.
             //Azure bug causes poison messages to stay in regular queue and keep processing.
             //This will mark them as successful after 5th time so they stop reprocessing after being put in poison queue.
-            if (dequeueCount > 5)
+            if (dequeueCount > ConfigHelper.GetMaxDequeueCount())
             {
                 return;
             }
@@ -108,22 +109,20 @@ namespace Odin.PropBotWebJob
             return null;
         }
 
-        private void SaveImage(string imgUrl)
+        //If 25 individual exceptions (basically if 5 properties fail) within an hour. Send Error Alert.
+        //Throttle means one alert per hour.
+        //Couldn't get SendGrid attribute to work, so send manually instead.
+        public static void ErrorMonitor(
+            [ErrorTrigger("01:00:00", 25, Throttle = "1:00:00")] TraceFilter filter, TextWriter log)
+
         {
-            try
-            {
-                using (WebClient client = new WebClient())
-                {
-                    using (Stream stream = client.OpenRead(imgUrl))
-                    {
-                        _imageStore.SaveImage(stream);
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                //Swallow image save exception.
-            }
+            JObject errorJson = new JObject();
+            errorJson["Title"] = "10 errors occured withing the past 30 minutes.";
+            errorJson["Messages"] = filter.GetDetailedMessage(10);
+
+            EmailHelper.SendErrorEmail("Odin.PropBotWebJob Error Alert",
+                errorJson.ToString());
         }
+
     }
 }

@@ -58,6 +58,14 @@ namespace Odin.Data.Persistence
                 new AttributeToColumnAnnotationConvention<TableColumnAttribute, string>(
                     "ServiceTableColumn", (property, attributes) => attributes.Single().ColumnType.ToString()));
 
+            modelBuilder.Entity<Property>()
+                .Property(p => p.Latitude)
+                .HasPrecision(9, 6);
+
+            modelBuilder.Entity<Property>()
+                .Property(p => p.Longitude)
+                .HasPrecision(9, 6);
+
             base.OnModelCreating(modelBuilder);
         }
 

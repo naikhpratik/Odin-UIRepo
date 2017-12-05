@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using HtmlAgilityPack;
 using Odin.Data.Core.Models;
-using Odin.Data.Helpers;
 using Odin.PropBotWebJob.Extensions;
 using Odin.PropBotWebJob.Interfaces;
 using System;
@@ -17,12 +16,21 @@ namespace Odin.PropBotWebJob.Bots
         private HtmlDocument _doc;
         private IMapper _mapper;
 
-        public RealtorBot(string url, IMapper mapper)
+        public RealtorBot(string url, IMapper mapper, string html = null)
         {
             _url = url;
-            HtmlWeb web = new HtmlWeb();
-            _doc = web.Load(_url);
             _mapper = mapper;
+
+            if (String.IsNullOrEmpty(html))
+            {
+                HtmlWeb web = new HtmlWeb();
+                _doc = web.Load(_url);
+            }
+            else
+            {
+                _doc = new HtmlDocument();
+                _doc.LoadHtml(html);
+            }
         }
 
         public Property Bot()
@@ -48,43 +56,79 @@ namespace Odin.PropBotWebJob.Bots
                 var lng = lngTag.Attributes["content"].Value.CleanNumeric();
                 if (!String.IsNullOrEmpty(lat) && !String.IsNullOrEmpty(lng))
                 {
-                    prop.Coordinates = GeographyHelper.CreateCoordinate(lat, lng);
+                    decimal latOut;
+                    decimal lngOut;
+                    if (decimal.TryParse(lat, out latOut) && decimal.TryParse(lng, out lngOut))
+                    {
+                        prop.Latitude = latOut;
+                        prop.Longitude = lngOut;
+                    }
                 }
             }
 
-            Regex numReg = new Regex(@"[+-]?(\d*\.)?\d+");
 
-            var bedTag = _doc.QuerySelector("li[data-label='property-meta-beds'] > span");
-            if (bedTag != null)
+            var propertyMetaTag = _doc.QuerySelector(".property-meta");
+            if (propertyMetaTag != null)
             {
-                int beds;
-                if (Int32.TryParse(numReg.Match(bedTag.InnerText.CleanNumeric()).Value, out beds))
+                Regex numReg = new Regex(@"[+-]?(\d*\.)?\d+");
+
+                var bedTag = propertyMetaTag.QuerySelector("li[data-label='property-meta-beds'] > span");
+                if (bedTag != null)
                 {
-                    prop.NumberOfBedrooms = beds;
+                    int beds;
+                    if (Int32.TryParse(numReg.Match(bedTag.InnerText.CleanNumeric()).Value, out beds))
+                    {
+                        prop.NumberOfBedrooms = beds;
+                    }
+                }
+
+                var bathTag = propertyMetaTag.QuerySelector("li[data-label='property-meta-baths']") ?? propertyMetaTag.QuerySelector("li[data-label='property-meta-bath']");
+                if (bathTag != null)
+                {
+                    var halfBathTags = bathTag.QuerySelectorAll(".property-half-baths-count");
+                    if (halfBathTags.Count > 0)
+                    {
+                        decimal numOfBaths = 0;
+                        foreach (var tag in halfBathTags)
+                        {
+                            var countTag = tag.QuerySelector(".property-half-baths");
+                            if (countTag != null)
+                            {
+                                bool isHalf = tag.InnerText.ToLower().Contains("half");
+                                decimal halfCountOut;
+                                if (decimal.TryParse(countTag.InnerText.CleanNumeric(), out halfCountOut))
+                                {
+                                    numOfBaths += isHalf ? (0.5m * halfCountOut) : halfCountOut;
+                                }
+                            }
+                        }
+                        if (numOfBaths > 0)
+                        {
+                            prop.NumberOfBathrooms = numOfBaths;
+                        }
+                    }
+                    else
+                    {
+                        decimal baths;
+                        if (decimal.TryParse(numReg.Match(bathTag.InnerText.CleanNumeric()).Value, out baths))
+                        {
+                            prop.NumberOfBathrooms = baths;
+                        }
+                    }
+                }
+
+                var sqftTag = propertyMetaTag.QuerySelector("li[data-label='property-meta-sqft'] > span");
+                if (sqftTag != null)
+                {
+                    int sqft;
+                    if (Int32.TryParse(numReg.Match(sqftTag.InnerText.CleanNumeric()).Value, out sqft))
+                    {
+                        prop.SquareFootage = sqft;
+                    }
                 }
             }
 
-            var bathTag = _doc.QuerySelector("li[data-label='property-meta-bath'] > span");
-            if (bathTag != null)
-            {
-                int baths;
-                if (Int32.TryParse(numReg.Match(bathTag.InnerText.CleanNumeric()).Value, out baths))
-                {
-                    prop.NumberOfBathrooms = baths;
-                }
-            }
-
-            var sqftTag = _doc.QuerySelector("li[data-label='property-meta-sqft'] > span");
-            if (sqftTag != null)
-            {
-                int sqft;
-                if (Int32.TryParse(numReg.Match(sqftTag.InnerText.CleanNumeric()).Value, out sqft))
-                {
-                    prop.SquareFootage = sqft;
-                }
-            }
-
-            var priceTag = _doc.QuerySelector("span[itemprop='lowPrice'] > span") ?? _doc.QuerySelector("span[itemprop='price'] > span");
+            var priceTag = _doc.QuerySelector("span[itemprop='lowPrice']") ?? _doc.QuerySelector("span[itemprop='price']");
             if (priceTag != null)
             {
                 decimal price;
