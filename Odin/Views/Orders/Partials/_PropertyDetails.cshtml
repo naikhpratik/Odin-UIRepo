@@ -51,17 +51,13 @@
     </div>
 </div>
 <div class="modal-footer">
-    <button type="submit" class="btn btn-danger">Delete</button>
+    <button type="button" id="removeProperty" class="btn btn-danger btn-ok">Remove Property</button>
 </div>
 
 <script>
-        $(".btn-danger").click(function () {
-            $.ajax({
-                url: '/HomeFindingProperties/Delete/@Model.Id',
-                type: 'DELETE',
-                success: function (result) {
-                    // Do something with the result
-                }
-            });
-        })
+    $(document).ready(function () {
+        $("#removeProperty.btn-danger").click(function () {
+            TransfereeHousingController.deleteProperty("@Model.Id");
+        });
+    });
 </script>

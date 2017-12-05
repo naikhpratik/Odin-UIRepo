@@ -13,7 +13,7 @@
                     contentType: false,
                     processData: false,
                     success: function (result) {
-                        $('#propertiesContainer').load('/orders/propertiesPartial/' + currentOrderId);
+                        reloadPropertiesPartial();
                         $(':input', '#propertyForm')
                             .not(':button, :submit, :reset, :hidden')
                             .val('')
@@ -29,8 +29,28 @@
         });
     };
 
+    var reloadPropertiesPartial = function () {
+        $('#propertiesContainer').load('/orders/propertiesPartial/' + currentOrderId);
+    };
+
+    var deleteProperty = function (propertyId) {
+        var confirmed = confirm("Are you sure you want to remove this property?");
+
+        if (confirmed) {
+            $.ajax({
+                url: '/HomeFindingProperties/Delete/'+propertyId,
+                type: 'DELETE',
+                success: function (result) {
+                    reloadPropertiesPartial();
+                    $('#propertyDetailsModal').modal('hide');
+                }
+            });
+        }
+    };
+
     return {
-        init: init
+        init: init,
+        deleteProperty: deleteProperty
     };
 
 }();
