@@ -13,6 +13,7 @@ using Odin.Data.Core;
 using Odin.Data.Core.Models;
 using Odin.Data.Extensions;
 using Odin.Data.Persistence;
+using Odin.ToSeWebJob.QueueProcessors;
 using ServicEngineImporter.Models;
 
 namespace Odin.ToSeWebJob
@@ -45,71 +46,11 @@ namespace Odin.ToSeWebJob
             var queueEntry = JsonConvert.DeserializeObject<OdinToSeQueueEntry>(message);
             if (queueEntry.QueueTypeId == (int) QueueType.Service)
             {
-                //TODO: Put process service in separate classs
-                var service = _unitOfWork.Services.GetServiceById(queueEntry.ObjectId);
-                var endPoint = GetEndPointForService(service);
-                var json = GetJsonForService(service);
-
-                //TODO: Environment variables
-                var environmentUrl = "https://localhost:44372/api/";
-                var apiKey = "VtADQse3uRTspdtGjSgp";
-
-                //TODO: Make Request/Send Helper
-                var request = new HttpRequestMessage
-                {
-                    RequestUri = new Uri($"{environmentUrl}{endPoint}"),
-                    Method = HttpMethod.Post
-                };
-                request.Headers.Add("Token", apiKey);
-                request.Content = new StringContent(json, Encoding.UTF8, "application/json");
-                using (var client = new HttpClient())
-                {
-                    var response = await client.SendAsync(request);
-                    log.WriteLine($"RESPOSNE: {response}");
-                }
+                var serviceProcessor = new ServiceProcessor(_unitOfWork);
+                var result = await serviceProcessor.ProcessService(queueEntry.ObjectId);
+                log.WriteLine($"Service Process Result: {result}");
             }
         }
 
-        public string GetEndPointForService(Service service)
-        {
-            if (service.ServiceType.Category == ServiceCategory.InitialConsultation || service.ServiceType.Category == ServiceCategory.WelcomePacket)
-                return "firstContact";
-            else if (service.Order.ProgramName.NullContains("Bundled") && ((int) service.ServiceType.Category & 12) == 0)
-                return "destinationChecklist";
-            else if (service.ServiceType.Category == ServiceCategory.SettlingIn)
-                return "settlingIn";
-            else if (service.ServiceType.Category == ServiceCategory.AreaOrientation)
-                return "areaOrientation";
-
-            return string.Empty;
-        }
-
-        public string GetColumnNameForServiceType(ServiceType serviceType)
-        {
-            var columnName = string.Empty;
-
-            return columnName;
-        }
-
-        public string GetJsonForService(Service service)
-        {
-            var json = string.Empty;
-
-            var serviceEngineId = Convert.ToInt32(service.Order.TrackingId);
-            var firstContact = new FirstContact(serviceEngineId);
-            switch (service.ServiceTypeId)
-            {
-                case 1:
-                    firstContact.FirstFaceToFaceMeetingDate = service.CompletedDate;
-                    json = JsonConvert.SerializeObject(firstContact);
-                    break;
-                case 2:
-                    firstContact.EstimatedFirstMeetingDate = service.CompletedDate;
-                    json = JsonConvert.SerializeObject(firstContact);
-                    break;
-            }
-
-            return json;
-        }
     }
 }

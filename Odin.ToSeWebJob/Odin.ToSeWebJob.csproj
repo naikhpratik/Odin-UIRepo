@@ -149,12 +149,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigHelper.cs" />
+    <Compile Include="Domain\AreaOrientationConverter.cs" />
+    <Compile Include="Domain\DestinationChecklistConverter.cs" />
+    <Compile Include="Domain\FirstContactConverter.cs" />
+    <Compile Include="Domain\ServiceToJson.cs" />
+    <Compile Include="Domain\SettlingInConverter.cs" />
     <Compile Include="Helpers\EndPointHelper.cs" />
+    <Compile Include="Helpers\RequestHelper.cs" />
+    <Compile Include="Interfaces\IServiceProcessor.cs" />
     <Compile Include="MyBindings.cs" />
     <Compile Include="MyJobActivator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Functions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueueProcessors\ServiceProcessor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -183,6 +191,7 @@
       <Name>Odin.Data</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Web.WebJobs.Publish.1.1.0\tools\webjobs.targets" Condition="Exists('..\packages\Microsoft.Web.WebJobs.Publish.1.1.0\tools\webjobs.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
