@@ -4,11 +4,11 @@ using Odin.Data.Core;
 using Odin.Data.Core.Dtos;
 using Odin.Data.Core.Models;
 using Odin.Filters;
-using Odin.Helpers;
 using Odin.Interfaces;
 using Odin.ViewModels.BookMarklet;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 
@@ -21,12 +21,14 @@ namespace Odin.Controllers
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly IQueueStore _queueStore;
+        private readonly IBookMarkletHelper _bookMarkletHelper;
 
-        public BookMarkletController(IUnitOfWork unitOfWork, IMapper mapper, IAccountHelper accountHelper, IQueueStore queueStore)
+        public BookMarkletController(IUnitOfWork unitOfWork, IMapper mapper, IQueueStore queueStore, IBookMarkletHelper bookMarkletHelper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _queueStore = queueStore;
+            _bookMarkletHelper = bookMarkletHelper;
         }
 
         [HttpGet]
@@ -35,8 +37,15 @@ namespace Odin.Controllers
             var userId = User.Identity.GetUserId();
             IEnumerable<Order> orders = _unitOfWork.Orders.GetOrdersFor(userId);
 
+            if (orders.Count() == 0)
+            {
+                BookMarkletErrorViewModel error = new BookMarkletErrorViewModel();
+                error.Header = "Sorry!";
+                error.Message = "It looks like you don't have any orders yet!";
+                return View("Error", error);
+            }
 
-            if (BookMarkletHelper.IsValidUrl(url))
+            if (_bookMarkletHelper.IsValidUrl(url))
             {
                 BookMarkletViewModel bm = new BookMarkletViewModel();
                 bm.Orders = _mapper.Map<IEnumerable<Order>, IEnumerable<BookMarkletOrderViewModel>>(orders);
@@ -45,7 +54,6 @@ namespace Odin.Controllers
             }
             else
             {
-                Response.StatusCode = (int)HttpStatusCode.NotImplemented;
                 BookMarkletErrorViewModel error = new BookMarkletErrorViewModel();
                 error.Header = "Sorry!";
                 error.Message = "This page is not currently supported! Try another homefinding site for this property.";

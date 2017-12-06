@@ -1,16 +1,13 @@
-﻿using AutoMapper;
-using Microsoft.Azure.WebJobs;
+﻿using Microsoft.Azure.WebJobs;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Odin.Data.Core;
 using Odin.Data.Core.Models;
-using Odin.PropBotWebJob.Bots;
 using Odin.PropBotWebJob.Helpers;
 using Odin.PropBotWebJob.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Net;
 using TraceFilter = Microsoft.Azure.WebJobs.Extensions.TraceFilter;
 
 namespace Odin.PropBotWebJob
@@ -18,14 +15,12 @@ namespace Odin.PropBotWebJob
     public class Functions
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
-        private readonly IImageStore _imageStore;
+        private readonly IBotHelper _botHelper;
 
-        public Functions(IUnitOfWork unitOfWork, IMapper mapper, IImageStore imageStore)
+        public Functions(IUnitOfWork unitOfWork, IBotHelper botHelper)
         {
             _unitOfWork = unitOfWork;
-            _mapper = mapper;
-            _imageStore = imageStore;
+            _botHelper = botHelper;
         }
 
         // This function will get triggered/executed when a new message is written 
@@ -42,7 +37,7 @@ namespace Odin.PropBotWebJob
             var queueEntry = JsonConvert.DeserializeObject<PropBotJobQueueEntry>(message);
             var order = _unitOfWork.Orders.GetOrderById(queueEntry.OrderId);
 
-            var bot = GetBot(queueEntry.PropertyUrl);
+            var bot = _botHelper.GetBot(queueEntry.PropertyUrl);
             var property = bot.Bot();
 
             try
@@ -53,27 +48,17 @@ namespace Odin.PropBotWebJob
                 {
                     try
                     {
-                        using (WebClient client = new WebClient())
-                        {
-                            using (Stream stream = client.OpenRead(image))
-                            {
-                                var storageId = _imageStore.SaveImage(stream);
-                                var urlStr = _imageStore.UriFor(storageId).AbsoluteUri;
-                                var photo = new Photo(storageId, urlStr);
-                                property.Photos.Add(photo);
-                            }
-                        }
+                        property.Photos.Add(_botHelper.SaveImageToStore(image));
                     }
                     catch (Exception e)
                     {
                         //Swallow image save exception.
                     }
                 }
-
             }
             catch (Exception e)
             {
-                
+                //Swallow image botting exception.
             }
 
             order.HomeFinding.HomeFindingProperties.Add(new HomeFindingProperty()
@@ -83,32 +68,9 @@ namespace Odin.PropBotWebJob
             
             _unitOfWork.Complete();
 
-            //HousingPropertyDto hpDto = bot.Bot(queueEntry.OrderId);
-            //HomeFindingProperty hfp = _mapper.Map<HousingPropertyDto, HomeFindingProperty>(hpDto);
-           
-
             log.WriteLine(queueEntry.PropertyUrl);
         }
-
-        private IBot GetBot(string rawUrl)
-        {
-            string url = rawUrl.ToLower();
-            if (url.Contains("www.trulia.com"))
-            {
-                return new TruliaBot(url, _mapper);
-            }
-            else if (url.Contains("www.realtor.com"))
-            {
-                return new RealtorBot(url, _mapper);
-            }
-            else if (url.Contains("www.apartments.com"))
-            {
-                return new ApartmentsBot(url, _mapper);
-            }
-
-            return null;
-        }
-
+        
         //If 25 individual exceptions (basically if 5 properties fail) within an hour. Send Error Alert.
         //Throttle means one alert per hour.
         //Couldn't get SendGrid attribute to work, so send manually instead.

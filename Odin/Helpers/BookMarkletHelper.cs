@@ -1,19 +1,20 @@
-﻿using System;
+﻿using Odin.Interfaces;
+using System;
 
 namespace Odin.Helpers
 {
-    public static class BookMarkletHelper
+    public class BookMarkletHelper : IBookMarkletHelper
     {
         public const string TRULIA = "www.trulia.com";
         public const string APARTMENTS = "www.apartments.com";
         public const string REALTOR = "www.realtor.com";
 
-        public static bool IsValidDomain(string domain)
+        public bool IsValidDomain(string domain)
         {
             return domain == REALTOR || domain == APARTMENTS || domain == TRULIA;
         }
 
-        public static bool IsValidUrl(string url)
+        public bool IsValidUrl(string url)
         {
             if (!String.IsNullOrEmpty(url))
             {

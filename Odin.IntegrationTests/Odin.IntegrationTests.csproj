@@ -180,6 +180,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\Api\ConsultantsControllerTests.cs" />
+    <Compile Include="Controllers\BookMarkletControllerTests.cs" />
     <Compile Include="Controllers\HomeFindingPropertiesControllerTests.cs" />
     <Compile Include="Controllers\Api\ManagersControllerTests.cs" />
     <Compile Include="Extensions\HttpActionResultExtensions.cs" />

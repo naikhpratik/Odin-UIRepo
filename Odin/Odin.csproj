@@ -330,6 +330,7 @@
     <Compile Include="Helpers\EmailHelper.cs" />
     <Compile Include="Helpers\ServiceHelper.cs" />
     <Compile Include="Helpers\ViewRenderer.cs" />
+    <Compile Include="Interfaces\IBookMarkletHelper.cs" />
     <Compile Include="Interfaces\IImageStore.cs" />
     <Compile Include="Interfaces\IQueueStore.cs" />
     <Compile Include="Interfaces\IConfigHelper.cs" />

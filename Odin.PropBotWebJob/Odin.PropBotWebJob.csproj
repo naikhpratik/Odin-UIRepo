@@ -187,9 +187,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\BotHelper.cs" />
     <Compile Include="Helpers\EmailHelper.cs" />
     <Compile Include="Helpers\ConfigHelper.cs" />
     <Compile Include="Domain\ImageStore.cs" />
+    <Compile Include="Interfaces\IBotHelper.cs" />
     <Compile Include="Interfaces\IImageStore.cs" />
     <Compile Include="MappingProfile.cs" />
     <Compile Include="Dtos\Trulia\TruliaBuyFeatureDto.cs" />

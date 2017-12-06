@@ -3,6 +3,7 @@ using Ninject.Modules;
 using Odin.Data.Core;
 using Odin.Data.Persistence;
 using Odin.PropBotWebJob.Domain;
+using Odin.PropBotWebJob.Helpers;
 using Odin.PropBotWebJob.Interfaces;
 
 namespace Odin.PropBotWebJob
@@ -14,6 +15,7 @@ namespace Odin.PropBotWebJob
             Bind<IApplicationDbContext>().To<ApplicationDbContext>();
             Bind<IUnitOfWork>().To<UnitOfWork>();
             Bind<IImageStore>().To<ImageStore>();
+            Bind<IBotHelper>().To<BotHelper>();
 
             var config = new MapperConfiguration(c => c.AddProfile(new MappingProfile()));
             var mapper = config.CreateMapper();
