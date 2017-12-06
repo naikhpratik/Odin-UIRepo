@@ -45,11 +45,16 @@ namespace Odin.ToSeWebJob
             var queueEntry = JsonConvert.DeserializeObject<OdinToSeQueueEntry>(message);
             if (queueEntry.QueueTypeId == (int) QueueType.Service)
             {
+                //TODO: Put process service in separate classs
                 var service = _unitOfWork.Services.GetServiceById(queueEntry.ObjectId);
                 var endPoint = GetEndPointForService(service);
                 var json = GetJsonForService(service);
+
+                //TODO: Environment variables
                 var environmentUrl = "https://localhost:44372/api/";
                 var apiKey = "VtADQse3uRTspdtGjSgp";
+
+                //TODO: Make Request/Send Helper
                 var request = new HttpRequestMessage
                 {
                     RequestUri = new Uri($"{environmentUrl}{endPoint}"),
