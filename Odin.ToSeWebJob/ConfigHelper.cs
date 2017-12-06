@@ -9,7 +9,7 @@ namespace Odin.ToSeWebJob
 {
     public static class ConfigHelper
     {
-        private static readonly string SeApiTokenKey = "SeApiToken";
+        private static readonly string SeApiTokenKey = "SeBaldrToken";
         private static readonly string BaldrApiUrl = "BaldrApiUrl";
 
         public static string GetSeApiToken()
