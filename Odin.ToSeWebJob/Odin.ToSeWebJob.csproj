@@ -149,6 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigHelper.cs" />
+    <Compile Include="Helpers\EndPointHelper.cs" />
     <Compile Include="MyBindings.cs" />
     <Compile Include="MyJobActivator.cs" />
     <Compile Include="Program.cs" />
