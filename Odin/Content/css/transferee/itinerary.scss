@@ -32,14 +32,13 @@ div#itinerary {
 
     > .sectionList {
 
-        li.itineraryDay{
+        li.itineraryDay {
             margin-left: inherit;
             margin-right: inherit;
             width: 100%;
         }
-        
-        @media screen and (min-width: 62rem) {
 
+        @media screen and (min-width: 62rem) {
             /*> li:nth-child(odd) {
                 padding-right: 6rem;
                 clear: left;
@@ -63,15 +62,15 @@ div#itinerary {
         display: flex;
         align-content: center;
         justify-content: flex-start;
-        margin:0;
-        padding:0;
+        margin: 0;
+        padding: 0;
 
         .dayNumber {
             font-size: 4.8rem;
             font-weight: 700;
             color: #2CBFFC;
             margin: 0 0 0 0;
-            padding:0;
+            padding: 0;
         }
 
         .dayText {
@@ -80,7 +79,7 @@ div#itinerary {
             align-items: flex-start;
             justify-content: center;
             margin-left: 0px;
-            padding:0;
+            padding: 0;
         }
 
         .dayName {
@@ -102,7 +101,8 @@ div#itinerary {
         color: #4E4E4E;
         font-weight: 300;
         margin: 0px;
-        padding:0;
+        padding: 0;
+        line-height: 26px;
     }
 
     .eventTime {
@@ -110,23 +110,27 @@ div#itinerary {
         color: #A7CE39;
         font-weight: 500;
         margin: 0px;
-        padding:0;
+        padding: 0;
         color: $DW_Green;
+        line-height: 26px;
     }
 
-    @media screen and (min-width: 48rem){
-        .sectionList{
-            li.itineraryDay{
+    @media screen and (min-width: 48rem) {
+        .sectionList {
+            li.itineraryDay {
                 width: 50%;
             }
         }
     }
 }
+.testClass {
+    line-height: 1rem;
+}
 
-.modal-content{
+.modal-content {
     padding: 2rem;
 
-    .close{
+    .close {
         position: absolute;
         top: 3rem;
         right: 3rem;

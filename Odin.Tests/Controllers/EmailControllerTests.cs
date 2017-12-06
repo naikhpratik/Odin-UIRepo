@@ -70,16 +70,16 @@ namespace Odin.Tests.Controllers
             result.Should().NotBeNull();
         }
         [TestMethod]
-        public void Index_Send_No_Recipient_WhenCalled_Returns_NotFound()
+        public void Index_Send_No_Recipient_WhenCalled_Returns_Null()
         {
             var orderId = "1";
-            Order order = new Order() { Id = orderId, ConsultantId = "1" };
+            Order order = new Order() { Id = orderId, ConsultantId = "1" };            
             _mockRepository.Setup(r => r.GetOrderById(orderId)).Returns(order);
             EmailViewModel vm = new EmailViewModel();
             vm.id = "1";
             vm.Email = null;
             var result = _controller.Index(vm);
-            Assert.AreEqual(((HttpStatusCodeResult)result).StatusCode, (int)HttpStatusCode.NotFound);
+            result.Should().BeNull();
         }
         [TestMethod]
         public void Index_Send_BadId_WhenCalled_Returns_NotFound()

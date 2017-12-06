@@ -45,17 +45,17 @@ namespace Odin.Controllers
                 OrdersTransfereeItineraryViewModel viewModel = BuildItineraryByOrderId(vm.id);
                 viewModel.Id = vm.id;
                 viewModel.IsPdf = true;
+                var to = ParseAddress(vm.Email);
+                if (to == null)
+                    return null;
                 Transferee ee = GetTransfereeByOrderId(vm.id);
                 if (ee == null)
                     return new HttpStatusCodeResult(HttpStatusCode.NotFound, "Not found");
                 viewModel.TransfereeName = ee.FullName;
                 string filename = "Itinerary" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".pdf";
-                var pdf = new Rotativa.ViewAsPdf("~/views/Orders/Partials/_Itinerary.cshtml", viewModel) { FileName = filename, PageMargins = new Rotativa.Options.Margins(0, 0, 0, 0) };
+                var pdf = new Rotativa.ViewAsPdf("~/views/Orders/Partials/_Itinerary.cshtml", viewModel);
                 byte[] pdfBytes = pdf.BuildFile(ControllerContext);
-                MemoryStream stream = new MemoryStream(pdfBytes);
-                var to = ParseAddress(vm.Email);
-                if (to == null)
-                    return null;
+                MemoryStream stream = new MemoryStream(pdfBytes);                
                 EmailHelper EH = new EmailHelper();                    
                 EH.SendEmail_FS(to, vm.Subject, vm.Message, SendGrid.MimeType.Html, filename, pdfBytes);
                 viewModel.IsPdf = false;
@@ -78,6 +78,8 @@ namespace Odin.Controllers
         }
         private static IEnumerable<string> ParseAddress(string addresses)
         {
+            if (string.IsNullOrEmpty(addresses) == true)
+                return null;
             addresses = addresses.Replace(",", ";").Replace(" ", ";");
             Char delim = ';';
             string[] newAdds = addresses.Split(delim);

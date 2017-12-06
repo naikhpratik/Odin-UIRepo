@@ -75,7 +75,8 @@ div#itinerary .eventNote {
   color: #4E4E4E;
   font-weight: 300;
   margin: 0px;
-  padding: 0; }
+  padding: 0;
+  line-height: 26px; }
 
 div#itinerary .eventTime {
   font-size: 1.8rem;
@@ -83,11 +84,15 @@ div#itinerary .eventTime {
   font-weight: 500;
   margin: 0px;
   padding: 0;
-  color: #49ae44; }
+  color: #49ae44;
+  line-height: 26px; }
 
 @media screen and (min-width: 48rem) {
   div#itinerary .sectionList li.itineraryDay {
     width: 50%; } }
+
+.testClass {
+  line-height: 1rem; }
 
 .modal-content {
   padding: 2rem; }

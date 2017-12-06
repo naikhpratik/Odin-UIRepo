@@ -195,7 +195,11 @@ namespace Odin.Controllers
             viewModel.IsPdf = true;
             Transferee ee = GetTransfereeByOrderId(id);
             viewModel.TransfereeName = ee.FullName;
-            return new Rotativa.ViewAsPdf("Partials/_Itinerary", viewModel) { FileName = "Itinerary.pdf", PageMargins = new Rotativa.Options.Margins(0, 0, 0, 0) }; 
+            return new Rotativa.ViewAsPdf("Partials/_Itinerary", viewModel)
+            {
+                FileName = "Itinerary.pdf",
+                PageMargins = new Rotativa.Options.Margins(0, 0, 0, 0)
+            }; 
         }       
     }
 
