@@ -20,7 +20,7 @@ namespace Odin.ToSeWebJob.Helpers
             if (service.ServiceType.Category == ServiceCategory.InitialConsultation ||
                 service.ServiceType.Category == ServiceCategory.WelcomePacket)
                 return FirstContactEndPoint;
-            else if (service.Order.ProgramName.NullContains("Bundled") &&
+            else if (service.Order.ProgramName.NullContains("Bundle") &&
                      ((int) service.ServiceType.Category & 12) > 0)
                 return DestinationChecklistEndPoint;
             else if (service.ServiceType.Category == ServiceCategory.SettlingIn)

@@ -17,7 +17,7 @@ namespace Odin.ToSeWebJob.Domain
             if (service.ServiceType.Category == ServiceCategory.InitialConsultation ||
                 service.ServiceType.Category == ServiceCategory.WelcomePacket)
                 return FirstContactConverter.GetJson(service);
-            else if (service.Order.ProgramName.NullContains("Bundled") &&
+            else if (service.Order.ProgramName.NullContains("Bundle") &&
                      ((int)service.ServiceType.Category & 12) > 0)
                 return DestinationChecklistConverter.GetJson(service);
             else if (service.ServiceType.Category == ServiceCategory.SettlingIn)
