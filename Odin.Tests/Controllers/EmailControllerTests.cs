@@ -45,14 +45,14 @@ namespace Odin.Tests.Controllers
 
             _mockRepository.Setup(r => r.GetOrderById(orderId)).Returns(order);
 
-            var result = _controller.Index(orderId);
+            var result = _controller.EmailForm(orderId);
             result.Should().NotBeNull();
         }
         [TestMethod]
         public void Index_Get_BadId_WhenCalled_Returns_NotFound()
         {
             var orderId = "1";
-            var result = _controller.Index(orderId);
+            var result = _controller.EmailForm(orderId);
 
             result.Should().BeOfType<HttpStatusCodeResult>();
             Assert.AreEqual(((HttpStatusCodeResult)result).StatusCode, (int)HttpStatusCode.NotFound);
@@ -66,7 +66,7 @@ namespace Odin.Tests.Controllers
             EmailViewModel vm = new EmailViewModel();
             vm.id = "1";
             vm.Email = "faque@email.com";
-            var result = _controller.Index(vm);
+            var result = _controller.SendEmail(vm);
             result.Should().NotBeNull();
         }
         [TestMethod]
@@ -78,14 +78,14 @@ namespace Odin.Tests.Controllers
             EmailViewModel vm = new EmailViewModel();
             vm.id = "1";
             vm.Email = null;
-            var result = _controller.Index(vm);
+            var result = _controller.SendEmail(vm);
             result.Should().BeNull();
         }
         [TestMethod]
         public void Index_Send_BadId_WhenCalled_Returns_NotFound()
         {
             var orderId = "1";
-            var result = _controller.Index(orderId);
+            var result = _controller.EmailForm(orderId);
 
             result.Should().BeOfType<HttpStatusCodeResult>();
             Assert.AreEqual(((HttpStatusCodeResult)result).StatusCode, (int)HttpStatusCode.NotFound);

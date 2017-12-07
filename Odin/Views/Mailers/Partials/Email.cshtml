@@ -1,6 +1,6 @@
 ﻿@model Odin.ViewModels.Mailers.EmailViewModel
 
-<div id="emailModal">
+<div id="emailModal" data-order-id="@Model.id">
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
@@ -33,44 +33,46 @@
     $('#cmdSendMail').click(function () {
         var err = false;
         var app = $('#emailModal');
-        var data = {};
-            var rows = app.find(".form-group");
-            rows.each(function () {
-                if (err)
-                    return;
+        var orderId = app.attr('data-order-id');
+        var data = { id : orderId};
+        
+        var rows = app.find(".form-group");
+        rows.each(function () {
+            if (err)
+                return;
                 
-                var row = $(this);
+            var row = $(this);
 
-                var rowInput = row.find(":input");
+            var rowInput = row.find(":input");
                 
-                if (rowInput.attr("name") == "Name")
-                    data["Name"] = rowInput.val();
+            if (rowInput.attr("name") == "Name")
+                data["Name"] = rowInput.val();
                 
-                if (rowInput.attr("name") == "Email")
-                    data["Email"] = rowInput.val();
+            if (rowInput.attr("name") == "Email")
+                data["Email"] = rowInput.val();
 
-                if (rowInput.attr("name") == "Subject")
-                    data["Subject"] = rowInput.val();
+            if (rowInput.attr("name") == "Subject")
+                data["Subject"] = rowInput.val();
 
-                if (rowInput.attr("name") == "Message")
-                    data["Message"] = rowInput.val();
+            if (rowInput.attr("name") == "Message")
+                data["Message"] = rowInput.val();
                 
-            });
+        });
             
-            if (!err) {
+        if (!err) {
                
-                $.ajax({
-                    url: '@Url.Action("Index", "Email")',
-                    type: 'POST',
-                    data: data,
-                    success: function (data, text) {
-                        toast('Email sent successfully', 'success');
-                    },
-                    error: function (request, status, error) {
-                        toast('Email was not sent', 'danger');
-                    }
-                });
-            }
+            $.ajax({
+                url: '@Url.Action("SendEmail", "Email")',
+                type: 'POST',
+                data: data,
+                success: function (data, text) {
+                    toast('Email sent successfully', 'success');
+                },
+                error: function (request, status, error) {
+                    toast('Email was not sent', 'danger');
+                }
+            });
+        }
     });
     var toast = function (message, type) {
         $.notify({

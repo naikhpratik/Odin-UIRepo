@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using Odin.Data.Core;
-using Odin.Interfaces;
 using Odin.ViewModels.Orders.Transferee;
 using Odin.ViewModels.Shared;
 using Odin.Data.Core.Models;
+using System.Web.Http;
 
-namespace Odin.Controllers
+namespace Odin.Helpers
 {
-    public class ItineraryModelBuilder: IItineraryModelBuilder<OrdersTransfereeItineraryViewModel>
+    public class ItineraryHelper
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public ItineraryModelBuilder(IUnitOfWork unitOfWork, IMapper mapper)
+        public ItineraryHelper(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
@@ -31,7 +31,7 @@ namespace Odin.Controllers
             var itinerary = itinerary1.Concat(itinerary2).OrderBy(s => s.ScheduledDate);
             OrdersTransfereeItineraryViewModel vm = new OrdersTransfereeItineraryViewModel();
             vm.Itinerary = itinerary;
-            return vm;            
+            return vm;
         }
     }
 }

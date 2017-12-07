@@ -178,12 +178,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\Api\ConsultantsControllerTests.cs" />
+    <Compile Include="Controllers\Api\AppointmentControllerTests.cs" />
     <Compile Include="Controllers\HomeFindingPropertiesControllerTests.cs" />
     <Compile Include="Controllers\Api\ManagersControllerTests.cs" />
     <Compile Include="Controllers\EmailControllerTests.cs" />
     <Compile Include="Extensions\HttpActionResultExtensions.cs" />
     <Compile Include="Helpers\AzureStorageEmulatorManagerTests.cs" />
     <Compile Include="Helpers\HttpPostedFileBaseTesting.cs" />
+    <Compile Include="Helpers\ItineraryHelperTests.cs" />
     <Compile Include="Helpers\ResultHelper.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

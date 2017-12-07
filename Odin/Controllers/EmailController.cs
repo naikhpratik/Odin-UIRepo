@@ -25,12 +25,14 @@ namespace Odin.Controllers
             _mapper = mapper;
         }
         [HttpGet]
-        public ActionResult Index(string id)
+        public ActionResult EmailForm(string id)
         {
             Transferee ee = GetTransfereeByOrderId(id);
             if (ee == null)
                 return new HttpStatusCodeResult(HttpStatusCode.NotFound, "Not found");
+
             var viewModel = new EmailViewModel();
+            viewModel.id = id;
             viewModel.Email = ee.Email;
             viewModel.Name = ee.FullName;
             viewModel.Subject = "Your DwellWorks Itinerary";
@@ -38,7 +40,7 @@ namespace Odin.Controllers
             return PartialView("~/views/Mailers/Partials/Email.cshtml", viewModel);
         }
         [HttpPost]
-        public ActionResult Index(EmailViewModel vm)
+        public ActionResult SendEmail(EmailViewModel vm)
         {
             try
             {
@@ -73,8 +75,8 @@ namespace Odin.Controllers
         }
         private OrdersTransfereeItineraryViewModel BuildItineraryByOrderId(string id)
         {
-            IItineraryModelBuilder<OrdersTransfereeItineraryViewModel> builder = new ItineraryModelBuilder(_unitOfWork, _mapper);
-            return builder.Build(id);            
+            ItineraryHelper itinHelper = new ItineraryHelper(_unitOfWork, _mapper);
+            return itinHelper.Build(id);            
         }
         private static IEnumerable<string> ParseAddress(string addresses)
         {

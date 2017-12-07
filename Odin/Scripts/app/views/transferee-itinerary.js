@@ -43,7 +43,7 @@ var TransfereeItineraryController = function (transfereeItineraryService) {
 
         });
         $('#cmdEmail').click(function () {
-            var url = "/Email/Index/" + $('#itinerary').attr("data-order-id");
+            var url = "/Email/EmailForm/" + $('#itinerary').attr("data-order-id");
             var app = $("#modalForm");
             app.find('.modal-title').text("Email Message");
             app.find(".modal-footer").css("display", "none");
@@ -56,7 +56,7 @@ var TransfereeItineraryController = function (transfereeItineraryService) {
         $('.showAppointment').click(function () {
             var app = $('#modalForm');
             app.find('.modal-title').text("Appointment");
-            var url = '/orders/appointmentPartial/' + $(this).attr('data-appointment-id');
+            var url = '/Appointment/appointmentPartial/' + $(this).attr('data-appointment-id');
             app.find(".modal-footer").css("display", "block");
             app.find(".delete").css("display", "block");
             $.get(url, function (data) {
@@ -69,7 +69,7 @@ var TransfereeItineraryController = function (transfereeItineraryService) {
             app.find('.modal-title').text("New Appointment");
             app.find(".modal-footer").css("display", "block");
             app.find(".delete").css("display", "none");
-            var url = '/orders/appointmentPartial/';
+            var url = '/Appointment/appointmentPartial/';
             $.get(url, function (data) {
                 app.find('.modal-body').html();
                 app.find('.modal-body').html(data);
@@ -81,7 +81,7 @@ var TransfereeItineraryController = function (transfereeItineraryService) {
         })
     }
     var toggleCollapse = function (e) {
-        if ($(e.target).get(0).tagName != 'IMG')
+        if ($(e.target).get(0).tagName !== 'IMG')
             return;
         var itineraryBlock = $(e.target).parents(".event-item");
         var colImg = itineraryBlock.find(".itinerary-collapse-img");

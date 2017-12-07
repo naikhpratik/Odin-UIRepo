@@ -11,8 +11,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using Odin.Helpers;
-using System.IO;
 
 namespace Odin.Controllers
 {
@@ -93,21 +91,7 @@ namespace Odin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.NotFound, "Not found");
             viewModel.TransfereeName = ee.FullName;
             return PartialView("~/views/orders/partials/_Itinerary.cshtml", viewModel);
-        }
-        public ActionResult AppointmentPartial(string id)
-        {
-            Appointment viewModel;
-            if (string.IsNullOrEmpty(id) == false)
-            {
-                viewModel = GetAppointmentById(id);
-                viewModel.Id = id;
-            }
-            else
-            {
-                viewModel = new Appointment() { Id = null, ScheduledDate = DateTime.Now }; 
-            }
-            return PartialView("~/views/orders/partials/_Appointment.cshtml", viewModel);
-        }
+        }        
 
         public ActionResult Details(string orderId)
         {
@@ -142,10 +126,7 @@ namespace Odin.Controllers
             OrdersTransfereeViewModel viewModel = GetViewModelForOrderDetails(id);
             return View(viewModel);
         }
-        public Transferee GetTransfereeByOrderId(string id)
-        {
-            return _unitOfWork.Transferees.GetTransfereeByOrderId(id);
-        }
+       
         private OrdersTransfereeViewModel GetViewModelForOrderDetails(string id)
         {
             var userId = User.Identity.GetUserId();
@@ -176,18 +157,15 @@ namespace Odin.Controllers
 
             return vm;
         }
-        
+        public Transferee GetTransfereeByOrderId(string id)
+        {
+            return _unitOfWork.Transferees.GetTransfereeByOrderId(id);
+        }
         private OrdersTransfereeItineraryViewModel GetItineraryByOrderId(string id)
         {
-            IItineraryModelBuilder<OrdersTransfereeItineraryViewModel> builder = new ItineraryModelBuilder(_unitOfWork, _mapper);
-            return builder.Build(id);
+            ItineraryHelper itinHelper = new ItineraryHelper(_unitOfWork, _mapper);
+            return itinHelper.Build(id);
         }
-        private Appointment GetAppointmentById(string Id)
-        {
-            var itinAppointment = _unitOfWork.Appointments.GetAppointmentById(Id);
-            return itinAppointment;
-        }
-        
         public ActionResult GeneratePDF(string id)
         {
             OrdersTransfereeItineraryViewModel viewModel = GetItineraryByOrderId(id);
@@ -199,8 +177,9 @@ namespace Odin.Controllers
             {
                 FileName = "Itinerary.pdf",
                 PageMargins = new Rotativa.Options.Margins(0, 0, 0, 0)
-            }; 
-        }       
+            };
+        }
+
     }
 
 }
