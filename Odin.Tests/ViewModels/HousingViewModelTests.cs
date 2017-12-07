@@ -202,5 +202,30 @@ namespace Odin.Tests.ViewModels
             photoVM.StorageId.Should().Be(fakeStorageId);
         }
 
-    }
+        [TestMethod]
+        public void TestPropertiesDoNotIncludeSoftDeleted()
+        {
+            HomeFindingProperty hfp1 = new HomeFindingProperty();
+            hfp1.Deleted = false;
+            hfp1.Property = new Property();
+            order.HomeFinding.HomeFindingProperties.Add(hfp1);
+
+            HomeFindingProperty hfp2 = new HomeFindingProperty();
+            hfp2.Deleted = false;
+            hfp2.Property = new Property();
+            order.HomeFinding.HomeFindingProperties.Add(hfp2);
+
+            HomeFindingProperty deletedHfp = new HomeFindingProperty();
+            deletedHfp.Deleted = true;
+            deletedHfp.Property = new Property();
+
+            order.HomeFinding.HomeFindingProperties.Add(deletedHfp);
+
+            HousingViewModel viewModel = new HousingViewModel(order, mapper);
+
+            IEnumerable<HousingPropertyViewModel> propertyViewModels = viewModel.Properties;
+            propertyViewModels.Count().Should().Be(2);
+        }
+
+}
 }

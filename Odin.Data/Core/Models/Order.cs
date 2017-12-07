@@ -16,6 +16,7 @@ namespace Odin.Data.Core.Models
             Appointments =  new Collection<Appointment>();
         }
 
+        public string ProgramName { get; set; }
         public string TrackingId { get; set; }
         public string RelocationType { get; set; }
         public string DestinationCity { get; set; }

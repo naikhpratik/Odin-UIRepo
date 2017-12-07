@@ -14,6 +14,7 @@ namespace Odin.Data.Core.Dtos
 
         [Required]
         public string TrackingId { get; set; }
+        public string ProgramName { get; set; }
         public string RelocationType { get; set; }
         public DateTime? EstimatedArrivalDate { get; set; }
         public DateTime? PreTripDate { get; set; }

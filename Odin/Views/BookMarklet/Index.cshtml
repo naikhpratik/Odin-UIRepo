@@ -1,34 +1,27 @@
 ﻿
-@model IEnumerable<Odin.ViewModels.BookMarklet.BookMarkletViewModel>
+@model Odin.ViewModels.BookMarklet.BookMarkletViewModel
 @{
     Layout = "~/Views/BookMarklet/Shared/_BookMarklet.cshtml";
 }
-@if (ViewBag.Valid)
-{
-    using (Html.BeginForm("Add", "BookMarklet", FormMethod.Post, new {@class= "bm-container", role = "form" }))
-    {
-        @*AntiForgeryToken purposefully left out because sets x-frame-options*@
-        <div class="form-group bm-form-group">
-            <label>Transferee:</label>
-            @Html.DropDownList("Orders", new SelectList(Model.ToList(), "Id", "TransfereeFullName"), new {@class = "form-control", Name = "Id"})
-        </div>
-        <div class="form-group bm-form-group">
-            <label>Notes:</label>
-            <p class="bm-sub-label">Written notes about the property you want to include.</p>
-    
-            @Html.TextArea("Notes", new {@class = "form-control"})
-        </div>
-        <div class="bm-btn-container">
-            <button class="btn btn-default btn-lg">Add Property to Homes</button>
-        </div>
-     }
 
-}
-else
+@using (Html.BeginForm("Add", "BookMarklet", FormMethod.Post, new {@class= "bm-container", role = "form" }))
 {
-    <div class="bm-container">
-        <h3 class="bm-message bm-header">Sorry!</h3>
-        <h5 class="bm-message">This page is not currently supported! Try another homefinding site for this property.</h5>
+    @*AntiForgeryToken purposefully left out because sets x-frame-options*@
+    <div class="form-group bm-form-group">
+        <label>Transferee:</label>
+        @Html.DropDownList("OrderId", new SelectList(Model.Orders.ToList(), "Id", "TransfereeFullName"), new {@class = "form-control"})
     </div>
+    <div class="form-group bm-form-group">
+        <label>Notes:</label>
+        <p class="bm-sub-label">Written notes about the property you want to include.</p>
+    
+        @Html.TextArea("Notes", new {@class = "form-control"})
+    </div>
+    <div class="bm-btn-container">
+        <button class="btn btn-default btn-lg">Add Property to Homes</button>
+    </div>
+    @Html.HiddenFor(m => Model.PropertyUrl)
 }
+
+
     
