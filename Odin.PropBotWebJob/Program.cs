@@ -27,6 +27,8 @@ namespace Odin.PropBotWebJob
                     config.UseDevelopmentSettings();
                 }
 
+                config.UseCore();
+
                 var host = new JobHost(config);
                 // The following code ensures that the WebJob will be running continuously
                 host.RunAndBlock();

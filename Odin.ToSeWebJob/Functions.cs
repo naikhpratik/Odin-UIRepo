@@ -42,7 +42,6 @@ namespace Odin.ToSeWebJob
                 log.WriteLine("Hit Max dequeue count");
                 return;
             }
-            throw new Exception("This is a test from web job in azure");
             var queueEntry = JsonConvert.DeserializeObject<OdinToSeQueueEntry>(message);
             if (queueEntry.QueueTypeId == (int) QueueType.Service)
             {
