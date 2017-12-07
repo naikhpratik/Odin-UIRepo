@@ -67,7 +67,6 @@ namespace Odin.Controllers
         {
             if (String.IsNullOrEmpty(dto.OrderId) || String.IsNullOrEmpty(dto.PropertyUrl))
             {
-                Response.StatusCode = (int) HttpStatusCode.BadRequest;
                 BookMarkletErrorViewModel error = new BookMarkletErrorViewModel();
                 error.Header = "Uh oh!";
                 error.Message = "It looks like something went wrong.  Please try again.";

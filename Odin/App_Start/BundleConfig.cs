@@ -70,6 +70,7 @@ namespace Odin
             bundles.Add(new ScriptBundle("~/Scripts/forgotPassword").Include(
                 "~/Scripts/bootstrap-notify.min.js",
                 "~/Scripts/app/views/forgotPassword.js")); 
+
         }
     }
 }

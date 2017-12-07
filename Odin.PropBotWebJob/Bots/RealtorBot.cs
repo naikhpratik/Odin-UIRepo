@@ -138,6 +138,16 @@ namespace Odin.PropBotWebJob.Bots
                 }
             }
 
+            var statusTag = _doc.QuerySelector(".ra-status-sale");
+            if (statusTag != null)
+            {
+                var parent = statusTag.ParentNode;
+                if (parent != null && parent.InnerText.ToUpper().Contains("ACTIVE"))
+                {
+                    prop.AvailabilityDate = DateTime.Now.Date;
+                }
+            }
+
             prop.Description = BotDescription();
             prop.SourceUrl = _url;
 

@@ -134,6 +134,42 @@ namespace Odin.PropBotWebJob.Bots
                 }
             }
 
+            DateTime now = DateTime.Now.Date;
+            DateTime? currDate = null;
+            bool first = true;
+            var dtTags = _doc.QuerySelectorAll("td.available");
+            foreach (var dtTag in dtTags)
+            {
+                DateTime? tempDate = null;
+                if (dtTag.InnerText.ToUpper().Contains("NOW"))
+                {
+                    tempDate = now;
+                }
+                else
+                {
+                    var dateStr = dtTag.InnerText.CleanText() + ", " + now.Year;
+                    DateTime dateOut;
+                    if (DateTime.TryParse(dateStr, out dateOut))
+                    {
+                        //if dec now but date is jan, then should be year + 1
+                        tempDate = (dateOut.Month < now.Month) ? dateOut.AddYears(1) : dateOut;
+                    }
+                }
+
+                if (first)
+                {
+                    first = false;
+                    currDate = tempDate;
+                }
+                else if (Nullable.Compare<DateTime>(currDate, tempDate) != 0)
+                {
+                    //Multiple availability dates. Just return null to indicate check for availability.
+                    currDate = null;
+                    break;
+                }
+            }
+
+            prop.AvailabilityDate = currDate;
             prop.Description = BotDescription();
             prop.SourceUrl = _url;
 

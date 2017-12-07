@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Odin.Controllers;
 using Odin.Data.Core;
+using Odin.Data.Core.Dtos;
 using Odin.Data.Core.Models;
 using Odin.Data.Core.Repositories;
 using Odin.Interfaces;
@@ -79,6 +80,33 @@ namespace Odin.Tests.Controllers
             _mockBookMarkletHelper.Setup(r => r.IsValidUrl(url)).Returns(true);
 
             var result = _controller.Index(url) as ViewResult;
+            result.Should().NotBeNull();
+            result.ViewName.Should().Be("Error");
+        }
+
+        [TestMethod]
+        public void Add_ValidDto_ShouldReturnDefaultView()
+        {
+            var dto = new BookMarkletDto()
+            {
+                PropertyUrl = "http://test.com",
+                OrderId = "1"
+            };
+            
+            var result = _controller.Add(dto) as ViewResult;
+            result.Should().NotBeNull();
+            result.ViewName.Should().Be("");
+        }
+
+        [TestMethod]
+        public void Add_BadDto_ShouldReturnErrorView()
+        {
+            var dto = new BookMarkletDto()
+            {
+                OrderId = "1"
+            };
+
+            var result = _controller.Add(dto) as ViewResult;
             result.Should().NotBeNull();
             result.ViewName.Should().Be("Error");
         }

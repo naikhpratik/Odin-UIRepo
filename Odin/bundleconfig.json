@@ -1,0 +1,14 @@
+[
+  {
+    "outputFileName": "Scripts/bookmarklet/bookmarklet.min.js",
+    "inputFiles": [
+      "Scripts/bookmarklet/bookmarklet.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/bookmarklet/index.min.js",
+    "inputFiles": [
+      "Scripts/bookmarklet/index.js"
+    ]
+  }
+]

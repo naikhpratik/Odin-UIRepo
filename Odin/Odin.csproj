@@ -19,7 +19,7 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>44303</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -731,7 +731,13 @@
     <Content Include="Scripts\app\views\forgotPassword.js" />
     <Content Include="Scripts\app\views\orders.js" />
     <Content Include="Scripts\bookmarklet\bookmarklet.js" />
+    <Content Include="Scripts\bookmarklet\bookmarklet.min.js">
+      <DependentUpon>bookmarklet.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\bookmarklet\index.js" />
+    <Content Include="Scripts\bookmarklet\index.min.js">
+      <DependentUpon>index.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap-notify.min.js" />
@@ -745,6 +751,7 @@
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
     <Content Include="App_Browsers\qt.browser" />
+    <None Include="bundleconfig.json" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>

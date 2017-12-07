@@ -1,5 +1,12 @@
 ﻿javascript: (function () {
-
+    
+    //Super Hacky
+    //If string not replaced by CI use localhost.
+    var bmDomain = "#{BOOKMARKLET_DOMAIN}#";
+    var bmUrl = bmDomain.toLowerCase() === "#{bookmarklet_domain}#"
+        ? "https://localhost:44303/BookMarklet?url="
+        : bmDomain + "/BookMarklet?url=";
+    
     var getComputedStyle = function (elt, style) {
         var result = null;
         if (window.getComputedStyle) {
@@ -35,7 +42,7 @@
 
     var removeBookMarklet = function () {
         var elt = document.getElementById("divOdinBookMarklet");
-        if (elt != null) {
+        if (elt !== null) {
             document.body.removeChild(elt);
             elt.removeEventListener("resize", initBookMarkletSize);
         }
@@ -67,7 +74,7 @@
             '<div style="' + titleCss + '">I Like This Property</div>' +
             '</div>' +
             '<br />' +
-            '<iframe  height="350px" width="100%" id="odinIFrame" frameBorder="0" src="http://localhost:49986/BookMarklet?url=' + encodedUrl + '">Some text in the Modal..</iframe>' +
+            '<iframe  height="350px" width="100%" id="odinIFrame" frameBorder="0" src="'+bmUrl+encodedUrl + '"></iframe>' +
             '</div>';
 
         bmTag.innerHTML = contentHtml;
@@ -81,7 +88,6 @@
     }
 
     //Execution
-
     init();
 
 })();

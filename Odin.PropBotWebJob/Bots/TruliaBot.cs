@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using HtmlAgilityPack;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Odin.Data.Core.Models;
 using Odin.PropBotWebJob.Dtos.Trulia;
 using Odin.PropBotWebJob.Extensions;
@@ -54,6 +55,7 @@ namespace Odin.PropBotWebJob.Bots
                     retVal = BotRental();
                 }
                 retVal.Description = BotRentalDescription();
+                retVal.AvailabilityDate = BotRentalAvailabilityDate();
             }
             else if (_botType == "property")
             {
@@ -573,6 +575,58 @@ namespace Odin.PropBotWebJob.Bots
             }
 
             return result;
+        }
+
+        private DateTime? BotRentalAvailabilityDate()
+        {
+            try
+            {
+                var fpTags = _doc.QuerySelectorAll("tr.rentalContactFloorPlanForm");
+                DateTime now = DateTime.Now.Date;
+                DateTime? currDate = null;
+                bool first = true;
+                foreach (var tag in fpTags)
+                {
+                    if (tag.HasAttributes && tag.Attributes["data-floorplan"] != null)
+                    {
+                        var fp = JObject.Parse(tag.Attributes["data-floorplan"].Value);
+                        var units = fp["childUnits"].Values();
+
+                        foreach (var unit in units)
+                        {
+                            var dateAvailable = unit["dateAvailable"].Value<DateTime?>();
+                            var isAvailableNow = unit["isAvailableNow"].Value<bool?>();
+
+                            DateTime? tempDate = null;
+                            if (isAvailableNow.HasValue && isAvailableNow.Value)
+                            {
+                                tempDate = now;
+                            }
+                            else if(dateAvailable.HasValue)
+                            {
+                                tempDate = dateAvailable;
+                            }
+
+                            if (first)
+                            {
+                                first = false;
+                                currDate = tempDate;
+                            }
+                            else if (Nullable.Compare<DateTime>(currDate, tempDate) != 0)
+                            {
+                                //Multiple availability dates. Just return null to indicate check for availability.
+                                return null;
+                            }
+
+                        }
+                    }
+                }
+                return currDate;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
         }
 
         private string GetBotType()

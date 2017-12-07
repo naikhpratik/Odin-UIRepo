@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Odin.PropBotWebJob", "Odin.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Odin.PropBotWebJob.Tests", "Odin.PropBotWebJob.Tests\Odin.PropBotWebJob.Tests.csproj", "{5BC236EF-B5AB-4BAC-B70E-5FF4895E22A7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Odin.PropBotWebJob.IntegrationTests", "Odin.PropBotWebJob.IntegrationTests\Odin.PropBotWebJob.IntegrationTests.csproj", "{DA32759F-335F-41A8-B843-20CA53CCF8FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Azure|Any CPU = Azure|Any CPU
@@ -100,6 +102,14 @@ Global
 		{5BC236EF-B5AB-4BAC-B70E-5FF4895E22A7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5BC236EF-B5AB-4BAC-B70E-5FF4895E22A7}.Staging|Any CPU.ActiveCfg = Release|Any CPU
 		{5BC236EF-B5AB-4BAC-B70E-5FF4895E22A7}.Staging|Any CPU.Build.0 = Release|Any CPU
+		{DA32759F-335F-41A8-B843-20CA53CCF8FD}.Azure|Any CPU.ActiveCfg = Release|Any CPU
+		{DA32759F-335F-41A8-B843-20CA53CCF8FD}.Azure|Any CPU.Build.0 = Release|Any CPU
+		{DA32759F-335F-41A8-B843-20CA53CCF8FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA32759F-335F-41A8-B843-20CA53CCF8FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA32759F-335F-41A8-B843-20CA53CCF8FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA32759F-335F-41A8-B843-20CA53CCF8FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA32759F-335F-41A8-B843-20CA53CCF8FD}.Staging|Any CPU.ActiveCfg = Release|Any CPU
+		{DA32759F-335F-41A8-B843-20CA53CCF8FD}.Staging|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
