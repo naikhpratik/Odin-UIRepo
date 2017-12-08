@@ -74,7 +74,20 @@ namespace Odin.IntegrationTests.Helpers
                 .Include(o => o.HomeFinding)
                 .Include(o => o.Pets)
                 .Include(o => o.Children)
+                .Include(o => o.Notifications)
                 .ToList();
+
+            var userNotifications = context.UserNotifications.ToList();
+            if (userNotifications.Any())
+            {
+                context.UserNotifications.RemoveRange(userNotifications);
+            }
+
+            var notifications = context.Notifications.ToList();
+            if (notifications.Any())
+            {
+                context.Notifications.RemoveRange(notifications);
+            }
 
             foreach (var order in orders)
             {
@@ -107,6 +120,9 @@ namespace Odin.IntegrationTests.Helpers
                 
                 if (order.HomeFinding != null)
                     context.HomeFindings.Remove(order.HomeFinding);
+
+
+                    
             }             
 
             context.SaveChanges();
