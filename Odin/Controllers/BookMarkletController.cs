@@ -9,7 +9,6 @@ using Odin.ViewModels.BookMarklet;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Web.Mvc;
 
 namespace Odin.Controllers
@@ -63,7 +62,7 @@ namespace Odin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(BookMarkletDto dto)
+        public ActionResult Index(BookMarkletDto dto)
         {
             if (String.IsNullOrEmpty(dto.OrderId) || String.IsNullOrEmpty(dto.PropertyUrl))
             {
@@ -76,8 +75,8 @@ namespace Odin.Controllers
             var queueEntry = _mapper.Map<BookMarkletDto, PropBotJobQueueEntry>(dto);
             _queueStore.Add(queueEntry);
 
-            var vm = _mapper.Map<BookMarkletDto, BookMarkletAddViewModel>(dto);
-            return View(vm);
+            //var vm = _mapper.Map<BookMarkletDto, BookMarkletAddViewModel>(dto);
+            return View();
         }
         
     }

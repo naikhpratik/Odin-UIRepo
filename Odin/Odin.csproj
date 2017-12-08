@@ -301,6 +301,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\AccountController.cs" />
+    <Compile Include="Controllers\Api\BookMarkletController.cs" />
     <Compile Include="Controllers\Api\ConsultantsController.cs" />
     <Compile Include="Controllers\HomeFindingPropertiesController.cs" />
     <Compile Include="Controllers\Api\ManagersController.cs" />
@@ -722,6 +723,7 @@
     <Content Include="Rotativa\wkhtmltopdf.exe" />
     <Content Include="Scripts\app\controllers\userManagementController.js" />
     <Content Include="Scripts\app\services\userManagementService.js" />
+    <Content Include="Scripts\app\views\bookmarklet.js" />
     <Content Include="Scripts\app\views\transferee-itin-appntmt.js" />
     <Content Include="Scripts\app\views\transferee-housing.js" />
     <Content Include="Scripts\app\views\transferee-details.js" />
@@ -730,13 +732,13 @@
     <Content Include="Scripts\app\views\transferee.js" />
     <Content Include="Scripts\app\views\forgotPassword.js" />
     <Content Include="Scripts\app\views\orders.js" />
-    <Content Include="Scripts\bookmarklet\bookmarklet.js" />
-    <Content Include="Scripts\bookmarklet\bookmarklet.min.js">
-      <DependentUpon>bookmarklet.js</DependentUpon>
+    <Content Include="Scripts\bookmarklet\app.js" />
+    <Content Include="Scripts\bookmarklet\app.min.js">
+      <DependentUpon>app.js</DependentUpon>
     </Content>
-    <Content Include="Scripts\bookmarklet\index.js" />
-    <Content Include="Scripts\bookmarklet\index.min.js">
-      <DependentUpon>index.js</DependentUpon>
+    <Content Include="Scripts\bookmarklet\dist.js" />
+    <Content Include="Scripts\bookmarklet\dist.min.js">
+      <DependentUpon>dist.js</DependentUpon>
     </Content>
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
