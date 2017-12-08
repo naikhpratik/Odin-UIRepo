@@ -27,5 +27,14 @@ namespace Odin.Data.Persistence
                 .Include(s => s.ServiceType)
                 .ToList();
         }
+
+        public Service GetServiceById(string id)
+        {
+            return _context.Services
+                .Where(s => s.Id.Equals(id))
+                .Include(s => s.Order)
+                .Include(s => s.ServiceType)
+                .FirstOrDefault();
+        }
     }
 }

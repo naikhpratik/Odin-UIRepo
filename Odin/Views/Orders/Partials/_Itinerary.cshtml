@@ -1,24 +1,39 @@
 ﻿@model Odin.ViewModels.Orders.Transferee.OrdersTransfereeItineraryViewModel
 
 <div class="container-fluid" data-order-id="@Model.Id" id="itinerary">
-@if (Model.mustPrint == true)
-{
-    <img style="margin-top:20px;float:right;" src="@Server.MapPath("~/Content/Images/dwellworks_icon.png")">
-}
+    @if (Model.IsPdf == true)
+    {
+        <img style="margin-top:20px;float:right;" src="@Server.MapPath("~/Content/Images/dwellworks_icon.png")">
+    }
     <div class="row">
         <div class="col-md-6 titleGroup">
-            <h1 class="sectionTitle">
-                Your Itinerary
-            </h1>
+            @if (Model.IsPdf == true)
+            {
+                <h3 class="sectionTitle" style="padding-top:10px;">
+                    @(Model.TransfereeName + "'s Itinerary")
+                </h3>
+
+                <style>
+                    ul.itineraryDayList{
+                        margin-left: 1.5rem;
+                    }
+                </style>
+            }
+            else
+            {
+                <h1 class="sectionTitle">
+                    Your Itinerary
+                </h1>
+            }
             <p class="sectionInstruction">
                 What is going on. Check to see what you have planned. To stay on top of things.
             </p>
         </div>
-        @if (Model.mustPrint == false)
+        @if (Model.IsPdf == false)
         {
             <div class="col-md-6">
-                <button type="button" class="btn btn-secondary showNewAppointment" data-toggle="modal" data-target="#appointmentModalNew">Add Appointment</button>
-                <button type="button" class="btn btn-secondary showNewAppointment" id="cmdEmail">Email to Transferee</button>
+                <button type="button" class="btn btn-secondary showNewAppointment" id="cmdNew" data-toggle="modal" data-target="#modalForm">Add Appointment</button>
+                <button type="button" class="btn btn-secondary showNewAppointment" id="cmdEmail" data-toggle="modal" data-target="#modalForm">Email</button>
                 <button type="button" class="btn btn-secondary showNewAppointment" id="cmdPDF">Generate PDF</button>
             </div>
         }
@@ -52,13 +67,13 @@
                 link = "$('.item[data-panel=housing]').trigger('click');";
             }
 
-            <li class="col-md-6">
+            <li class="itineraryDay">
 
                 @if (ViewBag.SameAs == null || DateTime.Parse(ViewBag.SameAs.ToString()).ToShortDateString() != dt.Value.ToShortDateString())
                 {
                     ViewBag.SameAs = dt;
                     <div class="dayTitle row">
-                        <h2 class="dayNumber col-md-2" >
+                        <h2 class="dayNumber col-md-2">
                             @(dt.HasValue ? dt.Value.ToString("dd") : "NA")
                         </h2>
                         <div class="dayText col-md-10">
@@ -75,45 +90,17 @@
                         if (dt2.Value.ToShortDateString() == dt.Value.ToShortDateString())
                         {
                             i++;
-                            <li class="">
+                            <li class="testClass">
                                 @if (Model.Itinerary.ElementAt(j).ItemType.Contains("Appointment"))
-                                {
-                                    <div class="modal fade" id="appointmentModal@(j.ToString())" tabindex="-100" role="dialog" data-backdrop="static" aria-labelledby="appointmentModalLabel" aria-hidden="true" style="z-index: 2147483647;">
-                                        <div class="modal-dialog" role="document" data-appointment-id="@Model.Itinerary.ElementAt(j).Id" data-url='@Url.Action("appointmentPartial")/@Model.Itinerary.ElementAt(j).Id' id="appointment" style="z-index: 2147483647;">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="appointmentModalLabel">Appointment</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body"></div>
-                                                <div class="modal-footer row">
-                                                    <div class="col-sm-3">
-                                                        @*<button type="button" class="btn btn-secondary new">new</button>*@
-                                                    </div>
-                                                    <div class="col-sm-3">
-                                                        <button type="button" class="btn btn-primary save">Save</button>
-                                                    </div>
-                                                    <div class="col-sm-3">
-                                                        <button type="button" class="btn btn-secondary delete" data-dismiss="modal">Delete</button>
-                                                    </div>
-                                                    <div class="col-sm-3">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <a id="showAppointment" class="showAppointment row" data-toggle="modal" data-target="#appointmentModal@(j.ToString())">
-                                        <span class="eventTime col-md-2">@(dt2.HasValue ? dt2.Value.ToString("hh:mm tt") : "NA")</span><span class="eventNote col-md-10">&nbsp;@al</span>
+                                {                                    
+                                    <a id="showAppointment" class="showAppointment row noteRow" data-appointment-id="@Model.Itinerary.ElementAt(j).Id" data-toggle="modal" data-target="#modalForm">
+                                        <span class="eventTime col-sm-12 col-md-2">@(dt2.HasValue ? dt2.Value.ToString("hh:mm tt") : "NA")&nbsp;</span><span class="eventNote col-sm-12 col-md-10">@al</span>
                                     </a>
                                 }
                                 else
                                 {
-                                    <a class="row" onclick="@link">
-                                        <span class="eventTime col-md-2">@(dt2.HasValue ? dt2.Value.ToString("hh:mm tt") : "NA")</span><span class="eventNote col-md-10">&nbsp;@al</span>
+                                    <a class="row noteRow" onclick="@link">
+                                        <span class="eventTime col-sm-12 col-md-2">@(dt2.HasValue ? dt2.Value.ToString("hh:mm tt") : "NA")&nbsp;</span><span class="eventNote col-sm-12 col-md-10">@al</span>
                                     </a>
                                 }
 
@@ -127,60 +114,36 @@
                     }
                 </ul>
                 <hr>
-            </li>            
+            </li>
         }
-</ul>
-    <div class="modal fade" id="appointmentModalNew" tabindex="-100" role="dialog" data-backdrop="static" aria-labelledby="appointmentModalLabel" aria-hidden="true" style="z-index: 2147483647;">
-        <div class="modal-dialog" role="document" data-appointment-id="" data-url='@Url.Action("appointmentPartial")/' id="appointment" style="z-index: 2147483647;">
+    </ul>
+    <div class="modal fade appointmentModal" id="modalForm" tabindex="-100" role="dialog" data-backdrop="static" aria-labelledby="appointmentModalLabel" aria-hidden="true" style="z-index: 2147483647;">
+        <div class="modal-dialog" role="document" id="appointment" style="z-index: 2147483647;">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="appointmentModalLabel">Appointment</h5>
+                <div class="modal-header row">
+                    <h5 class="modal-title" id="appointmentModalLabel"></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body new"></div>
+                <div class="modal-body"></div>
                 <div class="modal-footer row">
-                    <div class="col-md-6">
-                        @*<button type="button" class="btn btn-secondary new">new</button>*@
+                    <div class="col-sm-6">
+                        
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-sm-3">
+                        <button type="button" class="btn btn-secondary delete" data-dismiss="modal">Delete</button>
+                    </div>
+                    <div class="col-sm-3">
                         <button type="button" class="btn btn-primary save">Save</button>
-                    </div>
-                    <div class="col-md-3">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <hr>
-</div>
-<script>
-    $(function () { /* to make sure the script runs after page load */
-
-        $('a.read_more').click(function (event) { /* find all a.read_more elements and bind the following code to them */
-
-            event.preventDefault(); /* prevent the a from changing the url */
-            if ($('#moreorless').text() == "Less...") {
-                $(this).parents('.item').find('.more_text').animate().hide(); /* show the .more_text span */
-                $('#moreorless').text("More...");
-            }
-            else {
-                $(this).parents('.item').find('.more_text').animate().show(); /* show the .more_text span */
-                $('#moreorless').text("Less...");
-            }            
-        });
-
-    });
-</script>
-
-
-        
-                @Styles.Render("~/Styling/itinerary")
-
+</div>                
+@Styles.Render("~/Styling/itinerary")
 <script type="text/javascript">
-
     $(document).ready(function () {
         TransfereeItineraryController.init();        
     });   

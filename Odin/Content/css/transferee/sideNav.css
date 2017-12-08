@@ -10,6 +10,14 @@
     padding: 0 0 0 0;
     margin: 0 0 0 0;
     height: 100%; }
+  #transfereeSideNav #backButton {
+    width: 100%;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+    margin: 1rem auto;
+    cursor: pointer; }
   #transfereeSideNav p.eeDetails {
     margin: 0 1.6rem;
     padding: 0 0 0 0;
@@ -20,7 +28,7 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    margin-left: 1.6rem; }
+    margin-left: 3rem; }
     #transfereeSideNav .eeOriginVipWrap p.eeDetails {
       margin: 0 0; }
     #transfereeSideNav .eeOriginVipWrap p.eeBar {
@@ -56,9 +64,11 @@
     #transfereeSideNav ul.navbar-nav li {
       float: none;
       width: 100%;
-      padding: 2vh 1.6rem; }
+      padding: 1vh 1.6rem; }
       #transfereeSideNav ul.navbar-nav li a {
-        color: white; }
+        color: white;
+        padding-top: 0;
+        padding-bottom: 0; }
         #transfereeSideNav ul.navbar-nav li a img {
           margin-right: 2rem; }
     #transfereeSideNav ul.navbar-nav li.item:hover {
@@ -71,6 +81,16 @@
       left: 0;
       width: 18rem;
       height: calc(100vh - 8rem); }
+      #transfereeSideNav #backButton {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: white;
+        margin: 1rem auto;
+        cursor: pointer;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 2; }
       #transfereeSideNav .eeDetails {
         text-align: center;
         display: flex;
@@ -92,12 +112,14 @@
       #transfereeSideNav .transfereeSideNav__person {
         text-align: center;
         width: 100%;
-        border-bottom: none; }
+        border-bottom: none;
+        margin-top: 3rem; }
         #transfereeSideNav .transfereeSideNav__person .navbar-brand {
           flex-direction: column;
           justify-content: center;
           width: 100%;
-          height: 100%; }
+          height: 100%;
+          margin-top: 2rem; }
           #transfereeSideNav .transfereeSideNav__person .navbar-brand img.person {
             width: 8vh;
             margin: 2vh auto 1vh auto; }

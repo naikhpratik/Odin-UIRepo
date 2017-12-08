@@ -11,8 +11,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using Odin.Helpers;
-using System.IO;
 
 namespace Odin.Controllers
 {
@@ -73,13 +71,13 @@ namespace Odin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.Unauthorized, "Unauthorized Order");
             }
-            OrdersTransfereeViewModel viewModel = GetViewModelForOrder(id);
+            OrdersTransfereeViewModel viewModel = GetViewModelForOrderDetails(id);
             return PartialView("~/views/orders/partials/_Details.cshtml",viewModel); 
         }
 
         public ActionResult IntakePartial(string id)
         {
-            OrdersTransfereeViewModel viewModel = GetViewModelForOrder(id);
+            OrdersTransfereeViewModel viewModel = GetViewModelForOrderDetails(id);
             return PartialView("~/views/orders/partials/_Intake.cshtml", viewModel);
         }
 
@@ -87,23 +85,13 @@ namespace Odin.Controllers
         {            
             OrdersTransfereeItineraryViewModel viewModel = GetItineraryByOrderId(id);
             viewModel.Id = id;
-            viewModel.mustPrint = false;
+            viewModel.IsPdf = false;
+            Transferee ee = GetTransfereeByOrderId(id);
+            if (ee == null)
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound, "Not found");
+            viewModel.TransfereeName = ee.FullName;
             return PartialView("~/views/orders/partials/_Itinerary.cshtml", viewModel);
-        }
-        public ActionResult AppointmentPartial(string id)
-        {
-            Appointment viewModel;
-            if (string.IsNullOrEmpty(id) == false)
-            {
-                viewModel = GetAppointmentById(id);
-                viewModel.Id = id;
-            }
-            else
-            {
-                viewModel = new Appointment() { Id = null, ScheduledDate = DateTime.Now }; ;
-            }
-            return PartialView("~/views/orders/partials/_Appointment.cshtml", viewModel);
-        }
+        }        
 
         public ActionResult Details(string orderId)
         {
@@ -135,16 +123,17 @@ namespace Odin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.NotFound, "Not found");
             }
             ViewBag.Id = id;
-            OrdersTransfereeViewModel viewModel = GetViewModelForOrder(id);
+            OrdersTransfereeViewModel viewModel = GetViewModelForOrderDetails(id);
             return View(viewModel);
         }
-
-        private OrdersTransfereeViewModel GetViewModelForOrder(string id)
+       
+        private OrdersTransfereeViewModel GetViewModelForOrderDetails(string id)
         {
             var userId = User.Identity.GetUserId();
-            var order = _unitOfWork.Orders.GetOrderFor(userId,id);
+            var order = _unitOfWork.Orders.GetOrderById(id);
 
             OrdersTransfereeViewModel vm = _mapper.Map<Order, OrdersTransfereeViewModel>(order);
+
             vm.Services = vm.Services.OrderBy(s => s.ServiceTypeSortOrder);
             
             //Populate list of service categories available for this order.
@@ -168,47 +157,29 @@ namespace Odin.Controllers
 
             return vm;
         }
-        
+        public Transferee GetTransfereeByOrderId(string id)
+        {
+            return _unitOfWork.Transferees.GetTransfereeByOrderId(id);
+        }
         private OrdersTransfereeItineraryViewModel GetItineraryByOrderId(string id)
         {
-            var itinService = _unitOfWork.Services.GetServicesByOrderId(id);
-            var itinAppointments = _unitOfWork.Appointments.GetAppointmentsByOrderId(id);
-            //var itinViewings = _unitOfWork.HousingTypes.GetViewingsByOrderId(id);
-            var itinerary1 = _mapper.Map<IEnumerable<Service>, IEnumerable<ItineraryEntryViewModel>>(itinService);
-            var itinerary2 = _mapper.Map<IEnumerable<Appointment>, IEnumerable<ItineraryEntryViewModel>>(itinAppointments);
-            //var itinerary3 = _mapper.Map<IEnumerable<HousingPropertyViewModel>, IEnumerable<ItineraryEntryViewModel>>(itinViewings);
-            //var itinerary = itinerary1.Concat(itinerary2).Concat(itinerary3).OrderBy(s => s.ScheduledDate);
-            var itinerary = itinerary1.Concat(itinerary2).OrderBy(s => s.ScheduledDate);
-            OrdersTransfereeItineraryViewModel vm = new OrdersTransfereeItineraryViewModel();
-            vm.Itinerary = itinerary;            
-            return vm;
+            ItineraryHelper itinHelper = new ItineraryHelper(_unitOfWork, _mapper);
+            return itinHelper.Build(id);
         }
-        private Appointment GetAppointmentById(string Id)
-        {
-            var itinAppointment = _unitOfWork.Appointments.GetAppointmentById(Id);
-            return itinAppointment;
-        }
-        
         public ActionResult GeneratePDF(string id)
         {
             OrdersTransfereeItineraryViewModel viewModel = GetItineraryByOrderId(id);
             viewModel.Id = id;
-            viewModel.mustPrint = true;
-            return new Rotativa.ViewAsPdf("Partials/_Itinerary", viewModel) { FileName = "Itinerary.pdf", PageMargins = new Rotativa.Options.Margins(0, 0, 0, 0) }; 
+            viewModel.IsPdf = true;
+            Transferee ee = GetTransfereeByOrderId(id);
+            viewModel.TransfereeName = ee.FullName;
+            return new Rotativa.ViewAsPdf("Partials/_Itinerary", viewModel)
+            {
+                FileName = "Itinerary.pdf",
+                PageMargins = new Rotativa.Options.Margins(0, 0, 0, 0)
+            };
         }
-        public ActionResult EmailGeneratedPDF(string id, string email)
-        {
-            OrdersTransfereeItineraryViewModel viewModel = GetItineraryByOrderId(id);
-            viewModel.Id = id;
-            viewModel.mustPrint = true;
-            string filename = "Itinerary" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".pdf";
-            var pdf = new Rotativa.ViewAsPdf("Partials/_Itinerary", viewModel) {FileName = filename, PageMargins = new Rotativa.Options.Margins(0, 0, 0, 0) };
-            byte[] pdfBytes = pdf.BuildFile(ControllerContext);
-            MemoryStream stream = new MemoryStream(pdfBytes);
-            EmailHelper EH = new EmailHelper();
-            EH.SendEmail_FS(email, "Your DwellWorks Itinerary", "Please find attached your itinerary for the upcoming move", SendGrid.MimeType.Html, filename, pdfBytes);
-            return PartialView("~/views/orders/partials/_Itinerary.cshtml", viewModel);
-        }
+
     }
 
 }

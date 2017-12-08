@@ -181,12 +181,18 @@
   <ItemGroup>
     <Compile Include="Controllers\Api\ConsultantsControllerTests.cs" />
     <Compile Include="Controllers\BookMarkletControllerTests.cs" />
+    <Compile Include="Controllers\Api\AppointmentControllerTests.cs" />
     <Compile Include="Controllers\HomeFindingPropertiesControllerTests.cs" />
     <Compile Include="Controllers\Api\ManagersControllerTests.cs" />
+    <Compile Include="Controllers\Api\UserNotificationControllerTests.cs" />
+    <Compile Include="Controllers\UserNotificationControllerTests.cs" />
+    <Compile Include="Controllers\EmailControllerTests.cs" />
     <Compile Include="Extensions\HttpActionResultExtensions.cs" />
     <Compile Include="Helpers\AzureStorageEmulatorManagerTests.cs" />
     <Compile Include="Helpers\HttpPostedFileBaseTesting.cs" />
+    <Compile Include="Helpers\ItineraryHelperTests.cs" />
     <Compile Include="Helpers\ResultHelper.cs" />
+    <Compile Include="PropBotWebJob\FunctionsTest.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -212,6 +218,10 @@
     <ProjectReference Include="..\Odin.Data\Odin.Data.csproj">
       <Project>{0d2c0b84-daff-4f5c-97d9-1c3bc5871b4c}</Project>
       <Name>Odin.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Odin.PropBotWebJob\Odin.PropBotWebJob.csproj">
+      <Project>{62d82a16-178d-48c2-92c2-e640fe964c7a}</Project>
+      <Name>Odin.PropBotWebJob</Name>
     </ProjectReference>
     <ProjectReference Include="..\Odin\Odin.csproj">
       <Project>{003e6885-6839-46e6-9e1f-cc8ebfe57efb}</Project>

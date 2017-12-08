@@ -29,10 +29,13 @@ var TransfereeItineraryController = function (transfereeItineraryService) {
         itineraryBlocks.find(".itinerary-date").datetimepicker({
             format: "MM/DD/YYYY",
             useCurrent: true,
-            keepOpen: false
+            keepOpen: false,
+            showClose: true,
+            toolbarPlacement: 'bottom',
+            icons: { close: 'custom-icon-check' }
         });
         //Bind Events        
-        itineraryBlocks.on("click", clickable, toggleCollapse);        
+        itineraryBlocks.on("click", clickable, toggleCollapse);
 
         $('#cmdPDF').click(function () {
 
@@ -40,38 +43,45 @@ var TransfereeItineraryController = function (transfereeItineraryService) {
 
         });
         $('#cmdEmail').click(function () {
-
-            var url = "/Orders/EmailGeneratedPDF/" + $('#itinerary').attr("data-order-id") + "?email=" + $("#TransfereeEmail").val();
-            $.ajax({
-                url: url,
-                type: 'POST'
-            }).done(function () { toast("Email sent successfully", "success") }).fail(function () { toast("Email not sent!", "danger") });
-
-        });        
-
-        $('.showAppointment').click(function () {
-            var app = $(this).parent().parent().find('#appointment');
-            var url = app.data('url');
+            var url = "/Email/EmailForm/" + $('#itinerary').attr("data-order-id");
+            var app = $("#modalForm");
+            app.find('.modal-title').text("Email Message");
+            app.find(".modal-footer").css("display", "none");
             $.get(url, function (data) {
+                app.find('.modal-body').html();
                 app.find('.modal-body').html(data);
             });
         });
-        $('.showNewAppointment').click(function () {
-            var app = $("#appointmentModalNew");
-            var url = '/orders/appointmentPartial/';
+
+        $('.showAppointment').click(function () {
+            var app = $('#modalForm');
+            app.find('.modal-title').text("Appointment");
+            var url = '/Appointment/appointmentPartial/' + $(this).attr('data-appointment-id');
+            app.find(".modal-footer").css("display", "block");
+            app.find(".delete").css("display", "block");
             $.get(url, function (data) {
-                app.find('.modal-body.new').html(data);
+                app.find('.modal-body').html();
+                app.find('.modal-body').html(data);
+            });
+        });
+        $('#cmdNew').click(function () {
+            var app = $('#modalForm');
+            app.find('.modal-title').text("New Appointment");
+            app.find(".modal-footer").css("display", "block");
+            app.find(".delete").css("display", "none");
+            var url = '/Appointment/appointmentPartial/';
+            $.get(url, function (data) {
+                app.find('.modal-body').html();
+                app.find('.modal-body').html(data);
             });
         });
         $(".new").click(function (e) {
             e.stopPropagation();
             return false;
-        })        
-    };
-       
-
+        })
+    }
     var toggleCollapse = function (e) {
-        if ($(e.target).get(0).tagName != 'IMG')
+        if ($(e.target).get(0).tagName !== 'IMG')
             return;
         var itineraryBlock = $(e.target).parents(".event-item");
         var colImg = itineraryBlock.find(".itinerary-collapse-img");
@@ -90,7 +100,7 @@ var TransfereeItineraryController = function (transfereeItineraryService) {
         
     }
 
-    
+    //formaction = '@Url.Action("Index","email")'
 
     //Utilities
 

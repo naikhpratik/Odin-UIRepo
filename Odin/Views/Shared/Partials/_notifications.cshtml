@@ -1,0 +1,33 @@
+﻿
+@model IEnumerable<Odin.ViewModels.Shared.NotificationViewModel>
+
+
+<input id="hdnNotificationsCount" type="hidden" value="@Model.Where(n=>!n.IsRead ).Count()" />
+
+
+@foreach (var notification in Model)
+{
+    if (!notification.IsRead)
+    {
+        <li data-OrderId="@notification.NotificationOrderId" data-id="@notification.Id" data-isread="@notification.IsRead" data-isremoved="@notification.IsRemoved" class="notification notifications_unread" id="notificationlistitem_unread">
+            @*<input type="radio" id="r1" name="r1" />*@            
+            <label id="notificationlabel" class="notifications notification-label notification-close-unread">&times</label>           
+            
+                <strong>@notification.NotificationTitle</strong>
+                <br />Your manager has assigned you a new Transferee, their name is  <a href="/Orders/Transferee/@notification.NotificationOrderId" class="notifications">@notification.NotificationOrderTransfereeFullName</a>
+            
+        </li>
+    }
+    else
+    {
+        <li data-OrderId="@notification.NotificationOrderId" data-id="@notification.Id" data-isread="@notification.IsRead" data-isremoved="@notification.IsRemoved" class="notification notifications_read" id="notificationlistitem_unread">
+            <label id="notificationlabel" class="notifications notification-label notification-close-read">&times</label>
+            <strong>@notification.NotificationTitle</strong>
+            <br />Your manager has assigned you a new Transferee, their name is  <a href="/Orders/Transferee/@notification.NotificationOrderId" class="notifications">@notification.NotificationOrderTransfereeFullName</a>
+        </li>
+    }
+
+}
+
+
+

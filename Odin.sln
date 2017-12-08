@@ -20,7 +20,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Odin.PropBotWebJob", "Odin.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Odin.PropBotWebJob.Tests", "Odin.PropBotWebJob.Tests\Odin.PropBotWebJob.Tests.csproj", "{5BC236EF-B5AB-4BAC-B70E-5FF4895E22A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Odin.PropBotWebJob.IntegrationTests", "Odin.PropBotWebJob.IntegrationTests\Odin.PropBotWebJob.IntegrationTests.csproj", "{DA32759F-335F-41A8-B843-20CA53CCF8FD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Odin.ToSeWebJob.Tests", "Odin.ToSeWebJob.Tests\Odin.ToSeWebJob.Tests.csproj", "{58ABAB58-8BD4-4BC8-B44F-9BB397316A0D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -102,19 +102,20 @@ Global
 		{5BC236EF-B5AB-4BAC-B70E-5FF4895E22A7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5BC236EF-B5AB-4BAC-B70E-5FF4895E22A7}.Staging|Any CPU.ActiveCfg = Release|Any CPU
 		{5BC236EF-B5AB-4BAC-B70E-5FF4895E22A7}.Staging|Any CPU.Build.0 = Release|Any CPU
-		{DA32759F-335F-41A8-B843-20CA53CCF8FD}.Azure|Any CPU.ActiveCfg = Release|Any CPU
-		{DA32759F-335F-41A8-B843-20CA53CCF8FD}.Azure|Any CPU.Build.0 = Release|Any CPU
-		{DA32759F-335F-41A8-B843-20CA53CCF8FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DA32759F-335F-41A8-B843-20CA53CCF8FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DA32759F-335F-41A8-B843-20CA53CCF8FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DA32759F-335F-41A8-B843-20CA53CCF8FD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DA32759F-335F-41A8-B843-20CA53CCF8FD}.Staging|Any CPU.ActiveCfg = Release|Any CPU
-		{DA32759F-335F-41A8-B843-20CA53CCF8FD}.Staging|Any CPU.Build.0 = Release|Any CPU
+		{58ABAB58-8BD4-4BC8-B44F-9BB397316A0D}.Azure|Any CPU.ActiveCfg = Release|Any CPU
+		{58ABAB58-8BD4-4BC8-B44F-9BB397316A0D}.Azure|Any CPU.Build.0 = Release|Any CPU
+		{58ABAB58-8BD4-4BC8-B44F-9BB397316A0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58ABAB58-8BD4-4BC8-B44F-9BB397316A0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58ABAB58-8BD4-4BC8-B44F-9BB397316A0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58ABAB58-8BD4-4BC8-B44F-9BB397316A0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58ABAB58-8BD4-4BC8-B44F-9BB397316A0D}.Staging|Any CPU.ActiveCfg = Release|Any CPU
+		{58ABAB58-8BD4-4BC8-B44F-9BB397316A0D}.Staging|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Logging.6.0.1304.0\lib\NET45
 		SolutionGuid = {D2E3E291-E5BF-4A3B-AEE9-1560054CB06F}
 	EndGlobalSection
 EndGlobal

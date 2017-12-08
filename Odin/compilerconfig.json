@@ -48,6 +48,10 @@
     "outputFile": "Content/css/transferee/housing.css"
   },
   {
+    "inputFile": "Content/css/header.scss",
+    "outputFile": "Content/css/header.css"
+  },
+  {
     "inputFile": "Content/css/transferee/itinerary.scss",
     "outputFile": "Content/css/transferee/itinerary.css"
   },

@@ -303,12 +303,17 @@
     <Compile Include="Controllers\Api\AccountController.cs" />
     <Compile Include="Controllers\Api\BookMarkletController.cs" />
     <Compile Include="Controllers\Api\ConsultantsController.cs" />
+    <Compile Include="Controllers\Api\AppointmentController.cs" />
+    <Compile Include="Controllers\AppointmentController.cs" />
+    <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\HomeFindingPropertiesController.cs" />
     <Compile Include="Controllers\Api\ManagersController.cs" />
     <Compile Include="Controllers\Api\OrdersController.cs" />
+    <Compile Include="Controllers\Api\UserNotificationController.cs" />
     <Compile Include="Controllers\BookMarkletController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Controllers\UserNotificationController.cs" />
     <Compile Include="Domain\ImageStore.cs" />
     <Compile Include="Domain\QueueStore.cs" />
     <Compile Include="Domain\ConsultantImporter.cs" />
@@ -329,6 +334,7 @@
     <Compile Include="Helpers\ConfigHelper.cs" />
     <Compile Include="Helpers\DateHelper.cs" />
     <Compile Include="Helpers\EmailHelper.cs" />
+    <Compile Include="Helpers\ItineraryHelper.cs" />
     <Compile Include="Helpers\ServiceHelper.cs" />
     <Compile Include="Helpers\ViewRenderer.cs" />
     <Compile Include="Interfaces\IBookMarkletHelper.cs" />
@@ -367,6 +373,7 @@
     <Compile Include="ViewModels\BookMarklet\BookMarkletOrderViewModel.cs" />
     <Compile Include="ViewModels\BookMarklet\BookMarkletViewModel.cs" />
     <Compile Include="ViewModels\Mailers\CreatePasswordViewModel.cs" />
+    <Compile Include="ViewModels\Mailers\EmailViewModel.cs" />
     <Compile Include="ViewModels\Mailers\ResetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Orders\Index\OrdersIndexViewModel.cs" />
     <Compile Include="ViewModels\Mailers\ViewRenderer.cs" />
@@ -377,6 +384,7 @@
     <Compile Include="ViewModels\Shared\ChildViewModel.cs" />
     <Compile Include="ViewModels\Shared\ItineraryEntryViewModel.cs" />
     <Compile Include="ViewModels\Shared\ManagerViewModel.cs" />
+    <Compile Include="ViewModels\Shared\NotificationViewModel.cs" />
     <Compile Include="ViewModels\Shared\PetViewModel.cs" />
     <Compile Include="ViewModels\Shared\HomeFindingViewModel.cs" />
     <Compile Include="ViewModels\Shared\PhotoViewModel.cs" />
@@ -403,6 +411,7 @@
     <Content Include="Content\css\bookmarklet.min.css">
       <DependentUpon>bookmarklet.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\shared\thumbnails.carousel.css" />
     <Content Include="Content\css\transferee\details.css">
       <DependentUpon>details.scss</DependentUpon>
     </Content>
@@ -740,6 +749,9 @@
     <Content Include="Scripts\bookmarklet\dist.min.js">
       <DependentUpon>dist.js</DependentUpon>
     </Content>
+    <Content Include="Scripts\app\views\_header.js" />
+    <Content Include="Scripts\bookmarklet\bookmarklet.js" />
+    <Content Include="Scripts\bookmarklet\index.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap-notify.min.js" />
@@ -775,6 +787,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\css\primaryNav.scss" />
+    <Content Include="Content\css\header.scss" />
     <Content Include="Content\css\transferee\sideNav.scss" />
     <Content Include="Content\css\bookmarklet.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -855,6 +868,7 @@
     <Content Include="Scripts\DataTables\responsive.semanticui.js" />
     <Content Include="Scripts\DataTables\responsive.semanticui.min.js" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
+    <Content Include="Scripts\thumbnails.carousel.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
     <Content Include="Scripts\jquery-1.12.4.min.js" />
     <Content Include="Scripts\jquery-1.12.4.min.map" />
@@ -929,6 +943,7 @@
     <Content Include="Views\Orders\Partials\_Itinerary.cshtml" />
     <Content Include="Views\Orders\Partials\_Messages.cshtml" />
     <Content Include="Views\Orders\Partials\_History.cshtml" />
+    <Content Include="Views\Shared\Partials\_notifications.cshtml" />
     <Content Include="Views\BookMarklet\AuthorizationError.cshtml" />
     <Content Include="Views\Orders\Partials\_Appointment.cshtml" />
     <Content Include="Views\BookMarklet\Index.cshtml" />
@@ -937,7 +952,10 @@
     <Content Include="Views\Shared\EditorTemplates\CreateHousingProperty.cshtml" />
     <Content Include="Views\Orders\Partials\_HousingProperties.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\UnitedStates.cshtml" />
+    <Content Include="Views\Mailers\Partials\Email.cshtml" />
     <Content Include="Views\BookMarklet\Error.cshtml" />
+    <Content Include="Views\Orders\Partials\_PropertyDetails.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Photos.cshtml" />
     <None Include="Web.Azure.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -948,6 +966,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Appointment\" />
+    <Folder Include="Views\Email\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">

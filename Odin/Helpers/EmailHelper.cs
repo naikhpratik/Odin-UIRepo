@@ -2,6 +2,8 @@
 using SendGrid;
 using SendGrid.Helpers.Mail;
 using Odin.Interfaces;
+using System.Collections.Generic;
+
 namespace Odin.Helpers
 {
     public class EmailHelper : IEmailHelper
@@ -28,20 +30,23 @@ namespace Odin.Helpers
             }
             return "Message not sent";
         }
-        public string SendEmail_FS(string to, string subject, string content, string contentType, string attFile, byte[] bits)
+        public string SendEmail_FS(IEnumerable<string> to, string subject, string content, string contentType, string attFile, byte[] bits)
         {
             ConfigHelper _configHelper = new ConfigHelper();
             //this is needed for SendGrid emailing
             var apiKey = _configHelper.GetSendGridAPIKey();
             var client = new SendGridClient(apiKey);
+            SendGridMessage msg = new SendGridMessage();
             //set the message and its components
             var from = new EmailAddress(_configHelper.GetDWOdinTeamEmailFrom()); //DWOdinTeamEmailFrom, "DwellWorks Odin Team"
-            SendGridMessage msg = null;
             if (contentType == MimeType.Html)
-                msg = MailHelper.CreateSingleEmail(from, new EmailAddress(to), subject, "", content);
+                msg.HtmlContent=content;
             else if (contentType == MimeType.Text)
-                msg = MailHelper.CreateSingleEmail(from, new EmailAddress(to), subject, content, "");
-
+                msg.PlainTextContent =  content;
+            msg.From = from;
+            msg.Subject = subject;
+            foreach (string ea in to)
+                msg.AddTo(ea);
             msg.AddAttachment(filename: attFile, content: Convert.ToBase64String(bits));
             if (msg != null)
             {

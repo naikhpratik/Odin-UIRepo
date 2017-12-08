@@ -20,7 +20,9 @@ namespace Odin.Data.Core
         ITransportationTypesRepository TransportationTypes { get; }
         IDepositTypesRepository DepositTypes { get; }
         IBrokerFeeTypesRepository BrokerFeeTypes { get; }
+        IUserNotificationRepository UserNotifications { get; }
         IPhotosRepository Photos { get; }
+        IHomeFindingPropertyRepository HomeFindingProperties { get; }
         void Complete();
     }
 }

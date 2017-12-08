@@ -151,7 +151,10 @@
     <Compile Include="Controllers\Api\BookMarkletControllerTests.cs" />
     <Compile Include="Controllers\Api\OrdersControllerTests.cs" />
     <Compile Include="Controllers\BookMarkletControllerTests.cs" />
+    <Compile Include="Controllers\Api\UserNotificationControllerTests.cs" />
     <Compile Include="Controllers\OrdersControllerTests.cs" />
+    <Compile Include="Controllers\EmailControllerTests.cs" />
+    <Compile Include="Controllers\AppointmentControllerTests.cs" />
     <Compile Include="Domain\ConsultantImporterTests.cs" />
     <Compile Include="Domain\ManagerImporterTests.cs" />
     <Compile Include="Domain\OrderImporterTests.cs" />
@@ -159,6 +162,7 @@
     <Compile Include="Helpers\AccountHelperTests.cs" />
     <Compile Include="Helpers\DateHelperTests.cs" />
     <Compile Include="Helpers\ServiceHelperTests.cs" />
+    <Compile Include="Helpers\ItineraryHelperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\HousingViewModelTests.cs" />
     <Compile Include="ViewModels\HousingPropertyViewModelTests.cs" />

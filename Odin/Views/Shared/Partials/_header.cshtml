@@ -9,11 +9,12 @@
         <ul class="primaryNavIconList">
             <li class="primaryNavIconList__item dropdown">
                 <div class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    <span>9+</span>
+                    <span id="spanNotificationCount" class="animated bounceInDown"></span>
                     <img src="~/Content/Images/icn_alert_B1.png">
                 </div>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <li>Hello</li>
+               
+                <ul id="ulNotifications" class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                       
                 </ul>
             </li>
             <li class="primaryNavIconList__item dropdown">
@@ -37,3 +38,6 @@
         </ul>
     </nav>
 </header>
+<script>
+    $(document).ready(HeaderController.init);
+</script>

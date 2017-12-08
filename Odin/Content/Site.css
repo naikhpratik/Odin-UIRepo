@@ -21,7 +21,8 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    //max-width: 280px;
+    width: 100%;
 }
 
 
@@ -114,4 +115,3 @@ textarea {
 .grey-header {
     color: darkgrey;
 }
-

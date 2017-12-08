@@ -15,7 +15,15 @@
         height: 100%;
     }
 
-
+    #backButton {
+        width: 100%;
+        text-align: center;
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: white;
+        margin: 1rem auto;
+        cursor: pointer
+    }
 
     p.eeDetails {
         margin: 0 1.6rem;
@@ -29,7 +37,7 @@
         flex-direction: row;
         justify-content: flex-start;
         align-items: center;
-        margin-left: 1.6rem;
+        margin-left: 3rem;
 
         p.eeDetails {
             margin: 0 0;
@@ -84,10 +92,12 @@
         li {
             float: none;
             width: 100%;
-            padding: 2vh 1.6rem;
+            padding: 1vh 1.6rem;
 
             a {
                 color: white;
+                padding-top: 0;
+                padding-bottom: 0;
 
                 img {
                     margin-right: 2rem;
@@ -114,6 +124,18 @@
         width: $sideNavWidth;
         height: calc(100vh - #{$primaryNavHeightLg});
 
+        #backButton {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: white;
+            margin: 1rem auto;
+            cursor: pointer;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+
+        }
 
         .eeDetails {
             text-align: center;
@@ -134,7 +156,7 @@
                 margin: 0 0;
             }
 
-            p.eeDetails{
+            p.eeDetails {
                 text-align: center;
             }
 
@@ -153,12 +175,14 @@
             text-align: center;
             width: 100%;
             border-bottom: none;
+            margin-top: 3rem;
 
             .navbar-brand {
                 flex-direction: column;
                 justify-content: center;
                 width: 100%;
                 height: 100%;
+                margin-top: 2rem;
 
                 img.person {
                     width: 8vh;
