@@ -23,31 +23,33 @@ namespace Odin.Data.Persistence
         {
             DateTime currentdate = Convert.ToDateTime(DateTime.Now.AddDays(-30));
             return _context.UserNotifications
-                .Where(n => n.UserId == UserID && ((!n.IsRead) || (n.CreatedAt >= currentdate && n.IsRead)))
+                .Where(n => n.UserId == UserID && ((!n.IsRead) || (n.CreatedAt >= currentdate && n.IsRead)) && !n.IsRemoved)
                 .Include(n => n.Notification)
                 .Include(n => n.Notification.Order)
+                .OrderByDescending(n => !n.IsRead)
+                .OrderByDescending(n => n.CreatedAt)
                 .ToList();
 
         }
 
-        public IEnumerable<UserNotification> GetReadUserNotification(string UserID)
+        //public IEnumerable<UserNotification> GetReadUserNotification(string UserID)
+        //{
+        //    DateTime currentdate = Convert.ToDateTime(DateTime.Now.AddDays(-30));
+        //    return _context.UserNotifications
+        //        .Where(n => n.UserId == UserID && (n.CreatedAt >= currentdate && n.IsRead))
+        //        .Include(n => n.Notification)
+        //        .Include(n => n.Notification.Order)
+        //        .ToList();
+
+        //}
+
+
+
+
+        public UserNotification GetUserNotificationByNotificationId(string UserID, string UserNotificationId)
         {
-            DateTime currentdate = Convert.ToDateTime(DateTime.Now.AddDays(-30));
             return _context.UserNotifications
-                .Where(n => n.UserId == UserID && (n.CreatedAt >= currentdate && n.IsRead))
-                .Include(n => n.Notification)
-                .Include(n => n.Notification.Order)
-                .ToList();
-
-        }
-
-        
-
-
-        public UserNotification GetUserNotificationByNotificationId(string UserID, string NotificationId)
-        {
-            return _context.UserNotifications
-                .Where(n => n.UserId == UserID && n.Id == NotificationId).SingleOrDefault();
+                .Where(n => n.UserId == UserID && n.Id == UserNotificationId).SingleOrDefault();
 
         }
 

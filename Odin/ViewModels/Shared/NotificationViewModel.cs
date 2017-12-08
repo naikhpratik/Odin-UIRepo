@@ -12,6 +12,8 @@ namespace Odin.ViewModels.Shared
         public string NotificationTitle { get; set; }
         public string NotificationOrderTransfereeFullName { get; set; }
         public bool IsRead { get; set; }
+        public bool IsRemoved { get; set; }
+        public string NotificationUserNotificationId { get; set; }
 
     }
 

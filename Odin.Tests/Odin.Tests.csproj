@@ -147,6 +147,7 @@
   <ItemGroup>
     <Compile Include="Controllers\Api\AccountControllerTests.cs" />
     <Compile Include="Controllers\Api\OrdersControllerTests.cs" />
+    <Compile Include="Controllers\Api\UserNotificationControllerTests.cs" />
     <Compile Include="Controllers\OrdersControllerTests.cs" />
     <Compile Include="Domain\ConsultantImporterTests.cs" />
     <Compile Include="Domain\ManagerImporterTests.cs" />

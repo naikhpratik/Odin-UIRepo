@@ -18,7 +18,9 @@ namespace Odin.Data.Core.Models
 
         public bool IsRead { get; private set; }
 
-        protected UserNotification()
+        public bool IsRemoved { get; private set; }
+
+        public UserNotification()
         {
         }
 
@@ -40,6 +42,11 @@ namespace Odin.Data.Core.Models
         public void Read()
         {
             IsRead = true;
+        }
+
+        public void Remove()
+        {
+            IsRemoved = true;
         }
     }
 }

@@ -37,7 +37,8 @@ namespace Odin
                       "~/Content/site.css",
                       "~/Content/css/primaryNav.css",
                       "~/Content/datatables/css/datatables.bootstrap.css",
-                      "~/Content/animate.css"));
+                      "~/Content/animate.css",
+                      "~/Content/css/header.css"));
 
 
             // Page Styling

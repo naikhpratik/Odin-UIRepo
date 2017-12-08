@@ -453,6 +453,10 @@
     <Compile Include="Persistence\Migrations\201711202009571_AddOrderInfoToNotification.Designer.cs">
       <DependentUpon>201711202009571_AddOrderInfoToNotification.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201712042034473_ChangesInNotification.cs" />
+    <Compile Include="Persistence\Migrations\201712042034473_ChangesInNotification.Designer.cs">
+      <DependentUpon>201712042034473_ChangesInNotification.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\NumberOfBathroomsTypesRepository.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
@@ -654,6 +658,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201711202009571_AddOrderInfoToNotification.resx">
       <DependentUpon>201711202009571_AddOrderInfoToNotification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201712042034473_ChangesInNotification.resx">
+      <DependentUpon>201712042034473_ChangesInNotification.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

@@ -11,7 +11,7 @@ namespace Odin.Data.Core.Repositories
     {
         IEnumerable<UserNotification> GetUserNotification(string UserID);
         UserNotification GetUserNotificationByNotificationId(string UserID, string NotificationId);
-        IEnumerable<UserNotification> GetReadUserNotification(string UserID);
+        //IEnumerable<UserNotification> GetReadUserNotification(string UserID);
 
     }
 }

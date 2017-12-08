@@ -178,6 +178,8 @@
   <ItemGroup>
     <Compile Include="Controllers\Api\ConsultantsControllerTests.cs" />
     <Compile Include="Controllers\Api\ManagersControllerTests.cs" />
+    <Compile Include="Controllers\Api\UserNotificationControllerTests.cs" />
+    <Compile Include="Controllers\UserNotificationControllerTests.cs" />
     <Compile Include="Extensions\HttpActionResultExtensions.cs" />
     <Compile Include="Helpers\AzureStorageEmulatorManagerTests.cs" />
     <Compile Include="Helpers\ResultHelper.cs" />

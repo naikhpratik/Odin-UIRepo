@@ -15,6 +15,7 @@ using WebGrease.Css.Extensions;
 
 
 
+
 namespace Odin.Controllers.Api
 {
     public class UserNotificationController : ApiController
@@ -22,11 +23,28 @@ namespace Odin.Controllers.Api
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public UserNotificationController(IUnitOfWork unitOfWork, IMapper mapper, IAccountHelper accountHelper)
+        public UserNotificationController(IUnitOfWork unitOfWork, IMapper mapper, IQueueStore queueStore)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
+
+
+        //[Authorize]
+        //[HttpPost]
+        //public IHttpActionResult GetUserNotifications()
+        //{
+        //    var userId = User.Identity.GetUserId();
+
+        //    IEnumerable<UserNotification> userNotifications = _unitOfWork.UserNotifications.GetUserNotification(userId);
+
+
+        //    IEnumerable<NotificationViewModel> vms = _mapper.Map<IEnumerable<UserNotification>, IEnumerable<NotificationViewModel>>(userNotifications);
+
+        //    return PartialView("~/views/Shared/partials/_notifications.cshtml", vms);
+        //}
+
+
 
 
         [Authorize]
@@ -47,18 +65,41 @@ namespace Odin.Controllers.Api
 
         [Authorize]
         [HttpPost]
-        [Route("Api/UserNotification/NotificationMarkAsRead/{NotificationId}")]
-        public IHttpActionResult NotificationMarkAsRead(string NotificationId)
+        [Route("Api/UserNotification/NotificationMarkAsRead/{UserNotificationId}")]
+        public IHttpActionResult NotificationMarkAsRead(string UserNotificationId)
+        {
+            var UserId = User.Identity.GetUserId();
+            var notificataion = _unitOfWork.UserNotifications.GetUserNotificationByNotificationId(UserId, UserNotificationId);
+
+            if (notificataion != null)
+            { notificataion.Read(); }
+            else
+            { return Ok(NotFound()); }
+            
+            _unitOfWork.Complete();
+
+            return Ok(UserNotificationId);
+        }
+
+        [Authorize]
+        [HttpPost]
+        [Route("Api/UserNotification/NotificationMarkAsRemoved/{NotificationId}")]
+        public IHttpActionResult NotificationMarkAsRemoved(string NotificationId)
         {
             var UserId = User.Identity.GetUserId();
             var notificataion = _unitOfWork.UserNotifications.GetUserNotificationByNotificationId(UserId, NotificationId);
 
-            notificataion.Read();
-
+            if (notificataion != null)
+            { notificataion.Remove(); }
+            else
+            { return Ok(NotFound()); }
+            
             _unitOfWork.Complete();
 
             return Ok(NotificationId);
         }
+
+
     }
 
 }
