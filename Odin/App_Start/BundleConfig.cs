@@ -43,6 +43,7 @@ namespace Odin
 
 
             // Page Styling
+            bundles.Add(new StyleBundle("~/Styling/help").Include("~/Content/css/help.css"));
             bundles.Add(new StyleBundle("~/Styling/orders").Include("~/Content/css/orders.css"));
             bundles.Add(new StyleBundle("~/Styling/login").Include("~/Content/css/login.css"));
             bundles.Add(new StyleBundle("~/Styling/forgotPassword").Include("~/Content/css/forgotpassword.css",

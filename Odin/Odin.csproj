@@ -306,6 +306,7 @@
     <Compile Include="Controllers\Api\AppointmentController.cs" />
     <Compile Include="Controllers\AppointmentController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
+    <Compile Include="Controllers\HelpController.cs" />
     <Compile Include="Controllers\HomeFindingPropertiesController.cs" />
     <Compile Include="Controllers\Api\ManagersController.cs" />
     <Compile Include="Controllers\Api\OrdersController.cs" />
@@ -410,6 +411,18 @@
     </Content>
     <Content Include="Content\css\bookmarklet.min.css">
       <DependentUpon>bookmarklet.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\header.css">
+      <DependentUpon>header.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\header.min.css">
+      <DependentUpon>header.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\help.css">
+      <DependentUpon>help.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\help.min.css">
+      <DependentUpon>help.css</DependentUpon>
     </Content>
     <Content Include="Content\css\shared\thumbnails.carousel.css" />
     <Content Include="Content\css\transferee\details.css">
@@ -750,8 +763,6 @@
       <DependentUpon>dist.js</DependentUpon>
     </Content>
     <Content Include="Scripts\app\views\_header.js" />
-    <Content Include="Scripts\bookmarklet\bookmarklet.js" />
-    <Content Include="Scripts\bookmarklet\index.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap-notify.min.js" />
@@ -790,6 +801,7 @@
     <Content Include="Content\css\header.scss" />
     <Content Include="Content\css\transferee\sideNav.scss" />
     <Content Include="Content\css\bookmarklet.scss" />
+    <Content Include="Content\css\help.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
@@ -956,6 +968,7 @@
     <Content Include="Views\BookMarklet\Error.cshtml" />
     <Content Include="Views\Orders\Partials\_PropertyDetails.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Photos.cshtml" />
+    <Content Include="Views\Help\Index.cshtml" />
     <None Include="Web.Azure.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
