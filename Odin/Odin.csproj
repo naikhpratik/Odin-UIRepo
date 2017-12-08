@@ -19,7 +19,8 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>44303</IISExpressSSLPort>
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -750,8 +751,6 @@
       <DependentUpon>dist.js</DependentUpon>
     </Content>
     <Content Include="Scripts\app\views\_header.js" />
-    <Content Include="Scripts\bookmarklet\bookmarklet.js" />
-    <Content Include="Scripts\bookmarklet\index.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap-notify.min.js" />
