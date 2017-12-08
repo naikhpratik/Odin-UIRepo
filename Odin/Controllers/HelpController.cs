@@ -2,6 +2,7 @@
 
 namespace Odin.Controllers
 {
+    [Authorize]
     public class HelpController : Controller
     {
         // GET: Help

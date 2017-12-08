@@ -3,7 +3,7 @@
     //Super Hacky
     //If string not replaced by CI use localhost.
     var bmDomain = "#{BOOKMARKLET_DOMAIN}#";
-    var bmUrl = bmDomain.toLowerCase() === "#{bookmarklet_domain}#"
+    var bmUrl = bmDomain.toLowerCase().contains("bookmarklet_domain")
         ? "https://localhost:44303/BookMarklet?url="
         : bmDomain + "/BookMarklet?url=";
     

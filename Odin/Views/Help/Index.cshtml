@@ -14,12 +14,7 @@
     <div class="well">
         <a href="@ViewBag.PropBotScript" draggable="true"><strong>Prop Bot!</strong></a>
     </div>
-    <p>
-        If you are unable to drag the link to your favorites bar, manually create a favorite with the following link.
-    </p>
-    <div class="well">
-        <strong>@ViewBag.PropBotScript</strong>
-    </div>
+    @Html.ActionLink("Go Home", "Index","Orders",null,new {@class = "btn btn-default"})
 </div>
 @section styles
 {
