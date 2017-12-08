@@ -19,7 +19,11 @@ namespace Odin.Data.Persistence
         {
             return _context.Transferees.SingleOrDefault(t => t.Email.Equals(email));
         }
-
+        public Transferee GetTransfereeByOrderId(string id)
+        {
+            var eeId = _context.Orders.SingleOrDefault(o => o.Id == id).TransfereeId;
+            return _context.Transferees.SingleOrDefault(t => t.Id.Equals(eeId));
+        }
         public void Add(Transferee transferee)
         {
             var userManager = UserHelper.GetUserManager<Transferee>(_context);

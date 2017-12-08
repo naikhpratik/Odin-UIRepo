@@ -2,6 +2,9 @@
 using System.Transactions;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
+using Odin.Domain;
+using Microsoft.WindowsAzure.Storage.Blob;
+using System.Threading.Tasks;
 
 namespace Odin.IntegrationTests.TestAttributes
 {

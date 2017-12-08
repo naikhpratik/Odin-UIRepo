@@ -8,6 +8,7 @@ using FluentAssertions;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Linq;
+using Odin.ViewModels.Shared;
 
 namespace Odin.Tests.ViewModels
 {
@@ -156,8 +157,8 @@ namespace Odin.Tests.ViewModels
             DateTime now = DateTime.Now;
 
             DateTime firstDate = now;
-            DateTime secondDate = now.AddDays(1);
-            DateTime thirdDate = now.AddDays(5);
+            DateTime secondDate = now.AddDays(-1);
+            DateTime thirdDate = now.AddDays(-5);
 
             DateTime[] dates = new[] { thirdDate, firstDate, secondDate };
 
@@ -179,5 +180,52 @@ namespace Odin.Tests.ViewModels
             propertyViewModels.ElementAt(1).PropertyStreet1.Should().Be(secondDate.ToString());
             propertyViewModels.ElementAt(2).PropertyStreet1.Should().Be(thirdDate.ToString());
         }
-    }
+
+        [TestMethod]
+        public void TestMappingOfPropertyPhotos()
+        {
+            string fakeStorageId = "StorageId";
+            string fakePhotoUrl = "photoURL";
+            Photo fakePhoto = new Photo(fakeStorageId, fakePhotoUrl);
+            HomeFindingProperty hfp = HomeFindingPropertiesBuilder.New().First();
+            Property property = hfp.Property;
+            property.Photos.Add(fakePhoto);
+            order.HomeFinding.HomeFindingProperties.Add(hfp);
+            
+            HousingViewModel viewModel = new HousingViewModel(order, mapper);
+            HousingPropertyViewModel propertyViewModel = viewModel.Properties.ElementAt(0);
+            propertyViewModel.PropertyPhotos.Should().NotBeNull();
+            propertyViewModel.PropertyPhotos.Should().NotBeEmpty();
+
+            PhotoViewModel photoVM = propertyViewModel.PropertyPhotos.ElementAt(0);
+            photoVM.PhotoUrl.Should().Be(fakePhotoUrl);
+            photoVM.StorageId.Should().Be(fakeStorageId);
+        }
+
+        [TestMethod]
+        public void TestPropertiesDoNotIncludeSoftDeleted()
+        {
+            HomeFindingProperty hfp1 = new HomeFindingProperty();
+            hfp1.Deleted = false;
+            hfp1.Property = new Property();
+            order.HomeFinding.HomeFindingProperties.Add(hfp1);
+
+            HomeFindingProperty hfp2 = new HomeFindingProperty();
+            hfp2.Deleted = false;
+            hfp2.Property = new Property();
+            order.HomeFinding.HomeFindingProperties.Add(hfp2);
+
+            HomeFindingProperty deletedHfp = new HomeFindingProperty();
+            deletedHfp.Deleted = true;
+            deletedHfp.Property = new Property();
+
+            order.HomeFinding.HomeFindingProperties.Add(deletedHfp);
+
+            HousingViewModel viewModel = new HousingViewModel(order, mapper);
+
+            IEnumerable<HousingPropertyViewModel> propertyViewModels = viewModel.Properties;
+            propertyViewModels.Count().Should().Be(2);
+        }
+
+}
 }

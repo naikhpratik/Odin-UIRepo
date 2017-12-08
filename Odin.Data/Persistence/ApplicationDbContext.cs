@@ -20,6 +20,7 @@ namespace Odin.Data.Persistence
         public DbSet<HomeFinding> HomeFindings { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<ServiceType> ServiceTypes { get; set; }
+        public DbSet<Appointment> Appointments { get; set; }
         public virtual DbSet<Manager> Managers { get; set; }
         public virtual DbSet<Consultant> Consultants { get; set; }
         public virtual DbSet<Transferee> Transferees { get; set; }
@@ -37,6 +38,7 @@ namespace Odin.Data.Persistence
 
         public virtual DbSet<Notification> Notifications { get; set; }
         public virtual DbSet<UserNotification> UserNotifications { get; set; }
+        public virtual DbSet<Photo> Photos { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

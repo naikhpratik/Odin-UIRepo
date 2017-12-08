@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.WindowsAzure.Storage.Blob;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,7 +10,11 @@ namespace Odin.Interfaces
 {
     public interface IImageStore
     {
-        Task<string> SaveImage(Stream stream);
+        string SaveImage(Stream stream);
+        Task<string> SaveImageAsync(Stream stream);
         Uri UriFor(string imageId);
+
+        ICloudBlob ImageBlobFor(string imageId);
+        CloudBlobContainer GetImageContainer();
     }
 }

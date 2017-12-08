@@ -53,6 +53,13 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
         intakeBlocks = pnlIntake.find(".intake-block");
         orderId = pnlIntake.attr("data-order-id");
 
+        //default to collapsed sections
+        intakeBlocks.each(function () {
+            var intakeBlock = $(this);
+            if (intakeBlock.hasClass("expanded") == false)
+                collapse(intakeBlock); 
+        });
+
         //Init Dates
         intakeBlocks.find(".intake-date").datetimepicker({
             format: "MM/DD/YYYY",
@@ -68,6 +75,9 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
         intakeBlocks.on("click", ".intake-del", deleteRowFromBlock);
         intakeBlocks.on("click", ".intake-save", saveBlock);
         intakeBlocks.on("change", "[type=checkbox]", saveChecked);
+
+        
+        
     };
 
     //Event Callbacks
@@ -105,6 +115,7 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
             spans.css("display", "none");
             addSpans.css("display", "none");
             delSpans.css("display", "none");
+            
         }
 
         var save = function() {
@@ -182,12 +193,12 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
         var saveFail = function() {
             toast("Uh oh!  Something went wrong!", "danger");
         }
-
+        
         //Function Execution
         expand(intakeBlock);
         if (contains(spnEditSave.text(), "Edit")) {
             edit();
-        } else {
+        } else {           
             save();
         }
     }

@@ -1,83 +1,150 @@
 ﻿@model Odin.ViewModels.Orders.Transferee.OrdersTransfereeItineraryViewModel
-<div class="container-fluid" data-order-id="Model.Id" id="itinerary">
-    <h1 class="sectionTitle">Scheduled Events</h1>
-    <h2 class="sectionSubHead">Pre-Arrival Consultation</h2>
-    <div class="item">
-        <ul class="row sectionList">
-            <li class="col-sm-2">
-                <label>Date:</label>
-                <p>Event.date</p>
-            </li>
-            <li class="col-sm-2">
-                <label>Day:</label>
-                <p>Event.day</p>
-            </li>
-            <li class="col-sm-2">
-                <label>Time:</label>
-                <p>Event.time</p>
-            </li>
-            <li class="col-sm-2">
-                <label>Type:</label>
-                <p>Event.type</p>
-            </li>
-            <li class="col-sm-2">
-                <label>Description:</label>
-                <p>Event.description</p>
-            </li>
-            <li class="col-sm-2">
-                <label>Outcome:</label>
-                <p>Event.outcome</p>
-            </li>
-        </ul>       
-        
-        <ul class="row sectionList more_text" style="display:none">
-            <li class="col-sm-2">
-                <label>Date:</label>
-                <p>Event.date</p>
-            </li>
-            <li class="col-sm-2">
-                <label>Day:</label>
-                <p>Event.day</p>
-            </li>
-            <li class="col-sm-2">
-                <label>Time:</label>
-                <p>Event.time</p>
-            </li>
-            <li class="col-sm-2">
-                <label>Type:</label>
-                <p>Event.type</p>
-            </li>
-            <li class="col-sm-2">
-                <label>Description:</label>
-                <p>Event.description</p>
-            </li>
-            <li class="col-sm-2">
-                <label>Outcome:</label>
-                <p>Event.outcome</p>
-            </li>
-        </ul>
-        <a href="#" id="moreorless" class="read_more" style="text-decoration:none">More...</a><br />
-    </div>
-    
-    <hr>
-</div>
-<script>
-    $(function () { /* to make sure the script runs after page load */
 
-        $('a.read_more').click(function (event) { /* find all a.read_more elements and bind the following code to them */
+<div class="container-fluid" data-order-id="@Model.Id" id="itinerary">
+    @if (Model.IsPdf == true)
+    {
+        <img style="margin-top:20px;float:right;" src="@Server.MapPath("~/Content/Images/dwellworks_icon.png")">
+    }
+    <div class="row">
+        <div class="col-md-6 titleGroup">
+            @if (Model.IsPdf == true)
+            {
+                <h3 class="sectionTitle" style="padding-top:10px;">
+                    @(Model.TransfereeName + "'s Itinerary")
+                </h3>
 
-            event.preventDefault(); /* prevent the a from changing the url */
-            if ($('#moreorless').text() == "Less...") {
-                $(this).parents('.item').find('.more_text').animate().hide(); /* show the .more_text span */
-                $('#moreorless').text("More...");
+                <style>
+                    ul.itineraryDayList{
+                        margin-left: 1.5rem;
+                    }
+                </style>
             }
-            else {
-                $(this).parents('.item').find('.more_text').animate().show(); /* show the .more_text span */
-                $('#moreorless').text("Less...");
-            }            
-        });
+            else
+            {
+                <h1 class="sectionTitle">
+                    Your Itinerary
+                </h1>
+            }
+            <p class="sectionInstruction">
+                What is going on. Check to see what you have planned. To stay on top of things.
+            </p>
+        </div>
+        @if (Model.IsPdf == false)
+        {
+            <div class="col-md-6">
+                <button type="button" class="btn btn-secondary showNewAppointment" id="cmdNew" data-toggle="modal" data-target="#modalForm">Add Appointment</button>
+                <button type="button" class="btn btn-secondary showNewAppointment" id="cmdEmail" data-toggle="modal" data-target="#modalForm">Email</button>
+                <button type="button" class="btn btn-secondary showNewAppointment" id="cmdPDF">Generate PDF</button>
+            </div>
+        }
+        else
+        {
+            <div class="col-md-6"></div>
+        }
+    </div>
+    <ul class="sectionList event-item row" data-entity-id="@Model.Id">
+        @for (int i = 0; i < Model.Itinerary.Count(); i++)
+        {
+            var elem = Model.Itinerary.ElementAt(i);
+            string link = "";
+            DateTime? dt = (DateTime?)(elem).ScheduledDate;
 
-    });
-</script>
+            string id = Model.Id;
+            if (Model.Itinerary.ElementAt(i).ItemType.Contains("Service"))
+            {
+                link = "$('.item[data-panel=details]').trigger('click');";
+                if (!dt.HasValue)
+                {
+                    continue;
+                }
+            }
+            else if (Model.Itinerary.ElementAt(i).ItemType.Contains("Appointment"))
+            {
+                link = "";
+            }
+            else
+            {
+                link = "$('.item[data-panel=housing]').trigger('click');";
+            }
 
+            <li class="itineraryDay">
+
+                @if (ViewBag.SameAs == null || DateTime.Parse(ViewBag.SameAs.ToString()).ToShortDateString() != dt.Value.ToShortDateString())
+                {
+                    ViewBag.SameAs = dt;
+                    <div class="dayTitle row">
+                        <h2 class="dayNumber col-md-2">
+                            @(dt.HasValue ? dt.Value.ToString("dd") : "NA")
+                        </h2>
+                        <div class="dayText col-md-10">
+                            <p class="dayName"><span>@(dt.HasValue ? dt.Value.ToString("dddd") : "NA")</span></p>
+                            <p class="mmmyyyy">@(dt.HasValue ? dt.Value.ToString("MMMM yyyy") : "NA")</p>
+                        </div>
+                    </div>
+                }
+                <ul class="itineraryDayList">
+                    @for (int j = i; j < Model.Itinerary.Count(); j++)
+                    {
+                        string al = (string)(Model.Itinerary.ElementAt(j)).ActionLabel;
+                        DateTime? dt2 = (DateTime?)(Model.Itinerary.ElementAt(j)).ScheduledDate;
+                        if (dt2.Value.ToShortDateString() == dt.Value.ToShortDateString())
+                        {
+                            i++;
+                            <li class="testClass">
+                                @if (Model.Itinerary.ElementAt(j).ItemType.Contains("Appointment"))
+                                {                                    
+                                    <a id="showAppointment" class="showAppointment row noteRow" data-appointment-id="@Model.Itinerary.ElementAt(j).Id" data-toggle="modal" data-target="#modalForm">
+                                        <span class="eventTime col-sm-12 col-md-2">@(dt2.HasValue ? dt2.Value.ToString("hh:mm tt") : "NA")&nbsp;</span><span class="eventNote col-sm-12 col-md-10">@al</span>
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a class="row noteRow" onclick="@link">
+                                        <span class="eventTime col-sm-12 col-md-2">@(dt2.HasValue ? dt2.Value.ToString("hh:mm tt") : "NA")&nbsp;</span><span class="eventNote col-sm-12 col-md-10">@al</span>
+                                    </a>
+                                }
+
+                            </li>
+                        }
+                        else
+                        {
+                            i = j - 1;
+                            break;
+                        }
+                    }
+                </ul>
+                <hr>
+            </li>
+        }
+    </ul>
+    <div class="modal fade appointmentModal" id="modalForm" tabindex="-100" role="dialog" data-backdrop="static" aria-labelledby="appointmentModalLabel" aria-hidden="true" style="z-index: 2147483647;">
+        <div class="modal-dialog" role="document" id="appointment" style="z-index: 2147483647;">
+            <div class="modal-content">
+                <div class="modal-header row">
+                    <h5 class="modal-title" id="appointmentModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body"></div>
+                <div class="modal-footer row">
+                    <div class="col-sm-6">
+                        
+                    </div>
+                    <div class="col-sm-3">
+                        <button type="button" class="btn btn-secondary delete" data-dismiss="modal">Delete</button>
+                    </div>
+                    <div class="col-sm-3">
+                        <button type="button" class="btn btn-primary save">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>                
 @Styles.Render("~/Styling/itinerary")
+<script type="text/javascript">
+    $(document).ready(function () {
+        TransfereeItineraryController.init();        
+    });   
+</script>

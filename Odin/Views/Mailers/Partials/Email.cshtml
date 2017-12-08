@@ -1,0 +1,93 @@
+﻿@model Odin.ViewModels.Mailers.EmailViewModel
+
+<div id="emailModal" data-order-id="@Model.id">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Subject, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Message, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.Message, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-md-offset-6">
+                    <button type="button" class="btn btn-success pull-right" id="cmdSendMail" data-dismiss="modal">Send</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<script>
+    $('#cmdSendMail').click(function () {
+        var err = false;
+        var app = $('#emailModal');
+        var orderId = app.attr('data-order-id');
+        var data = { id : orderId};
+        
+        var rows = app.find(".form-group");
+        rows.each(function () {
+            if (err)
+                return;
+                
+            var row = $(this);
+
+            var rowInput = row.find(":input");
+                
+            if (rowInput.attr("name") == "Name")
+                data["Name"] = rowInput.val();
+                
+            if (rowInput.attr("name") == "Email")
+                data["Email"] = rowInput.val();
+
+            if (rowInput.attr("name") == "Subject")
+                data["Subject"] = rowInput.val();
+
+            if (rowInput.attr("name") == "Message")
+                data["Message"] = rowInput.val();
+                
+        });
+            
+        if (!err) {
+               
+            $.ajax({
+                url: '@Url.Action("SendEmail", "Email")',
+                type: 'POST',
+                data: data,
+                success: function (data, text) {
+                    toast('Email sent successfully', 'success');
+                },
+                error: function (request, status, error) {
+                    toast('Email was not sent', 'danger');
+                }
+            });
+        }
+    });
+    var toast = function (message, type) {
+        $.notify({
+            message: message
+        }, {
+                delay: 2000,
+                type: type,
+                placement: {
+                    from: "bottom",
+                    align: "center"
+                },
+                animate: {
+                    enter: 'animated fadeInUp',
+                    exit: 'animated fadeOutDown'
+                }
+            });
+    }
+</script>

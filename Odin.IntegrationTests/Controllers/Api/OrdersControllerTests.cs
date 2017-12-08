@@ -44,7 +44,7 @@ namespace Odin.IntegrationTests.Controllers.Api
             orders.ForEach(o => o.TrackingId = TokenHelper.NewToken());
             var testDateTime = new DateTime(1999, 6, 14);
             orders.ForEach(o => o.PreTripDate = testDateTime);
-       
+
             Context.Orders.AddRange(orders);
             Context.SaveChanges();
 
@@ -112,13 +112,13 @@ namespace Odin.IntegrationTests.Controllers.Api
             request.Headers.Add("Token", ApiKey);
             var response = await Server.HttpClient.SendAsync(request);
             var errorResponse = await response.ReadContentAsyncSafe<ErrorResponse>();
-                
+
             // Assert
             errorResponse?.errors.Should().BeNull();
             response.StatusCode.Should().Be(HttpStatusCode.OK);
             var order = Context.Orders.FirstOrDefault(o => o.TrackingId.Equals(orderDto.TrackingId));
             order.Should().NotBeNull();
-          
+
         }
 
         [Test, CleanData]
@@ -357,7 +357,7 @@ namespace Odin.IntegrationTests.Controllers.Api
 
         //TODO: UpsertOrder_OnException_Returns501()
         //TODO: UpsertOrder_DtoMissingFields_ReturnsArrayOfErrors()
-        
+
         [Test, Isolated]
         public async Task UpsertOrderDetails_UpdateExistingService_ShouldChangeDate()
         {
@@ -386,7 +386,7 @@ namespace Odin.IntegrationTests.Controllers.Api
             //modify the service
             DateTime changedDate = DateTime.Now.AddDays(4);
             List<OrdersTransfereeDetailsServiceDto> oTranDetailServices = new List<OrdersTransfereeDetailsServiceDto>();
-            OrdersTransfereeDetailsServiceDto oTranDetailService = new OrdersTransfereeDetailsServiceDto(){ Id = service.Id, ScheduledDate = changedDate};
+            OrdersTransfereeDetailsServiceDto oTranDetailService = new OrdersTransfereeDetailsServiceDto() { Id = service.Id, ScheduledDate = changedDate };
             oTranDetailServices.Add(oTranDetailService);
             OrdersTransfereeDetailsServicesDto svc = new OrdersTransfereeDetailsServicesDto();
             svc.Services = oTranDetailServices;
@@ -774,7 +774,7 @@ namespace Odin.IntegrationTests.Controllers.Api
             order.Consultant = dsc;
             order.ProgramManager = pm;
             order.DestinationCity = "integration city";
-            
+
             Context.Orders.Add(order);
             Context.SaveChanges();
             Context.Entry(order).Reload();
@@ -789,14 +789,14 @@ namespace Odin.IntegrationTests.Controllers.Api
 
             result.Should().BeOfType<System.Web.Http.Results.OkNegotiatedContentResult<string>>();
             order.Children.Count.Should().Be(1);
-            ((OkNegotiatedContentResult<string>) result).Content.Should().Be(order.Children.FirstOrDefault().Id);
+            ((OkNegotiatedContentResult<string>)result).Content.Should().Be(order.Children.FirstOrDefault().Id);
         }
 
         [Test, Isolated]
         public async Task InsertChild_NoOrder_ShouldReturnNotFound()
         {
             // arrange
-            
+
 
             // Act
             var controller = SetUpOrdersController();
@@ -812,7 +812,7 @@ namespace Odin.IntegrationTests.Controllers.Api
         {
             // arrange
             var child = ChildBuilder.New();
-            
+
             var order = OrderBuilder.New().First();
             order.TrackingId = TokenHelper.NewToken();
             order.Transferee = transferee;
@@ -824,7 +824,7 @@ namespace Odin.IntegrationTests.Controllers.Api
             Context.SaveChanges();
             Context.Entry(order).Reload();
 
-            
+
             // Act
             var controller = SetUpOrdersController();
             controller.MockCurrentUser(dsc.Id, dsc.UserName);
@@ -902,8 +902,8 @@ namespace Odin.IntegrationTests.Controllers.Api
         {
             // arrange
             int serviceTypeId = Context.ServiceTypes.FirstOrDefault().Id;
-            Service service = new Odin.Data.Core.Models.Service() {ServiceTypeId = serviceTypeId, Notes = "Some Notes", Selected = true};
-           
+            Service service = new Odin.Data.Core.Models.Service() { ServiceTypeId = serviceTypeId, Notes = "Some Notes", Selected = true };
+
             var order = OrderBuilder.New().First();
             order.TrackingId = TokenHelper.NewToken();
             order.Transferee = transferee;
@@ -1250,7 +1250,7 @@ namespace Odin.IntegrationTests.Controllers.Api
 
             //modify the order
             var dto = new OrdersTransfereeIntakeRelocationDto()
-            { 
+            {
                 Id = order.Id,
                 PreTripDate = order.PreTripDate.HasValue ? order.PreTripDate.Value.AddDays(5) : DateTime.Now,
                 PreTripNotes = order.PreTripNotes + "1",
@@ -1348,13 +1348,13 @@ namespace Odin.IntegrationTests.Controllers.Api
             order.Consultant = dsc;
             order.ProgramManager = pm;
             order.DestinationCity = "integration city";
-           
+
             order.HomeFinding = HomeFindingBuilder.New();
             order.HomeFinding.NumberOfBathrooms = Context.NumberOfBathrooms.FirstOrDefault();
             order.HomeFinding.HousingType = Context.HousingTypes.FirstOrDefault();
             order.HomeFinding.AreaType = Context.AreaTypes.FirstOrDefault();
             order.HomeFinding.TransportationType = Context.TransportationTypes.FirstOrDefault();
-            
+
 
             Context.Orders.Add(order);
             Context.SaveChanges();
@@ -1373,7 +1373,7 @@ namespace Odin.IntegrationTests.Controllers.Api
                 Comments = order.HomeFinding.Comments + "1",
                 NumberOfCarsOwned = order.HomeFinding.NumberOfCarsOwned + 2,
                 IsFurnished = !order.HomeFinding.IsFurnished.Value,
-                HasParking =  !order.HomeFinding.HasParking,
+                HasParking = !order.HomeFinding.HasParking,
                 HasLaundry = !order.HomeFinding.HasLaundry,
                 HasAC = !order.HomeFinding.HasAC,
                 HasExerciseRoom = !order.HomeFinding.HasExerciseRoom,
@@ -1523,7 +1523,7 @@ namespace Odin.IntegrationTests.Controllers.Api
                 ServiceType = Context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Welcome Packet".ToUpper()),
                 Selected = true
             };
-            
+
             // Arrange
             var order = OrderBuilder.New().First();
             order.Services.Add(wel);
@@ -1618,6 +1618,5 @@ namespace Odin.IntegrationTests.Controllers.Api
 
             order.Services.Count.Should().BeGreaterThan(2);
         }
-
     }
 }

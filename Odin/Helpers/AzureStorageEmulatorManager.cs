@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.WindowsAzure.Storage.Blob;
+using Odin.Domain;
+using System;
 using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
@@ -38,6 +40,19 @@ namespace Odin.Helpers
             if (IsProcessRunning())
             {
                 ExecuteProcess(ProcessCommand.Stop);
+            }
+        }
+
+        public static void SetupImageContainer()
+        {
+            if (ConfigurationManager.AppSettings["IsLocalTestingEnvironment"].Equals("true"))
+            {
+                CloudBlobContainer container = new ImageStore().GetImageContainer();
+                container.CreateIfNotExists();
+                // set the proper permissions so the images can be fetched
+                BlobContainerPermissions containerPermissions = container.GetPermissions();
+                containerPermissions.PublicAccess = BlobContainerPublicAccessType.Blob;
+                container.SetPermissions(containerPermissions);
             }
         }
 

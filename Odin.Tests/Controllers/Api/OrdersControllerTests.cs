@@ -23,6 +23,7 @@ namespace Odin.Tests.Controllers.Api
         private Mock<IOrdersRepository> _mockRepository;
         private Mock<IChildrenRepository> _mockChildrenRepository;
         private Mock<IPetsRepository> _mockPetsRepository;
+        private Mock<IAppointmentsRepository> _mockAppointmentsRepository;
         private Mock<IMapper> _mockMapper;
         private string _userId;
         private string _userName;
@@ -34,11 +35,15 @@ namespace Odin.Tests.Controllers.Api
             _mockMapper = new Mock<IMapper>();
             _mockChildrenRepository = new Mock<IChildrenRepository>();
             _mockPetsRepository = new Mock<IPetsRepository>();
+            _mockAppointmentsRepository = new Mock<IAppointmentsRepository>();
 
             var mockUnitOfWork = new Mock<IUnitOfWork>();
             mockUnitOfWork.SetupGet(u => u.Orders).Returns(_mockRepository.Object);
             mockUnitOfWork.SetupGet(u => u.Children).Returns(_mockChildrenRepository.Object);
             mockUnitOfWork.SetupGet(u => u.Pets).Returns(_mockPetsRepository.Object);
+            mockUnitOfWork.SetupGet(u => u.Appointments).Returns(_mockAppointmentsRepository.Object);
+            
+
 
             var mockQueueStore = new Mock<IQueueStore>();
             var mockAccountHelper = new Mock<IAccountHelper>();

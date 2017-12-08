@@ -16,25 +16,34 @@ namespace Odin.Domain
     /// </summary>
     public class QueueStore : IQueueStore
     {
-        private readonly CloudQueue _queue;
+        private readonly CloudQueueClient _queueClient;
         private const string StorageConnectionKey = "StorageConnectionString";
-        private const string QueueName = "odintose";
+        private const string OdinToSeQueueName = "odintose";
+        private const string PropBotQueueName = "propbotqueue";
 
         public QueueStore()
         {
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
                 CloudConfigurationManager.GetSetting(StorageConnectionKey));
-            CloudQueueClient queueClient = storageAccount.CreateCloudQueueClient();
-            CloudQueue queue = queueClient.GetQueueReference(QueueName);
-            queue.CreateIfNotExists();
-            _queue = queue;
+            _queueClient = storageAccount.CreateCloudQueueClient();
+            var odinToSeQueue = _queueClient.GetQueueReference(OdinToSeQueueName);
+            odinToSeQueue.CreateIfNotExists();
+            var propBotQueue = _queueClient.GetQueueReference(PropBotQueueName);
+            propBotQueue.CreateIfNotExists();
         }
 
-        public void Add(QueueEntry entry)
+        public void Add(OdinToSeQueueEntry entry)
         {
+            var queue = _queueClient.GetQueueReference(OdinToSeQueueName);
             CloudQueueMessage message = new CloudQueueMessage(JsonConvert.SerializeObject(entry));
-            _queue.AddMessage(message);
+            queue.AddMessage(message);
         }
-        
+
+        public void Add(PropBotJobQueueEntry entry)
+        {
+            var queue = _queueClient.GetQueueReference(PropBotQueueName);
+            CloudQueueMessage message = new CloudQueueMessage(JsonConvert.SerializeObject(entry));
+            queue.AddMessage(message);
+        }
     }
 }

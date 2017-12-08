@@ -1,8 +1,21 @@
 ﻿@import "../shared/_definitions.scss";
 
-.mapWrapper img {
-    display: block;
-    width: 100%;
+.mapWrapper {
+    height: 27.5rem;
+    overflow: hidden;
+    position: relative;
+
+    background-image: url('');
+    background-position: center;
+    background-size: cover;
+
+    img {
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
+        display: block;
+        width: 100%;
+    }
 }
 
 #propertiesControls {
@@ -97,7 +110,12 @@
 
 .propertyItem {
     margin: 0 0 0 0;
-    padding: 0 0 0 0;
+    padding: 0.5rem 0 0.5rem 0;
+
+    &:hover {
+        background-color: $DW_Hover;
+        cursor: pointer;
+    }
 
     > div {
 
@@ -148,3 +166,23 @@
     }
 }
 
+#propertyForm {
+    // Site.css inexplicably sets the max width on inputs to 280. This undoes that
+    input,
+    select,
+    textarea {
+        max-width: 100%;
+    }
+
+    .input-group-addon {
+        border: 0px;
+        box-shadow: inset 0 -1px 0 #dddddd;
+        padding-left: 0;
+    }
+}
+
+#propertyDetailsModal {
+    h5 {
+        color: $DW_LtPurple;
+    }
+}

@@ -1,56 +1,12 @@
 ﻿#orderContainer {
-  margin-left: 18rem;
-  margin-top: 8rem;
-  width: auto; }
-
-nav#transfereeSideNav {
-  background-color: #a7ce39;
-  position: fixed;
-  top: 5rem;
-  left: 0;
-  width: 18rem;
-  height: calc(100vh - 5rem);
-  color: white; }
-  nav#transfereeSideNav .transfereeSideNav__person {
-    text-align: center;
-    margin-bottom: 2rem; }
-    nav#transfereeSideNav .transfereeSideNav__person img.person {
-      width: 6rem;
-      margin: 2rem auto 1.25rem auto; }
-    nav#transfereeSideNav .transfereeSideNav__person p {
-      margin-bottom: 0;
-      line-height: 1.75rem; }
-    nav#transfereeSideNav .transfereeSideNav__person .eeName {
-      font-weight: bold; }
-  nav#transfereeSideNav hr.transfereeSideNav__rule {
-    border: 0px;
-    border-top: 1px solid white;
-    width: 85%;
-    margin: 1rem 7.5%; }
-  nav#transfereeSideNav ul.transfereeSideNav__items {
-    color: white;
-    list-style: none;
-    margin: 0 0;
-    padding: 0; }
-    nav#transfereeSideNav ul.transfereeSideNav__items li a {
-      padding: 2vh 10%;
-      display: block;
-      height: 100%;
-      width: 100%; }
-      nav#transfereeSideNav ul.transfereeSideNav__items li a img {
-        width: 1.5rem; }
-      nav#transfereeSideNav ul.transfereeSideNav__items li a label {
-        color: white;
-        font-size: 1.5rem;
-        margin-left: 0.75rem; }
-    nav#transfereeSideNav ul.transfereeSideNav__items li:hover {
-      background-color: rgba(0, 0, 0, 0.2); }
-    nav#transfereeSideNav ul.transfereeSideNav__items li.selected {
-      background-color: #8E1A55; }
+  margin-left: 0 !important;
+  margin-top: calc(5rem + 6rem);
+  width: 100%; }
   @media screen and (min-width: 48rem) {
-    nav#transfereeSideNav {
-      height: calc(100vh - 8rem);
-      top: 8rem; } }
+    #orderContainer {
+      margin-left: 18rem !important;
+      margin-top: 8rem;
+      width: auto; } }
 
 .input-group.date, .input-group.time {
   /*margin: 0 auto;*/
@@ -58,27 +14,25 @@ nav#transfereeSideNav {
         text-align: center;
     }*/ }
 
+.titleGroup {
+  margin-bottom: 5rem; }
+
 .sectionTitle {
   padding-bottom: 0px;
-  margin: 2rem 0 0 0;
+  margin: 2rem 0 1rem 0;
   font-size: 2.5rem;
   color: #231F20; }
 
 .sectionSubHead {
-  margin: 2.5rem 0 0.5rem 0;
+  margin: 1rem 0 0.5rem 0;
   font-size: 1.725rem;
   font-weight: 400;
   color: #8e1a55;
   display: inline-block; }
 
-.sectionSave, .sectionAdd {
+.sectionSave {
   font-size: small;
   color: #a7ce39;
-  cursor: pointer; }
-
-.sectionDelete {
-  font-size: small;
-  color: #e53c2e;
   cursor: pointer; }
 
 .sectionInstruction {
@@ -91,7 +45,7 @@ nav#transfereeSideNav {
   margin: 1rem 0 0 0;
   padding: 0; }
   .sectionList li {
-    margin: 0 0 1rem 0;
+    margin-bottom: 1rem;
     padding: 0; }
     .sectionList li label {
       display: block;
@@ -116,4 +70,13 @@ nav#transfereeSideNav {
       font-size: 1.5rem;
       font-weight: 400;
       margin: 0; }
+  @media screen and (min-width: 62rem) {
+    .sectionList label.mobileLabel {
+      display: none; } }
+
+#scheduledServices {
+  display: none; }
+  @media screen and (min-width: 62rem) {
+    #scheduledServices {
+      display: block; } }
 

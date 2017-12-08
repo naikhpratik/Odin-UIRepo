@@ -21,5 +21,6 @@ namespace Odin.Data.Persistence
 
         DbSet<Property> Properties { get; set; }
         DbSet<HomeFindingProperty> HomeFindingProperties { get; set; }
+        DbSet<Photo> Photos { get; set; }
     }
 }

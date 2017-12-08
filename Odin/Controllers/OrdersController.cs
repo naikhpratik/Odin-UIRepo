@@ -6,6 +6,7 @@ using Odin.Helpers;
 using Odin.Interfaces;
 using Odin.ViewModels.Orders.Transferee;
 using Odin.ViewModels.Shared;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -34,7 +35,7 @@ namespace Odin.Controllers
 
             //var orderVms = _mapper.Map<IEnumerable<Order>, IEnumerable<OrdersIndexViewModel>>(orders);
 
-            return View();
+            return View(orders);
         }
 
         // GET Partials
@@ -48,24 +49,50 @@ namespace Odin.Controllers
             return PartialView("~/views/orders/partials/_Housing.cshtml", viewModel);
         }
 
+        public ActionResult PropertiesPartial(string id)
+        {
+            var userId = User.Identity.GetUserId();
+            var order = _unitOfWork.Orders.GetOrderFor(userId, id);
+
+            HousingViewModel viewModel = new HousingViewModel(order, _mapper);
+
+            return PartialView("~/views/orders/partials/_HousingProperties.cshtml", viewModel.Properties);
+        }
+
         public ActionResult DetailsPartial(string id)
         {
-            OrdersTransfereeViewModel viewModel = GetViewModelForOrder(id);
-            return PartialView("~/views/orders/partials/_Details.cshtml",viewModel);
+            var userId = User.Identity.GetUserId();
+            var order = _unitOfWork.Orders.GetOrderById(id);
+            if (order == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound, "Not found");
+            }
+            if (order.ConsultantId != userId)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized, "Unauthorized Order");
+            }
+            OrdersTransfereeViewModel viewModel = GetViewModelForOrderDetails(id);
+            return PartialView("~/views/orders/partials/_Details.cshtml",viewModel); 
         }
 
         public ActionResult IntakePartial(string id)
         {
-            OrdersTransfereeViewModel viewModel = GetViewModelForOrder(id);
+            OrdersTransfereeViewModel viewModel = GetViewModelForOrderDetails(id);
             return PartialView("~/views/orders/partials/_Intake.cshtml", viewModel);
         }
 
         public ActionResult ItineraryPartial(string id)
-        {
-            //var order = _unitOfWork.Orders.GetOrderById(id);
-            //OrdersTransfereeViewModel viewModel = viewModelForOrder(order);
-            return PartialView("~/views/orders/partials/_Itinerary.cshtml", null);
-        }
+        {            
+            OrdersTransfereeItineraryViewModel viewModel = GetItineraryByOrderId(id);
+            viewModel.Id = id;
+            viewModel.IsPdf = false;
+            Transferee ee = GetTransfereeByOrderId(id);
+            if (ee == null)
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound, "Not found");
+            viewModel.TransfereeName = ee.FullName;
+            return PartialView("~/views/orders/partials/_Itinerary.cshtml", viewModel);
+        }        
+
         public ActionResult Details(string orderId)
         {
             var userId = User.Identity.GetUserId();
@@ -96,15 +123,17 @@ namespace Odin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.NotFound, "Not found");
             }
             ViewBag.Id = id;
-            return View();
+            OrdersTransfereeViewModel viewModel = GetViewModelForOrderDetails(id);
+            return View(viewModel);
         }
-
-        private OrdersTransfereeViewModel GetViewModelForOrder(string id)
+       
+        private OrdersTransfereeViewModel GetViewModelForOrderDetails(string id)
         {
             var userId = User.Identity.GetUserId();
-            var order = _unitOfWork.Orders.GetOrderFor(userId,id);
+            var order = _unitOfWork.Orders.GetOrderById(id);
 
             OrdersTransfereeViewModel vm = _mapper.Map<Order, OrdersTransfereeViewModel>(order);
+
             vm.Services = vm.Services.OrderBy(s => s.ServiceTypeSortOrder);
             
             //Populate list of service categories available for this order.
@@ -128,6 +157,29 @@ namespace Odin.Controllers
 
             return vm;
         }
+        public Transferee GetTransfereeByOrderId(string id)
+        {
+            return _unitOfWork.Transferees.GetTransfereeByOrderId(id);
+        }
+        private OrdersTransfereeItineraryViewModel GetItineraryByOrderId(string id)
+        {
+            ItineraryHelper itinHelper = new ItineraryHelper(_unitOfWork, _mapper);
+            return itinHelper.Build(id);
+        }
+        public ActionResult GeneratePDF(string id)
+        {
+            OrdersTransfereeItineraryViewModel viewModel = GetItineraryByOrderId(id);
+            viewModel.Id = id;
+            viewModel.IsPdf = true;
+            Transferee ee = GetTransfereeByOrderId(id);
+            viewModel.TransfereeName = ee.FullName;
+            return new Rotativa.ViewAsPdf("Partials/_Itinerary", viewModel)
+            {
+                FileName = "Itinerary.pdf",
+                PageMargins = new Rotativa.Options.Margins(0, 0, 0, 0)
+            };
+        }
+
     }
 
 }

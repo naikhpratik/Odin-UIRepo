@@ -101,8 +101,6 @@ namespace Odin.Controllers.Api
             _mapper.Map<OrdersTransfereeIntakeOriginDto, Order>(dto, order);
             _unitOfWork.Complete();
 
-            _queueStore.Add(new QueueEntry(order.Id, QueueType.Order));
-
             return Ok();
         }
 
@@ -272,7 +270,12 @@ namespace Odin.Controllers.Api
                     }
                     else
                     {
+                        var originalServiceDate = service.CompletedDate;
                         _mapper.Map<OrdersTransfereeDetailsServiceDto, Service>(serviceDto, service);
+                        if (service.CompletedDate != originalServiceDate)
+                        {
+                            _queueStore.Add(new OdinToSeQueueEntry(service.Id, QueueType.Service));
+                        }
                     }
                 }
             }
@@ -415,7 +418,7 @@ namespace Odin.Controllers.Api
 
             var userId = User.Identity.GetUserId();
             var order = _unitOfWork.Orders.GetOrderFor(userId, dto.Id);
-
+            
             if (order == null)
             {
                 return NotFound();

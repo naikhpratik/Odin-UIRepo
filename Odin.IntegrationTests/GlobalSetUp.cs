@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using System.Configuration;
 using System.Data.Entity.Migrations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
-using Odin.Data.Core.Models;
 using Odin.Data.Persistence;
 using Odin.Helpers;
 using Odin.IntegrationTests.Helpers;
@@ -23,11 +17,12 @@ namespace Odin.IntegrationTests
 
             Seed();
 
-
             if (ConfigurationManager.AppSettings["IsLocalTestingEnvironment"].Equals("true"))
             {
                 if (!AzureStorageEmulatorManager.IsProcessRunning())
                     AzureStorageEmulatorManager.StartStorageEmulator();
+
+                AzureStorageEmulatorManager.SetupImageContainer();
             }
         }
 

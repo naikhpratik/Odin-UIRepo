@@ -1,61 +1,61 @@
-﻿#orderContainer {
-  margin-left: 18rem;
-  margin-top: 8rem;
-  width: auto; }
-
-body {
+﻿body {
   padding-top: 0px; }
 
 div.container.body-content {
-  width: auto;
-  padding-right: 0px; }
-  div.container.body-content div.row {
-    margin: 0px;
-    height: 886px;
-    max-width: 100%;
-    max-height: 100%;
-    overflow: hidden; }
-  div.container.body-content div.col-md-4 {
-    height: 852px;
-    margin-top: 32px; }
-    @media screen and (max-width: 992px) {
-      div.container.body-content div.col-md-4 {
-        padding-right: 120px; } }
-    div.container.body-content div.col-md-4 div#caption {
-      line-height: 44px;
-      padding-top: 60px;
-      font-size: xx-large;
-      text-align: center;
-      margin-bottom: 97px; }
-      div.container.body-content div.col-md-4 div#caption span#Odin {
-        color: #49ae44; }
-  div.container.body-content div.col {
-    width: 66%;
-    max-height: 884px;
-    overflow: hidden;
-    position: relative;
-    display: inline-block; }
-    @media screen and (max-width: 992px) {
-      div.container.body-content div.col {
-        display: none; } }
-    div.container.body-content div.col p {
-      margin: 0px; }
-    div.container.body-content div.col img {
-      width: 223%; }
-    div.container.body-content div.col div#labels-box {
-      color: white;
-      position: absolute;
-      top: 150px;
-      left: 186px; }
-    div.container.body-content div.col div.text-lables:nth-child(1) {
-      line-height: 62px;
-      font-family: sans-serif;
-      font-size: 50px;
-      font-weight: bold; }
-    div.container.body-content div.col div.text-lables:nth-child(2) {
-      margin-top: 40px;
-      font-size: 24px;
-      line-height: 30px; }
+  width: 100%;
+  padding-right: 0px;
+  margin: 0 0; }
+  div.container.body-content .loginWrap {
+    background-image: url("../Images/bg_img_w_gradient.png");
+    background-position: center;
+    background-size: cover; }
+    div.container.body-content .loginWrap div.row {
+      margin: 0px;
+      height: 100vh;
+      width: 100%;
+      overflow: hidden; }
+    div.container.body-content .loginWrap div.col-md-4 {
+      height: 100vh;
+      background-color: white; }
+      @media screen and (max-width: 48rem) {
+        div.container.body-content .loginWrap div.col-md-4 {
+          /*padding-right: 120px;*/ } }
+      div.container.body-content .loginWrap div.col-md-4 div#caption {
+        line-height: 44px;
+        padding-top: 60px;
+        font-size: xx-large;
+        text-align: center;
+        margin-bottom: 97px; }
+        div.container.body-content .loginWrap div.col-md-4 div#caption #logo {
+          display: flex;
+          justify-content: center;
+          height: 3rem;
+          align-items: center;
+          margin-bottom: 3rem; }
+          div.container.body-content .loginWrap div.col-md-4 div#caption #logo #logoImage {
+            margin-right: 1rem;
+            padding-right: 1rem;
+            border-right: 1px solid #b7a998; }
+          div.container.body-content .loginWrap div.col-md-4 div#caption #logo #logoOdin {
+            color: #49ae44;
+            font-size: 1.75rem; }
+        div.container.body-content .loginWrap div.col-md-4 div#caption span#Odin {
+          color: #49ae44; }
+    div.container.body-content .loginWrap .col-md-8 {
+      position: relative;
+      height: 100vh; }
+      div.container.body-content .loginWrap .col-md-8 .loginCopyWrap {
+        color: white;
+        position: absolute;
+        top: 10vh;
+        left: 10%;
+        width: 50%; }
+        div.container.body-content .loginWrap .col-md-8 .loginCopyWrap .head {
+          font-weight: 600;
+          font-size: 2.5rem;
+          line-height: 3rem; }
+        div.container.body-content .loginWrap .col-md-8 .loginCopyWrap .copy {
+          font-size: 2rem; }
   div.container.body-content div.form-group div.col-md-10 {
     padding-left: 88px;
     padding-right: 0px; }
@@ -64,7 +64,6 @@ div.container.body-content {
     padding-left: 0px; }
   div.container.body-content div.form-group div.passwd {
     text-align: center;
-    margin-top: 116px;
     margin-left: 0px;
     padding: 0px;
     width: 100%; }
@@ -81,24 +80,4 @@ div.container.body-content {
       text-transform: capitalize; }
   div.container.body-content p#forgot {
     text-align: center; }
-  div.container.body-content div#dwellworks {
-    margin-top: 196px;
-    text-align: center;
-    padding-left: 0px; }
-    div.container.body-content div#dwellworks.mailer {
-      margin-top: 40px; }
-    div.container.body-content div#dwellworks p {
-      display: inline-block; }
-      div.container.body-content div#dwellworks p:first-of-type {
-        border-left: 1px solid gray;
-        margin-left: 4px;
-        top: -2px;
-        height: 21px;
-        position: relative; }
-      div.container.body-content div#dwellworks p:last-of-type {
-        top: -3px;
-        font-size: large;
-        color: #49ae44;
-        font-size: 20px;
-        font-family: sans-serif; }
 
