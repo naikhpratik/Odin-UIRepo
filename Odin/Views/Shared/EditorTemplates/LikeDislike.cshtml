@@ -1,6 +1,11 @@
 ﻿@model bool?
-
-    <div class="likeDislike row">
+@{ 
+    var likeStatusClass = "";
+    if (Model.HasValue) {
+        likeStatusClass = Model.Value ? "like" : "dislike";
+    }
+}
+    <div class="likeDislike row @likeStatusClass">
         <div class="like col-xs-6" />
         <div class="dislike col-xs-6" />
     </div>
