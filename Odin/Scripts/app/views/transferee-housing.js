@@ -22,7 +22,7 @@
                         $('#addPropertyModal').modal('hide');
                     },
                     error: function () {
-                        alert("An unknown error has occurred. Please try again later.");
+                        toast("An unknown error has occurred.Please try again later.", "danger");
                     }
                 });
             }
@@ -79,11 +79,17 @@
             type: 'PUT',
             data: postData,
             success: function (result) {
-                console.log("Weee");
-                console.log(result);
+                var message = "Your change was saved";
+
+                if (likedValue != null) {
+                    var messageVerb = likedValue ? "liked" : "disliked";
+                    message = "You " + messageVerb + " a property";
+                }
+
+                toast(message, "success");
             },
             error: function () {
-                alert("An unknown error has occurred. Please try again later.");
+                toast("An unknown error has occurred.Please try again later.", "danger");
             }
         });
     };
@@ -104,11 +110,28 @@
                     $('#propertyDetailsModal').modal('hide');
                 },
                 error: function () {
-                    alert("An unknown error has occurred. Please try again later.");
+                    toast("An unknown error has occurred.Please try again later.", "danger");
                 }
             });
         }
     };
+
+    // FIXME: this toas function is in 4 other spots. I'm copy/pasting here for quickness, but we should refactor
+    var toast = function (message, type) {
+        $.notify({
+            message: message,
+        }, {
+                type: type,
+                placement: {
+                    from: "bottom",
+                    align: "center"
+                },
+                animate: {
+                    enter: 'animated fadeInDown',
+                    exit: 'animated fadeOutUp'
+                }
+            });
+    }
 
     return {
         init: init,
