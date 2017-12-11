@@ -931,6 +931,7 @@
     <Content Include="Views\BookMarklet\Error.cshtml" />
     <Content Include="Views\Orders\Partials\_PropertyDetails.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Photos.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\LikeDislike.cshtml" />
     <None Include="Web.Azure.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -141,7 +141,7 @@
         }
     }
 
-    .like, .comments {
+    .comments {
         img {
             width: 3rem;
         }
@@ -184,5 +184,39 @@
 #propertyDetailsModal {
     h5 {
         color: $DW_LtPurple;
+    }
+}
+
+.likeDislike {
+    margin: 0 auto;
+    width: auto;
+    height: auto;
+
+    .likeDislike-btn {
+        height:50px;
+        /*padding-left: 180px; /* Equal to width of new image */
+        background-position: center center !important;
+    }
+
+    .like {
+        @extend .likeDislike-btn;
+        background: url('/Content/Images/icn_ln_non_selected_like.png') no-repeat;
+    }
+
+    .dislike {
+        @extend .likeDislike-btn;
+        background: url('/Content/Images/icn_ln_non_selected_dislike.png') no-repeat;
+    }
+
+    &.like {
+        .like {
+            background: url('/Content/Images/icn_ln_selected_like.png') no-repeat;
+        }
+    }
+
+    &.dislike {
+        .dislike {
+            background: url('/Content/Images/icn_ln_selected_dislike.png') no-repeat;
+        }
     }
 }

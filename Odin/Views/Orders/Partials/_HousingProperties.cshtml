@@ -7,7 +7,7 @@
                 <p>Location Photos:</p>
             </div>
             @* Switch next 3 columns to col-md-2 when adding remaining columns *@
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <p>Address:</p>
             </div>
             <div class="col-md-3">
@@ -20,9 +20,11 @@
             <div class="col-md-3">
                 <p>Schedule a Viewing</p>
             </div>
+            -->
             <div class="col-md-1">
                 <p>Like or Dislike:</p>
             </div>
+            <!--
             <div class="col-md-1">
                 <p>Property Comments:</p>
             </div>
@@ -36,7 +38,7 @@
                     <img class="location" src="@propertyVM.ThumbnailPhotoUrl" />
                 </div>
                 @* Switch next 3 columns to col-md-2 when adding remaining columns *@
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <p>
                         @Html.DisplayFor(m => propertyVM.PropertyAddress)
                     </p>
@@ -56,9 +58,11 @@
                 <div class="col-md-3">
                     @Html.DatePicker("date", "ViewingDate", false)
                 </div>
+                -->
                 <div class="col-md-1 like">
-                    <img src="~/Content/Images/icn_ln_selected_like.png" />
+                    @Html.EditorFor(m => propertyVM.Liked)
                 </div>
+                <!--
                 <div class="col-md-1 comments">
                     <img src="~/Content/Images/icn_chat_bubble.png" />
                     <span>09</span>

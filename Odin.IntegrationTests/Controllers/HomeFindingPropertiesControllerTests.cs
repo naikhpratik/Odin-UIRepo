@@ -153,6 +153,100 @@ namespace Odin.IntegrationTests.Controllers
             response.StatusCode.Should().Be(expectedCode.StatusCode);
         }
 
+        [Test, Isolated]
+        public void UpdateHomeFindingProperty_UpdatesLiked()
+        {
+            // Arrange
+            Order order = BuildOrder(false);
+            Context.Orders.Add(order);
+            HomeFindingProperty hfp = order.HomeFinding.HomeFindingProperties.First();
+            hfp.Liked = null; // ensure this isn't already liked
+            Context.SaveChanges();
+
+            // Act
+            HousingPropertyViewModel propertyVM = new HousingPropertyViewModel();
+            propertyVM.Id = hfp.Id;
+            propertyVM.Liked = true;
+
+            HomeFindingPropertiesController controller = SetUpHomeFindingPropertiesController();
+            HttpStatusCodeResult response = (HttpStatusCodeResult)controller.Update(propertyVM);
+
+            // Assert
+            Context.Entry(hfp).Reload();
+            hfp.Liked.Should().BeTrue();
+        }
+
+        [Test, Isolated]
+        public void UpdateHomeFindingProperty_UpdatesDisliked()
+        {
+            // Arrange
+            Order order = BuildOrder(false);
+            Context.Orders.Add(order);
+            HomeFindingProperty hfp = order.HomeFinding.HomeFindingProperties.First();
+            hfp.Liked = null; // ensure this isn't already disliked
+            Context.SaveChanges();
+
+            // Act
+            HousingPropertyViewModel propertyVM = new HousingPropertyViewModel();
+            propertyVM.Id = hfp.Id;
+            propertyVM.Liked = false;
+
+            HomeFindingPropertiesController controller = SetUpHomeFindingPropertiesController();
+            HttpStatusCodeResult response = (HttpStatusCodeResult)controller.Update(propertyVM);
+
+            // Assert
+            Context.Entry(hfp).Reload();
+            hfp.Liked.Should().BeFalse();
+        }
+
+        [Test, Isolated]
+        public void UpdateHomeFindingProperty_UpdatesNull()
+        {
+            // Arrange
+            Order order = BuildOrder(false);
+            Context.Orders.Add(order);
+            HomeFindingProperty hfp = order.HomeFinding.HomeFindingProperties.First();
+            hfp.Liked = true; // ensure this is already liked
+            Context.SaveChanges();
+
+            // Act
+            HousingPropertyViewModel propertyVM = new HousingPropertyViewModel();
+            propertyVM.Id = hfp.Id;
+            propertyVM.Liked = null;
+
+            HomeFindingPropertiesController controller = SetUpHomeFindingPropertiesController();
+            HttpStatusCodeResult response = (HttpStatusCodeResult)controller.Update(propertyVM);
+
+            // Assert
+            Context.Entry(hfp).Reload();
+            hfp.Liked.Should().BeNull();
+        }
+
+        [Test, Isolated]
+        public void UpdateHomeFindingProperty_DoesNotWipeOutOtherDataFromIncompleteViewModel()
+        {
+            // Arrange
+            Order order = BuildOrder(false);
+            Context.Orders.Add(order);
+            HomeFindingProperty hfp = order.HomeFinding.HomeFindingProperties.First();
+            Context.SaveChanges();
+
+            // Act
+            var expectedStreet = hfp.Property.Street1;
+            HousingPropertyViewModel propertyVM = new HousingPropertyViewModel();
+            propertyVM.Id = hfp.Id;
+            propertyVM.Liked = null;
+            // This ViewModel doesn't have anything for the property meaning nothing gets updated
+            // Note: This is more of a test of the Mapper instead of the controller
+
+            HomeFindingPropertiesController controller = SetUpHomeFindingPropertiesController();
+            HttpStatusCodeResult response = (HttpStatusCodeResult)controller.Update(propertyVM);
+
+            // Assert
+            Context.Entry(hfp).Reload();
+            hfp.Property.Street1.Should().Be(expectedStreet);
+        }
+
         /*-------------------------------------------------*/
         private Order BuildOrder(bool emptyProperties=true)
         {

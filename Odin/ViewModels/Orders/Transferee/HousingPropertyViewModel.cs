@@ -107,5 +107,8 @@ namespace Odin.ViewModels.Orders.Transferee
                 return thumbUrl;
             }
         }
+
+        [DataType("LikeDislike")]
+        public bool? Liked { get; set; }
     }
 }

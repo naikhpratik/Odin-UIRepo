@@ -30,6 +30,44 @@
             event.preventDefault();
             return false;
         });
+
+        $('.likeDislike > .like').click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            var parentElement = $(this.parentElement);
+            parentElement.toggleClass("like");
+            parentElement.removeClass("dislike");
+
+            updateLikedStatusForControl(parentElement[0]);
+        });
+
+        $('.likeDislike > .dislike').click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            var parentElement = $(this.parentElement);
+            parentElement.toggleClass("dislike");
+            parentElement.removeClass("like");
+
+            updateLikedStatusForControl(parentElement[0]);
+        });
+    };
+
+    var updateLikedStatusForControl = function (controlElement) {
+        console.log(controlElement);
+        console.log(controlElement.classList);
+        var classList = controlElement.classList;
+
+        if (classList.contains('like')) {
+            console.log('like');
+        } else if (classList.contains('dislike')) {
+            console.log('dislike');
+        } else {
+            console.log("null");
+        }
+
+
     };
 
     var reloadPropertiesPartial = function () {
