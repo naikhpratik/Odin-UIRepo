@@ -60,7 +60,7 @@
                 </div>
                 -->
                 <div class="col-md-1">
-                    @Html.EditorFor(m => propertyVM.Liked)
+                    @Html.EditorFor(m => propertyVM.Liked, new { propertyId = propertyVM.Id })
                 </div>
                 <!--
                 <div class="col-md-1 comments">

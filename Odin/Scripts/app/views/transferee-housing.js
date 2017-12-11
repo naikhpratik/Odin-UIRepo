@@ -37,7 +37,7 @@
             var propertyId = $(event.delegateTarget).data("property-id");
             var propertyModalUrl = '/homefindingproperties/propertypartial/' + propertyId;
             $('#propertyModalContent').load(propertyModalUrl, function (response, status, xhr) {
-                if (status == "success") {
+                if (status === "success") {
                     $('#propertyDetailsModal').modal('show');
                 }
             });
@@ -51,23 +51,29 @@
             e.preventDefault();
             e.stopPropagation();
 
-            var parentElement = $(this.parentElement);
-            parentElement.toggleClass("like");
-            parentElement.removeClass("dislike");
+            var controlWrappers = controllerWrappersForLikeDislikeButton($(this));
+            controlWrappers.toggleClass("like");
+            controlWrappers.removeClass("dislike");
 
-            updateLikedStatusForControl(parentElement[0]);
+            updateLikedStatusForControl(controlWrappers[0]);
         });
 
         $('.likeDislike > .dislike').click(function (e) {
             e.preventDefault();
             e.stopPropagation();
 
-            var parentElement = $(this.parentElement);
-            parentElement.toggleClass("dislike");
-            parentElement.removeClass("like");
+            var controlWrappers = controllerWrappersForLikeDislikeButton($(this));
+            controlWrappers.toggleClass("dislike");
+            controlWrappers.removeClass("like");
 
-            updateLikedStatusForControl(parentElement[0]);
+            updateLikedStatusForControl(controlWrappers[0]);
         });
+    };
+
+    var controllerWrappersForLikeDislikeButton = function (likeDislikeButton) {
+        var propertyId = $(likeDislikeButton).data('property-id');
+        var selectorString = '.likeDislike[data-property-id="' + propertyId + '"]';
+        return $(selectorString);
     };
 
     var updateLikedStatusForControl = function (controlElement) {
@@ -79,10 +85,8 @@
         } else if (classList.contains('dislike')) {
             likedValue = false;
         }
-
-        console.log(likedValue);
-
-        var propertyId = $(controlElement).parents('li.propertyItem').attr('data-property-id')
+        
+        var propertyId = $(controlElement).closest("[data-property-id]").attr('data-property-id');
         var postData = {
             id: propertyId,
             liked: likedValue
@@ -95,7 +99,7 @@
             success: function (result) {
                 var message = "Your change was saved";
 
-                if (likedValue != null) {
+                if (likedValue !== null) {
                     var messageVerb = likedValue ? "liked" : "disliked";
                     message = "You " + messageVerb + " a property";
                 }
@@ -133,7 +137,7 @@
     // FIXME: this toas function is in 4 other spots. I'm copy/pasting here for quickness, but we should refactor
     var toast = function (message, type) {
         $.notify({
-            message: message,
+            message: message
         }, {
                 type: type,
                 placement: {
@@ -145,12 +149,13 @@
                     exit: 'animated fadeOutUp'
                 }
             });
-    }
+    };
 
     return {
         init: init,
         deleteProperty: deleteProperty,
-        setupPropertiesList: setupPropertiesList
+        setupPropertiesList: setupPropertiesList,
+        setupLikeDislikeControls: setupLikeDislikeControls
     };
 
 }();

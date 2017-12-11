@@ -17,8 +17,7 @@
         width: 100%;
     }
 }
-
-#propertiesControls {
+.controlsContainer {
     border-top: 1px solid $DW_Gray;
     border-bottom: 1px solid $DW_Gray;
     padding: 1.5rem 0;
@@ -196,6 +195,7 @@
         height:50px;
         /*padding-left: 180px; /* Equal to width of new image */
         background-position: center center !important;
+        cursor: pointer;
     }
 
     .like {
