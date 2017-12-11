@@ -86,6 +86,7 @@ namespace Odin.Controllers
 
             // for now only support a subset of updated values
             homeFindingProperty.Liked = propertyVM.Liked;
+            homeFindingProperty.ViewingDate = propertyVM.ViewingDate;
 
             _unitOfWork.Complete();
 
