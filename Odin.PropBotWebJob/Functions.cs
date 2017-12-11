@@ -8,6 +8,7 @@ using Odin.PropBotWebJob.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Microsoft.ApplicationInsights;
 using TraceFilter = Microsoft.Azure.WebJobs.Extensions.TraceFilter;
 
 namespace Odin.PropBotWebJob
@@ -16,11 +17,13 @@ namespace Odin.PropBotWebJob
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IBotHelper _botHelper;
+        private readonly TelemetryClient _telemetryClient;
 
         public Functions(IUnitOfWork unitOfWork, IBotHelper botHelper)
         {
             _unitOfWork = unitOfWork;
             _botHelper = botHelper;
+            _telemetryClient = new TelemetryClient();
         }
 
         // This function will get triggered/executed when a new message is written 
@@ -52,13 +55,13 @@ namespace Odin.PropBotWebJob
                     }
                     catch (Exception e)
                     {
-                        //Swallow image save exception.
+                        _telemetryClient.TrackException(e);
                     }
                 }
             }
             catch (Exception e)
             {
-                //Swallow image botting exception.
+                _telemetryClient.TrackException(e);
             }
 
             order.HomeFinding.HomeFindingProperties.Add(new HomeFindingProperty()
