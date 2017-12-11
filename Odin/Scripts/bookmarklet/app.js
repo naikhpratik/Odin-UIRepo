@@ -1,5 +1,12 @@
 ﻿javascript: (function () {
-
+    
+    //Super Hacky
+    //If string not replaced by CI use localhost.
+    var bmDomain = "#{BOOKMARKLET_DOMAIN}#";
+    var bmUrl = bmDomain.toLowerCase().indexOf("bookmarklet_domain") >= 0
+        ? "https://localhost:44303/BookMarklet?url="
+        : bmDomain + "/BookMarklet?url=";
+    
     var getComputedStyle = function (elt, style) {
         var result = null;
         if (window.getComputedStyle) {
@@ -35,7 +42,7 @@
 
     var removeBookMarklet = function () {
         var elt = document.getElementById("divOdinBookMarklet");
-        if (elt != null) {
+        if (elt !== null) {
             document.body.removeChild(elt);
             elt.removeEventListener("resize", initBookMarkletSize);
         }
@@ -52,12 +59,12 @@
         var bmTag = document.createElement("div");
         bmTag.setAttribute("id", "divOdinBookMarklet");
 
-        var bmCss = 'display: block; position: fixed; top: 0; right: 50px; width: 450px; height: 450px; z-index:' + maxZ + ';';
+        var bmCss = 'display: block; position: fixed; top: 0; right: 50px; width: 450px; height: 420px; z-index:' + maxZ + ';';
         bmTag.setAttribute('style', bmCss);
 
         var contentCss = 'background-color:#fff; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); height: inherit; font-family: sans-serif;';
         var closeCss = 'float: right; font-weight: bold; margin: 10px 20px 0px 0px; cursor: pointer';
-        var headerCss = 'color: #fff; background-color:#a7ce39; font-size: 20px;';
+        var headerCss = 'color: #fff; background-color:#a7ce39; font-size: 20px; margin-bottom:20px;';
         var titleCss = 'padding: 20px 40px 20px 40px;';
 
         var contentHtml =
@@ -66,8 +73,7 @@
             '<div id="divOdinBookMarkletClose" style="' + closeCss + '">&times;</div>' +
             '<div style="' + titleCss + '">I Like This Property</div>' +
             '</div>' +
-            '<br />' +
-            '<iframe  height="350px" width="100%" id="odinIFrame" frameBorder="0" src="http://localhost:49986/BookMarklet?url=' + encodedUrl + '">Some text in the Modal..</iframe>' +
+            '<iframe  height="320px" width="100%" id="odinIFrame" frameBorder="0" src="'+bmUrl+encodedUrl + '"></iframe>' +
             '</div>';
 
         bmTag.innerHTML = contentHtml;
@@ -81,7 +87,6 @@
     }
 
     //Execution
-
     init();
 
 })();

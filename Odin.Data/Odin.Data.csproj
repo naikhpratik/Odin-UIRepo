@@ -42,8 +42,8 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper, Version=6.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoMapper.6.1.1\lib\net45\AutoMapper.dll</HintPath>
+    <Reference Include="AutoMapper, Version=6.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.2.1\lib\net45\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="Bogus, Version=17.0.1.0, Culture=neutral, PublicKeyToken=fa1bb3f3f218129a, processorArchitecture=MSIL">
       <HintPath>..\packages\Bogus.17.0.1\lib\net40\Bogus.dll</HintPath>
@@ -88,6 +88,7 @@
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Spatial, Version=5.8.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Spatial.5.8.2\lib\net40\System.Spatial.dll</HintPath>
     </Reference>
@@ -157,6 +158,8 @@
     <Compile Include="Core\Models\BrokerFeeType.cs" />
     <Compile Include="Core\Models\Child.cs" />
     <Compile Include="Core\Models\HomeFindingProperty.cs" />
+    <Compile Include="Core\Models\Notification.cs" />
+    <Compile Include="Core\Models\NotificationType.cs" />
     <Compile Include="Core\Models\Photo.cs" />
     <Compile Include="Core\Models\Property.cs" />
     <Compile Include="Core\Models\Consultant.cs" />
@@ -180,6 +183,7 @@
     <Compile Include="Core\Models\DefaultType.cs" />
     <Compile Include="Core\Models\Transferee.cs" />
     <Compile Include="Core\Models\TransportationType.cs" />
+    <Compile Include="Core\Models\UserNotification.cs" />
     <Compile Include="Core\Models\UserRoles.cs" />
     <Compile Include="Core\Repositories\IAreaTypesRepository.cs" />
     <Compile Include="Core\Repositories\IBrokerFeeTypesRepository.cs" />
@@ -198,8 +202,10 @@
     <Compile Include="Core\Repositories\IServiceTypesRepository.cs" />
     <Compile Include="Core\Repositories\ITransfereesRepository.cs" />
     <Compile Include="Core\Repositories\ITransportationTypesRepository.cs" />
+    <Compile Include="Core\Repositories\IUserNotificationRepository.cs" />
     <Compile Include="Core\Repositories\IUsersRepository.cs" />
     <Compile Include="Extensions\ModelStateExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Helpers\PasswordHelper.cs" />
     <Compile Include="Helpers\TokenHelper.cs" />
     <Compile Include="Helpers\UserHelper.cs" />
@@ -466,6 +472,18 @@
     <Compile Include="Persistence\Migrations\201711151608086_MergeAddSortOrderAndDefault.Designer.cs">
       <DependentUpon>201711151608086_MergeAddSortOrderAndDefault.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201711201759564_AddNotification.cs" />
+    <Compile Include="Persistence\Migrations\201711201759564_AddNotification.Designer.cs">
+      <DependentUpon>201711201759564_AddNotification.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201711202009571_AddOrderInfoToNotification.cs" />
+    <Compile Include="Persistence\Migrations\201711202009571_AddOrderInfoToNotification.Designer.cs">
+      <DependentUpon>201711202009571_AddOrderInfoToNotification.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201712042034473_ChangesInNotification.cs" />
+    <Compile Include="Persistence\Migrations\201712042034473_ChangesInNotification.Designer.cs">
+      <DependentUpon>201712042034473_ChangesInNotification.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\201711212055489_AddPhotos.cs" />
     <Compile Include="Persistence\Migrations\201711212055489_AddPhotos.Designer.cs">
       <DependentUpon>201711212055489_AddPhotos.cs</DependentUpon>
@@ -494,6 +512,30 @@
     <Compile Include="Persistence\Migrations\201712051938142_AddLikedToHomeFindingProperties.Designer.cs">
       <DependentUpon>201712051938142_AddLikedToHomeFindingProperties.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201712041449390_AddUrlLatLngToProperty.cs" />
+    <Compile Include="Persistence\Migrations\201712041449390_AddUrlLatLngToProperty.Designer.cs">
+      <DependentUpon>201712041449390_AddUrlLatLngToProperty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201712041539029_AdjustLatLngPrecisionScale.cs" />
+    <Compile Include="Persistence\Migrations\201712041539029_AdjustLatLngPrecisionScale.Designer.cs">
+      <DependentUpon>201712041539029_AdjustLatLngPrecisionScale.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201712042113206_AddProgramNameToOrders.cs" />
+    <Compile Include="Persistence\Migrations\201712042113206_AddProgramNameToOrders.Designer.cs">
+      <DependentUpon>201712042113206_AddProgramNameToOrders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201712081538019_MergeNotificationsBranch.cs" />
+    <Compile Include="Persistence\Migrations\201712081538019_MergeNotificationsBranch.Designer.cs">
+      <DependentUpon>201712081538019_MergeNotificationsBranch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201712081617470_MergePropBotChanges.cs" />
+    <Compile Include="Persistence\Migrations\201712081617470_MergePropBotChanges.Designer.cs">
+      <DependentUpon>201712081617470_MergePropBotChanges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201712111812294_AfternoonDec11Merge.cs" />
+    <Compile Include="Persistence\Migrations\201712111812294_AfternoonDec11Merge.Designer.cs">
+      <DependentUpon>201712111812294_AfternoonDec11Merge.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\NumberOfBathroomsTypesRepository.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
@@ -506,12 +548,15 @@
     <Compile Include="Persistence\TransfereesRepository.cs" />
     <Compile Include="Persistence\TransportationTypesRepository.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
+    <Compile Include="Persistence\UserNotificationRepository.cs" />
     <Compile Include="Persistence\UsersRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validations\HasManagerRoleAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="App.Release.config" />
     <None Include="App.Staging.config" />
     <None Include="packages.config" />
@@ -703,6 +748,15 @@
     <EmbeddedResource Include="Persistence\Migrations\201711151608086_MergeAddSortOrderAndDefault.resx">
       <DependentUpon>201711151608086_MergeAddSortOrderAndDefault.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711201759564_AddNotification.resx">
+      <DependentUpon>201711201759564_AddNotification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201711202009571_AddOrderInfoToNotification.resx">
+      <DependentUpon>201711202009571_AddOrderInfoToNotification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201712042034473_ChangesInNotification.resx">
+      <DependentUpon>201712042034473_ChangesInNotification.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201711212055489_AddPhotos.resx">
       <DependentUpon>201711212055489_AddPhotos.cs</DependentUpon>
     </EmbeddedResource>
@@ -724,7 +778,24 @@
     <EmbeddedResource Include="Persistence\Migrations\201712051938142_AddLikedToHomeFindingProperties.resx">
       <DependentUpon>201712051938142_AddLikedToHomeFindingProperties.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201712041449390_AddUrlLatLngToProperty.resx">
+      <DependentUpon>201712041449390_AddUrlLatLngToProperty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201712041539029_AdjustLatLngPrecisionScale.resx">
+      <DependentUpon>201712041539029_AdjustLatLngPrecisionScale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201712042113206_AddProgramNameToOrders.resx">
+      <DependentUpon>201712042113206_AddProgramNameToOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201712081538019_MergeNotificationsBranch.resx">
+      <DependentUpon>201712081538019_MergeNotificationsBranch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201712081617470_MergePropBotChanges.resx">
+      <DependentUpon>201712081617470_MergePropBotChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201712111812294_AfternoonDec11Merge.resx">
+      <DependentUpon>201712111812294_AfternoonDec11Merge.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

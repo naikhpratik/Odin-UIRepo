@@ -1,7 +1,7 @@
 ﻿
 <header>
     <nav id="primaryNav">
-        <a class="primaryNavHome" href="#">
+        <a class="primaryNavHome" href="@Url.Action("Index","Orders")">
             <img class="primaryNavHome__logo--mobile" src="./img/dw_logo_mobile.png">
             <img class="primaryNavHome__logo" src="~/Content/Images/dwellworks_icon.png">
             <p>Odin</p>
@@ -9,11 +9,11 @@
         <ul class="primaryNavIconList">
             <li class="primaryNavIconList__item dropdown">
                 <div class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    <span>9+</span>
+                    <span id="spanNotificationCount" class="animated bounceInDown"></span>
                     <img src="~/Content/Images/icn_alert_B1.png">
                 </div>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <li>Hello</li>
+                <ul id="ulNotifications" class="dropdown-menu notification-dropdown" aria-labelledby="dropdownMenu1">
+                       
                 </ul>
             </li>
             <li class="primaryNavIconList__item dropdown">
@@ -21,9 +21,6 @@
                     <span>9+</span>
                     <img src="~/Content/Images/icn_cal_B1.png">
                 </div>
-                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
-                    <li>Hello</li>
-                </ul>
             </li>
             <li class="primaryNavIconList__item dropdown">
                 <div class="dropdown-toggle" id="dropdownMenu3" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -34,6 +31,24 @@
                     <li>Hello</li>
                 </ul>
             </li>
+            <li class="primaryNavIconList__item dropdown">
+                <div class="dropdown-toggle" id="dropdownMenu2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <img src="~/Content/Images/icn_profile_B1.png">
+                </div>
+                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
+                    <li>@Html.ActionLink("Help", "Index", "Help")</li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="javascript:document.getElementById('logoutForm').submit()">Logout</a></li>
+                </ul>
+                @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                {
+                    @Html.AntiForgeryToken()
+                }
+            </li>
         </ul>
     </nav>
 </header>
+<script>
+    $(document).ready(HeaderController.init);
+</script>
+

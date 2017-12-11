@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Odin.Data.Core.Models.Order>
+@{
+    ViewBag.Title = "Orders Page";
+    Layout = "~/Views/Shared/_Common.cshtml";
+}
+<div class="container" id="help">
+    <div class="titleGroup">
+        <h1 class="sectionTitle">Adding the Prop Bot</h1>
+    </div>
+    <br />
+    <p>
+        Drag the following link to your favorites bar and start prop botting!
+    </p>
+    <div class="well">
+        <a href="@ViewBag.PropBotScript" draggable="true"><strong>Prop Bot!</strong></a>
+    </div>
+    @Html.ActionLink("Go Home", "Index","Orders",null,new {@class = "btn btn-default"})
+</div>
+@section styles
+{
+    @Styles.Render("~/Styling/help")
+}

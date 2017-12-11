@@ -14,8 +14,10 @@ namespace Odin.Data.Core.Models
             Children = new Collection<Child>();
             Pets = new Collection<Pet>();
             Appointments =  new Collection<Appointment>();
+            Notifications = new Collection<Notification>();
         }
 
+        public string ProgramName { get; set; }
         public string TrackingId { get; set; }
         public string RelocationType { get; set; }
         public string DestinationCity { get; set; }
@@ -88,6 +90,8 @@ namespace Odin.Data.Core.Models
         public int ServiceFlag { get; set; }
 
         public virtual ICollection<Service> Services { get; private set; }
+
+        public virtual ICollection<Notification> Notifications { get; private set; }
 
         public bool HasService(int serviceTypeId)
         {

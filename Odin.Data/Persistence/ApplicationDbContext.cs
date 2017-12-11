@@ -36,6 +36,8 @@ namespace Odin.Data.Persistence
         public virtual DbSet<Property> Properties { get; set; }
         public virtual DbSet<HomeFindingProperty> HomeFindingProperties { get; set; }
 
+        public virtual DbSet<Notification> Notifications { get; set; }
+        public virtual DbSet<UserNotification> UserNotifications { get; set; }
         public virtual DbSet<Photo> Photos { get; set; }
 
         public ApplicationDbContext()
@@ -57,6 +59,14 @@ namespace Odin.Data.Persistence
             modelBuilder.Conventions.Add(
                 new AttributeToColumnAnnotationConvention<TableColumnAttribute, string>(
                     "ServiceTableColumn", (property, attributes) => attributes.Single().ColumnType.ToString()));
+
+            modelBuilder.Entity<Property>()
+                .Property(p => p.Latitude)
+                .HasPrecision(9, 6);
+
+            modelBuilder.Entity<Property>()
+                .Property(p => p.Longitude)
+                .HasPrecision(9, 6);
 
             base.OnModelCreating(modelBuilder);
         }

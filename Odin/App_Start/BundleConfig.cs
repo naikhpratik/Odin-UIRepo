@@ -18,7 +18,8 @@ namespace Odin
                         "~/Scripts/respond.js",
                         "~/Scripts/jspdf.min.js",
                         "~/Scripts/datatables/jquery.datatables.js",
-                        "~/Scripts/datatables/datatables.bootstrap.js"));
+                        "~/Scripts/datatables/datatables.bootstrap.js",
+                        "~/Scripts/app/views/_header.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -36,16 +37,19 @@ namespace Odin
                       "~/Content/bootstrap-datetimepicker.css",
                       "~/Content/site.css",
                       "~/Content/css/primaryNav.css",
-                      "~/Content/datatables/css/datatables.bootstrap.css"));
+                      "~/Content/datatables/css/datatables.bootstrap.css",
+                      "~/Content/animate.css",
+                      "~/Content/css/header.css"));
 
 
             // Page Styling
+            bundles.Add(new StyleBundle("~/Styling/help").Include("~/Content/css/help.css"));
             bundles.Add(new StyleBundle("~/Styling/orders").Include("~/Content/css/orders.css"));
             bundles.Add(new StyleBundle("~/Styling/login").Include("~/Content/css/login.css"));
             bundles.Add(new StyleBundle("~/Styling/forgotPassword").Include("~/Content/css/forgotpassword.css",
                 "~/Content/animate.css"));
             bundles.Add(new StyleBundle("~/Styling/transferee").Include("~/Content/css/transferee/transferee.css"));
-            bundles.Add(new StyleBundle("~/Styling/bookmarklet").Include("~/Content/css/bookmarklet.css"));
+            bundles.Add(new StyleBundle("~/Styling/bookmarklet").Include("~/Content/css/bookmarklet.css", "~/Content/animate.css"));
 
             // Panel Styling
             bundles.Add(new StyleBundle("~/Styling/sideNav").Include("~/Content/css/transferee/sideNav.css"));
@@ -69,7 +73,13 @@ namespace Odin
 
             bundles.Add(new ScriptBundle("~/Scripts/forgotPassword").Include(
                 "~/Scripts/bootstrap-notify.min.js",
-                "~/Scripts/app/views/forgotPassword.js")); 
+                "~/Scripts/app/views/forgotPassword.js"));
+
+            //Originally bundled in Scripts folder, but getting 403 error in IFrame.
+            bundles.Add(new ScriptBundle("~/bundles/bookmarklet").Include(
+                "~/Scripts/bootstrap-notify.min.js",
+                "~/Scripts/app/views/bookmarklet.js"));
+
         }
     }
 }

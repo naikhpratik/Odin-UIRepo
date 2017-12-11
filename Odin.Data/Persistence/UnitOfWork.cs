@@ -22,6 +22,7 @@ namespace Odin.Data.Persistence
         public ITransportationTypesRepository TransportationTypes { get; private set; }
         public IDepositTypesRepository DepositTypes { get; private set; }
         public IBrokerFeeTypesRepository BrokerFeeTypes { get; private set; }
+        public IUserNotificationRepository UserNotifications { get; private set; }
         public IPhotosRepository Photos { get; private set; }
         public IHomeFindingPropertyRepository HomeFindingProperties { get; private set; }
 
@@ -44,8 +45,12 @@ namespace Odin.Data.Persistence
             TransportationTypes = new TransportationTypesRepository(context);
             DepositTypes = new DepositTypesRepository(context);
             BrokerFeeTypes = new BrokerFeeTypesRepository(context);
+
+            UserNotifications = new UserNotificationRepository(context);
+
             Photos = new PhotosRepository(context);
             HomeFindingProperties = new HomeFindingPropertyRepository(context);
+
         }
         
         public void Complete()

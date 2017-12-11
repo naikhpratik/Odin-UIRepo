@@ -7,7 +7,6 @@
   padding: 0px 40px 0px 40px; }
 
 .bm-form-group {
-  padding-bottom: 25px;
   width: 100%;
   max-width: 100%; }
   .bm-form-group .form-control {
@@ -18,6 +17,13 @@
   color: #31a4dd; }
 
 .bm-btn-container {
+  padding-top: 10px;
   width: 100%;
   text-align: center; }
+
+div[data-notify].alert-success {
+  background-color: #8d0b56; }
+
+div[data-notify].alert-danger {
+  background-color: #e53c2e; }
 
