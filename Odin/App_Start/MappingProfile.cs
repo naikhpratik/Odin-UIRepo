@@ -47,7 +47,10 @@ namespace Odin
 
             CreateMap<Order, HousingViewModel>();
             CreateMap<HomeFinding, HousingViewModel>();
-            CreateMap<HomeFindingProperty, HousingPropertyViewModel>().ReverseMap();
+
+            CreateMap<HomeFindingProperty, HousingPropertyViewModel>()
+                .ReverseMap();
+
             CreateMap<Photo, PhotoViewModel>();
 
             /*BookMarklet*/

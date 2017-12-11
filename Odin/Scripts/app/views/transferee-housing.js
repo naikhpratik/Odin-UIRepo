@@ -22,13 +22,93 @@
                         $('#addPropertyModal').modal('hide');
                     },
                     error: function () {
-                        alert("An unknown error has occurred. Please try again later.");
+                        toast("An unknown error has occurred.Please try again later.", "danger");
                     }
                 });
             }
 
             event.preventDefault();
             return false;
+        });
+    };
+
+    var setupPropertiesList = function () {
+        $('.propertyItem').click(function (event) {
+            var propertyId = $(event.delegateTarget).data("property-id");
+            var propertyModalUrl = '/homefindingproperties/propertypartial/' + propertyId;
+            $('#propertyModalContent').load(propertyModalUrl, function (response, status, xhr) {
+                if (status === "success") {
+                    $('#propertyDetailsModal').modal('show');
+                }
+            });
+        });
+
+        setupLikeDislikeControls();
+    };
+
+    var setupLikeDislikeControls = function () {
+        $('.likeDislike > .like').click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            var controlWrappers = controllerWrappersForLikeDislikeButton($(this));
+            controlWrappers.toggleClass("like");
+            controlWrappers.removeClass("dislike");
+
+            updateLikedStatusForControl(controlWrappers[0]);
+        });
+
+        $('.likeDislike > .dislike').click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            var controlWrappers = controllerWrappersForLikeDislikeButton($(this));
+            controlWrappers.toggleClass("dislike");
+            controlWrappers.removeClass("like");
+
+            updateLikedStatusForControl(controlWrappers[0]);
+        });
+    };
+
+    var controllerWrappersForLikeDislikeButton = function (likeDislikeButton) {
+        var propertyId = $(likeDislikeButton).data('property-id');
+        var selectorString = '.likeDislike[data-property-id="' + propertyId + '"]';
+        return $(selectorString);
+    };
+
+    var updateLikedStatusForControl = function (controlElement) {
+        var classList = controlElement.classList;
+
+        var likedValue = null;
+        if (classList.contains('like')) {
+            likedValue = true;
+        } else if (classList.contains('dislike')) {
+            likedValue = false;
+        }
+        
+        var propertyId = $(controlElement).closest("[data-property-id]").attr('data-property-id');
+        var postData = {
+            id: propertyId,
+            liked: likedValue
+        };
+
+        $.ajax({
+            url: '/HomeFindingProperties/Update/',
+            type: 'PUT',
+            data: postData,
+            success: function (result) {
+                var message = "Your change was saved";
+
+                if (likedValue !== null) {
+                    var messageVerb = likedValue ? "liked" : "disliked";
+                    message = "You " + messageVerb + " a property";
+                }
+
+                toast(message, "success");
+            },
+            error: function () {
+                toast("An unknown error has occurred.Please try again later.", "danger");
+            }
         });
     };
 
@@ -48,163 +128,34 @@
                     $('#propertyDetailsModal').modal('hide');
                 },
                 error: function () {
-                    alert("An unknown error has occurred. Please try again later.");
+                    toast("An unknown error has occurred.Please try again later.", "danger");
                 }
             });
         }
     };
 
+    // FIXME: this toas function is in 4 other spots. I'm copy/pasting here for quickness, but we should refactor
+    var toast = function (message, type) {
+        $.notify({
+            message: message
+        }, {
+                type: type,
+                placement: {
+                    from: "bottom",
+                    align: "center"
+                },
+                animate: {
+                    enter: 'animated fadeInDown',
+                    exit: 'animated fadeOutUp'
+                }
+            });
+    };
+
     return {
         init: init,
-        deleteProperty: deleteProperty
+        deleteProperty: deleteProperty,
+        setupPropertiesList: setupPropertiesList,
+        setupLikeDislikeControls: setupLikeDislikeControls
     };
 
 }();
-
-
-
-
-
-
-//var TransfereeHousingProperty = function (){
-//     var route = "/api/orders/transferee/";
-
-//var updatePropertyBlock = function (block, data, success, fail) {
-//    var url = route + "/property/" + block;
-//    $.post(url, data).done(success).fail(fail);
-//     }
-//return {
-//    updatePropertyBlock: updatePropertyBlock    
-//}
-
-//}();
-//var TransfereeHousingController = function (TransfereeHousingProperty) {
-    
-//    var init = function () {
-
-//        var pnlHousing = $("div#housing");
-//        var propertiesBlock = pnlHousing.find("#propertiesBlock");
-       
-//        propertiesBlock.find('.date').datetimepicker({                
-//            useCurrent:true,
-//            keepOpen: false
-//        });
-        
-        
-
-//        //pnlHousing.find(".details-header").find("span").on("click",
-//        //    function () {
-//        //        var cols = $(this).parents(".details-blocks").find(".details-row > .details-col");                                                                                           
-//        //        cols.find("span").css("display", "block");                  
-//        //    });
-
-//        //Init Variables
-//        housingBlocks = pnlHousing.find(".details-blocks");
-//        orderId = pnlHousing.attr("data-order-id");
-
-//        //Save Event for Services
-//        //detailsProperty.on("click", ".details-save", saveBlock);
-//    };
-
-//    //var saveBlock = function (e) {
-
-//    //    var detailsBlock = $(e.target).parents(".details-blocks");
-//    //    var block = detailsBlock.attr("data-block");
-//    //    var rows = detailsBlock.find(".details-row[data-entity-id]");
-//    //    var err = false;
-//    //    var saveSuccess = function () {
-//    //        toast('changes to service dates are successful', 'success');
-//    //    }
-//    //    var saveFail = function () {
-//    //        toast('changes to service dates failed', 'danger');
-//    //    }
-
-//    //    var data = { "Id": orderId };
-       
-//    //    rows.each(function () {
-//    //        if (err)
-//    //            return;
-//    //        var row = $(this);
-//    //        var rowInputs = row.find(":input").not("input[type='hidden']");
-//    //        if (hasAttr(row, 'data-entity-collection')) {
-//    //            if (!isCollectionRowEmpty(rowInputs)) {
-//    //                var collectionKey = row.attr("data-entity-collection");
-//    //                var collectionData = { "Id": row.attr("data-entity-id") };
-                    
-//    //                var ret = fillPostData(collectionData, rowInputs);
-//    //                if (ret == -1) {
-//    //                    err = true;
-//    //                    return;
-//    //                }
-//    //                if (!(collectionKey in data)) {
-//    //                    data[collectionKey] = [];
-//    //                }
-//    //                data[collectionKey].push(collectionData);
-//    //            }
-//    //        } else {
-//    //            fillPostData(data, rowInputs);
-//    //        }
-            
-//    //    });
-//    //     if (!err)            
-//    //    TransfereeDetailsService.updateDetailsBlock(block, data, saveSuccess, saveFail);
-//    //}
-
-//    //var fillPostData = function (data, inputs) {
-//    //    var sd = '';
-//    //    var st = '';
-//    //    var cd = '';
-//    //    inputs.each(function () {
-//    //        var input = $(this);
-//    //        sd = input.attr("name") == "ScheduledDate" ? input.val() : sd;
-//    //        st = input.attr("name") == "ScheduledTime" ? input.val() : st;
-//    //        cd = input.attr("name") == "CompletedDate" ? input.val() : cd;
-//    //    });
-//    //    if (sd.length > 0 && st == '') {            
-//    //        $('.text-danger[data-entity-id="' + data['Id'] + '"]').show();
-//    //        return -1;            
-//    //    }
-//    //    else           
-//    //        $('.text-danger[data-entity-id="' + data['Id'] + '"]').hide();
-
-//    //    data["ScheduledDate"] = sd + ' ' + st;        
-//    //    data["CompletedDate"] = cd;
-        
-//    //}
-
-//    //var isCollectionRowEmpty = function (rowInputs) {
-//    //    return rowInputs.filter(function () { return $.trim($(this).val()) !== ""; }).length === 0;
-//    //}
-
-//    //var hasAttr = function (obj, attrName) {
-//    //    var attr = obj.attr(attrName);
-//    //    return typeof attr !== typeof undefined && attr !== false && attr !== "" && attr !== null;
-//    //}
-
-//    //var contains = function(value, searchFor)
-//    //{
-//    //    return (value || '').indexOf(searchFor) > -1;
-//    //}
-
-//    var toast = function (message, type) {
-//        $.notify({
-//            message: message
-//        }, {
-//            delay: 2000,
-//            type: type,
-//            placement: {
-//                from: "bottom",
-//                align: "center"
-//            },
-//            animate: {
-//                enter: 'animated fadeInUp',
-//                exit: 'animated fadeOutDown'
-//            }
-//        });
-//    }
-
-
-//    return {
-//        init: init
-//    };
-//}(TransfereeHousingProperty);

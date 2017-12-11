@@ -10,5 +10,6 @@ namespace Odin.Data.Core.Models
     {
         public Property Property { get; set; }
         public HomeFinding HomeFinding { get; set; }
+        public bool? Liked { get; set; }
     }
 }

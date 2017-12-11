@@ -39,7 +39,7 @@ namespace Odin.Controllers
             HomeFindingProperty homeFindingProperty = new HomeFindingProperty();
             // mapping wipes out the Id - this is hack to resolve that
             propertyVM.Id = homeFindingProperty.Id;
-            homeFindingProperty = _mapper.Map<HousingPropertyViewModel, HomeFindingProperty>(propertyVM, homeFindingProperty);
+            _mapper.Map<HousingPropertyViewModel, HomeFindingProperty>(propertyVM, homeFindingProperty);
 
             Order order = _unitOfWork.Orders.GetOrderFor(userId, propertyVM.OrderId);
             HomeFinding homeFinding = order.HomeFinding;
@@ -70,6 +70,24 @@ namespace Odin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.ServiceUnavailable);
             }
+
+            return new HttpStatusCodeResult(HttpStatusCode.NoContent);
+        }
+
+        [HttpPut]
+        public ActionResult Update(HousingPropertyViewModel propertyVM)
+        {
+            HomeFindingProperty homeFindingProperty;
+            homeFindingProperty = _unitOfWork.HomeFindingProperties.GetHomeFindingPropertyById(propertyVM.Id);
+
+            // !!!: Do NOT use automapper here. There are issues with mapping back from the VM and in the essence of time I couldn't find a good solution
+            // AutoMapper might not be the best best tool for two way mapping
+            // https://lostechies.com/jimmybogard/2009/09/18/the-case-for-two-way-mapping-in-automapper/
+
+            // for now only support a subset of updated values
+            homeFindingProperty.Liked = propertyVM.Liked;
+
+            _unitOfWork.Complete();
 
             return new HttpStatusCodeResult(HttpStatusCode.NoContent);
         }
