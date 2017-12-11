@@ -30,7 +30,23 @@
             event.preventDefault();
             return false;
         });
+    };
 
+    var setupPropertiesList = function () {
+        $('.propertyItem').click(function (event) {
+            var propertyId = $(event.delegateTarget).data("property-id");
+            var propertyModalUrl = '/homefindingproperties/propertypartial/' + propertyId;
+            $('#propertyModalContent').load(propertyModalUrl, function (response, status, xhr) {
+                if (status == "success") {
+                    $('#propertyDetailsModal').modal('show');
+                }
+            });
+        });
+
+        setupLikeDislikeControls();
+    };
+
+    var setupLikeDislikeControls = function () {
         $('.likeDislike > .like').click(function (e) {
             e.preventDefault();
             e.stopPropagation();
@@ -55,8 +71,6 @@
     };
 
     var updateLikedStatusForControl = function (controlElement) {
-        console.log(controlElement);
-        console.log(controlElement.classList);
         var classList = controlElement.classList;
 
         var likedValue = null;
@@ -135,7 +149,8 @@
 
     return {
         init: init,
-        deleteProperty: deleteProperty
+        deleteProperty: deleteProperty,
+        setupPropertiesList: setupPropertiesList
     };
 
 }();

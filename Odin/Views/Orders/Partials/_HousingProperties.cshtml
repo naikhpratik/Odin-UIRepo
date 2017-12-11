@@ -76,14 +76,6 @@
 
 <script>
     $(document).ready(function () {
-        $('.propertyItem').click(function (event) {
-            var propertyId = $(event.delegateTarget).data("property-id");
-            var propertyModalUrl = '/homefindingproperties/propertypartial/' + propertyId;
-            $('#propertyModalContent').load(propertyModalUrl, function (response, status, xhr) {
-                if (status == "success") {
-                    $('#propertyDetailsModal').modal('show');
-                }
-            });
-        });
+        TransfereeHousingController.setupPropertiesList();
     });
 </script>
