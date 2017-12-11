@@ -32,7 +32,14 @@
         });
     };
 
+    /*** Setup Methods ***/
     var setupPropertiesList = function () {
+        $('.propertyItem input, .input-group.date-picker').click(function (event) {
+            event.stopPropagation();
+        });
+
+        setupDatePickers();
+
         $('.propertyItem').click(function (event) {
             var propertyId = $(event.delegateTarget).data("property-id");
             var propertyModalUrl = '/homefindingproperties/propertypartial/' + propertyId;
@@ -47,6 +54,7 @@
     };
 
     var setupLikeDislikeControls = function () {
+        $('.likeDislike > .like').unbind('click');
         $('.likeDislike > .like').click(function (e) {
             e.preventDefault();
             e.stopPropagation();
@@ -58,6 +66,7 @@
             updateLikedStatusForControl(controlWrappers[0]);
         });
 
+        $('.likeDislike > .dislike').unbind('click');
         $('.likeDislike > .dislike').click(function (e) {
             e.preventDefault();
             e.stopPropagation();
@@ -70,12 +79,47 @@
         });
     };
 
+    var setupDatePickers = function () {
+        $('.date-picker').datetimepicker({
+            format: "MM/DD/YYYY",
+            useCurrent: false,
+            keepOpen: false
+        }).on("dp.change", function (e) {
+            console.log(e);
+        });
+    };
+
+
+    /*** Private Helpers ***/
+    // FIXME: this toas function is in 4 other spots. I'm copy/pasting here for quickness, but we should refactor
+    var toast = function (message, type) {
+        $.notify({
+            message: message
+        }, {
+                type: type,
+                placement: {
+                    from: "bottom",
+                    align: "center"
+                },
+                animate: {
+                    enter: 'animated fadeInDown',
+                    exit: 'animated fadeOutUp'
+                }
+            });
+    };
+
+    var reloadPropertiesPartial = function () {
+        $('#propertiesContainer').load('/orders/propertiesPartial/' + currentOrderId);
+    };
+
     var controllerWrappersForLikeDislikeButton = function (likeDislikeButton) {
         var propertyId = $(likeDislikeButton).data('property-id');
         var selectorString = '.likeDislike[data-property-id="' + propertyId + '"]';
         return $(selectorString);
     };
 
+
+    /*** Update Methods ***/
     var updateLikedStatusForControl = function (controlElement) {
         var classList = controlElement.classList;
 
@@ -87,41 +131,44 @@
         }
 
         var propertyId = $(controlElement).closest("[data-property-id]").attr('data-property-id');
-        var postData = {
+        var data = {
             id: propertyId,
             liked: likedValue
         };
 
+        var success = function (result) {
+            var message = "Your change was saved";
+
+            if (likedValue !== null) {
+                var messageVerb = likedValue ? "liked" : "disliked";
+                message = "You " + messageVerb + " a property";
+            }
+
+            toast(message, "success");
+        };
+
+        updateProperty(data, success);
+    };
+
+    var updateProperty = function (data, success) {
         $.ajax({
             url: '/HomeFindingProperties/Update/',
             type: 'PUT',
-            data: postData,
-            success: function (result) {
-                var message = "Your change was saved";
-
-                if (likedValue !== null) {
-                    var messageVerb = likedValue ? "liked" : "disliked";
-                    message = "You " + messageVerb + " a property";
-                }
-
-                toast(message, "success");
-            },
+            data: data,
+            success: success,
             error: function () {
                 toast("An unknown error has occurred.Please try again later.", "danger");
             }
         });
     };
 
-    var reloadPropertiesPartial = function () {
-        $('#propertiesContainer').load('/orders/propertiesPartial/' + currentOrderId);
-    };
 
     var deleteProperty = function (propertyId) {
         var confirmed = confirm("Are you sure you want to remove this property?");
 
         if (confirmed) {
             $.ajax({
-                url: '/HomeFindingProperties/Delete/'+propertyId,
+                url: '/HomeFindingProperties/Delete/' + propertyId,
                 type: 'DELETE',
                 success: function (result) {
                     reloadPropertiesPartial();
@@ -171,6 +218,7 @@
         deleteProperty: deleteProperty,
         setupPropertiesList: setupPropertiesList,
         setupLikeDislikeControls: setupLikeDislikeControls,
+        setupDatePickers: setupDatePickers,
         export2PDF: export2PDF
     };
 
