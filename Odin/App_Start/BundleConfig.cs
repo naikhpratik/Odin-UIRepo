@@ -75,7 +75,8 @@ namespace Odin
                 "~/Scripts/bootstrap-notify.min.js",
                 "~/Scripts/app/views/forgotPassword.js"));
 
-            bundles.Add(new ScriptBundle("~/Scripts/bookmarklet").Include(
+            //Originally bundled in Scripts folder, but getting 403 error in IFrame.
+            bundles.Add(new ScriptBundle("~/bundles/bookmarklet").Include(
                 "~/Scripts/bootstrap-notify.min.js",
                 "~/Scripts/app/views/bookmarklet.js"));
 
