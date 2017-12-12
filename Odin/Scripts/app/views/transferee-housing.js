@@ -76,6 +76,18 @@
                     function (e) {
                         this.closePopup();
                     });
+
+                var propertyId = $(this).attr("data-property-id");
+                marker.on("click",
+                    function() {
+                        var propertyModalUrl = '/homefindingproperties/propertypartial/' + propertyId;
+                        $('#propertyModalContent').load(propertyModalUrl, function (response, status, xhr) {
+                            if (status == "success") {
+                                $('#propertyDetailsModal').modal('show');
+                            }
+                        });
+                        
+                    });
             }
         });
 
