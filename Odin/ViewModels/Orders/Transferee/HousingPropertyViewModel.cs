@@ -61,7 +61,7 @@ namespace Odin.ViewModels.Orders.Transferee
         public String PropertyPostalCode { get; set; }
 
         [Display(Name = "Availability Date")]
-        [DisplayFormat(NullDisplayText = "Unknown", DataFormatString = "{0:d}")]
+        [DisplayFormat(NullDisplayText = "Unknown", DataFormatString = "{0:dd-MMM-yyyy}")]
         [DataType(DataType.Date)]
         public DateTime? PropertyAvailabilityDate { get; set; }
 

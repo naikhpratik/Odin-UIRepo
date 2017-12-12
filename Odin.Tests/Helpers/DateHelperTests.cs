@@ -13,8 +13,7 @@ namespace Odin.Tests.Helpers
         {
             DateTime? date = Convert.ToDateTime("10/01/17");
             var result = DateHelper.GetViewFormat(date);
-            result.Should().Be("10/1/2017");
-            // !!!: This is not a great test, as it is dependant on the current culture settings. Revisit this later.
+            result.Should().Be("01-Oct-2017");
         }
 
         [TestMethod]

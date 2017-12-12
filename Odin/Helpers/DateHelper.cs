@@ -11,7 +11,7 @@ namespace Odin.Helpers
         }
         public static string GetViewFormat(DateTime? date)
         {
-            return date.HasValue ? string.Format(Thread.CurrentThread.CurrentCulture, "{0:d}", date) : String.Empty;
+            return date.HasValue ? string.Format(Thread.CurrentThread.CurrentCulture, "{0:dd-MMM-yyyy}", date) : String.Empty;
         }
         public static string GetViewFormat(decimal? amount)
         {
@@ -22,7 +22,7 @@ namespace Odin.Helpers
             if (isTime)
                 return date.HasValue ? string.Format(Thread.CurrentThread.CurrentCulture, "{0:t}", date) : String.Empty;
             else
-                return date.HasValue ? string.Format(Thread.CurrentThread.CurrentCulture, "{0:d}", date) : String.Empty;
+                return date.HasValue ? string.Format(Thread.CurrentThread.CurrentCulture, "{0:dd-MMM-yyyy}", date) : String.Empty;
         }
     }
 }

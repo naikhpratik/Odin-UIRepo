@@ -120,5 +120,10 @@ namespace Odin.Controllers
 
             return PartialView("~/views/orders/partials/_PropertyDetails.cshtml", viewModel);
         }
+        public ActionResult RadioButtonList(string title)
+        {
+            ViewBag.Title = title;
+            return PartialView("~/Views/Shared/Partials/multipleChoiceRadioButtons.cshtml");
+        }
     }
 }
