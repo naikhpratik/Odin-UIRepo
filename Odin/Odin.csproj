@@ -19,8 +19,7 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>
-    </IISExpressSSLPort>
+    <IISExpressSSLPort>44303</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -673,8 +672,13 @@
     <Content Include="Content\Images\icn_up_sel_arrow.png" />
     <Content Include="Content\Images\ic_search.png" />
     <Content Include="Content\Images\image_placeholder_large.png" />
+    <Content Include="Content\Images\layers-2x.png" />
+    <Content Include="Content\Images\layers.png" />
     <Content Include="Content\Images\login.jpg" />
     <Content Include="Content\Images\map_placeholder.png" />
+    <Content Include="Content\Images\marker-icon-2x.png" />
+    <Content Include="Content\Images\marker-icon.png" />
+    <Content Include="Content\Images\marker-shadow.png" />
     <Content Include="Content\Images\popout_sml_img.png" />
     <Content Include="Content\Images\user-placeholder.png" />
     <Content Include="Content\css\login.css">
@@ -695,6 +699,7 @@
     <Content Include="Content\css\primaryNav.min.css">
       <DependentUpon>primaryNav.css</DependentUpon>
     </Content>
+    <Content Include="Content\leaflet.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -881,6 +886,7 @@
     <Content Include="Scripts\DataTables\responsive.semanticui.js" />
     <Content Include="Scripts\DataTables\responsive.semanticui.min.js" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
+    <Content Include="Scripts\leaflet.js" />
     <Content Include="Scripts\thumbnails.carousel.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
     <Content Include="Scripts\jquery-1.12.4.min.js" />

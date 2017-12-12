@@ -31,13 +31,13 @@
 
         @foreach (var propertyVM in Model)
             {
-            <li class="row propertyItem" data-property-id="@propertyVM.Id">
+            <li class="row propertyItem" data-property-id="@propertyVM.Id" data-lat="@propertyVM.PropertyLatitude" data-lng="@propertyVM.PropertyLongitude">
                 <div class="col-md-1">
                     <img class="location" src="@propertyVM.ThumbnailPhotoUrl" />
                 </div>
                 @* Switch next 3 columns to col-md-2 when adding remaining columns *@
                 <div class="col-md-4">
-                    <p>
+                    <p class="propertyAddress">
                         @Html.DisplayFor(m => propertyVM.PropertyAddress)
                     </p>
                 </div>

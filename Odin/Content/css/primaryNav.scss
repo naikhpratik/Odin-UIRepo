@@ -2,7 +2,7 @@
 
 #primaryNav {
     position: fixed;
-    z-index: 2;
+    z-index: 10000;
     height: $primaryNavHeightSm;
     width: 100%;
     display: flex;

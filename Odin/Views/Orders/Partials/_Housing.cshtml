@@ -40,8 +40,11 @@
             </ul>
         </div>
         <div class="col-md-8 mapWrapper">
-            <img src="~/Content/Images/map_placeholder.png" />
+            
+            <div id="map"></div>
+
         </div>
+        
     </div>
 
     <div class="row" id="propertiesControls">
@@ -329,7 +332,6 @@
         </div>
     </div>
 </div>
-
 @Styles.Render("~/Styling/housing")
 <script>
     $(document).ready(function () {

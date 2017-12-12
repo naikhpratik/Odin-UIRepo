@@ -1,13 +1,10 @@
-﻿using System;
-using Odin.Data.Core.Models;
-using Odin.Helpers;
+﻿using Odin.ViewModels.Shared;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
-using System.Web;
 using System.Collections.ObjectModel;
-using Odin.ViewModels.Shared;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Web;
 
 namespace Odin.ViewModels.Orders.Transferee
 {
@@ -107,5 +104,13 @@ namespace Odin.ViewModels.Orders.Transferee
                 return thumbUrl;
             }
         }
+
+        [Display(Name = "Latitude")]
+        [DisplayFormat(NullDisplayText = "")]
+        public Decimal PropertyLatitude { get; set; }
+
+        [Display(Name = "Longitude")]
+        [DisplayFormat(NullDisplayText = "")]
+        public Decimal PropertyLongitude { get; set; }
     }
 }

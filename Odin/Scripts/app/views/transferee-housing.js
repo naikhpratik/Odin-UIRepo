@@ -3,7 +3,7 @@
     var init = function () {
         console.log("Loading Housing");
 
-        $('#propertyForm').submit(function (event) {
+        $('#propertyForm').submit(function(event) {
             if ($(this).valid()) {
                 $.ajax({
                     url: this.action,
@@ -12,7 +12,7 @@
                     data: new FormData(this),
                     contentType: false,
                     processData: false,
-                    success: function (result) {
+                    success: function(result) {
                         reloadPropertiesPartial();
                         $(':input', '#propertyForm')
                             .not(':button, :submit, :reset, :hidden')
@@ -21,7 +21,7 @@
                             .removeAttr('selected');
                         $('#addPropertyModal').modal('hide');
                     },
-                    error: function () {
+                    error: function() {
                         alert("An unknown error has occurred. Please try again later.");
                     }
                 });
@@ -30,7 +30,63 @@
             event.preventDefault();
             return false;
         });
+
+        initMap();
     };
+
+    var initMap = function() {
+        L.mapquest.key = '1tJblQYiEARJGDxuF9gfQVniw3jsi6Ll';
+
+        // 'map' refers to a <div> element with the ID map
+        var map = L.mapquest.map('map', {
+            center: [37.7749, -122.4194],
+            layers: L.mapquest.tileLayer('map'),
+            zoom: 12
+        });
+
+        var centLat = 0;
+        var centLng = 0;
+        $("#propertiesList > .propertyItem").each(function (index) {
+
+            var lat = $(this).attr("data-lat");
+            var lng = $(this).attr("data-lng");
+
+            if (lat !== "" && lng !== "") {
+                if (centLat === 0 || centLng === 0) {
+                    centLat = lat;
+                    centLng = lng;
+                }
+                var marker = L.marker([lat, lng]).addTo(map);
+
+                var propertyAddress = $(this).find(".propertyAddress");
+                if (propertyAddress.length > 0) {
+                    marker.bindPopup(propertyAddress.html());
+                }
+
+                marker.on("mouseover",
+                    function(e) {
+                        this.openPopup();
+                    });
+
+                marker.on("mouseout",
+                    function (e) {
+                        this.closePopup();
+                    });
+            }
+        });
+
+        if (centLat !== 0 && centLng !== 0) {
+            map.setView(new L.LatLng(centLat, centLng), 12);
+        } else {
+            map.setView(new L.LatLng(37.7749, -122.4194), 12);
+        }
+
+        //For some reason need to set height then call invalidateSize to get map displaying correctly.
+        //Hacky, works now, look for better solution.
+        var mapDiv = $("#map");
+        mapDiv.height(300);
+        map.invalidateSize(false);
+    }
 
     var reloadPropertiesPartial = function () {
         $('#propertiesContainer').load('/orders/propertiesPartial/' + currentOrderId);

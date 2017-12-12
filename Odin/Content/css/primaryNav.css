@@ -1,6 +1,6 @@
 ﻿#primaryNav {
   position: fixed;
-  z-index: 2;
+  z-index: 10000;
   height: 5rem;
   width: 100%;
   display: flex;
