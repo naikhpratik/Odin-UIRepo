@@ -1,7 +1,11 @@
-﻿var TransfereeHousingController = function (TransfereeHousingProperty) {
+﻿﻿var TransfereeHousingController = function (TransfereeHousingProperty) {
 
     var init = function () {
         console.log("Loading Housing");
+
+        setupLikeDislikeControls();
+
+        setupPropertiesList();
 
         $('#propertyForm').submit(function (event) {
             if ($(this).valid()) {
@@ -34,28 +38,29 @@
 
     /*** Setup Methods ***/
     var setupPropertiesList = function () {
-        $('.propertyItem input, .input-group.date-picker').click(function (event) {
-            event.stopPropagation();
-        });
-
         setupDatePickers();
 
-        $('.propertyItem').click(function (event) {
-            var propertyId = $(event.delegateTarget).data("property-id");
-            var propertyModalUrl = '/homefindingproperties/propertypartial/' + propertyId;
-            $('#propertyModalContent').load(propertyModalUrl, function (response, status, xhr) {
-                if (status === "success") {
-                    $('#propertyDetailsModal').modal('show');
-                }
-            });
-        });
+        $(document).off('click', '.propertyItem');
+        $(document).on('click', '.propertyItem', function (event) {
 
-        setupLikeDislikeControls();
+            if (!$(event.target).is("input") &&
+                !$(event.target).is("span")) { // prevents the date picker from triggering the modal
+
+                var propertyId = $(this).data("property-id");
+                var propertyModalUrl = '/homefindingproperties/propertypartial/' + propertyId;
+                $('#propertyModalContent').load(propertyModalUrl, function (response, status, xhr) {
+                    if (status === "success") {
+                        $('#propertyDetailsModal').modal('show');
+                    }
+                });
+            }
+        });
     };
 
     var setupLikeDislikeControls = function () {
-        $('.likeDislike > .like').unbind('click');
-        $('.likeDislike > .like').click(function (e) {
+        var likeSelector = '.likeDislike > .like';
+        $(document).off('click', likeSelector);
+        $(document).on('click', likeSelector, function (e) {
             e.preventDefault();
             e.stopPropagation();
 
@@ -66,8 +71,9 @@
             updateLikedStatusForControl(controlWrappers[0]);
         });
 
-        $('.likeDislike > .dislike').unbind('click');
-        $('.likeDislike > .dislike').click(function (e) {
+        var dislikeSelector = '.likeDislike > .dislike';
+        $(document).off('click', dislikeSelector);
+        $(document).on('click', dislikeSelector, function (e) {
             e.preventDefault();
             e.stopPropagation();
 
@@ -93,10 +99,23 @@
                 viewingDate: e.date.format("MM/DD/YYYY")
             };
 
-            updateProperty(data, success);            
+            updateProperty(data, success);
         });
     };
 
+    var export2PDF = function (choice) {
+        //window.location.href = "/Orders/PropertiesPartialPDF/" + currentOrderId + "?listChoice=" + choice;
+        $.ajax({
+            url: "/Orders/PropertiesPartialPDF/" + currentOrderId + "?listChoice=" + choice,
+            type: 'GET',
+            success: function (result) {
+                window.location.href = "/Orders/PropertiesPartialPDF/" + currentOrderId + "?listChoice=" + choice;
+            },
+            error: function () {
+                toast("No properties found that satisfy the selected option.", "warning");
+            }
+        });
+    };
 
     /*** Private Helpers ***/
     // FIXME: this toas function is in 4 other spots. I'm copy/pasting here for quickness, but we should refactor
@@ -170,7 +189,6 @@
         });
     };
 
-
     var deleteProperty = function (propertyId) {
         var confirmed = confirm("Are you sure you want to remove this property?");
 
@@ -189,43 +207,9 @@
         }
     };
 
-    var export2PDF = function (choice) {
-        //window.location.href = "/Orders/PropertiesPartialPDF/" + currentOrderId + "?listChoice=" + choice;
-        $.ajax({
-            url: "/Orders/PropertiesPartialPDF/" + currentOrderId + "?listChoice=" + choice,
-            type: 'GET',
-            success: function (result) {
-                window.location.href = "/Orders/PropertiesPartialPDF/" + currentOrderId + "?listChoice=" + choice;
-            },
-            error: function () {
-                toast("No properties found that satisfy the selected option.", "warning");
-            }
-        });
-    };
-
-    // FIXME: this toas function is in 4 other spots. I'm copy/pasting here for quickness, but we should refactor
-    var toast = function (message, type) {
-        $.notify({
-            message: message
-        }, {
-            delay: 2000,
-                type: type,
-                placement: {
-                    from: "bottom",
-                    align: "center"
-                },
-                animate: {
-                    enter: 'animated fadeInDown',
-                    exit: 'animated fadeOutUp'
-                }
-            });
-    };
-
     return {
         init: init,
         deleteProperty: deleteProperty,
-        setupPropertiesList: setupPropertiesList,
-        setupLikeDislikeControls: setupLikeDislikeControls,
         setupDatePickers: setupDatePickers,
         export2PDF: export2PDF
     };
