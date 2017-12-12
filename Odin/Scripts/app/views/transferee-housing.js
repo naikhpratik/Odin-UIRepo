@@ -86,8 +86,8 @@
     };
 
     var setupDatePickers = function () {
-        $('.date-picker').datetimepicker({
-            format: "MM/DD/YYYY",
+        $('.date').datetimepicker({
+            format: "DD-MMM-YYYY",
             useCurrent: false,
             keepOpen: false
         }).on("dp.change", function (e) {
