@@ -102,7 +102,7 @@ public static class DatePickerHelper
             }
             tagInput.Attributes.Add("data-date-today-highlight", "true");
             tagInput.Attributes.Add("data-date-today-btn", "true");
-            tagInput.Attributes.Add("value", value.ToString("yyyy-MM-dd"));
+            tagInput.Attributes.Add("value", value.ToString("MM/dd/YYYY"));
 
             res += tagInput.ToString(TagRenderMode.SelfClosing);
 

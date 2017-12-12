@@ -85,7 +85,15 @@
             useCurrent: false,
             keepOpen: false
         }).on("dp.change", function (e) {
-            console.log(e);
+            var success = function (result) { console.log('i did something!'); };
+
+            var propertyId = $(this).closest("[data-property-id]").attr('data-property-id');
+            var data = {
+                id: propertyId,
+                viewingDate: e.date.format("MM/DD/YYYY")
+            };
+
+            updateProperty(data, success);            
         });
     };
 
