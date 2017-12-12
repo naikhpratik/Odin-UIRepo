@@ -528,6 +528,10 @@
     <Compile Include="Persistence\Migrations\201712081617470_MergePropBotChanges.Designer.cs">
       <DependentUpon>201712081617470_MergePropBotChanges.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201712121642511_AddedLatLngToOrder.cs" />
+    <Compile Include="Persistence\Migrations\201712121642511_AddedLatLngToOrder.Designer.cs">
+      <DependentUpon>201712121642511_AddedLatLngToOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\NumberOfBathroomsTypesRepository.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
@@ -781,6 +785,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201712081617470_MergePropBotChanges.resx">
       <DependentUpon>201712081617470_MergePropBotChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201712121642511_AddedLatLngToOrder.resx">
+      <DependentUpon>201712121642511_AddedLatLngToOrder.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

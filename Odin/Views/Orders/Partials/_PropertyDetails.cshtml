@@ -44,6 +44,8 @@
                     <li class="col-md-12">
                         <label>@Html.DisplayNameFor(model => model.PropertyDescription)</label>
                         <p>@Html.DisplayFor(model => model.PropertyDescription)</p>
+                        @*<p>@Model.PropertyDescription.Replace("<br />","\n")</p>*@
+                        @*@Html.Raw(@Model.PropertyDescription)*@
                     </li>
                 </ul>
             </div>

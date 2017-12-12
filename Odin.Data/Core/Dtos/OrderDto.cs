@@ -56,6 +56,8 @@ namespace Odin.Data.Core.Dtos
         public string DepositTypeSeValue { get; set; }
 
         public string SeCustStatus { get; set;  }
+        public decimal? Latitude { get; set; }
+        public decimal? Longitude { get; set; }
 
 
         [Required]

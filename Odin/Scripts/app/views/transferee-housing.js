@@ -37,22 +37,26 @@
     var initMap = function() {
         L.mapquest.key = '1tJblQYiEARJGDxuF9gfQVniw3jsi6Ll';
 
+        var mapDiv = $("#map");
+   
+        var centLat = mapDiv.attr("data-lat");
+        var centLng = mapDiv.attr("data-lng");
+
         // 'map' refers to a <div> element with the ID map
         var map = L.mapquest.map('map', {
             center: [37.7749, -122.4194],
             layers: L.mapquest.tileLayer('map'),
             zoom: 12
         });
+        
 
-        var centLat = 0;
-        var centLng = 0;
         $("#propertiesList > .propertyItem").each(function (index) {
 
             var lat = $(this).attr("data-lat");
             var lng = $(this).attr("data-lng");
 
             if (lat !== "" && lng !== "") {
-                if (centLat === 0 || centLng === 0) {
+                if (centLat === "" || centLng === "") {
                     centLat = lat;
                     centLng = lng;
                 }
@@ -83,7 +87,6 @@
 
         //For some reason need to set height then call invalidateSize to get map displaying correctly.
         //Hacky, works now, look for better solution.
-        var mapDiv = $("#map");
         mapDiv.height(300);
         map.invalidateSize(false);
     }
