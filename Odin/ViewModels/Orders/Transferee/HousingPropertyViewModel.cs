@@ -1,4 +1,5 @@
-﻿using Odin.ViewModels.Shared;
+﻿using Ganss.XSS;
+using Odin.ViewModels.Shared;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -81,10 +82,18 @@ namespace Odin.ViewModels.Orders.Transferee
         [DataType(DataType.Currency)]
         public Decimal PropertyAmount { get; set; }
 
+        private String _propertyDescription;
         [Display(Name = "Description/Notes:")]
         [DataType(DataType.MultilineText)]
         [DisplayFormat(ConvertEmptyStringToNull = true)]
-        public String PropertyDescription { get; set; }
+        public String PropertyDescription {
+            get
+            {
+                var sanitizer = new HtmlSanitizer();
+                return sanitizer.Sanitize(_propertyDescription);
+            }
+            set { _propertyDescription = value; }
+        }
 
         [Display(Name = "Photos")]
         public IEnumerable<HttpPostedFileBase> UploadedPhotos { get; set; }
