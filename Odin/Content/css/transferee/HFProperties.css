@@ -63,3 +63,24 @@
 li.propertyItem {
   page-break-after: always; }
 
+.likeDislike {
+  width: 100px;
+  height: auto; }
+  .likeDislike .likeDislike-btn, .likeDislike .like, .likeDislike .dislike {
+    height: 50px;
+    /*padding-left: 180px; /* Equal to width of new image */
+    background-position: center center !important;
+    cursor: pointer; }
+  .likeDislike .like {
+    display: none;
+    background: url("/Content/Images/icn_ln_non_selected_like.png") no-repeat; }
+  .likeDislike .dislike {
+    display: none;
+    background: url("/Content/Images/icn_ln_non_selected_dislike.png") no-repeat; }
+  .likeDislike.like .like {
+    display: block;
+    background: url("/Content/Images/icn_ln_selected_like.png") no-repeat; }
+  .likeDislike.dislike .dislike {
+    display: block;
+    background: url("/Content/Images/icn_ln_selected_dislike.png") no-repeat; }
+
