@@ -746,16 +746,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Photos\pic1.jpg" />
-    <Content Include="Photos\pic10.jpg" />
-    <Content Include="Photos\pic2.jpg" />
-    <Content Include="Photos\pic3.jpg" />
-    <Content Include="Photos\pic4.jpg" />
-    <Content Include="Photos\pic5.jpg" />
-    <Content Include="Photos\pic6.jpg" />
-    <Content Include="Photos\pic7.jpg" />
-    <Content Include="Photos\pic8.jpg" />
-    <Content Include="Photos\pic9.jpg" />
     <Content Include="Rotativa\help-wkhtmltoimage.txt" />
     <Content Include="Rotativa\help-wkhtmltopdf.txt" />
     <Content Include="Rotativa\wkhtmltoimage.exe" />
