@@ -123,10 +123,12 @@ div#itinerary {
         }
     }
 }
-.testClass {
+.noteEntry {
     line-height: 1rem;
 }
-
+.noteRow{
+    cursor:pointer;
+}
 .modal-content {
     padding: 2rem;
 

@@ -18,7 +18,7 @@ var TransfereeDetailsController = function (transfereeDetailseService) {
         var servicesBlocks = pnlDetails.find("#servicesBlock");
 
         servicesBlocks.find('.date').datetimepicker({
-            format: "MM/DD/YYYY",
+            format: "DD-MMM-YYYY",
             useCurrent: false,
             keepOpen: false
         }).on("dp.change", function (e) { saveServices(e); });

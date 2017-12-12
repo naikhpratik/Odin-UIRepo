@@ -536,6 +536,10 @@
     <Compile Include="Persistence\Migrations\201712111812294_AfternoonDec11Merge.Designer.cs">
       <DependentUpon>201712111812294_AfternoonDec11Merge.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201712111851475_AddViewingDateToHomeFindingProperty.cs" />
+    <Compile Include="Persistence\Migrations\201712111851475_AddViewingDateToHomeFindingProperty.Designer.cs">
+      <DependentUpon>201712111851475_AddViewingDateToHomeFindingProperty.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\NumberOfBathroomsTypesRepository.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
@@ -795,6 +799,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201712111812294_AfternoonDec11Merge.resx">
       <DependentUpon>201712111812294_AfternoonDec11Merge.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201712111851475_AddViewingDateToHomeFindingProperty.resx">
+      <DependentUpon>201712111851475_AddViewingDateToHomeFindingProperty.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

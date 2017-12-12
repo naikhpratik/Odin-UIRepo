@@ -11,6 +11,9 @@ using Odin.Tests.Extensions;
 using System.Net;
 using System.Web.Mvc;
 using Odin.ViewModels.Orders.Transferee;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Odin.Tests.Controllers
 {
@@ -30,8 +33,10 @@ namespace Odin.Tests.Controllers
         private Mock<IDepositTypesRepository> _mockDepositTypesRepository;
         private Mock<IBrokerFeeTypesRepository> _mockBrokerFeeTypessRepository;
         private Mock<ITransfereesRepository> _mockTransfereesRepository;
+        private Mock<IHomeFindingPropertyRepository> _mockHFPropertyRepository;
 
         private Mock<IMapper> _mockMapper;
+        private IMapper mapper;
 
         [TestInitialize]
         public void TestInitialize()
@@ -47,8 +52,11 @@ namespace Odin.Tests.Controllers
             _mockDepositTypesRepository = new Mock<IDepositTypesRepository>();
             _mockBrokerFeeTypessRepository = new Mock<IBrokerFeeTypesRepository>();
             _mockTransfereesRepository = new Mock<ITransfereesRepository>();
-
+            _mockHFPropertyRepository = new Mock<IHomeFindingPropertyRepository>();
             _mockMapper = new Mock<IMapper>();
+
+            var config = new MapperConfiguration(c => c.AddProfile(new MappingProfile()));
+            mapper = config.CreateMapper();
 
             var mockUnitOfWork = new Mock<IUnitOfWork>();
             mockUnitOfWork.SetupGet(u => u.Orders).Returns(_mockRepository.Object);
@@ -62,12 +70,14 @@ namespace Odin.Tests.Controllers
             mockUnitOfWork.SetupGet(u => u.DepositTypes).Returns(_mockDepositTypesRepository.Object);
             mockUnitOfWork.SetupGet(u => u.BrokerFeeTypes).Returns(_mockBrokerFeeTypessRepository.Object);
             mockUnitOfWork.SetupGet(u => u.Transferees).Returns(_mockTransfereesRepository.Object);
+            mockUnitOfWork.SetupGet(u => u.HomeFindingProperties).Returns(_mockHFPropertyRepository.Object);
 
             var mockEmailHelper = new Mock<IEmailHelper>();
             var mockAccountHelper = new Mock<IAccountHelper>();
             _controller = new OrdersController(mockUnitOfWork.Object, _mockMapper.Object, mockAccountHelper.Object);
             _userId = "1";
             _controller.MockControllerContextForUser(_userId);
+
 
         }
 
@@ -140,6 +150,79 @@ namespace Odin.Tests.Controllers
 
             result.Should().BeOfType<HttpStatusCodeResult>();
             Assert.AreEqual(((HttpStatusCodeResult)result).StatusCode, (int)HttpStatusCode.NotFound);
+        }
+        [TestMethod]
+        public void Properties_NoPropertiesWithAnyOptionExist_Count_ShouldBeZero()
+        {
+            var orderId = "1";
+            var userId = "1";
+            var order = new Order() { Id = orderId, ConsultantId = userId };
+            _mockRepository.Setup(r => r.GetOrderFor(orderId, userId)).Returns(order);
+            order.HomeFinding = new HomeFinding() { Id = orderId, Deleted = false };
+            
+            HousingViewModel viewModel = new HousingViewModel(order, mapper, "AllViewings");
+            viewModel.Properties.Count().Should().Be(0);
+        }
+        [TestMethod]
+        public void Properties_NoPropertiesWithGivenOptionExist_Count_ShouldBeZero()
+        {
+            var orderId = "1";
+            var userId = "1";
+            var order = new Order() { Id = orderId, ConsultantId = userId};
+            _mockRepository.Setup(r => r.GetOrderFor(orderId, userId)).Returns(order);
+            order.HomeFinding = new HomeFinding() { Id = orderId, Deleted = false };
+            order.HomeFinding.HomeFindingProperties.Add(new HomeFindingProperty() { Id = "1", ViewingDate = DateTime.Now });
+            HousingViewModel viewModel = new HousingViewModel(order, mapper, "NoViewings");
+            viewModel.Properties.Count().Should().Be(0);
+        }
+        [TestMethod]
+        public void Properties_TwoPropertiesWithGivenOptionExists_Count_ShouldBe2()
+        {
+            var orderId = "1";
+            var userId = "1";
+            var order = new Order() { Id = orderId, ConsultantId = userId };
+            _mockRepository.Setup(r => r.GetOrderFor(orderId, userId)).Returns(order);
+            order.HomeFinding = new HomeFinding() { Id = orderId, Deleted = false };
+            
+            HomeFindingProperty p1 = new HomeFindingProperty();
+            p1.Deleted = false;
+            p1.Property = new Property();
+            p1.ViewingDate = DateTime.Now.AddDays(10);
+            order.HomeFinding.HomeFindingProperties.Add(p1);
+
+            HomeFindingProperty p2 = new HomeFindingProperty();
+            p2.Deleted = false;
+            p2.Property = new Property();
+            p2.ViewingDate = DateTime.Now.AddDays(20);
+            order.HomeFinding.HomeFindingProperties.Add(p2);
+
+            HousingViewModel viewModel = new HousingViewModel(order, mapper, "ViewingsOnly");
+            //var result = _controller.PropertiesPartialPDF(orderId, "ViewingsOnly");
+            viewModel.Properties.Count().Should().Be(2);
+        }
+        [TestMethod]
+        public void Properties_TwoPropertiesWithOneViewingOptionExists_Count_ShouldBe1()
+        {
+            var orderId = "1";
+            var userId = "1";
+            var order = new Order() { Id = orderId, ConsultantId = userId };
+            _mockRepository.Setup(r => r.GetOrderFor(orderId, userId)).Returns(order);
+            order.HomeFinding = new HomeFinding() { Id = orderId, Deleted = false };
+
+            HomeFindingProperty p1 = new HomeFindingProperty();
+            p1.Deleted = false;
+            p1.Property = new Property();
+            p1.ViewingDate = DateTime.Now.AddDays(10);
+            order.HomeFinding.HomeFindingProperties.Add(p1);
+
+            HomeFindingProperty p2 = new HomeFindingProperty();
+            p2.Deleted = false;
+            p2.Property = new Property();
+            order.HomeFinding.HomeFindingProperties.Add(p2);
+
+            HousingViewModel viewModel = new HousingViewModel(order, mapper, "ViewingsOnly");
+            //var result = _controller.PropertiesPartialPDF(orderId, "ViewingsOnly");
+            viewModel.Properties.Count().Should().Be(1);
         }
     }
 }

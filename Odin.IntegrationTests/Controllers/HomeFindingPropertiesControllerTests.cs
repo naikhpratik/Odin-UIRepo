@@ -177,6 +177,29 @@ namespace Odin.IntegrationTests.Controllers
         }
 
         [Test, Isolated]
+        public void UpdateHomeFindingProperty_UpdatesViewingDate()
+        {
+            // Arrange
+            Order order = BuildOrder(false);
+            Context.Orders.Add(order);
+            HomeFindingProperty hfp = order.HomeFinding.HomeFindingProperties.First();
+            hfp.ViewingDate = null; // ensure this isn't already scheduled
+            Context.SaveChanges();
+
+            // Act
+            HousingPropertyViewModel propertyVM = new HousingPropertyViewModel();
+            propertyVM.Id = hfp.Id;
+            propertyVM.ViewingDate = DateTime.Now;
+
+            HomeFindingPropertiesController controller = SetUpHomeFindingPropertiesController();
+            HttpStatusCodeResult response = (HttpStatusCodeResult)controller.Update(propertyVM);
+
+            // Assert
+            Context.Entry(hfp).Reload();
+            hfp.ViewingDate.Should().BeSameDateAs(propertyVM.ViewingDate.Value);
+        }
+
+        [Test, Isolated]
         public void UpdateHomeFindingProperty_UpdatesDisliked()
         {
             // Arrange

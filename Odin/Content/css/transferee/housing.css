@@ -38,19 +38,17 @@
   #housingFilter .housingFilter__title {
     font-size: 1.5rem; }
 
-#addProperty {
-  text-align: right;
+.btnAndLabel {
+  display: inline-block;
   cursor: pointer; }
-  #addProperty > img {
+  .btnAndLabel > img {
     width: 3rem; }
-  #addProperty > * {
+  .btnAndLabel > * {
     display: inline-block;
     vertical-align: middle; }
-    #addProperty > *:nth-child(1) {
-      margin-right: 1rem; }
-  @media screen and (min-width: 76.8rem) {
-    #addProperty {
-      float: right; } }
+
+.btnAndLabel + .btnAndLabel {
+  margin-right: 1.5rem; }
 
 #propertiesList {
   list-style: none;

@@ -86,6 +86,7 @@ namespace Odin.Controllers
 
             // for now only support a subset of updated values
             homeFindingProperty.Liked = propertyVM.Liked;
+            homeFindingProperty.ViewingDate = propertyVM.ViewingDate;
 
             _unitOfWork.Complete();
 
@@ -119,6 +120,11 @@ namespace Odin.Controllers
             HousingPropertyViewModel viewModel = _mapper.Map<HomeFindingProperty, HousingPropertyViewModel>(homeFindingProperty);
 
             return PartialView("~/views/orders/partials/_PropertyDetails.cshtml", viewModel);
+        }
+        public ActionResult RadioButtonList(string title)
+        {
+            ViewBag.Title = title;
+            return PartialView("~/Views/Shared/Partials/multipleChoiceRadioButtons.cshtml");
         }
     }
 }

@@ -1,51 +1,51 @@
 ﻿[
   {
-    "inputFile": "Content/css/transferee/sideNav.scss",
-    "outputFile": "Content/css/transferee/sideNav.css"
+    "outputFile": "Content/css/transferee/sideNav.css",
+    "inputFile": "Content/css/transferee/sideNav.scss"
   },
   {
-    "inputFile": "Content/css/primaryNav.scss",
-    "outputFile": "Content/css/primaryNav.css"
+    "outputFile": "Content/css/primaryNav.css",
+    "inputFile": "Content/css/primaryNav.scss"
   },
   {
-    "inputFile": "Content/css/orders.scss",
-    "outputFile": "Content/css/orders.css"
+    "outputFile": "Content/css/orders.css",
+    "inputFile": "Content/css/orders.scss"
   },
   {
-    "inputFile": "Content/css/login.scss",
-    "outputFile": "Content/css/login.css"
+    "outputFile": "Content/css/login.css",
+    "inputFile": "Content/css/login.scss"
   },
   {
-    "inputFile": "Content/css/forgotpassword.scss",
-    "outputFile": "Content/css/forgotpassword.css"
+    "outputFile": "Content/css/forgotpassword.css",
+    "inputFile": "Content/css/forgotpassword.scss"
   },
   {
-    "inputFile": "Content/css/transferee/transferee.scss",
-    "outputFile": "Content/css/transferee/transferee.css"
+    "outputFile": "Content/css/transferee/transferee.css",
+    "inputFile": "Content/css/transferee/transferee.scss"
   },
   {
-    "inputFile": "Content/css/transferee/itinerary.scss",
-    "outputFile": "Content/css/transferee/itinerary.css"
+    "outputFile": "Content/css/transferee/itinerary.css",
+    "inputFile": "Content/css/transferee/itinerary.scss"
   },
   {
-    "inputFile": "Content/css/transferee/details.scss",
-    "outputFile": "Content/css/transferee/details.css"
+    "outputFile": "Content/css/transferee/details.css",
+    "inputFile": "Content/css/transferee/details.scss"
   },
   {
-    "inputFile": "Content/css/transferee/history.scss",
-    "outputFile": "Content/css/transferee/history.css"
+    "outputFile": "Content/css/transferee/history.css",
+    "inputFile": "Content/css/transferee/history.scss"
   },
   {
-    "inputFile": "Content/css/transferee/intake.scss",
-    "outputFile": "Content/css/transferee/intake.css"
+    "outputFile": "Content/css/transferee/intake.css",
+    "inputFile": "Content/css/transferee/intake.scss"
   },
   {
-    "inputFile": "Content/css/transferee/messages.scss",
-    "outputFile": "Content/css/transferee/messages.css"
+    "outputFile": "Content/css/transferee/messages.css",
+    "inputFile": "Content/css/transferee/messages.scss"
   },
   {
-    "inputFile": "Content/css/transferee/housing.scss",
-    "outputFile": "Content/css/transferee/housing.css"
+    "outputFile": "Content/css/transferee/housing.css",
+    "inputFile": "Content/css/transferee/housing.scss"
   },
   {
     "inputFile": "Content/css/header.scss",
@@ -58,6 +58,14 @@
   {
     "inputFile": "Content/css/help.scss",
     "outputFile": "Content/css/help.css"
+  },
+  {
+    "outputFile": "Content/css/bookmarklet.css",
+    "inputFile": "Content/css/bookmarklet.scss"
+  },
+  {
+    "outputFile": "Content/css/transferee/HFProperties.css",
+    "inputFile": "Content/css/transferee/HFProperties.scss"
   }
 
 ]

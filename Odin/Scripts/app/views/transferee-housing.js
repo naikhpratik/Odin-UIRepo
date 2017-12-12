@@ -85,7 +85,7 @@
         } else if (classList.contains('dislike')) {
             likedValue = false;
         }
-        
+
         var propertyId = $(controlElement).closest("[data-property-id]").attr('data-property-id');
         var postData = {
             id: propertyId,
@@ -134,11 +134,26 @@
         }
     };
 
+    var export2PDF = function (choice) {
+        //window.location.href = "/Orders/PropertiesPartialPDF/" + currentOrderId + "?listChoice=" + choice;
+        $.ajax({
+            url: "/Orders/PropertiesPartialPDF/" + currentOrderId + "?listChoice=" + choice,
+            type: 'GET',
+            success: function (result) {
+                window.location.href = "/Orders/PropertiesPartialPDF/" + currentOrderId + "?listChoice=" + choice;
+            },
+            error: function () {
+                toast("No properties found that satisfy the selected option.", "warning");
+            }
+        });
+    };
+
     // FIXME: this toas function is in 4 other spots. I'm copy/pasting here for quickness, but we should refactor
     var toast = function (message, type) {
         $.notify({
             message: message
         }, {
+            delay: 2000,
                 type: type,
                 placement: {
                     from: "bottom",
@@ -155,7 +170,8 @@
         init: init,
         deleteProperty: deleteProperty,
         setupPropertiesList: setupPropertiesList,
-        setupLikeDislikeControls: setupLikeDislikeControls
+        setupLikeDislikeControls: setupLikeDislikeControls,
+        export2PDF: export2PDF
     };
 
 }();
