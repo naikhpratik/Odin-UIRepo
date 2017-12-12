@@ -87,19 +87,24 @@
 
     var setupDatePickers = function () {
         $('.date').datetimepicker({
-            format: "DD-MMM-YYYY",
+            format: "DD-MMM-YYYY h:mm A",
             useCurrent: false,
-            keepOpen: false
-        }).on("dp.change", function (e) {
-            var success = function (result) { console.log('i did something!'); };
+            keepOpen: true,
+            showClose: true,
+            toolbarPlacement: 'bottom',
+            icons: { close: 'custom-icon-check' }
+        }).on("dp.hide", function (e) {
+            var success = function (result) {
+                toast("You scheduled to view the property at " + e.date.format("MM/DD/YYYY h:mm A"), "success");
+            };
 
             var propertyId = $(this).closest("[data-property-id]").attr('data-property-id');
             var data = {
                 id: propertyId,
-                viewingDate: e.date.format("MM/DD/YYYY")
+                viewingDate: e.date.format("MM/DD/YYYY h:mm A")
             };
 
-            updateProperty(data, success);
+            updateProperty("viewingdate", data, success);
         });
     };
 
@@ -174,12 +179,12 @@
             toast(message, "success");
         };
 
-        updateProperty(data, success);
+        updateProperty("liked", data, success);
     };
 
-    var updateProperty = function (data, success) {
+    var updateProperty = function (action, data, success) {
         $.ajax({
-            url: '/HomeFindingProperties/Update/',
+            url: '/HomeFindingProperties/Update' + action,
             type: 'PUT',
             data: data,
             success: success,

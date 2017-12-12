@@ -169,7 +169,7 @@ namespace Odin.IntegrationTests.Controllers
             propertyVM.Liked = true;
 
             HomeFindingPropertiesController controller = SetUpHomeFindingPropertiesController();
-            HttpStatusCodeResult response = (HttpStatusCodeResult)controller.Update(propertyVM);
+            HttpStatusCodeResult response = (HttpStatusCodeResult)controller.UpdateLiked(propertyVM);
 
             // Assert
             Context.Entry(hfp).Reload();
@@ -192,7 +192,7 @@ namespace Odin.IntegrationTests.Controllers
             propertyVM.ViewingDate = DateTime.Now;
 
             HomeFindingPropertiesController controller = SetUpHomeFindingPropertiesController();
-            HttpStatusCodeResult response = (HttpStatusCodeResult)controller.Update(propertyVM);
+            HttpStatusCodeResult response = (HttpStatusCodeResult)controller.UpdateViewingDate(propertyVM);
 
             // Assert
             Context.Entry(hfp).Reload();
@@ -215,7 +215,7 @@ namespace Odin.IntegrationTests.Controllers
             propertyVM.Liked = false;
 
             HomeFindingPropertiesController controller = SetUpHomeFindingPropertiesController();
-            HttpStatusCodeResult response = (HttpStatusCodeResult)controller.Update(propertyVM);
+            HttpStatusCodeResult response = (HttpStatusCodeResult)controller.UpdateLiked(propertyVM);
 
             // Assert
             Context.Entry(hfp).Reload();
@@ -238,7 +238,7 @@ namespace Odin.IntegrationTests.Controllers
             propertyVM.Liked = null;
 
             HomeFindingPropertiesController controller = SetUpHomeFindingPropertiesController();
-            HttpStatusCodeResult response = (HttpStatusCodeResult)controller.Update(propertyVM);
+            HttpStatusCodeResult response = (HttpStatusCodeResult)controller.UpdateLiked(propertyVM);
 
             // Assert
             Context.Entry(hfp).Reload();
@@ -263,7 +263,7 @@ namespace Odin.IntegrationTests.Controllers
             // Note: This is more of a test of the Mapper instead of the controller
 
             HomeFindingPropertiesController controller = SetUpHomeFindingPropertiesController();
-            HttpStatusCodeResult response = (HttpStatusCodeResult)controller.Update(propertyVM);
+            HttpStatusCodeResult response = (HttpStatusCodeResult)controller.UpdateLiked(propertyVM);
 
             // Assert
             Context.Entry(hfp).Reload();

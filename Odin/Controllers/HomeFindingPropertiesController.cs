@@ -75,7 +75,7 @@ namespace Odin.Controllers
         }
 
         [HttpPut]
-        public ActionResult Update(HousingPropertyViewModel propertyVM)
+        public ActionResult UpdateLiked(HousingPropertyViewModel propertyVM)
         {
             HomeFindingProperty homeFindingProperty;
             homeFindingProperty = _unitOfWork.HomeFindingProperties.GetHomeFindingPropertyById(propertyVM.Id);
@@ -86,6 +86,21 @@ namespace Odin.Controllers
 
             // for now only support a subset of updated values
             homeFindingProperty.Liked = propertyVM.Liked;
+
+            _unitOfWork.Complete();
+
+            return new HttpStatusCodeResult(HttpStatusCode.NoContent);
+        }
+
+        [HttpPut]
+        public ActionResult UpdateViewingDate(HousingPropertyViewModel propertyVM)
+        {
+            HomeFindingProperty homeFindingProperty;
+            homeFindingProperty = _unitOfWork.HomeFindingProperties.GetHomeFindingPropertyById(propertyVM.Id);
+
+            // !!!: Do NOT use automapper here. There are issues with mapping back from the VM and in the essence of time I couldn't find a good solution
+            // AutoMapper might not be the best best tool for two way mapping
+            // https://lostechies.com/jimmybogard/2009/09/18/the-case-for-two-way-mapping-in-automapper/
             homeFindingProperty.ViewingDate = propertyVM.ViewingDate;
 
             _unitOfWork.Complete();
