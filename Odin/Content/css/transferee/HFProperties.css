@@ -50,10 +50,16 @@
     .sectionList li li.photo {
       float: left;
       margin-left: 1rem; }
+    .sectionList li img.location {
+      width: 70px;
+      height: 70px; }
   @media screen and (min-width: 62rem) {
     .sectionList label.mobileLabel {
       display: none; } }
 
-#scheduledServices {
+#propertiesHeader {
   display: none; }
+
+li.propertyItem {
+  page-break-after: always; }
 
