@@ -63,12 +63,10 @@
       margin: 2vh auto; }
     #transfereeSideNav ul.navbar-nav li {
       float: none;
-      width: 100%;
-      padding: 1vh 1.6rem; }
+      width: 100%; }
       #transfereeSideNav ul.navbar-nav li a {
         color: white;
-        padding-top: 0;
-        padding-bottom: 0; }
+        padding: 1vh 3.1rem; }
         #transfereeSideNav ul.navbar-nav li a img {
           margin-right: 2rem; }
     #transfereeSideNav ul.navbar-nav li.item:hover {
