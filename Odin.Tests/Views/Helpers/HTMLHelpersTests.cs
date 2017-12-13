@@ -35,7 +35,7 @@ namespace Odin.Tests.Views.Helpers
             vc.HttpContext = new FakeHttpContext();        
             var hh = new HtmlHelper(vc, new FakeViewDataContainer());
             var result = DatePickerHelper.DatePicker(hh, "pickerClass", "pickerName", DateTime.Now).ToString();
-            Assert.IsTrue(result.Contains("<div class=\"input-group pickerClass\"") && result.Contains("value=\"" + DateTime.Now.ToString("yyyy-MM-dd")));
+            Assert.IsTrue(result.Contains("<div class=\"input-group pickerClass\"") && result.Contains("value=\"" + DateTime.Now.ToString("dd-MMM-yyyy")));
         }
         [TestMethod]
         public void DatePicker_should_render_HTML_imput_with_name_only()

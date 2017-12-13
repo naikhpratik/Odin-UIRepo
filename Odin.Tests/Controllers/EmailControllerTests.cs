@@ -21,6 +21,7 @@ namespace Odin.Tests.Controllers
         private Mock<ITransfereesRepository> _mockEeRepository;
         private Mock<IServicesRepository> _mockServicesRepository;
         private Mock<IAppointmentsRepository> _mockAppointmentsRepository;
+        private Mock<IHomeFindingPropertyRepository> _mockHomeFindingPropertyRepository;
 
         [TestInitialize]
         public void TestInitialize()
@@ -30,11 +31,13 @@ namespace Odin.Tests.Controllers
             _mockEeRepository = new Mock<ITransfereesRepository>();
             _mockServicesRepository = new Mock<IServicesRepository>();
             _mockAppointmentsRepository = new Mock<IAppointmentsRepository>();
+            _mockHomeFindingPropertyRepository = new Mock<IHomeFindingPropertyRepository>();
             var mockUnitOfWork = new Mock<IUnitOfWork>();
             mockUnitOfWork.SetupGet(u => u.Orders).Returns(_mockRepository.Object);
             mockUnitOfWork.SetupGet(u => u.Transferees).Returns(_mockEeRepository.Object);
             mockUnitOfWork.SetupGet(u => u.Services).Returns(_mockServicesRepository.Object);
             mockUnitOfWork.SetupGet(u => u.Appointments).Returns(_mockAppointmentsRepository.Object);
+            mockUnitOfWork.SetupGet(u => u.HomeFindingProperties).Returns(_mockHomeFindingPropertyRepository.Object);
             _controller = new EmailController(mockUnitOfWork.Object, _mockMapper.Object);
         }
         [TestMethod]

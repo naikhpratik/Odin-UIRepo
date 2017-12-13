@@ -16,6 +16,7 @@ namespace Odin.Tests.Helpers
         private ItineraryHelper _itineraryHelper;
         private Mock<IServicesRepository> _mockServicesRepository;
         private Mock<IAppointmentsRepository> _mockAppointmentsRepository;
+        private Mock<IHomeFindingPropertyRepository> _mockHomeFindingPropertiesRepository;
 
         [TestInitialize]
         public void TestInitialize()
@@ -28,9 +29,13 @@ namespace Odin.Tests.Helpers
             var mockMapper = new Mock<IMapper>();
             _mockServicesRepository = new Mock<IServicesRepository>();
             _mockAppointmentsRepository = new Mock<IAppointmentsRepository>();
+            _mockHomeFindingPropertiesRepository = new Mock<IHomeFindingPropertyRepository>();
+
             var mockUnitOfWork = new Mock<IUnitOfWork>();
             mockUnitOfWork.SetupGet(u => u.Services).Returns(_mockServicesRepository.Object);
             mockUnitOfWork.SetupGet(u => u.Appointments).Returns(_mockAppointmentsRepository.Object);
+            mockUnitOfWork.SetupGet(u => u.HomeFindingProperties).Returns(_mockHomeFindingPropertiesRepository.Object);
+
             _itineraryHelper = new ItineraryHelper(mockUnitOfWork.Object, mockMapper.Object);
             string orderId = "1";
             var result = _itineraryHelper.Build(orderId);
@@ -42,9 +47,12 @@ namespace Odin.Tests.Helpers
             var mockMapper = new Mock<IMapper>();
             _mockServicesRepository = new Mock<IServicesRepository>();
             _mockAppointmentsRepository = new Mock<IAppointmentsRepository>();
+            _mockHomeFindingPropertiesRepository = new Mock<IHomeFindingPropertyRepository>();
+
             var mockUnitOfWork = new Mock<IUnitOfWork>();
             mockUnitOfWork.SetupGet(u => u.Services).Returns(_mockServicesRepository.Object);
             mockUnitOfWork.SetupGet(u => u.Appointments).Returns(_mockAppointmentsRepository.Object);
+            mockUnitOfWork.SetupGet(u => u.HomeFindingProperties).Returns(_mockHomeFindingPropertiesRepository.Object);
             _itineraryHelper = new ItineraryHelper(mockUnitOfWork.Object, mockMapper.Object);
             string orderId = null;
             var result = _itineraryHelper.Build(orderId);

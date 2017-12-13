@@ -1,9 +1,13 @@
-﻿var TransfereeHousingController = function (TransfereeHousingProperty) {
+﻿﻿var TransfereeHousingController = function (TransfereeHousingProperty) {
 
     var init = function () {
         console.log("Loading Housing");
 
-        $('#propertyForm').submit(function(event) {
+        setupLikeDislikeControls();
+
+        setupPropertiesList();
+
+        $('#propertyForm').submit(function (event) {
             if ($(this).valid()) {
                 $.ajax({
                     url: this.action,
@@ -34,11 +38,12 @@
         initMap();
     };
 
+    /*** Setup Methods ***/
     var initMap = function() {
         L.mapquest.key = '1tJblQYiEARJGDxuF9gfQVniw3jsi6Ll';
 
         var mapDiv = $("#map");
-   
+
         var centLat = mapDiv.attr("data-lat");
         var centLng = mapDiv.attr("data-lng");
 
@@ -48,7 +53,7 @@
             layers: L.mapquest.tileLayer('map'),
             zoom: 12
         });
-        
+
 
         $("#propertiesList > .propertyItem").each(function (index) {
 
@@ -86,7 +91,7 @@
                                 $('#propertyDetailsModal').modal('show');
                             }
                         });
-                        
+
                     });
             }
         });
@@ -103,21 +108,29 @@
         map.invalidateSize(false);
     }
     var setupPropertiesList = function () {
-        $('.propertyItem').click(function (event) {
-            var propertyId = $(event.delegateTarget).data("property-id");
-            var propertyModalUrl = '/homefindingproperties/propertypartial/' + propertyId;
-            $('#propertyModalContent').load(propertyModalUrl, function (response, status, xhr) {
-                if (status === "success") {
-                    $('#propertyDetailsModal').modal('show');
-                }
-            });
-        });
+        setupDatePickers();
 
-        setupLikeDislikeControls();
+        $(document).off('click', '.propertyItem');
+        $(document).on('click', '.propertyItem', function (event) {
+
+            if (!$(event.target).is("input") &&
+                !$(event.target).is("span")) { // prevents the date picker from triggering the modal
+
+                var propertyId = $(this).data("property-id");
+                var propertyModalUrl = '/homefindingproperties/propertypartial/' + propertyId;
+                $('#propertyModalContent').load(propertyModalUrl, function (response, status, xhr) {
+                    if (status === "success") {
+                        $('#propertyDetailsModal').modal('show');
+                    }
+                });
+            }
+        });
     };
 
     var setupLikeDislikeControls = function () {
-        $('.likeDislike > .like').click(function (e) {
+        var likeSelector = '.likeDislike > .like';
+        $(document).off('click', likeSelector);
+        $(document).on('click', likeSelector, function (e) {
             e.preventDefault();
             e.stopPropagation();
 
@@ -128,7 +141,9 @@
             updateLikedStatusForControl(controlWrappers[0]);
         });
 
-        $('.likeDislike > .dislike').click(function (e) {
+        var dislikeSelector = '.likeDislike > .dislike';
+        $(document).off('click', dislikeSelector);
+        $(document).on('click', dislikeSelector, function (e) {
             e.preventDefault();
             e.stopPropagation();
 
@@ -140,68 +155,27 @@
         });
     };
 
-    var controllerWrappersForLikeDislikeButton = function (likeDislikeButton) {
-        var propertyId = $(likeDislikeButton).data('property-id');
-        var selectorString = '.likeDislike[data-property-id="' + propertyId + '"]';
-        return $(selectorString);
-    };
+    var setupDatePickers = function () {
+        $('.date').datetimepicker({
+            format: "DD-MMM-YYYY h:mm A",
+            useCurrent: false,
+            keepOpen: true,
+            showClose: true,
+            toolbarPlacement: 'bottom',
+            icons: { close: 'custom-icon-check' }
+        }).on("dp.hide", function (e) {
+            var success = function (result) {
+                toast("You scheduled to view the property at " + e.date.format("MM/DD/YYYY h:mm A"), "success");
+            };
 
-    var updateLikedStatusForControl = function (controlElement) {
-        var classList = controlElement.classList;
+            var propertyId = $(this).closest("[data-property-id]").attr('data-property-id');
+            var data = {
+                id: propertyId,
+                viewingDate: e.date.format("MM/DD/YYYY h:mm A")
+            };
 
-        var likedValue = null;
-        if (classList.contains('like')) {
-            likedValue = true;
-        } else if (classList.contains('dislike')) {
-            likedValue = false;
-        }
-
-        var propertyId = $(controlElement).closest("[data-property-id]").attr('data-property-id');
-        var postData = {
-            id: propertyId,
-            liked: likedValue
-        };
-
-        $.ajax({
-            url: '/HomeFindingProperties/Update/',
-            type: 'PUT',
-            data: postData,
-            success: function (result) {
-                var message = "Your change was saved";
-
-                if (likedValue !== null) {
-                    var messageVerb = likedValue ? "liked" : "disliked";
-                    message = "You " + messageVerb + " a property";
-                }
-
-                toast(message, "success");
-            },
-            error: function () {
-                toast("An unknown error has occurred.Please try again later.", "danger");
-            }
+            updateProperty("viewingdate", data, success);
         });
-    };
-
-    var reloadPropertiesPartial = function () {
-        $('#propertiesContainer').load('/orders/propertiesPartial/' + currentOrderId);
-    };
-
-    var deleteProperty = function (propertyId) {
-        var confirmed = confirm("Are you sure you want to remove this property?");
-
-        if (confirmed) {
-            $.ajax({
-                url: '/HomeFindingProperties/Delete/'+propertyId,
-                type: 'DELETE',
-                success: function (result) {
-                    reloadPropertiesPartial();
-                    $('#propertyDetailsModal').modal('hide');
-                },
-                error: function () {
-                    toast("An unknown error has occurred.Please try again later.", "danger");
-                }
-            });
-        }
     };
 
     var export2PDF = function (choice) {
@@ -218,12 +192,12 @@
         });
     };
 
+    /*** Private Helpers ***/
     // FIXME: this toas function is in 4 other spots. I'm copy/pasting here for quickness, but we should refactor
     var toast = function (message, type) {
         $.notify({
             message: message
         }, {
-            delay: 2000,
                 type: type,
                 placement: {
                     from: "bottom",
@@ -236,11 +210,82 @@
             });
     };
 
+    var reloadPropertiesPartial = function () {
+        $('#propertiesContainer').load('/orders/propertiesPartial/' + currentOrderId);
+    };
+
+    var controllerWrappersForLikeDislikeButton = function (likeDislikeButton) {
+        var propertyId = $(likeDislikeButton).data('property-id');
+        var selectorString = '.likeDislike[data-property-id="' + propertyId + '"]';
+        return $(selectorString);
+    };
+
+
+    /*** Update Methods ***/
+    var updateLikedStatusForControl = function (controlElement) {
+        var classList = controlElement.classList;
+
+        var likedValue = null;
+        if (classList.contains('like')) {
+            likedValue = true;
+        } else if (classList.contains('dislike')) {
+            likedValue = false;
+        }
+
+        var propertyId = $(controlElement).closest("[data-property-id]").attr('data-property-id');
+        var data = {
+            id: propertyId,
+            liked: likedValue
+        };
+
+        var success = function (result) {
+            var message = "Your change was saved";
+
+            if (likedValue !== null) {
+                var messageVerb = likedValue ? "liked" : "disliked";
+                message = "You " + messageVerb + " a property";
+            }
+
+            toast(message, "success");
+        };
+
+        updateProperty("liked", data, success);
+    };
+
+    var updateProperty = function (action, data, success) {
+        $.ajax({
+            url: '/HomeFindingProperties/Update' + action,
+            type: 'PUT',
+            data: data,
+            success: success,
+            error: function () {
+                toast("An unknown error has occurred.Please try again later.", "danger");
+            }
+        });
+    };
+
+    var deleteProperty = function (propertyId) {
+        var confirmed = confirm("Are you sure you want to remove this property?");
+
+        if (confirmed) {
+            $.ajax({
+                url: '/HomeFindingProperties/Delete/' + propertyId,
+                type: 'DELETE',
+                success: function (result) {
+                    reloadPropertiesPartial();
+                    $('#propertyDetailsModal').modal('hide');
+                },
+                error: function () {
+                    toast("An unknown error has occurred.Please try again later.", "danger");
+                }
+            });
+        }
+    };
+
     return {
         init: init,
         deleteProperty: deleteProperty,
-        setupPropertiesList: setupPropertiesList,
-        setupLikeDislikeControls: setupLikeDislikeControls,
+        setupDatePickers: setupDatePickers,
         export2PDF: export2PDF
     };
 

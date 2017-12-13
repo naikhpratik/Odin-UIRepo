@@ -87,7 +87,7 @@ var TransfereeAppointmentController = function (transfereeItineraryAppointment) 
        
         var saveSuccess = function () {
             toast('changes to the appointment are successful', 'success');
-            $('.item[data-panel=itinerary]').trigger('click');
+            OrdersPageController.loadPanel("itinerary");
         }
         var saveFail = function () {
             err = true;

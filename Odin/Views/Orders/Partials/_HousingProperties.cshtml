@@ -1,35 +1,33 @@
 ﻿@model IEnumerable<Odin.ViewModels.Orders.Transferee.HousingPropertyViewModel>
 
 <div id="propertiesBlock">
-    <div class="row">
-        <div class="row" id="propertiesHeader">
-            <div class="col-md-1">
-                <p>Location Photos:</p>
-            </div>
-            @* Switch next 3 columns to col-md-2 when adding remaining columns *@
-            <div class="col-md-3">
-                <p>Address:</p>
-            </div>
-            <div class="col-md-3">
-                <p>Availability Date:</p>
-            </div>
-            <div class="col-md-4">
-                <p>BD | BA<br />Rent | Sq. Ft:</p>
-            </div>
-            <!--
-            <div class="col-md-3">
-                <p>Schedule a Viewing</p>
-            </div>
-            -->
-            <div class="col-md-1">
-                <p>Like or Dislike:</p>
-            </div>
-            <!--
-            <div class="col-md-1">
-                <p>Property Comments:</p>
-            </div>
-            -->
+    <div class="row" id="propertiesHeader">
+        <div class="col-md-1  col-xs-12">
+            <p>Location Photos:</p>
         </div>
+
+        <div class="col-md-2  col-xs-12">
+            <p>Address:</p>
+        </div>
+        <div class="col-md-3 col-xs-12">
+            <p>Availability Date:</p>
+        </div>
+        <div class="col-md-2 col-xs-12">
+            <p>BD | BA<br />Rent | Sq. Ft:</p>
+        </div>
+
+        <div class="col-md-3 col-xs-12">
+            <p>Schedule a Viewing</p>
+        </div>
+
+        <div class="col-md-1 col-xs-12">
+            <p>Like or Dislike:</p>
+        </div>
+        <!--
+        <div class="col-md-1">
+            <p>Property Comments:</p>
+        </div>
+        -->
     </div>
 
     <ul class="row sectionList" id="propertiesList">
@@ -69,7 +67,7 @@
                 </div>
 
 
-                <div class="col-md-3 col-xs-12">
+                <div class="col-md-2 col-xs-12">
                     <label class="mobileLabel">Address</label>
                     <p>
                         @Html.DisplayFor(m => propertyVM.PropertyAddress)
@@ -81,21 +79,28 @@
                         @Html.DisplayFor(m => propertyVM.PropertyAvailabilityDate)
                     </p>
                 </div>
-                <div class="col-md-4 col-xs-12">
+                <div class="col-md-2 col-xs-12">
                     <label class="mobileLabel">BD | BA<br />Rent | Sq. Ft:</label>
                     <p>
                         @Html.DisplayFor(m => propertyVM.PropertyNumberOfBedrooms) | @Html.DisplayFor(m => propertyVM.PropertyNumberOfBathrooms)<br />
                         @Html.DisplayFor(m => propertyVM.PropertyAmount) | @Html.DisplayFor(m => propertyVM.PropertySquareFootage)
                     </p>
                 </div>
-                <!--
+
                 <div class="col-md-3">
-                    Html.DatePicker("date", "ViewingDate", false)
+                    <label class="mobileLabel">Schedule a Viewing</label>
+                    @Html.DatePicker("date", "ViewingDate", propertyVM.ViewingDate, true)
                 </div>
-                -->
+
                 <div class="col-md-1 col-xs-12">
                     <label class="mobileLabel">Like or Dislike</label>
+                    @if (ViewBag.IsPDF == true && !propertyVM.Liked.HasValue)
+                    {
+                        <span>Not Yet Rated</span>
+                    }
+
                     @Html.EditorFor(m => propertyVM.Liked, new { propertyId = propertyVM.Id })
+
                 </div>
                 <!--
                 <div class="col-md-1 comments">
@@ -113,9 +118,3 @@
 {
     @Styles.Render("~/Styling/properties")
 }
-
-<script>
-    $(document).ready(function () {
-        TransfereeHousingController.setupPropertiesList();
-    });
-</script>

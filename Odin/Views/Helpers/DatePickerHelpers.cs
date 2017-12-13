@@ -102,7 +102,7 @@ public static class DatePickerHelper
             }
             tagInput.Attributes.Add("data-date-today-highlight", "true");
             tagInput.Attributes.Add("data-date-today-btn", "true");
-            tagInput.Attributes.Add("value", value.ToString("yyyy-MM-dd"));
+            tagInput.Attributes.Add("value", value.ToString("dd-MMM-yyyy"));
 
             res += tagInput.ToString(TagRenderMode.SelfClosing);
 
@@ -168,11 +168,11 @@ public static class DatePickerHelper
         return html;
     }
 
-    public static IHtmlString DatePicker(this HtmlHelper htmlHelper, string clss, string name, DateTime? dateValue)
+    public static IHtmlString DatePicker(this HtmlHelper htmlHelper, string clss, string name, DateTime? dateValue, bool includePlaceHolder = false)
     {
         return dateValue.HasValue
-            ? DatePicker(htmlHelper, clss, name, dateValue.Value, false)
-            : DatePicker(htmlHelper, clss, name, false);
+            ? DatePicker(htmlHelper, clss, name, dateValue.Value, includePlaceHolder)
+            : DatePicker(htmlHelper, clss, name, includePlaceHolder);
     }
     
 

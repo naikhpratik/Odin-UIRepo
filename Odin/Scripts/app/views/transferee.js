@@ -40,7 +40,8 @@
 
 
     return {
-        TransfereeInit: init
+        TransfereeInit: init,
+        loadPanel: loadPanel
     };
 }();
 
