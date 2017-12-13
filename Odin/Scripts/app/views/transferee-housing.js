@@ -16,7 +16,7 @@
                     data: new FormData(this),
                     contentType: false,
                     processData: false,
-                    success: function (result) {
+                    success: function(result) {
                         reloadPropertiesPartial();
                         $(':input', '#propertyForm')
                             .not(':button, :submit, :reset, :hidden')
@@ -34,9 +34,79 @@
             event.preventDefault();
             return false;
         });
+
+        initMap();
     };
 
     /*** Setup Methods ***/
+    var initMap = function() {
+        L.mapquest.key = '1tJblQYiEARJGDxuF9gfQVniw3jsi6Ll';
+
+        var mapDiv = $("#map");
+
+        var centLat = mapDiv.attr("data-lat");
+        var centLng = mapDiv.attr("data-lng");
+
+        // 'map' refers to a <div> element with the ID map
+        var map = L.mapquest.map('map', {
+            center: [37.7749, -122.4194],
+            layers: L.mapquest.tileLayer('map'),
+            zoom: 12
+        });
+
+
+        $("#propertiesList > .propertyItem").each(function (index) {
+
+            var lat = $(this).attr("data-lat");
+            var lng = $(this).attr("data-lng");
+
+            if (lat !== "" && lng !== "") {
+                if (centLat === "" || centLng === "") {
+                    centLat = lat;
+                    centLng = lng;
+                }
+                var marker = L.marker([lat, lng]).addTo(map);
+
+                var propertyAddress = $(this).find(".propertyAddress");
+                if (propertyAddress.length > 0) {
+                    marker.bindPopup(propertyAddress.html());
+                }
+
+                marker.on("mouseover",
+                    function(e) {
+                        this.openPopup();
+                    });
+
+                marker.on("mouseout",
+                    function (e) {
+                        this.closePopup();
+                    });
+
+                var propertyId = $(this).attr("data-property-id");
+                marker.on("click",
+                    function() {
+                        var propertyModalUrl = '/homefindingproperties/propertypartial/' + propertyId;
+                        $('#propertyModalContent').load(propertyModalUrl, function (response, status, xhr) {
+                            if (status == "success") {
+                                $('#propertyDetailsModal').modal('show');
+                            }
+                        });
+
+                    });
+            }
+        });
+
+        if (centLat !== 0 && centLng !== 0) {
+            map.setView(new L.LatLng(centLat, centLng), 12);
+        } else {
+            map.setView(new L.LatLng(37.7749, -122.4194), 12);
+        }
+
+        //For some reason need to set height then call invalidateSize to get map displaying correctly.
+        //Hacky, works now, look for better solution.
+        mapDiv.height(300);
+        map.invalidateSize(false);
+    }
     var setupPropertiesList = function () {
         setupDatePickers();
 

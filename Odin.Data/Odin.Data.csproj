@@ -532,6 +532,10 @@
     <Compile Include="Persistence\Migrations\201712081617470_MergePropBotChanges.Designer.cs">
       <DependentUpon>201712081617470_MergePropBotChanges.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201712121642511_AddedLatLngToOrder.cs" />
+    <Compile Include="Persistence\Migrations\201712121642511_AddedLatLngToOrder.Designer.cs">
+      <DependentUpon>201712121642511_AddedLatLngToOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\201712111812294_AfternoonDec11Merge.cs" />
     <Compile Include="Persistence\Migrations\201712111812294_AfternoonDec11Merge.Designer.cs">
       <DependentUpon>201712111812294_AfternoonDec11Merge.cs</DependentUpon>
@@ -539,6 +543,10 @@
     <Compile Include="Persistence\Migrations\201712111851475_AddViewingDateToHomeFindingProperty.cs" />
     <Compile Include="Persistence\Migrations\201712111851475_AddViewingDateToHomeFindingProperty.Designer.cs">
       <DependentUpon>201712111851475_AddViewingDateToHomeFindingProperty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201712131458037_MergeHousingMap.cs" />
+    <Compile Include="Persistence\Migrations\201712131458037_MergeHousingMap.Designer.cs">
+      <DependentUpon>201712131458037_MergeHousingMap.cs</DependentUpon>
     </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\NumberOfBathroomsTypesRepository.cs" />
@@ -797,11 +805,17 @@
     <EmbeddedResource Include="Persistence\Migrations\201712081617470_MergePropBotChanges.resx">
       <DependentUpon>201712081617470_MergePropBotChanges.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201712121642511_AddedLatLngToOrder.resx">
+      <DependentUpon>201712121642511_AddedLatLngToOrder.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201712111812294_AfternoonDec11Merge.resx">
       <DependentUpon>201712111812294_AfternoonDec11Merge.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201712111851475_AddViewingDateToHomeFindingProperty.resx">
       <DependentUpon>201712111851475_AddViewingDateToHomeFindingProperty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201712131458037_MergeHousingMap.resx">
+      <DependentUpon>201712131458037_MergeHousingMap.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

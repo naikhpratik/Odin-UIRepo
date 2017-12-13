@@ -1,13 +1,11 @@
-﻿using System;
-using Odin.Data.Core.Models;
-using Odin.Helpers;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
-using System.Web;
-using System.Collections.ObjectModel;
+﻿using Ganss.XSS;
 using Odin.ViewModels.Shared;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Web;
 
 namespace Odin.ViewModels.Orders.Transferee
 {
@@ -84,10 +82,18 @@ namespace Odin.ViewModels.Orders.Transferee
         [DataType(DataType.Currency)]
         public Decimal PropertyAmount { get; set; }
 
+        private String _propertyDescription;
         [Display(Name = "Description/Notes:")]
         [DataType(DataType.MultilineText)]
         [DisplayFormat(ConvertEmptyStringToNull = true)]
-        public String PropertyDescription { get; set; }
+        public String PropertyDescription {
+            get
+            {
+                var sanitizer = new HtmlSanitizer();
+                return sanitizer.Sanitize(_propertyDescription);
+            }
+            set { _propertyDescription = value; }
+        }
 
         [Display(Name = "Photos")]
         public IEnumerable<HttpPostedFileBase> UploadedPhotos { get; set; }
@@ -108,6 +114,13 @@ namespace Odin.ViewModels.Orders.Transferee
             }
         }
 
+        [Display(Name = "Latitude")]
+        [DisplayFormat(NullDisplayText = "")]
+        public Decimal PropertyLatitude { get; set; }
+
+        [Display(Name = "Longitude")]
+        [DisplayFormat(NullDisplayText = "")]
+        public Decimal PropertyLongitude { get; set; }
         [DataType("LikeDislike")]
         public bool? Liked { get; set; }
 

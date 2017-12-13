@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-using Odin.ViewModels.Shared;
-using System.ComponentModel.DataAnnotations;
+﻿using AutoMapper;
 using Odin.Data.Core.Models;
-using AutoMapper;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace Odin.ViewModels.Orders.Transferee
 {
@@ -121,6 +118,15 @@ namespace Odin.ViewModels.Orders.Transferee
         [Display(Name = "Transportation:")]
         [DisplayFormat(NullDisplayText = "No Preference")]
         public String TransportationTypeName { get; set; }
+
+        [Display(Name = "Latitude:")]
+        [DisplayFormat(NullDisplayText = "")]
+        public decimal? Latitude { get; set; }
+
+        [Display(Name = "Longitude:")]
+        [DisplayFormat(NullDisplayText = "")]
+        public decimal? Longitude { get; set; }
+
 
         public IEnumerable<HousingPropertyViewModel> Properties { get; set; }
     }

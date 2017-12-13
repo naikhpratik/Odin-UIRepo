@@ -40,8 +40,11 @@
             </ul>
         </div>
         <div class="col-md-8 mapWrapper">
-            <img src="~/Content/Images/map_placeholder.png" />
+            
+            <div id="map" data-lat="@Model.Latitude" data-lng="@Model.Longitude"></div>
+
         </div>
+        
     </div>
 
     <div class="row controlsContainer" id="propertiesControls">

@@ -93,6 +93,9 @@ namespace Odin.Data.Core.Models
 
         public virtual ICollection<Notification> Notifications { get; private set; }
 
+        public decimal? Latitude { get; set; }
+        public decimal? Longitude { get; set; }
+
         public bool HasService(int serviceTypeId)
         {
             return Services.Any<Service>(s => s.ServiceTypeId == serviceTypeId);

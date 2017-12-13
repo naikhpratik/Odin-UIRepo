@@ -68,6 +68,14 @@ namespace Odin.Data.Persistence
                 .Property(p => p.Longitude)
                 .HasPrecision(9, 6);
 
+            modelBuilder.Entity<Order>()
+                .Property(p => p.Latitude)
+                .HasPrecision(9, 6);
+
+            modelBuilder.Entity<Order>()
+                .Property(p => p.Longitude)
+                .HasPrecision(9, 6);
+
             base.OnModelCreating(modelBuilder);
         }
 

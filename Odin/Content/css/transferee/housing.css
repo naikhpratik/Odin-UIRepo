@@ -1,16 +1,11 @@
 ﻿.mapWrapper {
-  height: 27.5rem;
+  height: 300px;
   overflow: hidden;
-  position: relative;
-  background-image: url("");
-  background-position: center;
-  background-size: cover; }
-  .mapWrapper img {
-    position: absolute;
-    top: 50%;
-    transform: translate(0, -50%);
-    display: block;
-    width: 100%; }
+  position: relative; }
+
+#map {
+  /*height getting set in javascript because of map issue.*/
+  height: 300px; }
 
 .controlsContainer {
   border-top: 1px solid #b7a998;
