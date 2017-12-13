@@ -21,7 +21,37 @@ namespace Odin.ViewModels.Orders.Transferee
 
             this.Properties = propertyViewModels;
         }
+        //this version will replace the above constructor when the viewings portion is completed: 
+        //the isViewing flag will detrmine if only those properties that have a viewing scheduled will be returned
+        public HousingViewModel(Order order, IMapper mapper, string listChoice) : this()
+        {
+           
+            mapper.Map<HomeFinding, HousingViewModel>(order.HomeFinding, this);
+            mapper.Map<Order, HousingViewModel>(order, this);
 
+            IEnumerable<HomeFindingProperty> homeFindingProperties;         
+            
+            //list choices: AllProperties, ViewingsOnly, or NoViewings   
+            //filters to be applied when home viewing module is completed. The only active choice is "AllProperties"
+            //ViewingsOnly
+            if (listChoice == "ViewingsOnly")
+            {
+                homeFindingProperties = order.HomeFinding.HomeFindingProperties.Where(hfp => !hfp.Deleted && hfp.ViewingDate != null).OrderByDescending(hfp => hfp.CreatedAt);
+            }
+            //NoViewings
+            else if (listChoice == "NoViewings")
+            {
+                homeFindingProperties = order.HomeFinding.HomeFindingProperties.Where(hfp => !hfp.Deleted && hfp.ViewingDate == null).OrderByDescending(hfp => hfp.CreatedAt);
+            }
+            else
+            //AllProperties
+                homeFindingProperties = order.HomeFinding.HomeFindingProperties.Where(hfp => !hfp.Deleted).OrderByDescending(hfp => hfp.CreatedAt);
+
+            IEnumerable<HousingPropertyViewModel> propertyViewModels;
+            propertyViewModels = mapper.Map<IEnumerable<HomeFindingProperty>, IEnumerable<HousingPropertyViewModel>>(homeFindingProperties);
+
+            this.Properties = propertyViewModels;
+        }
         public HousingViewModel()
         {
             Properties = new List<HousingPropertyViewModel>();

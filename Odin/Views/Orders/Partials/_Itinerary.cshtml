@@ -90,7 +90,7 @@
                         if (dt2.Value.ToShortDateString() == dt.Value.ToShortDateString())
                         {
                             i++;
-                            <li class="testClass">
+                            <li class="noteEntry">
                                 @if (Model.Itinerary.ElementAt(j).ItemType.Contains("Appointment"))
                                 {                                    
                                     <a id="showAppointment" class="showAppointment row noteRow" data-appointment-id="@Model.Itinerary.ElementAt(j).Id" data-toggle="modal" data-target="#modalForm">

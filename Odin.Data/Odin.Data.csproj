@@ -508,6 +508,10 @@
     <Compile Include="Persistence\Migrations\201711292152381_MergedAppointmentsBranch.Designer.cs">
       <DependentUpon>201711292152381_MergedAppointmentsBranch.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201712051938142_AddLikedToHomeFindingProperties.cs" />
+    <Compile Include="Persistence\Migrations\201712051938142_AddLikedToHomeFindingProperties.Designer.cs">
+      <DependentUpon>201712051938142_AddLikedToHomeFindingProperties.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\201712041449390_AddUrlLatLngToProperty.cs" />
     <Compile Include="Persistence\Migrations\201712041449390_AddUrlLatLngToProperty.Designer.cs">
       <DependentUpon>201712041449390_AddUrlLatLngToProperty.cs</DependentUpon>
@@ -531,6 +535,14 @@
     <Compile Include="Persistence\Migrations\201712121642511_AddedLatLngToOrder.cs" />
     <Compile Include="Persistence\Migrations\201712121642511_AddedLatLngToOrder.Designer.cs">
       <DependentUpon>201712121642511_AddedLatLngToOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201712111812294_AfternoonDec11Merge.cs" />
+    <Compile Include="Persistence\Migrations\201712111812294_AfternoonDec11Merge.Designer.cs">
+      <DependentUpon>201712111812294_AfternoonDec11Merge.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201712111851475_AddViewingDateToHomeFindingProperty.cs" />
+    <Compile Include="Persistence\Migrations\201712111851475_AddViewingDateToHomeFindingProperty.Designer.cs">
+      <DependentUpon>201712111851475_AddViewingDateToHomeFindingProperty.cs</DependentUpon>
     </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\NumberOfBathroomsTypesRepository.cs" />
@@ -771,6 +783,9 @@
     <EmbeddedResource Include="Persistence\Migrations\201711292152381_MergedAppointmentsBranch.resx">
       <DependentUpon>201711292152381_MergedAppointmentsBranch.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201712051938142_AddLikedToHomeFindingProperties.resx">
+      <DependentUpon>201712051938142_AddLikedToHomeFindingProperties.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201712041449390_AddUrlLatLngToProperty.resx">
       <DependentUpon>201712041449390_AddUrlLatLngToProperty.cs</DependentUpon>
     </EmbeddedResource>
@@ -788,6 +803,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201712121642511_AddedLatLngToOrder.resx">
       <DependentUpon>201712121642511_AddedLatLngToOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201712111812294_AfternoonDec11Merge.resx">
+      <DependentUpon>201712111812294_AfternoonDec11Merge.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201712111851475_AddViewingDateToHomeFindingProperty.resx">
+      <DependentUpon>201712111851475_AddViewingDateToHomeFindingProperty.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

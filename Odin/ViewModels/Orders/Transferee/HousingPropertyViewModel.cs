@@ -59,7 +59,7 @@ namespace Odin.ViewModels.Orders.Transferee
         public String PropertyPostalCode { get; set; }
 
         [Display(Name = "Availability Date")]
-        [DisplayFormat(NullDisplayText = "Unknown", DataFormatString = "{0:d}")]
+        [DisplayFormat(NullDisplayText = "Unknown", DataFormatString = "{0:dd-MMM-yyyy}")]
         [DataType(DataType.Date)]
         public DateTime? PropertyAvailabilityDate { get; set; }
 
@@ -121,5 +121,11 @@ namespace Odin.ViewModels.Orders.Transferee
         [Display(Name = "Longitude")]
         [DisplayFormat(NullDisplayText = "")]
         public Decimal PropertyLongitude { get; set; }
+        [DataType("LikeDislike")]
+        public bool? Liked { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}")]
+        [DataType(DataType.Date)]
+        public DateTime? ViewingDate { get; set; }
     }
 }

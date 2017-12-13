@@ -17,7 +17,6 @@ namespace Odin.Controllers
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-
         public ActionResult AppointmentPartial(string id)
         {
             Appointment viewModel;

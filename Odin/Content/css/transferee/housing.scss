@@ -10,8 +10,7 @@
     /*height getting set in javascript because of map issue.*/
     height: 300px;
 }
-
-#propertiesControls {
+.controlsContainer {
     border-top: 1px solid $DW_Gray;
     border-bottom: 1px solid $DW_Gray;
     padding: 1.5rem 0;
@@ -54,8 +53,8 @@
     }
 }
 
-#addProperty {
-    text-align: right;
+.btnAndLabel {
+    display: inline-block;
     cursor: pointer;
 
     > img {
@@ -65,15 +64,14 @@
     > * {
         display: inline-block;
         vertical-align: middle;
-
-        &:nth-child(1) {
-            margin-right: 1rem;
-        }
     }
 
     @media screen and (min-width: 76.8rem) {
-        float: right;
-    }
+     }
+}
+
+.btnAndLabel + .btnAndLabel{
+    margin-right: 1.5rem;
 }
 
 #propertiesList {
@@ -134,7 +132,7 @@
         }
     }
 
-    .like, .comments {
+    .comments {
         img {
             width: 3rem;
         }
@@ -177,5 +175,40 @@
 #propertyDetailsModal {
     h5 {
         color: $DW_LtPurple;
+    }
+}
+
+.likeDislike {
+    margin: 0 auto;
+    width: auto;
+    height: auto;
+
+    .likeDislike-btn {
+        height:50px;
+        /*padding-left: 180px; /* Equal to width of new image */
+        background-position: center center !important;
+        cursor: pointer;
+    }
+
+    .like {
+        @extend .likeDislike-btn;
+        background: url('/Content/Images/icn_ln_non_selected_like.png') no-repeat;
+    }
+
+    .dislike {
+        @extend .likeDislike-btn;
+        background: url('/Content/Images/icn_ln_non_selected_dislike.png') no-repeat;
+    }
+
+    &.like {
+        .like {
+            background: url('/Content/Images/icn_ln_selected_like.png') no-repeat;
+        }
+    }
+
+    &.dislike {
+        .dislike {
+            background: url('/Content/Images/icn_ln_selected_dislike.png') no-repeat;
+        }
     }
 }

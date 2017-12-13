@@ -437,6 +437,12 @@
     <Content Include="Content\css\transferee\details.min.css">
       <DependentUpon>details.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\transferee\HFProperties.css">
+      <DependentUpon>HFProperties.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\transferee\HFProperties.min.css">
+      <DependentUpon>HFProperties.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\transferee\history.css">
       <DependentUpon>history.scss</DependentUpon>
     </Content>
@@ -814,6 +820,7 @@
     <Content Include="Content\css\transferee\sideNav.scss" />
     <Content Include="Content\css\bookmarklet.scss" />
     <Content Include="Content\css\help.scss" />
+    <TypeScriptCompile Include="Content\css\transferee\HFProperties.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
@@ -981,7 +988,9 @@
     <Content Include="Views\BookMarklet\Error.cshtml" />
     <Content Include="Views\Orders\Partials\_PropertyDetails.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Photos.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\LikeDislike.cshtml" />
     <Content Include="Views\Help\Index.cshtml" />
+    <Content Include="Views\Shared\Partials\multipleChoiceRadioButtons.cshtml" />
     <None Include="Web.Azure.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
