@@ -107,7 +107,13 @@ namespace Odin.Domain
                 consultant.Notify(notification);
                 
             }
-            
+
+            var homeFinding = new HomeFinding
+            {
+                Id = order.Id
+            };
+            order.HomeFinding = homeFinding;
+
             _unitOfWork.Complete();
 
 

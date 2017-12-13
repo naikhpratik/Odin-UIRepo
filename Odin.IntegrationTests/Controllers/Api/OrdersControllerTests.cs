@@ -116,9 +116,13 @@ namespace Odin.IntegrationTests.Controllers.Api
             // Assert
             errorResponse?.errors.Should().BeNull();
             response.StatusCode.Should().Be(HttpStatusCode.OK);
-            var order = Context.Orders.FirstOrDefault(o => o.TrackingId.Equals(orderDto.TrackingId));
+            var order = Context.Orders
+                .Where(o => o.TrackingId.Equals(orderDto.TrackingId))
+                .Include(o => o.HomeFinding)
+                .FirstOrDefault();
+            
             order.Should().NotBeNull();
-
+            order?.HomeFinding.Should().NotBeNull();
         }
 
         [Test, CleanData]

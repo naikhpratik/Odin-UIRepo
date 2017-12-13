@@ -15,6 +15,7 @@ namespace Odin.Data.Persistence.EntityConfigurations
     {
         public OrderConfiguration()
         {
+
             HasRequired(o => o.Transferee)
                 .WithMany(t => t.Orders)
                 .HasForeignKey(o => o.TransfereeId)
