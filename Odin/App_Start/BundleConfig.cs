@@ -44,7 +44,7 @@ namespace Odin
 
             // Page Styling
             bundles.Add(new StyleBundle("~/Styling/help").Include("~/Content/css/help.css"));
-            bundles.Add(new StyleBundle("~/Styling/orders").Include("~/Content/css/orders.css"));
+            bundles.Add(new StyleBundle("~/Styling/orders").Include("~/Content/css/orders.css","~/Content/typeahead.css"));
             bundles.Add(new StyleBundle("~/Styling/login").Include("~/Content/css/login.css"));
             bundles.Add(new StyleBundle("~/Styling/forgotPassword").Include("~/Content/css/forgotpassword.css",
                 "~/Content/animate.css"));
@@ -63,7 +63,7 @@ namespace Odin
             bundles.Add(new StyleBundle("~/Styling/properties").Include("~/Content/css/transferee/HFProperties.css"));
 
             // Page scripts
-            bundles.Add(new ScriptBundle("~/Scripts/orders").Include("~/Scripts/app/views/orders.js"));
+            bundles.Add(new ScriptBundle("~/Scripts/orders").Include("~/Scripts/app/views/orders.js", "~/Scripts/typeahead.js"));
             bundles.Add(new ScriptBundle("~/Scripts/transferee").Include(
                 "~/Scripts/bootstrap-notify.min.js",
                 "~/Scripts/app/views/transferee.js",
