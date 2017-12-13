@@ -1,5 +1,7 @@
 ﻿using Odin.Data.Core.Models;
 using Odin.Data.Core.Repositories;
+using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 
@@ -20,6 +22,12 @@ namespace Odin.Data.Persistence
                 .Where(hfp => hfp.Id.Equals(homeFindingPropertyId))
                 .Include(hfp => hfp.Property.Photos)
                 .SingleOrDefault<HomeFindingProperty>();
+        }
+
+        public IEnumerable<HomeFindingProperty> GetUpcomingHomeFindingPropertiesByHomeFindingId(string homeFindingId)
+        {
+            return _context.HomeFindingProperties
+                .Where(hfp => hfp.HomeFinding.Id.Equals(homeFindingId) && hfp.Deleted == false && hfp.ViewingDate >= DateTime.Now);
         }
     }
 }

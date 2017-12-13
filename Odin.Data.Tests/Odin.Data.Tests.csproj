@@ -127,6 +127,7 @@
     <Compile Include="Core\Models\PropertyTests.cs" />
     <Compile Include="Extensions\MockDbSetExtensions.cs" />
     <Compile Include="Extensions\StringExtensionsTests.cs" />
+    <Compile Include="Persistence\Repositories\HomeFindingPropertyRepositoryTests.cs" />
     <Compile Include="Persistence\Repositories\ConsultantsRepositoryTests.cs" />
     <Compile Include="Persistence\Repositories\ManagersRepositoryTests.cs" />
     <Compile Include="Persistence\Repositories\OrdersRepositoryTests.cs" />
