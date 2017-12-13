@@ -44,6 +44,11 @@ namespace Odin
                 .ForMember(m => m.ScheduledDate, opt => opt.MapFrom(src => src.ScheduledDate))
                 .ForMember(m => m.ActionLabel, opt => opt.MapFrom(src => src.ServiceType.ActionLabel));
 
+            CreateMap<HomeFindingProperty, ItineraryEntryViewModel>()
+                .ForMember(m => m.ItemType, opt => opt.MapFrom(src => src.GetType().ToString()))
+                .ForMember(m => m.ScheduledDate, opt => opt.MapFrom(src => src.ViewingDate))
+                .ForMember(m => m.ActionLabel, opt => opt.MapFrom(src => src.Property.Street1));
+
 
             CreateMap<Order, HousingViewModel>();
             CreateMap<HomeFinding, HousingViewModel>();

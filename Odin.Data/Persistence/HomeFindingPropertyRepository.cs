@@ -27,7 +27,8 @@ namespace Odin.Data.Persistence
         public IEnumerable<HomeFindingProperty> GetUpcomingHomeFindingPropertiesByHomeFindingId(string homeFindingId)
         {
             return _context.HomeFindingProperties
-                .Where(hfp => hfp.HomeFinding.Id.Equals(homeFindingId) && hfp.Deleted == false && hfp.ViewingDate >= DateTime.Now);
+                .Where(hfp => hfp.HomeFinding.Id.Equals(homeFindingId) && hfp.Deleted == false && hfp.ViewingDate >= DateTime.Now)
+                .Include(hfp => hfp.Property);
         }
     }
 }
