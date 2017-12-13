@@ -11,14 +11,19 @@ div#list {
   padding-bottom: 4.5rem; }
   div#list div#search {
     margin-top: 5rem;
-    padding: 2rem 4rem;
+    padding: 2rem;
     background-color: #a7ce39;
     box-sizing: border-box;
     display: flex;
     align-items: center; }
     div#list div#search input {
       width: 100%;
-      border: none; }
+      border: none;
+      padding: 0.5rem 1rem;
+      box-shadow: 0px 0px 0px 0px; }
+      div#list div#search input:focus {
+        outline: none;
+        box-shadow: 0px 0px 0px 0px; }
     div#list div#search button {
       width: auto;
       padding: 0 1rem;

@@ -6,7 +6,7 @@
 
 <div class="container-fluid" id="list">
     <div id="search">
-        <input id="searchbox" /><button>Search</button>
+        <input id="searchbox" placeholder="Type here to search, select to go"/>
     </div>
 
 
@@ -44,7 +44,7 @@
         {
             var order = (Odin.Data.Core.Models.Order)Model.ElementAt(j);
             
-            <li class="row clickable" data-order-id="@order.Id">
+            <li class="row clickable orderRow" data-order-id="@order.Id">
                 <div class="col-md-2">
                     <label class="header">Transferee</label>
                     <p class="eeName">@order.Transferee.FullName</p>
@@ -115,6 +115,6 @@
         @Scripts.Render("~/Scripts/orders")
 
         <script>
-            $(document).ready(OrdersPageController.OrdersPageInit);
+            $(document).ready(OrdersPageController.init);
         </script>
     }
