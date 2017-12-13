@@ -126,8 +126,8 @@
     background: url("/Content/Images/icn_ln_non_selected_like.png") no-repeat; }
   .likeDislike .dislike {
     background: url("/Content/Images/icn_ln_non_selected_dislike.png") no-repeat; }
-  .likeDislike.like .like {
+  .likeDislike[data-liked="True"] .like {
     background: url("/Content/Images/icn_ln_selected_like.png") no-repeat; }
-  .likeDislike.dislike .dislike {
+  .likeDislike[data-liked="False"] .dislike {
     background: url("/Content/Images/icn_ln_selected_dislike.png") no-repeat; }
 

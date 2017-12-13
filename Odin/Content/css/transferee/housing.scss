@@ -184,7 +184,7 @@
     height: auto;
 
     .likeDislike-btn {
-        height:50px;
+        height: 50px;
         /*padding-left: 180px; /* Equal to width of new image */
         background-position: center center !important;
         cursor: pointer;
@@ -200,13 +200,13 @@
         background: url('/Content/Images/icn_ln_non_selected_dislike.png') no-repeat;
     }
 
-    &.like {
+    &[data-liked="True"] {
         .like {
             background: url('/Content/Images/icn_ln_selected_like.png') no-repeat;
         }
     }
 
-    &.dislike {
+    &[data-liked="False"] {
         .dislike {
             background: url('/Content/Images/icn_ln_selected_dislike.png') no-repeat;
         }

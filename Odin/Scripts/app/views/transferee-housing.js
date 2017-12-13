@@ -127,6 +127,13 @@
         });
     };
 
+    var triggerLikeStatus = function (wrappers, newLikedStatus) {
+        wrappers.each(function () {
+            var currentLikedStatus = $(this).attr("data-liked");
+            $(this).attr('data-liked', currentLikedStatus === newLikedStatus ? "" : newLikedStatus);
+        });
+    };
+
     var setupLikeDislikeControls = function () {
         var likeSelector = '.likeDislike > .like';
         $(document).off('click', likeSelector);
@@ -135,9 +142,8 @@
             e.stopPropagation();
 
             var controlWrappers = controllerWrappersForLikeDislikeButton($(this));
-            controlWrappers.toggleClass("like");
-            controlWrappers.removeClass("dislike");
-
+            triggerLikeStatus(controlWrappers, "True");
+            
             updateLikedStatusForControl(controlWrappers[0]);
         });
 
@@ -148,8 +154,7 @@
             e.stopPropagation();
 
             var controlWrappers = controllerWrappersForLikeDislikeButton($(this));
-            controlWrappers.toggleClass("dislike");
-            controlWrappers.removeClass("like");
+            triggerLikeStatus(controlWrappers, "False");
 
             updateLikedStatusForControl(controlWrappers[0]);
         });
@@ -223,12 +228,12 @@
 
     /*** Update Methods ***/
     var updateLikedStatusForControl = function (controlElement) {
-        var classList = controlElement.classList;
+        var likedData = $(controlElement).attr('data-liked');
 
         var likedValue = null;
-        if (classList.contains('like')) {
+        if (likedData == "True") {
             likedValue = true;
-        } else if (classList.contains('dislike')) {
+        } else if (likedData == "False") {
             likedValue = false;
         }
 
