@@ -96,7 +96,13 @@
                 
                 <div class="col-md-1 col-xs-12">
                     <label class="mobileLabel">Like or Dislike</label>
+                    @if (ViewBag.IsPDF == true && !propertyVM.Liked.HasValue)
+                    {
+                        <span>Not Yet Rated</span>
+                    }
+
                     @Html.EditorFor(m => propertyVM.Liked, new { propertyId = propertyVM.Id })
+
                 </div>
                 <!--
                 <div class="col-md-1 comments">

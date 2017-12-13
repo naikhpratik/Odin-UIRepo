@@ -72,15 +72,18 @@ li.propertyItem {
     background-position: center center !important;
     cursor: pointer; }
   .likeDislike .like {
-    display: none;
-    background: url("/Content/Images/icn_ln_non_selected_like.png") no-repeat; }
-  .likeDislike .dislike {
-    display: none;
-    background: url("/Content/Images/icn_ln_non_selected_dislike.png") no-repeat; }
+    /*display: none;*/ }
   .likeDislike.like .like {
-    display: block;
+    /*display: block;*/
     background: url("/Content/Images/icn_ln_selected_like.png") no-repeat; }
   .likeDislike.dislike .dislike {
-    display: block;
+    /*display: block;*/
     background: url("/Content/Images/icn_ln_selected_dislike.png") no-repeat; }
+
+.glyphicon-calendar {
+  display: none; }
+
+.form-control {
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important; }
 
