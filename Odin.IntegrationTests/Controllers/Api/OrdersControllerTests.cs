@@ -189,6 +189,7 @@ namespace Odin.IntegrationTests.Controllers.Api
             order.Consultant = dsc;
             order.ProgramManager = pm;
             order.DestinationCity = "test-before-insert";
+            order.HomeFinding = new HomeFinding {Id = order.Id};
             Context.Orders.Add(order);
             Context.SaveChanges();
             var orderDto = OrderDtoBuilder.New();

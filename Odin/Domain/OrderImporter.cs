@@ -108,14 +108,17 @@ namespace Odin.Domain
                 
             }
 
-            var homeFinding = new HomeFinding
+            if (IsNew)
             {
-                Id = order.Id
-            };
-            order.HomeFinding = homeFinding;
+                var homeFinding = new HomeFinding
+                {
+                    Id = order.Id
+                };
+                order.HomeFinding = homeFinding;
 
+            }
+        
             _unitOfWork.Complete();
-
 
         }
 
