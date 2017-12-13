@@ -18,7 +18,7 @@ namespace Odin.PropBotWebJob.Domain
         public ImageStore()
         {
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
-                CloudConfigurationManager.GetSetting(StorageConnectionKey));
+                CloudConfigurationManager.GetSetting(StorageConnectionKey, false));
 
             _client = storageAccount.CreateCloudBlobClient();
         }
