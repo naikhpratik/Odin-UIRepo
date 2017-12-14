@@ -3,6 +3,7 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Odin.Controllers;
+
 using Odin.Data.Core;
 using Odin.Data.Core.Models;
 using Odin.Data.Core.Repositories;
@@ -93,7 +94,7 @@ namespace Odin.Tests.Controllers
         public void Details_OrderConsultantIdIsNotCurrentUser_ShouldReturnUnauthorized()
         {
             var orderId = "1";
-           
+
             Order order = new Order() { Id = orderId, ConsultantId = "2" };
 
             _mockRepository.Setup(r => r.GetOrderById(orderId)).Returns(order);
@@ -140,6 +141,23 @@ namespace Odin.Tests.Controllers
 
             result.Should().BeOfType<HttpStatusCodeResult>();
             Assert.AreEqual(((HttpStatusCodeResult)result).StatusCode, (int)HttpStatusCode.NotFound);
+        }
+
+        [TestMethod]
+        public void HistoryPartial_InvalidOrderId_ShouldReturnOk()
+        {
+            //Arrange 
+            var orderId = "1";
+            Order order = new Order() { Id = orderId, ConsultantId = "1" };
+            _mockRepository.Setup(r => r.GetOrderById(orderId)).Returns(order);
+
+
+            //Action 
+            var result = _controller.HistoryPartial(orderId);
+            
+            
+            //Assert 
+            result.Should().NotBeNull();
         }
     }
 }

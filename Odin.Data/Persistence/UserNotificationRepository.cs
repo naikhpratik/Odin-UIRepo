@@ -53,6 +53,17 @@ namespace Odin.Data.Persistence
 
         }
 
+        public IEnumerable<UserNotification> GetUserNotificationHistory(string UserID, string orderid)
+        {
+            return _context.UserNotifications
+                .Where(n => n.UserId == UserID && n.Notification.OrderId == orderid)
+                .Include(n => n.Notification)
+                .Include(n => n.Notification.Order)
+                .ToList();
+
+            
+        }
+
 
     }
 }

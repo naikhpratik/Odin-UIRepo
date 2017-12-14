@@ -20,7 +20,7 @@ namespace Odin.Controllers
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public OrdersController(IUnitOfWork unitOfWork, IMapper mapper,IAccountHelper accountHelper)
+        public OrdersController(IUnitOfWork unitOfWork, IMapper mapper, IAccountHelper accountHelper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
@@ -72,7 +72,7 @@ namespace Odin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.Unauthorized, "Unauthorized Order");
             }
             OrdersTransfereeViewModel viewModel = GetViewModelForOrderDetails(id);
-            return PartialView("~/views/orders/partials/_Details.cshtml",viewModel); 
+            return PartialView("~/views/orders/partials/_Details.cshtml", viewModel);
         }
 
         public ActionResult IntakePartial(string id)
@@ -82,7 +82,7 @@ namespace Odin.Controllers
         }
 
         public ActionResult ItineraryPartial(string id)
-        {            
+        {
             OrdersTransfereeItineraryViewModel viewModel = GetItineraryByOrderId(id);
             viewModel.Id = id;
             viewModel.IsPdf = false;
@@ -91,7 +91,30 @@ namespace Odin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.NotFound, "Not found");
             viewModel.TransfereeName = ee.FullName;
             return PartialView("~/views/orders/partials/_Itinerary.cshtml", viewModel);
-        }        
+        }
+
+        //id is the Order id. 
+        public ActionResult HistoryPartial(string id)
+        {
+            var userId = User.Identity.GetUserId();
+            var order = _unitOfWork.Orders.GetOrderFor(userId, id);
+
+            if (order == null)
+            {
+                
+                //TempData.Add("notfound", 1);
+                return PartialView("~/views/orders/partials/_History.cshtml", null);
+            }
+            else
+            {
+                //TempData.Add("found", 2);
+                IEnumerable<UserNotification> userNotifications = _unitOfWork.UserNotifications.GetUserNotificationHistory(userId, order.Id);
+                IEnumerable<HistoryViewModel> vms = _mapper.Map<IEnumerable<UserNotification>, IEnumerable<HistoryViewModel>>(userNotifications);
+                return PartialView("~/views/orders/partials/_History.cshtml", vms);
+            }
+
+
+        }
 
         public ActionResult Details(string orderId)
         {
@@ -126,7 +149,7 @@ namespace Odin.Controllers
             OrdersTransfereeViewModel viewModel = GetViewModelForOrderDetails(id);
             return View(viewModel);
         }
-       
+
         private OrdersTransfereeViewModel GetViewModelForOrderDetails(string id)
         {
             var userId = User.Identity.GetUserId();
@@ -135,7 +158,7 @@ namespace Odin.Controllers
             OrdersTransfereeViewModel vm = _mapper.Map<Order, OrdersTransfereeViewModel>(order);
 
             vm.Services = vm.Services.OrderBy(s => s.ServiceTypeSortOrder);
-            
+
             //Populate list of service categories available for this order.
             var cats = ServiceHelper.GetCategoriesForServiceFlag(order.ServiceFlag);
 
