@@ -18,22 +18,22 @@
     <ul class="container-fluid">
         <li class="header row">
             <div class="col-md-2">
-                <label>Transferee Sort +/-</label>
+                <label id="eeNameSort" class="sortLabel">Transferee Sort <span class="sortPlus">+</span>/<span class="sortMinus">-</span></label>
             </div>
             <div class="col-md-2">
-                <label>Authorized Tasks  +/-</label>
+                <label>Authorized Tasks</label>
             </div>
             <div class="col-md-2">
-                <label>Manager  +/-</label>
+                <label id="pmNameSort" class="sortLabel">Manager <span class="sortPlus">+</span>/<span class="sortMinus">-</span></label>
             </div>
             <div class="col-md-2">
-                <label>Pre-Trip +/-</label>
+                <label id="preTripDateSort" class="sortLabel">Pre-Trip <span class="sortPlus">+</span>/<span class="sortMinus">-</span></label>
             </div>
             <div class="col-md-2">
-                <label>Final Arrival +/-</label>
+                <label id="estimatedArrivalDateSort" class="sortLabel">Final Arrival <span class="sortPlus">+</span>/<span class="sortMinus">-</span></label>
             </div>
             <div class="col-md-2">
-                <label>Notifications +/-</label>
+                <label id="notificationsSort" class="sortLabel">Notifications <span class="sortPlus">+</span>/<span class="sortMinus">-</span></label>
             </div>
         </li>
         @if (Model == null)
@@ -80,7 +80,7 @@
                 }
             <div class="col-md-2">
                 <label class="header">Completed/Scheduled/Assigned</label>
-                <div class="progressBar" title="Tasks">
+                <div class="progressBar" title="Tasks" data-comp-percent="@Decimal.ToInt32(cwid)%" data-auth-percent="@Decimal.ToInt32(atwid)%" data-sched-percent="@Decimal.ToInt32(swid)%">
                     <span class="progressBar__progress progressBar__auth" style="width:@Decimal.ToInt32(atwid)%" title="Authorized Tasks"></span>
                     <span class="progressBar__progress progressBar__sched" style="width:@Decimal.ToInt32(swid)%" title="Scheduled Tasks"></span>
                     <span class="progressBar__progress progressBar__comp" style="width:@Decimal.ToInt32(cwid)%" title="Completed Tasks"></span>
@@ -88,20 +88,20 @@
             </div>
             <div class="col-md-2">
                 <label class="header">Manager</label>
-                <p>@order.ProgramManager.FullName</p>
-                <p class="subTitle">@order.ProgramManager.PhoneNumber</p>
+                <p class="pmName">@order.ProgramManager.FullName</p>
+                <p class="subTitle pmPhone">@order.ProgramManager.PhoneNumber</p>
             </div>
             <div class="col-md-2">
                 <label class="header">Pre-Trip</label>
-                <p>@order.PreTripDate</p>
+                <p class="preTripDate">@order.PreTripDate</p>
             </div>
             <div class="col-md-2">
                 <label class="header">Final Arrival</label>
-                <p>@order.EstimatedArrivalDate</p>
+                <p class="estimatedArrivalDate">@order.EstimatedArrivalDate</p>
             </div>
             <div class="col-md-2">
                 <label class="header">Notifications</label>
-                <p>2*</p>
+                <p class="notifications">2*</p>
             </div>
         </li>
         }
