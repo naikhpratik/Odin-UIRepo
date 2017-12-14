@@ -160,7 +160,7 @@
             format: "DD-MMM-YYYY h:mm A",
             useCurrent: false,
             keepOpen: true,
-            showClose: true,
+            showClose: false,
             toolbarPlacement: 'bottom',
             icons: { close: 'custom-icon-check' }
         }).on("dp.hide", function (e) {

@@ -418,8 +418,9 @@ namespace Odin.Data.Persistence.Migrations
                     Name = "Initial/Pre-Arrival Consultation",
                     Category = ServiceCategory.InitialConsultation,
                     SortOrder = 1,
-                    Default = (int)DefaultType.Domestic + (int)DefaultType.International
-            });
+                    Default = (int)DefaultType.Domestic + (int)DefaultType.International,
+                    ActionLabel= "Going to attend the 'Initial/Pre-Arrival Consultation'"
+                });
             }
             else
             {
@@ -428,6 +429,7 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 1;
                     type.Default = (int) DefaultType.Domestic + (int) DefaultType.International;
+                    type.ActionLabel = "Going to attend the 'Initial/Pre-Arrival Consultation'";
                 }
                 
             }
@@ -439,7 +441,8 @@ namespace Odin.Data.Persistence.Migrations
                     Name = "Welcome Packet",
                     Category = ServiceCategory.WelcomePacket,
                     SortOrder = 2,
-                    Default = (int)DefaultType.Domestic + (int)DefaultType.International
+                    Default = (int)DefaultType.Domestic + (int)DefaultType.International,
+                    ActionLabel= "Receiving the 'Welcome Packet'"
                 });
             }
             else
@@ -449,6 +452,7 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 2;
                     type.Default = (int)DefaultType.Domestic + (int)DefaultType.International;
+                    type.ActionLabel = "Receiving the 'Welcome Packet'";
                 }
             }
 
@@ -459,7 +463,8 @@ namespace Odin.Data.Persistence.Migrations
                     Name = "Social Security Registration",
                     Category = ServiceCategory.SettlingIn,
                     SortOrder = 5,
-                    Default = (int)DefaultType.International
+                    Default = (int)DefaultType.International,
+                    ActionLabel= "Going to register for 'Social Security Registration'"
                 });
             }
             else
@@ -469,6 +474,7 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 5;
                     type.Default = (int)DefaultType.International;
+                    type.ActionLabel = "Going to register for 'Social Security Registration'";
                 }
             }
 
@@ -479,7 +485,8 @@ namespace Odin.Data.Persistence.Migrations
                     Name = "Colleges/Universities",
                     Category = ServiceCategory.SettlingIn,
                     SortOrder = 19,
-                    Default = (int)DefaultType.No
+                    Default = (int)DefaultType.No,
+                    ActionLabel= "Going to explore 'Colleges/Universities'"
                 });
             }
             else
@@ -489,6 +496,7 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 19;
                     type.Default = (int)DefaultType.No;
+                    type.ActionLabel = "Going to explore 'Colleges/Universities'";
                 }
             }
 
@@ -499,7 +507,8 @@ namespace Odin.Data.Persistence.Migrations
                     Name = "Language Assistance",
                     Category = ServiceCategory.SettlingIn,
                     SortOrder = 20,
-                    Default = (int)DefaultType.No
+                    Default = (int)DefaultType.No,
+                    ActionLabel= "Going to receive 'Language Assistance'"
                 });
             }
             else
@@ -509,6 +518,7 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 20;
                     type.Default = (int)DefaultType.No;
+                    type.ActionLabel = "Going to receive 'Language Assistance'";
                 }
             }
 
@@ -519,7 +529,8 @@ namespace Odin.Data.Persistence.Migrations
                     Name = "Telephone systems",
                     Category = ServiceCategory.SettlingIn,
                     SortOrder = 21,
-                    Default = (int)DefaultType.No
+                    Default = (int)DefaultType.No,
+                    ActionLabel= "Going to compare 'Telephone systems'"
                 });
             }
             else
@@ -529,6 +540,7 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 21;
                     type.Default = (int)DefaultType.No;
+                    type.ActionLabel = "Going to compare 'Telephone systems'";
                 }
             }
 
@@ -539,7 +551,8 @@ namespace Odin.Data.Persistence.Migrations
                     Name = "Utility hook-up",
                     Category = ServiceCategory.SettlingIn,
                     SortOrder = 22,
-                    Default = (int)DefaultType.No
+                    Default = (int)DefaultType.No,
+                    ActionLabel= "Going to work on 'Utility hook-up'"
                 });
             }
             else
@@ -549,6 +562,7 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 22;
                     type.Default = (int)DefaultType.No;
+                    type.ActionLabel = "Going to work on 'Utility hook-up'";
                 }
             }
 
@@ -559,7 +573,8 @@ namespace Odin.Data.Persistence.Migrations
                     Name = "Internet service providers",
                     Category = ServiceCategory.SettlingIn,
                     SortOrder = 23,
-                    Default = (int)DefaultType.No
+                    Default = (int)DefaultType.No,
+                    ActionLabel= "Researching available 'Internet service providers'"
                 });
             }
             else
@@ -569,6 +584,7 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 23;
                     type.Default = (int)DefaultType.No;
+                    type.ActionLabel = "Researching available 'Internet service providers'";
                 }
             }
 
@@ -579,7 +595,8 @@ namespace Odin.Data.Persistence.Migrations
                     Name = "Furniture Rental",
                     Category = ServiceCategory.SettlingIn,
                     SortOrder = 24,
-                    Default = (int)DefaultType.No
+                    Default = (int)DefaultType.No,
+                    ActionLabel = "Going to look into 'Furniture Rental'"
                 });
             }
             else
@@ -589,6 +606,7 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 24;
                     type.Default = (int)DefaultType.No;
+                    type.ActionLabel = "Going to look into 'Furniture Rental'";
                 }
             }
 
@@ -599,7 +617,8 @@ namespace Odin.Data.Persistence.Migrations
                     Name = "Furniture Purchase",
                     Category = ServiceCategory.SettlingIn,
                     SortOrder = 25,
-                    Default = (int)DefaultType.No
+                    Default = (int)DefaultType.No,
+                    ActionLabel = "Going to complete 'Furniture Purchase'"
                 });
             }
             else
@@ -609,6 +628,7 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 25;
                     type.Default = (int)DefaultType.No;
+                    type.ActionLabel = "Going to complete 'Furniture Purchase'";
                 }
             }
 
@@ -619,7 +639,8 @@ namespace Odin.Data.Persistence.Migrations
                     Name = "Appliances(compatibility / purchase)",
                     Category = ServiceCategory.SettlingIn,
                     SortOrder = 26,
-                    Default = (int)DefaultType.No
+                    Default = (int)DefaultType.No,
+                    ActionLabel = "Going to shop for 'Appliances(compatibility / purchase)'"
                 });
             }
             else
@@ -629,6 +650,7 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 26;
                     type.Default = (int)DefaultType.No;
+                    type.ActionLabel = "Going to shop for 'Appliances(compatibility / purchase)'";
                 }
             }
 
@@ -639,7 +661,8 @@ namespace Odin.Data.Persistence.Migrations
                     Name = "Driving/auto info (licensing / driving schools)",
                     Category = ServiceCategory.SettlingIn,
                     SortOrder = 7,
-                    Default = (int)DefaultType.International
+                    Default = (int)DefaultType.International,
+                    ActionLabel = "Going to look into 'Driving/auto info (licensing / driving schools)'"
                 });
             }
             else
@@ -649,6 +672,7 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 7;
                     type.Default = (int)DefaultType.International;
+                    type.ActionLabel = "Going to look into 'Driving/auto info (licensing / driving schools)'";
                 }
             }
 
@@ -659,7 +683,8 @@ namespace Odin.Data.Persistence.Migrations
                     Name = "Transportation options",
                     Category = ServiceCategory.SettlingIn,
                     SortOrder = 27,
-                    Default = (int)DefaultType.No
+                    Default = (int)DefaultType.No,
+                    ActionLabel = "Going to look into 'Transportation options'"
                 });
             }
             else
@@ -669,6 +694,7 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 27;
                     type.Default = (int)DefaultType.No;
+                    type.ActionLabel = "Going to look into 'Transportation options'";
                 }
             }
 
@@ -679,7 +705,8 @@ namespace Odin.Data.Persistence.Migrations
                     Name = "Homeowner's services",
                     Category = ServiceCategory.SettlingIn,
                     SortOrder = 28,
-                    Default = (int)DefaultType.No
+                    Default = (int)DefaultType.No,
+                    ActionLabel = "Exploring various 'Homeowner's services'"
                 });
             }
             else
@@ -689,6 +716,7 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 28;
                     type.Default = (int)DefaultType.No;
+                    type.ActionLabel = "Exploring various 'Homeowner's services'";
                 }
             }
 
@@ -699,7 +727,8 @@ namespace Odin.Data.Persistence.Migrations
                     Name = "Insurance (auto / renter / homeowner)",
                     Category = ServiceCategory.SettlingIn,
                     SortOrder = 29,
-                    Default = (int)DefaultType.No
+                    Default = (int)DefaultType.No,
+                    ActionLabel = "Shopping for 'Insurance (auto / renter / homeowner)'"
                 });
             }
             else
@@ -709,6 +738,7 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 29;
                     type.Default = (int)DefaultType.No;
+                    type.ActionLabel = "Shopping for 'Insurance (auto / renter / homeowner)'";
                 }
             }
 
@@ -719,7 +749,8 @@ namespace Odin.Data.Persistence.Migrations
                     Name = "Medical/dental information",
                     Category = ServiceCategory.SettlingIn,
                     SortOrder = 30,
-                    Default = (int)DefaultType.No
+                    Default = (int)DefaultType.No,
+                    ActionLabel = "Researching 'Medical/dental information'"
                 });
             }
             else
@@ -729,6 +760,7 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 30;
                     type.Default = (int)DefaultType.No;
+                    type.ActionLabel = "Researching 'Medical/dental information'";
                 }
             }
 
@@ -739,7 +771,8 @@ namespace Odin.Data.Persistence.Migrations
                     Name = "Money issues/banking",
                     Category = ServiceCategory.SettlingIn,
                     SortOrder = 6,
-                    Default = (int)DefaultType.International
+                    Default = (int)DefaultType.International,
+                    ActionLabel = "Looking into and resolving 'Money issues/banking'"
                 });
             }
             else
@@ -749,6 +782,7 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 6;
                     type.Default = (int)DefaultType.International;
+                    type.ActionLabel = "Looking into and resolving 'Money issues/banking'";
                 }
             }
 
@@ -759,7 +793,8 @@ namespace Odin.Data.Persistence.Migrations
                     Name = "Mail services",
                     Category = ServiceCategory.SettlingIn,
                     SortOrder = 31,
-                    Default = (int)DefaultType.No
+                    Default = (int)DefaultType.No,
+                    ActionLabel = "Finding 'Mail services'"
                 });
             }
             else
@@ -769,6 +804,7 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 31;
                     type.Default = (int)DefaultType.No;
+                    type.ActionLabel = "Finding 'Mail services'";
                 }
             }
 
@@ -779,7 +815,8 @@ namespace Odin.Data.Persistence.Migrations
                     Name = "Domestic services(maid / cook / driver)",
                     Category = ServiceCategory.SettlingIn,
                     SortOrder = 32,
-                    Default = (int)DefaultType.No
+                    Default = (int)DefaultType.No,
+                    ActionLabel = "Finding and hiring 'Domestic services(maid / cook / driver)'"
                 });
             }
             else
@@ -789,6 +826,7 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 32;
                     type.Default = (int)DefaultType.No;
+                    type.ActionLabel = "Finding and hiring 'Domestic services(maid / cook / driver)'";
                 }
             }
 
@@ -799,7 +837,8 @@ namespace Odin.Data.Persistence.Migrations
                     Name = "Pets (care/licensing/etc.)",
                     Category = ServiceCategory.SettlingIn,
                     SortOrder = 33,
-                    Default = (int)DefaultType.No
+                    Default = (int)DefaultType.No,
+                    ActionLabel = "Finding 'Pets (care/licensing/etc.)'"
                 });
             }
             else
@@ -809,6 +848,7 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 33;
                     type.Default = (int)DefaultType.No;
+                    type.ActionLabel = "Finding 'Pets (care/licensing/etc.)'";
                 }
             }
 
@@ -819,7 +859,8 @@ namespace Odin.Data.Persistence.Migrations
                     Name = "Childcare",
                     Category = ServiceCategory.SettlingIn,
                     SortOrder = 34,
-                    Default = (int)DefaultType.No
+                    Default = (int)DefaultType.No,
+                    ActionLabel = "Researching and finding 'Childcare'"
                 });
             }
             else
@@ -829,6 +870,7 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 34;
                     type.Default = (int)DefaultType.No;
+                    type.ActionLabel = "Researching and finding 'Childcare'";
                 }
             }
 
@@ -839,7 +881,8 @@ namespace Odin.Data.Persistence.Migrations
                     Name = "Eldercare",
                     Category = ServiceCategory.SettlingIn,
                     SortOrder = 35,
-                    Default = (int)DefaultType.No
+                    Default = (int)DefaultType.No,
+                    ActionLabel = "Researching and finding convenient 'Eldercare'"
                 });
             }
             else
@@ -849,6 +892,7 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 35;
                     type.Default = (int)DefaultType.No;
+                    type.ActionLabel = "Researching and finding convenient 'Eldercare'";
                 }
             }
 
@@ -869,7 +913,8 @@ namespace Odin.Data.Persistence.Migrations
                     Name = "Area Orientation / Overview",
                     Category = ServiceCategory.AreaOrientation,
                     SortOrder = 3,
-                    Default = (int)DefaultType.Domestic + (int)DefaultType.International
+                    Default = (int)DefaultType.Domestic + (int)DefaultType.International,
+                    ActionLabel = "Attending a briefing on 'Area Orientation / Overview'"
                 });
             }
             else
@@ -879,6 +924,7 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 3;
                     type.Default = (int)DefaultType.Domestic + (int)DefaultType.International;
+                    type.ActionLabel = "Attending a briefing on 'Area Orientation / Overview'";
                 }
             }
 
@@ -889,7 +935,8 @@ namespace Odin.Data.Persistence.Migrations
                     Name = "Housing/Neighborhoods",
                     Category = ServiceCategory.AreaOrientation,
                     SortOrder = 8,
-                    Default = (int)DefaultType.No
+                    Default = (int)DefaultType.No,
+                    ActionLabel = "Researching and visiting 'Housing/Neighborhoods'"
                 });
             }
             else
@@ -899,26 +946,29 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 8;
                     type.Default = (int) DefaultType.No;
+                    type.ActionLabel = "Researching and visiting 'Housing/Neighborhoods'";
                 }
             }
 
-            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Religious workship".ToUpper()))
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Religious worship".ToUpper()))
             {
                 context.ServiceTypes.Add(new ServiceType()
                 {
                     Name = "Religious workship",
                     Category = ServiceCategory.AreaOrientation,
                     SortOrder = 9,
-                    Default = (int)DefaultType.No
+                    Default = (int)DefaultType.No,
+                    ActionLabel = "Finding places for 'Religious worship'"
                 });
             }
             else
             {
-                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Religious workship".ToUpper());
+                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Religious worship".ToUpper());
                 if (type.SortOrder == 0)
                 {
                     type.SortOrder = 9;
                     type.Default = (int)DefaultType.No;
+                    type.ActionLabel = "Finding places for 'Religious worship'";
                 }
             }
 
@@ -929,7 +979,8 @@ namespace Odin.Data.Persistence.Migrations
                     Name = "Shopping information",
                     Category = ServiceCategory.AreaOrientation,
                     SortOrder = 10,
-                    Default = (int)DefaultType.No
+                    Default = (int)DefaultType.No,
+                    ActionLabel = "Researching 'Shopping information'"
                 });
             }
             else
@@ -939,6 +990,7 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 10;
                     type.Default = (int)DefaultType.No;
+                    type.ActionLabel = "Researching 'Shopping information'";
                 }
             }
 
@@ -949,7 +1001,8 @@ namespace Odin.Data.Persistence.Migrations
                     Name = "Restaurants",
                     Category = ServiceCategory.AreaOrientation,
                     SortOrder = 11,
-                    Default = (int)DefaultType.No
+                    Default = (int)DefaultType.No,
+                    ActionLabel = "Locating 'Restaurants'"
                 });
             }
             else
@@ -959,6 +1012,7 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 11;
                     type.Default = (int)DefaultType.No;
+                    type.ActionLabel = "Locating 'Restaurants'";
                 }
             }
 
@@ -969,7 +1023,8 @@ namespace Odin.Data.Persistence.Migrations
                     Name = "Arts and leisure facilities",
                     Category = ServiceCategory.AreaOrientation,
                     SortOrder = 12,
-                    Default = (int)DefaultType.No
+                    Default = (int)DefaultType.No,
+                    ActionLabel = "Locating local 'Arts and leisure facilities'"
                 });
             }
             else
@@ -979,6 +1034,7 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 12;
                     type.Default = (int)DefaultType.No;
+                    type.ActionLabel = "Locating local 'Arts and leisure facilities'";
                 }
             }
 
@@ -989,7 +1045,8 @@ namespace Odin.Data.Persistence.Migrations
                     Name = "Clubs (social / health / recreational)",
                     Category = ServiceCategory.AreaOrientation,
                     SortOrder = 13,
-                    Default = (int)DefaultType.No
+                    Default = (int)DefaultType.No,
+                    ActionLabel = "Locating local 'Clubs (social / health / recreational)'"
                 });
             }
             else
@@ -999,6 +1056,7 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 13;
                     type.Default = (int)DefaultType.No;
+                    type.ActionLabel = "Locating local 'Clubs (social / health / recreational)'";
                 }
             }
 
@@ -1009,7 +1067,8 @@ namespace Odin.Data.Persistence.Migrations
                     Name = "Sports information",
                     Category = ServiceCategory.AreaOrientation,
                     SortOrder = 14,
-                    Default = (int)DefaultType.No
+                    Default = (int)DefaultType.No,
+                    ActionLabel = "Aquiring 'Sports information'"
                 });
             }
             else
@@ -1019,6 +1078,7 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 14;
                     type.Default = (int)DefaultType.No;
+                    type.ActionLabel = "Aquiring 'Sports information'";
                 }
             }
 
@@ -1029,7 +1089,8 @@ namespace Odin.Data.Persistence.Migrations
                     Name = "Volunteer associations",
                     Category = ServiceCategory.AreaOrientation,
                     SortOrder = 15,
-                    Default = (int)DefaultType.No
+                    Default = (int)DefaultType.No,
+                    ActionLabel = "Investigating 'Volunteer associations'"
                 });
             }
             else
@@ -1039,6 +1100,7 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 15;
                     type.Default = (int)DefaultType.No;
+                    type.ActionLabel = "Investigating 'Volunteer associations'";
                 }
             }
 
@@ -1049,7 +1111,8 @@ namespace Odin.Data.Persistence.Migrations
                     Name = "Library",
                     Category = ServiceCategory.AreaOrientation,
                     SortOrder = 16,
-                    Default = (int)DefaultType.No
+                    Default = (int)DefaultType.No,
+                    ActionLabel = "Locating the local 'Library'"
                 });
             }
             else
@@ -1059,6 +1122,7 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 16;
                     type.Default = (int)DefaultType.No;
+                    type.ActionLabel = "Locating the local 'Library'";
                 }
             }
 
@@ -1069,7 +1133,8 @@ namespace Odin.Data.Persistence.Migrations
                     Name = "Emergency/police/fire",
                     Category = ServiceCategory.AreaOrientation,
                     SortOrder = 17,
-                    Default = (int)DefaultType.No
+                    Default = (int)DefaultType.No,
+                    ActionLabel = "Locating the local 'Emergency/police/fire'"
                 });
             }
             else
@@ -1079,6 +1144,7 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 17;
                     type.Default = (int)DefaultType.No;
+                    type.ActionLabel = "Locating the local 'Emergency/police/fire'";
                 }
             }
 
@@ -1089,7 +1155,8 @@ namespace Odin.Data.Persistence.Migrations
                     Name = "Local/Regional/Government Holidays",
                     Category = ServiceCategory.AreaOrientation,
                     SortOrder = 18,
-                    Default = (int)DefaultType.No
+                    Default = (int)DefaultType.No,
+                    ActionLabel = "Marking the 'Local/Regional/Government Holidays'"
                 });
             }
             else
@@ -1099,6 +1166,7 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 18;
                     type.Default = (int)DefaultType.No;
+                    type.ActionLabel = "Marking the 'Local/Regional/Government Holidays'";
                 }
             }
 
@@ -1109,7 +1177,8 @@ namespace Odin.Data.Persistence.Migrations
                     Name = "Settling In / Overview",
                     Category = ServiceCategory.SettlingIn,
                     SortOrder = 4,
-                    Default = (int)DefaultType.Domestic + (int)DefaultType.International
+                    Default = (int)DefaultType.Domestic + (int)DefaultType.International,
+                    ActionLabel = "Looking into 'Settling In / Overview'"
                 });
             }
             else
@@ -1119,6 +1188,7 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 4;
                     type.Default = (int)DefaultType.Domestic + (int)DefaultType.International;
+                    type.ActionLabel = "Looking into 'Settling In / Overview'";
                 }
             }
 
