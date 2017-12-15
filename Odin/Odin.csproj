@@ -19,7 +19,8 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>44303</IISExpressSSLPort>
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -310,6 +311,7 @@
     <Compile Include="Controllers\Api\BookMarkletController.cs" />
     <Compile Include="Controllers\Api\ConsultantsController.cs" />
     <Compile Include="Controllers\Api\AppointmentController.cs" />
+    <Compile Include="Controllers\Api\MessageController.cs" />
     <Compile Include="Controllers\AppointmentController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\HelpController.cs" />
@@ -319,6 +321,7 @@
     <Compile Include="Controllers\Api\UserNotificationController.cs" />
     <Compile Include="Controllers\BookMarkletController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\UserNotificationController.cs" />
     <Compile Include="Domain\ImageStore.cs" />
@@ -389,6 +392,7 @@
     <Compile Include="ViewModels\Orders\Transferee\OrdersTransfereeItineraryViewModel.cs" />
     <Compile Include="ViewModels\Orders\Transferee\OrdersTransfereeViewModel.cs" />
     <Compile Include="ViewModels\Shared\ChildViewModel.cs" />
+    <Compile Include="ViewModels\Shared\PropertyMessagesViewModel .cs" />
     <Compile Include="ViewModels\Shared\ItineraryEntryViewModel.cs" />
     <Compile Include="ViewModels\Shared\ManagerViewModel.cs" />
     <Compile Include="ViewModels\Shared\NotificationViewModel.cs" />
@@ -472,6 +476,12 @@
     </Content>
     <Content Include="Content\css\transferee\messages.min.css">
       <DependentUpon>messages.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\transferee\propertyMessages.css">
+      <DependentUpon>propertyMessages.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\transferee\propertyMessages.min.css">
+      <DependentUpon>propertyMessages.css</DependentUpon>
     </Content>
     <Content Include="Content\css\transferee\sideNav.css">
       <DependentUpon>sideNav.scss</DependentUpon>
@@ -765,6 +775,7 @@
     <Content Include="Scripts\app\services\userManagementService.js" />
     <Content Include="Scripts\app\views\bookmarklet.js" />
     <Content Include="Scripts\app\views\transferee-itin-appntmt.js" />
+    <Content Include="Scripts\app\views\transferee-hfp-messages.js" />
     <Content Include="Scripts\app\views\transferee-housing.js" />
     <Content Include="Scripts\app\views\transferee-details.js" />
     <Content Include="Scripts\app\views\transferee-itinerary.js" />
@@ -821,6 +832,7 @@
     <Content Include="Content\css\bookmarklet.scss" />
     <Content Include="Content\css\help.scss" />
     <TypeScriptCompile Include="Content\css\transferee\HFProperties.scss" />
+    <Content Include="Content\css\transferee\propertyMessages.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
@@ -991,6 +1003,7 @@
     <Content Include="Views\Shared\EditorTemplates\LikeDislike.cshtml" />
     <Content Include="Views\Help\Index.cshtml" />
     <Content Include="Views\Shared\Partials\multipleChoiceRadioButtons.cshtml" />
+    <Content Include="Views\Orders\Partials\_Message.cshtml" />
     <None Include="Web.Azure.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1003,6 +1016,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\Appointment\" />
     <Folder Include="Views\Email\" />
+    <Folder Include="Views\Message\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">

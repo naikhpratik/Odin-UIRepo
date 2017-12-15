@@ -6,11 +6,10 @@
             <div class="col-md-1">
                 <p>Location Photos:</p>
             </div>
-            @* Switch next 3 columns to col-md-2 when adding remaining columns *@
             <div class="col-md-2">
                 <p>Address:</p>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <p>Availability Date:</p>
             </div>
             <div class="col-md-3">
@@ -24,11 +23,9 @@
             <div class="col-md-1">
                 <p>Like or Dislike:</p>
             </div>
-            <!--
             <div class="col-md-1">
                 <p>Property Comments:</p>
             </div>
-            -->
         </div>
     </div>
 
@@ -75,7 +72,7 @@
                         @Html.DisplayFor(m => propertyVM.PropertyAddress)
                     </p>
                 </div>
-                <div class="col-md-3 col-xs-12">
+                <div class="col-md-2 col-xs-12">
                     <label class="mobileLabel">Availability</label>
                     <p>
                         @Html.DisplayFor(m => propertyVM.PropertyAvailabilityDate)
@@ -104,19 +101,34 @@
                     @Html.EditorFor(m => propertyVM.Liked, new { propertyId = propertyVM.Id })
 
                 </div>
-                <!--
                 <div class="col-md-1 comments">
                     <img src="~/Content/Images/icn_chat_bubble.png" />
-                    <span>09</span>
+                    <span>@propertyVM.Messages.Count()</span>
                 </div>
-                -->
             </li>
         }
 
     </ul>
 </div>
-
+<div class="modal fade notificationModal" id="modalNotification" tabindex="-100" role="dialog" data-backdrop="static" aria-labelledby="notificationModalLabel" aria-hidden="true" style="z-index: 2147483647;">
+    <div class="modal-dialog" role="document" id="notification" style="z-index: 2147483647;">
+        <div class="modal-content">
+            
+        </div>
+    </div>
+</div>
 @if (ViewBag.IsPDF == true)
 {
     @Styles.Render("~/Styling/properties")
 }
+<script>
+    $('.comments').click(function (event) {
+        var app = $('#modalNotification');        
+        var url = '/Message/MessagePartial/' + $(this).parent().attr('data-property-id');
+        $.get(url, function (data) {
+            app.find('.modal-content').html();
+            app.find('.modal-content').html(data);            
+        });        
+        app.modal('show');
+    });
+</script>

@@ -31,7 +31,7 @@ var TransfereeAppointmentController = function (transfereeItineraryAppointment) 
             keepOpen: false
         });
 
-        var modalParent = appointmentModal.parent().parent()
+        var modalParent = appointmentModal.parent().parent();
         //New Event for Appointment
         modalParent.on("click", ".new", newAppointment);
        

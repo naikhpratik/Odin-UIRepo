@@ -23,6 +23,7 @@ namespace Odin.Data.Core
         IUserNotificationRepository UserNotifications { get; }
         IPhotosRepository Photos { get; }
         IHomeFindingPropertyRepository HomeFindingProperties { get; }
+        IMessagesRepository Messages { get; }
         void Complete();
     }
 }

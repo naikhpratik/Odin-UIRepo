@@ -43,7 +43,6 @@ namespace Odin
                 .ForMember(m => m.ItemType, opt => opt.MapFrom(src => src.GetType().ToString()))
                 .ForMember(m => m.ScheduledDate, opt => opt.MapFrom(src => src.ScheduledDate))
                 .ForMember(m => m.ActionLabel, opt => opt.MapFrom(src => src.ServiceType.ActionLabel));
-
             CreateMap<HomeFindingProperty, ItineraryEntryViewModel>()
                 .ForMember(m => m.ItemType, opt => opt.MapFrom(src => src.GetType().ToString()))
                 .ForMember(m => m.ScheduledDate, opt => opt.MapFrom(src => src.ViewingDate))
@@ -80,6 +79,7 @@ namespace Odin
             CreateMap<ConsultantImportDto, Consultant>();
             CreateMap<ServiceDto, Service>();
             CreateMap<AppointmentDto, Appointment>();
+            CreateMap<MessageDto, Message>();
 
             CreateMap<ChildDto, Child>();
             CreateMap<PetDto, Pet>();

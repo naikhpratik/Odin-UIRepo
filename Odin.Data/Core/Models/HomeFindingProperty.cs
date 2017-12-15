@@ -12,5 +12,6 @@ namespace Odin.Data.Core.Models
         public HomeFinding HomeFinding { get; set; }
         public bool? Liked { get; set; }
         public DateTime? ViewingDate { get; set; }
+        public virtual ICollection<Message> Messages { get; set; }
     }
 }
