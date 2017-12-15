@@ -6,6 +6,13 @@
 .clickable {
   cursor: pointer; }
 
+.sortLabel {
+  text-align: center; }
+
+.sortPlus, .sortMinus {
+  margin-left: 1rem;
+  display: none; }
+
 div#list {
   height: auto;
   padding-bottom: 4.5rem; }

@@ -18,22 +18,22 @@
     <ul class="container-fluid">
         <li class="header row">
             <div class="col-md-2">
-                <label id="eeNameSort" class="sortLabel">Transferee Sort <span class="sortPlus">+</span>/<span class="sortMinus">-</span></label>
+                <label id="eeNameSort" class="sortLabel">Transferee Name<span class="sortPlus"><img src="/Content/Images/icn_up_sel_arrow.png" /></span><span class="sortMinus"><img src="/Content/Images/icn_down_arrow.png" /></span></label>
             </div>
             <div class="col-md-2">
                 <label>Authorized Tasks</label>
             </div>
             <div class="col-md-2">
-                <label id="pmNameSort" class="sortLabel">Manager <span class="sortPlus">+</span>/<span class="sortMinus">-</span></label>
+                <label id="pmNameSort" class="sortLabel">Manager <span class="sortPlus"><img src="/Content/Images/icn_up_sel_arrow.png" /></span><span class="sortMinus"><img src="/Content/Images/icn_down_arrow.png" /></span></label>
             </div>
             <div class="col-md-2">
-                <label id="preTripDateSort" class="sortLabel">Pre-Trip <span class="sortPlus">+</span>/<span class="sortMinus">-</span></label>
+                <label id="preTripDateSort" class="sortLabel">Pre-Trip <span class="sortPlus"><img src="/Content/Images/icn_up_sel_arrow.png" /></span><span class="sortMinus"><img src="/Content/Images/icn_down_arrow.png" /></span></label>
             </div>
             <div class="col-md-2">
-                <label id="estimatedArrivalDateSort" class="sortLabel">Final Arrival <span class="sortPlus">+</span>/<span class="sortMinus">-</span></label>
+                <label id="estimatedArrivalDateSort" class="sortLabel">Final Arrival <span class="sortPlus"><img src="/Content/Images/icn_up_sel_arrow.png" /></span><span class="sortMinus"><img src="/Content/Images/icn_down_arrow.png" /></span></label>
             </div>
             <div class="col-md-2">
-                <label id="notificationsSort" class="sortLabel">Notifications <span class="sortPlus">+</span>/<span class="sortMinus">-</span></label>
+                <label id="notificationsSort" class="sortLabel">Notifications <span class="sortPlus"><img src="/Content/Images/icn_up_sel_arrow.png" /></span><span class="sortMinus"><img src="/Content/Images/icn_down_arrow.png" /></span></label>
             </div>
         </li>
         @if (Model == null)
@@ -47,7 +47,7 @@
             <li class="row clickable orderRow" data-order-id="@order.Id">
                 <div class="col-md-2">
                     <label class="header">Transferee</label>
-                    <p class="eeName">@order.Transferee.FullName</p>
+                    <p class="eeName" data-last-name="@order.Transferee.LastName">@order.Transferee.FullName</p>
                     <p class="rmcName">@order.Rmc</p>
                     <p class="clientName">@order.Client</p>
                 </div>
@@ -88,7 +88,7 @@
             </div>
             <div class="col-md-2">
                 <label class="header">Manager</label>
-                <p class="pmName">@order.ProgramManager.FullName</p>
+                <p class="pmName" data-last-name="@order.ProgramManager.LastName">@order.ProgramManager.FullName</p>
                 <p class="subTitle pmPhone">@order.ProgramManager.PhoneNumber</p>
             </div>
             <div class="col-md-2">

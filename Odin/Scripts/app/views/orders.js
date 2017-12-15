@@ -45,11 +45,11 @@
 
     var initSort = function() {
         $("#eeNameSort").click(function () {
-            sortCol($(this), "name", function(a) { return a.toUpperCase() });
+            sortCol($(this), "eeLastName", function(a) { return a.toUpperCase() });
         });
 
         $("#pmNameSort").click(function () {
-            sortCol($(this), "pmName", function (a) { return a.toUpperCase() });
+            sortCol($(this), "pmLastName", function (a) { return a.toUpperCase() });
         });
 
         $("#preTripDateSort").click(function () {
@@ -63,12 +63,19 @@
         $("#notificationsSort").click(function () {
             sortCol($(this), "notifications", function (a) { return parseInt(a.replace("*","")) });
         });
+
+
+        //Default sort. Move to server?
+        sortCol($("#estimatedArrivalDateSort"), "estimatedArrivalDate", function (a) { return new Date(a) });
     }
 
     var sortCol = function(headerElt, dataName, sortFunc) {
         resetSortHeaders();
         headerElt.css("font-weight", "Bold").css("color", "black");
-       
+
+        var ascElt = headerElt.find(".sortPlus");
+        var descElt = headerElt.find(".sortMinus");
+        
         var sortId = headerElt.attr('id');
         if (_sortCurr === sortId) {
             _sortAsc = !_sortAsc;
@@ -78,11 +85,12 @@
         }
 
         if (_sortAsc) {
-            headerElt.find(".sortPlus").css("color", "#e53c2e");
-            headerElt.find(".sortMinus").css("color", "black");
+            ascElt.css("display", "inline-block");
+            descElt.css("display", "none");
+
         } else {
-            headerElt.find(".sortMinus").css("color", "#e53c2e");
-            headerElt.find(".sortPlus").css("color", "black");
+            descElt.css("display", "inline-block");
+            ascElt.css("display", "none");
         }
         
         _data.sort(sortBy(dataName, _sortAsc, sortFunc));
@@ -90,28 +98,34 @@
     }
 
     var resetSortHeaders = function () {
-        $(".sortLabel, .sortLabel .sortPlus, .sortLabel .sortMinus").css("font-weight", "normal").css("color", "#858585");
-       
+        $(".sortLabel, .sortLabel").css("font-weight", "normal").css("color", "#858585");
+        $(".sortPlus,.sortMinus").css("display", "none");
+
     }
 
     var bindData = function()
     {
         var rows = $(".orderRow");
-        rows.each(function(i, elt) {
-            $(this).attr("data-order-id",_data[i]["id"]);
-            $(this).find(".eeName").text(_data[i]["name"]);
-            $(this).find(".rmcName").text(_data[i]["rmcName"]);
-            $(this).find(".clientName").text(_data[i]["clientName"]);
-            $(this).find(".pmName").text(_data[i]["pmName"]);
-            $(this).find(".pmPhone").text(_data[i]["pmPhone"]);
-            $(this).find(".preTripDate").text(_data[i]["preTripDate"]);
-            $(this).find(".estimatedArrivalDate").text(_data[i]["estimatedArrivalDate"]);
-            $(this).find(".notifications").text(_data[i]["notifications"]);
+        rows.each(function (i, element) {
 
-            var pb = $(this).find(".progressBar");
-            pb.data("comp-percent", _data[i]["compPercent"]);
-            pb.data("auth-percent", _data[i]["authPercent"]);
-            pb.data("sched-percent", _data[i]["schedPercent"]);
+            var elt = $(element);
+           
+            elt.attr("data-order-id",_data[i]["id"]);
+            elt.find(".eeName").text(_data[i]["eeName"]);
+            elt.find(".eeName").data("last-name",_data[i]["eeLastName"]);
+            elt.find(".rmcName").text(_data[i]["rmcName"]);
+            elt.find(".clientName").text(_data[i]["clientName"]);
+            elt.find(".pmName").text(_data[i]["pmName"]);
+            elt.find(".pmName").data("last-name", _data[i]["pmLastName"]);
+            elt.find(".pmPhone").text(_data[i]["pmPhone"]);
+            elt.find(".preTripDate").text(_data[i]["preTripDate"]);
+            elt.find(".estimatedArrivalDate").text(_data[i]["estimatedArrivalDate"]);
+            elt.find(".notifications").text(_data[i]["notifications"]);
+
+            var pb = elt.find(".progressBar");
+            pb.attr("data-comp-percent", _data[i]["compPercent"]);
+            pb.attr("data-auth-percent", _data[i]["authPercent"]);
+            pb.attr("data-sched-percent", _data[i]["schedPercent"]);
             loadProgressBar(pb);
         });
     }
@@ -120,28 +134,34 @@
         var rows = $(".orderRow");
         var data = new Array();
 
-        rows.each(function () {
-            var id = $(this).attr("data-order-id");
-            var name = $(this).find(".eeName").text();
-            var rmcName = $(this).find(".rmcName").text();
-            var clientName = $(this).find(".clientName").text();
-            var pmName = $(this).find(".pmName").text();
-            var pmPhone = $(this).find(".pmPhone").text();
-            var preTripDate = $(this).find(".preTripDate").text();
-            var estimatedArrivalDate = $(this).find(".estimatedArrivalDate").text();
-            var notifications = $(this).find(".notifications").text();
+        rows.each(function (i, element) {
 
-            var pb = $(this).find(".progressBar");
-            var authPercent = pb.data("auth-percent");
-            var schedPercent = pb.data("sched-percent");
-            var compPercent = pb.data("comp-percent");
+            var elt = $(element);
+            var id = elt.attr("data-order-id");
+            var eeName = elt.find(".eeName").text();
+            var eeLastName = elt.find(".eeName").attr("data-last-name");
+            var rmcName = elt.find(".rmcName").text();
+            var clientName = elt.find(".clientName").text();
+            var pmName = elt.find(".pmName").text();
+            var pmLastName = elt.find(".pmName").attr("data-last-name");
+            var pmPhone = elt.find(".pmPhone").text();
+            var preTripDate = elt.find(".preTripDate").text();
+            var estimatedArrivalDate = elt.find(".estimatedArrivalDate").text();
+            var notifications = elt.find(".notifications").text();
+
+            var pb = elt.find(".progressBar");
+            var authPercent = pb.attr("data-auth-percent");
+            var schedPercent = pb.attr("data-sched-percent");
+            var compPercent = pb.attr("data-comp-percent");
 
             data.push({
                 id: id,
-                name: name,
+                eeName: eeName,
+                eeLastName:eeLastName,
                 rmcName: rmcName,
                 clientName: clientName,
                 pmName: pmName,
+                pmLastName:pmLastName,
                 pmPhone:pmPhone,
                 preTripDate: preTripDate,
                 estimatedArrivalDate: estimatedArrivalDate,
@@ -173,9 +193,9 @@
     }
 
     var loadProgressBar = function(pbElt) {
-        pbElt.find(".progressBar__auth").width(pbElt.data("auth-percent"));
-        pbElt.find(".progressBar__sched").width(pbElt.data("sched-percent"));
-        pbElt.find(".progressBar__comp").width(pbElt.data("comp-percent"));
+        pbElt.find(".progressBar__auth").width(pbElt.attr("data-auth-percent"));
+        pbElt.find(".progressBar__sched").width(pbElt.attr("data-sched-percent"));
+        pbElt.find(".progressBar__comp").width(pbElt.attr("data-comp-percent"));
     }
 
     return { 
