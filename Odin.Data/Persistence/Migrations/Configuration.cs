@@ -82,7 +82,7 @@ namespace Odin.Data.Persistence.Migrations
                     });
                     orders[i].Services.Add(new Service()
                     {
-                        ServiceType = context.ServiceTypes.OrderByDescending(st=>st.Id).First(),
+                        ServiceType = context.ServiceTypes.OrderByDescending(st => st.Id).First(),
                         Selected = true
                     });
                     context.Orders.Add(orders[i]);
@@ -251,7 +251,7 @@ namespace Odin.Data.Persistence.Migrations
 
             if (!context.NumberOfBathrooms.Any(n => n.Id == 1))
             {
-                context.NumberOfBathrooms.Add(new NumberOfBathroomsType() {Id = 1, Name = "0",SeValue = "0"});
+                context.NumberOfBathrooms.Add(new NumberOfBathroomsType() { Id = 1, Name = "0", SeValue = "0" });
             }
 
             if (!context.NumberOfBathrooms.Any(n => n.Id == 2))
@@ -261,7 +261,7 @@ namespace Odin.Data.Persistence.Migrations
 
             if (!context.NumberOfBathrooms.Any(n => n.Id == 3))
             {
-                context.NumberOfBathrooms.Add(new NumberOfBathroomsType() { Id = 3, Name = "1", SeValue = "1"});
+                context.NumberOfBathrooms.Add(new NumberOfBathroomsType() { Id = 3, Name = "1", SeValue = "1" });
             }
 
             if (!context.NumberOfBathrooms.Any(n => n.Id == 4))
@@ -271,7 +271,7 @@ namespace Odin.Data.Persistence.Migrations
 
             if (!context.NumberOfBathrooms.Any(n => n.Id == 5))
             {
-                context.NumberOfBathrooms.Add(new NumberOfBathroomsType() { Id = 5, Name = "2", SeValue = "2"});
+                context.NumberOfBathrooms.Add(new NumberOfBathroomsType() { Id = 5, Name = "2", SeValue = "2" });
             }
 
             if (!context.NumberOfBathrooms.Any(n => n.Id == 6))
@@ -348,7 +348,7 @@ namespace Odin.Data.Persistence.Migrations
 
             if (!context.AreaTypes.Any(a => a.Id == 1))
             {
-                context.AreaTypes.Add(new AreaType() { Id = 1, Name = "Suburban"});
+                context.AreaTypes.Add(new AreaType() { Id = 1, Name = "Suburban" });
             }
 
             if (!context.AreaTypes.Any(a => a.Id == 2))
@@ -368,7 +368,7 @@ namespace Odin.Data.Persistence.Migrations
         {
             if (!context.TransportationTypes.Any(t => t.Id == 1))
             {
-                context.TransportationTypes.Add(new TransportationType() { Id = 1, Name = "Automobile",SeValue = "AUTOMO"});
+                context.TransportationTypes.Add(new TransportationType() { Id = 1, Name = "Automobile", SeValue = "AUTOMO" });
             }
 
             if (!context.TransportationTypes.Any(t => t.Id == 2))
@@ -419,19 +419,19 @@ namespace Odin.Data.Persistence.Migrations
                     Category = ServiceCategory.InitialConsultation,
                     SortOrder = 1,
                     Default = (int)DefaultType.Domestic + (int)DefaultType.International,
-                    ActionLabel= "Going to attend the 'Initial/Pre-Arrival Consultation'"
+                    ActionLabel = "Going to attend the 'Initial/Pre-Arrival Consultation'"
                 });
             }
             else
             {
-                ServiceType type = context.ServiceTypes.SingleOrDefault(s =>s.Name.Trim().ToUpper() == "Initial/Pre-Arrival Consultation".ToUpper());
+                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Initial/Pre-Arrival Consultation".ToUpper());
                 if (type.SortOrder == 0)
                 {
                     type.SortOrder = 1;
-                    type.Default = (int) DefaultType.Domestic + (int) DefaultType.International;
-                    type.ActionLabel = "Going to attend the 'Initial/Pre-Arrival Consultation'";
+                    type.Default = (int)DefaultType.Domestic + (int)DefaultType.International;
+
                 }
-                
+                type.ActionLabel = "Going to attend the 'Initial/Pre-Arrival Consultation'";
             }
 
             if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Welcome Packet".ToUpper()))
@@ -442,7 +442,7 @@ namespace Odin.Data.Persistence.Migrations
                     Category = ServiceCategory.WelcomePacket,
                     SortOrder = 2,
                     Default = (int)DefaultType.Domestic + (int)DefaultType.International,
-                    ActionLabel= "Receiving the 'Welcome Packet'"
+                    ActionLabel = "Receiving the 'Welcome Packet'"
                 });
             }
             else
@@ -452,8 +452,9 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 2;
                     type.Default = (int)DefaultType.Domestic + (int)DefaultType.International;
-                    type.ActionLabel = "Receiving the 'Welcome Packet'";
+
                 }
+                type.ActionLabel = "Receiving the 'Welcome Packet'";
             }
 
             if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Social Security Registration".ToUpper()))
@@ -464,7 +465,7 @@ namespace Odin.Data.Persistence.Migrations
                     Category = ServiceCategory.SettlingIn,
                     SortOrder = 5,
                     Default = (int)DefaultType.International,
-                    ActionLabel= "Going to register for 'Social Security Registration'"
+                    ActionLabel = "Going to register for 'Social Security Registration'"
                 });
             }
             else
@@ -474,8 +475,9 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 5;
                     type.Default = (int)DefaultType.International;
-                    type.ActionLabel = "Going to register for 'Social Security Registration'";
+
                 }
+                type.ActionLabel = "Going to register for 'Social Security Registration'";
             }
 
             if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Colleges/Universities".ToUpper()))
@@ -486,7 +488,7 @@ namespace Odin.Data.Persistence.Migrations
                     Category = ServiceCategory.SettlingIn,
                     SortOrder = 19,
                     Default = (int)DefaultType.No,
-                    ActionLabel= "Going to explore 'Colleges/Universities'"
+                    ActionLabel = "Going to explore 'Colleges/Universities'"
                 });
             }
             else
@@ -496,8 +498,9 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 19;
                     type.Default = (int)DefaultType.No;
-                    type.ActionLabel = "Going to explore 'Colleges/Universities'";
+
                 }
+                type.ActionLabel = "Going to explore 'Colleges/Universities'";
             }
 
             if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Language Assistance".ToUpper()))
@@ -508,7 +511,7 @@ namespace Odin.Data.Persistence.Migrations
                     Category = ServiceCategory.SettlingIn,
                     SortOrder = 20,
                     Default = (int)DefaultType.No,
-                    ActionLabel= "Going to receive 'Language Assistance'"
+                    ActionLabel = "Going to receive 'Language Assistance'"
                 });
             }
             else
@@ -518,8 +521,9 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 20;
                     type.Default = (int)DefaultType.No;
-                    type.ActionLabel = "Going to receive 'Language Assistance'";
+
                 }
+                type.ActionLabel = "Going to receive 'Language Assistance'";
             }
 
             if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Telephone systems".ToUpper()))
@@ -530,7 +534,7 @@ namespace Odin.Data.Persistence.Migrations
                     Category = ServiceCategory.SettlingIn,
                     SortOrder = 21,
                     Default = (int)DefaultType.No,
-                    ActionLabel= "Going to compare 'Telephone systems'"
+                    ActionLabel = "Going to compare 'Telephone systems'"
                 });
             }
             else
@@ -540,8 +544,9 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 21;
                     type.Default = (int)DefaultType.No;
-                    type.ActionLabel = "Going to compare 'Telephone systems'";
+
                 }
+                type.ActionLabel = "Going to compare 'Telephone systems'";
             }
 
             if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Utility hook-up".ToUpper()))
@@ -552,7 +557,7 @@ namespace Odin.Data.Persistence.Migrations
                     Category = ServiceCategory.SettlingIn,
                     SortOrder = 22,
                     Default = (int)DefaultType.No,
-                    ActionLabel= "Going to work on 'Utility hook-up'"
+                    ActionLabel = "Going to work on 'Utility hook-up'"
                 });
             }
             else
@@ -562,8 +567,9 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 22;
                     type.Default = (int)DefaultType.No;
-                    type.ActionLabel = "Going to work on 'Utility hook-up'";
+
                 }
+                type.ActionLabel = "Going to work on 'Utility hook-up'";
             }
 
             if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Internet service providers".ToUpper()))
@@ -574,7 +580,7 @@ namespace Odin.Data.Persistence.Migrations
                     Category = ServiceCategory.SettlingIn,
                     SortOrder = 23,
                     Default = (int)DefaultType.No,
-                    ActionLabel= "Researching available 'Internet service providers'"
+                    ActionLabel = "Researching available 'Internet service providers'"
                 });
             }
             else
@@ -584,8 +590,9 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 23;
                     type.Default = (int)DefaultType.No;
-                    type.ActionLabel = "Researching available 'Internet service providers'";
+
                 }
+                type.ActionLabel = "Researching available 'Internet service providers'";
             }
 
             if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Furniture Rental".ToUpper()))
@@ -606,8 +613,8 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 24;
                     type.Default = (int)DefaultType.No;
-                    type.ActionLabel = "Going to look into 'Furniture Rental'";
                 }
+                type.ActionLabel = "Going to look into 'Furniture Rental'";
             }
 
             if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Furniture Purchase".ToUpper()))
@@ -628,8 +635,8 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 25;
                     type.Default = (int)DefaultType.No;
-                    type.ActionLabel = "Going to complete 'Furniture Purchase'";
                 }
+                type.ActionLabel = "Going to complete 'Furniture Purchase'";
             }
 
             if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Appliances(compatibility / purchase)".ToUpper()))
@@ -650,8 +657,8 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 26;
                     type.Default = (int)DefaultType.No;
-                    type.ActionLabel = "Going to shop for 'Appliances(compatibility / purchase)'";
                 }
+                type.ActionLabel = "Going to shop for 'Appliances(compatibility / purchase)'";
             }
 
             if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Driving/auto info (licensing / driving schools)".ToUpper()))
@@ -672,8 +679,8 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 7;
                     type.Default = (int)DefaultType.International;
-                    type.ActionLabel = "Going to look into 'Driving/auto info (licensing / driving schools)'";
                 }
+                type.ActionLabel = "Going to look into 'Driving/auto info (licensing / driving schools)'";
             }
 
             if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Transportation options".ToUpper()))
@@ -694,8 +701,8 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 27;
                     type.Default = (int)DefaultType.No;
-                    type.ActionLabel = "Going to look into 'Transportation options'";
                 }
+                type.ActionLabel = "Going to look into 'Transportation options'";
             }
 
             if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Homeowner's services".ToUpper()))
@@ -716,8 +723,8 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 28;
                     type.Default = (int)DefaultType.No;
-                    type.ActionLabel = "Exploring various 'Homeowner's services'";
                 }
+                type.ActionLabel = "Exploring various 'Homeowner's services'";
             }
 
             if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Insurance (auto / renter / homeowner)".ToUpper()))
@@ -738,8 +745,8 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 29;
                     type.Default = (int)DefaultType.No;
-                    type.ActionLabel = "Shopping for 'Insurance (auto / renter / homeowner)'";
                 }
+                type.ActionLabel = "Shopping for 'Insurance (auto / renter / homeowner)'";
             }
 
             if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Medical/dental information".ToUpper()))
@@ -760,8 +767,8 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 30;
                     type.Default = (int)DefaultType.No;
-                    type.ActionLabel = "Researching 'Medical/dental information'";
                 }
+                type.ActionLabel = "Researching 'Medical/dental information'";
             }
 
             if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Money issues/banking".ToUpper()))
@@ -782,8 +789,8 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 6;
                     type.Default = (int)DefaultType.International;
-                    type.ActionLabel = "Looking into and resolving 'Money issues/banking'";
                 }
+                type.ActionLabel = "Looking into and resolving 'Money issues/banking'";
             }
 
             if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Mail services".ToUpper()))
@@ -804,8 +811,8 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 31;
                     type.Default = (int)DefaultType.No;
-                    type.ActionLabel = "Finding 'Mail services'";
                 }
+                type.ActionLabel = "Finding 'Mail services'";
             }
 
             if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Domestic services(maid / cook / driver)".ToUpper()))
@@ -826,8 +833,8 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 32;
                     type.Default = (int)DefaultType.No;
-                    type.ActionLabel = "Finding and hiring 'Domestic services(maid / cook / driver)'";
                 }
+                type.ActionLabel = "Finding and hiring 'Domestic services(maid / cook / driver)'";
             }
 
             if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Pets (care/licensing/etc.)".ToUpper()))
@@ -848,8 +855,8 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 33;
                     type.Default = (int)DefaultType.No;
-                    type.ActionLabel = "Finding 'Pets (care/licensing/etc.)'";
                 }
+                type.ActionLabel = "Finding 'Pets (care/licensing/etc.)'";
             }
 
             if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Childcare".ToUpper()))
@@ -870,8 +877,8 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 34;
                     type.Default = (int)DefaultType.No;
-                    type.ActionLabel = "Researching and finding 'Childcare'";
                 }
+                type.ActionLabel = "Researching and finding 'Childcare'";
             }
 
             if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Eldercare".ToUpper()))
@@ -892,8 +899,8 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 35;
                     type.Default = (int)DefaultType.No;
-                    type.ActionLabel = "Researching and finding convenient 'Eldercare'";
                 }
+                type.ActionLabel = "Researching and finding convenient 'Eldercare'";
             }
 
             /*Duplicate Fix*/
@@ -924,8 +931,8 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 3;
                     type.Default = (int)DefaultType.Domestic + (int)DefaultType.International;
-                    type.ActionLabel = "Attending a briefing on 'Area Orientation / Overview'";
                 }
+                type.ActionLabel = "Attending a briefing on 'Area Orientation / Overview'";
             }
 
             if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Housing/Neighborhoods".ToUpper()))
@@ -945,16 +952,16 @@ namespace Odin.Data.Persistence.Migrations
                 if (type.SortOrder == 0)
                 {
                     type.SortOrder = 8;
-                    type.Default = (int) DefaultType.No;
-                    type.ActionLabel = "Researching and visiting 'Housing/Neighborhoods'";
+                    type.Default = (int)DefaultType.No;
                 }
+                type.ActionLabel = "Researching and visiting 'Housing/Neighborhoods'";
             }
 
             if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Religious worship".ToUpper()))
             {
                 context.ServiceTypes.Add(new ServiceType()
                 {
-                    Name = "Religious workship",
+                    Name = "Religious worship",
                     Category = ServiceCategory.AreaOrientation,
                     SortOrder = 9,
                     Default = (int)DefaultType.No,
@@ -968,8 +975,8 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 9;
                     type.Default = (int)DefaultType.No;
-                    type.ActionLabel = "Finding places for 'Religious worship'";
                 }
+                type.ActionLabel = "Finding places for 'Religious worship'";
             }
 
             if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Shopping information".ToUpper()))
@@ -990,8 +997,8 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 10;
                     type.Default = (int)DefaultType.No;
-                    type.ActionLabel = "Researching 'Shopping information'";
                 }
+                type.ActionLabel = "Researching 'Shopping information'";
             }
 
             if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Restaurants".ToUpper()))
@@ -1012,8 +1019,8 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 11;
                     type.Default = (int)DefaultType.No;
-                    type.ActionLabel = "Locating 'Restaurants'";
                 }
+                type.ActionLabel = "Locating 'Restaurants'";
             }
 
             if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Arts and leisure facilities".ToUpper()))
@@ -1034,8 +1041,8 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 12;
                     type.Default = (int)DefaultType.No;
-                    type.ActionLabel = "Locating local 'Arts and leisure facilities'";
                 }
+                type.ActionLabel = "Locating local 'Arts and leisure facilities'";
             }
 
             if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Clubs (social / health / recreational)".ToUpper()))
@@ -1056,8 +1063,8 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 13;
                     type.Default = (int)DefaultType.No;
-                    type.ActionLabel = "Locating local 'Clubs (social / health / recreational)'";
                 }
+                type.ActionLabel = "Locating local 'Clubs (social / health / recreational)'";
             }
 
             if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Sports information".ToUpper()))
@@ -1078,8 +1085,8 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 14;
                     type.Default = (int)DefaultType.No;
-                    type.ActionLabel = "Aquiring 'Sports information'";
                 }
+                type.ActionLabel = "Aquiring 'Sports information'";
             }
 
             if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Volunteer associations".ToUpper()))
@@ -1100,8 +1107,8 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 15;
                     type.Default = (int)DefaultType.No;
-                    type.ActionLabel = "Investigating 'Volunteer associations'";
                 }
+                type.ActionLabel = "Investigating 'Volunteer associations'";
             }
 
             if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Library".ToUpper()))
@@ -1122,8 +1129,8 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 16;
                     type.Default = (int)DefaultType.No;
-                    type.ActionLabel = "Locating the local 'Library'";
                 }
+                type.ActionLabel = "Locating the local 'Library'";
             }
 
             if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Emergency/police/fire".ToUpper()))
@@ -1144,8 +1151,8 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 17;
                     type.Default = (int)DefaultType.No;
-                    type.ActionLabel = "Locating the local 'Emergency/police/fire'";
                 }
+                type.ActionLabel = "Locating the local 'Emergency/police/fire'";
             }
 
             if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Local/Regional/Government Holidays".ToUpper()))
@@ -1166,8 +1173,8 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 18;
                     type.Default = (int)DefaultType.No;
-                    type.ActionLabel = "Marking the 'Local/Regional/Government Holidays'";
                 }
+                type.ActionLabel = "Marking the 'Local/Regional/Government Holidays'";
             }
 
             if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Settling In / Overview".ToUpper()))
@@ -1188,8 +1195,8 @@ namespace Odin.Data.Persistence.Migrations
                 {
                     type.SortOrder = 4;
                     type.Default = (int)DefaultType.Domestic + (int)DefaultType.International;
-                    type.ActionLabel = "Looking into 'Settling In / Overview'";
                 }
+                type.ActionLabel = "Looking into 'Settling In / Overview'";
             }
 
             context.SaveChanges();
