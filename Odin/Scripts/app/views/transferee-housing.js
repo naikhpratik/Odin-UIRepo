@@ -44,24 +44,24 @@
 
         var mapDiv = $("#map");
 
-        var centLat = mapDiv.attr("data-lat");
-        var centLng = mapDiv.attr("data-lng");
+        var centLat = parseFloat(mapDiv.attr("data-lat"));
+        var centLng = parseFloat(mapDiv.attr("data-lng"));
 
         // 'map' refers to a <div> element with the ID map
         var map = L.mapquest.map('map', {
             center: [37.7749, -122.4194],
             layers: L.mapquest.tileLayer('map'),
-            zoom: 12
+            zoom: 10
         });
 
 
         $("#propertiesList > .propertyItem").each(function (index) {
 
-            var lat = $(this).attr("data-lat");
-            var lng = $(this).attr("data-lng");
+            var lat = parseFloat($(this).attr("data-lat"));
+            var lng = parseFloat($(this).attr("data-lng"));
 
-            if (lat !== "" && lng !== "") {
-                if (centLat === "" || centLng === "") {
+            if (!isNaN(lat) && !isNaN(lng) && !(lat === 0 && lng === 0)) {
+                if (isNaN(centLat) || isNaN(centLng)) {
                     centLat = lat;
                     centLng = lng;
                 }
@@ -96,11 +96,9 @@
             }
         });
 
-        if (centLat !== 0 && centLng !== 0) {
-            map.setView(new L.LatLng(centLat, centLng), 12);
-        } else {
-            map.setView(new L.LatLng(37.7749, -122.4194), 12);
-        }
+        if (!isNaN(centLat) && !isNaN(centLng)) {
+            map.setView(new L.LatLng(centLat, centLng), 10);
+        } 
 
         //For some reason need to set height then call invalidateSize to get map displaying correctly.
         //Hacky, works now, look for better solution.
