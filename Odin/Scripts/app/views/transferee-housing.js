@@ -41,7 +41,7 @@
     };
 
     /*** Setup Methods ***/
-    var initMap = function() {
+    var initMap = function () {
         L.mapquest.key = '1tJblQYiEARJGDxuF9gfQVniw3jsi6Ll';
 
         var mapDiv = $("#map");
@@ -75,7 +75,7 @@
                 }
 
                 marker.on("mouseover",
-                    function(e) {
+                    function (e) {
                         this.openPopup();
                     });
 
@@ -86,10 +86,10 @@
 
                 var propertyId = $(this).attr("data-property-id");
                 marker.on("click",
-                    function() {
+                    function () {
                         var propertyModalUrl = '/homefindingproperties/propertypartial/' + propertyId;
                         $('#propertyModalContent').load(propertyModalUrl, function (response, status, xhr) {
-                            if (status == "success") {
+                            if (status === "success") {
                                 $('#propertyDetailsModal').modal('show');
                             }
                         });
@@ -108,7 +108,8 @@
         //Hacky, works now, look for better solution.
         mapDiv.height(300);
         map.invalidateSize(false);
-    }
+    };
+
     var setupPropertiesList = function () {
         setupDatePickers();
 
@@ -184,15 +185,15 @@
         var currentLikedValue = likeDislikeElements.attr('data-liked');
 
         // if the status to be triggered is the same, then clear the status
-        var newLikedStatus = ((currentLikedValue === triggerStatusValue) ? "" : triggerStatusValue);
+        var newLikedStatus = currentLikedValue === triggerStatusValue ? "" : triggerStatusValue;
 
         likeDislikeElements.attr('data-liked', newLikedStatus);
 
         var likedBoolean = null;
         // NOTE: using string comparison due to the possible null/empty state
-        if (newLikedStatus.toLowerCase() == "true") {
+        if (newLikedStatus.toLowerCase() === "true") {
             likedBoolean = true;
-        } else if (newLikedStatus.toLowerCase() == "false") {
+        } else if (newLikedStatus.toLowerCase() === "false") {
             likedBoolean = false;
         }
 
@@ -237,7 +238,8 @@
 
     /**
      * Return all DOM elements that track the liked value for the property matching propertyId
-     * @param {any} propertyId
+     * @param {any} propertyId The id of the property
+     * @return {Array<HTMLElement>} All DOM elements that track the liked value for the property
      */
     var likeDislikeElementsForPropertyId = function (propertyId) {
         var selectorString = '[data-property-id="' + propertyId + '"][data-liked]';
@@ -245,7 +247,7 @@
     };
 
 
-    /*** Update Methods ***/
+    /* Update Methods */
     var updatePropertyLiked = function (propertyId, likedValue) {
 
         var data = {
