@@ -134,26 +134,26 @@
         });
     };
 
-    var triggerLikeStatus = function (propertyId, newLikedStatus) {
+    var triggerLikeStatus = function (propertyId, triggerStatusValue) {
 
         var likeDislikeElements = likeDislikeElementsForPropertyId(propertyId);
-        likeDislikeElements.each(function () {
-            var currentLikedStatus = $(this).attr("data-liked");
-            $(this).attr('data-liked', currentLikedStatus === newLikedStatus ? "" : newLikedStatus);
-        });
 
-        var firstWrapper = likeDislikeElements[0];
-        var propertyId = $(firstWrapper).attr('data-property-id');
-        var likedData = $(firstWrapper).attr('data-liked');
+        var currentLikedValue = likeDislikeElements.attr('data-liked');
 
-        var likedValue = null;
-        if (likedData == "True") {
-            likedValue = true;
-        } else if (likedData == "False") {
-            likedValue = false;
+        // if the status to be triggered is the same, then clear the status
+        var newLikedStatus = ((currentLikedValue === triggerStatusValue) ? "" : triggerStatusValue);
+
+        likeDislikeElements.attr('data-liked', newLikedStatus);
+
+        var likedBoolean = null;
+        // NOTE: using string comparison due to the possible null/empty state
+        if (newLikedStatus.toLowerCase() == "true") {
+            likedBoolean = true;
+        } else if (newLikedStatus.toLowerCase() == "false") {
+            likedBoolean = false;
         }
 
-        updatePropertyLiked(propertyId, likedValue);
+        updatePropertyLiked(propertyId, likedBoolean);
     };
 
     var setupLikeDislikeControls = function () {
@@ -249,6 +249,7 @@
 
     /*** Update Methods ***/
     var updatePropertyLiked = function (propertyId, likedValue) {
+
         var data = {
             id: propertyId,
             liked: likedValue
