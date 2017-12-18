@@ -20,7 +20,11 @@ var TransfereeMessagesController = function (transfereeHousingMessages) {
     };
     
     var saveMessage = function (e) {
-        var message = $('div#messagesModal').find('#message');        
+        var message = $('div#messagesModal').find('#message').val();        
+        if (message == 'Enter your comment here...' || message.length == 0) {
+            alert('Please type a message to send.');
+            return;
+        }
         var propertyId = $('div#messagesModal').attr('data-property-id');
         var currDate = moment().format('YYYY-MM-DD HH:mm');
         var err = false;
@@ -35,7 +39,7 @@ var TransfereeMessagesController = function (transfereeHousingMessages) {
 
         if (!err) {
             
-            var data = { "HomeFindingPropertyId": propertyId, "MessageDate": currDate, "MessageText": message.val() };
+            var data = { "HomeFindingPropertyId": propertyId, "MessageDate": currDate, "MessageText": message };
             transfereeHousingMessages.updateMessage("messages", data, saveSuccess, saveFail);
         }
     }    

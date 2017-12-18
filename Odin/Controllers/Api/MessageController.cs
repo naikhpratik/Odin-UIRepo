@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Odin.Data.Core;
 using Odin.Data.Core.Dtos;
 using Odin.Data.Core.Models;
+using Odin.Data.Persistence;
 using Odin.Domain;
 using Odin.Interfaces;
 using System;
@@ -32,8 +34,11 @@ namespace Odin.Controllers.Api
         public IHttpActionResult UpsertPropertyMessage(MessageDto dto)
         {
             var email = User.Identity.Name;
-            var mgr = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            var user = mgr.FindByName(email);
+            var store = new UserStore<ApplicationUser>(new ApplicationDbContext());
+            var userManager = new UserManager<ApplicationUser>(store);
+            ApplicationUser user = userManager.FindByNameAsync(User.Identity.Name).Result;
+            //var mgr = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            //var user = mgr.FindByEmail(email);
             var author = user.FullName == " " ? email : user.FullName;
             
             var HomeFindingPropertyId = dto.HomeFindingPropertyId;

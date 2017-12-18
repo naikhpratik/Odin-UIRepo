@@ -114,8 +114,8 @@
         $(document).on('click', '.propertyItem', function (event) {
 
             if (!$(event.target).is("input") &&
-                !$(event.target).is("span")) { // prevents the date picker from triggering the modal
-
+                !$(event.target).is("span") &&
+                !$(event.target).is(".comments")) { // prevents the date picker and messages from triggering the modal
                 var propertyId = $(this).data("property-id");
                 var propertyModalUrl = '/homefindingproperties/propertypartial/' + propertyId;
                 $('#propertyModalContent').load(propertyModalUrl, function (response, status, xhr) {
