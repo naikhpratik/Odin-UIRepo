@@ -145,14 +145,13 @@
             e.stopPropagation();
 
             var propertyId = $(this).data('property-id');
-
-            // ???: for the life of me, I cannot figure out why classList() doesn't work here. 
-            var classList = $(this).attr('class').split(' ');
+            
+            var classList = $(this)[0].classList;
 
             var triggerStatus = "";
-            if (classList.includes('dislike')) {
+            if (classList.contains('dislike')) {
                 triggerStatus = "False";
-            } else if (classList.includes('like')) {
+            } else if (classList.contains('like')) {
                 triggerStatus = "True";
             }
 
