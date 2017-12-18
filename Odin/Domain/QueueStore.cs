@@ -24,7 +24,7 @@ namespace Odin.Domain
         public QueueStore()
         {
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
-                CloudConfigurationManager.GetSetting(StorageConnectionKey));
+                CloudConfigurationManager.GetSetting(StorageConnectionKey, false));
             _queueClient = storageAccount.CreateCloudQueueClient();
             var odinToSeQueue = _queueClient.GetQueueReference(OdinToSeQueueName);
             odinToSeQueue.CreateIfNotExists();

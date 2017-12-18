@@ -2,7 +2,11 @@
 
 <div class="container-fluid" id="housing">
     <div class="row" id="housingSummaryMap">
-        <div class="col-md-4">
+
+        <div class="col-md-8 col-md-push-4 mapWrapper">
+            <div id="map" data-lat="@Model.Latitude" data-lng="@Model.Longitude"></div>
+        </div>
+        <div class="col-md-4 col-md-pull-8">
             <h1 class="sectionTitle">Housing Summary</h1>
             <ul class="row sectionList">
                 <li class="col-md-6">
@@ -39,12 +43,6 @@
                 </li>
             </ul>
         </div>
-        <div class="col-md-8 mapWrapper">
-            
-            <div id="map" data-lat="@Model.Latitude" data-lng="@Model.Longitude"></div>
-
-        </div>
-        
     </div>
 
     <div class="row controlsContainer" id="propertiesControls">
