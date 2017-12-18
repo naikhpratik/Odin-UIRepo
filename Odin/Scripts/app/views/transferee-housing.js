@@ -127,13 +127,15 @@
         });
     };
 
-    var triggerLikeStatus = function (wrappers, newLikedStatus) {
-        wrappers.each(function () {
+    var triggerLikeStatus = function (propertyId, newLikedStatus) {
+
+        var likeDislikeElements = likeDislikeElementsForPropertyId(propertyId);
+        likeDislikeElements.each(function () {
             var currentLikedStatus = $(this).attr("data-liked");
             $(this).attr('data-liked', currentLikedStatus === newLikedStatus ? "" : newLikedStatus);
         });
 
-        var firstWrapper = wrappers[0];
+        var firstWrapper = likeDislikeElements[0];
         var propertyId = $(firstWrapper).attr('data-property-id');
         var likedData = $(firstWrapper).attr('data-liked');
 
@@ -155,8 +157,7 @@
             e.stopPropagation();
 
             var propertyId = $(this).data('property-id');
-            var controlWrappers = likeDislikeElementsForPropertyId(propertyId);
-            triggerLikeStatus(controlWrappers, "True");
+            triggerLikeStatus(propertyId, "True");
         });
 
         var dislikeSelector = '.likeDislike > .dislike';
@@ -166,8 +167,7 @@
             e.stopPropagation();
 
             var propertyId = $(this).data('property-id');
-            var controlWrappers = likeDislikeElementsForPropertyId(propertyId);
-            triggerLikeStatus(controlWrappers, "False");
+            triggerLikeStatus(propertyId, "False");
         });
     };
 
@@ -230,8 +230,12 @@
         $('#propertiesContainer').load('/orders/propertiesPartial/' + currentOrderId);
     };
 
+    /**
+     * Return all DOM elements that track the liked value for the property matching propertyId
+     * @param {any} propertyId
+     */
     var likeDislikeElementsForPropertyId = function (propertyId) {
-        var selectorString = '.likeDislike[data-property-id="' + propertyId + '"]';
+        var selectorString = '[data-property-id="' + propertyId + '"][data-liked]';
         return $(selectorString);
     };
 
