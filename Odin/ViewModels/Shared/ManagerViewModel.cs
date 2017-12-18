@@ -11,5 +11,6 @@ namespace Odin.ViewModels.Shared
         public string LastName { get; set; }
         public string Email { get; set; }
         public string FullName => $"{FirstName} {LastName}";
+        public string phoneNumber { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using Odin.Data.Core;
 using Odin.Data.Core.Models;
 using Odin.Helpers;
 using Odin.Interfaces;
+using Odin.ViewModels.Orders.Index;
 using Odin.ViewModels.Orders.Transferee;
 using Odin.ViewModels.Shared;
 using System;
@@ -33,9 +34,9 @@ namespace Odin.Controllers
 
             var orders = _unitOfWork.Orders.GetOrdersFor(userId);
 
-            //var orderVms = _mapper.Map<IEnumerable<Order>, IEnumerable<OrdersIndexViewModel>>(orders);
+            var orderVms = _mapper.Map<IEnumerable<Order>, IEnumerable<OrdersIndexViewModel>>(orders);
 
-            return View(orders);
+            return View(orderVms);
         }
 
         // GET Partials
