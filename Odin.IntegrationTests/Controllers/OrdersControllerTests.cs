@@ -7,12 +7,13 @@ using Odin.Helpers;
 using System.Linq;
 using Odin.IntegrationTests.TestAttributes;
 using Moq;
-using Odin.Tests.Extensions;
 using Odin.Data.Helpers;
 using System;
 using Odin.IntegrationTests.Extensions;
 using System.Web.Mvc;
 using Odin.ViewModels.Orders.Transferee;
+using FluentAssertions;
+
 
 namespace Odin.IntegrationTests.Controllers
 {
@@ -162,5 +163,59 @@ namespace Odin.IntegrationTests.Controllers
         //    newOrder.Services.Count().Should().Be(1);
         //}
 
-    }
+        [Test, Isolated]
+        public void Properties_TwoProperties_ViewingDate_Is_Set_WithGivenOptionExists_Count_ShouldBe2()
+        {
+            //arrange
+                        
+            var order = new Order() { SeCustNumb = "867-5309", Transferee = _transferee, Consultant = _dsc, ProgramManager = _pm, TrackingId = "123Test" };
+            order.HomeFinding = new HomeFinding();
+            _controller.MockCurrentUser(_dsc.Id, _dsc.UserName);
+            _context.Orders.Add(order);
+            _context.SaveChanges();
+
+            //act
+            HomeFindingProperty p1 = new HomeFindingProperty();
+            p1.Deleted = false;
+            p1.Property = new Property();
+            p1.ViewingDate = DateTime.Now.AddDays(10);
+            order.HomeFinding.HomeFindingProperties.Add(p1);
+
+            HomeFindingProperty p2 = new HomeFindingProperty();
+            p2.Deleted = false;
+            p2.Property = new Property();
+            p2.ViewingDate = DateTime.Now.AddDays(20);
+            order.HomeFinding.HomeFindingProperties.Add(p2);
+
+            //assert            
+            var result = _controller.PropertiesPartialPDF(order.Id, "ViewingsOnly");
+            Assert.IsTrue(result.GetType().ToString().Contains("Rotativa.ViewAsPdf"));
+        }
+        [Test, Isolated]
+        public void Properties_TwoProperties_ViewingDate_Not_Set_WithGivenOptionExists_Count_ShouldBe2()
+        {
+            //arrange
+
+            var order = new Order() { SeCustNumb = "867-5309", Transferee = _transferee, Consultant = _dsc, ProgramManager = _pm, TrackingId = "123Test" };
+            order.HomeFinding = new HomeFinding();
+            _controller.MockCurrentUser(_dsc.Id, _dsc.UserName);
+            _context.Orders.Add(order);
+            _context.SaveChanges();
+
+            //act
+            HomeFindingProperty p1 = new HomeFindingProperty();
+            p1.Deleted = false;
+            p1.Property = new Property();
+            order.HomeFinding.HomeFindingProperties.Add(p1);
+
+            HomeFindingProperty p2 = new HomeFindingProperty();
+            p2.Deleted = false;
+            p2.Property = new Property();
+            order.HomeFinding.HomeFindingProperties.Add(p2);
+
+            //assert            
+            var result = _controller.PropertiesPartialPDF(order.Id, "ViewingsOnly");
+            result.Should().BeOfType<HttpNotFoundResult>();
+        }
+    }   
 }

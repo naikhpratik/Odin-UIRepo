@@ -33,14 +33,18 @@ namespace Odin.IntegrationTests.Helpers
 
         public static void ClearIntegrationOrders(ApplicationDbContext context)
         {
-            
+
             var transferees = context.Transferees.Where(t => t.Email.Contains("integration")).Include(t => t.Orders).ToList();
 
             if (transferees.Any())
             {
                 foreach (var transferee in transferees)
                 {
-                    context.Orders.RemoveRange(transferee.Orders);
+                    var transfereeOrderIds = transferee.Orders.Select(o => o.Id).ToArray();
+                    foreach (var orderId in transfereeOrderIds)
+                    {
+                        RemoveOrder(context, orderId);
+                    }
                 }
                 context.Transferees.RemoveRange(transferees);
             }
@@ -50,7 +54,11 @@ namespace Odin.IntegrationTests.Helpers
             {
                 foreach (var manager in managers)
                 {
-                    context.Orders.RemoveRange(manager.Orders);
+                    var managerOrderIds = manager.Orders.Select(o => o.Id).ToArray();
+                    foreach (var orderId in managerOrderIds)
+                    {
+                        RemoveOrder(context, orderId);
+                    }
                 }
                 context.Managers.RemoveRange(managers);
             }
@@ -62,7 +70,11 @@ namespace Odin.IntegrationTests.Helpers
             {
                 foreach (var consultant in consultants)
                 {
-                    context.Orders.RemoveRange(consultant.Orders);
+                    var consultantOrderIds = consultant.Orders.Select(o => o.Id).ToArray();
+                    foreach (var orderId in consultantOrderIds)
+                    {
+                        RemoveOrder(context, orderId);
+                    }
                 }
                 context.Consultants.RemoveRange(consultants);
             }
@@ -126,6 +138,46 @@ namespace Odin.IntegrationTests.Helpers
             }             
 
             context.SaveChanges();
+        }
+
+        private static void RemoveOrder(ApplicationDbContext context, string orderId)
+        {
+            var order = context.Orders
+                .Where(o => o.Id.Equals(orderId))
+                .Include(o => o.Transferee)
+                .Include(s => s.Services)
+                .Include(o => o.HomeFinding)
+                .Include(o => o.Pets)
+                .Include(o => o.Children)
+                .Include(o => o.Notifications)
+                .First();
+
+            if (order.Services != null)
+            {
+                foreach (var service in order.Services)
+                {
+                    context.Services.Remove(service);
+                }
+            }
+            if (order.Pets != null)
+            {
+                foreach (var pet in order.Pets)
+                {
+                    context.Pets.Remove(pet);
+                }
+            }
+            if (order.Children != null)
+            {
+                foreach (var orderChild in order.Children)
+                {
+                    context.Children.Remove(orderChild);
+                }
+            }
+
+            if (order.HomeFinding != null)
+                context.HomeFindings.Remove(order.HomeFinding);
+
+            context.Orders.Remove(order);
         }
     }
 }

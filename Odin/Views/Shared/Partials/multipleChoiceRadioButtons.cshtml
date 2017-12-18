@@ -1,0 +1,40 @@
+﻿<div class="modal-header">
+    <h5 class="modal-title" id="pdfChoicesModalLabel">
+        @ViewBag.Title
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </h5>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-md-6">@Html.Label("Allproperties", "All properties")</div>
+        <div class="col-md-2 col-offset-2">@Html.RadioButton("radio", false, new { @id = "AllProperties", @class = "pdfChoice" }) </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">@Html.Label("ViewingsOnly", "Scheduled viewings only")</div>
+        <div class="col-md-2 col-offset-2">@Html.RadioButton("radio", false, new { @id = "ViewingsOnly", @class = "pdfChoice" })</div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">@Html.Label("NoViewings", "Properties with no scheduled viewings")</div>
+        <div class="col-md-2 col-offset-2">@Html.RadioButton("radio", false, new { @id = "NoViewings", @class = "pdfChoice" })</div>
+    </div>
+</div>
+<div class="modal-footer row">
+    <div class="col-sm-6">
+    </div>
+    <div class="col-sm-6">
+        <button type="button" id="choiceMade" class="btn btn-primary submit" disabled data-dismiss="modal">Submit</button>
+    </div>
+</div>
+
+<script>
+    var chosenList = "";
+    $('.pdfChoice').change(function () {
+        chosenList = $(this).attr('id');
+        $('#choiceMade').prop('disabled', false);
+    });
+    $("#choiceMade").click(function () {
+        TransfereeHousingController.export2PDF(chosenList);
+    });
+    </script>

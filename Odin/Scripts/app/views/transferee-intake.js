@@ -62,7 +62,7 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
 
         //Init Dates
         intakeBlocks.find(".intake-date").datetimepicker({
-            format: "MM/DD/YYYY",
+            format: "DD-MMM-YYYY",
             useCurrent: true,
             keepOpen: false
         });

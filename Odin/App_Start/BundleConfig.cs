@@ -43,7 +43,8 @@ namespace Odin
 
 
             // Page Styling
-            bundles.Add(new StyleBundle("~/Styling/orders").Include("~/Content/css/orders.css"));
+            bundles.Add(new StyleBundle("~/Styling/help").Include("~/Content/css/help.css"));
+            bundles.Add(new StyleBundle("~/Styling/orders").Include("~/Content/css/orders.css","~/Content/typeahead.css"));
             bundles.Add(new StyleBundle("~/Styling/login").Include("~/Content/css/login.css"));
             bundles.Add(new StyleBundle("~/Styling/forgotPassword").Include("~/Content/css/forgotpassword.css",
                 "~/Content/animate.css"));
@@ -57,10 +58,12 @@ namespace Odin
             bundles.Add(new StyleBundle("~/Styling/history").Include("~/Content/css/transferee/history.css"));
             bundles.Add(new StyleBundle("~/Styling/intake").Include("~/Content/css/transferee/intake.css", "~/Content/animate.css"));
             bundles.Add(new StyleBundle("~/Styling/messages").Include("~/Content/css/transferee/messages.css"));
+            bundles.Add(new StyleBundle("~/Styling/housing").Include("~/Content/css/transferee/housing.css","~/Content/leaflet.css"));
             bundles.Add(new StyleBundle("~/Styling/housing").Include("~/Content/css/transferee/housing.css"));
+            bundles.Add(new StyleBundle("~/Styling/properties").Include("~/Content/css/transferee/HFProperties.css"));
 
             // Page scripts
-            bundles.Add(new ScriptBundle("~/Scripts/orders").Include("~/Scripts/app/views/orders.js"));
+            bundles.Add(new ScriptBundle("~/Scripts/orders").Include("~/Scripts/app/views/orders.js", "~/Scripts/typeahead.js"));
             bundles.Add(new ScriptBundle("~/Scripts/transferee").Include(
                 "~/Scripts/bootstrap-notify.min.js",
                 "~/Scripts/app/views/transferee.js",
@@ -68,13 +71,15 @@ namespace Odin
                 "~/Scripts/app/views/transferee-details.js",
                 "~/Scripts/app/views/transferee-housing.js",
                 "~/Scripts/app/views/transferee-itinerary.js",
-                "~/Scripts/app/views/transferee-itin-appntmt.js"));
+                "~/Scripts/app/views/transferee-itin-appntmt.js",
+                "~/Scripts/leaflet.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/forgotPassword").Include(
                 "~/Scripts/bootstrap-notify.min.js",
                 "~/Scripts/app/views/forgotPassword.js"));
 
-            bundles.Add(new ScriptBundle("~/Scripts/bookmarklet").Include(
+            //Originally bundled in Scripts folder, but getting 403 error in IFrame.
+            bundles.Add(new ScriptBundle("~/bundles/bookmarklet").Include(
                 "~/Scripts/bootstrap-notify.min.js",
                 "~/Scripts/app/views/bookmarklet.js"));
 

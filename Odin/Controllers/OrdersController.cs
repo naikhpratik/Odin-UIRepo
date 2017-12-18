@@ -53,12 +53,25 @@ namespace Odin.Controllers
         {
             var userId = User.Identity.GetUserId();
             var order = _unitOfWork.Orders.GetOrderFor(userId, id);
-
             HousingViewModel viewModel = new HousingViewModel(order, _mapper);
-
             return PartialView("~/views/orders/partials/_HousingProperties.cshtml", viewModel.Properties);
         }
-
+        public ActionResult PropertiesPartialPDF(string id, string listChoice)
+        {
+            var userId = User.Identity.GetUserId();
+            var order = _unitOfWork.Orders.GetOrderFor(userId, id);
+            HousingViewModel viewModel = new HousingViewModel(order, _mapper, listChoice);
+            if (viewModel.Properties.Count() == 0)
+            {
+                return new HttpNotFoundResult();
+            }           
+            ViewBag.isPDF = true;
+            return new Rotativa.ViewAsPdf("Partials/_HousingProperties", viewModel.Properties)
+            {
+                FileName = "Housing.pdf",
+                PageMargins = new Rotativa.Options.Margins(0, 0, 0, 0)
+            };           
+        }
         public ActionResult DetailsPartial(string id)
         {
             var userId = User.Identity.GetUserId();
@@ -148,8 +161,8 @@ namespace Odin.Controllers
             ViewBag.Id = id;
             OrdersTransfereeViewModel viewModel = GetViewModelForOrderDetails(id);
             return View(viewModel);
-        }
-
+        }       
+        
         private OrdersTransfereeViewModel GetViewModelForOrderDetails(string id)
         {
             var userId = User.Identity.GetUserId();
@@ -202,7 +215,5 @@ namespace Odin.Controllers
                 PageMargins = new Rotativa.Options.Margins(0, 0, 0, 0)
             };
         }
-
     }
-
 }

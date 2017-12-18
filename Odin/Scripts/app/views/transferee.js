@@ -15,10 +15,7 @@
         $('.item').click(function () {     
             $('.item.selected').removeClass('selected');            
             $(this).addClass('selected');
-            var actionName = $(this).attr('data-panel');
-            loadPanel(actionName);
-            $('#orderContainer').load('/orders/' + actionName + 'Partial/' + currentOrderId);
-
+            
             if ($('.navbar-toggle').css('display') != 'none')
             {
                 $('.navbar-toggle').click();
@@ -43,7 +40,8 @@
 
 
     return {
-        TransfereeInit: init
+        TransfereeInit: init,
+        loadPanel: loadPanel
     };
 }();
 

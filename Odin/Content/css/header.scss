@@ -1,5 +1,5 @@
 ﻿/* Bootstrap Overrides */
-.dropdown-menu {
+.notification-dropdown {
     box-shadow: none;
     -webkit-box-shadow: none;
     position: absolute;
@@ -8,7 +8,9 @@
     width: 400px;
 }
 
-.dropdown-menu > li.notifications_unread {
+
+
+.notification-dropdown > li.notifications_unread {
     border-bottom: solid;
     border-bottom-color: lightgray;
     border-bottom-width: medium;
@@ -24,7 +26,7 @@
     background-color: lightgray;
 }
 
-.dropdown-menu > li.notifications_read {
+.notification-dropdown > li.notifications_read {
     border-bottom: solid;
     border-bottom-color: lightgray;
     border-bottom-width: medium;
@@ -47,16 +49,21 @@
     display: none;
 }
 
-.dropdown-menu > li > a.notifications {
+.notification-dropdown > li > a.notifications {
     color: red;
     font-weight: bold;
     white-space: nowrap;
     display: inline;
 }
 
-.dropdown-menu > li > label.notifications {
+.notification-dropdown > li > label.notifications {
     float: right;
     text-align: right;
     padding-right: 8px;
     cursor: pointer;
 }
+
+#logoutForm{
+    display:none;
+}
+

@@ -2,7 +2,11 @@
 
 <div class="container-fluid" id="housing">
     <div class="row" id="housingSummaryMap">
-        <div class="col-md-4">
+
+        <div class="col-md-8 col-md-push-4 mapWrapper">
+            <div id="map" data-lat="@Model.Latitude" data-lng="@Model.Longitude"></div>
+        </div>
+        <div class="col-md-4 col-md-pull-8">
             <h1 class="sectionTitle">Housing Summary</h1>
             <ul class="row sectionList">
                 <li class="col-md-6">
@@ -39,12 +43,9 @@
                 </li>
             </ul>
         </div>
-        <div class="col-md-8 mapWrapper">
-            <img src="~/Content/Images/map_placeholder.png" />
-        </div>
     </div>
 
-    <div class="row" id="propertiesControls">
+    <div class="row controlsContainer" id="propertiesControls">
 
                         <!--
                         <form class="col-sm-6" id="housingFilter">
@@ -64,14 +65,13 @@
                         </form>
                         -->
                         @* Change to col-sm-6 when readding the above filters *@
-
-        <div class="col-sm-12" id="addProperty" data-toggle="modal" data-target="#addPropertyModal">
-            <span>Add Property</span>
-            <img src="~/Content/Images/btn_add_home.png" />
+        <div class="col-sm-6 col-sm-offset-6" style="direction: rtl;"> <!-- remove inline style when filtering is brought back in-->
+            <span  class="btnAndLabel" id="exportPDF"  data-toggle="modal" data-target="#pdfChoicesModal">Export to PDF <img src="~/Content/Images/btn_add_home.png" /></span>
+            <span  class="btnAndLabel" id="addProperty" data-toggle="modal" data-target="#addPropertyModal">Add Property <img src="~/Content/Images/btn_add_home.png" /></span>
         </div>
     </div>
 
-    <div id="propertiesContainer">
+    <div class="row" id="propertiesContainer">
         @Html.Partial("~/Views/Orders/Partials/_HousingProperties.cshtml", Model.Properties)
     </div>
 
@@ -121,10 +121,10 @@
                 </ul>
             </div>
             <div id="comment">
-                < p > Comment </ p >
+                <p> Comment </p>
             </div>
-            < button > Close </ button >
-            < button > Send </ button >
+            <button> Close </button>
+            <button> Send </button>
         </div>
     </div>
     <div id="property" style="display: none;">
@@ -330,9 +330,23 @@
     </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="pdfChoicesModal" tabindex="-1" role="dialog" aria-labelledby="pdfChoicesModalLabel" data-backdrop="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" id="pdfChoicesModalContent">
+           
+        </div>
+    </div>
+</div>
 @Styles.Render("~/Styling/housing")
 <script>
     $(document).ready(function () {
         TransfereeHousingController.init();
     });
+    $('#exportPDF').click(function () {
+        var app = $('#pdfChoicesModal');        
+        app.find('.modal-content').html();
+        app.find('.modal-content').load('/HomeFindingProperties/RadioButtonList?title=' + encodeURIComponent('Choose The List Type:'));
+    });
+
 </script>

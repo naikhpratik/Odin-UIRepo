@@ -1,64 +1,108 @@
 ﻿@model IEnumerable<Odin.ViewModels.Orders.Transferee.HousingPropertyViewModel>
 
 <div id="propertiesBlock">
-    <ul class="row" id="propertiesList">
-        <li class="row" id="propertiesHeader">
-            <div class="col-md-1">
-                <p>Location Photos:</p>
-            </div>
-            @* Switch next 3 columns to col-md-2 when adding remaining columns *@
-            <div class="col-md-4">
-                <p>Address:</p>
-            </div>
-            <div class="col-md-3">
-                <p>Availability Date:</p>
-            </div>
-            <div class="col-md-4">
-                <p>BD | BA<br />Rent | Sq. Ft:</p>
-            </div>
-            <!--
-            <div class="col-md-3">
-                <p>Schedule a Viewing</p>
-            </div>
-            <div class="col-md-1">
-                <p>Like or Dislike:</p>
-            </div>
-            <div class="col-md-1">
-                <p>Property Comments:</p>
-            </div>
-            -->
-        </li>
+    <div class="row" id="propertiesHeader">
+        <div class="col-md-1  col-xs-12">
+            <p>Location Photos:</p>
+        </div>
+
+        <div class="col-md-2  col-xs-12">
+            <p>Address:</p>
+        </div>
+        <div class="col-md-3 col-xs-12">
+            <p>Availability Date:</p>
+        </div>
+        <div class="col-md-2 col-xs-12">
+            <p>BD | BA<br />Rent | Sq. Ft:</p>
+        </div>
+
+        <div class="col-md-3 col-xs-12">
+            <p>Schedule a Viewing</p>
+        </div>
+
+        <div class="col-md-1 col-xs-12">
+            <p>Like or Dislike:</p>
+        </div>
+        <!--
+        <div class="col-md-1">
+            <p>Property Comments:</p>
+        </div>
+        -->
+    </div>
+
+    <ul class="row sectionList" id="propertiesList">
 
         @foreach (var propertyVM in Model)
-            {
-            <li class="row propertyItem" data-property-id="@propertyVM.Id">
-                <div class="col-md-1">
-                    <img class="location" src="@propertyVM.ThumbnailPhotoUrl" />
+        {
+            <li class="row propertyItem" data-property-id="@propertyVM.Id" data-lat="@propertyVM.PropertyLatitude" data-lng="@propertyVM.PropertyLongitude">
+
+
+                <div class="col-md-1 col-xs-12">
+                    <label class="mobileLabel">Property Photos</label>
+
+                    @if (ViewBag.IsPDF == true)
+                    {
+                        <ul class="sectionList">
+                            @{ int kount = 0; }
+                            @foreach (var photo in propertyVM.PropertyPhotos)
+                            {
+                                <li class="photo">
+                                    <img class="location" src="@photo.PhotoUrl" />
+                                </li>
+
+                                kount++;
+
+                                if (kount > 5)
+                                {
+                                    break;
+                                }
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <img class="location" src="@propertyVM.ThumbnailPhotoUrl" />
+                    }
+
                 </div>
-                @* Switch next 3 columns to col-md-2 when adding remaining columns *@
-                <div class="col-md-4">
-                    <p>
+
+
+                <div class="col-md-2 col-xs-12">
+                    <label class="mobileLabel">Address</label>
+                    <p class="propertyAddress">
                         @Html.DisplayFor(m => propertyVM.PropertyAddress)
                     </p>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-xs-12">
+                    <label class="mobileLabel">Availability</label>
                     <p>
                         @Html.DisplayFor(m => propertyVM.PropertyAvailabilityDate)
                     </p>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-2 col-xs-12">
+                    <label class="mobileLabel">BD | BA<br />Rent | Sq. Ft:</label>
                     <p>
                         @Html.DisplayFor(m => propertyVM.PropertyNumberOfBedrooms) | @Html.DisplayFor(m => propertyVM.PropertyNumberOfBathrooms)<br />
                         @Html.DisplayFor(m => propertyVM.PropertyAmount) | @Html.DisplayFor(m => propertyVM.PropertySquareFootage)
                     </p>
                 </div>
-                <!--
+
                 <div class="col-md-3">
-                    @Html.DatePicker("date", "ViewingDate", false)
+                    <label class="mobileLabel">Schedule a Viewing</label>
+                    @Html.DatePicker("date", "ViewingDate", propertyVM.ViewingDate, true)
                 </div>
-                <div class="col-md-1 like">
-                    <img src="~/Content/Images/icn_ln_selected_like.png" />
+
+                <div class="col-md-1 col-xs-12">
+                    <label class="mobileLabel">Like or Dislike</label>
+                    @if (ViewBag.IsPDF == true && !propertyVM.Liked.HasValue)
+                    {
+                        <span>Not Yet Rated</span>
+                    }
+
+                    @Html.EditorFor(m => propertyVM.Liked, new { propertyId = propertyVM.Id })
+
                 </div>
+                <!--
                 <div class="col-md-1 comments">
                     <img src="~/Content/Images/icn_chat_bubble.png" />
                     <span>09</span>
@@ -70,16 +114,7 @@
     </ul>
 </div>
 
-<script>
-    $(document).ready(function () {
-        $('.propertyItem').click(function (event) {
-            var propertyId = $(event.delegateTarget).data("property-id");
-            var propertyModalUrl = '/homefindingproperties/propertypartial/' + propertyId;
-            $('#propertyModalContent').load(propertyModalUrl, function (response, status, xhr) {
-                if (status == "success") {
-                    $('#propertyDetailsModal').modal('show');
-                }
-            });
-        });
-    });
-</script>
+@if (ViewBag.IsPDF == true)
+{
+    @Styles.Render("~/Styling/properties")
+}

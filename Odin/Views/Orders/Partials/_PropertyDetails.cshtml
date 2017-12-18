@@ -5,7 +5,7 @@
     <h5 class="modal-title"><strong>Available on:</strong> @Html.DisplayFor(model => model.PropertyAvailabilityDate)</h5>
 </div>
 <div class="modal-body">
-    <div class="container-fluid">
+    <div class="container-fluid" data-property-id="@Model.Id">
         <div class="row">
             <div class="col-md-8">
                 @Html.DisplayFor(p => p.PropertyPhotos)
@@ -36,6 +36,11 @@
                         <p>@Html.DisplayFor(model => model.PropertyAmount)</p>
                     </li>
                 </ul>
+                <div class="row controlsContainer">
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.Liked, new { propertyId = Model.Id })
+                    </div>
+                </div>
             </div>
 
 
@@ -43,7 +48,10 @@
                 <ul class="row sectionList">
                     <li class="col-md-12">
                         <label>@Html.DisplayNameFor(model => model.PropertyDescription)</label>
-                        <p>@Html.DisplayFor(model => model.PropertyDescription)</p>
+                        @*<p>@Html.DisplayFor(model => model.PropertyDescription)</p>*@
+                        @*<p>@Model.PropertyDescription.Replace("<br />","\n")</p>*@
+                        <!--Should be safe because sanitized in view model.-->
+                        <p>@Html.Raw(@Model.PropertyDescription)</p>
                     </li>
                 </ul>
             </div>

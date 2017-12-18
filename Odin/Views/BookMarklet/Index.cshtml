@@ -4,7 +4,7 @@
     Layout = "~/Views/BookMarklet/Shared/_BookMarklet.cshtml";
 }
 
-@Scripts.Render("~/Scripts/bookmarklet")
+@Scripts.Render("~/bundles/bookmarklet")
 @using (Html.BeginForm("Index", "BookMarklet", FormMethod.Post, new {@class= "bm-container", role = "form" }))
 {
     @*AntiForgeryToken purposefully left out because sets x-frame-options*@

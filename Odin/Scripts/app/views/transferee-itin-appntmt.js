@@ -22,7 +22,8 @@ var TransfereeAppointmentController = function (transfereeItineraryAppointment) 
     
     var init = function () { 
         var appointmentModal = $("div#appointmentModal");        
-        appointmentModal.find('.date').datetimepicker({               
+        appointmentModal.find('.date').datetimepicker({    
+            format: "DD-MMM-YYYY HH:MM A",
             showClose: true,
             toolbarPlacement: 'bottom',
             icons: { close: 'custom-icon-check' },
@@ -86,7 +87,7 @@ var TransfereeAppointmentController = function (transfereeItineraryAppointment) 
        
         var saveSuccess = function () {
             toast('changes to the appointment are successful', 'success');
-            $('.item[data-panel=itinerary]').trigger('click');
+            OrdersPageController.loadPanel("itinerary");
         }
         var saveFail = function () {
             err = true;
