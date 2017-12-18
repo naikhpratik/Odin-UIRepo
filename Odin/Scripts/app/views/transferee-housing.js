@@ -132,6 +132,19 @@
             var currentLikedStatus = $(this).attr("data-liked");
             $(this).attr('data-liked', currentLikedStatus === newLikedStatus ? "" : newLikedStatus);
         });
+
+        var firstWrapper = wrappers[0];
+        var propertyId = $(firstWrapper).attr('data-property-id');
+        var likedData = $(firstWrapper).attr('data-liked');
+
+        var likedValue = null;
+        if (likedData == "True") {
+            likedValue = true;
+        } else if (likedData == "False") {
+            likedValue = false;
+        }
+
+        updatePropertyLiked(propertyId, likedValue);
     };
 
     var setupLikeDislikeControls = function () {
@@ -141,10 +154,9 @@
             e.preventDefault();
             e.stopPropagation();
 
-            var controlWrappers = controllerWrappersForLikeDislikeButton($(this));
+            var propertyId = $(this).data('property-id');
+            var controlWrappers = likeDislikeElementsForPropertyId(propertyId);
             triggerLikeStatus(controlWrappers, "True");
-            
-            updateLikedStatusForControl(controlWrappers[0]);
         });
 
         var dislikeSelector = '.likeDislike > .dislike';
@@ -153,10 +165,9 @@
             e.preventDefault();
             e.stopPropagation();
 
-            var controlWrappers = controllerWrappersForLikeDislikeButton($(this));
+            var propertyId = $(this).data('property-id');
+            var controlWrappers = likeDislikeElementsForPropertyId(propertyId);
             triggerLikeStatus(controlWrappers, "False");
-
-            updateLikedStatusForControl(controlWrappers[0]);
         });
     };
 
@@ -219,25 +230,14 @@
         $('#propertiesContainer').load('/orders/propertiesPartial/' + currentOrderId);
     };
 
-    var controllerWrappersForLikeDislikeButton = function (likeDislikeButton) {
-        var propertyId = $(likeDislikeButton).data('property-id');
+    var likeDislikeElementsForPropertyId = function (propertyId) {
         var selectorString = '.likeDislike[data-property-id="' + propertyId + '"]';
         return $(selectorString);
     };
 
 
     /*** Update Methods ***/
-    var updateLikedStatusForControl = function (controlElement) {
-        var likedData = $(controlElement).attr('data-liked');
-
-        var likedValue = null;
-        if (likedData == "True") {
-            likedValue = true;
-        } else if (likedData == "False") {
-            likedValue = false;
-        }
-
-        var propertyId = $(controlElement).closest("[data-property-id]").attr('data-property-id');
+    var updatePropertyLiked = function (propertyId, likedValue) {
         var data = {
             id: propertyId,
             liked: likedValue
