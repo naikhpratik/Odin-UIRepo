@@ -36,6 +36,8 @@
         });
 
         initMap();
+
+        setupFilterButtons();
     };
 
     /*** Setup Methods ***/
@@ -124,6 +126,11 @@
                     }
                 });
             }
+        });
+    };
+    var setupFilterButtons = function () {
+        $('input[type=radio][name=Filter]').change(function () {
+            $('#propertiesList').attr('data-filter', this.value);
         });
     };
 
