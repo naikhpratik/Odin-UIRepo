@@ -136,23 +136,27 @@
     };
     var setupLikeDislikeControls = function () {
         var likeSelector = '.likeDislike > .like';
-        $(document).off('click', likeSelector);
-        $(document).on('click', likeSelector, function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            var propertyId = $(this).data('property-id');
-            triggerLikeStatus(propertyId, "True");
-        });
-
         var dislikeSelector = '.likeDislike > .dislike';
-        $(document).off('click', dislikeSelector);
-        $(document).on('click', dislikeSelector, function (e) {
+        var clickSelector = `${likeSelector}, ${dislikeSelector}`;
+
+        $(document).off('click', clickSelector);
+        $(document).on('click', clickSelector, function (e) {
             e.preventDefault();
             e.stopPropagation();
 
             var propertyId = $(this).data('property-id');
-            triggerLikeStatus(propertyId, "False");
+
+            // ???: for the life of me, I cannot figure out why classList() doesn't work here. 
+            var classList = $(this).attr('class').split(' ');
+
+            var triggerStatus = "";
+            if (classList.includes('dislike')) {
+                triggerStatus = "False";
+            } else if (classList.includes('like')) {
+                triggerStatus = "True";
+            }
+
+            triggerLikeStatus(propertyId, triggerStatus);
         });
     };
     var setupDatePickers = function () {
