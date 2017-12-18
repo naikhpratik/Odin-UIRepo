@@ -1,5 +1,95 @@
-﻿<div id="history" class="frame noinit">
-    <h2>History Panel</h2>
-</div>
+﻿@*@model IEnumerable<Odin.ViewModels.Shared.NotificationViewModel>*@
 
-@Styles.Render("~/Styling/history")
+@model IEnumerable<Odin.ViewModels.Orders.Transferee.HistoryViewModel>
+
+
+<html>
+
+<body>
+
+
+
+    @Styles.Render("~/Styling/history")
+
+    <div id="history" class="sectionTitle">
+        History Panel
+    </div>
+
+    <hr class="historydivider">
+
+
+
+
+
+
+    @*<table id="tblnotificationhistory" border="1" width="100%" class="table table-striped">
+            <tr>
+                <td>
+                    Notification Type
+                </td>
+
+                <td>
+
+                    Notification Message
+                </td>
+                <td>
+
+                    Notification Title
+                </td>
+                <td>
+
+                    Notification Created At
+                </td>
+                <td>
+
+                    Transferee Name
+                </td>
+            </tr>
+
+            @foreach (var notification in Model)
+                {
+                <tr>
+                    <td>Order Created</td>
+                    <td id="tdnotificationhistory">
+                        @notification.NotificationMessage
+                    </td>
+                    <td id="tdnotificationhistory">
+                        @notification.NotificationTitle
+                    </td>
+                    <td id="tdnotificationhistory">
+                        @notification.NotificationMessage
+                    </td>
+                    <td id="tdnotificationhistory">
+                        @notification.NotificationOrderTransfereeFullName
+                    </td>
+                </tr>
+
+
+            }
+
+
+
+        </table>*@
+
+    @{ var myType = "";}
+    
+    @if (Model == null)
+    {<div>No History to show</div> }
+    else
+    {
+        foreach (var notification in Model)
+        {
+            <div>
+                <div>
+                    <b>@notification.NotificationTitle: </b>@notification.NotificationNotificationType: @notification.NotificationMessage for <a href="/Orders/Transferee/@notification.NotificationOrderId" class="notifications">@notification.NotificationOrderTransfereeFullName</a>
+                </div>
+                <div>
+                    @notification.MyNotificationCreatedAt
+                </div>
+            </div>
+            <br />
+        }
+    }
+
+</body>
+</html>
