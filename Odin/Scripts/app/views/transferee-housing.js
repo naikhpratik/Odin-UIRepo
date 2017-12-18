@@ -133,29 +133,6 @@
             $('#propertiesList').attr('data-filter', this.value);
         });
     };
-
-    var triggerLikeStatus = function (propertyId, triggerStatusValue) {
-
-        var likeDislikeElements = likeDislikeElementsForPropertyId(propertyId);
-
-        var currentLikedValue = likeDislikeElements.attr('data-liked');
-
-        // if the status to be triggered is the same, then clear the status
-        var newLikedStatus = ((currentLikedValue === triggerStatusValue) ? "" : triggerStatusValue);
-
-        likeDislikeElements.attr('data-liked', newLikedStatus);
-
-        var likedBoolean = null;
-        // NOTE: using string comparison due to the possible null/empty state
-        if (newLikedStatus.toLowerCase() == "true") {
-            likedBoolean = true;
-        } else if (newLikedStatus.toLowerCase() == "false") {
-            likedBoolean = false;
-        }
-
-        updatePropertyLiked(propertyId, likedBoolean);
-    };
-
     var setupLikeDislikeControls = function () {
         var likeSelector = '.likeDislike > .like';
         $(document).off('click', likeSelector);
@@ -177,7 +154,6 @@
             triggerLikeStatus(propertyId, "False");
         });
     };
-
     var setupDatePickers = function () {
         $('.date').datetimepicker({
             format: "DD-MMM-YYYY h:mm A",
@@ -199,6 +175,28 @@
 
             updateProperty("viewingdate", data, success);
         });
+    };
+
+    var triggerLikeStatus = function (propertyId, triggerStatusValue) {
+
+        var likeDislikeElements = likeDislikeElementsForPropertyId(propertyId);
+
+        var currentLikedValue = likeDislikeElements.attr('data-liked');
+
+        // if the status to be triggered is the same, then clear the status
+        var newLikedStatus = ((currentLikedValue === triggerStatusValue) ? "" : triggerStatusValue);
+
+        likeDislikeElements.attr('data-liked', newLikedStatus);
+
+        var likedBoolean = null;
+        // NOTE: using string comparison due to the possible null/empty state
+        if (newLikedStatus.toLowerCase() == "true") {
+            likedBoolean = true;
+        } else if (newLikedStatus.toLowerCase() == "false") {
+            likedBoolean = false;
+        }
+
+        updatePropertyLiked(propertyId, likedBoolean);
     };
 
     var export2PDF = function (choice) {
