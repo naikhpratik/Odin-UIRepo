@@ -15,6 +15,8 @@ namespace Odin.Data.Core.Dtos
         public DateTime? MessageDate { get; set; }
         
         public string Author { get; set; }
+        public string AuthorId { get; set; }
+        public bool IsRead { get; set; }
 
     }
 }

@@ -556,6 +556,10 @@
     <Compile Include="Persistence\Migrations\201712151909529_changedPropertyIdtoHomeFindingPropertyId.Designer.cs">
       <DependentUpon>201712151909529_changedPropertyIdtoHomeFindingPropertyId.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201712181617292_addReadFlagnUser.cs" />
+    <Compile Include="Persistence\Migrations\201712181617292_addReadFlagnUser.Designer.cs">
+      <DependentUpon>201712181617292_addReadFlagnUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\NumberOfBathroomsTypesRepository.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
@@ -827,6 +831,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201712151909529_changedPropertyIdtoHomeFindingPropertyId.resx">
       <DependentUpon>201712151909529_changedPropertyIdtoHomeFindingPropertyId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201712181617292_addReadFlagnUser.resx">
+      <DependentUpon>201712181617292_addReadFlagnUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

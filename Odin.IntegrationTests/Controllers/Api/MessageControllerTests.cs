@@ -30,27 +30,27 @@ namespace Odin.IntegrationTests.Controllers.Api
         }
                 
 
+        //[Test, Isolated]
+        //public async Task InsertMessage_ValidProperty_ShouldAddMessage()
+        //{
+        //    // Arrange
+        //    Order order = BuildOrder(false);
+        //    Context.Orders.Add(order);
+        //    Context.SaveChanges();              
+
+        //    // Act
+        //    var controller = SetUpMessageController();
+        //    controller.MockCurrentUser(dsc.Id, dsc.UserName);
+        //    HomeFindingProperty property = order.HomeFinding.HomeFindingProperties.First();
+        //    MessageDto dto = new MessageDto() { HomeFindingPropertyId = property.Id, Id = null, MessageDate = DateTime.Now, MessageText = "Adding a new Message", Deleted=false};
+        //    var result = controller.UpsertPropertyMessage(dto);
+
+        //    // Assert
+        //    property.Messages.Count.Should().Be(1);
+        //}
+
         [Test, Isolated]
-        public async Task InsertMessage_ValidProperty_ShouldAddMessage()
-        {
-            // Arrange
-            Order order = BuildOrder(false);
-            Context.Orders.Add(order);
-            Context.SaveChanges();              
-
-            // Act
-            var controller = SetUpMessageController();
-            controller.MockCurrentUser(dsc.Id, dsc.UserName);
-            HomeFindingProperty property = order.HomeFinding.HomeFindingProperties.First();
-            MessageDto dto = new MessageDto() { HomeFindingPropertyId = property.Id, Id = null, MessageDate = DateTime.Now, MessageText = "Adding a new Message", Deleted=false};
-            var result = controller.UpsertPropertyMessage(dto);
-
-            // Assert
-            property.Messages.Count.Should().Be(1);
-        }
-
-        [Test, Isolated]
-        public async Task InsertMessage_NoOrder_ShouldReturnNotFound()
+        public async Task InsertMessage_NoProperty_ShouldReturnNotFound()
         {
             // arrange
             var controller = SetUpMessageController();

@@ -6,38 +6,82 @@
             <span aria-hidden="true"></span>
         </button>
     </div>
-    <div class="modal-body row">
-        @foreach (var message in Model.messages)
-        {
-            <div id="messageModal" data-message-id="@message.Id" class="row">
-                <div class="col-md-2">
-                    <img class="messageImage" src="~/Content/Images/icn_chat_1.png" />
+    <div id="messageBody">
+        <div class="modal-body row">
+            @foreach (var message in Model.messages)
+            {
+                <div id="messageModal" data-message-id="@message.Id" class="row">
+                    <div class="col-md-1">
+                        <img class="messageImage" src="~/Content/Images/icn_chat_1.png" />
+                    </div>
+                    
+                        @if (message.IsRead || message.AuthorId == ViewBag.CurrentUser)
+                        {
+                            <div class="col-md-11 messageList">
+                                <h6 class="messageHeader">
+                                    @message.Author
+                                    <span>@(message.MessageDate.HasValue ? message.MessageDate.Value.ToString("dd - MMM - yyyy") : "")</span>
+                                </h6>
+                                <p class="messageText">@message.MessageText</p>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-md-11 messageListNotRead">
+                                <h6 class="messageHeader">
+                                    @message.Author
+                                    <span>@(message.MessageDate.HasValue ? message.MessageDate.Value.ToString("dd - MMM - yyyy") : "")</span>
+                                </h6>
+                                <p class="messageText">@message.MessageText</p>                                
+                            </div>                            
+                        }
                 </div>
-                <div class="col-md-10">
-                    <h5 class="messageHeader">
-                        @message.Author
-                    </h5>
-                    <span>@message.MessageText</span>
-                </div>
-            </div>
-        }
-    </div>
-    <div>
-        <textarea id="message" onfocus="this.value=''; setbg('#e5fff3');" onblur="setbg('white')">Enter your comment here...</textarea>
-    </div>
-    <div class="modal-footer row">
-        <div class="col-sm-2">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            }
+
         </div>
-        <div class="col-sm-8"></div>
-        <div class="col-sm-2">
-            <button type="button" class="btn btn-primary send">Send</button>
+        <div>
+            <textarea id="message" onfocus="this.value=''; setbg('#e5fff3');" onblur="setbg('white')">Enter your comment here...</textarea>
         </div>
+        <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>            
+                <button type="button" class="btn btn-primary send">Send</button>
+        </div>    
     </div>
 </div>
 @Styles.Render("~/Styling/propertyMessages")
 <script>
     $(document).ready(function () {
         TransfereeMessagesController.init();
+    });
+    $('.btn-secondary').click(function () {
+        var propertyId = $('#messagesModal').attr('data-property-id');                
+        var Url = "/api/orders/transferee/housing/markRead/" + propertyId;
+
+        $.ajax({
+            url: Url,
+            type: 'POST',
+            success: function (result) {
+                toast("Messageses have been marked as read.", "success");
+                OrdersPageController.loadPanel("housing");
+            },
+            error: function () {
+                toast("No messageses have been marked as read.", "warning");
+            }
+        });
+        var toast = function (message, type) {
+            $.notify({
+                message: message
+            }, {
+                    type: type,
+                    placement: {
+                        from: "bottom",
+                        align: "center"
+                    },
+                    animate: {
+                        enter: 'animated fadeInDown',
+                        exit: 'animated fadeOutUp'
+                    }
+                });
+        };
     });
 </script>

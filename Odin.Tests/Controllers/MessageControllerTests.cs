@@ -42,6 +42,15 @@ namespace Odin.Tests.Controllers
             result.Should().NotBeNull();
         }
         [TestMethod]
+        public void MessagePartial_Get_NoMessages_WhenCalled_Returns_NotFound()
+        {
+            var propertyId = "1";
+            PropertyMessagesViewModel mess = new PropertyMessagesViewModel();
+            mess.Id = propertyId;
+            var result = _controller.MessagePartial(propertyId);
+            Assert.AreEqual(((HttpStatusCodeResult)result).StatusCode, (int)HttpStatusCode.NotFound);
+        }
+        [TestMethod]
         public void AppointmentPartial_Get_BadId_WhenCalled_Returns_NotFound()
         {
             var propertyId = "1";

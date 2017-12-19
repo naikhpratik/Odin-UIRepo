@@ -19,5 +19,7 @@ namespace Odin.Data.Core.Models
             Deleted = true;
         }
         public string Author { get; set; }
+        public string AuthorId { get; set; }
+        public bool IsRead { get; set; }
     }
 }

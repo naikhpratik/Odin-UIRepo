@@ -5,7 +5,9 @@ using Odin.Data.Core.Models;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Linq;
-
+using Microsoft.AspNet.Identity.EntityFramework;
+using Odin.Data.Persistence;
+using Microsoft.AspNet.Identity;
 
 namespace Odin.Controllers
 {
@@ -29,9 +31,12 @@ namespace Odin.Controllers
             if (viewModel.messages == null)
                 return HttpNotFound();
             viewModel.latest = viewModel.messages.First().MessageDate;
-            viewModel.Id = property.Id;            
+            viewModel.Id = property.Id;
+            var userId = User.Identity.GetUserId(); 
+            ViewBag.CurrentUser = userId;
             return PartialView("~/views/Orders/Partials/_Message.cshtml", viewModel);
         }
+
         private IEnumerable<Message> GetMessagesByPropertyId(string Id)
         {
             var msg = _unitOfWork.Messages.GetMessagesByPropertyId(Id);
