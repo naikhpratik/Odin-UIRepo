@@ -14,7 +14,7 @@
         // constructs the suggestion engine
         var engine = new Bloodhound({
             datumTokenizer: function (datum) {
-                return Bloodhound.tokenizers.whitespace(datum.name);
+                return Bloodhound.tokenizers.whitespace(datum.eeName);
             },
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             local: _data,
@@ -29,7 +29,7 @@
             {
                 name: 'data',
                 source: engine,
-                displayKey: 'name'
+                displayKey: 'eeName'
             }
         ).on('typeahead:selected',
             function (e, suggestion, name) {
