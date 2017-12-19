@@ -432,6 +432,7 @@
     <Content Include="Content\css\help.min.css">
       <DependentUpon>help.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\shared\dw_loading.css" />
     <Content Include="Content\css\shared\thumbnails.carousel.css" />
     <Content Include="Content\css\transferee\details.css">
       <DependentUpon>details.scss</DependentUpon>
@@ -902,6 +903,7 @@
     <Content Include="Scripts\DataTables\responsive.semanticui.js" />
     <Content Include="Scripts\DataTables\responsive.semanticui.min.js" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
+    <Content Include="Scripts\dw_loader.js" />
     <Content Include="Scripts\leaflet.js" />
     <Content Include="Scripts\thumbnails.carousel.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />

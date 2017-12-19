@@ -32,10 +32,14 @@
         loadPanel(actionName);
     }
 
-    var loadPanel = function(actionName) {
+    var loadPanel = function (actionName) {
+        var loaderId = DWLoader.showLoaderAfterDelay();
+
         $('.item.selected').removeClass('selected');
         $("[data-panel=" + actionName + "]").addClass('selected');
-        $('#orderContainer').load('/orders/' + actionName + 'Partial/' + currentOrderId);
+        $('#orderContainer').load('/orders/' + actionName + 'Partial/' + currentOrderId, function () {
+            DWLoader.hideLoaderWithId(loaderId);
+        });
     }
 
 
