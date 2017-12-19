@@ -42,9 +42,9 @@ namespace Odin.PropBotWebJob.Bots
 
             var body = _doc.QuerySelector(".body");
 
-            var address = body.QuerySelectorAll(".userbody .mapAndAttrs .mapbox .mapaddress");
-            //prop.Street1 = address.InnerText.CleanText();
-
+            var mapAddress = body.QuerySelector(".userbody .mapAndAttrs .mapbox .mapaddress > div");
+            prop.Street1 = mapAddress.InnerText.CleanText();
+            
             var map = body.QuerySelector(".userbody .mapAndAttrs .mapbox .map");
 
             var latAttribute = map.Attributes["data-latitude"];
