@@ -95,37 +95,47 @@ namespace Odin.Data.Persistence
             if (userRole == UserRoles.Transferee)
             {
                 return _context.Orders
-                    .Where(o => o.Id == orderId && o.TransfereeId == userId)
-                    .Include(o => o.Services)
-                    .Include(o => o.HomeFinding)
-                    .Include(o => o.Services.Select(s => s.ServiceType))
-                    .Include(o => o.HomeFinding)
-                    .Include(o => o.HomeFinding.NumberOfBathrooms)
-                    .Include(o => o.HomeFinding.HousingType)
-                    .Include(o => o.HomeFinding.AreaType)
-                    .Include(o => o.HomeFinding.TransportationType)
-                    .Include(o => o.HomeFinding.HomeFindingProperties.Select(hfp => hfp.Property.Photos))
-                    .Include(o => o.DepositType)
-                    .Include(o => o.BrokerFeeType)
-                    .SingleOrDefault<Order>();
+                .Where(o => o.Id == orderId && o.ConsultantId == userId)
+                .Include(o => o.Services)
+                .Include(o => o.HomeFinding)
+                .Include(o => o.Services.Select(s => s.ServiceType))
+                .Include(o => o.HomeFinding)
+                .Include(o => o.HomeFinding.NumberOfBathrooms)
+                .Include(o => o.HomeFinding.HousingType)
+                .Include(o => o.HomeFinding.AreaType)
+                .Include(o => o.HomeFinding.TransportationType)
+                .Include(o => o.HomeFinding.HomeFindingProperties.Select(hfp => hfp.Property.Photos))
+                .Include(o => o.DepositType)
+                .Include(o => o.BrokerFeeType)
+                .Include(o => o.Notifications)
+                .SingleOrDefault<Order>();
             }
             else
             {
                 return _context.Orders
-                    .Where(o => o.Id == orderId && o.ConsultantId == userId)
-                    .Include(o => o.Services)
-                    .Include(o => o.HomeFinding)
-                    .Include(o => o.Services.Select(s => s.ServiceType))
-                    .Include(o => o.HomeFinding)
-                    .Include(o => o.HomeFinding.NumberOfBathrooms)
-                    .Include(o => o.HomeFinding.HousingType)
-                    .Include(o => o.HomeFinding.AreaType)
-                    .Include(o => o.HomeFinding.TransportationType)
-                    .Include(o => o.HomeFinding.HomeFindingProperties.Select(hfp => hfp.Property.Photos))
-                    .Include(o => o.DepositType)
-                    .Include(o => o.BrokerFeeType)
-                    .SingleOrDefault<Order>();
+                .Where(o => o.Id == orderId && o.ConsultantId == userId)
+                .Include(o => o.Services)
+                .Include(o => o.HomeFinding)
+                .Include(o => o.Services.Select(s => s.ServiceType))
+                .Include(o => o.HomeFinding)
+                .Include(o => o.HomeFinding.NumberOfBathrooms)
+                .Include(o => o.HomeFinding.HousingType)
+                .Include(o => o.HomeFinding.AreaType)
+                .Include(o => o.HomeFinding.TransportationType)
+                .Include(o => o.HomeFinding.HomeFindingProperties.Select(hfp => hfp.Property.Photos))
+                .Include(o => o.DepositType)
+                .Include(o => o.BrokerFeeType)
+                .Include(o => o.Notifications)
+                .SingleOrDefault<Order>();
             }
         }
+
+        //public IEnumerable<UserNotification> GetUserNotification(string userId, string orderid)
+        //{
+        //    return _context.Orders
+        //        .Where(o => o.Id == orderid && o.ConsultantId == userId).ToList<UserNotification>();
+
+
+        //}
     }
 }

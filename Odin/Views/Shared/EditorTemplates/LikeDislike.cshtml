@@ -1,11 +1,6 @@
 ﻿@model bool?
-@{ 
-    var likeStatusClass = "";
-    if (Model.HasValue) {
-        likeStatusClass = Model.Value ? "like" : "dislike";
-    }
-}
-    <div class="likeDislike row @likeStatusClass" data-property-id="@ViewData["propertyId"]">
-        <div class="like col-xs-6" data-property-id="@ViewData["propertyId"]" />
-        <div class="dislike col-xs-6" data-property-id="@ViewData["propertyId"]" />
-    </div>
+
+<div class="likeDislike row" data-property-id="@ViewData["propertyId"]" data-liked="@Model">
+    <div class="like col-xs-6" data-property-id="@ViewData["propertyId"]" />
+    <div class="dislike col-xs-6" data-property-id="@ViewData["propertyId"]" />
+</div>

@@ -227,6 +227,10 @@
       <Project>{62d82a16-178d-48c2-92c2-e640fe964c7a}</Project>
       <Name>Odin.PropBotWebJob</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Odin.Tests\Odin.Tests.csproj">
+      <Project>{16df4b51-f65f-4fdf-8abc-6e5844bde941}</Project>
+      <Name>Odin.Tests</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Odin\Odin.csproj">
       <Project>{003e6885-6839-46e6-9e1f-cc8ebfe57efb}</Project>
       <Name>Odin</Name>

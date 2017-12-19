@@ -1,22 +1,24 @@
 ﻿var OrdersPageController = function () {
 
+    var _data;
+    var _sortAsc = true;
+    var _sortCurr = "";
+
     var init = function () {
+        _data = getData();
+        initSearch();
+        initSort();
+    };
 
-        var data = [];
-        $(".orderRow").each(function () {
-            var name = $(this).find(".eeName").text();
-            var id = $(this).attr("data-order-id");
-            data.push({ id: id, name: name });
-        });
-
+    var initSearch = function() {
         // constructs the suggestion engine
         var engine = new Bloodhound({
-            datumTokenizer: function(datum) {
+            datumTokenizer: function (datum) {
                 return Bloodhound.tokenizers.whitespace(datum.name);
             },
             queryTokenizer: Bloodhound.tokenizers.whitespace,
-            local: data,
-            identify: function(obj) {return obj.id}
+            local: _data,
+            identify: function (obj) { return obj.id }
         });
 
         $('#searchbox').typeahead({
@@ -34,18 +36,169 @@
                 goToOrder(suggestion.id);
             }
         );
-        
+
         // row selection handler
         $('.clickable').click(function () {
             goToOrder($(this).attr("data-order-id"));
         });
-    };
+    }
+
+    var initSort = function() {
+        $("#eeNameSort").click(function () {
+            sortCol($(this), "eeLastName", function(a) { return a.toUpperCase() });
+        });
+
+        $("#pmNameSort").click(function () {
+            sortCol($(this), "pmLastName", function (a) { return a.toUpperCase() });
+        });
+
+        $("#preTripDateSort").click(function () {
+            sortCol($(this), "preTripDate", function (a) { return new Date(a) });
+        });
+
+        $("#estimatedArrivalDateSort").click(function () {
+            sortCol($(this), "estimatedArrivalDate", function (a) { return new Date(a) });
+        });
+
+        $("#notificationsSort").click(function () {
+            sortCol($(this), "notifications", function (a) { return parseInt(a.replace("*","")) });
+        });
+
+
+        //Default sort. Move to server?
+        sortCol($("#estimatedArrivalDateSort"), "estimatedArrivalDate", function (a) { return new Date(a) });
+    }
+
+    var sortCol = function(headerElt, dataName, sortFunc) {
+        resetSortHeaders();
+        headerElt.css("font-weight", "Bold").css("color", "black");
+
+        var ascElt = headerElt.find(".sortPlus");
+        var descElt = headerElt.find(".sortMinus");
+        
+        var sortId = headerElt.attr('id');
+        if (_sortCurr === sortId) {
+            _sortAsc = !_sortAsc;
+        } else {
+            _sortCurr = sortId;
+            _sortAsc = true;
+        }
+
+        if (_sortAsc) {
+            ascElt.css("display", "inline-block");
+            descElt.css("display", "none");
+
+        } else {
+            descElt.css("display", "inline-block");
+            ascElt.css("display", "none");
+        }
+        
+        _data.sort(sortBy(dataName, _sortAsc, sortFunc));
+        bindData();
+    }
+
+    var resetSortHeaders = function () {
+        $(".sortLabel, .sortLabel").css("font-weight", "normal").css("color", "#858585");
+        $(".sortPlus,.sortMinus").css("display", "none");
+
+    }
+
+    var bindData = function()
+    {
+        var rows = $(".orderRow");
+        rows.each(function (i, element) {
+
+            var elt = $(element);
+           
+            elt.attr("data-order-id",_data[i]["id"]);
+            elt.find(".eeName").text(_data[i]["eeName"]);
+            elt.find(".eeName").data("last-name",_data[i]["eeLastName"]);
+            elt.find(".rmcName").text(_data[i]["rmcName"]);
+            elt.find(".clientName").text(_data[i]["clientName"]);
+            elt.find(".pmName").text(_data[i]["pmName"]);
+            elt.find(".pmName").data("last-name", _data[i]["pmLastName"]);
+            elt.find(".pmPhone").text(_data[i]["pmPhone"]);
+            elt.find(".preTripDate").text(_data[i]["preTripDate"]);
+            elt.find(".estimatedArrivalDate").text(_data[i]["estimatedArrivalDate"]);
+            elt.find(".notifications").text(_data[i]["notifications"]);
+
+            var pb = elt.find(".progressBar");
+            pb.attr("data-comp-percent", _data[i]["compPercent"]);
+            pb.attr("data-auth-percent", _data[i]["authPercent"]);
+            pb.attr("data-sched-percent", _data[i]["schedPercent"]);
+            loadProgressBar(pb);
+        });
+    }
+
+    var getData = function() {
+        var rows = $(".orderRow");
+        var data = new Array();
+
+        rows.each(function (i, element) {
+
+            var elt = $(element);
+            var id = elt.attr("data-order-id");
+            var eeName = elt.find(".eeName").text();
+            var eeLastName = elt.find(".eeName").attr("data-last-name");
+            var rmcName = elt.find(".rmcName").text();
+            var clientName = elt.find(".clientName").text();
+            var pmName = elt.find(".pmName").text();
+            var pmLastName = elt.find(".pmName").attr("data-last-name");
+            var pmPhone = elt.find(".pmPhone").text();
+            var preTripDate = elt.find(".preTripDate").text();
+            var estimatedArrivalDate = elt.find(".estimatedArrivalDate").text();
+            var notifications = elt.find(".notifications").text();
+
+            var pb = elt.find(".progressBar");
+            var authPercent = pb.attr("data-auth-percent");
+            var schedPercent = pb.attr("data-sched-percent");
+            var compPercent = pb.attr("data-comp-percent");
+
+            data.push({
+                id: id,
+                eeName: eeName,
+                eeLastName:eeLastName,
+                rmcName: rmcName,
+                clientName: clientName,
+                pmName: pmName,
+                pmLastName:pmLastName,
+                pmPhone:pmPhone,
+                preTripDate: preTripDate,
+                estimatedArrivalDate: estimatedArrivalDate,
+                notifications: notifications,
+                authPercent: authPercent,
+                schedPercent: schedPercent,
+                compPercent: compPercent
+            });
+        });
+
+        return data;
+    }
+
+    //https://stackoverflow.com/questions/979256/sorting-an-array-of-javascript-objects
+    var sortBy = function (field, asc, primer) {
+        var key = primer ?
+            function (x) { return primer(x[field]) } :
+            function (x) { return x[field] };
+
+        var reverse = asc ? 1 : -1;
+
+        return function (a, b) {
+            return a = key(a), b = key(b), reverse * ((a > b) - (b > a));
+        } 
+    }
 
     var goToOrder = function(id) {
         window.location.href = "/Orders/Transferee/" + id;
     }
 
-    return {
+    var loadProgressBar = function(pbElt) {
+        pbElt.find(".progressBar__auth").width(pbElt.attr("data-auth-percent"));
+        pbElt.find(".progressBar__sched").width(pbElt.attr("data-sched-percent"));
+        pbElt.find(".progressBar__comp").width(pbElt.attr("data-comp-percent"));
+    }
+
+    return { 
         init: init
     };
 }();

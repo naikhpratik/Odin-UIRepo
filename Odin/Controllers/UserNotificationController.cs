@@ -21,7 +21,7 @@ namespace Odin.Controllers
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public UserNotificationController(IUnitOfWork unitOfWork, IMapper mapper, IAccountHelper accountHelper)
+        public UserNotificationController(IUnitOfWork unitOfWork, IMapper mapper, IQueueStore queueStore)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
@@ -39,7 +39,20 @@ namespace Odin.Controllers
             return PartialView("~/views/Shared/partials/_notifications.cshtml", vms);
         }
 
-        
+
+        //public ActionResult GetUserNotificationHistory()
+        //{
+        //    var userId = User.Identity.GetUserId();
+
+        //    IEnumerable<UserNotification> userNotifications = _unitOfWork.UserNotifications.GetUserNotification(userId);
+
+
+        //    IEnumerable<NotificationViewModel> vms = _mapper.Map<IEnumerable<UserNotification>, IEnumerable<NotificationViewModel>>(userNotifications);
+
+        //    return PartialView("~/views/Shared/NotificationHistory.cshtml", vms);
+        //}
+
+
 
     }
 

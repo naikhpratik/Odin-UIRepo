@@ -19,7 +19,8 @@ namespace Odin
                         "~/Scripts/jspdf.min.js",
                         "~/Scripts/datatables/jquery.datatables.js",
                         "~/Scripts/datatables/datatables.bootstrap.js",
-                        "~/Scripts/app/views/_header.js"));
+                        "~/Scripts/app/views/_header.js",
+                        "~/Scripts/dw_loader.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -39,7 +40,8 @@ namespace Odin
                       "~/Content/css/primaryNav.css",
                       "~/Content/datatables/css/datatables.bootstrap.css",
                       "~/Content/animate.css",
-                      "~/Content/css/header.css"));
+                      "~/Content/css/header.css",
+                      "~/Content/css/shared/dw_loading.css"));
 
 
             // Page Styling
