@@ -95,7 +95,7 @@ namespace Odin.Data.Persistence
             if (userRole == UserRoles.Transferee)
             {
                 return _context.Orders
-                .Where(o => o.Id == orderId && o.ConsultantId == userId)
+                .Where(o => o.Id == orderId && o.TransfereeId == userId)
                 .Include(o => o.Services)
                 .Include(o => o.HomeFinding)
                 .Include(o => o.Services.Select(s => s.ServiceType))
