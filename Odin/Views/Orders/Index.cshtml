@@ -51,15 +51,20 @@
                 <p class="rmcName">@order.Rmc</p>
                 <p class="clientName">@order.Client</p>
             </div>
+           
+            @*Updates the tasks count to show them in view progress bar *@
+           
             @{ 
-                var tasks = order.updateTask(); 
+                order.updateTask(); 
             }
+
+
             <div class="col-md-2">
                 <label class="header">Completed/Scheduled/Assigned</label>
                 <div class="progressBar" title="Tasks">
-                    <span class="progressBar__progress progressBar__auth" style="width:@Decimal.ToInt32(tasks.ElementAt(2))%" title="Authorized Tasks"></span>
-                    <span class="progressBar__progress progressBar__sched" style="width:@Decimal.ToInt32(tasks.ElementAt(1))%" title="Scheduled Tasks"></span>
-                    <span class="progressBar__progress progressBar__comp" style="width:@Decimal.ToInt32(tasks.ElementAt(0))%" title="Completed Tasks"></span>
+                    <span class="progressBar__progress progressBar__auth" style="width:@Decimal.ToInt32(order.AuthorizedWidth)%" title="Authorized Tasks"></span>
+                    <span class="progressBar__progress progressBar__sched" style="width:@Decimal.ToInt32(order.ScheduledWidth)%" title="Scheduled Tasks"></span>
+                    <span class="progressBar__progress progressBar__comp" style="width:@Decimal.ToInt32(order.CompletedWidth)%" title="Completed Tasks"></span>
                 </div>
             </div>
             <div class="col-md-2">

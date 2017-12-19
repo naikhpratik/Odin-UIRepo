@@ -31,6 +31,12 @@ namespace Odin.ViewModels.Orders.Index
 
         public IEnumerable<ServiceViewModel> Services { get; set; }
 
+        public decimal CompletedWidth { get; set; }
+        public decimal ScheduledWidth {  get; set; }
+        public decimal AuthorizedWidth {  get; set; }
+
+
+        // Call this function in Index inorder to set the CompletedWidth, ScheduledWidth, AuthorizedWidth
         public List<decimal> updateTask()
         {
             List<decimal> tasks = new List<decimal>();
@@ -58,7 +64,11 @@ namespace Odin.ViewModels.Orders.Index
             tasks.Add(cwid = (at == 0 ? 0 : c / at * 100));
             tasks.Add(swid = (at == 0 ? 0 : s / at * 100));
             tasks.Add(atwid = swid == 0 ? 100 : 100);
-            
+
+            this.CompletedWidth = cwid;
+            this.ScheduledWidth = swid;
+            this.AuthorizedWidth = atwid;
+
             return tasks;
         }
 
