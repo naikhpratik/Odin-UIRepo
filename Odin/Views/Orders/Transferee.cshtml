@@ -1,97 +1,98 @@
 ﻿@model Odin.ViewModels.Orders.Transferee.OrdersTransfereeViewModel
-    @{
-        ViewBag.Title = "Transferee Page";
-        Layout = "~/Views/Shared/_Common.cshtml";
-    }
+@{
+    ViewBag.Title = "Transferee Page";
+    Layout = "~/Views/Shared/_Common.cshtml";
+}
 
-    <nav class="navbar navbar-default" id="transfereeSideNav">
-        
-        <div class="container-fluid navWrapper">
-            <div class="navbar-header transfereeSideNav__person">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <div class="navbar-brand" href="#">
-                    @*<img class="person" src="~/Content/Images/icn_person.png" />*@
-                    <p class="eeName">@Model.Transferee.FullName</p>
-                    @Html.HiddenFor(Model => Model.Transferee.Email, new {id="TransfereeEmail"})
-                </div>
-            </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <div class="eeDetails">
-                    <div class="eeOriginVipWrap">
-                        <p class="eeDetails eeOrigin">@Model.RelocationType</p>
-                        @if (Model.IsVipDisplay == "Yes")
-                        {
-                            <p class="eeDetails eeBar">|</p>
-                            <p class="eeDetails eeVip">VIP</p>
+<nav class="navbar navbar-default" id="transfereeSideNav">
 
-                        }
-                    </div>
-                    <p class="eeDetails">@Model.Rmc</p>
-                    <p class="eeDetails">@Model.Client</p>
-                </div>
-                <ul class="nav navbar-nav">
-                    <hr class="transfereeSideNav__rule" />
-
-                    <li class="item selected nav-item" data-panel="intake">
-                        <a href="#intake">
-                            <img src="~/Content/Images/icn_intake.png" />
-                            <label>Intake</label>
-                       </a>
-                    </li>
-                    <li class="item nav-item" data-panel="details">
-                        <a href="#details">
-                            <img src="~/Content/Images/icn_details.png" />
-                            <label>Details</label>
-                        </a>
-                    </li>
-                    <li class="item nav-item" data-panel="housing">
-                        <a href="#housing">
-                            <img src="~/Content/Images/icn_housing.png" />
-                            <label>Housing</label>
-                        </a>
-                    </li>
-                    <li class="item nav-item" data-panel="history">
-                        <a href="#history">
-                            <img src="~/Content/Images/icn_history.png" />
-                            <label>History</label>
-                        </a>
-                    </li>
-                    <hr class="transfereeSideNav__rule" />
-                    <li class="item nav-item" data-panel="messages">
-                        <a href="#messages">
-                            <img src="~/Content/Images/icn_internal_messages.png" />
-                            <label>Messages</label>
-                        </a>
-                    </li>
-                    <li class="item nav-item" data-panel="itinerary">
-                        <a href="#itinerary">
-                            <img src="~/Content/Images/icn_internal_itinerary.png" />
-                            <label>Itinerary</label>
-                        </a>
-                    </li>
-                </ul>
-                <span id="backButton">BACK TO LIST</span>
+    <div class="container-fluid navWrapper">
+        <div class="navbar-header transfereeSideNav__person">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand" href="#">
+                @*<img class="person" src="~/Content/Images/icn_person.png" />*@
+                <p class="eeName">@Model.Transferee.FullName</p>
+                @Html.HiddenFor(Model => Model.Transferee.Email, new { id = "TransfereeEmail" })
             </div>
         </div>
-    </nav>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div class="eeDetails">
+                <div class="eeOriginVipWrap">
+                    <p class="eeDetails eeOrigin">@Model.RelocationType</p>
+                    @if (Model.IsVipDisplay == "Yes")
+                    {
+                        <p class="eeDetails eeBar">|</p>
+                        <p class="eeDetails eeVip">VIP</p>
 
-    <div class="container" id="orderContainer">
-        @*@Html.Partial("~/Views/Orders/Partials/_Intake.cshtml")*@
+                    }
+                </div>
+                <p class="eeDetails">@Model.Rmc</p>
+                <p class="eeDetails">@Model.Client</p>
+            </div>
+            <ul class="nav navbar-nav">
+                <hr class="transfereeSideNav__rule" />
+
+                <li class="item selected nav-item" data-panel="intake">
+                    <a href="#intake">
+                        <img src="~/Content/Images/icn_intake.png" />
+                        <label>Intake</label>
+                    </a>
+                </li>
+                <li class="item nav-item" data-panel="details">
+                    <a href="#details">
+                        <img src="~/Content/Images/icn_details.png" />
+                        <label>Details</label>
+                    </a>
+                </li>
+                <li class="item nav-item" data-panel="housing">
+                    <a href="#housing">
+                        <img src="~/Content/Images/icn_housing.png" />
+                        <label>Housing</label>
+                    </a>
+                </li>
+                <li class="item nav-item" data-panel="history">
+                    <a href="#history">
+                        <img src="~/Content/Images/icn_history.png" />
+                        <label>History</label>
+                    </a>
+                </li>
+                <hr class="transfereeSideNav__rule" />
+                <li class="item nav-item" data-panel="messages">
+                    <a href="#messages">
+                        <img src="~/Content/Images/icn_internal_messages.png" />
+                        <label>Messages</label>
+                    </a>
+                </li>
+                <li class="item nav-item" data-panel="itinerary">
+                    <a href="#itinerary">
+                        <img src="~/Content/Images/icn_internal_itinerary.png" />
+                        <label>Itinerary</label>
+                    </a>
+                </li>
+            </ul>
+            <span id="backButton">BACK TO LIST</span>
+        </div>
     </div>
+</nav>
 
-    @section scripts
+<div class="container" id="orderContainer">
+    @*@Html.Partial("~/Views/Orders/Partials/_Intake.cshtml")*@
+</div>
+
+@section scripts
 {
-        @Styles.Render("~/Styling/transferee")
-        @Styles.Render("~/Styling/sideNav")
-        @Scripts.Render("~/Scripts/transferee")
-  
-        <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.2.0/mapquest.js"></script>
-        <script>
+    @Scripts.Render("~/Scripts/dw_loader.js")
+    @Styles.Render("~/Styling/transferee")
+    @Styles.Render("~/Styling/sideNav")
+    @Scripts.Render("~/Scripts/transferee")
+
+    <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.2.0/mapquest.js"></script>
+    <script>
             var currentOrderId = '@Model.Id';
             $(document).ready(function () {
                 OrdersPageController.TransfereeInit();
@@ -101,8 +102,8 @@
                 })
             });
 
-        </script>
-    }
+    </script>
+}
 @section styles
 {
     <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.2.0/mapquest.css" />
