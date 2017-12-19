@@ -74,7 +74,16 @@ namespace Odin.Data.Persistence
                 .Include(o => o.HomeFinding.HomeFindingProperties.Select(hfp => hfp.Property.Photos))
                 .Include(o => o.DepositType)
                 .Include(o => o.BrokerFeeType)
+                .Include(o => o.Notifications)
                 .SingleOrDefault<Order>();
         }
+
+        //public IEnumerable<UserNotification> GetUserNotification(string userId, string orderid)
+        //{
+        //    return _context.Orders
+        //        .Where(o => o.Id == orderid && o.ConsultantId == userId).ToList<UserNotification>();
+
+
+        //}
     }
 }

@@ -94,7 +94,7 @@ namespace Odin.Domain
             order.ProgramManagerId = programManagerId;
 
             
-            if (!IsNew)
+            if (IsNew)
             {
                 Notification notification = new Notification()
                 {
