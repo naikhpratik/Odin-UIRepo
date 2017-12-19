@@ -42,7 +42,7 @@ namespace Odin.PropBotWebJob.Bots
 
             var body = _doc.QuerySelector(".body");
 
-            var mapAddress = body.QuerySelector(".userbody .mapAndAttrs .mapbox .mapaddress > div");
+            var mapAddress = body.QuerySelector(".userbody .mapAndAttrs .mapbox .mapaddress div");
             prop.Street1 = mapAddress.InnerText.CleanText();
             
             var map = body.QuerySelector(".userbody .mapAndAttrs .mapbox .map");
