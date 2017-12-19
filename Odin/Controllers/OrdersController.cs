@@ -6,7 +6,6 @@ using Odin.Helpers;
 using Odin.Interfaces;
 using Odin.ViewModels.Orders.Transferee;
 using Odin.ViewModels.Shared;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -129,7 +128,16 @@ namespace Odin.Controllers
         public ActionResult Transferee(string id)
         {
             var userId = User.Identity.GetUserId();
-            var order = _unitOfWork.Orders.GetOrderFor(userId, id);
+
+            Order order = null;
+            if (User.IsInRole(UserRoles.Transferee))
+            {
+                order = _unitOfWork.Orders.GetOrderFor(userId, id, UserRoles.Transferee);
+            }
+            else
+            {
+                order = _unitOfWork.Orders.GetOrderFor(userId, id);
+            }
 
             if (order == null)
             {

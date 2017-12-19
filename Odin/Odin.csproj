@@ -320,6 +320,7 @@
     <Compile Include="Controllers\BookMarkletController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\UserNotificationController.cs" />
     <Compile Include="Domain\ImageStore.cs" />
     <Compile Include="Domain\QueueStore.cs" />
@@ -1005,6 +1006,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\Appointment\" />
     <Folder Include="Views\Email\" />
+    <Folder Include="Views\Role\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">
