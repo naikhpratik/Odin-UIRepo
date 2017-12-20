@@ -8,6 +8,7 @@ namespace Odin.Data.Core.Models
 {
     public enum NotificationType
     {
-        OrderCreated = 1
+        OrderCreated = 1,
+        Appointment = 2
     }
 }

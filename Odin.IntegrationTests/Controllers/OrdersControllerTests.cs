@@ -5,22 +5,27 @@ using Odin.Data.Core.Models;
 using Odin.Data.Persistence;
 using Odin.Helpers;
 using System.Linq;
-using System;
 using Odin.IntegrationTests.TestAttributes;
+using Moq;
+using Odin.Data.Helpers;
+using System;
 using Odin.IntegrationTests.Extensions;
-using FluentAssertions;
 using System.Web.Mvc;
+using Odin.ViewModels.Orders.Transferee;
+using FluentAssertions;
+
 
 namespace Odin.IntegrationTests.Controllers
 {
     [TestFixture]
-    public class OrdersControllerTests 
+    public class OrdersControllerTests
     {
         private OrdersController _controller;
         private ApplicationDbContext _context;
         private Manager _pm;
         private Consultant _dsc;
         private Transferee _transferee;
+        
 
         [SetUp]
         public void SetUp()
@@ -43,6 +48,68 @@ namespace Odin.IntegrationTests.Controllers
         {
             _context.Dispose();
         }
+
+        [Test, Isolated]
+        public void HistoryPartial_InvalidOrderId_ShouldReturnOk_Integration()
+        {
+            // Arrange
+
+            var orders = Odin.Data.Builders.OrderBuilder.New(1);
+            orders.ForEach(o => o.ConsultantId = _dsc.Id);
+            orders.ForEach(o => o.TransfereeId = _transferee.Id);
+            orders.ForEach(o => o.ProgramManagerId = _pm.Id);
+            orders.ForEach(o => o.TrackingId = TokenHelper.NewToken());
+            var testDateTime = new DateTime(1999, 6, 14);
+            orders.ForEach(o => o.PreTripDate = testDateTime);
+
+
+            var _mockBookMarkletHelper = new Mock<Controller>();
+            var config = new MapperConfiguration(c => c.AddProfile(new MappingProfile()));
+            var mapper = config.CreateMapper();
+            var unitOfWork = new UnitOfWork(_context);
+            var emailHelper = new EmailHelper();
+            var accountHelper = new AccountHelper(emailHelper);
+
+            _controller = new OrdersController(unitOfWork, mapper, accountHelper);
+            _context.Orders.AddRange(orders);
+            _controller.MockCurrentUser(_dsc.Id, _dsc.UserName);
+
+            Notification notification = new Notification();
+            notification.NotificationType = NotificationType.OrderCreated;
+            notification.Message = "A New Order is Created - Test";
+            notification.Title = "New Order Creation - Test";
+            var order = orders[0];
+            notification.OrderId = order.Id;
+
+            UserNotification userNotification = new UserNotification(_dsc, notification);
+
+            _context.Notifications.Add(notification);
+            _context.UserNotifications.Add(userNotification);
+            _context.SaveChanges();
+
+            HistoryViewModel historyViewModel = new HistoryViewModel();
+            historyViewModel.NotificationMessage = notification.Message;
+
+            historyViewModel.NotificationOrderId = notification.OrderId;
+            historyViewModel.NotificationTitle = notification.Title;
+
+            historyViewModel.IsRead = false;
+            historyViewModel.IsRemoved = false;
+            historyViewModel.NotificationUserNotificationId = notification.Id;
+
+
+            historyViewModel.NotificationNotificationType = NotificationType.OrderCreated;
+
+            //act 
+            var result = _controller.HistoryPartial(order.Id) as PartialViewResult;
+
+
+            //assert
+            result.Model.Equals(historyViewModel);
+
+        }
+
+
 
         //Built with expectation that order index would be populated with a view model.  Currently it is not.  Leaving in case this changes in the future.
         //[Test, Isolated]

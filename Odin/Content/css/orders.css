@@ -6,6 +6,13 @@
 .clickable {
   cursor: pointer; }
 
+.sortLabel {
+  text-align: center; }
+
+.sortPlus, .sortMinus {
+  margin-left: 1rem;
+  display: none; }
+
 div#list {
   height: auto;
   padding-bottom: 4.5rem; }
@@ -51,6 +58,16 @@ div#list {
     font-weight: 400;
     font-size: 1.5rem;
     padding: 2rem 0; }
+    div#list li.header .sortLabel {
+      cursor: pointer;
+      -webkit-user-select: none;
+      /* Safari */
+      -moz-user-select: none;
+      /* Firefox */
+      -ms-user-select: none;
+      /* IE10+/Edge */
+      user-select: none;
+      /* Standard */ }
   div#list li.row .col-md-2 {
     margin-bottom: 2rem; }
   div#list li.row .col-md-2:last-child {

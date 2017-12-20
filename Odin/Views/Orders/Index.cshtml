@@ -9,14 +9,14 @@
         <input id="searchbox" placeholder="Type here to search, select to go" />
     </div>
     <div id="">
-        <div class="dropdown">
+        <div class="dropdown" align="center">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Dropdown button
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 @foreach (var mngr in Model.Managers)
                 {
-                    <a class="dropdown-item" href="#">@mngr.FullName</a><br>
+                    <div class=" clickable" id="pmRow" data-order-id="@mngr.Id" align="center">@mngr.FullName</div><br>
                 }
             </div>
         </div>
@@ -32,22 +32,22 @@
     <ul class="container-fluid">
         <li class="header row">
             <div class="col-md-2">
-                <label>Transferee Sort +/-</label>
+                <label id="eeNameSort" class="sortLabel">Transferee Name<span class="sortPlus"><img src="/Content/Images/icn_up_sel_arrow.png" /></span><span class="sortMinus"><img src="/Content/Images/icn_down_arrow.png" /></span></label>
             </div>
             <div class="col-md-2">
-                <label>Authorized Tasks  +/-</label>
+                <label>Authorized Tasks</label>
             </div>
             <div class="col-md-2">
-                <label>Manager  +/-</label>
+                <label id="pmNameSort" class="sortLabel">Manager <span class="sortPlus"><img src="/Content/Images/icn_up_sel_arrow.png" /></span><span class="sortMinus"><img src="/Content/Images/icn_down_arrow.png" /></span></label>
             </div>
             <div class="col-md-2">
-                <label>Pre-Trip +/-</label>
+                <label id="preTripDateSort" class="sortLabel">Pre-Trip <span class="sortPlus"><img src="/Content/Images/icn_up_sel_arrow.png" /></span><span class="sortMinus"><img src="/Content/Images/icn_down_arrow.png" /></span></label>
             </div>
             <div class="col-md-2">
-                <label>Final Arrival +/-</label>
+                <label id="estimatedArrivalDateSort" class="sortLabel">Final Arrival <span class="sortPlus"><img src="/Content/Images/icn_up_sel_arrow.png" /></span><span class="sortMinus"><img src="/Content/Images/icn_down_arrow.png" /></span></label>
             </div>
             <div class="col-md-2">
-                <label>Notifications +/-</label>
+                <label id="notificationsSort" class="sortLabel">Notifications <span class="sortPlus"><img src="/Content/Images/icn_up_sel_arrow.png" /></span><span class="sortMinus"><img src="/Content/Images/icn_down_arrow.png" /></span></label>
             </div>
         </li>
         @if (Model == null)
@@ -61,7 +61,7 @@
             <li class="row clickable orderRow" data-order-id="@order.Id">
                 <div class="col-md-2">
                     <label class="header">Transferee</label>
-                    <p class="eeName">@order.Transferee.FullName</p>
+                    <p class="eeName" data-last-name="@order.Transferee.LastName">@order.Transferee.FullName</p>
                     <p class="rmcName">@order.Rmc</p>
                     <p class="clientName">@order.Client</p>
                 </div>
@@ -71,8 +71,6 @@
                 @{
                     order.updateTask();
                 }
-
-
                 <div class="col-md-2">
                     <label class="header">Completed/Scheduled/Assigned</label>
                     <div class="progressBar" title="Tasks">
@@ -107,9 +105,11 @@
 
 @section scripts
 {
-    @Scripts.Render("~/Scripts/orders")
+    @Scripts.Render("~/Scripts/app/views/orders.js")
 
     <script>
+        alert("hELL");
         $(document).ready(OrdersPageController.init);
+        alert("hELLO0");
     </script>
 }

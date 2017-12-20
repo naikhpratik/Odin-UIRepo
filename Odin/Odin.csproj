@@ -320,6 +320,7 @@
     <Compile Include="Controllers\BookMarkletController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\UserNotificationController.cs" />
     <Compile Include="Domain\ImageStore.cs" />
     <Compile Include="Domain\QueueStore.cs" />
@@ -385,6 +386,7 @@
     <Compile Include="ViewModels\Orders\Index\OrderIndexManagerViewModel.cs" />
     <Compile Include="ViewModels\Orders\Index\OrdersIndexViewModel.cs" />
     <Compile Include="ViewModels\Mailers\ViewRenderer.cs" />
+    <Compile Include="ViewModels\Orders\Transferee\HistoryViewModel.cs" />
     <Compile Include="ViewModels\Orders\Transferee\HousingPropertyViewModel.cs" />
     <Compile Include="ViewModels\Orders\Transferee\HousingViewModel.cs" />
     <Compile Include="ViewModels\Orders\Transferee\OrdersTransfereeItineraryViewModel.cs" />
@@ -431,6 +433,7 @@
     <Content Include="Content\css\help.min.css">
       <DependentUpon>help.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\shared\dw_loading.css" />
     <Content Include="Content\css\shared\thumbnails.carousel.css" />
     <Content Include="Content\css\transferee\details.css">
       <DependentUpon>details.scss</DependentUpon>
@@ -901,6 +904,7 @@
     <Content Include="Scripts\DataTables\responsive.semanticui.js" />
     <Content Include="Scripts\DataTables\responsive.semanticui.min.js" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
+    <Content Include="Scripts\dw_loader.js" />
     <Content Include="Scripts\leaflet.js" />
     <Content Include="Scripts\thumbnails.carousel.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
@@ -1006,6 +1010,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\Appointment\" />
     <Folder Include="Views\Email\" />
+    <Folder Include="Views\Role\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">
