@@ -1,20 +1,34 @@
-﻿@model IEnumerable<Odin.ViewModels.Orders.Index.OrdersIndexViewModel>
+﻿@model Odin.ViewModels.Orders.Index.OrderIndexManagerViewModel
 @{
     ViewBag.Title = "Orders Page";
     Layout = "~/Views/Shared/_Common.cshtml";
 }
-
+@Styles.Render("~/Styling/orders")
 <div class="container-fluid" id="list">
     <div id="search">
-        <input id="searchbox" placeholder="Type here to search, select to go"/>
+        <input id="searchbox" placeholder="Type here to search, select to go" />
     </div>
-
+    <div id="">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown button
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                @foreach (var mngr in Model.Managers)
+                {
+                    <a class="dropdown-item" href="#">@mngr.FullName</a><br>
+                }
+            </div>
+        </div>
+    </div>
 
     @*<div>
             <img class="arrow up name" src="~/Content/Images/icn_up_arrow.png" />
             <img class="arrow down name noinit" src="~/Content/Images/icn_down_arrow.png" />
             <img class="arrow upsel name noinit" src="~/Content/Images/icn_up_sel_arrow.png" />
         </div>*@
+
+
     <ul class="container-fluid">
         <li class="header row">
             <div class="col-md-2">
@@ -40,56 +54,56 @@
         {
             return;
         }
-        @for (int j = 0; j < Model.Count(); j++)
+        @for (int j = 0; j < Model.OrdersIndexVm.Count(); j++)
         {
-             var order = Model.ElementAt(j);
+            var order = Model.OrdersIndexVm.ElementAt(j);
 
-        <li class="row clickable orderRow" data-order-id="@order.Id">
-            <div class="col-md-2">
-                <label class="header">Transferee</label>
-                <p class="eeName">@order.Transferee.FullName</p>
-                <p class="rmcName">@order.Rmc</p>
-                <p class="clientName">@order.Client</p>
-            </div>
-           
-            @*Updates the tasks count to show them in view progress bar *@
-           
-            @{ 
-                order.updateTask(); 
-            }
-
-
-            <div class="col-md-2">
-                <label class="header">Completed/Scheduled/Assigned</label>
-                <div class="progressBar" title="Tasks">
-                    <span class="progressBar__progress progressBar__auth" style="width:@Decimal.ToInt32(order.AuthorizedWidth)%" title="Authorized Tasks"></span>
-                    <span class="progressBar__progress progressBar__sched" style="width:@Decimal.ToInt32(order.ScheduledWidth)%" title="Scheduled Tasks"></span>
-                    <span class="progressBar__progress progressBar__comp" style="width:@Decimal.ToInt32(order.CompletedWidth)%" title="Completed Tasks"></span>
+            <li class="row clickable orderRow" data-order-id="@order.Id">
+                <div class="col-md-2">
+                    <label class="header">Transferee</label>
+                    <p class="eeName">@order.Transferee.FullName</p>
+                    <p class="rmcName">@order.Rmc</p>
+                    <p class="clientName">@order.Client</p>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <label class="header">Manager</label>
-                <p>@order.ProgramManager.FullName</p>
-                <p class="subTitle">@order.ProgramManager.phoneNumber</p>
-            </div>
-            <div class="col-md-2">
-                <label class="header">Pre-Trip</label>
-                <p>@order.PreTripDate</p>
-            </div>
-            <div class="col-md-2">
-                <label class="header">Final Arrival</label>
-                <p>@order.EstimatedArrivalDate</p>
-            </div>
-            <div class="col-md-2">
-                <label class="header">Notifications</label>
-                <p>2*</p>
-            </div>
-        </li>
+
+                @*Updates the tasks count to show them in view progress bar *@
+
+                @{
+                    order.updateTask();
+                }
+
+
+                <div class="col-md-2">
+                    <label class="header">Completed/Scheduled/Assigned</label>
+                    <div class="progressBar" title="Tasks">
+                        <span class="progressBar__progress progressBar__auth" style="width:@Decimal.ToInt32(order.AuthorizedWidth)%" title="Authorized Tasks"></span>
+                        <span class="progressBar__progress progressBar__sched" style="width:@Decimal.ToInt32(order.ScheduledWidth)%" title="Scheduled Tasks"></span>
+                        <span class="progressBar__progress progressBar__comp" style="width:@Decimal.ToInt32(order.CompletedWidth)%" title="Completed Tasks"></span>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <label class="header">Manager</label>
+                    <p>@order.ProgramManager.FullName</p>
+                    <p class="subTitle">@order.ProgramManager.phoneNumber</p>
+                </div>
+                <div class="col-md-2">
+                    <label class="header">Pre-Trip</label>
+                    <p>@order.PreTripDate</p>
+                </div>
+                <div class="col-md-2">
+                    <label class="header">Final Arrival</label>
+                    <p>@order.EstimatedArrivalDate</p>
+                </div>
+                <div class="col-md-2">
+                    <label class="header">Notifications</label>
+                    <p>2*</p>
+                </div>
+            </li>
         }
     </ul>
 </div>
 
-@Styles.Render("~/Styling/orders")
+
 
 @section scripts
 {

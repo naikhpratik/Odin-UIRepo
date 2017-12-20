@@ -38,7 +38,7 @@ namespace Odin.Tests.ViewModels.Orders.Index
             Test_task.Add(200);
             Test_task.Add(300);
             Test_task.Add(100);
-
+            
             tasks.Equals(Test_task);
             
         }

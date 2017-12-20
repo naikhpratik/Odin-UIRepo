@@ -24,6 +24,7 @@ namespace Odin.ViewModels.Orders.Index
         public int AuthorizedServicesDisplay => Services.Count();
         public int ScheduledServicesDisplay => Services.Where(s => s.ScheduledDate.HasValue && !s.CompletedDate.HasValue).Count();
         public int CompletedServicesDisplay => Services.Where(s => s.CompletedDate.HasValue).Count();
+         
 
         public TransfereeViewModel Transferee { get; set; }
 
@@ -40,6 +41,7 @@ namespace Odin.ViewModels.Orders.Index
         public List<decimal> updateTask()
         {
             List<decimal> tasks = new List<decimal>();
+            
             int at = 0;
             decimal s = 0;
             decimal c = 0;

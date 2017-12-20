@@ -8,6 +8,7 @@ using Odin.ViewModels.Orders.Index;
 using Odin.ViewModels.Orders.Transferee;
 using Odin.ViewModels.Shared;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -33,10 +34,15 @@ namespace Odin.Controllers
             var userId = User.Identity.GetUserId();
 
             var orders = _unitOfWork.Orders.GetOrdersFor(userId);
-
+            var managers = _unitOfWork.Managers.GetManagers();
             var orderVms = _mapper.Map<IEnumerable<Order>, IEnumerable<OrdersIndexViewModel>>(orders);
+            var result = ((IEnumerable)managers).Cast<Manager>().ToList();
+            //IList Imanager = (IList)managers;
+            var managerVms  = _mapper.Map< IEnumerable<Manager>, IEnumerable <ManagerViewModel>> (result);
+            OrderIndexManagerViewModel ordermanagervms = new OrderIndexManagerViewModel(orderVms, managerVms);
 
-            return View(orderVms);
+
+            return View(ordermanagervms);
         }
 
         // GET Partials

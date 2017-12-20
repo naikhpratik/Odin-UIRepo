@@ -26,7 +26,11 @@ namespace Odin.Data.Persistence
             manager.UserName = manager.Email;
             var result = userManager.Create(manager, PasswordHelper.TemporaryPassword());
             userManager.AddToRole(manager.Id, userRole);
-        }        
-        
+        }
+
+        public object GetManagers()
+        {
+            return _context.Managers.ToList();
+        }
     }
 }
