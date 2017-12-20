@@ -32,22 +32,40 @@ namespace Odin.Controllers
         public ViewResult Index(string id)
         {
             var userId = "";
+            IEnumerable<Order> orders;
+
             if (id == null)
+            {
                 userId = User.Identity.GetUserId();
+                orders = _unitOfWork.Orders.GetOrdersFor(userId);
+            }
             else
+            {
                 userId = id;
-            var orders = _unitOfWork.Orders.GetOrdersFor(userId);
+                orders = _unitOfWork.Orders.GetOrdersFor(userId, UserRoles.ProgramManager);
+            }
+            
+
+            if (User.IsInRole(UserRoles.ProgramManager))
+            {
+                ViewBag.userRole = "ProgramManager";
+            }
+            else
+            { ViewBag.userRole = ""; }
+
+
+
             var managers = _unitOfWork.Managers.GetManagers();
             var orderVms = _mapper.Map<IEnumerable<Order>, IEnumerable<OrdersIndexViewModel>>(orders);
             var result = ((IEnumerable)managers).Cast<Manager>().ToList();
             //IList Imanager = (IList)managers;
-            var managerVms  = _mapper.Map< IEnumerable<Manager>, IEnumerable <ManagerViewModel>> (result);
+            var managerVms = _mapper.Map<IEnumerable<Manager>, IEnumerable<ManagerViewModel>>(result);
             OrderIndexManagerViewModel ordermanagervms = new OrderIndexManagerViewModel(orderVms, managerVms);
 
 
             return View(ordermanagervms);
         }
-        
+
         // GET Partials
         public ActionResult HousingPartial(string id)
         {
@@ -74,13 +92,13 @@ namespace Odin.Controllers
             if (viewModel.Properties.Count() == 0)
             {
                 return new HttpNotFoundResult();
-            }           
+            }
             ViewBag.isPDF = true;
             return new Rotativa.ViewAsPdf("Partials/_HousingProperties", viewModel.Properties)
             {
                 FileName = "Housing.pdf",
                 PageMargins = new Rotativa.Options.Margins(0, 0, 0, 0)
-            };           
+            };
         }
         public ActionResult DetailsPartial(string id)
         {
@@ -124,7 +142,7 @@ namespace Odin.Controllers
 
             if (order == null)
             {
-                
+
                 //TempData.Add("notfound", 1);
                 return PartialView("~/views/orders/partials/_History.cshtml", null);
             }
@@ -180,8 +198,8 @@ namespace Odin.Controllers
             ViewBag.Id = id;
             OrdersTransfereeViewModel viewModel = GetViewModelForOrderDetails(id);
             return View(viewModel);
-        }       
-        
+        }
+
         private OrdersTransfereeViewModel GetViewModelForOrderDetails(string id)
         {
             var userId = User.Identity.GetUserId();

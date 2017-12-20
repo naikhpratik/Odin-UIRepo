@@ -3,6 +3,7 @@ using Odin.Data.Core.Repositories;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using Odin.Data.Helpers;
 
 namespace Odin.Data.Persistence
 {
@@ -44,6 +45,16 @@ namespace Odin.Data.Persistence
             {
                 return _context.Orders
                     .Where(o => o.ConsultantId == userId)
+                    .Include(o => o.Transferee)
+                    .Include(o => o.ProgramManager)
+                    .Include(o => o.Consultant)
+                    .Include(o => o.Services.Select(st => st.ServiceType))
+                    .ToList();
+            }
+            else if (UserRoles.ProgramManager == userRole)
+            {
+                return _context.Orders
+                    .Where(o => o.ProgramManagerId == userId)
                     .Include(o => o.Transferee)
                     .Include(o => o.ProgramManager)
                     .Include(o => o.Consultant)
@@ -129,6 +140,8 @@ namespace Odin.Data.Persistence
                 .SingleOrDefault<Order>();
             }
         }
+
+    
 
         //public IEnumerable<UserNotification> GetUserNotification(string userId, string orderid)
         //{

@@ -5,100 +5,107 @@
 }
 @Styles.Render("~/Styling/orders")
 <div class="container-fluid" id="list">
-    <div id="search">
-        <input id="searchbox" placeholder="Type here to search, select to go" />
-    </div>
-    <div id="">
-        <div class="dropdown" align="center">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown button
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    
+        <div id="search">
+            <input id="searchbox" placeholder="Type here to search, select to go" />
+        </div>
+    
+    @if (@ViewBag.userRole.Equals("ProgramManager"))
+    {
+
+        <div class="dropdown show">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Property Managers
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" align="center">
                 @foreach (var mngr in Model.Managers)
                 {
                     <div class=" clickable" id="pmRow" data-order-id="@mngr.Id" align="center">@mngr.FullName</div><br>
                 }
             </div>
         </div>
-    </div>
-
-    @*<div>
-            <img class="arrow up name" src="~/Content/Images/icn_up_arrow.png" />
-            <img class="arrow down name noinit" src="~/Content/Images/icn_down_arrow.png" />
-            <img class="arrow upsel name noinit" src="~/Content/Images/icn_up_sel_arrow.png" />
-        </div>*@
+    }
 
 
-    <ul class="container-fluid">
-        <li class="header row">
+
+@*<div>
+        <img class="arrow up name" src="~/Content/Images/icn_up_arrow.png" />
+        <img class="arrow down name noinit" src="~/Content/Images/icn_down_arrow.png" />
+        <img class="arrow upsel name noinit" src="~/Content/Images/icn_up_sel_arrow.png" />
+    </div>*@
+
+
+<ul class="container-fluid">
+    <li class="header row">
+        <div class="col-md-2">
+            <label id="eeNameSort" class="sortLabel">Transferee Name<span class="sortPlus"><img src="/Content/Images/icn_up_sel_arrow.png" /></span><span class="sortMinus"><img src="/Content/Images/icn_down_arrow.png" /></span></label>
+        </div>
+        <div class="col-md-2">
+            <label>Authorized Tasks</label>
+        </div>
+        <div class="col-md-2">
+            <label id="pmNameSort" class="sortLabel">Manager <span class="sortPlus"><img src="/Content/Images/icn_up_sel_arrow.png" /></span><span class="sortMinus"><img src="/Content/Images/icn_down_arrow.png" /></span></label>
+        </div>
+        <div class="col-md-2">
+            <label id="preTripDateSort" class="sortLabel">Pre-Trip <span class="sortPlus"><img src="/Content/Images/icn_up_sel_arrow.png" /></span><span class="sortMinus"><img src="/Content/Images/icn_down_arrow.png" /></span></label>
+        </div>
+        <div class="col-md-2">
+            <label id="estimatedArrivalDateSort" class="sortLabel">Final Arrival <span class="sortPlus"><img src="/Content/Images/icn_up_sel_arrow.png" /></span><span class="sortMinus"><img src="/Content/Images/icn_down_arrow.png" /></span></label>
+        </div>
+        <div class="col-md-2">
+            <label id="notificationsSort" class="sortLabel">Notifications <span class="sortPlus"><img src="/Content/Images/icn_up_sel_arrow.png" /></span><span class="sortMinus"><img src="/Content/Images/icn_down_arrow.png" /></span></label>
+        </div>
+    </li>
+    @if (Model == null)
+    {
+        return;
+    }
+    @for (int j = 0; j < Model.OrdersIndexVm.Count(); j++)
+    {
+        var order = Model.OrdersIndexVm.ElementAt(j);
+
+        <li class="row clickable orderRow" data-order-id="@order.Id">
             <div class="col-md-2">
-                <label id="eeNameSort" class="sortLabel">Transferee Name<span class="sortPlus"><img src="/Content/Images/icn_up_sel_arrow.png" /></span><span class="sortMinus"><img src="/Content/Images/icn_down_arrow.png" /></span></label>
+                <label class="header">Transferee</label>
+                <p class="eeName" data-last-name="@order.Transferee.LastName">@order.Transferee.FullName</p>
+                <p class="rmcName">@order.Rmc</p>
+                <p class="clientName">@order.Client</p>
+            </div>
+
+            @*Updates the tasks count to show them in view progress bar *@
+
+            @{
+                order.updateTask();
+            }
+            <div class="col-md-2">
+                <label class="header">Completed/Scheduled/Assigned</label>
+                <div class="progressBar" title="Tasks">
+                    <span class="progressBar__progress progressBar__auth" style="width:@Decimal.ToInt32(order.AuthorizedWidth)%" title="Authorized Tasks"></span>
+                    <span class="progressBar__progress progressBar__sched" style="width:@Decimal.ToInt32(order.ScheduledWidth)%" title="Scheduled Tasks"></span>
+                    <span class="progressBar__progress progressBar__comp" style="width:@Decimal.ToInt32(order.CompletedWidth)%" title="Completed Tasks"></span>
+                </div>
             </div>
             <div class="col-md-2">
-                <label>Authorized Tasks</label>
+                <label class="header">Manager</label>
+                <p>@order.ProgramManager.FullName</p>
+                <p class="subTitle">@order.ProgramManager.phoneNumber</p>
             </div>
             <div class="col-md-2">
-                <label id="pmNameSort" class="sortLabel">Manager <span class="sortPlus"><img src="/Content/Images/icn_up_sel_arrow.png" /></span><span class="sortMinus"><img src="/Content/Images/icn_down_arrow.png" /></span></label>
+                <label class="header">Pre-Trip</label>
+                <p>@order.PreTripDate</p>
             </div>
             <div class="col-md-2">
-                <label id="preTripDateSort" class="sortLabel">Pre-Trip <span class="sortPlus"><img src="/Content/Images/icn_up_sel_arrow.png" /></span><span class="sortMinus"><img src="/Content/Images/icn_down_arrow.png" /></span></label>
+                <label class="header">Final Arrival</label>
+                <p>@order.EstimatedArrivalDate</p>
             </div>
             <div class="col-md-2">
-                <label id="estimatedArrivalDateSort" class="sortLabel">Final Arrival <span class="sortPlus"><img src="/Content/Images/icn_up_sel_arrow.png" /></span><span class="sortMinus"><img src="/Content/Images/icn_down_arrow.png" /></span></label>
-            </div>
-            <div class="col-md-2">
-                <label id="notificationsSort" class="sortLabel">Notifications <span class="sortPlus"><img src="/Content/Images/icn_up_sel_arrow.png" /></span><span class="sortMinus"><img src="/Content/Images/icn_down_arrow.png" /></span></label>
+                <label class="header">Notifications</label>
+                <p>2*</p>
             </div>
         </li>
-        @if (Model == null)
-        {
-            return;
-        }
-        @for (int j = 0; j < Model.OrdersIndexVm.Count(); j++)
-        {
-            var order = Model.OrdersIndexVm.ElementAt(j);
-
-            <li class="row clickable orderRow" data-order-id="@order.Id">
-                <div class="col-md-2">
-                    <label class="header">Transferee</label>
-                    <p class="eeName" data-last-name="@order.Transferee.LastName">@order.Transferee.FullName</p>
-                    <p class="rmcName">@order.Rmc</p>
-                    <p class="clientName">@order.Client</p>
-                </div>
-
-                @*Updates the tasks count to show them in view progress bar *@
-
-                @{
-                    order.updateTask();
-                }
-                <div class="col-md-2">
-                    <label class="header">Completed/Scheduled/Assigned</label>
-                    <div class="progressBar" title="Tasks">
-                        <span class="progressBar__progress progressBar__auth" style="width:@Decimal.ToInt32(order.AuthorizedWidth)%" title="Authorized Tasks"></span>
-                        <span class="progressBar__progress progressBar__sched" style="width:@Decimal.ToInt32(order.ScheduledWidth)%" title="Scheduled Tasks"></span>
-                        <span class="progressBar__progress progressBar__comp" style="width:@Decimal.ToInt32(order.CompletedWidth)%" title="Completed Tasks"></span>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <label class="header">Manager</label>
-                    <p>@order.ProgramManager.FullName</p>
-                    <p class="subTitle">@order.ProgramManager.phoneNumber</p>
-                </div>
-                <div class="col-md-2">
-                    <label class="header">Pre-Trip</label>
-                    <p>@order.PreTripDate</p>
-                </div>
-                <div class="col-md-2">
-                    <label class="header">Final Arrival</label>
-                    <p>@order.EstimatedArrivalDate</p>
-                </div>
-                <div class="col-md-2">
-                    <label class="header">Notifications</label>
-                    <p>2*</p>
-                </div>
-            </li>
-        }
-    </ul>
+    }
+</ul>
 </div>
 
 
@@ -108,8 +115,8 @@
     @Scripts.Render("~/Scripts/app/views/orders.js")
 
     <script>
-        alert("hELL");
+
         $(document).ready(OrdersPageController.init);
-        alert("hELLO0");
+
     </script>
 }

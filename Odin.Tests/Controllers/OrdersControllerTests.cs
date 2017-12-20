@@ -81,7 +81,7 @@ namespace Odin.Tests.Controllers
 
 
         }
-
+        //we have to test this test
         [TestMethod]
         public void Index_WhenCalled_ReturnsOk()
         {

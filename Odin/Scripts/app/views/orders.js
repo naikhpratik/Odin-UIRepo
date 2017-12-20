@@ -1,21 +1,21 @@
 ﻿var OrdersPageController = function () {
-    alert("Knock");
+    //alert("Knock");
     var _data;
     var _sortAsc = true;
     var _sortCurr = "";
 
     var init = function () {
-        alert("Knock");
+        //alert("Knock");
         _data = getData();
         
-        initSearch();
+        //initSearch();
         initSort();
-        //initPmDropDown();
+        initPmDropDown();
     };
 
     var initSearch = function() {
         // constructs the suggestion engine
-        alert("Knock");
+        
         var engine = new Bloodhound({
             datumTokenizer: function (datum) {
                 return Bloodhound.tokenizers.whitespace(datum.eeName);
@@ -43,7 +43,7 @@
 
         // row selection handler
         $('.clickable').click(function () {
-            alert("iDAR HU");
+            //alert("iDAR HU");
             goToOrder($(this).attr("data-order-id"));
         });
     }
@@ -51,17 +51,9 @@
     var initPmDropDown = function () {
         // constructs the suggestion engine
          // row selection handler
-        var engine = new Bloodhound({
-            datumTokenizer: function (datum) {
-                return Bloodhound.tokenizers.whitespace(datum.eeName);
-            },
-            queryTokenizer: Bloodhound.tokenizers.whitespace,
-            local: _data,
-            identify: function (obj) { return obj.id }
-        });
 
-        alert("Knockpm");
-        $('#pmRow').click(function () {
+        //alert("Knockpm");
+        $('.clickable').click(function () {
             goToOrderofManagers($(this).attr("data-order-id"));
         });
     }
@@ -154,7 +146,7 @@
     }
 
     var getData = function () {
-        alert("Knockg");
+        //alert("Knockg");
         var rows = $(".orderRow");
         var data = new Array();
 
@@ -199,7 +191,7 @@
         return data;
     }
 
-    ////https://stackoverflow.com/questions/979256/sorting-an-array-of-javascript-objects
+    //https://stackoverflow.com/questions/979256/sorting-an-array-of-javascript-objects
     var sortBy = function (field, asc, primer) {
         var key = primer ?
             function (x) { return primer(x[field]) } :
@@ -213,13 +205,13 @@
     }
 
     var goToOrder = function (id) {
-        alert("goToOrder");
+        
         window.location.href = "/Orders/Transferee/" + id;
     }
 
     var goToOrderofManagers = function (id) {
-        alert("goToOrderofManagers");
-        window.location.href = "/Orders/" + id;
+        
+        window.location.href = "/Orders/Index/" + id;
     }
 
     var loadProgressBar = function(pbElt) {

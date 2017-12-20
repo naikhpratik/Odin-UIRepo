@@ -15,7 +15,7 @@ namespace Odin.ViewModels.Orders.Index
             OrdersIndexVm = orderVms;
             Managers = managersVms;
            // IEnumerable<ManagerViewModel> Managers = (ManagerViewModel)managersVms;
-
+           
         }
 
         public IEnumerable<OrdersIndexViewModel> OrdersIndexVm { get; set; }
