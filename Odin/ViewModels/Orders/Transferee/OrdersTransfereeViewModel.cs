@@ -441,5 +441,24 @@ namespace Odin.ViewModels.Orders.Transferee
                     : String.Empty;
             }
         }
+
+        [DisplayName("Program Manager")]
+        public string ProgramManagerFullName { get; set; }
+
+        [DisplayName("Email")]
+        public string ProgramManagerEmail { get; set; }
+
+        [DisplayName("Phone")]
+        public string ProgramManagerPhoneNumber { get; set; }
+
+        [DisplayName("Consultant")]
+        public string ConsultantFullName { get; set; }
+
+        [DisplayName("Email")]
+        public string ConsultantEmail { get; set; }
+
+        [DisplayName("Phone")]
+        public string ConsultantPhoneNumber { get; set; }
+
     }
 }

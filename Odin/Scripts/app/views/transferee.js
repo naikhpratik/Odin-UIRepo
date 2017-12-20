@@ -25,10 +25,12 @@
     };
 
     var initPanels = function() {
-        var actionName = "intake";
+        var actionName = "";
         var urlArray = window.location.href.split("#");
         if (urlArray.length == 2) {
             actionName = urlArray[1];
+        } else {
+            actionName = $(".nav-item:first").attr("data-panel");
         }
         loadPanel(actionName);
     }

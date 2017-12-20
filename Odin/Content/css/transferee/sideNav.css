@@ -48,19 +48,19 @@
       #transfereeSideNav .transfereeSideNav__person .navbar-brand img.person {
         width: 3rem;
         margin-left: 1.6rem; }
-      #transfereeSideNav .transfereeSideNav__person .navbar-brand p.eeName {
-        color: white;
-        margin: 0 0 0 1rem;
-        font-size: 1.5rem;
-        font-weight: bold; }
+  #transfereeSideNav p.eeName {
+    color: white;
+    margin: 0 0 0 1rem;
+    font-size: 1.5rem;
+    font-weight: bold; }
+  #transfereeSideNav hr.transfereeSideNav__rule {
+    display: block;
+    width: 90%;
+    margin: 2vh auto; }
   #transfereeSideNav ul.navbar-nav {
     margin: 0 0;
     padding: 1vh 0;
     width: 100%; }
-    #transfereeSideNav ul.navbar-nav hr.transfereeSideNav__rule {
-      display: block;
-      width: 90%;
-      margin: 2vh auto; }
     #transfereeSideNav ul.navbar-nav li {
       float: none;
       width: 100%; }

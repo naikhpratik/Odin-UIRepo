@@ -66,6 +66,10 @@
   {
     "outputFile": "Content/css/transferee/HFProperties.css",
     "inputFile": "Content/css/transferee/HFProperties.scss"
+  },
+  {
+    "outputFile": "Content/css/transferee/help.css",
+    "inputFile": "Content/css/transferee/help.scss"
   }
 
 ]

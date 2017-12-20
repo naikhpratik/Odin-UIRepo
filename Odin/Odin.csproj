@@ -19,8 +19,7 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>
-    </IISExpressSSLPort>
+    <IISExpressSSLPort>44303</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -441,6 +440,12 @@
     <Content Include="Content\css\transferee\details.min.css">
       <DependentUpon>details.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\transferee\help.css">
+      <DependentUpon>help.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\transferee\help.min.css">
+      <DependentUpon>help.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\transferee\HFProperties.css">
       <DependentUpon>HFProperties.scss</DependentUpon>
     </Content>
@@ -655,6 +660,7 @@
     <Content Include="Content\Images\bg_gradient_forgot_password.png" />
     <Content Include="Content\Images\bg_img_3.png" />
     <Content Include="Content\Images\bg_img_w_gradient.png" />
+    <Content Include="Content\Images\bookmarklet.JPG" />
     <Content Include="Content\Images\check.png" />
     <Content Include="Content\Images\btn_add_home.png" />
     <Content Include="Content\Images\collapse.png" />
@@ -688,6 +694,7 @@
     <Content Include="Content\Images\icn_up_sel_arrow.png" />
     <Content Include="Content\Images\ic_search.png" />
     <Content Include="Content\Images\image_placeholder_large.png" />
+    <Content Include="Content\Images\install.jpg" />
     <Content Include="Content\Images\layers-2x.png" />
     <Content Include="Content\Images\layers.png" />
     <Content Include="Content\Images\login.jpg" />
@@ -826,6 +833,7 @@
     <Content Include="Content\css\bookmarklet.scss" />
     <Content Include="Content\css\help.scss" />
     <TypeScriptCompile Include="Content\css\transferee\HFProperties.scss" />
+    <Content Include="Content\css\transferee\help.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
@@ -998,6 +1006,10 @@
     <Content Include="Views\Shared\EditorTemplates\LikeDislike.cshtml" />
     <Content Include="Views\Help\Index.cshtml" />
     <Content Include="Views\Shared\Partials\multipleChoiceRadioButtons.cshtml" />
+    <Content Include="Views\Orders\Partials\_ConsultantSideNav.cshtml" />
+    <Content Include="Views\Orders\Partials\_TransfereeSideNav.cshtml" />
+    <Content Include="Views\Orders\Partials\_Dashboard.cshtml" />
+    <Content Include="Views\Orders\Partials\_Help.cshtml" />
     <None Include="Web.Azure.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
