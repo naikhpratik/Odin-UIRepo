@@ -110,6 +110,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Compile Include="Bots\ApartmentsBotTest.cs" />
+    <Compile Include="Bots\CraigslistBotTests.cs" />
     <Compile Include="Bots\RealtorBotTests.cs" />
     <Compile Include="Bots\TruliaBotTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -125,6 +126,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="BotHtml\CraigslistRent.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="BotHtml\RealtorBad.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

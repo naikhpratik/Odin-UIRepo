@@ -38,14 +38,14 @@ namespace Odin.PropBotWebJob.Bots
 
         public Property Bot()
         {
-            var prop = new Property();
+            var prop = new Property {SourceUrl = _url};
 
             var body = _doc.QuerySelector(".body");
 
             var mapAddress = body.QuerySelector(".userbody .mapAndAttrs .mapbox .mapaddress div");
             prop.Street1 = mapAddress.InnerText.CleanText();
             
-            var map = body.QuerySelector(".userbody .mapAndAttrs .mapbox .map");
+            var map = body.QuerySelector(".userbody .mapAndAttrs .mapbox #map");
 
             var latAttribute = map.Attributes["data-latitude"];
             if (latAttribute != null)
@@ -74,7 +74,7 @@ namespace Odin.PropBotWebJob.Bots
                 }
             }
 
-            var descriptionTag = body.QuerySelector(".userbody .postingbody");
+            var descriptionTag = body.QuerySelector(".userbody #postingbody");
             if (descriptionTag != null)
             {
                 prop.Description = descriptionTag.InnerText.CleanText();
@@ -136,7 +136,7 @@ namespace Odin.PropBotWebJob.Bots
                     }
                 }
             }
-
+            
             return prop;
         }
 
