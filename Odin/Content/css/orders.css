@@ -3,7 +3,7 @@
   body div.container-fluid {
     padding: 0px; }
 
-.clickable {
+.clickable, .clickablepm {
   cursor: pointer; }
 
 .sortLabel {

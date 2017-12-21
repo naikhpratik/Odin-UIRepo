@@ -1,13 +1,12 @@
 ﻿var OrdersPageController = function () {
-    //alert("Knock");
+   
     var _data;
     var _sortAsc = true;
     var _sortCurr = "";
 
     var init = function () {
-        //alert("Knock");
+      
         _data = getData();
-        
         //initSearch();
         initSort();
         initPmDropDown();
@@ -37,25 +36,24 @@
             }
         ).on('typeahead:selected',
             function (e, suggestion, name) {
+
                 goToOrder(suggestion.id);
             }
         );
 
         // row selection handler
         $('.clickable').click(function () {
-            //alert("iDAR HU");
+            alert("iDAR HU");
             goToOrder($(this).attr("data-order-id"));
         });
     }
 
     var initPmDropDown = function () {
-        // constructs the suggestion engine
-         // row selection handler
-
-        //alert("Knockpm");
-        $('.clickable').click(function () {
+        
+        $('.clickablepm').click(function () {
             goToOrderofManagers($(this).attr("data-order-id"));
         });
+
     }
 
     var initSort = function() {
@@ -146,7 +144,7 @@
     }
 
     var getData = function () {
-        //alert("Knockg");
+       
         var rows = $(".orderRow");
         var data = new Array();
 
@@ -205,12 +203,12 @@
     }
 
     var goToOrder = function (id) {
-        
+        //alert("goToOrder");
         window.location.href = "/Orders/Transferee/" + id;
     }
 
     var goToOrderofManagers = function (id) {
-        
+        //alert("goToOrderofManagers");
         window.location.href = "/Orders/Index/" + id;
     }
 

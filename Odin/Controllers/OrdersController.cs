@@ -33,37 +33,53 @@ namespace Odin.Controllers
         {
             var userId = "";
             IEnumerable<Order> orders;
-
+           
             if (id == null)
             {
                 userId = User.Identity.GetUserId();
-                orders = _unitOfWork.Orders.GetOrdersFor(userId);
+                orders = _unitOfWork.Orders.GetOrdersFor(userId, getUserRole());
             }
             else
             {
                 userId = id;
                 orders = _unitOfWork.Orders.GetOrdersFor(userId, UserRoles.ProgramManager);
             }
-            
-
-            if (User.IsInRole(UserRoles.ProgramManager))
-            {
-                ViewBag.userRole = "ProgramManager";
-            }
-            else
-            { ViewBag.userRole = ""; }
-
-
-
+            ViewBag.userRole = _unitOfWork.Users.GetRoleByUserId(userId);
             var managers = _unitOfWork.Managers.GetManagers();
             var orderVms = _mapper.Map<IEnumerable<Order>, IEnumerable<OrdersIndexViewModel>>(orders);
             var result = ((IEnumerable)managers).Cast<Manager>().ToList();
             //IList Imanager = (IList)managers;
             var managerVms = _mapper.Map<IEnumerable<Manager>, IEnumerable<ManagerViewModel>>(result);
             OrderIndexManagerViewModel ordermanagervms = new OrderIndexManagerViewModel(orderVms, managerVms);
-
-
             return View(ordermanagervms);
+        }
+
+        /// <summary>
+        /// We Can add this function to IUserRepository 
+        /// </summary>
+        /// <returns></returns>
+        public string getUserRole()
+        {
+            if (User.IsInRole(UserRoles.Admin))
+            {
+                return UserRoles.Admin;
+            }
+            else if (User.IsInRole(UserRoles.Consultant))
+            {
+                return UserRoles.Consultant;
+            }
+            if (User.IsInRole(UserRoles.GlobalSupplyChain))
+            {
+                return UserRoles.GlobalSupplyChain;
+            }
+            else if (User.IsInRole(UserRoles.ProgramManager))
+            {
+                return UserRoles.ProgramManager;
+            }
+            else
+            {
+                return UserRoles.Transferee;
+            }
         }
 
         // GET Partials

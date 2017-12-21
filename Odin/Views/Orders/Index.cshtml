@@ -10,7 +10,7 @@
             <input id="searchbox" placeholder="Type here to search, select to go" />
         </div>
     
-    @if (@ViewBag.userRole.Equals("ProgramManager"))
+    @if (@ViewBag.userRole.Equals("Program Manager"))
     {
 
         <div class="dropdown show">
@@ -21,13 +21,11 @@
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" align="center">
                 @foreach (var mngr in Model.Managers)
                 {
-                    <div class=" clickable" id="pmRow" data-order-id="@mngr.Id" align="center">@mngr.FullName</div><br>
+                    <div class="clickablepm" data-order-id="@mngr.Id" align="center">@mngr.FullName</div><br>
                 }
             </div>
         </div>
     }
-
-
 
 @*<div>
         <img class="arrow up name" src="~/Content/Images/icn_up_arrow.png" />
@@ -112,10 +110,11 @@
 
 @section scripts
 {
-    @Scripts.Render("~/Scripts/app/views/orders.js")
+
+    @Scripts.Render("~/Scripts/orders")
 
     <script>
-
+        
         $(document).ready(OrdersPageController.init);
 
     </script>
