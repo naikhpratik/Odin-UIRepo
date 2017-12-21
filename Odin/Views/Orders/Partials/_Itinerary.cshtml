@@ -1,5 +1,4 @@
 ﻿@model Odin.ViewModels.Orders.Transferee.OrdersTransfereeItineraryViewModel
-
 <div class="container-fluid" data-order-id="@Model.Id" id="itinerary">
     @if (Model.IsPdf == true)
     {
@@ -141,8 +140,15 @@
             </div>
         </div>
     </div>
-</div>                
-@Styles.Render("~/Styling/itinerary")
+</div>        
+@if (Model.IsPdf == true)
+{
+    @Styles.Render("~/Styling/itineraryPdf");    
+}
+else
+{
+    @Styles.Render("~/Styling/itinerary");
+}
 <script type="text/javascript">
     $(document).ready(function () {
         TransfereeItineraryController.init();        

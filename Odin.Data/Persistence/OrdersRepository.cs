@@ -19,7 +19,7 @@ namespace Odin.Data.Persistence
         {
             return _context.Orders
 
-                .Where(o => o.ConsultantId == userId)
+                .Where(o => (o.ConsultantId == userId || o.TransfereeId == userId))
                 .Include(o => o.Transferee)
                 .Include(o => o.ProgramManager)
                 .Include(o => o.Consultant)
@@ -62,7 +62,7 @@ namespace Odin.Data.Persistence
         public Order GetOrderFor(string userId, string orderId)
         {
             return _context.Orders
-                .Where(o => o.Id == orderId && o.ConsultantId == userId)
+                .Where(o => o.Id == orderId && (o.ConsultantId == userId || o.TransfereeId == userId))
                 .Include(o => o.Services)
                 .Include(o => o.HomeFinding)
                 .Include(o => o.Services.Select(s => s.ServiceType))

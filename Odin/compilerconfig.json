@@ -70,5 +70,9 @@
   {
     "outputFile": "Content/css/transferee/propertyMessages.css",
     "inputFile": "Content/css/transferee/propertyMessages.scss"
+  },
+  {
+    "outputFile": "Content/css/transferee/itineraryPdf.css",
+    "inputFile": "Content/css/transferee/itineraryPdf.scss"
   }
 ]

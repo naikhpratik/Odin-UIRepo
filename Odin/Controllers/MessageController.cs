@@ -30,7 +30,8 @@ namespace Odin.Controllers
             viewModel.messages = GetMessagesByPropertyId(property.Id);
             if (viewModel.messages == null)
                 return HttpNotFound();
-            viewModel.latest = viewModel.messages.First().MessageDate;
+            if (viewModel.messages.Count() > 0)
+                viewModel.latest = viewModel.messages.First().MessageDate;
             viewModel.Id = property.Id;
             var userId = User.Identity.GetUserId(); 
             ViewBag.CurrentUser = userId;

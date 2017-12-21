@@ -1,4 +1,7 @@
-﻿#help {
+﻿html, body {
+  background-color: #f1f1f1; }
+
+#help {
   margin-top: 80px; }
 
 .sectionTitle {

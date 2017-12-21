@@ -62,6 +62,7 @@ namespace Odin
             bundles.Add(new StyleBundle("~/Styling/housing").Include("~/Content/css/transferee/housing.css"));
             bundles.Add(new StyleBundle("~/Styling/properties").Include("~/Content/css/transferee/HFProperties.css"));
             bundles.Add(new StyleBundle("~/Styling/propertyMessages").Include("~/Content/css/transferee/propertyMessages.css"));
+            bundles.Add(new StyleBundle("~/Styling/itineraryPdf").Include("~/Content/css/transferee/itineraryPdf.css"));
 
             // Page scripts
             bundles.Add(new ScriptBundle("~/Scripts/orders").Include("~/Scripts/app/views/orders.js"));

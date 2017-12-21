@@ -1,8 +1,14 @@
 ﻿@import "../shared/_definitions.scss";
+html{
+    background-color: white !important;
+}
 
-
+body{
+    background-color:white !important;
+}
 
 div#itinerary {
+
     .sectionList {
         list-style: none;
         margin: 0;
@@ -12,7 +18,7 @@ div#itinerary {
     button.btn {
         border: none;
         font-size: 1.5rem;
-        text-transform:none;
+        text-transform: none;
     }
 
     .event-item {
@@ -97,19 +103,19 @@ div#itinerary {
         font-size: 1.8rem;
         color: #4E4E4E;
         font-weight: 300;
-        margin: 0px;
         padding: 0;
-        line-height: 1rem;
+        line-height: 26px;
+
     }
 
     .eventTime {
         font-size: 1.8rem;
         color: #A7CE39;
         font-weight: 500;
-        margin: 0px;
         padding: 0;
         color: $DW_Green;
-        line-height: 1rem;
+        line-height: 26px;
+
     }
 
     @media screen and (min-width: 48rem) {
@@ -119,20 +125,24 @@ div#itinerary {
             }
         }
     }
-}
-.sectionList li.noteEntry {
-    line-height: 1rem;
-    margin-bottom: 0rem;
-}
-.noteRow{
-    cursor:pointer;
-}
-.modal-content {
-    padding: 2rem;
 
-    .close {
-        position: absolute;
-        top: 3rem;
-        right: 3rem;
+
+    .sectionList li.noteEntry {
+        line-height: 26px;
+        margin-bottom: 1rem;
+    }
+
+    .noteRow {
+        cursor: pointer;
+    }
+
+    .modal-content {
+        padding: 2rem;
+
+        .close {
+            position: absolute;
+            top: 3rem;
+            right: 3rem;
+        }
     }
 }

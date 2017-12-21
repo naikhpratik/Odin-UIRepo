@@ -471,6 +471,12 @@
     <Content Include="Content\css\transferee\itinerary.min.css">
       <DependentUpon>itinerary.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\transferee\itineraryPdf.css">
+      <DependentUpon>itineraryPdf.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\transferee\itineraryPdf.min.css">
+      <DependentUpon>itineraryPdf.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\transferee\messages.css">
       <DependentUpon>messages.scss</DependentUpon>
     </Content>
@@ -833,6 +839,7 @@
     <Content Include="Content\css\help.scss" />
     <TypeScriptCompile Include="Content\css\transferee\HFProperties.scss" />
     <Content Include="Content\css\transferee\propertyMessages.scss" />
+    <Content Include="Content\css\transferee\itineraryPdf.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />

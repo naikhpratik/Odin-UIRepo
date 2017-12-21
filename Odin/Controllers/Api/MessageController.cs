@@ -1,17 +1,13 @@
 ﻿using AutoMapper;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNet.Identity.Owin;
 using Odin.Data.Core;
 using Odin.Data.Core.Dtos;
 using Odin.Data.Core.Models;
-using Odin.Data.Persistence;
 using Odin.Domain;
 using Odin.Interfaces;
 using System;
-using Odin.ViewModels.Shared;
 using System.Web.Http;
-using System.Collections.Generic;
+using System.Security.Claims;
 
 namespace Odin.Controllers.Api
 {
@@ -34,21 +30,19 @@ namespace Odin.Controllers.Api
         [Route("api/orders/transferee/housing/messages")]
         public IHttpActionResult UpsertPropertyMessage(MessageDto dto)
         {
-            var email = User.Identity.Name;
-            var store = new UserStore<ApplicationUser>(new ApplicationDbContext());
-            var userManager = new UserManager<ApplicationUser>(store);
-            ApplicationUser user = userManager.FindByNameAsync(User.Identity.Name).Result;
-            var author = user.FullName == " " ? email : user.FullName;
-            
-            var HomeFindingPropertyId = dto.HomeFindingPropertyId;
-            dto.Author = author;
-            dto.AuthorId = user.Id;
-            var property = _unitOfWork.HomeFindingProperties.GetHomeFindingPropertyById(HomeFindingPropertyId);
-
+            var property = _unitOfWork.HomeFindingProperties.GetHomeFindingPropertyById(dto.HomeFindingPropertyId);
             if (property == null)
             {
                 return NotFound();
-            }
+            }            
+            var fullNameClaim = ((ClaimsIdentity)User.Identity).FindFirst("FullName");
+            string author = "";
+            if (fullNameClaim != null)
+                author = fullNameClaim.Value;
+
+            dto.Author = author;
+            dto.AuthorId = User.Identity.GetUserId();
+            
             if (dto.Id == null)
             {
                 var msg = new Message {
@@ -58,8 +52,22 @@ namespace Odin.Controllers.Api
                     Deleted = false,
                     MessageText = dto.MessageText,
                     Author = dto.Author,
-                    AuthorId = dto.AuthorId
+                    AuthorId = dto.AuthorId                    
                 };
+                if (User.IsInRole("Transferee"))
+                {
+                    Notification notification = new Notification()
+                    {
+                        NotificationType = NotificationType.MessageCreated,
+                        Message = "A New message was composed",
+                        Title = "New Message",
+                        OrderId = dto.OrderId
+                    };
+                    var order = _unitOfWork.Orders.GetOrderById(dto.OrderId);
+                    int seId = (int)(order.Consultant.SeContactUid == null ? 0 : order.Consultant.SeContactUid);
+                    Consultant consultant = _unitOfWork.Consultants.GetConsultantBySeContactUid(seId);
+                    consultant.Notify(notification);
+                }
                 property.Messages.Add(msg);
                 _unitOfWork.Complete();
                 return Ok();
