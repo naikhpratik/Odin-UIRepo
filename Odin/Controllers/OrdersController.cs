@@ -73,11 +73,10 @@ namespace Odin.Controllers
                 order = _unitOfWork.Orders.GetOrderFor(userId, id);
             }
 
+            ViewBag.CurrentUser = userId;
             HousingViewModel viewModel = new HousingViewModel(order, _mapper);
-
             return PartialView("~/views/orders/partials/_Housing.cshtml", viewModel);
         }
-
         public ActionResult PropertiesPartial(string id)
         {
             var userId = User.Identity.GetUserId();
@@ -90,7 +89,7 @@ namespace Odin.Controllers
             {
                 order = _unitOfWork.Orders.GetOrderFor(userId, id);
             }
-            HousingViewModel viewModel = new HousingViewModel(order, _mapper);
+            HousingViewModel viewModel = new HousingViewModel(order, _mapper);            
             return PartialView("~/views/orders/partials/_HousingProperties.cshtml", viewModel.Properties);
         }
         public ActionResult PropertiesPartialPDF(string id, string listChoice)
@@ -132,13 +131,11 @@ namespace Odin.Controllers
             OrdersTransfereeViewModel viewModel = GetViewModelForOrderDetails(id);
             return PartialView("~/views/orders/partials/_Details.cshtml", viewModel);
         }
-
         public ActionResult IntakePartial(string id)
         {
             OrdersTransfereeViewModel viewModel = GetViewModelForOrderDetails(id);
             return PartialView("~/views/orders/partials/_Intake.cshtml", viewModel);
         }
-
         public ActionResult ItineraryPartial(string id)
         {
             OrdersTransfereeItineraryViewModel viewModel = GetItineraryByOrderId(id);
@@ -192,8 +189,6 @@ namespace Odin.Controllers
 
             return View();
         }
-
-        // GET: Transferee
         public ActionResult Transferee(string id)
         {
             var userId = User.Identity.GetUserId();

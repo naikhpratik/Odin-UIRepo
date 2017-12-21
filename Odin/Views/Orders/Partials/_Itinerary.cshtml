@@ -145,8 +145,15 @@
             </div>
         </div>
     </div>
-</div>                
-@Styles.Render("~/Styling/itinerary")
+</div>        
+@if (Model.IsPdf == true)
+{
+    @Styles.Render("~/Styling/itineraryPdf");    
+}
+else
+{
+    @Styles.Render("~/Styling/itinerary");
+}
 <script type="text/javascript">
     $(document).ready(function () {
         TransfereeItineraryController.init();        

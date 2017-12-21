@@ -1,4 +1,7 @@
-﻿.mapWrapper {
+﻿html, body {
+  background-color: #f1f1f1; }
+
+.mapWrapper {
   height: 300px;
   overflow: hidden;
   position: relative; }

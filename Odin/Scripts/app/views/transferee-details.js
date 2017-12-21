@@ -29,7 +29,7 @@ var TransfereeDetailsController = function (transfereeDetailseService) {
             useCurrent: false,
             toolbarPlacement: 'bottom',
             icons: { close: 'custom-icon-check'}
-        }).on("dp.change", function (e) { saveServices(e); });
+        }).on("dp.hide", function (e) { saveServices(e); });
 
 
         //Init Variables

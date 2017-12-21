@@ -9,6 +9,12 @@ div#itinerary {
         padding: 0;
     }
 
+    button.btn {
+        border: none;
+        font-size: 1.5rem;
+        text-transform:none;
+    }
+
     .event-item {
         margin-top: 4rem;
         margin-bottom: 2rem;
@@ -39,15 +45,6 @@ div#itinerary {
         }
 
         @media screen and (min-width: 62rem) {
-            /*> li:nth-child(odd) {
-                padding-right: 6rem;
-                clear: left;
-            }
-
-            > li:nth-child(even) {
-                padding-left: 6rem;
-                clear: right;
-            }*/
         }
     }
 
@@ -102,7 +99,7 @@ div#itinerary {
         font-weight: 300;
         margin: 0px;
         padding: 0;
-        line-height: 26px;
+        line-height: 1rem;
     }
 
     .eventTime {
@@ -112,7 +109,7 @@ div#itinerary {
         margin: 0px;
         padding: 0;
         color: $DW_Green;
-        line-height: 26px;
+        line-height: 1rem;
     }
 
     @media screen and (min-width: 48rem) {
@@ -123,8 +120,9 @@ div#itinerary {
         }
     }
 }
-.noteEntry {
+.sectionList li.noteEntry {
     line-height: 1rem;
+    margin-bottom: 0rem;
 }
 .noteRow{
     cursor:pointer;

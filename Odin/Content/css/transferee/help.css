@@ -1,4 +1,7 @@
-﻿.helpRow {
+﻿html, body {
+  background-color: #f1f1f1; }
+
+.helpRow {
   padding-top: 2rem; }
   .helpRow img {
     padding-bottom: 2rem;

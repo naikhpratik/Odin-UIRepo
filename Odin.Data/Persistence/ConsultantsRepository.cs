@@ -19,7 +19,10 @@ namespace Odin.Data.Persistence
         {
             return _context.Consultants.FirstOrDefault(c => c.SeContactUid == seContactUid);
         }
-
+        public Consultant GetConsultantById(string id)
+        {
+            return _context.Consultants.FirstOrDefault(c => c.Id == id);
+        }
         public void Add(Consultant consultant)
         {
             var userManager = UserHelper.GetUserManager<Consultant>(_context);

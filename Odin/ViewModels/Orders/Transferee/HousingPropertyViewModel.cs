@@ -129,5 +129,7 @@ namespace Odin.ViewModels.Orders.Transferee
         [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy h:mmtt}")]
         [DataType(DataType.Date)]
         public DateTime? ViewingDate { get; set; }
+
+        public ICollection<Odin.Data.Core.Models.Message> Messages { get; set; }
     }
 }

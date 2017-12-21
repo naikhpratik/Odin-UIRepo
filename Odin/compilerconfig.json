@@ -48,16 +48,16 @@
     "inputFile": "Content/css/transferee/housing.scss"
   },
   {
-    "inputFile": "Content/css/header.scss",
-    "outputFile": "Content/css/header.css"
+    "outputFile": "Content/css/header.css",
+    "inputFile": "Content/css/header.scss"
   },
   {
-    "inputFile": "Content/css/transferee/itinerary.scss",
-    "outputFile": "Content/css/transferee/itinerary.css"
+    "outputFile": "Content/css/transferee/itinerary.css",
+    "inputFile": "Content/css/transferee/itinerary.scss"
   },
   {
-    "inputFile": "Content/css/help.scss",
-    "outputFile": "Content/css/help.css"
+    "outputFile": "Content/css/help.css",
+    "inputFile": "Content/css/help.scss"
   },
   {
     "outputFile": "Content/css/bookmarklet.css",
@@ -70,6 +70,13 @@
   {
     "outputFile": "Content/css/transferee/help.css",
     "inputFile": "Content/css/transferee/help.scss"
+  },
+  {
+    "outputFile": "Content/css/transferee/propertyMessages.css",
+    "inputFile": "Content/css/transferee/propertyMessages.scss"
+  },
+  {
+    "outputFile": "Content/css/transferee/itineraryPdf.css",
+    "inputFile": "Content/css/transferee/itineraryPdf.scss"
   }
-
 ]
