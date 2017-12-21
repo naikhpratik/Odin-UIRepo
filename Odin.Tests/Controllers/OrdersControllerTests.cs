@@ -3,18 +3,16 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Odin.Controllers;
-
 using Odin.Data.Core;
 using Odin.Data.Core.Models;
 using Odin.Data.Core.Repositories;
 using Odin.Interfaces;
 using Odin.Tests.Extensions;
-using System.Net;
-using System.Web.Mvc;
 using Odin.ViewModels.Orders.Transferee;
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Web.Mvc;
 
 namespace Odin.Tests.Controllers
 {

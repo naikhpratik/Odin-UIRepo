@@ -1,6 +1,9 @@
 ﻿html, body {
   background-color: #f1f1f1; }
 
+html, body {
+  background-color: #fff; }
+
 .bm-message {
   padding-bottom: 25px;
   line-height: 25px; }
