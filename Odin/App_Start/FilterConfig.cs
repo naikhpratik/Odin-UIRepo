@@ -9,6 +9,7 @@ namespace Odin
         {
             //filters.Add(new HandleErrorAttribute());
             filters.Add(new AiHandleErrorAttribute());
+            filters.Add(new RequireHttpsAttribute());
         }
     }
 }
