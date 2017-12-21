@@ -111,8 +111,8 @@
 
                 </div>
                 <div class="col-md-1 col-xs-12">
-                    <div class="comments">
-                        <img class="comments" src="~/Content/Images/icn_chat_bubble.png" />
+                    <div class="comments" data-property-id="@propertyVM.Id">
+                        <img src="~/Content/Images/icn_chat_bubble.png" />
                         <span>@propertyVM.Messages.Where(r => r.IsRead == false && r.AuthorId != ViewBag.CurrentUser).Count()</span>
                     </div>
                 </div>
@@ -134,8 +134,11 @@
 }
 <script>
     $('.comments').click(function (event) {
+        event.stopPropagation();
+
         var app = $('#modalNotification');        
-        var url = '/Message/MessagePartial/' + $(this).parent().attr('data-property-id');
+        var url = '/Message/MessagePartial/' + $(this).attr('data-property-id');
+        
         $.get(url, function (data) {
             app.find('.modal-content').html();
             app.find('.modal-content').html(data);            
