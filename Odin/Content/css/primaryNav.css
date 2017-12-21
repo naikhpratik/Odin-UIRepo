@@ -1,4 +1,7 @@
-﻿#primaryNav {
+﻿html, body {
+  background-color: #f1f1f1; }
+
+#primaryNav {
   position: fixed;
   z-index: 1010;
   height: 5rem;
@@ -12,7 +15,8 @@
   top: 0; }
   @media screen and (min-width: 48rem) {
     #primaryNav {
-      height: 8rem; } }
+      height: 8rem;
+      max-width: 1440px; } }
 
 a.primaryNavHome {
   display: flex;

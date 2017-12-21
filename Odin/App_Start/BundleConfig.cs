@@ -63,6 +63,9 @@ namespace Odin
             bundles.Add(new StyleBundle("~/Styling/housing").Include("~/Content/css/transferee/housing.css","~/Content/leaflet.css"));
             bundles.Add(new StyleBundle("~/Styling/housing").Include("~/Content/css/transferee/housing.css"));
             bundles.Add(new StyleBundle("~/Styling/properties").Include("~/Content/css/transferee/HFProperties.css"));
+            bundles.Add(new StyleBundle("~/Styling/transfereeHelp").Include("~/Content/css/transferee/help.css"));
+            bundles.Add(new StyleBundle("~/Styling/propertyMessages").Include("~/Content/css/transferee/propertyMessages.css"));
+            bundles.Add(new StyleBundle("~/Styling/itineraryPdf").Include("~/Content/css/transferee/itineraryPdf.css"));
 
             // Page scripts
             bundles.Add(new ScriptBundle("~/Scripts/orders").Include("~/Scripts/app/views/orders.js", "~/Scripts/typeahead.js"));
@@ -74,6 +77,7 @@ namespace Odin
                 "~/Scripts/app/views/transferee-housing.js",
                 "~/Scripts/app/views/transferee-itinerary.js",
                 "~/Scripts/app/views/transferee-itin-appntmt.js",
+                "~/Scripts/app/views/transferee-hfp-messages.js",
                 "~/Scripts/leaflet.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/forgotPassword").Include(

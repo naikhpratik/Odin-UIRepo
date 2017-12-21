@@ -6,7 +6,7 @@ namespace Odin.Data.Core.Models
     public class Appointment : MobileTable
     {
         [Display(Name = "Scheduled Date:")]
-        [DisplayFormat(DataFormatString = "{0:dddd}", NullDisplayText = "NA")]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", NullDisplayText = "NA")]
         public DateTime? ScheduledDate { get; set; }
 
         [Display(Name = "Description:")]

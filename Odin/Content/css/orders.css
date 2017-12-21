@@ -1,4 +1,7 @@
-﻿body {
+﻿html, body {
+  background-color: #f1f1f1; }
+
+body {
   padding: 0px; }
   body div.container-fluid {
     padding: 0px; }
@@ -15,7 +18,11 @@
 
 div#list {
   height: auto;
-  padding-bottom: 4.5rem; }
+  padding-bottom: 4.5rem;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  background-color: white; }
   div#list div#search {
     margin-top: 5rem;
     padding: 2rem;

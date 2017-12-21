@@ -121,6 +121,7 @@
     <Compile Include="Builders\OrderBuilder.cs" />
     <Compile Include="Builders\OrderDtoBuilder.cs" />
     <Compile Include="Builders\TransfereeDtoBuilder.cs" />
+    <Compile Include="Core\Dtos\MessageDto.cs" />
     <Compile Include="Core\Dtos\BookMarkletDto.cs" />
     <Compile Include="Core\Dtos\ChildDto.cs" />
     <Compile Include="Core\Dtos\ConsultantDto.cs" />
@@ -152,6 +153,7 @@
     <Compile Include="Core\Dtos\TransfereeIndexDto.cs" />
     <Compile Include="Core\Dtos\UserDto.cs" />
     <Compile Include="Core\Models\ApplicationUser.cs" />
+    <Compile Include="Core\Models\Message.cs" />
     <Compile Include="Core\Models\Appointment.cs" />
     <Compile Include="Core\Models\AreaType.cs" />
     <Compile Include="Core\Models\AzureTest.cs" />
@@ -185,6 +187,7 @@
     <Compile Include="Core\Models\TransportationType.cs" />
     <Compile Include="Core\Models\UserNotification.cs" />
     <Compile Include="Core\Models\UserRoles.cs" />
+    <Compile Include="Core\Repositories\IMessagesRepository.cs" />
     <Compile Include="Core\Repositories\IAreaTypesRepository.cs" />
     <Compile Include="Core\Repositories\IBrokerFeeTypesRepository.cs" />
     <Compile Include="Core\Repositories\IChildrenRepository.cs" />
@@ -212,6 +215,7 @@
     <Compile Include="Persistence\ApplicationDbContext.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Persistence\ApplicationUserRepository.cs" />
+    <Compile Include="Persistence\MessagesRepository.cs" />
     <Compile Include="Persistence\AreaTypesRepository.cs" />
     <Compile Include="Persistence\BrokerFeeTypesRepository.cs" />
     <Compile Include="Persistence\ChildrenRepository.cs" />
@@ -540,13 +544,21 @@
     <Compile Include="Persistence\Migrations\201712111812294_AfternoonDec11Merge.Designer.cs">
       <DependentUpon>201712111812294_AfternoonDec11Merge.cs</DependentUpon>
     </Compile>
-    <Compile Include="Persistence\Migrations\201712111851475_AddViewingDateToHomeFindingProperty.cs" />
-    <Compile Include="Persistence\Migrations\201712111851475_AddViewingDateToHomeFindingProperty.Designer.cs">
-      <DependentUpon>201712111851475_AddViewingDateToHomeFindingProperty.cs</DependentUpon>
-    </Compile>
     <Compile Include="Persistence\Migrations\201712131458037_MergeHousingMap.cs" />
     <Compile Include="Persistence\Migrations\201712131458037_MergeHousingMap.Designer.cs">
       <DependentUpon>201712131458037_MergeHousingMap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201712141753284_propertymessages.cs" />
+    <Compile Include="Persistence\Migrations\201712141753284_propertymessages.Designer.cs">
+      <DependentUpon>201712141753284_propertymessages.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201712151909529_changedPropertyIdtoHomeFindingPropertyId.cs" />
+    <Compile Include="Persistence\Migrations\201712151909529_changedPropertyIdtoHomeFindingPropertyId.Designer.cs">
+      <DependentUpon>201712151909529_changedPropertyIdtoHomeFindingPropertyId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201712181617292_addReadFlagnUser.cs" />
+    <Compile Include="Persistence\Migrations\201712181617292_addReadFlagnUser.Designer.cs">
+      <DependentUpon>201712181617292_addReadFlagnUser.cs</DependentUpon>
     </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\NumberOfBathroomsTypesRepository.cs" />
@@ -811,11 +823,17 @@
     <EmbeddedResource Include="Persistence\Migrations\201712111812294_AfternoonDec11Merge.resx">
       <DependentUpon>201712111812294_AfternoonDec11Merge.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Persistence\Migrations\201712111851475_AddViewingDateToHomeFindingProperty.resx">
-      <DependentUpon>201712111851475_AddViewingDateToHomeFindingProperty.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201712131458037_MergeHousingMap.resx">
       <DependentUpon>201712131458037_MergeHousingMap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201712141753284_propertymessages.resx">
+      <DependentUpon>201712141753284_propertymessages.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201712151909529_changedPropertyIdtoHomeFindingPropertyId.resx">
+      <DependentUpon>201712151909529_changedPropertyIdtoHomeFindingPropertyId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201712181617292_addReadFlagnUser.resx">
+      <DependentUpon>201712181617292_addReadFlagnUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

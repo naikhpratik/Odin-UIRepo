@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Odin.ViewModels.Orders.Transferee.HousingPropertyViewModel>
+﻿@using Odin.Data.Core.Models
+@model IEnumerable<Odin.ViewModels.Orders.Transferee.HousingPropertyViewModel>
 
 <div id="propertiesBlock">
     <div class="row" id="propertiesHeader">
@@ -9,7 +10,7 @@
         <div class="col-md-2  col-xs-12">
             <p>Address:</p>
         </div>
-        <div class="col-md-3 col-xs-12">
+        <div class="col-md-2 col-xs-12">
             <p>Availability Date:</p>
         </div>
         <div class="col-md-2 col-xs-12">
@@ -23,11 +24,11 @@
         <div class="col-md-1 col-xs-12">
             <p>Like or Dislike:</p>
         </div>
-        <!--
-        <div class="col-md-1">
+        
+        <div class="col-md-1 col-xs-12">
             <p>Property Comments:</p>
         </div>
-        -->
+        
     </div>
 
     <ul class="row sectionList" id="propertiesList" data-filter="">
@@ -73,7 +74,7 @@
                         @Html.DisplayFor(m => propertyVM.PropertyAddress)
                     </p>
                 </div>
-                <div class="col-md-3 col-xs-12">
+                <div class="col-md-2 col-xs-12">
                     <label class="mobileLabel">Availability</label>
                     <p>
                         @Html.DisplayFor(m => propertyVM.PropertyAvailabilityDate)
@@ -87,9 +88,16 @@
                     </p>
                 </div>
 
-                <div class="col-md-3">
+                <div class="col-md-3 col-xs-12">
                     <label class="mobileLabel">Schedule a Viewing</label>
-                    @Html.DatePicker("date", "ViewingDate", propertyVM.ViewingDate, true)
+                    @if (User.IsInRole(UserRoles.Transferee))
+                    {
+                        <p>@Html.DisplayFor(m => propertyVM.ViewingDate)</p>
+                    }
+                    else
+                    {
+                        @Html.DatePicker("date", "ViewingDate", propertyVM.ViewingDate, true)
+                    }
                 </div>
 
                 <div class="col-md-1 col-xs-12">
@@ -102,19 +110,34 @@
                     @Html.EditorFor(m => propertyVM.Liked, new { propertyId = propertyVM.Id })
 
                 </div>
-                <!--
-                <div class="col-md-1 comments">
-                    <img src="~/Content/Images/icn_chat_bubble.png" />
-                    <span>09</span>
+                <div class="col-md-1 col-xs-12 comments">
+                    <img class="comments" src="~/Content/Images/icn_chat_bubble.png" />
+                    <span>@propertyVM.Messages.Where(r => r.IsRead == false && r.AuthorId != ViewBag.CurrentUser).Count()</span>
                 </div>
-                -->
             </li>
         }
 
     </ul>
 </div>
-
+<div class="modal fade notificationModal" id="modalNotification" tabindex="-100" role="dialog" data-backdrop="static" aria-labelledby="notificationModalLabel" aria-hidden="true" style="z-index: 2147483647;">
+    <div class="modal-dialog" role="document" id="notification" style="z-index: 2147483647;">
+        <div class="modal-content">
+            
+        </div>
+    </div>
+</div>
 @if (ViewBag.IsPDF == true)
 {
     @Styles.Render("~/Styling/properties")
 }
+<script>
+    $('.comments').click(function (event) {
+        var app = $('#modalNotification');        
+        var url = '/Message/MessagePartial/' + $(this).parent().attr('data-property-id');
+        $.get(url, function (data) {
+            app.find('.modal-content').html();
+            app.find('.modal-content').html(data);            
+        });        
+        app.modal('show');
+    });
+</script>

@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Odin.Data.Core;
-using AutoMapper;
-using Odin.Filters;
-using System.Web.Mvc;
-using Odin.ViewModels.Orders.Transferee;
-using Odin.Data.Core.Models;
-using System.Net;
-using System.Threading.Tasks;
+﻿using AutoMapper;
 using Microsoft.AspNet.Identity;
+using Odin.Data.Core;
+using Odin.Data.Core.Models;
 using Odin.Interfaces;
-using System.Collections.ObjectModel;
+using Odin.ViewModels.Orders.Transferee;
+using System;
+using System.Net;
+using System.Web.Mvc;
 
 namespace Odin.Controllers
 {
@@ -41,7 +35,16 @@ namespace Odin.Controllers
             propertyVM.Id = homeFindingProperty.Id;
             _mapper.Map<HousingPropertyViewModel, HomeFindingProperty>(propertyVM, homeFindingProperty);
 
-            Order order = _unitOfWork.Orders.GetOrderFor(userId, propertyVM.OrderId);
+            Order order = null;
+            if (User.IsInRole(UserRoles.Transferee))
+            {
+                order = _unitOfWork.Orders.GetOrderFor(userId, propertyVM.OrderId,UserRoles.Transferee);
+            }
+            else
+            {
+                order = _unitOfWork.Orders.GetOrderFor(userId, propertyVM.OrderId);
+            }
+               
             HomeFinding homeFinding = order.HomeFinding;
             homeFinding.HomeFindingProperties.Add(homeFindingProperty);
 

@@ -1,4 +1,7 @@
-﻿.mapWrapper {
+﻿html, body {
+  background-color: #f1f1f1; }
+
+.mapWrapper {
   height: 300px;
   overflow: hidden;
   position: relative; }
@@ -114,6 +117,8 @@ li.propertyItem {
             text-align: left; }
         li.propertyItem > div img {
           margin-left: 0; } }
+    li.propertyItem > div .btn-container {
+      text-align: center; }
   li.propertyItem .comments img {
     width: 3rem; }
   li.propertyItem .comments {

@@ -34,7 +34,15 @@ namespace Odin.Controllers
         public ActionResult Index(string url)
         {
             var userId = User.Identity.GetUserId();
-            IEnumerable<Order> orders = _unitOfWork.Orders.GetOrdersFor(userId);
+            IEnumerable<Order> orders = null;
+            if (User.IsInRole(UserRoles.Transferee))
+            {
+                orders = _unitOfWork.Orders.GetOrdersFor(userId,UserRoles.Transferee);
+            }
+            else
+            {
+                orders = _unitOfWork.Orders.GetOrdersFor(userId);
+            }
 
             if (orders.Count() == 0)
             {

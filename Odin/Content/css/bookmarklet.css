@@ -1,4 +1,7 @@
-﻿.bm-message {
+﻿html, body {
+  background-color: #f1f1f1; }
+
+.bm-message {
   padding-bottom: 25px;
   line-height: 25px; }
 

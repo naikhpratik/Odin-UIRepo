@@ -15,7 +15,6 @@ namespace Odin.Controllers.Api
         private readonly IOrderImporter _orderImporter;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        private readonly IQueueStore _queueStore;
 
         public AppointmentController(IUnitOfWork unitOfWork, IMapper mapper)
         {

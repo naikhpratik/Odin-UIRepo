@@ -1,4 +1,5 @@
-﻿@model Odin.ViewModels.Orders.Transferee.OrdersTransfereeItineraryViewModel
+﻿@using Odin.Data.Core.Models
+@model Odin.ViewModels.Orders.Transferee.OrdersTransfereeItineraryViewModel
 
 <div class="container-fluid" data-order-id="@Model.Id" id="itinerary">
     @if (Model.IsPdf == true)
@@ -32,7 +33,10 @@
         @if (Model.IsPdf == false)
         {
             <div class="col-md-6">
-                <button type="button" class="btn btn-secondary showNewAppointment" id="cmdNew" data-toggle="modal" data-target="#modalForm">Add Appointment</button>
+                @if (!User.IsInRole(UserRoles.Transferee))
+                {
+                    <button type="button" class="btn btn-secondary showNewAppointment" id="cmdNew" data-toggle="modal" data-target="#modalForm">Add Appointment</button>  
+                }
                 <button type="button" class="btn btn-secondary showNewAppointment" id="cmdEmail" data-toggle="modal" data-target="#modalForm">Email</button>
                 <button type="button" class="btn btn-secondary showNewAppointment" id="cmdPDF">Generate PDF</button>
             </div>
@@ -141,8 +145,15 @@
             </div>
         </div>
     </div>
-</div>                
-@Styles.Render("~/Styling/itinerary")
+</div>        
+@if (Model.IsPdf == true)
+{
+    @Styles.Render("~/Styling/itineraryPdf");    
+}
+else
+{
+    @Styles.Render("~/Styling/itinerary");
+}
 <script type="text/javascript">
     $(document).ready(function () {
         TransfereeItineraryController.init();        
