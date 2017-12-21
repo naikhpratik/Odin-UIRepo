@@ -8,10 +8,11 @@ namespace Odin.Helpers
         public const string TRULIA = "www.trulia.com";
         public const string APARTMENTS = "www.apartments.com";
         public const string REALTOR = "www.realtor.com";
+        public const string CRAIGSLIST = "craigslist.org";
 
         public bool IsValidDomain(string domain)
         {
-            return domain == REALTOR || domain == APARTMENTS || domain == TRULIA;
+            return domain == REALTOR || domain == APARTMENTS || domain == TRULIA || domain.Contains(CRAIGSLIST);
         }
 
         public bool IsValidUrl(string url)

@@ -19,7 +19,8 @@ namespace Odin
                         "~/Scripts/jspdf.min.js",
                         "~/Scripts/datatables/jquery.datatables.js",
                         "~/Scripts/datatables/datatables.bootstrap.js",
-                        "~/Scripts/app/views/_header.js"));
+                        "~/Scripts/app/views/_header.js",
+                        "~/Scripts/dw_loader.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -39,12 +40,13 @@ namespace Odin
                       "~/Content/css/primaryNav.css",
                       "~/Content/datatables/css/datatables.bootstrap.css",
                       "~/Content/animate.css",
-                      "~/Content/css/header.css"));
+                      "~/Content/css/header.css",
+                      "~/Content/css/shared/dw_loading.css"));
 
 
             // Page Styling
             bundles.Add(new StyleBundle("~/Styling/help").Include("~/Content/css/help.css"));
-            bundles.Add(new StyleBundle("~/Styling/orders").Include("~/Content/css/orders.css"));
+            bundles.Add(new StyleBundle("~/Styling/orders").Include("~/Content/css/orders.css","~/Content/typeahead.css"));
             bundles.Add(new StyleBundle("~/Styling/login").Include("~/Content/css/login.css"));
             bundles.Add(new StyleBundle("~/Styling/forgotPassword").Include("~/Content/css/forgotpassword.css",
                 "~/Content/animate.css"));
@@ -65,7 +67,7 @@ namespace Odin
             bundles.Add(new StyleBundle("~/Styling/itineraryPdf").Include("~/Content/css/transferee/itineraryPdf.css"));
 
             // Page scripts
-            bundles.Add(new ScriptBundle("~/Scripts/orders").Include("~/Scripts/app/views/orders.js"));
+            bundles.Add(new ScriptBundle("~/Scripts/orders").Include("~/Scripts/app/views/orders.js", "~/Scripts/typeahead.js"));
             bundles.Add(new ScriptBundle("~/Scripts/transferee").Include(
                 "~/Scripts/bootstrap-notify.min.js",
                 "~/Scripts/app/views/transferee.js",

@@ -9,7 +9,7 @@ div.container.body-content {
   padding-right: 0px;
   margin: 0 0; }
   div.container.body-content .loginWrap {
-    background-image: url("../Images/bg_img_w_gradient.png");
+    background-image: url("/Content/Images/bg_img_w_gradient.png");
     background-position: center;
     background-size: cover; }
     div.container.body-content .loginWrap div.row {

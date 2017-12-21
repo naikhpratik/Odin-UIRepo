@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Odin.ViewModels.Orders.Transferee
 {
@@ -85,6 +86,7 @@ namespace Odin.ViewModels.Orders.Transferee
         private String _propertyDescription;
         [Display(Name = "Description/Notes:")]
         [DataType(DataType.MultilineText)]
+        [AllowHtml]
         [DisplayFormat(ConvertEmptyStringToNull = true)]
         public String PropertyDescription {
             get

@@ -1,6 +1,7 @@
 ﻿var OrdersPageController = function () {
      
     var init = function () {
+        setupAjaxLoader();
 
         //$('div.col-md-10 > div > div').each(function () { $(this).css("display", "none"); });
 
@@ -36,7 +37,7 @@
         loadPanel(actionName);
     }
 
-    var loadPanel = function(actionName) {
+    var loadPanel = function (actionName) {
         $('.item.selected').removeClass('selected');
         $("[data-panel=" + actionName + "]").addClass('selected');
         $('#orderContainer').load('/orders/' + actionName + 'Partial/' + currentOrderId);
@@ -58,6 +59,19 @@
             $('#orderContainer').css('margin-left', 0);
         }
     }
+
+    var setupAjaxLoader = function () {
+        var loaderId;
+        $(document).ajaxStart(function () {
+            loaderId = DWLoader.showLoaderAfterDelay();
+            console.log("started ajax" + loaderId);
+
+        }).ajaxComplete(function () {
+                console.log("stopped ajax" + loaderId);
+                DWLoader.hideLoaderWithId(loaderId);
+        });
+    };
+    
     return {
         TransfereeInit: init,
         loadPanel: loadPanel

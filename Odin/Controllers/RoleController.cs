@@ -1,0 +1,41 @@
+﻿using Microsoft.AspNet.Identity;
+using Odin.Data.Core;
+using Odin.Data.Core.Models;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Web.Mvc;
+
+namespace Odin.Controllers
+{
+    [Authorize]
+    public class RoleController : Controller
+    {
+        private IUnitOfWork _unitOfWork;
+        
+        // GET: Role
+        public RoleController(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
+
+        public ActionResult Index()
+        {
+
+            if (User.IsInRole(UserRoles.Consultant))
+            {
+                return RedirectToAction("Index", "Orders");
+            }
+            else if(User.IsInRole(UserRoles.Transferee))
+            {
+                IEnumerable<Order> orders = _unitOfWork.Orders.GetOrdersFor(User.Identity.GetUserId(), UserRoles.Transferee);
+                if (orders.Count() == 1)
+                {
+                    return RedirectToAction("Transferee", "Orders", new {id = orders.First().Id});
+                }
+            }
+
+            return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+        }
+    }
+}

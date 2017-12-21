@@ -12,7 +12,7 @@ namespace Odin
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Orders", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Role", action = "Index", id = UrlParameter.Optional }
             );
             routes.MapRoute(
                name: "Email",

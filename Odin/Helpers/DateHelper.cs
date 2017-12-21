@@ -24,5 +24,11 @@ namespace Odin.Helpers
             else
                 return date.HasValue ? string.Format(Thread.CurrentThread.CurrentCulture, "{0:dd-MMM-yyyy}", date) : String.Empty;
         }
+
+        public static string GetViewHistoryFormat(DateTime? date)
+        {
+            return date.HasValue ? string.Format(Thread.CurrentThread.CurrentCulture, "{0:dd-MMM-yyyy}", date) + "at " + (date.HasValue ? string.Format(Thread.CurrentThread.CurrentCulture, "{0:t}", date) : String.Empty): String.Empty;
+        }
+
     }
 }

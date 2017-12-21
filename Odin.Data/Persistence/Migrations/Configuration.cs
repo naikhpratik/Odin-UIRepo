@@ -3,8 +3,8 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Azure.Mobile.Server.Tables;
 using Odin.Data.Builders;
 using Odin.Data.Core.Models;
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
@@ -43,6 +43,7 @@ namespace Odin.Data.Persistence.Migrations
             CreateOrderData(context);
             PopulateSeContactUids(context);
             SeedHomeFindingPropertiesIfNone(context);
+            CreateOrderWithTransferee(context);
         }
 
         private void PopulateSeContactUids(ApplicationDbContext context)
@@ -98,6 +99,63 @@ namespace Odin.Data.Persistence.Migrations
                 }
 
                 context.SaveChanges();
+            }
+        }
+
+        private void CreateOrderWithTransferee(ApplicationDbContext context)
+        {
+            if (!context.Orders.Any(o => o.Transferee.Email == "eeWithOrder@dwellworks.com"))
+            {
+                var dsc = context.Consultants.First(u => u.UserName.Equals(_odinConsultantUserName));
+                var pm = context.Managers.First(u => u.UserName.Equals(_odinPmUserName));
+
+                int count = 1;
+                var orders = OrderBuilder.New(count);
+               
+                var userStore = new UserStore<Transferee>(context);
+                var userManager = new UserManager<Transferee>(userStore);
+
+                Transferee user;
+                if (!context.Users.Any(u => u.Email == "eeWithOrder@dwellworks.com"))
+                {
+                    user = TransfereeBuilder.New();
+                    user.Email = "eeWithOrder@dwellworks.com";
+                    user.UserName = "eeWithOrder@dwellworks.com";
+                    userManager.Create(user, "OdinOdin5$");
+                    var transfereeStore = new UserStore<Transferee>(context);
+                    var transfereeManager = new UserManager<Transferee>(transfereeStore);
+                    transfereeManager.AddToRole(user.Id, UserRoles.Transferee);
+                }
+                else
+                {
+                    user = context.Transferees.Single<Transferee>(t => t.Email == "eeWithOrder@dwellworks.com");
+                }
+
+                orders[0].TrackingId = Guid.NewGuid().ToString().Substring(0,20);
+                orders[0].Transferee = user;
+                orders[0].Consultant = dsc;
+                orders[0].ProgramManager = pm;
+                orders[0].Services.Add(new Service()
+                {
+                    ServiceType = context.ServiceTypes.First(),
+                    Selected = true
+                });
+                orders[0].Services.Add(new Service()
+                {
+                    ServiceType = context.ServiceTypes.OrderByDescending(st => st.Id).First(),
+                    Selected = true
+                });
+                context.Orders.Add(orders[0]);
+
+                var homeFinding = HomeFindingBuilder.New();
+                homeFinding.Id = orders[0].Id;
+                context.HomeFindings.Add(homeFinding);
+
+                orders[0].Children.Add(ChildBuilder.New());
+                orders[0].Children.Add(ChildBuilder.New());
+                orders[0].Pets.Add(PetBuilder.New());
+                orders[0].Pets.Add(PetBuilder.New());              
+               
             }
         }
 

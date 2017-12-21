@@ -94,7 +94,7 @@ namespace Odin.Domain
             order.ProgramManagerId = programManagerId;
 
             
-            if (!IsNew)
+            if (IsNew)
             {
                 Notification notification = new Notification()
                 {
@@ -107,9 +107,18 @@ namespace Odin.Domain
                 consultant.Notify(notification);
                 
             }
-            
-            _unitOfWork.Complete();
 
+            if (IsNew)
+            {
+                var homeFinding = new HomeFinding
+                {
+                    Id = order.Id
+                };
+                order.HomeFinding = homeFinding;
+
+            }
+        
+            _unitOfWork.Complete();
 
         }
 

@@ -26,5 +26,11 @@
         {
             return str.Trim().Replace("\n", "").Replace("<br />", "").Replace("<br/>", "").Replace("<br>", "").Replace("\r", "").Replace("\t", "").Trim();
         }
+
+        public static string LowerReplace(this string str, string oldChars, string newChars)
+        {
+            var lowerStr = str.ToLower();
+            return lowerStr.Replace(oldChars, newChars);
+        }
     }
 }

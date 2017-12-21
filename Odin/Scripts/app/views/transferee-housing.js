@@ -36,32 +36,34 @@
         });
 
         initMap();
+
+        setupFilterButtons();
     };
 
     /*** Setup Methods ***/
-    var initMap = function() {
+    var initMap = function () {
         L.mapquest.key = '1tJblQYiEARJGDxuF9gfQVniw3jsi6Ll';
 
         var mapDiv = $("#map");
 
-        var centLat = mapDiv.attr("data-lat");
-        var centLng = mapDiv.attr("data-lng");
+        var centLat = parseFloat(mapDiv.attr("data-lat"));
+        var centLng = parseFloat(mapDiv.attr("data-lng"));
 
         // 'map' refers to a <div> element with the ID map
         var map = L.mapquest.map('map', {
             center: [37.7749, -122.4194],
             layers: L.mapquest.tileLayer('map'),
-            zoom: 12
+            zoom: 10
         });
 
 
         $("#propertiesList > .propertyItem").each(function (index) {
 
-            var lat = $(this).attr("data-lat");
-            var lng = $(this).attr("data-lng");
+            var lat = parseFloat($(this).attr("data-lat"));
+            var lng = parseFloat($(this).attr("data-lng"));
 
-            if (lat !== "" && lng !== "") {
-                if (centLat === "" || centLng === "") {
+            if (!isNaN(lat) && !isNaN(lng) && !(lat === 0 && lng === 0)) {
+                if (isNaN(centLat) || isNaN(centLng)) {
                     centLat = lat;
                     centLng = lng;
                 }
@@ -73,7 +75,7 @@
                 }
 
                 marker.on("mouseover",
-                    function(e) {
+                    function (e) {
                         this.openPopup();
                     });
 
@@ -84,10 +86,10 @@
 
                 var propertyId = $(this).attr("data-property-id");
                 marker.on("click",
-                    function() {
+                    function () {
                         var propertyModalUrl = '/homefindingproperties/propertypartial/' + propertyId;
                         $('#propertyModalContent').load(propertyModalUrl, function (response, status, xhr) {
-                            if (status == "success") {
+                            if (status === "success") {
                                 $('#propertyDetailsModal').modal('show');
                             }
                         });
@@ -96,17 +98,16 @@
             }
         });
 
-        if (centLat !== 0 && centLng !== 0) {
-            map.setView(new L.LatLng(centLat, centLng), 12);
-        } else {
-            map.setView(new L.LatLng(37.7749, -122.4194), 12);
-        }
+        if (!isNaN(centLat) && !isNaN(centLng)) {
+            map.setView(new L.LatLng(centLat, centLng), 10);
+        } 
 
         //For some reason need to set height then call invalidateSize to get map displaying correctly.
         //Hacky, works now, look for better solution.
         mapDiv.height(300);
         map.invalidateSize(false);
-    }
+    };
+
     var setupPropertiesList = function () {
         setupDatePickers();
 
@@ -126,35 +127,35 @@
             }
         });
     };
-
-    var setupLikeDislikeControls = function () {
-        var likeSelector = '.likeDislike > .like';
-        $(document).off('click', likeSelector);
-        $(document).on('click', likeSelector, function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            var controlWrappers = controllerWrappersForLikeDislikeButton($(this));
-            controlWrappers.toggleClass("like");
-            controlWrappers.removeClass("dislike");
-
-            updateLikedStatusForControl(controlWrappers[0]);
-        });
-
-        var dislikeSelector = '.likeDislike > .dislike';
-        $(document).off('click', dislikeSelector);
-        $(document).on('click', dislikeSelector, function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            var controlWrappers = controllerWrappersForLikeDislikeButton($(this));
-            controlWrappers.toggleClass("dislike");
-            controlWrappers.removeClass("like");
-
-            updateLikedStatusForControl(controlWrappers[0]);
+    var setupFilterButtons = function () {
+        $('input[type=radio][name=Filter]').change(function () {
+            $('#propertiesList').attr('data-filter', this.value);
         });
     };
+    var setupLikeDislikeControls = function () {
+        var likeSelector = '.likeDislike > .like';
+        var dislikeSelector = '.likeDislike > .dislike';
+        var clickSelector = `${likeSelector}, ${dislikeSelector}`;
 
+        $(document).off('click', clickSelector);
+        $(document).on('click', clickSelector, function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            var propertyId = $(this).data('property-id');
+            
+            var classList = $(this)[0].classList;
+
+            var triggerStatus = "";
+            if (classList.contains('dislike')) {
+                triggerStatus = "False";
+            } else if (classList.contains('like')) {
+                triggerStatus = "True";
+            }
+
+            triggerLikeStatus(propertyId, triggerStatus);
+        });
+    };
     var setupDatePickers = function () {
         $('.date').datetimepicker({
             format: "DD-MMM-YYYY h:mm A",
@@ -176,6 +177,28 @@
 
             updateProperty("viewingdate", data, success);
         });
+    };
+
+    var triggerLikeStatus = function (propertyId, triggerStatusValue) {
+
+        var likeDislikeElements = likeDislikeElementsForPropertyId(propertyId);
+
+        var currentLikedValue = likeDislikeElements.attr('data-liked');
+
+        // if the status to be triggered is the same, then clear the status
+        var newLikedStatus = currentLikedValue === triggerStatusValue ? "" : triggerStatusValue;
+
+        likeDislikeElements.attr('data-liked', newLikedStatus);
+
+        var likedBoolean = null;
+        // NOTE: using string comparison due to the possible null/empty state
+        if (newLikedStatus.toLowerCase() === "true") {
+            likedBoolean = true;
+        } else if (newLikedStatus.toLowerCase() === "false") {
+            likedBoolean = false;
+        }
+
+        updatePropertyLiked(propertyId, likedBoolean);
     };
 
     var export2PDF = function (choice) {
@@ -214,25 +237,20 @@
         $('#propertiesContainer').load('/orders/propertiesPartial/' + currentOrderId);
     };
 
-    var controllerWrappersForLikeDislikeButton = function (likeDislikeButton) {
-        var propertyId = $(likeDislikeButton).data('property-id');
-        var selectorString = '.likeDislike[data-property-id="' + propertyId + '"]';
+    /**
+     * Return all DOM elements that track the liked value for the property matching propertyId
+     * @param {any} propertyId The id of the property
+     * @return {Array<HTMLElement>} All DOM elements that track the liked value for the property
+     */
+    var likeDislikeElementsForPropertyId = function (propertyId) {
+        var selectorString = '[data-property-id="' + propertyId + '"][data-liked]';
         return $(selectorString);
     };
 
 
-    /*** Update Methods ***/
-    var updateLikedStatusForControl = function (controlElement) {
-        var classList = controlElement.classList;
+    /* Update Methods */
+    var updatePropertyLiked = function (propertyId, likedValue) {
 
-        var likedValue = null;
-        if (classList.contains('like')) {
-            likedValue = true;
-        } else if (classList.contains('dislike')) {
-            likedValue = false;
-        }
-
-        var propertyId = $(controlElement).closest("[data-property-id]").attr('data-property-id');
         var data = {
             id: propertyId,
             liked: likedValue

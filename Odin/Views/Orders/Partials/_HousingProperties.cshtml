@@ -1,39 +1,40 @@
 ﻿@model IEnumerable<Odin.ViewModels.Orders.Transferee.HousingPropertyViewModel>
 
 <div id="propertiesBlock">
-    <div class="row">
-        <div class="row" id="propertiesHeader">
-            <div class="col-md-1">
-                <p>Location Photos:</p>
-            </div>
-            <div class="col-md-2">
-                <p>Address:</p>
-            </div>
-            <div class="col-md-2">
-                <p>Availability Date:</p>
-            </div>
-            <div class="col-md-3">
-                <p>BD | BA<br />Rent | Sq. Ft:</p>
-            </div>
-            
-            <div class="col-md-2">
-                <p>Schedule a Viewing</p>
-            </div>
-            
-            <div class="col-md-1">
-                <p>Like or Dislike:</p>
-            </div>
-            <div class="col-md-1">
-                <p>Property Comments:</p>
-            </div>
+    <div class="row" id="propertiesHeader">
+        <div class="col-md-1  col-xs-12">
+            <p>Location Photos:</p>
         </div>
+
+        <div class="col-md-2  col-xs-12">
+            <p>Address:</p>
+        </div>
+        <div class="col-md-2 col-xs-12">
+            <p>Availability Date:</p>
+        </div>
+        <div class="col-md-2 col-xs-12">
+            <p>BD | BA<br />Rent | Sq. Ft:</p>
+        </div>
+
+        <div class="col-md-3 col-xs-12">
+            <p>Schedule a Viewing</p>
+        </div>
+
+        <div class="col-md-1 col-xs-12">
+            <p>Like or Dislike:</p>
+        </div>
+        
+        <div class="col-md-1 col-xs-12">
+            <p>Property Comments:</p>
+        </div>
+        
     </div>
 
-    <ul class="row sectionList" id="propertiesList">
+    <ul class="row sectionList" id="propertiesList" data-filter="">
 
         @foreach (var propertyVM in Model)
         {
-            <li class="row propertyItem" data-property-id="@propertyVM.Id" data-lat="@propertyVM.PropertyLatitude" data-lng="@propertyVM.PropertyLongitude">
+            <li class="row propertyItem" data-property-id="@propertyVM.Id" data-lat="@propertyVM.PropertyLatitude" data-lng="@propertyVM.PropertyLongitude" data-liked="@propertyVM.Liked">
 
 
                 <div class="col-md-1 col-xs-12">
@@ -68,7 +69,7 @@
 
                 <div class="col-md-2 col-xs-12">
                     <label class="mobileLabel">Address</label>
-                    <p>
+                    <p class="propertyAddress">
                         @Html.DisplayFor(m => propertyVM.PropertyAddress)
                     </p>
                 </div>
@@ -78,19 +79,19 @@
                         @Html.DisplayFor(m => propertyVM.PropertyAvailabilityDate)
                     </p>
                 </div>
-                <div class="col-md-3 col-xs-12">
+                <div class="col-md-2 col-xs-12">
                     <label class="mobileLabel">BD | BA<br />Rent | Sq. Ft:</label>
                     <p>
                         @Html.DisplayFor(m => propertyVM.PropertyNumberOfBedrooms) | @Html.DisplayFor(m => propertyVM.PropertyNumberOfBathrooms)<br />
                         @Html.DisplayFor(m => propertyVM.PropertyAmount) | @Html.DisplayFor(m => propertyVM.PropertySquareFootage)
                     </p>
                 </div>
-                
-                <div class="col-md-2">
+
+                <div class="col-md-3 col-xs-12">
                     <label class="mobileLabel">Schedule a Viewing</label>
                     @Html.DatePicker("date", "ViewingDate", propertyVM.ViewingDate, true)
                 </div>
-                
+
                 <div class="col-md-1 col-xs-12">
                     <label class="mobileLabel">Like or Dislike</label>
                     @if (ViewBag.IsPDF == true && !propertyVM.Liked.HasValue)
@@ -101,7 +102,7 @@
                     @Html.EditorFor(m => propertyVM.Liked, new { propertyId = propertyVM.Id })
 
                 </div>
-                <div class="col-md-1 comments">
+                <div class="col-md-1 col-xs-12 comments">
                     <img class="comments" src="~/Content/Images/icn_chat_bubble.png" />
                     <span>@propertyVM.Messages.Where(r => r.IsRead == false && r.AuthorId != ViewBag.CurrentUser).Count()</span>
                 </div>

@@ -19,8 +19,7 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>
-    </IISExpressSSLPort>
+    <IISExpressSSLPort>44394</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -323,6 +322,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\UserNotificationController.cs" />
     <Compile Include="Domain\ImageStore.cs" />
     <Compile Include="Domain\QueueStore.cs" />
@@ -387,6 +387,7 @@
     <Compile Include="ViewModels\Mailers\ResetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Orders\Index\OrdersIndexViewModel.cs" />
     <Compile Include="ViewModels\Mailers\ViewRenderer.cs" />
+    <Compile Include="ViewModels\Orders\Transferee\HistoryViewModel.cs" />
     <Compile Include="ViewModels\Orders\Transferee\HousingPropertyViewModel.cs" />
     <Compile Include="ViewModels\Orders\Transferee\HousingViewModel.cs" />
     <Compile Include="ViewModels\Orders\Transferee\OrdersTransfereeItineraryViewModel.cs" />
@@ -434,6 +435,7 @@
     <Content Include="Content\css\help.min.css">
       <DependentUpon>help.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\shared\dw_loading.css" />
     <Content Include="Content\css\shared\thumbnails.carousel.css" />
     <Content Include="Content\css\transferee\details.css">
       <DependentUpon>details.scss</DependentUpon>
@@ -769,6 +771,9 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Content\typeahead.css" />
+    <Content Include="Errors\404.html" />
+    <Content Include="Errors\error.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -918,6 +923,7 @@
     <Content Include="Scripts\DataTables\responsive.semanticui.js" />
     <Content Include="Scripts\DataTables\responsive.semanticui.min.js" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
+    <Content Include="Scripts\dw_loader.js" />
     <Content Include="Scripts\leaflet.js" />
     <Content Include="Scripts\thumbnails.carousel.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
@@ -939,6 +945,7 @@
     <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\typeahead.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1024,6 +1031,7 @@
     <Folder Include="Views\Appointment\" />
     <Folder Include="Views\Email\" />
     <Folder Include="Views\Message\" />
+    <Folder Include="Views\Role\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">

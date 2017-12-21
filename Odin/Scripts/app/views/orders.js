@@ -1,355 +1,19 @@
 ﻿var OrdersPageController = function () {
 
-    var $currSort = null;
+    var _data;
+    var _sortAsc = true;
+    var _sortCurr = "";
 
-    var $Orders = null;
-    var $SortedOrders = null;
-    var $SearchedOrders = null;
-
-    var init = function () { 
+    var init = function () {
         sizePage();
-        var tablet_table = $('table.tablet tbody');
-        var mobile_table = $('table.mobile tbody');
-        var desktop_table = $('table.desktop tbody');
+        _data = getData();
+        initSearch();
+        initSort();
 
         $(window).resize(function () {
             
             sizePage();
         });
-
-        $.getJSON("/api/orders",
-            function (orders) {
-                $Orders = orders;
-                for (var i = 0; i < $Orders.transferees.length; i++) {
-                    $Orders.transferees[i].index = i;
-                }
-
-                $SortedOrders = $Orders; 
-                $SearchedOrders = $SortedOrders;
-
-                populateTables();
-            }
-        );
-
-        // sort handlers
-        $('.arrow.up').click(function () {
-
-            if ($currSort !== null) {
-                $currSort.next().css("display", "none");
-                $currSort.next().next().css("display", "none");
-
-                $currSort.css("display", "block");
-            }
-
-            $currSort = $(this);
-            $currSort.css("display", "none");
-            $currSort.next().css("display", "block");
-
-            if ($currSort.hasClass('name')) {
-                nameSort(true);
-            }
-
-            if ($currSort.hasClass('date')) {
-                dateSort($(this).attr('data-field'), true);
-            }
-
-            if ($currSort.hasClass('number')) {
-                numberSort(true);
-            }
-
-            $SearchedOrders = $SortedOrders;
-
-            populateTables();
-        });
-
-        $('.arrow.down').click(function () {
-
-            $(this).css("display", "none");
-            $(this).next().css("display", "block");
-
-            if ($currSort.hasClass('name')) {
-                nameSort(false);
-            }
-
-            if ($currSort.hasClass('date')) {
-                dateSort($(this).attr('data-field'), false);
-            }
-
-            if ($currSort.hasClass('number')) {
-                numberSort(false);
-            }
-
-            $SearchedOrders = $SortedOrders;
-
-            populateTables();
-        });
-
-        $('.arrow.upsel').click(function () {
-
-            $(this).css("display", "none");
-            $(this).prev().css("display", "block");
-
-            if ($currSort.hasClass('name')) {
-                nameSort(true);
-            }
-
-            if ($currSort.hasClass('date')) {
-                dateSort($(this).attr('data-field'), true);
-            }
-
-            if ($currSort.hasClass('number')) {
-                numberSort(true);
-            }
-
-            $SearchedOrders = $SortedOrders;
-
-            populateTables();
-        });
-
-        // search box
-        $('#searchbox').on("keyup input", function () {
-            var srchIndx = $(this).val().toLowerCase();
-
-            if (srchIndx.length > 1) {
-                $SearchedOrders = { "transferees": [] };
-
-                for (var i = 0; i < $SortedOrders.transferees.length; i++) {
-                    var firstMatch = $SortedOrders.transferees[i].firstName.split(srchIndx);
-                    var lastMatch = $SortedOrders.transferees[i].lastName.split(srchIndx);
-
-                    if (firstMatch.length > 1 || lastMatch.length > 1) {
-                        var transferee = {};
-
-                        Object.assign(transferee, $SortedOrders.transferees[i]);
-
-                        // indicate search on first name
-                        if (firstMatch.length > 1) {
-                            var firstName = firstMatch[0];
-
-                            firstName += "<span class=\"srchIndx\">";
-                            for (var j = 0; j < srchIndx.length; j++) {
-                                firstName += transferee.firstName[firstMatch[0].length + j];
-                            }
-                            firstName += "</span>" + firstMatch[1];
-
-                            transferee.firstName = firstName;
-                        }
-
-                        // indicate search on last name
-                        if (lastMatch.length > 1) {
-                            var lastName = lastMatch[0];
-
-                            lastName += "<span class=\"srchIndx\">";
-                            for (var k = 0; k < srchIndx.length; k++) {
-                                lastName += transferee.lastName[lastMatch[0].length + k];
-                            }
-                            lastName += "</span>" + lastMatch[1];
-
-                            transferee.lastName = lastName;
-                        }
-
-                        $SearchedOrders.transferees.push(transferee);
-                    }
-                }
-            }
-            else $SearchedOrders = $SortedOrders;
-
-            populateTables();  
-        });
-
-        
-        // sorting routines
-        var nameSort = function (asc) {
-            $SortedOrders.transferees.sort(function (a, b) {
-                if (asc)
-                    return a.lastName.localeCompare(b.lastName);
-                else
-                    return a.lastName.localeCompare(b.lastName) * -1;
-            });
-        };
-
-        var dateSort = function (field, asc) {
-            $SortedOrders.transferees.sort(function (a, b) {
-                // trap nulls
-                if (a[field] === null && b[field] === null)
-                    return 0;
-
-                if (a[field] === null && b[field] !== null)
-                    if (asc)
-                        return -1;
-                    else
-                        return 1;
-
-                if (a[field] !== null && b[field] === null)
-                    if (asc)
-                        return 1;
-                    else
-                        return -1;
-
-                var dateA = new Date(a[field]);
-                var dateB = new Date(b[field]);
-
-                if (dateA > dateB)
-                    if (asc)
-                        return -1;
-                    else
-                        return 1;
-                else if (dateA === dateB)
-                    return 0;
-                else
-                    if (asc)
-                        return 1;
-                    else
-                        return -1;
-            });
-        };
-
-        var numberSort = function (asc) {
-            $SortedOrders.transferees.sort(function (a, b) {
-                if (a.numberOfAlerts > b.numberOfAlerts)
-                    if (asc)
-                        return -1;
-                    else
-                        return 1;
-                else if (a.numberOfAlerts === b.numberOfAlerts)
-                    return 0;
-                else
-                    if (asc)
-                        return 1;
-                    else
-                        return -1;
-            });
-        };
-
-        // tables builder
-        var populateTables = function () {
-
-            desktop_table.empty();
-            tablet_table.empty();
-            mobile_table.empty();
-
-            if ($SearchedOrders.transferees === null) return;
-
-            for (var i = 0; i < $SearchedOrders.transferees.length; i++) {
-
-                // name
-                var name = "<p class=\"transferee\">" + $SearchedOrders.transferees[i].firstName + " " + $SearchedOrders.transferees[i].lastName + "</p>";
-                if ($SearchedOrders.transferees[i].rmc !== null) 
-                    name += "<p class=\"Callout\">" + $SearchedOrders.transferees[i].rmc + "</p>";                        
-                
-                if ($SearchedOrders.transferees[i].company !== null) 
-                    name += "<p class=\"company\">" + $SearchedOrders.transferees[i].company + "</p>";   
-
-                if ($SearchedOrders.transferees[i].rush !== undefined && $SearchedOrders.transferees[i].rush === true)
-                    name += "<p class=\"urgent\">Rush</p>";
-
-                var name_tablet = name + "<div><span class=\"tablet-column-label\">PreTrip:</span>";
-                if ($SearchedOrders.transferees[i].preTrip !== null)
-                    name_tablet += "<span>" + $SearchedOrders.transferees[i].preTrip.split("T")[0] + "</span><br />";
-                else name_tablet += "<br />";
-
-                name_tablet += "<span class=\"tablet-column-label\">Final Arrival:</span>";
-                if ($SearchedOrders.transferees[i].finalArrival !== null)
-                    name_tablet += "<span> " + $SearchedOrders.transferees[i].finalArrival.split("T")[0] + "</span></div>";
-                else name_tablet += "</div>";
-
-                var name_mobile = name_tablet + "<div><span class=\"tablet-column-label\">Manager:</span>";
-                if ($SearchedOrders.transferees[i].manager !== null)
-                    name_mobile += "<span class=\"Callout\">" + $SearchedOrders.transferees[i].manager + "</span>";
-
-                if ($SearchedOrders.transferees[i].managerPhone !== null)
-                    name_mobile += "<p class=\"mobile-phone\">" + $SearchedOrders.transferees[i].managerPhone + "</p></div>";
-                else name_mobile += "</div>";
-
-                // services
-                var services = "<div class=\"actlist-item-hdr\"><img class=\"expand\" src=\"/Content/Images/expand.png\" /><img class=\"collapse noinit\" src=\"/Content/Images/collapse.png\" />" +
-                    "</div><div class=\"actlist-item-hdr\"><p>AT</p><a href=\"#\">" + ("0" + $SearchedOrders.transferees[i].numberOfScheduledServices).slice(-2) + "</a></div><div class=\"actlist-item-hdr\"><p>S</p><a href=\"#\">" +
-                    ("0" + $SearchedOrders.transferees[i].numberOfServices).slice(-2) + "</a></div>" + "<div class=\"actlist-item-hdr\"><p>C</p><a href=\"#\">" + ("0" + $SearchedOrders.transferees[i].numberOfCompletedServices).slice(-2) + "</a></div>";
-
-                var services_list = "";
-                if ($SearchedOrders.transferees[i].services !== null) {
-                    for (var j = 0; j < $SearchedOrders.transferees[i].services.length; j++) {
-                        services_list += "<div class=\"actlist-item-blk\"><p class=\"actlist-item\">" + $SearchedOrders.transferees[i].services[j].name + "</p>";
-                        if ($SearchedOrders.transferees[i].services[j].completedDate !== null)
-                            services_list += "<p>" + $SearchedOrders.transferees[i].services[j].completedDate.split("T")[0] + "</p></div>";
-                        else services_list += "</div>";
-                    }
-                    services += services_list;
-                }
-
-                var services_tablet = "<div class=\"actlist-item-hdr\"><img class=\"expand\" src=\"/Content/Images/expand.png\" /><img class=\"collapse noinit\" src=\"/Content/Images/collapse.png\" />" +
-                    "</div><div class=\"actlist-item-hdr\"><p>AT</p><a href=\"#\">" + ("0" + $SearchedOrders.transferees[i].numberOfScheduledServices).slice(-2) + "</a></div><div class=\"actlist-item-hdr\"><p>S</p><a href=\"#\">" +
-                    ("0" + $SearchedOrders.transferees[i].numberOfServices).slice(-2) + "</a></div><div class=\"actlist-item-hdr\">" + "<p>C</p><a href=\"#\">" + ("0"+$SearchedOrders.transferees[i].numberOfCompletedServices).slice(-2) + "</a></div>";
-                services_tablet += services_list;
-
-                // last contacted
-                var lastcontacted = "";
-                if ($SearchedOrders.transferees[i].lastContacted !== null)
-                    lastcontacted += "<p class=\"lastcontacted\">" + $SearchedOrders.transferees[i].lastContacted.split("T")[0] + "</p>";
-
-                // manager
-                var manager = "<td>";
-                if ($SearchedOrders.transferees[i].manager !== null)
-                    manager += "<p class=\"Callout\">" + $SearchedOrders.transferees[i].manager + "</p>";
-                if ($SearchedOrders.transferees[i].managerPhone !== null)
-                    manager += "<p class=\"managerphone\">" + $SearchedOrders.transferees[i].managerPhone + "</p></td>";
-                else manager += "</td>";
-
-                // pretrip
-                var pretrip = "<td>";
-                if ($SearchedOrders.transferees[i].preTrip !== null)
-                    pretrip += "<p class=\"pretrip\">" + $SearchedOrders.transferees[i].preTrip.split("T")[0] + "</p></td>";
-                else pretrip += "</td>";
-
-                // final arrival
-                var finalarrival = "<td>";
-                if ($SearchedOrders.transferees[i].finalArrival !== null)
-                    finalarrival += "<p class=\"finalarrival\">" + $SearchedOrders.transferees[i].finalArrival.split("T")[0] + "</p></td>";
-                else finalarrival += "</td>";
-
-                // notification
-                var notification = "<td><img src=\"/Content/Images/icn_alert_B1.png\" />";
-                if ($SearchedOrders.transferees[i].numberOfAlerts > 0)
-                    notification += "<div class=\"notify-count\"><img src=\"/Content/Images/icn_alert_circle.png\"/><span>" + ("0"+$SearchedOrders.transferees[i].numberOfAlerts).slice(-2) + "</span></div></td>";
-
-                desktop_table.append("<tr data-order-id=\""+$SearchedOrders.transferees[i].id+"\" data-index=\"" + $SearchedOrders.transferees[i].index + "\">" + "<td>" + name + "</td>" + "<td>" + services + "</td>" + "<td>" + lastcontacted + "</td>" + manager + pretrip + finalarrival + notification + "</tr>");
-                tablet_table.append("<tr data-order-id=\"" + $SearchedOrders.transferees[i].id +"\" data-index=\"" + $SearchedOrders.transferees[i].index + "\">" + "<td>" + name_tablet + "</td>" + manager + "<td>" + lastcontacted + "</td>" + "<td>" + services_tablet + "</td>" + notification + "</tr>");
-                mobile_table.append("<tr data-order-id=\"" + $SearchedOrders.transferees[i].id +"\" data-index=\"" + $SearchedOrders.transferees[i].index + "\">" + "<td>" + name_mobile + "</td>" + "<td>" + lastcontacted + services + "</td>" + notification + "</tr>");
-
-                // service expansion handlers
-                $('.expand').click(function (event) {
-                    event.stopPropagation();
-
-                    $(this).css("display", "none");
-                    $(this).next().css("display", "block");
-
-                    $(this).parent().parent().children('.actlist-item-blk').each(function () {
-                        $(this).css("display", "block");
-                    });
-                });
-
-                $('.collapse').click(function (event) {
-                    event.stopPropagation();
-
-                    $(this).css("display", "none");
-                    $(this).prev().css("display", "block");
-
-                    $(this).parent().parent().children('.actlist-item-blk').each(function () {
-                        $(this).css("display", "none");
-                    });
-                });
-
-                // <a> handler until functionality decided
-                $('a').click(function (event) {
-                    event.stopPropagation();
-                });
-
-                // row selection handler
-                $('.clickable').click(function () {
-                    window.location.href = "/Orders/Transferee/" + $(this).attr("data-order-id");
-                });
-            }
-        };
     };
 
     var sizePage = function () {
@@ -364,10 +28,198 @@
             $('#primaryNav').css('left', 0);
 
         }       
+    };
+
+    var initSearch = function() {
+        // constructs the suggestion engine
+        var engine = new Bloodhound({
+            datumTokenizer: function (datum) {
+                return Bloodhound.tokenizers.whitespace(datum.eeName);
+            },
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            local: _data,
+            identify: function (obj) { return obj.id }
+        });
+
+        $('#searchbox').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 1
+            },
+            {
+                name: 'data',
+                source: engine,
+                displayKey: 'eeName'
+            }
+        ).on('typeahead:selected',
+            function (e, suggestion, name) {
+                goToOrder(suggestion.id);
+            }
+        );
+
+        // row selection handler
+        $('.clickable').click(function () {
+            goToOrder($(this).attr("data-order-id"));
+        });
     }
 
-    return {
-        OrdersPageInit: init
+    var initSort = function() {
+        $("#eeNameSort").click(function () {
+            sortCol($(this), "eeLastName", function(a) { return a.toUpperCase() });
+        });
+
+        $("#pmNameSort").click(function () {
+            sortCol($(this), "pmLastName", function (a) { return a.toUpperCase() });
+        });
+
+        $("#preTripDateSort").click(function () {
+            sortCol($(this), "preTripDate", function (a) { return new Date(a) });
+        });
+
+        $("#estimatedArrivalDateSort").click(function () {
+            sortCol($(this), "estimatedArrivalDate", function (a) { return new Date(a) });
+        });
+
+        $("#notificationsSort").click(function () {
+            sortCol($(this), "notifications", function (a) { return parseInt(a.replace("*","")) });
+        });
+
+
+        //Default sort. Move to server?
+        sortCol($("#estimatedArrivalDateSort"), "estimatedArrivalDate", function (a) { return new Date(a) });
+    }
+
+    var sortCol = function(headerElt, dataName, sortFunc) {
+        resetSortHeaders();
+        headerElt.css("font-weight", "Bold").css("color", "black");
+
+        var ascElt = headerElt.find(".sortPlus");
+        var descElt = headerElt.find(".sortMinus");
+        
+        var sortId = headerElt.attr('id');
+        if (_sortCurr === sortId) {
+            _sortAsc = !_sortAsc;
+        } else {
+            _sortCurr = sortId;
+            _sortAsc = true;
+        }
+
+        if (_sortAsc) {
+            ascElt.css("display", "inline-block");
+            descElt.css("display", "none");
+
+        } else {
+            descElt.css("display", "inline-block");
+            ascElt.css("display", "none");
+        }
+        
+        _data.sort(sortBy(dataName, _sortAsc, sortFunc));
+        bindData();
+    }
+
+    var resetSortHeaders = function () {
+        $(".sortLabel, .sortLabel").css("font-weight", "normal").css("color", "#858585");
+        $(".sortPlus,.sortMinus").css("display", "none");
+
+    }
+
+    var bindData = function()
+    {
+        var rows = $(".orderRow");
+        rows.each(function (i, element) {
+
+            var elt = $(element);
+           
+            elt.attr("data-order-id",_data[i]["id"]);
+            elt.find(".eeName").text(_data[i]["eeName"]);
+            elt.find(".eeName").data("last-name",_data[i]["eeLastName"]);
+            elt.find(".rmcName").text(_data[i]["rmcName"]);
+            elt.find(".clientName").text(_data[i]["clientName"]);
+            elt.find(".pmName").text(_data[i]["pmName"]);
+            elt.find(".pmName").data("last-name", _data[i]["pmLastName"]);
+            elt.find(".pmPhone").text(_data[i]["pmPhone"]);
+            elt.find(".preTripDate").text(_data[i]["preTripDate"]);
+            elt.find(".estimatedArrivalDate").text(_data[i]["estimatedArrivalDate"]);
+            elt.find(".notifications").text(_data[i]["notifications"]);
+
+            var pb = elt.find(".progressBar");
+            pb.attr("data-comp-percent", _data[i]["compPercent"]);
+            pb.attr("data-auth-percent", _data[i]["authPercent"]);
+            pb.attr("data-sched-percent", _data[i]["schedPercent"]);
+            loadProgressBar(pb);
+        });
+    }
+
+    var getData = function() {
+        var rows = $(".orderRow");
+        var data = new Array();
+
+        rows.each(function (i, element) {
+
+            var elt = $(element);
+            var id = elt.attr("data-order-id");
+            var eeName = elt.find(".eeName").text();
+            var eeLastName = elt.find(".eeName").attr("data-last-name");
+            var rmcName = elt.find(".rmcName").text();
+            var clientName = elt.find(".clientName").text();
+            var pmName = elt.find(".pmName").text();
+            var pmLastName = elt.find(".pmName").attr("data-last-name");
+            var pmPhone = elt.find(".pmPhone").text();
+            var preTripDate = elt.find(".preTripDate").text();
+            var estimatedArrivalDate = elt.find(".estimatedArrivalDate").text();
+            var notifications = elt.find(".notifications").text();
+
+            var pb = elt.find(".progressBar");
+            var authPercent = pb.attr("data-auth-percent");
+            var schedPercent = pb.attr("data-sched-percent");
+            var compPercent = pb.attr("data-comp-percent");
+
+            data.push({
+                id: id,
+                eeName: eeName,
+                eeLastName:eeLastName,
+                rmcName: rmcName,
+                clientName: clientName,
+                pmName: pmName,
+                pmLastName:pmLastName,
+                pmPhone:pmPhone,
+                preTripDate: preTripDate,
+                estimatedArrivalDate: estimatedArrivalDate,
+                notifications: notifications,
+                authPercent: authPercent,
+                schedPercent: schedPercent,
+                compPercent: compPercent
+            });
+        });
+
+        return data;
+    }
+
+    //https://stackoverflow.com/questions/979256/sorting-an-array-of-javascript-objects
+    var sortBy = function (field, asc, primer) {
+        var key = primer ?
+            function (x) { return primer(x[field]) } :
+            function (x) { return x[field] };
+
+        var reverse = asc ? 1 : -1;
+
+        return function (a, b) {
+            return a = key(a), b = key(b), reverse * ((a > b) - (b > a));
+        } 
+    }
+
+    var goToOrder = function(id) {
+        window.location.href = "/Orders/Transferee/" + id;
+    }
+
+    var loadProgressBar = function(pbElt) {
+        pbElt.find(".progressBar__auth").width(pbElt.attr("data-auth-percent"));
+        pbElt.find(".progressBar__sched").width(pbElt.attr("data-sched-percent"));
+        pbElt.find(".progressBar__comp").width(pbElt.attr("data-comp-percent"));
+    }
+
+    return { 
+        init: init
     };
 }();
 

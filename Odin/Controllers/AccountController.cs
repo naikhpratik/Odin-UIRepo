@@ -470,7 +470,7 @@ namespace Odin.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Orders");
+            return RedirectToAction("Index", "Role");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult
