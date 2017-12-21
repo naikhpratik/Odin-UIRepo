@@ -10,7 +10,7 @@
             <input id="searchbox" placeholder="Type here to search, select to go" />
         </div>
     
-    @if (@ViewBag.userRole.Equals("Program Manager"))
+    @if (@ViewBag.userRole.Equals("Program Manager") || @ViewBag.userRole.Equals("Global Supply Chain"))
     {
 
         <div class="dropdown show">

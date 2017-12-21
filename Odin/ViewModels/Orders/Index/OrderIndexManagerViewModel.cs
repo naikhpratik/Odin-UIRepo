@@ -10,6 +10,10 @@ namespace Odin.ViewModels.Orders.Index
     public class OrderIndexManagerViewModel
     {
 
+        public OrderIndexManagerViewModel()
+        {
+
+        }
         public OrderIndexManagerViewModel(IEnumerable<OrdersIndexViewModel> orderVms, IEnumerable<ManagerViewModel> managersVms)
         {
             OrdersIndexVm = orderVms;

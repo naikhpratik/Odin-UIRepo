@@ -36,6 +36,9 @@ namespace Odin.Tests.Controllers
         private Mock<ITransfereesRepository> _mockTransfereesRepository;
         private Mock<IHomeFindingPropertyRepository> _mockHFPropertyRepository;
 
+        private Mock<IUsersRepository> _mockUserRepository;
+        private Mock<IManagersRepository> _mockManagerRepository; 
+
         private Mock<IMapper> _mockMapper;
         private IMapper mapper;
 
@@ -56,6 +59,9 @@ namespace Odin.Tests.Controllers
             _mockHFPropertyRepository = new Mock<IHomeFindingPropertyRepository>();
             _mockMapper = new Mock<IMapper>();
 
+            _mockUserRepository = new Mock<IUsersRepository>();
+            _mockManagerRepository = new Mock<IManagersRepository>();
+
             var config = new MapperConfiguration(c => c.AddProfile(new MappingProfile()));
             mapper = config.CreateMapper();
 
@@ -73,6 +79,12 @@ namespace Odin.Tests.Controllers
             mockUnitOfWork.SetupGet(u => u.Transferees).Returns(_mockTransfereesRepository.Object);
             mockUnitOfWork.SetupGet(u => u.HomeFindingProperties).Returns(_mockHFPropertyRepository.Object);
 
+            mockUnitOfWork.SetupGet(u => u.Users).Returns(_mockUserRepository.Object);
+            mockUnitOfWork.SetupGet(u => u.Managers).Returns(_mockManagerRepository.Object);
+
+
+            List<Manager> manager = new List<Manager>();
+
             var mockEmailHelper = new Mock<IEmailHelper>();
             var mockAccountHelper = new Mock<IAccountHelper>();
             _controller = new OrdersController(mockUnitOfWork.Object, _mockMapper.Object, mockAccountHelper.Object);
@@ -85,8 +97,8 @@ namespace Odin.Tests.Controllers
         [TestMethod]
         public void Index_WhenCalled_ReturnsOk()
         {
-            var result = _controller.Index() as ViewResult;
-
+            _userId = null;
+            var result = _controller.Index(_userId) as ViewResult;
             result.Should().NotBeNull();
         }
 

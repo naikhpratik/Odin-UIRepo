@@ -33,7 +33,7 @@ namespace Odin.Controllers
         {
             var userId = "";
             IEnumerable<Order> orders;
-           
+                
             if (id == null)
             {
                 userId = User.Identity.GetUserId();
@@ -47,11 +47,21 @@ namespace Odin.Controllers
             ViewBag.userRole = _unitOfWork.Users.GetRoleByUserId(userId);
             var managers = _unitOfWork.Managers.GetManagers();
             var orderVms = _mapper.Map<IEnumerable<Order>, IEnumerable<OrdersIndexViewModel>>(orders);
-            var result = ((IEnumerable)managers).Cast<Manager>().ToList();
-            //IList Imanager = (IList)managers;
-            var managerVms = _mapper.Map<IEnumerable<Manager>, IEnumerable<ManagerViewModel>>(result);
-            OrderIndexManagerViewModel ordermanagervms = new OrderIndexManagerViewModel(orderVms, managerVms);
-            return View(ordermanagervms);
+
+            if (managers != null)
+            {
+                var result = ((IEnumerable)managers).Cast<Manager>().ToList();
+                var managerVms = _mapper.Map<IEnumerable<Manager>, IEnumerable<ManagerViewModel>>(result);
+                OrderIndexManagerViewModel ordermanagervms = new OrderIndexManagerViewModel(orderVms, managerVms);
+                return View(ordermanagervms);
+            }
+            else
+            {
+                return View(orderVms);
+
+            }
+           
+            
         }
 
         /// <summary>
