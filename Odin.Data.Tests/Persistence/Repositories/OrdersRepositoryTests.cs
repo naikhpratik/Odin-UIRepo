@@ -42,6 +42,32 @@ namespace Odin.Data.Tests.Persistence.Repositories
         }
 
         [TestMethod]
+        public void GetOrdersFor_OrderIsCancelled_ShouldNotReturnOrder()
+        {
+            var consultant = new Consultant() { Id = "fake-user-id" };
+            var order = new Order() { Transferee = new Transferee(), DestinationCity = "Vancouver", ProgramManager = new Manager(), Consultant = consultant, ConsultantId = consultant.Id, SeCustStatus = OrderStatus.Cancelled };
+
+            SetupRepositoryWithSource(new[] { order });
+
+            var orders = _ordersRepository.GetOrdersFor(consultant.Id);
+
+            orders.Should().HaveCount(0);
+        }
+
+        [TestMethod]
+        public void GetOrdersFor_OrderIsClosed_ShouldNotReturnOrder()
+        {
+            var consultant = new Consultant() { Id = "fake-user-id" };
+            var order = new Order() { Transferee = new Transferee(), DestinationCity = "Vancouver", ProgramManager = new Manager(), Consultant = consultant, ConsultantId = consultant.Id, SeCustStatus = OrderStatus.Closed };
+
+            SetupRepositoryWithSource(new[] { order });
+
+            var orders = _ordersRepository.GetOrdersFor(consultant.Id);
+
+            orders.Should().HaveCount(0);
+        }
+
+        [TestMethod]
         public void GetOrdersFor_OrderIsForUser_ShouldReturnOrder()
         {
             var consultant = new Consultant() { Id = "fake-user-id" };
