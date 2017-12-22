@@ -119,7 +119,7 @@ namespace Odin.IntegrationTests.Controllers
         public void Index_WhenCalled_ShouldReturnOK()
         {
 
-            //Initial Setup
+            //Initial
             var _mockBookMarkletHelper = new Mock<Controller>();
             var config = new MapperConfiguration(c => c.AddProfile(new MappingProfile()));
             var mapper = config.CreateMapper();

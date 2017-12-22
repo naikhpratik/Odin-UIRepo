@@ -33,7 +33,7 @@ namespace Odin.Controllers
         {
             var userId = "";
             IEnumerable<Order> orders;
-                
+
             if (id == null)
             {
                 userId = User.Identity.GetUserId();
@@ -41,6 +41,7 @@ namespace Odin.Controllers
             }
             else
             {
+                TempData["curr_mngr"] = id;
                 userId = id;
                 orders = _unitOfWork.Orders.GetOrdersFor(userId, UserRoles.ProgramManager);
             }
@@ -58,10 +59,7 @@ namespace Odin.Controllers
             else
             {
                 return View(orderVms);
-
             }
-           
-            
         }
 
         /// <summary>
@@ -205,7 +203,13 @@ namespace Odin.Controllers
         // GET: Transferee
         public ActionResult Transferee(string id)
         {
+
             var userId = User.Identity.GetUserId();
+            //setting current managers id to navigate through his orders
+            if (userId != (string)TempData["curr_mngr"])
+            {
+                userId = (string)TempData["curr_mngr"];
+            }
             var userRole = getUserRole();
             Order order = null;
             if (User.IsInRole(UserRoles.Transferee))
@@ -216,11 +220,12 @@ namespace Odin.Controllers
             {
                 order = _unitOfWork.Orders.GetOrderFor(userId, id, UserRoles.ProgramManager);
             }
-            else {
+            else
+            {
                 order = _unitOfWork.Orders.GetOrderFor(userId, id);
             }
 
-           if (order == null)
+            if (order == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.NotFound, "Not found");
             }
