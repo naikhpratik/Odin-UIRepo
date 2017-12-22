@@ -21,6 +21,7 @@ namespace Odin.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        public static string CurrentManager;
 
         public OrdersController(IUnitOfWork unitOfWork, IMapper mapper, IAccountHelper accountHelper)
         {
@@ -31,6 +32,7 @@ namespace Odin.Controllers
         // GET: Orders/id
         public ViewResult Index(string id)
         {
+            //id = selected manager's id 
             var userId = "";
             IEnumerable<Order> orders;
 
@@ -38,10 +40,12 @@ namespace Odin.Controllers
             {
                 userId = User.Identity.GetUserId();
                 orders = _unitOfWork.Orders.GetOrdersFor(userId, getUserRole());
+                CurrentManager = null;
             }
             else
             {
-                TempData["curr_mngr"] = id;
+                //TempData["curr_mngr"] = id;
+                CurrentManager = id;
                 userId = id;
                 orders = _unitOfWork.Orders.GetOrdersFor(userId, UserRoles.ProgramManager);
             }
@@ -203,13 +207,17 @@ namespace Odin.Controllers
         // GET: Transferee
         public ActionResult Transferee(string id)
         {
-
+            //id is selected order id
             var userId = User.Identity.GetUserId();
             //setting current managers id to navigate through his orders
-            if (userId != (string)TempData["curr_mngr"])
+            //if (TempData["curr_mngr"] != null && userId != (string)TempData["curr_mngr"])
+            if (CurrentManager != null && userId != CurrentManager)
             {
-                userId = (string)TempData["curr_mngr"];
+                userId = CurrentManager;
             }
+            else
+            { userId = User.Identity.GetUserId(); }
+
             var userRole = getUserRole();
             Order order = null;
             if (User.IsInRole(UserRoles.Transferee))
