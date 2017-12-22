@@ -14,7 +14,14 @@ using System;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-
+using Odin.ViewModels.Orders.Transferee;
+using FluentAssertions;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity;
+using Odin.ViewModels.Orders;
+using Odin.ViewModels.Orders.Index;
+using Odin.ViewModels.Shared;
+using System.Collections.Generic;
 
 namespace Odin.IntegrationTests.Controllers
 {
@@ -26,7 +33,8 @@ namespace Odin.IntegrationTests.Controllers
         private Manager _pm;
         private Consultant _dsc;
         private Transferee _transferee;
-        
+
+
 
         [SetUp]
         public void SetUp()
@@ -110,8 +118,110 @@ namespace Odin.IntegrationTests.Controllers
 
         }
 
+        [Test, Isolated]
+        public void Index_WhenCalled_ShouldReturnOK()
+        {
+
+            //Initial
+            var _mockBookMarkletHelper = new Mock<Controller>();
+            var config = new MapperConfiguration(c => c.AddProfile(new MappingProfile()));
+            var mapper = config.CreateMapper();
+            var unitOfWork = new UnitOfWork(_context);
+            var emailHelper = new EmailHelper();
+            var accountHelper = new AccountHelper(emailHelper);
+            
+            //creating 2 orders 
+            var orders = Odin.Data.Builders.OrderBuilder.New(2);
+            orders.ForEach(o => o.ConsultantId = _dsc.Id);
+            orders.ForEach(o => o.TransfereeId = _transferee.Id);
+            orders.ForEach(o => o.ProgramManagerId = _pm.Id);
+            orders.ForEach(o => o.TrackingId = TokenHelper.NewToken());
+            var testDateTime = new DateTime(1999, 6, 14);
+            orders.ForEach(o => o.PreTripDate = testDateTime);
+
+            _controller = new OrdersController(unitOfWork, mapper, accountHelper);
+            _context.Orders.AddRange(orders);
+            _controller.MockCurrentUser(_dsc.Id, _dsc.UserName);
+
+            //creating managers 
+            var managerStore = new UserStore<Manager>(new ApplicationDbContext());
+            var managerManager = new UserManager<Manager>(managerStore);
+
+            //Manager 1
+            string _odinPmUserName1 = "odinpm@dwellworks.com";
+            var pmUser1 = managerManager.FindByName(_odinPmUserName1);
+            if (pmUser1 == null)
+            {
+                var newPm = new Manager()
+                {
+                    UserName = _odinPmUserName1,
+                    FirstName = "Odin",
+                    LastName = "Pm",
+                    Email = _odinPmUserName1,
+                    PhoneNumber = "2166824239"
+                };
+                managerManager.Create(newPm, "OdinOdin5$");
+                managerManager.AddToRole(newPm.Id, UserRoles.ProgramManager);
+            }
+
+            //Manager 2
+            string _odinPmUserName2 = "pratikpm@dwellworks.com";
+            var pmUser2 = managerManager.FindByName(_odinPmUserName2);
+            if (pmUser2 == null)
+            {
+                var newPm = new Manager()
+                {
+                    UserName = _odinPmUserName2,
+                    FirstName = "Pratik",
+                    LastName = "Pm",
+                    Email = _odinPmUserName2,
+                    PhoneNumber = "21689578545"
+                };
+                managerManager.Create(newPm, "OdinOdin5$");
+                managerManager.AddToRole(newPm.Id, UserRoles.ProgramManager);
+            }
+            
+            //putting Orders in DB
+            _context.Orders.AddRange(orders);
+            _context.SaveChanges();
+
+            //ManagerViewModels
+            ManagerViewModel mngrvms1 = new ManagerViewModel();
+            mngrvms1.FirstName = pmUser1.FirstName;
+            mngrvms1.Id = pmUser1.Id;
+            mngrvms1.LastName = pmUser1.LastName;
+            mngrvms1.phoneNumber = pmUser1.PhoneNumber;
+            mngrvms1.Email = pmUser1.Email;
+
+            ManagerViewModel mngrvms2 = new ManagerViewModel();
+            mngrvms2.FirstName = pmUser2.FirstName;
+            mngrvms2.Id = pmUser2.Id;
+            mngrvms2.LastName = pmUser2.LastName;
+            mngrvms2.phoneNumber = pmUser2.PhoneNumber;
+            mngrvms2.Email = pmUser2.Email;
 
 
+            //Creating view models 
+            OrdersIndexViewModel ordersIndexViewModel1 = new OrdersIndexViewModel();
+            ordersIndexViewModel1.Id = orders[0].Id;
+            ordersIndexViewModel1.ProgramManager = mngrvms1;
+
+            OrdersIndexViewModel ordersIndexViewModel2 = new OrdersIndexViewModel();
+            ordersIndexViewModel1.Id = orders[1].Id;
+            ordersIndexViewModel1.ProgramManager = mngrvms2;
+
+            
+            OrderIndexManagerViewModel orderIndexManagerViewModel = new OrderIndexManagerViewModel(Enumerable.Repeat(ordersIndexViewModel1, 1), Enumerable.Repeat(mngrvms1, 1));
+            orderIndexManagerViewModel.Managers = Enumerable.Repeat(mngrvms2, 1);
+            orderIndexManagerViewModel.OrdersIndexVm = Enumerable.Repeat(ordersIndexViewModel2, 1);
+           
+            //act 
+            var OrdersIndexViewModelres = _controller.Index(pmUser1.Id) as ViewResult;
+
+            //assert
+            OrdersIndexViewModelres.Model.Equals(orderIndexManagerViewModel);
+            
+        }
         //Built with expectation that order index would be populated with a view model.  Currently it is not.  Leaving in case this changes in the future.
         //[Test, Isolated]
         //public void Index_ValidRequest_ShouldReturnOrders()
@@ -168,7 +278,7 @@ namespace Odin.IntegrationTests.Controllers
         public void Properties_TwoProperties_ViewingDate_Is_Set_WithGivenOptionExists_Count_ShouldBe2()
         {
             //arrange
-                        
+
             var order = new Order() { SeCustNumb = "867-5309", Transferee = _transferee, Consultant = _dsc, ProgramManager = _pm, TrackingId = "123Test" };
             order.HomeFinding = new HomeFinding();
             _controller.MockCurrentUser(_dsc.Id, _dsc.UserName);

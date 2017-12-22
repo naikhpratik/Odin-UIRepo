@@ -1,5 +1,5 @@
 ﻿var OrdersPageController = function () {
-
+   
     var _data;
     var _sortAsc = true;
     var _sortCurr = "";
@@ -9,7 +9,8 @@
         _data = getData();
         initSearch();
         initSort();
-
+        initPmDropDown();
+        
         $(window).resize(function () {
             
             sizePage();
@@ -32,6 +33,7 @@
 
     var initSearch = function() {
         // constructs the suggestion engine
+        
         var engine = new Bloodhound({
             datumTokenizer: function (datum) {
                 return Bloodhound.tokenizers.whitespace(datum.eeName);
@@ -53,6 +55,7 @@
             }
         ).on('typeahead:selected',
             function (e, suggestion, name) {
+
                 goToOrder(suggestion.id);
             }
         );
@@ -61,6 +64,14 @@
         $('.clickable').click(function () {
             goToOrder($(this).attr("data-order-id"));
         });
+    }
+
+    var initPmDropDown = function () {
+        
+        $('.clickablepm').click(function () {
+            goToOrderofManagers($(this).attr("data-order-id"));
+        });
+
     }
 
     var initSort = function() {
@@ -150,7 +161,8 @@
         });
     }
 
-    var getData = function() {
+    var getData = function () {
+       
         var rows = $(".orderRow");
         var data = new Array();
 
@@ -208,8 +220,14 @@
         } 
     }
 
-    var goToOrder = function(id) {
+    var goToOrder = function (id) {
+        //alert("goToOrder");
         window.location.href = "/Orders/Transferee/" + id;
+    }
+
+    var goToOrderofManagers = function (id) {
+        //alert("goToOrderofManagers");
+        window.location.href = "/Orders/Index/" + id;
     }
 
     var loadProgressBar = function(pbElt) {
@@ -219,7 +237,7 @@
     }
 
     return { 
-        init: init
+       init: init
     };
 }();
 

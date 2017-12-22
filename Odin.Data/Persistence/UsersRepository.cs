@@ -30,5 +30,11 @@ namespace Odin.Data.Persistence
         {
             throw new System.NotImplementedException();
         }
+
+        public string GetRoleByUserId(string userId)
+        {
+            var RoleUsertbl = _context.Users.Include(u => u.Roles).Where(r => r.Id.Equals(userId)).SingleOrDefault().Roles.SingleOrDefault().RoleId;
+            return _context.Roles.Where(u => u.Id == RoleUsertbl).SingleOrDefault().Name;
+        }
     }
 }

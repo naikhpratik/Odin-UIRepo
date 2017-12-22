@@ -11,5 +11,6 @@ namespace Odin.Data.Core.Repositories
     {
         Manager GetManagerBySeContactUid(int seContactUid);
         void Add(Manager manager, string userRole);
+        object GetManagers();
     }
 }
