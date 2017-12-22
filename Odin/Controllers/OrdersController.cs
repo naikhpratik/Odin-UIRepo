@@ -74,7 +74,7 @@ namespace Odin.Controllers
             }
 
             ViewBag.CurrentUser = userId;
-            HousingViewModel viewModel = new HousingViewModel(order, _mapper);
+            HousingViewModel viewModel = new HousingViewModel(order, _mapper, userId, false);
             return PartialView("~/views/orders/partials/_Housing.cshtml", viewModel);
         }
         public ActionResult PropertiesPartial(string id)

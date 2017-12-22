@@ -49,7 +49,7 @@ public static class DatePickerHelper
 
             if (includePlaceHolder)
             {
-                tagInput.Attributes.Add("placeholder", "Enter " + clss + " or hit " + icon);
+                tagInput.Attributes.Add("placeholder", "Enter " + clss + " or click");
             }
             tagInput.Attributes.Add("data-date-today-highlight", "true");
             tagInput.Attributes.Add("data-date-today-btn", "true");
@@ -98,7 +98,7 @@ public static class DatePickerHelper
 
             if (includePlaceHolder)
             {
-                tagInput.Attributes.Add("placeholder", "Enter " + clss + " or hit " + icon);
+                tagInput.Attributes.Add("placeholder", "Enter " + clss + " or click");
             }
             tagInput.Attributes.Add("data-date-today-highlight", "true");
             tagInput.Attributes.Add("data-date-today-btn", "true");
@@ -145,7 +145,7 @@ public static class DatePickerHelper
         tagInput.AddCssClass("form-control");
         tagInput.Attributes.Add("type", "text");
         tagInput.Attributes.Add("style", "display:block;width:90%;");
-        tagInput.Attributes.Add("placeholder", "Enter " + clss + " or hit " + icon);
+        tagInput.Attributes.Add("placeholder", "Enter " + clss + " or click");
         tagInput.Attributes.Add("data-date-today-highlight", "true");
         tagInput.Attributes.Add("data-date-today-btn", "true");
         tagInput.Attributes.Add("value", dateValue);
@@ -195,7 +195,7 @@ public static class DatePickerHelper
             tagInput.AddCssClass("form-control");
             tagInput.Attributes.Add("type", "text");
             tagInput.Attributes.Add("style", "display:block;width:90%;");
-            tagInput.Attributes.Add("placeholder", "Enter " + name + " or hit " + icon);
+            tagInput.Attributes.Add("placeholder", "Enter " + name + " or click");
             tagInput.Attributes.Add("data-date-today-highlight", "true");
             tagInput.Attributes.Add("data-date-today-btn", "true");
             foreach (string key in validationAttributes.Keys)

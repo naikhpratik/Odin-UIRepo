@@ -17,9 +17,11 @@ var TransfereeMessagesController = function (transfereeHousingMessages) {
 
         //Save Event for message
         modalParent.on("click", ".btn-primary.send", saveMessage);
+        modalParent.on("click", ".btn-secondary", readMessages);
     };
     
     var saveMessage = function (e) {
+
         var orderId = $('div#housing').attr('data-order-id');
         var message = $('div#messagesModal').find('#message').val();        
         if (message === 'Enter your comment here...' || message.length === 0) {
@@ -29,9 +31,13 @@ var TransfereeMessagesController = function (transfereeHousingMessages) {
         var propertyId = $('div#messagesModal').attr('data-property-id');
         var currDate = moment().format('YYYY-MM-DD HH:mm');
         var err = false;
-        var saveSuccess = function () {
-            toast('The new message was sent successfully', 'success');
-            OrdersPageController.loadPanel("housing");
+        var saveSuccess = function () {      
+            var app = $('#modalNotification');            
+            var url = '/Message/MessagePartial/' + propertyId;
+            $.get(url, function (data) {
+                app.find('.modal-content').html();
+                app.find('.modal-content').html(data);
+            });
         }
         var saveFail = function () {
             err = true;
@@ -44,6 +50,23 @@ var TransfereeMessagesController = function (transfereeHousingMessages) {
             transfereeHousingMessages.updateMessage("messages", data, saveSuccess, saveFail);
         }
     }    
+
+    var readMessages = function (e) {
+        var propertyId = $('#messagesModal').attr('data-property-id');
+        var Url = "/api/orders/transferee/housing/markRead/" + propertyId;
+
+        $.ajax({
+            url: Url,
+            type: 'POST',
+            success: function (result) {
+                $('body').removeClass('modal-open');
+                OrdersPageController.loadPanel("housing");
+            },
+            error: function () {
+                //toast("No messageses have been marked as read.", "warning");
+            }
+        });
+    }
 
     var toast = function (message, type) {
         $.notify({

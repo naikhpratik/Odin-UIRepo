@@ -87,7 +87,8 @@ var TransfereeAppointmentController = function (transfereeItineraryAppointment) 
        
         var saveSuccess = function () {
             toast('changes to the appointment are successful', 'success');
-            OrdersPageController.loadPanel("itinerary");
+            $('body').removeClass('modal-open');
+            OrdersPageController.loadPanel("itinerary");           
         }
         var saveFail = function () {
             err = true;

@@ -66,10 +66,10 @@
         var loaderId;
         $(document).ajaxStart(function () {
             loaderId = DWLoader.showLoaderAfterDelay();
-            console.log("started ajax" + loaderId);
+            //console.log("started ajax" + loaderId);
 
         }).ajaxComplete(function () {
-                console.log("stopped ajax" + loaderId);
+                //console.log("stopped ajax" + loaderId);
                 DWLoader.hideLoaderWithId(loaderId);
         });
     };

@@ -110,16 +110,19 @@
                     @Html.EditorFor(m => propertyVM.Liked, new { propertyId = propertyVM.Id })
 
                 </div>
-                <div class="col-md-1 col-xs-12 comments">
-                    <img class="comments" src="~/Content/Images/icn_chat_bubble.png" />
-                    <span>@propertyVM.Messages.Where(r => r.IsRead == false && r.AuthorId != ViewBag.CurrentUser).Count()</span>
+                <div class="col-md-1 col-xs-12 comments" data-property-id="@propertyVM.Id">
+                    <img src="~/Content/Images/icn_chat_bubble.png" />
+                    @if (propertyVM.ReadCount != 0)
+                    {
+                        <span style="text-align:center">@propertyVM.ReadCount</span>
+                    }
                 </div>
             </li>
         }
 
     </ul>
 </div>
-<div class="modal fade notificationModal" id="modalNotification" tabindex="-100" role="dialog" data-backdrop="static" aria-labelledby="notificationModalLabel" aria-hidden="true" style="z-index: 2147483647;">
+<div class="modal fade notificationModal" id="modalNotification" data-backdrop="none" tabindex="-100" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true" style="z-index: 2147483647;">
     <div class="modal-dialog" role="document" id="notification" style="z-index: 2147483647;">
         <div class="modal-content">
             
@@ -133,7 +136,8 @@
 <script>
     $('.comments').click(function (event) {
         var app = $('#modalNotification');        
-        var url = '/Message/MessagePartial/' + $(this).parent().attr('data-property-id');
+        var url = '/Message/MessagePartial/' + $(this).attr('data-property-id');
+        event.stopPropagation();
         $.get(url, function (data) {
             app.find('.modal-content').html();
             app.find('.modal-content').html(data);            

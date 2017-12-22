@@ -52,6 +52,20 @@ namespace Odin.ViewModels.Orders.Transferee
 
             this.Properties = propertyViewModels;
         }
+        public HousingViewModel(Order order, IMapper mapper, string uId, bool dummy) : this()
+        {
+            mapper.Map<HomeFinding, HousingViewModel>(order.HomeFinding, this);
+            mapper.Map<Order, HousingViewModel>(order, this);
+
+            IEnumerable<HomeFindingProperty> homeFindingProperties = order.HomeFinding.HomeFindingProperties.Where(hfp => !hfp.Deleted).OrderByDescending(hfp => hfp.CreatedAt);
+            IEnumerable<HousingPropertyViewModel> propertyViewModels;
+            propertyViewModels = mapper.Map<IEnumerable<HomeFindingProperty>, IEnumerable<HousingPropertyViewModel>>(homeFindingProperties);
+            foreach (var prop in propertyViewModels)
+            {
+                prop.CurrUserId = uId;
+            }
+            this.Properties = propertyViewModels;
+        }
         public HousingViewModel()
         {
             Properties = new List<HousingPropertyViewModel>();
