@@ -1,7 +1,4 @@
-﻿
-@{
-    ViewBag.Title = "_Dashboard";
-}
+﻿@model Odin.ViewModels.Orders.Transferee.DashboardViewModel
 
 <div class="container-fluid">
     @*<div class="row">
@@ -15,77 +12,86 @@
                 <h4 class="dashboardCard__head">My Tasks</h4>
                 <section class="dashboardSection">
                     <h5 class="dashboardSection__head">Progress</h5>
-                    <p class="dashboardSection__progressText"><span>1 of 5</span> Tasks Complete
+                    <p class="dashboardSection__progressText"><span>@Model.CompletedServiceCount.ToString() of @Model.TotalServiceCount.ToString()</span> Tasks Complete
                     </p>
                     <div class="dashboardProgressBar">
-                        <div class="dashboardProgressBar__progress"></div>
+                        <div class="dashboardProgressBar__progress" style="width:@Model.PercentComplete.ToString()%"></div>
                     </div>
                 </section>
-                @*for each section*@
-                <section class="dashboardSection">
-                    <h5 class="dashboardSection__head">License Registration</h5>
-                    <p class="dashboardSection__text">Lorem ipsum dolore maga equis todi magnis dis parturient montes, nascetur diciulus mus.</p>
-                    <ul class="dashboardTaskList">
-                        @*for each task*@
-                        <li class="dashboardTaskList__task">
-                            <img class="dashboardTaskList__check" src="~/Content/Images/task_notDone.png">
-                            <p class="dashboardTaskList__taskText">Sed fringilla mauris sit amet nib</p>
-                        </li>
-                        <li class="dashboardTaskList__task">
-                            <img class="dashboardTaskList__check" src="~/Content/Images/task_done.png">
-                            <p class="dashboardTaskList__taskText">Sed fringilla mauris sit amet nib</p>
-                        </li>
-                    </ul>
-                </section>
+                @foreach(var cat in Model.ServiceCategories) { 
+                    <section class="dashboardSection">
+                        <h5 class="dashboardSection__head">@Model.GetServiceCategoryString(cat)</h5>
+                        <p class="dashboardSection__text"></p>
+                        <ul class="dashboardTaskList">
+                            @foreach (var serv in @Model.GetServiceTypesByCategory(cat))
+                            {
+                                <li class="dashboardTaskList__task">
+                                    @if (serv.CompletedDate.HasValue)
+                                    {
+                                        <img class="dashboardTaskList__check" src="~/Content/Images/task_done.png">
+                                    }
+                                    else
+                                    {
+                                        <img class="dashboardTaskList__check" src="~/Content/Images/task_notDone.png">
+                                    }
+                                    <p class="dashboardTaskList__taskText">@serv.ServiceType.ActionLabel</p>
+                                </li>
+                            }
+                        </ul>
+                    </section>
+                }
             </div>
         </div>
         <div class="col-md-5">
             <div class="dashboardCard">
                 <h4 class="dashboardCard__head">My Itinerary</h4>
-                <section class="dashboardSection">
-                    <div class="dashboardItinerary__date">
-                    
-                        <p class="dashboardItinerary__dateDayNumber">03</p>
+                @if (Model.Itinerary.Count() > 0)
+                {
+                    for (int i = 0; i < Model.Itinerary.Count(); i++)
+                    {
+                        var entry = Model.Itinerary.ElementAt(i);
+                        <section class="dashboardSection">
+                            @if (ViewBag.SameAs == null || DateTime.Parse(ViewBag.SameAs.ToString()).ToShortDateString() != entry.ScheduledDate.Value.ToShortDateString())
+                            {
+                                <div class="dashboardItinerary__date">
+                                    <p class="dashboardItinerary__dateDayNumber">@entry.DayNumber</p>
 
-                        <div class="dashboardItinerary__dateDayNameMonthYear">
-                            <p><span>Tuesday</span></p>
-                            <p>December 2017</p>
-                        </div>
+                                    <div class="dashboardItinerary__dateDayNameMonthYear">
+                                        <p><span>@entry.DayName</span>
+                                        </p>
+                                        <p>@entry.MonthYear</p>
+                                    </div>
+                                </div>
+                            }
+                            @for (int j = i; j < Model.Itinerary.Count(); j++)
+                            {
+                                var entry2 = Model.Itinerary.ElementAt(j);
+                                if (entry2.ScheduledDate.Value.ToShortDateString() == entry.ScheduledDate.Value.ToShortDateString())
+                                {
+                                    i++;
+                                    <div class="dashboardItinerary__task">
+                                        <p class="dashboardItinerary__taskTime">@entry2.Time</p>
+                                        <div class="dashboardItinerary__taskNote">
+                                            <p>@entry2.ActionLabel</p>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    i = j - 1;
+                                    break;
+                                }
 
-                    </div>
-                    <div class="dashboardItinerary__task">
-
-                        <p class="dashboardItinerary__taskTime">12:12am</p>
-
-                        <div class="dashboardItinerary__taskNote">
-                            <p>Bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla </p>
-                        </div>
-
-                    </div>
-
-                </section>
-                <section class="dashboardSection">
-                    <div class="dashboardItinerary__date">
-
-                        <p class="dashboardItinerary__dateDayNumber">03</p>
-
-                        <div class="dashboardItinerary__dateDayNameMonthYear">
-                            <p><span>Tuesday</span></p>
-                            <p>December 2017</p>
-                        </div>
-
-                    </div>
-                    <div class="dashboardItinerary__task">
-
-                        <p class="dashboardItinerary__taskTime">12:12am</p>
-
-                        <div class="dashboardItinerary__taskNote">
-                            <p>Bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla </p>
-                        </div>
-
-                    </div>
-
-                </section>
+                            }
+                        </section>
+                    }
+                }
+                else
+                {
+                    <section class="dashboardSection">
+                        Your itinerary is currently empty.
+                    </section>
+                }
             </div>    
         </div>
     </div>

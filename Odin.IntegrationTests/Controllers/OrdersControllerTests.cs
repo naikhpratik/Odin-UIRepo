@@ -12,6 +12,7 @@ using Odin.IntegrationTests.TestAttributes;
 using Odin.ViewModels.Orders.Transferee;
 using System;
 using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 
 
@@ -273,6 +274,36 @@ namespace Odin.IntegrationTests.Controllers
             //assert            
             var result = _controller.PropertiesPartialPDF(order.Id, "ViewingsOnly");
             result.Should().BeOfType<HttpNotFoundResult>();
+        }
+
+        [Test, Isolated]
+        public void Dashboard_NoOrder_ShouldBeNotFound()
+        {
+            //arrange
+            _controller.MockCurrentUserAndRole(_transferee.Id, _transferee.UserName, UserRoles.Transferee);
+           
+
+            //assert            
+            var result = _controller.DashboardPartial("Not an order!");
+            result.Should().BeOfType<HttpStatusCodeResult>();
+
+            var codeResult = result as HttpStatusCodeResult;
+            codeResult.StatusCode.Should().Be((int) HttpStatusCode.NotFound);
+        }
+
+        [Test, Isolated]
+        public void Dashboard_Order_ShouldBeFound()
+        {
+            var order = new Order() { SeCustNumb = "867-5309", Transferee = _transferee, Consultant = _dsc, ProgramManager = _pm, TrackingId = "123Test", DestinationCity = "integration city"};
+            _context.Orders.Add(order);
+            _context.SaveChanges();
+
+            //arrange
+            _controller.MockCurrentUserAndRole(_transferee.Id, _transferee.UserName, UserRoles.Transferee);
+
+            //assert            
+            var result = _controller.DashboardPartial(order.Id);
+            result.Should().BeOfType<PartialViewResult>();
         }
     }   
 }

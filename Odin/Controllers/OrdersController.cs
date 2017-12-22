@@ -43,9 +43,16 @@ namespace Odin.Controllers
             var userId = User.Identity.GetUserId();
             var order = _unitOfWork.Orders.GetOrderFor(userId, id, UserRoles.Transferee);
 
-            //HousingViewModel viewModel = new HousingViewModel(order, _mapper);
+            if (order == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+            }
 
-            return PartialView("~/views/orders/partials/_Dashboard.cshtml");
+            var dashVM = _mapper.Map<Order, DashboardViewModel>(order);
+            ItineraryHelper helper = new ItineraryHelper(_unitOfWork,_mapper);
+            dashVM.Itinerary = helper.GetItinerary(id);
+
+            return PartialView("~/views/orders/partials/_Dashboard.cshtml",dashVM);
         }
 
         // GET Partials

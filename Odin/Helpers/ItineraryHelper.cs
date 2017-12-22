@@ -1,11 +1,10 @@
 ﻿using AutoMapper;
-using System.Collections.Generic;
-using System.Linq;
 using Odin.Data.Core;
+using Odin.Data.Core.Models;
 using Odin.ViewModels.Orders.Transferee;
 using Odin.ViewModels.Shared;
-using Odin.Data.Core.Models;
-using System.Web.Http;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Odin.Helpers
 {
@@ -20,7 +19,15 @@ namespace Odin.Helpers
             _mapper = mapper;
         }
         public OrdersTransfereeItineraryViewModel Build(string id)
-        {            
+        {
+            var itinerary = GetItinerary(id);
+            OrdersTransfereeItineraryViewModel vm = new OrdersTransfereeItineraryViewModel();
+            vm.Itinerary = itinerary;
+            return vm;
+        }
+
+        public IEnumerable<ItineraryEntryViewModel> GetItinerary(string id)
+        {
             var itinService = _unitOfWork.Services.GetServicesByOrderId(id);
             var itinAppointments = _unitOfWork.Appointments.GetAppointmentsByOrderId(id);
             // NOTE: This works because homefinding id is the same as order id
@@ -31,9 +38,7 @@ namespace Odin.Helpers
             var itinerary3 = _mapper.Map<IEnumerable<HomeFindingProperty>, IEnumerable<ItineraryEntryViewModel>>(itinViewings);
 
             var itinerary = itinerary1.Concat(itinerary2).Concat(itinerary3).OrderBy(s => s.ScheduledDate);
-            OrdersTransfereeItineraryViewModel vm = new OrdersTransfereeItineraryViewModel();
-            vm.Itinerary = itinerary;
-            return vm;
+            return itinerary;
         }
     }
 }

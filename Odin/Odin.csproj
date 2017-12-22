@@ -387,6 +387,7 @@
     <Compile Include="ViewModels\Mailers\ResetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Orders\Index\OrdersIndexViewModel.cs" />
     <Compile Include="ViewModels\Mailers\ViewRenderer.cs" />
+    <Compile Include="ViewModels\Orders\Transferee\DashboardViewModel.cs" />
     <Compile Include="ViewModels\Orders\Transferee\HistoryViewModel.cs" />
     <Compile Include="ViewModels\Orders\Transferee\HousingPropertyViewModel.cs" />
     <Compile Include="ViewModels\Orders\Transferee\HousingViewModel.cs" />
