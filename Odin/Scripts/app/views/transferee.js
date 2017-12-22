@@ -1,7 +1,7 @@
 ﻿var OrdersPageController = function () {
      
     var init = function () {
-        alert("Knockt");
+        
         setupAjaxLoader();
 
         //$('div.col-md-10 > div > div').each(function () { $(this).css("display", "none"); });

@@ -7,7 +7,7 @@
     var init = function () {
       
         _data = getData();
-        //initSearch();
+        initSearch();
         initSort();
         initPmDropDown();
     };
@@ -43,7 +43,6 @@
 
         // row selection handler
         $('.clickable').click(function () {
-            alert("iDAR HU");
             goToOrder($(this).attr("data-order-id"));
         });
     }

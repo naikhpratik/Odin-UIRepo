@@ -98,6 +98,7 @@ namespace Odin.Data.Persistence
 
         public Order GetOrderFor(string userId, string orderId)
         {
+            
             return GetOrderFor(userId, orderId, UserRoles.Consultant);
         }
 
@@ -121,7 +122,25 @@ namespace Odin.Data.Persistence
                 .Include(o => o.Notifications)
                 .SingleOrDefault<Order>();
             }
-            else
+            else if(userRole == UserRoles.ProgramManager) // for Program Manager
+            {
+                return _context.Orders
+                .Where(o => o.Id == orderId && o.ProgramManagerId == userId)
+                .Include(o => o.Services)
+                .Include(o => o.HomeFinding)
+                .Include(o => o.Services.Select(s => s.ServiceType))
+                .Include(o => o.HomeFinding)
+                .Include(o => o.HomeFinding.NumberOfBathrooms)
+                .Include(o => o.HomeFinding.HousingType)
+                .Include(o => o.HomeFinding.AreaType)
+                .Include(o => o.HomeFinding.TransportationType)
+                .Include(o => o.HomeFinding.HomeFindingProperties.Select(hfp => hfp.Property.Photos))
+                .Include(o => o.DepositType)
+                .Include(o => o.BrokerFeeType)
+                .Include(o => o.Notifications)
+                .SingleOrDefault<Order>();
+            }
+            else //for Consultant
             {
                 return _context.Orders
                 .Where(o => o.Id == orderId && o.ConsultantId == userId)

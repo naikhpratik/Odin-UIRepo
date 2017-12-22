@@ -118,6 +118,15 @@ namespace Odin.IntegrationTests.Controllers
         [Test, Isolated]
         public void Index_WhenCalled_ShouldReturnOK()
         {
+
+            //Initial Setup
+            var _mockBookMarkletHelper = new Mock<Controller>();
+            var config = new MapperConfiguration(c => c.AddProfile(new MappingProfile()));
+            var mapper = config.CreateMapper();
+            var unitOfWork = new UnitOfWork(_context);
+            var emailHelper = new EmailHelper();
+            var accountHelper = new AccountHelper(emailHelper);
+            
             //creating 2 orders 
             var orders = Odin.Data.Builders.OrderBuilder.New(2);
             orders.ForEach(o => o.ConsultantId = _dsc.Id);
@@ -127,14 +136,6 @@ namespace Odin.IntegrationTests.Controllers
             var testDateTime = new DateTime(1999, 6, 14);
             orders.ForEach(o => o.PreTripDate = testDateTime);
 
-            //blah 
-            var _mockBookMarkletHelper = new Mock<Controller>();
-            var config = new MapperConfiguration(c => c.AddProfile(new MappingProfile()));
-            var mapper = config.CreateMapper();
-            var unitOfWork = new UnitOfWork(_context);
-            var emailHelper = new EmailHelper();
-            var accountHelper = new AccountHelper(emailHelper);
-
             _controller = new OrdersController(unitOfWork, mapper, accountHelper);
             _context.Orders.AddRange(orders);
             _controller.MockCurrentUser(_dsc.Id, _dsc.UserName);
@@ -143,10 +144,8 @@ namespace Odin.IntegrationTests.Controllers
             var managerStore = new UserStore<Manager>(new ApplicationDbContext());
             var managerManager = new UserManager<Manager>(managerStore);
 
-            
+            //Manager 1
             string _odinPmUserName1 = "odinpm@dwellworks.com";
-            string _odinPmUserName2 = "pratikpm@dwellworks.com";
-
             var pmUser1 = managerManager.FindByName(_odinPmUserName1);
             if (pmUser1 == null)
             {
@@ -162,6 +161,8 @@ namespace Odin.IntegrationTests.Controllers
                 managerManager.AddToRole(newPm.Id, UserRoles.ProgramManager);
             }
 
+            //Manager 2
+            string _odinPmUserName2 = "pratikpm@dwellworks.com";
             var pmUser2 = managerManager.FindByName(_odinPmUserName2);
             if (pmUser2 == null)
             {
@@ -176,47 +177,18 @@ namespace Odin.IntegrationTests.Controllers
                 managerManager.Create(newPm, "OdinOdin5$");
                 managerManager.AddToRole(newPm.Id, UserRoles.ProgramManager);
             }
-
-            //relating orders and managers 
-           // orders[0].ProgramManager = pmUser1;
-           // orders[1].ProgramManager = pmUser1;
-
-            //putting manages in DB
+            
+            //putting Orders in DB
             _context.Orders.AddRange(orders);
-            //_context.Orders.Add(orders[1]);
-           // _context.Managers.Add(pmUser1);
-           // _context.Managers.Add(pmUser2);
             _context.SaveChanges();
 
+            //ManagerViewModels
             ManagerViewModel mngrvms1 = new ManagerViewModel();
             mngrvms1.FirstName = pmUser1.FirstName;
             mngrvms1.Id = pmUser1.Id;
             mngrvms1.LastName = pmUser1.LastName;
             mngrvms1.phoneNumber = pmUser1.PhoneNumber;
             mngrvms1.Email = pmUser1.Email;
-
-            //Creating view models 
-            OrdersIndexViewModel ordersIndexViewModel1 = new OrdersIndexViewModel();
-            ordersIndexViewModel1.Id = orders[0].Id;
-           
-            ordersIndexViewModel1.ProgramManager = mngrvms1;
-
-            //OrdersIndexViewModel ordersIndexViewModel2 = new OrdersIndexViewModel();
-            //ordersIndexViewModel2.Id = orders[1].Id;
-            //ordersIndexViewModel2.ProgramManager.FirstName = pmUser1.FirstName;
-            //ordersIndexViewModel2.ProgramManager.LastName = pmUser1.LastName;
-            //ordersIndexViewModel2.ProgramManager.Email = pmUser1.Email;
-            //ordersIndexViewModel2.ProgramManager.phoneNumber = pmUser1.PhoneNumber;
-
-            //OrdersIndexViewModel ordersIndexViewModel2 = new OrdersIndexViewModel();
-
-            //ordersIndexViewModel2.ProgramManager.FirstName = pmUser2.FirstName;
-            //ordersIndexViewModel2.ProgramManager.LastName = pmUser2.LastName;
-            //ordersIndexViewModel2.ProgramManager.Email = pmUser2.Email;
-            //ordersIndexViewModel2.ProgramManager.phoneNumber = pmUser2.PhoneNumber;
-
-            Enumerable.Repeat(orders[0], 1);
-
 
             ManagerViewModel mngrvms2 = new ManagerViewModel();
             mngrvms2.FirstName = pmUser2.FirstName;
@@ -225,18 +197,27 @@ namespace Odin.IntegrationTests.Controllers
             mngrvms2.phoneNumber = pmUser2.PhoneNumber;
             mngrvms2.Email = pmUser2.Email;
 
-            OrderIndexManagerViewModel orderIndexManagerViewModel = new OrderIndexManagerViewModel(Enumerable.Repeat(ordersIndexViewModel1, 1), Enumerable.Repeat(mngrvms1, 1));
-            //IEnumerable<ManagerViewModel> oivms1 = new IEnumerable<ManagerViewModel>();
 
+            //Creating view models 
+            OrdersIndexViewModel ordersIndexViewModel1 = new OrdersIndexViewModel();
+            ordersIndexViewModel1.Id = orders[0].Id;
+            ordersIndexViewModel1.ProgramManager = mngrvms1;
+
+            OrdersIndexViewModel ordersIndexViewModel2 = new OrdersIndexViewModel();
+            ordersIndexViewModel1.Id = orders[1].Id;
+            ordersIndexViewModel1.ProgramManager = mngrvms2;
+
+            
+            OrderIndexManagerViewModel orderIndexManagerViewModel = new OrderIndexManagerViewModel(Enumerable.Repeat(ordersIndexViewModel1, 1), Enumerable.Repeat(mngrvms1, 1));
+            orderIndexManagerViewModel.Managers = Enumerable.Repeat(mngrvms2, 1);
+            orderIndexManagerViewModel.OrdersIndexVm = Enumerable.Repeat(ordersIndexViewModel2, 1);
+           
             //act 
             var OrdersIndexViewModelres = _controller.Index(pmUser1.Id) as ViewResult;
 
             //assert
-            //foreach (var vms in OrdersIndexViewModelres.Model.Equals())
-            //{
-
-            //}
             OrdersIndexViewModelres.Model.Equals(orderIndexManagerViewModel);
+            
         }
         //Built with expectation that order index would be populated with a view model.  Currently it is not.  Leaving in case this changes in the future.
         //[Test, Isolated]

@@ -206,18 +206,21 @@ namespace Odin.Controllers
         public ActionResult Transferee(string id)
         {
             var userId = User.Identity.GetUserId();
-
+            var userRole = getUserRole();
             Order order = null;
             if (User.IsInRole(UserRoles.Transferee))
             {
                 order = _unitOfWork.Orders.GetOrderFor(userId, id, UserRoles.Transferee);
             }
-            else
+            else if (User.IsInRole(UserRoles.ProgramManager))
             {
+                order = _unitOfWork.Orders.GetOrderFor(userId, id, UserRoles.ProgramManager);
+            }
+            else {
                 order = _unitOfWork.Orders.GetOrderFor(userId, id);
             }
 
-            if (order == null)
+           if (order == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.NotFound, "Not found");
             }
