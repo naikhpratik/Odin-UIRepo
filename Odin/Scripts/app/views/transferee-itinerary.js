@@ -24,7 +24,7 @@ var TransfereeItineraryController = function (transfereeItineraryService) {
         //Init Variables
         itineraryBlocks = pnlItinerary.find(".event-item");
         orderId = pnlItinerary.attr("data-order-id");
-        clickable = itineraryBlocks.find(".clickable");
+
         //Init Dates
         itineraryBlocks.find(".itinerary-date").datetimepicker({
             format: "MM/DD/YYYY",
@@ -35,8 +35,7 @@ var TransfereeItineraryController = function (transfereeItineraryService) {
             icons: { close: 'custom-icon-check' }
         });
         //Bind Events        
-        itineraryBlocks.on("click", clickable, toggleCollapse);
-
+        
         $('#cmdPDF').click(function () {
 
             window.location.href = "/Orders/GeneratePDF/" + $('#itinerary').attr("data-order-id");
@@ -70,36 +69,20 @@ var TransfereeItineraryController = function (transfereeItineraryService) {
             app.find(".modal-footer").css("display", "block");
             app.find(".delete").css("display", "none");
             var url = '/Appointment/appointmentPartial/';
-            $.get(url, function (data) {
-                app.find('.modal-body').html();
-                app.find('.modal-body').html(data);
+
+            app.find('.modal-body').load(url, function (response, status, xhr) {
+                if (status === "success") {
+                    app.modal('show');
+                }
             });
         });
+
         $(".new").click(function (e) {
             e.stopPropagation();
             return false;
         })
     }
-    var toggleCollapse = function (e) {
-        if ($(e.target).get(0).tagName !== 'IMG')
-            return;
-        var itineraryBlock = $(e.target).parents(".event-item");
-        var colImg = itineraryBlock.find(".itinerary-collapse-img");
-        var expImg = itineraryBlock.find(".itinerary-expand-img");
-        var actionItem = itineraryBlock.find("#more_text");
-
-        if (actionItem.is(":visible")) {            
-            actionItem.hide();
-            expImg.css("display", "inline");
-            colImg.css("display", "none");
-        } else {
-            actionItem.show();
-            expImg.css("display", "none");
-            colImg.css("display", "inline");
-        }
-        
-    }
-
+   
     //formaction = '@Url.Action("Index","email")'
 
     //Utilities

@@ -68,26 +68,26 @@
                 width: 3rem;
                 margin-left: 1.6rem;
             }
-
-            p.eeName {
-                color: white;
-                margin: 0 0 0 1rem;
-                font-size: 1.5rem;
-                font-weight: bold;
-            }
         }
+    }
+
+    p.eeName {
+        color: white;
+        margin: 0 0 0 1rem;
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    hr.transfereeSideNav__rule {
+        display: block;
+        width: 90%;
+        margin: 2vh auto;
     }
 
     ul.navbar-nav {
         margin: 0 0;
         padding: 1vh 0;
         width: 100%;
-
-        hr.transfereeSideNav__rule {
-            display: block;
-            width: 90%;
-            margin: 2vh auto;
-        }
 
         li {
             float: none;

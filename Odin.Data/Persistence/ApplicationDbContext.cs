@@ -32,7 +32,7 @@ namespace Odin.Data.Persistence
         public virtual DbSet<TransportationType> TransportationTypes { get; set; }
         public virtual DbSet<DepositType> DepositTypes { get; set; }
         public virtual DbSet<BrokerFeeType> BrokerFeeTypes { get; set; }
-
+        public DbSet<Message> Messages { get; set; }
         public virtual DbSet<Property> Properties { get; set; }
         public virtual DbSet<HomeFindingProperty> HomeFindingProperties { get; set; }
 

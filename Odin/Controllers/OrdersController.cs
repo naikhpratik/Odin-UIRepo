@@ -95,27 +95,72 @@ namespace Odin.Controllers
         }
 
         // GET Partials
+        public ActionResult DashboardPartial(string id)
+        {
+            var userId = User.Identity.GetUserId();
+            var order = _unitOfWork.Orders.GetOrderFor(userId, id, UserRoles.Transferee);
+
+            //HousingViewModel viewModel = new HousingViewModel(order, _mapper);
+
+            return PartialView("~/views/orders/partials/_Dashboard.cshtml");
+        }
+
+        // GET Partials
+        public ActionResult HelpPartial(string id)
+        {
+            var userId = User.Identity.GetUserId();
+            var order = _unitOfWork.Orders.GetOrderFor(userId, id, UserRoles.Transferee);
+            ViewBag.PropBotScript = "javascript:" + System.IO.File.ReadAllText(Server.MapPath(@"~/Scripts/bookmarklet/dist.min.js"));
+            //HousingViewModel viewModel = new HousingViewModel(order, _mapper);
+
+            return PartialView("~/views/orders/partials/_Help.cshtml");
+        }
+
         public ActionResult HousingPartial(string id)
         {
             var userId = User.Identity.GetUserId();
-            var order = _unitOfWork.Orders.GetOrderFor(userId, id);
 
-            HousingViewModel viewModel = new HousingViewModel(order, _mapper);
+            Order order = null;
+            if (User.IsInRole(UserRoles.Transferee))
+            {
+                order = _unitOfWork.Orders.GetOrderFor(userId, id, UserRoles.Transferee);
+            }
+            else
+            {
+                order = _unitOfWork.Orders.GetOrderFor(userId, id);
+            }
 
+            ViewBag.CurrentUser = userId;
+            HousingViewModel viewModel = new HousingViewModel(order, _mapper, userId, false);
             return PartialView("~/views/orders/partials/_Housing.cshtml", viewModel);
         }
-
         public ActionResult PropertiesPartial(string id)
         {
             var userId = User.Identity.GetUserId();
-            var order = _unitOfWork.Orders.GetOrderFor(userId, id);
-            HousingViewModel viewModel = new HousingViewModel(order, _mapper);
+            Order order = null;
+            if (User.IsInRole(UserRoles.Transferee))
+            {
+                order = _unitOfWork.Orders.GetOrderFor(userId, id, UserRoles.Transferee);
+            }
+            else
+            {
+                order = _unitOfWork.Orders.GetOrderFor(userId, id);
+            }
+            HousingViewModel viewModel = new HousingViewModel(order, _mapper);            
             return PartialView("~/views/orders/partials/_HousingProperties.cshtml", viewModel.Properties);
         }
         public ActionResult PropertiesPartialPDF(string id, string listChoice)
         {
             var userId = User.Identity.GetUserId();
-            var order = _unitOfWork.Orders.GetOrderFor(userId, id);
+            Order order = null;
+            if (User.IsInRole(UserRoles.Transferee))
+            {
+                order = _unitOfWork.Orders.GetOrderFor(userId, id, UserRoles.Transferee);
+            }
+            else
+            {
+                order = _unitOfWork.Orders.GetOrderFor(userId, id);
+            }
             HousingViewModel viewModel = new HousingViewModel(order, _mapper, listChoice);
             if (viewModel.Properties.Count() == 0)
             {
@@ -143,13 +188,11 @@ namespace Odin.Controllers
             OrdersTransfereeViewModel viewModel = GetViewModelForOrderDetails(id);
             return PartialView("~/views/orders/partials/_Details.cshtml", viewModel);
         }
-
         public ActionResult IntakePartial(string id)
         {
             OrdersTransfereeViewModel viewModel = GetViewModelForOrderDetails(id);
             return PartialView("~/views/orders/partials/_Intake.cshtml", viewModel);
         }
-
         public ActionResult ItineraryPartial(string id)
         {
             OrdersTransfereeItineraryViewModel viewModel = GetItineraryByOrderId(id);
@@ -203,26 +246,21 @@ namespace Odin.Controllers
 
             return View();
         }
-
-        // GET: Transferee
         public ActionResult Transferee(string id)
         {
             //id is selected order id
             var userId = User.Identity.GetUserId();
             //setting current managers id to navigate through his orders
-            //if (TempData["curr_mngr"] != null && userId != (string)TempData["curr_mngr"])
             if (CurrentManager != null && userId != CurrentManager)
             {
                 userId = CurrentManager;
             }
-            else
-            { userId = User.Identity.GetUserId(); }
 
             var userRole = getUserRole();
             Order order = null;
             if (User.IsInRole(UserRoles.Transferee))
             {
-                order = _unitOfWork.Orders.GetOrderFor(userId, id, UserRoles.Transferee);
+               order = _unitOfWork.Orders.GetOrderFor(userId, id, UserRoles.Transferee);
             }
             else if (User.IsInRole(UserRoles.ProgramManager))
             {

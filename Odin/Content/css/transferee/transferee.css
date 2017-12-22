@@ -1,12 +1,21 @@
-﻿#orderContainer {
-  margin-left: 0 !important;
+﻿html, body {
+  background-color: #f1f1f1; }
+
+#orderContainer {
+  margin-left: 0;
   margin-top: calc(5rem + 6rem);
-  width: 100%; }
+  width: 100%;
+  background-color: #fff;
+  min-height: calc(100vh - 5rem); }
   @media screen and (min-width: 48rem) {
     #orderContainer {
-      margin-left: 18rem !important;
+      margin-left: 18rem;
       margin-top: 8rem;
-      width: auto; } }
+      width: auto;
+      min-height: calc(100vh - 8rem); } }
+  @media screen and (min-width: 1440px) {
+    #orderContainer {
+      max-width: calc(1440px - 18rem); } }
 
 .input-group.date, .input-group.time {
   /*margin: 0 auto;*/

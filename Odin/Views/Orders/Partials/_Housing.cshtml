@@ -1,6 +1,6 @@
 @model Odin.ViewModels.Orders.Transferee.HousingViewModel
 
-<div class="container-fluid" id="housing">
+<div class="container-fluid" id="housing" data-order-id="@Model.Id">
     <div class="row" id="housingSummaryMap">
 
         <div class="col-md-8 col-md-push-4 mapWrapper">
@@ -48,7 +48,7 @@
     <div class="row controlsContainer" id="propertiesControls">
 
                         
-        <form class="col-sm-6" id="housingFilter">
+        <form class="col-md-6" id="housingFilter">
             <label class="housingFilter__title">Filter:</label>
             <label>
                 @Html.RadioButton("Filter", "", true)
@@ -68,7 +68,7 @@
             </label>
         </form>
                         
-        <div class="col-sm-6" style="direction: rtl;"> <!-- remove inline style when filtering is brought back in-->
+        <div class="col-md-6">
             <span  class="btnAndLabel" id="exportPDF"  data-toggle="modal" data-target="#pdfChoicesModal">Export to PDF <img src="~/Content/Images/btn_add_home.png" /></span>
             <span  class="btnAndLabel" id="addProperty" data-toggle="modal" data-target="#addPropertyModal">Add Property <img src="~/Content/Images/btn_add_home.png" /></span>
         </div>

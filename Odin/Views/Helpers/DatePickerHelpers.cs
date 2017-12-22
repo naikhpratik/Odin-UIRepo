@@ -45,11 +45,11 @@ public static class DatePickerHelper
             tagInput.AddCssClass("form-control");
             tagInput.Attributes.Add("type", "text");
             tagInput.Attributes.Add("name", name);
-           tagInput.Attributes.Add("style", "display:block;");
+           tagInput.Attributes.Add("style", "display:block;width:90%;");
 
             if (includePlaceHolder)
             {
-                tagInput.Attributes.Add("placeholder", "Enter " + clss + " or hit " + icon);
+                tagInput.Attributes.Add("placeholder", "Enter " + clss + " or click");
             }
             tagInput.Attributes.Add("data-date-today-highlight", "true");
             tagInput.Attributes.Add("data-date-today-btn", "true");
@@ -58,7 +58,7 @@ public static class DatePickerHelper
 
             TagBuilder tagSpan1 = new TagBuilder("span");
             tagSpan1.AddCssClass("input-group-addon");
-            tagSpan1.Attributes.Add("style", "display:block;width:15%");
+            tagSpan1.Attributes.Add("style", "display:block;");//width:15%
 
             res += tagSpan1.ToString(TagRenderMode.StartTag);
 
@@ -94,11 +94,11 @@ public static class DatePickerHelper
             tagInput.Attributes.Add("name", name);
             tagInput.AddCssClass("form-control");            
             tagInput.Attributes.Add("type", "text");
-            tagInput.Attributes.Add("style", "display:block;");
+            tagInput.Attributes.Add("style", "display:block;width:90%;");
 
             if (includePlaceHolder)
             {
-                tagInput.Attributes.Add("placeholder", "Enter " + clss + " or hit " + icon);
+                tagInput.Attributes.Add("placeholder", "Enter " + clss + " or click");
             }
             tagInput.Attributes.Add("data-date-today-highlight", "true");
             tagInput.Attributes.Add("data-date-today-btn", "true");
@@ -108,7 +108,7 @@ public static class DatePickerHelper
 
             TagBuilder tagSpan1 = new TagBuilder("span");
             tagSpan1.AddCssClass("input-group-addon");
-            tagSpan1.Attributes.Add("style", "display:block;width:15%");
+            tagSpan1.Attributes.Add("style", "display:block;");//width:15%
 
             res += tagSpan1.ToString(TagRenderMode.StartTag);
 
@@ -144,8 +144,8 @@ public static class DatePickerHelper
         tagInput.Attributes.Add("name", name);
         tagInput.AddCssClass("form-control");
         tagInput.Attributes.Add("type", "text");
-        tagInput.Attributes.Add("style", "display:block;");
-        tagInput.Attributes.Add("placeholder", "Enter " + clss + " or hit " + icon);
+        tagInput.Attributes.Add("style", "display:block;width:90%;");
+        tagInput.Attributes.Add("placeholder", "Enter " + clss + " or click");
         tagInput.Attributes.Add("data-date-today-highlight", "true");
         tagInput.Attributes.Add("data-date-today-btn", "true");
         tagInput.Attributes.Add("value", dateValue);
@@ -154,7 +154,7 @@ public static class DatePickerHelper
 
         TagBuilder tagSpan1 = new TagBuilder("span");
         tagSpan1.AddCssClass("input-group-addon");
-        tagSpan1.Attributes.Add("style", "display:block;width:15%");
+        tagSpan1.Attributes.Add("style", "display:block;"); //width:15%
 
         res += tagSpan1.ToString(TagRenderMode.StartTag);
 
@@ -194,8 +194,8 @@ public static class DatePickerHelper
             TagBuilder tagInput = new TagBuilder("input");
             tagInput.AddCssClass("form-control");
             tagInput.Attributes.Add("type", "text");
-            //tagInput.Attributes.Add("style", "display:block;width:85%");
-            tagInput.Attributes.Add("placeholder", "Enter " + name + " or hit " + icon);
+            tagInput.Attributes.Add("style", "display:block;width:90%;");
+            tagInput.Attributes.Add("placeholder", "Enter " + name + " or click");
             tagInput.Attributes.Add("data-date-today-highlight", "true");
             tagInput.Attributes.Add("data-date-today-btn", "true");
             foreach (string key in validationAttributes.Keys)
@@ -206,7 +206,7 @@ public static class DatePickerHelper
 
             TagBuilder tagSpan1 = new TagBuilder("span");
             tagSpan1.AddCssClass("input-group-addon");
-            tagSpan1.Attributes.Add("style", "display:block;width:15%");
+            tagSpan1.Attributes.Add("style", "display:block;");//width:15%
 
             res += tagSpan1.ToString(TagRenderMode.StartTag);
 

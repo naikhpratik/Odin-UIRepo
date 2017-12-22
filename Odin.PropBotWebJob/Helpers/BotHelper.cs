@@ -33,6 +33,10 @@ namespace Odin.PropBotWebJob.Helpers
             {
                 return new ApartmentsBot(url, _mapper);
             }
+            else if (url.Contains("craigslist.org"))
+            {
+                return  new CraigslistBot(url, _mapper);
+            }
 
             return null;
         }

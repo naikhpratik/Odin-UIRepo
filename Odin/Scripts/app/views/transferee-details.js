@@ -28,6 +28,7 @@ var TransfereeDetailsController = function (transfereeDetailseService) {
             showClose: true,
             useCurrent: false,
             toolbarPlacement: 'bottom',
+            keepOpen: false,
             icons: { close: 'custom-icon-check'}
         }).on("dp.change", function (e) { saveServices(e); });
 
@@ -100,7 +101,7 @@ var TransfereeDetailsController = function (transfereeDetailseService) {
                 st = input.val();
                 timeTag = input.parent().find('.glyphicon-time');                
             }
-            cd = input.attr("name") == "CompletedDate" ? input.val() : cd;            
+            cd = input.attr("name") == "CompletedDate" ? input.val() : cd;                   
         });
         
         if (sd.length == 0 && st.length > 0) {    
@@ -113,6 +114,7 @@ var TransfereeDetailsController = function (transfereeDetailseService) {
             return err;
         }
         if (sd.length > 0 && st == '') { 
+
             if (who == 'sectionSave') 
                 toast('schedule time is required', 'danger');
             else

@@ -25,6 +25,7 @@ namespace Odin.Data.Persistence
         public IUserNotificationRepository UserNotifications { get; private set; }
         public IPhotosRepository Photos { get; private set; }
         public IHomeFindingPropertyRepository HomeFindingProperties { get; private set; }
+        public IMessagesRepository Messages { get; private set; }
 
         public UnitOfWork(ApplicationDbContext context)
         {
@@ -50,7 +51,7 @@ namespace Odin.Data.Persistence
 
             Photos = new PhotosRepository(context);
             HomeFindingProperties = new HomeFindingPropertyRepository(context);
-
+            Messages = new MessagesRepository(context);
         }
         
         public void Complete()

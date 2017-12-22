@@ -1,4 +1,5 @@
 ﻿
+@using Odin.Data.Core.Models
 @model Odin.ViewModels.BookMarklet.BookMarkletViewModel
 @{
     Layout = "~/Views/BookMarklet/Shared/_BookMarklet.cshtml";
@@ -8,10 +9,18 @@
 @using (Html.BeginForm("Index", "BookMarklet", FormMethod.Post, new {@class= "bm-container", role = "form" }))
 {
     @*AntiForgeryToken purposefully left out because sets x-frame-options*@
-    <div class="form-group bm-form-group">
-        <label>Transferee:</label>
-        @Html.DropDownList("OrderId", new SelectList(Model.Orders.ToList(), "Id", "TransfereeFullName"), new {@class = "form-control"})
-    </div>
+    if (User.IsInRole(UserRoles.Transferee))
+    {
+        @Html.HiddenFor(o => Model.Orders.First().Id, new{ Name = "OrderId"})
+    }
+    else
+    {
+        <div class="form-group bm-form-group">
+            <label>Transferee:</label>
+            @Html.DropDownList("OrderId", new SelectList(Model.Orders.ToList(), "Id", "TransfereeFullName"), new { @class = "form-control" })
+        </div>
+    }
+
     <div class="form-group bm-form-group">
         <label>Notes:</label>
         <p class="bm-sub-label">Written notes about the property you want to include.</p>

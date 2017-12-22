@@ -1,4 +1,7 @@
-﻿div[data-notify].alert-success {
+﻿html, body {
+  background-color: #f1f1f1; }
+
+div[data-notify].alert-success {
   background-color: #8d0b56; }
 
 div[data-notify].alert-danger {

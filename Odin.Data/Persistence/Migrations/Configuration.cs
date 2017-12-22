@@ -1019,7 +1019,7 @@ namespace Odin.Data.Persistence.Migrations
             {
                 context.ServiceTypes.Add(new ServiceType()
                 {
-                    Name = "Religious workship",
+                    Name = "Religious worship",
                     Category = ServiceCategory.AreaOrientation,
                     SortOrder = 9,
                     Default = (int)DefaultType.No,

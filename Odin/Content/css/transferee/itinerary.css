@@ -1,7 +1,15 @@
-﻿div#itinerary .sectionList {
+﻿html, body {
+  background-color: #f1f1f1; }
+
+div#itinerary .sectionList {
   list-style: none;
   margin: 0;
   padding: 0; }
+
+div#itinerary button.btn {
+  border: none;
+  font-size: 1.5rem;
+  text-transform: none; }
 
 div#itinerary .event-item {
   margin-top: 4rem;
@@ -24,18 +32,6 @@ div#itinerary > .sectionList li.itineraryDay {
   margin-left: inherit;
   margin-right: inherit;
   width: 100%; }
-
-@media screen and (min-width: 62rem) {
-  div#itinerary > .sectionList {
-    /*> li:nth-child(odd) {
-                padding-right: 6rem;
-                clear: left;
-            }
-
-            > li:nth-child(even) {
-                padding-left: 6rem;
-                clear: right;
-            }*/ } }
 
 div#itinerary .itineraryDayList {
   list-style: none;
@@ -76,7 +72,7 @@ div#itinerary .eventNote {
   font-weight: 300;
   margin: 0px;
   padding: 0;
-  line-height: 26px; }
+  line-height: 1rem; }
 
 div#itinerary .eventTime {
   font-size: 1.8rem;
@@ -85,14 +81,15 @@ div#itinerary .eventTime {
   margin: 0px;
   padding: 0;
   color: #49ae44;
-  line-height: 26px; }
+  line-height: 1rem; }
 
 @media screen and (min-width: 48rem) {
   div#itinerary .sectionList li.itineraryDay {
     width: 50%; } }
 
-.noteEntry {
-  line-height: 1rem; }
+.sectionList li.noteEntry {
+  line-height: 1rem;
+  margin-bottom: 0rem; }
 
 .noteRow {
   cursor: pointer; }

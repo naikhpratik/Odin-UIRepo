@@ -1,0 +1,56 @@
+﻿@model Odin.ViewModels.Shared.PropertyMessagesViewModel
+<div id="messagesModal" data-property-id="@Model.Id">
+    <div class="modal-header" style="background-color:#a7ce39">
+        <span class="modal-title" id="notificationModalLabel">Last Message @(Model.latest.HasValue ? string.Format("{0:t}", Model.latest.Value) : "N/A") </span>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true"></span>
+        </button>
+    </div>
+    <div id="messageBody">
+        <div class="modal-body row">
+            @foreach (var message in Model.messages)
+            {
+                <div id="messageModal" data-message-id="@message.Id" class="row">
+                    <div class="col-md-1">
+                        <img class="messageImage" src="~/Content/Images/icn_chat_1.png" />
+                    </div>
+                    
+                        @if (message.IsRead || message.AuthorId == ViewBag.CurrentUser)
+                        {
+                            <div class="col-md-11 messageList">
+                                <h6 class="messageHeader">
+                                    @message.Author
+                                    <span>@(message.MessageDate.HasValue ? message.MessageDate.Value.ToString("dd - MMM - yyyy") : "")</span>
+                                </h6>
+                                <p class="messageText">@message.MessageText</p>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-md-11 messageListNotRead">
+                                <h6 class="messageHeader">
+                                    @message.Author
+                                    <span>@(message.MessageDate.HasValue ? message.MessageDate.Value.ToString("dd - MMM - yyyy") : "")</span>
+                                </h6>
+                                <p class="messageText">@message.MessageText</p>                                
+                            </div>                            
+                        }
+                </div>
+            }
+
+        </div>
+        <div>
+            <textarea id="message" onfocus="this.value=''; setbg('#e5fff3');" onblur="setbg('white')">Enter your comment here...</textarea>
+        </div>
+        <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="messageClose">Close</button>            
+                <button type="button" class="btn btn-primary send">Send</button>
+        </div>    
+    </div>
+</div>
+@Styles.Render("~/Styling/propertyMessages")
+<script>
+    $(document).ready(function () {
+        TransfereeMessagesController.init();
+    });    
+</script>

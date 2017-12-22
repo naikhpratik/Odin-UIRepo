@@ -37,7 +37,7 @@ namespace Odin.Tests.Controllers
             _controller = new AppointmentController(mockUnitOfWork.Object, _mockMapper.Object);
         }
         [TestMethod]
-        public void AppointmentPartial_Get_WhenCalled_Returns_Email_PartialView()
+        public void AppointmentPartial_Get_WhenCalled_Returns_Appointment_PartialView()
         {
             var appointmentId = "1";
             Appointment appointment = new Appointment() { Id = appointmentId};

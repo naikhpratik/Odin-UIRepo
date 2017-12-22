@@ -31,7 +31,7 @@ var TransfereeAppointmentController = function (transfereeItineraryAppointment) 
             keepOpen: false
         });
 
-        var modalParent = appointmentModal.parent().parent()
+        var modalParent = appointmentModal.parent().parent();
         //New Event for Appointment
         modalParent.on("click", ".new", newAppointment);
        
@@ -60,7 +60,8 @@ var TransfereeAppointmentController = function (transfereeItineraryAppointment) 
 
             var deleteSuccess = function () {
                 toast('the appointment was deleted successfully', 'success');
-                $('.item[data-panel=itinerary]').trigger('click');
+                $('body').removeClass('modal-open');
+                OrdersPageController.loadPanel("itinerary");
             }
             var deleteFail = function () {
                 toast('the appointment deletion failed', 'danger');                
@@ -87,7 +88,8 @@ var TransfereeAppointmentController = function (transfereeItineraryAppointment) 
        
         var saveSuccess = function () {
             toast('changes to the appointment are successful', 'success');
-            OrdersPageController.loadPanel("itinerary");
+            $('body').removeClass('modal-open');
+            OrdersPageController.loadPanel("itinerary");           
         }
         var saveFail = function () {
             err = true;
