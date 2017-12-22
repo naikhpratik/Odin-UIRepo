@@ -119,14 +119,17 @@ li.propertyItem {
           margin-left: 0; } }
     li.propertyItem > div .btn-container {
       text-align: center; }
-  li.propertyItem .comments img {
-    width: 3rem; }
   li.propertyItem .comments {
     position: relative; }
+    li.propertyItem .comments img {
+      width: 3rem;
+      display: inline-block; }
     li.propertyItem .comments span {
+      display: inline-block;
       position: absolute;
-      top: 0;
-      left: 50%;
+      top: -1rem;
+      left: 2rem;
+      text-align: center;
       background-color: #e53c2e;
       color: white;
       font-size: 1.25rem;

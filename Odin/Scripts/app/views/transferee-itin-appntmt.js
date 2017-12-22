@@ -60,7 +60,8 @@ var TransfereeAppointmentController = function (transfereeItineraryAppointment) 
 
             var deleteSuccess = function () {
                 toast('the appointment was deleted successfully', 'success');
-                $('.item[data-panel=itinerary]').trigger('click');
+                $('body').removeClass('modal-open');
+                OrdersPageController.loadPanel("itinerary");
             }
             var deleteFail = function () {
                 toast('the appointment deletion failed', 'danger');                
