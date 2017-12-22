@@ -15,5 +15,14 @@ namespace Odin.Data.Extensions
 
             return str.Contains(containsStr);
         }
+
+        // Returns false if either string is null or empty
+        public static bool NullEquals(this string str, string compareStr)
+        {
+            if (String.IsNullOrEmpty(str) || String.IsNullOrEmpty(compareStr))
+                return false;
+
+            return str.Equals(compareStr);
+        }
     }
 }

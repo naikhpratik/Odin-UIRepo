@@ -36,7 +36,9 @@ namespace Odin.Data.Core.Models
         public DateTime? TempHousingEndDate { get; set; }
         public string SchoolDistrict { get; set; }
         public string FamilyDetails { get; set; }
-        
+
+        public string SeCustStatus { get; set; }
+
         public float? DaysAuthorized { get; set; }
 
         public bool TransfereeInviteEnabled { get; set; }

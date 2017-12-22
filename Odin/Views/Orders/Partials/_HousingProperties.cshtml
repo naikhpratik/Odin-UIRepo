@@ -135,6 +135,8 @@
 }
 <script>
     $('.comments').click(function (event) {
+        event.stopPropagation();
+
         var app = $('#modalNotification');        
         var url = '/Message/MessagePartial/' + $(this).attr('data-property-id');
         event.stopPropagation();

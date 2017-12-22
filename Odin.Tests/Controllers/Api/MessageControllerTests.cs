@@ -86,15 +86,16 @@ namespace Odin.Tests.Controllers.Api
             Message mess = new Message() { HomeFindingPropertyId = propId };
             prop.Messages.Add(mess);
             _mockMessageRepository.Setup(r => r.GetMessagesByPropertyId(propId)).Returns(prop.Messages);
-            MessageDto dto = new MessageDto(){ HomeFindingPropertyId = propId, OrderId = orderId };
+            MessageDto dto = new MessageDto() { HomeFindingPropertyId = propId, OrderId = orderId };
             var rl = _controller.User.IsInRole("Transferee");
             IEnumerable<UserNotification> userNotifications = new List<UserNotification>();
             _mockNotificationRepository.Setup(r => r.GetUserNotification(_userId)).Returns(userNotifications);
             var result = _controller.UpsertPropertyMessage(dto);
             prop.Messages.Count.Should().Be(2);
             rl.Should().BeFalse();
-            userNotifications.Should().BeEmpty();            
-           }
+            userNotifications.Should().BeEmpty();
+        }
+
         [TestMethod]
         public void InsertMessage_ValidProperty_ShouldAddMessageAnd_Notification_If_Transferee()
         {
