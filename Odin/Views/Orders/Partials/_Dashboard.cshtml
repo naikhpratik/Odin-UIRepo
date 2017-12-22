@@ -4,51 +4,91 @@
 }
 
 <div class="container-fluid">
-    <div class="row">
+    @*<div class="row">
         <div class="col-md-12">
             <h3>Dashboard</h3>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-8">
-            <h4>Tasks</h4>
-            <section>
-                <h5>License Registration</h5>
-                <p>Lorem ipsum dolore maga equis todi magnis dis parturient montes, nascetur diciulus mus.</p>
-                <ul>
-                    <li>
-                        <img src="http://placehold.it/64x64">
-                        <p>Sed fringilla mauris sit amet nib</p>
-                    </li>
-                    <li>
-                        <img src="http://placehold.it/64x64">
-                        <p>Sed fringilla mauris sit amet nib</p>
-                    </li>
-                    <li>
-                        <img src="http://placehold.it/64x64">
-                        <p>Sed fringilla mauris sit amet nib</p>
-                    </li>
-                    <li>
-                        <img src="http://placehold.it/64x64">
-                        <p>Sed fringilla mauris sit amet nib</p>
-                    </li>
-                    <li>
-                        <img src="http://placehold.it/64x64">
-                        <p>Sed fringilla mauris sit amet nib</p>
-                    </li>
-                    <li>
-                        <img src="http://placehold.it/64x64">
-                        <p>Sed fringilla mauris sit amet nib</p>
-                    </li>
-                    <li>
-                        <img src="http://placehold.it/64x64">
-                        <p>Sed fringilla mauris sit amet nib</p>
-                    </li>
-                </ul>
-            </section>
+    </div>*@
+    <div class="row dashboardWrap">
+        <div class="col-md-7">
+            <div class="dashboardCard">
+                <h4 class="dashboardCard__head">My Tasks</h4>
+                <section class="dashboardSection">
+                    <h5 class="dashboardSection__head">Progress</h5>
+                    <p class="dashboardSection__progressText"><span>1 of 5</span> Tasks Complete
+                    </p>
+                    <div class="dashboardProgressBar">
+                        <div class="dashboardProgressBar__progress"></div>
+                    </div>
+                </section>
+                @*for each section*@
+                <section class="dashboardSection">
+                    <h5 class="dashboardSection__head">License Registration</h5>
+                    <p class="dashboardSection__text">Lorem ipsum dolore maga equis todi magnis dis parturient montes, nascetur diciulus mus.</p>
+                    <ul class="dashboardTaskList">
+                        @*for each task*@
+                        <li class="dashboardTaskList__task">
+                            <img class="dashboardTaskList__check" src="~/Content/Images/task_notDone.png">
+                            <p class="dashboardTaskList__taskText">Sed fringilla mauris sit amet nib</p>
+                        </li>
+                        <li class="dashboardTaskList__task">
+                            <img class="dashboardTaskList__check" src="~/Content/Images/task_done.png">
+                            <p class="dashboardTaskList__taskText">Sed fringilla mauris sit amet nib</p>
+                        </li>
+                    </ul>
+                </section>
+            </div>
         </div>
-        <div class="col-md-4">
-            <h4>Itinerary</h4>
+        <div class="col-md-5">
+            <div class="dashboardCard">
+                <h4 class="dashboardCard__head">My Itinerary</h4>
+                <section class="dashboardSection">
+                    <div class="dashboardItinerary__date">
+                    
+                        <p class="dashboardItinerary__dateDayNumber">03</p>
+
+                        <div class="dashboardItinerary__dateDayNameMonthYear">
+                            <p><span>Tuesday</span></p>
+                            <p>December 2017</p>
+                        </div>
+
+                    </div>
+                    <div class="dashboardItinerary__task">
+
+                        <p class="dashboardItinerary__taskTime">12:12am</p>
+
+                        <div class="dashboardItinerary__taskNote">
+                            <p>Bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla </p>
+                        </div>
+
+                    </div>
+
+                </section>
+                <section class="dashboardSection">
+                    <div class="dashboardItinerary__date">
+
+                        <p class="dashboardItinerary__dateDayNumber">03</p>
+
+                        <div class="dashboardItinerary__dateDayNameMonthYear">
+                            <p><span>Tuesday</span></p>
+                            <p>December 2017</p>
+                        </div>
+
+                    </div>
+                    <div class="dashboardItinerary__task">
+
+                        <p class="dashboardItinerary__taskTime">12:12am</p>
+
+                        <div class="dashboardItinerary__taskNote">
+                            <p>Bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla </p>
+                        </div>
+
+                    </div>
+
+                </section>
+            </div>    
         </div>
     </div>
 </div>
+
+@Styles.Render("~/Styling/dashboard")

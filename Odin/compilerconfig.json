@@ -78,5 +78,9 @@
   {
     "outputFile": "Content/css/transferee/itineraryPdf.css",
     "inputFile": "Content/css/transferee/itineraryPdf.scss"
+  },
+  {
+    "outputFile": "Content/css/transferee/dashboard.css",
+    "inputFile": "Content/css/transferee/dashboard.scss"
   }
 ]
