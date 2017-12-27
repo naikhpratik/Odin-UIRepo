@@ -22,6 +22,7 @@ namespace Odin.Controllers
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         public static string CurrentManager;
+        public static string userId;
 
         public OrdersController(IUnitOfWork unitOfWork, IMapper mapper, IAccountHelper accountHelper)
         {
@@ -33,7 +34,7 @@ namespace Odin.Controllers
         public ViewResult Index(string id)
         {
             //id = selected manager's id 
-            var userId = "";
+            //var userId = "";
             IEnumerable<Order> orders;
 
             if (id == null)
@@ -106,10 +107,10 @@ namespace Odin.Controllers
             }
 
             var dashVM = _mapper.Map<Order, DashboardViewModel>(order);
-            ItineraryHelper helper = new ItineraryHelper(_unitOfWork,_mapper);
+            ItineraryHelper helper = new ItineraryHelper(_unitOfWork, _mapper);
             dashVM.Itinerary = helper.GetItinerary(id);
 
-            return PartialView("~/views/orders/partials/_Dashboard.cshtml",dashVM);
+            return PartialView("~/views/orders/partials/_Dashboard.cshtml", dashVM);
         }
 
         // GET Partials
@@ -125,12 +126,16 @@ namespace Odin.Controllers
 
         public ActionResult HousingPartial(string id)
         {
-            var userId = User.Identity.GetUserId();
+            //var userId = User.Identity.GetUserId();
 
             Order order = null;
             if (User.IsInRole(UserRoles.Transferee))
             {
                 order = _unitOfWork.Orders.GetOrderFor(userId, id, UserRoles.Transferee);
+            }
+            else if (User.IsInRole(UserRoles.ProgramManager))
+            {
+                order = _unitOfWork.Orders.GetOrderFor(userId, id, UserRoles.ProgramManager);
             }
             else
             {
@@ -138,8 +143,10 @@ namespace Odin.Controllers
             }
 
             ViewBag.CurrentUser = userId;
+
             HousingViewModel viewModel = new HousingViewModel(order, _mapper, userId, false);
             return PartialView("~/views/orders/partials/_Housing.cshtml", viewModel);
+
         }
         public ActionResult PropertiesPartial(string id)
         {
@@ -153,7 +160,7 @@ namespace Odin.Controllers
             {
                 order = _unitOfWork.Orders.GetOrderFor(userId, id);
             }
-            HousingViewModel viewModel = new HousingViewModel(order, _mapper);            
+            HousingViewModel viewModel = new HousingViewModel(order, _mapper);
             return PartialView("~/views/orders/partials/_HousingProperties.cshtml", viewModel.Properties);
         }
         public ActionResult PropertiesPartialPDF(string id, string listChoice)
@@ -188,7 +195,7 @@ namespace Odin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.NotFound, "Not found");
             }
-            if (order.ConsultantId != userId)
+            if (order.ConsultantId != userId && order.ProgramManagerId != userId && !User.IsInRole(UserRoles.ProgramManager))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.Unauthorized, "Unauthorized Order");
             }
@@ -267,7 +274,7 @@ namespace Odin.Controllers
             Order order = null;
             if (User.IsInRole(UserRoles.Transferee))
             {
-               order = _unitOfWork.Orders.GetOrderFor(userId, id, UserRoles.Transferee);
+                order = _unitOfWork.Orders.GetOrderFor(userId, id, UserRoles.Transferee);
             }
             else if (User.IsInRole(UserRoles.ProgramManager))
             {
