@@ -54,15 +54,30 @@ namespace Odin.Controllers.Api
                     Author = dto.Author,
                     AuthorId = dto.AuthorId                    
                 };
-                if (User.IsInRole("Transferee"))
-                {
-                    Notification notification = new Notification()
+                Notification notification = new Notification()
                     {
                         NotificationType = NotificationType.MessageCreated,
                         Message = "A New message was composed",
                         Title = "New Message",
                         OrderId = dto.OrderId
                     };
+                if (User.IsInRole(UserRoles.ProgramManager))
+                {                    
+                    var order = _unitOfWork.Orders.GetOrderById(dto.OrderId);
+                    int seId = (int)(order.Consultant.SeContactUid == null ? 0 : order.Consultant.SeContactUid);
+                    Consultant consultant = _unitOfWork.Consultants.GetConsultantBySeContactUid(seId);
+                    consultant.Notify(notification);
+                    var ee = order.Transferee;
+                    ee.Notify(notification);
+                }
+                else if (User.IsInRole(UserRoles.Consultant))
+                {
+                    var order = _unitOfWork.Orders.GetOrderById(dto.OrderId);
+                    var ee = order.Transferee;
+                    ee.Notify(notification);
+                }
+                else if (User.IsInRole(UserRoles.Transferee))
+                {                   
                     var order = _unitOfWork.Orders.GetOrderById(dto.OrderId);
                     int seId = (int)(order.Consultant.SeContactUid == null ? 0 : order.Consultant.SeContactUid);
                     Consultant consultant = _unitOfWork.Consultants.GetConsultantBySeContactUid(seId);

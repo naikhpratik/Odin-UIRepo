@@ -47,5 +47,23 @@ namespace Odin.IntegrationTests.Extensions
 
             controller.ControllerContext.RequestContext.Principal = principal;
         }
+
+        public static void MockCurrentUserAndRole(this ApiController controller, string userId, string username, string roleName)
+        {
+            var identity = new GenericIdentity(username);
+            identity.AddClaim(
+                new Claim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name",
+                    username));
+
+            identity.AddClaim(
+                new Claim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier",
+                    userId));
+
+            identity.AddClaim(new Claim(ClaimTypes.Role, roleName));           
+
+            var principal = new GenericPrincipal(identity, new string[] { "Transferee" });
+
+            controller.ControllerContext.RequestContext.Principal = principal;
+        }
     }
 }
