@@ -56,7 +56,7 @@
             string id = Model.Id;
             if (Model.Itinerary.ElementAt(i).ItemType.Contains("Service"))
             {
-                link = "OrdersPageController.loadPanel('details');";
+                link = "window.history.pushState('link', 'fromitinerary', '#details');OrdersPageController.loadPanel('details');";
                 if (!dt.HasValue)
                 {
                     continue;
@@ -68,7 +68,7 @@
             }
             else
             {
-                link = "OrdersPageController.loadPanel('housing');";
+                link = "window.history.pushState('link', 'fromitinerary', '#housing');OrdersPageController.loadPanel('housing');";
             }
 
             <li class="itineraryDay">
