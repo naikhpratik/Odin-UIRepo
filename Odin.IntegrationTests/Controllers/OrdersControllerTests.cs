@@ -162,6 +162,7 @@ namespace Odin.IntegrationTests.Controllers
                 };
                 managerManager.Create(newPm, "OdinOdin5$");
                 managerManager.AddToRole(newPm.Id, UserRoles.ProgramManager);
+                pmUser1 = managerManager.FindByName(_odinPmUserName1);
             }
 
             //Manager 2
@@ -179,6 +180,7 @@ namespace Odin.IntegrationTests.Controllers
                 };
                 managerManager.Create(newPm, "OdinOdin5$");
                 managerManager.AddToRole(newPm.Id, UserRoles.ProgramManager);
+                pmUser2 = managerManager.FindByName(_odinPmUserName2);
             }
             
             //putting Orders in DB
