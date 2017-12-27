@@ -58,7 +58,7 @@ namespace Odin.Data.Persistence
                     .Include(o => o.Services.Select(st => st.ServiceType))
                     .ToList();
             }
-            else if (UserRoles.ProgramManager == userRole)
+            else if (UserRoles.ProgramManager == userRole || UserRoles.GlobalSupplyChain == userRole)
             {
                 return _context.Orders
                     .Where(o => o.ProgramManagerId == userId)
