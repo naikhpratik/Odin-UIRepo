@@ -180,9 +180,9 @@ namespace Odin.Data.Persistence
             }
         }
 
-    
 
-        //public IEnumerable<UserNotification> GetUserNotification(string userId, string orderid)
+
+        //public IEnumerable<UserNotification> GetOrderNotification(string userId, string orderid)
         //{
         //    return _context.Orders
         //        .Where(o => o.Id == orderid && o.ConsultantId == userId).ToList<UserNotification>();

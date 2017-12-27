@@ -3,6 +3,7 @@ using Odin.ViewModels.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Odin.Data.Core.Models;
 
 namespace Odin.ViewModels.Orders.Index
 {
@@ -31,6 +32,9 @@ namespace Odin.ViewModels.Orders.Index
         public ManagerViewModel ProgramManager { get; set; }
 
         public IEnumerable<ServiceViewModel> Services { get; set; }
+
+        public ICollection<Notification> Notifications { get; private set; }
+
 
         public decimal CompletedWidth { get; set; }
         public decimal ScheduledWidth {  get; set; }
