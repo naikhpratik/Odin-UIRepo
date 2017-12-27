@@ -537,6 +537,10 @@
     <Compile Include="Persistence\Migrations\201712081617470_MergePropBotChanges.Designer.cs">
       <DependentUpon>201712081617470_MergePropBotChanges.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201712111851475_AddViewingDateToHomeFindingProperty.cs" />
+    <Compile Include="Persistence\Migrations\201712111851475_AddViewingDateToHomeFindingProperty.Designer.cs">
+      <DependentUpon>201712111851475_AddViewingDateToHomeFindingProperty.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\201712121642511_AddedLatLngToOrder.cs" />
     <Compile Include="Persistence\Migrations\201712121642511_AddedLatLngToOrder.Designer.cs">
       <DependentUpon>201712121642511_AddedLatLngToOrder.cs</DependentUpon>
@@ -564,6 +568,10 @@
     <Compile Include="Persistence\Migrations\201712212033589_AddSeCustNumbToOrder.cs" />
     <Compile Include="Persistence\Migrations\201712212033589_AddSeCustNumbToOrder.Designer.cs">
       <DependentUpon>201712212033589_AddSeCustNumbToOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201712271541010_AddedViewingDateNeedsEmptyMigration.cs" />
+    <Compile Include="Persistence\Migrations\201712271541010_AddedViewingDateNeedsEmptyMigration.Designer.cs">
+      <DependentUpon>201712271541010_AddedViewingDateNeedsEmptyMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\NumberOfBathroomsTypesRepository.cs" />
@@ -822,6 +830,9 @@
     <EmbeddedResource Include="Persistence\Migrations\201712081617470_MergePropBotChanges.resx">
       <DependentUpon>201712081617470_MergePropBotChanges.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201712111851475_AddViewingDateToHomeFindingProperty.resx">
+      <DependentUpon>201712111851475_AddViewingDateToHomeFindingProperty.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201712121642511_AddedLatLngToOrder.resx">
       <DependentUpon>201712121642511_AddedLatLngToOrder.cs</DependentUpon>
     </EmbeddedResource>
@@ -842,6 +853,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201712212033589_AddSeCustNumbToOrder.resx">
       <DependentUpon>201712212033589_AddSeCustNumbToOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201712271541010_AddedViewingDateNeedsEmptyMigration.resx">
+      <DependentUpon>201712271541010_AddedViewingDateNeedsEmptyMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

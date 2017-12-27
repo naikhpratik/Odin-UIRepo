@@ -24,6 +24,7 @@ namespace Odin.Tests.Controllers.Api
         private Odin.Controllers.Api.MessageController _controller;
         private Mock<IOrdersRepository> _mockRepository;
         private Mock<IConsultantsRepository> _mockConsultantsRepository;
+        private Mock<ITransfereesRepository> _mockTransfereesRepository;
         private Mock<IMessagesRepository> _mockMessageRepository;
         private Mock<IHomeFindingPropertyRepository> _mockHFPRepository;
         private Mock<IUserNotificationRepository> _mockNotificationRepository;
@@ -37,6 +38,7 @@ namespace Odin.Tests.Controllers.Api
         {
             _mockRepository = new Mock<IOrdersRepository>();
             _mockConsultantsRepository = new Mock<IConsultantsRepository>();
+            _mockTransfereesRepository = new Mock<ITransfereesRepository>();
             _mockMessageRepository = new Mock<IMessagesRepository>();
             _mockMapper = new Mock<IMapper>();
             _mockHFPRepository = new Mock<IHomeFindingPropertyRepository>();
@@ -45,6 +47,7 @@ namespace Odin.Tests.Controllers.Api
             var mockUnitOfWork = new Mock<IUnitOfWork>();
             mockUnitOfWork.SetupGet(u => u.Orders).Returns(_mockRepository.Object);
             mockUnitOfWork.SetupGet(c => c.Consultants).Returns(_mockConsultantsRepository.Object);
+            mockUnitOfWork.SetupGet(t => t.Transferees).Returns(_mockTransfereesRepository.Object);
             mockUnitOfWork.SetupGet(p => p.HomeFindingProperties).Returns(_mockHFPRepository.Object);
             mockUnitOfWork.SetupGet(m => m.Messages).Returns(_mockMessageRepository.Object);
             mockUnitOfWork.SetupGet(n => n.UserNotifications).Returns(_mockNotificationRepository.Object);
@@ -73,7 +76,7 @@ namespace Odin.Tests.Controllers.Api
             mess.IsRead.Should().Be(true);    
         }
         [TestMethod]
-        public void InsertMessage_ValidProperty_ShouldAddMessage_No_Notification_If_Not_EE()
+        public void InsertMessage_ValidProperty_ShouldAddMessage_No_Notification_If_Not_EE_MAN_CON()
         {
             _controller.MockCurrentUser(_userId, _userName);
             var orderId = "1";
@@ -83,23 +86,24 @@ namespace Odin.Tests.Controllers.Api
             var propId = "1";
             HomeFindingProperty prop = new HomeFindingProperty() { Id = propId };
             _mockHFPRepository.Setup(r => r.GetHomeFindingPropertyById(propId)).Returns(prop);
-            Message mess = new Message() { HomeFindingPropertyId = propId };
-            prop.Messages.Add(mess);
-            _mockMessageRepository.Setup(r => r.GetMessagesByPropertyId(propId)).Returns(prop.Messages);
+            Message mess = new Message() { HomeFindingPropertyId = propId };            
             MessageDto dto = new MessageDto() { HomeFindingPropertyId = propId, OrderId = orderId };
-            var rl = _controller.User.IsInRole("Transferee");
-            IEnumerable<UserNotification> userNotifications = new List<UserNotification>();
-            _mockNotificationRepository.Setup(r => r.GetUserNotification(_userId)).Returns(userNotifications);
+            
             var result = _controller.UpsertPropertyMessage(dto);
-            prop.Messages.Count.Should().Be(2);
+            var rl = _controller.User.IsInRole(UserRoles.Transferee);
             rl.Should().BeFalse();
-            userNotifications.Should().BeEmpty();
+            var rlC = _controller.User.IsInRole(UserRoles.Consultant);
+            rlC.Should().BeFalse();
+            var rlM = _controller.User.IsInRole(UserRoles.ProgramManager);
+            rlM.Should().BeFalse();
+            consultant.UserNotifications.Count().Should().Be(0);
+            prop.Messages.Count.Should().Be(1);           
         }
 
         [TestMethod]
-        public void InsertMessage_ValidProperty_ShouldAddMessageAnd_Notification_If_Transferee()
+        public void InsertMessage_ValidProperty_ShouldAddMessageAnd_Consultant_Notification_If_Transferee()
         {
-            _controller.MockCurrentUserAndRole(_userId, _userName, "Transferee");
+            _controller.MockCurrentUserAndRole(_userId, _userName, UserRoles.Transferee);
 
             var orderId = "1";
             Order order = new Order() { Id = orderId };
@@ -111,18 +115,83 @@ namespace Odin.Tests.Controllers.Api
             var propId = "1";
             HomeFindingProperty prop = new HomeFindingProperty() { Id = propId };
             _mockHFPRepository.Setup(r => r.GetHomeFindingPropertyById(propId)).Returns(prop);
-            Message mess = new Message() { HomeFindingPropertyId = propId };
-            prop.Messages.Add(mess);
-            _mockMessageRepository.Setup(r => r.GetMessagesByPropertyId(propId)).Returns(prop.Messages);
+            Message mess = new Message() { HomeFindingPropertyId = propId };            
             MessageDto dto = new MessageDto(){ HomeFindingPropertyId = propId, OrderId = orderId };            
-            IEnumerable<UserNotification> userNotifications = new List<UserNotification>();
-            _mockNotificationRepository.Setup(r => r.GetUserNotification(_userId)).Returns(userNotifications);
-            var result = _controller.UpsertPropertyMessage(dto);
-            prop.Messages.Count.Should().Be(2);
 
-            var rl = _controller.User.IsInRole("Transferee");
+            var result = _controller.UpsertPropertyMessage(dto);
+            prop.Messages.Count.Should().Be(1);
+
+            var rl = _controller.User.IsInRole(UserRoles.Transferee);
             rl.Should().BeTrue();
+
             consultant.UserNotifications.Count().Should().Be(1);
+
+            result.Should().BeOfType<System.Web.Http.Results.OkResult>();
+        }
+
+        [TestMethod]
+        public void InsertMessage_ValidProperty_ShouldAddMessageAnd_2Notifications_If_Consultant()
+        {
+            _controller.MockCurrentUserAndRole("5", _userName, UserRoles.Consultant);
+
+            var orderId = "1";
+            Order order = new Order() { Id = orderId };
+            var consultant = new Consultant() { SeContactUid = 1 };
+            var tEmail = "odinTransferee@dwellworks.com";
+            var transferee = new Transferee() { Id = "1", Email = tEmail };
+            _mockConsultantsRepository.Setup(c => c.GetConsultantBySeContactUid(1)).Returns(consultant);
+            _mockTransfereesRepository.Setup(t => t.GetTransfereeByEmail(tEmail)).Returns(transferee);
+            _mockRepository.Setup(o => o.GetOrderById(orderId)).Returns(order);
+            order.Consultant = consultant;
+            order.Transferee = transferee;
+            var propId = "1";
+            HomeFindingProperty prop = new HomeFindingProperty() { Id = propId };
+            _mockHFPRepository.Setup(r => r.GetHomeFindingPropertyById(propId)).Returns(prop);
+            Message mess = new Message() { HomeFindingPropertyId = propId };
+            MessageDto dto = new MessageDto() { HomeFindingPropertyId = propId, OrderId = orderId };
+
+            var result = _controller.UpsertPropertyMessage(dto);
+            prop.Messages.Count.Should().Be(1);
+
+            var rl = _controller.User.IsInRole(UserRoles.Consultant);
+            rl.Should().BeTrue();
+
+            transferee.UserNotifications.Count().Should().Be(1);
+
+            result.Should().BeOfType<System.Web.Http.Results.OkResult>();
+        }
+
+        [TestMethod]
+        public void InsertMessage_ValidProperty_ShouldAddMessageAnd_2Notifications_If_Manager()
+        {
+            _controller.MockCurrentUserAndRole("9", _userName, UserRoles.ProgramManager);
+
+            var orderId = "1";
+            Order order = new Order() { Id = orderId };
+            var consultant = new Consultant() { SeContactUid = 1 };
+            var tEmail = "odinTransferee@dwellworks.com";
+            var transferee = new Transferee() { Id = "1", Email= tEmail};
+            _mockConsultantsRepository.Setup(c => c.GetConsultantBySeContactUid(1)).Returns(consultant);
+            _mockTransfereesRepository.Setup(t => t.GetTransfereeByEmail(tEmail)).Returns(transferee);
+            _mockRepository.Setup(o => o.GetOrderById(orderId)).Returns(order);
+            order.Consultant = consultant;
+            order.Transferee = transferee;
+            var propId = "1";
+            HomeFindingProperty prop = new HomeFindingProperty() { Id = propId };
+            _mockHFPRepository.Setup(r => r.GetHomeFindingPropertyById(propId)).Returns(prop);
+            Message mess = new Message() { HomeFindingPropertyId = propId };
+            MessageDto dto = new MessageDto() { HomeFindingPropertyId = propId, OrderId = orderId };
+
+            var result = _controller.UpsertPropertyMessage(dto);
+            prop.Messages.Count.Should().Be(1);
+
+            var rl = _controller.User.IsInRole(UserRoles.ProgramManager);
+            rl.Should().BeTrue();
+
+            consultant.UserNotifications.Count().Should().Be(1);
+
+            transferee.UserNotifications.Count().Should().Be(1);
+
             result.Should().BeOfType<System.Web.Http.Results.OkResult>();
         }
 

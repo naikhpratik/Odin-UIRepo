@@ -1,15 +1,18 @@
 ﻿using AutoMapper;
+using FluentAssertions;
+using Moq;
 using NUnit.Framework;
 using Odin.Controllers;
 using Odin.Data.Core.Models;
+using Odin.Data.Helpers;
 using Odin.Data.Persistence;
 using Odin.Helpers;
-using System.Linq;
-using Odin.IntegrationTests.TestAttributes;
-using Moq;
-using Odin.Data.Helpers;
-using System;
 using Odin.IntegrationTests.Extensions;
+using Odin.IntegrationTests.TestAttributes;
+using Odin.ViewModels.Orders.Transferee;
+using System;
+using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 using Odin.ViewModels.Orders.Transferee;
 using FluentAssertions;
@@ -159,6 +162,7 @@ namespace Odin.IntegrationTests.Controllers
                 };
                 managerManager.Create(newPm, "OdinOdin5$");
                 managerManager.AddToRole(newPm.Id, UserRoles.ProgramManager);
+                pmUser1 = managerManager.FindByName(_odinPmUserName1);
             }
 
             //Manager 2
@@ -176,6 +180,7 @@ namespace Odin.IntegrationTests.Controllers
                 };
                 managerManager.Create(newPm, "OdinOdin5$");
                 managerManager.AddToRole(newPm.Id, UserRoles.ProgramManager);
+                pmUser2 = managerManager.FindByName(_odinPmUserName2);
             }
             
             //putting Orders in DB
@@ -299,6 +304,36 @@ namespace Odin.IntegrationTests.Controllers
             var result = _controller.PropertiesPartialPDF(order.Id, "ViewingsOnly");
             Assert.IsTrue(result.GetType().ToString().Contains("Rotativa.ViewAsPdf"));
         }
+
+        [Test, Isolated]
+        public void PropertiesTransferee_TwoProperties_ViewingDate_Is_Set_WithGivenOptionExists_Count_ShouldBe2()
+        {
+            //arrange
+
+            var order = new Order() { SeCustNumb = "867-5309", Transferee = _transferee, Consultant = _dsc, ProgramManager = _pm, TrackingId = "123Test" };
+            order.HomeFinding = new HomeFinding();
+            _controller.MockCurrentUserAndRole(_transferee.Id, _transferee.UserName,UserRoles.Transferee);
+            _context.Orders.Add(order);
+            _context.SaveChanges();
+
+            //act
+            HomeFindingProperty p1 = new HomeFindingProperty();
+            p1.Deleted = false;
+            p1.Property = new Property();
+            p1.ViewingDate = DateTime.Now.AddDays(10);
+            order.HomeFinding.HomeFindingProperties.Add(p1);
+
+            HomeFindingProperty p2 = new HomeFindingProperty();
+            p2.Deleted = false;
+            p2.Property = new Property();
+            p2.ViewingDate = DateTime.Now.AddDays(20);
+            order.HomeFinding.HomeFindingProperties.Add(p2);
+
+            //assert            
+            var result = _controller.PropertiesPartialPDF(order.Id, "ViewingsOnly");
+            Assert.IsTrue(result.GetType().ToString().Contains("Rotativa.ViewAsPdf"));
+        }
+
         [Test, Isolated]
         public void Properties_TwoProperties_ViewingDate_Not_Set_WithGivenOptionExists_Count_ShouldBe2()
         {
@@ -325,5 +360,62 @@ namespace Odin.IntegrationTests.Controllers
             var result = _controller.PropertiesPartialPDF(order.Id, "ViewingsOnly");
             result.Should().BeOfType<HttpNotFoundResult>();
         }
-    }
+
+        [Test, Isolated]
+        public void PropertiesTransferee_TwoProperties_ViewingDate_Not_Set_WithGivenOptionExists_Count_ShouldBe2()
+        {
+            //arrange
+
+            var order = new Order() { SeCustNumb = "867-5309", Transferee = _transferee, Consultant = _dsc, ProgramManager = _pm, TrackingId = "123Test" };
+            order.HomeFinding = new HomeFinding();
+            _controller.MockCurrentUserAndRole(_transferee.Id, _transferee.UserName,UserRoles.Transferee);
+            _context.Orders.Add(order);
+            _context.SaveChanges();
+
+            //act
+            HomeFindingProperty p1 = new HomeFindingProperty();
+            p1.Deleted = false;
+            p1.Property = new Property();
+            order.HomeFinding.HomeFindingProperties.Add(p1);
+
+            HomeFindingProperty p2 = new HomeFindingProperty();
+            p2.Deleted = false;
+            p2.Property = new Property();
+            order.HomeFinding.HomeFindingProperties.Add(p2);
+
+            //assert            
+            var result = _controller.PropertiesPartialPDF(order.Id, "ViewingsOnly");
+            result.Should().BeOfType<HttpNotFoundResult>();
+        }
+
+        [Test, Isolated]
+        public void Dashboard_NoOrder_ShouldBeNotFound()
+        {
+            //arrange
+            _controller.MockCurrentUserAndRole(_transferee.Id, _transferee.UserName, UserRoles.Transferee);
+           
+
+            //assert            
+            var result = _controller.DashboardPartial("Not an order!");
+            result.Should().BeOfType<HttpStatusCodeResult>();
+
+            var codeResult = result as HttpStatusCodeResult;
+            codeResult.StatusCode.Should().Be((int) HttpStatusCode.NotFound);
+        }
+
+        [Test, Isolated]
+        public void Dashboard_Order_ShouldBeFound()
+        {
+            var order = new Order() { SeCustNumb = "867-5309", Transferee = _transferee, Consultant = _dsc, ProgramManager = _pm, TrackingId = "123Test", DestinationCity = "integration city"};
+            _context.Orders.Add(order);
+            _context.SaveChanges();
+
+            //arrange
+            _controller.MockCurrentUserAndRole(_transferee.Id, _transferee.UserName, UserRoles.Transferee);
+
+            //assert            
+            var result = _controller.DashboardPartial(order.Id);
+            result.Should().BeOfType<PartialViewResult>();
+        }
+    }   
 }
