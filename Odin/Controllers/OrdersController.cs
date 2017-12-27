@@ -4,8 +4,11 @@ using Odin.Data.Core;
 using Odin.Data.Core.Models;
 using Odin.Helpers;
 using Odin.Interfaces;
+using Odin.ViewModels.Orders.Index;
 using Odin.ViewModels.Orders.Transferee;
 using Odin.ViewModels.Shared;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -18,6 +21,8 @@ namespace Odin.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        public static string CurrentManager;
+        public static string userId;
 
         public OrdersController(IUnitOfWork unitOfWork, IMapper mapper, IAccountHelper accountHelper)
         {
@@ -25,16 +30,69 @@ namespace Odin.Controllers
             _mapper = mapper;
         }
 
-        // GET: Orders
-        public ViewResult Index()
+        // GET: Orders/id
+        public ViewResult Index(string id)
         {
-            var userId = User.Identity.GetUserId();
+            //id = selected manager's id 
+            //var userId = "";
+            IEnumerable<Order> orders;
 
-            var orders = _unitOfWork.Orders.GetOrdersFor(userId);
+            if (id == null)
+            {
+                userId = User.Identity.GetUserId();
+                orders = _unitOfWork.Orders.GetOrdersFor(userId, getUserRole());
+                CurrentManager = null;
+            }
+            else
+            {
+                //TempData["curr_mngr"] = id;
+                CurrentManager = id;
+                userId = id;
+                orders = _unitOfWork.Orders.GetOrdersFor(userId, UserRoles.ProgramManager);
+            }
+            ViewBag.userRole = _unitOfWork.Users.GetRoleByUserId(userId);
+            var managers = _unitOfWork.Managers.GetManagers();
+            var orderVms = _mapper.Map<IEnumerable<Order>, IEnumerable<OrdersIndexViewModel>>(orders);
 
-            //var orderVms = _mapper.Map<IEnumerable<Order>, IEnumerable<OrdersIndexViewModel>>(orders);
+            if (managers != null)
+            {
+                var result = ((IEnumerable)managers).Cast<Manager>().ToList();
+                var managerVms = _mapper.Map<IEnumerable<Manager>, IEnumerable<ManagerViewModel>>(result);
+                OrderIndexManagerViewModel ordermanagervms = new OrderIndexManagerViewModel(orderVms, managerVms);
+                return View(ordermanagervms);
+            }
+            else
+            {
+                return View(orderVms);
+            }
+        }
 
-            return View(orders);
+        /// <summary>
+        /// We Can add this function to IUserRepository 
+        /// </summary>
+        /// <returns></returns>
+        public string getUserRole()
+        {
+            if (User.IsInRole(UserRoles.Admin))
+            {
+                return UserRoles.Admin;
+            }
+            else if (User.IsInRole(UserRoles.Consultant))
+            {
+                return UserRoles.Consultant;
+            }
+            if (User.IsInRole(UserRoles.GlobalSupplyChain))
+            {
+                return UserRoles.GlobalSupplyChain;
+            }
+            else if (User.IsInRole(UserRoles.ProgramManager))
+            {
+                return UserRoles.ProgramManager;
+            }
+            else
+            {
+                return UserRoles.Transferee;
+            }
         }
 
         // GET Partials
@@ -43,9 +101,16 @@ namespace Odin.Controllers
             var userId = User.Identity.GetUserId();
             var order = _unitOfWork.Orders.GetOrderFor(userId, id, UserRoles.Transferee);
 
-            //HousingViewModel viewModel = new HousingViewModel(order, _mapper);
+            if (order == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+            }
 
-            return PartialView("~/views/orders/partials/_Dashboard.cshtml");
+            var dashVM = _mapper.Map<Order, DashboardViewModel>(order);
+            ItineraryHelper helper = new ItineraryHelper(_unitOfWork, _mapper);
+            dashVM.Itinerary = helper.GetItinerary(id);
+
+            return PartialView("~/views/orders/partials/_Dashboard.cshtml", dashVM);
         }
 
         // GET Partials
@@ -61,12 +126,16 @@ namespace Odin.Controllers
 
         public ActionResult HousingPartial(string id)
         {
-            var userId = User.Identity.GetUserId();
+            //var userId = User.Identity.GetUserId();
 
             Order order = null;
             if (User.IsInRole(UserRoles.Transferee))
             {
                 order = _unitOfWork.Orders.GetOrderFor(userId, id, UserRoles.Transferee);
+            }
+            else if (User.IsInRole(UserRoles.ProgramManager))
+            {
+                order = _unitOfWork.Orders.GetOrderFor(userId, id, UserRoles.ProgramManager);
             }
             else
             {
@@ -74,8 +143,10 @@ namespace Odin.Controllers
             }
 
             ViewBag.CurrentUser = userId;
+
             HousingViewModel viewModel = new HousingViewModel(order, _mapper, userId, false);
             return PartialView("~/views/orders/partials/_Housing.cshtml", viewModel);
+
         }
         public ActionResult PropertiesPartial(string id)
         {
@@ -89,7 +160,7 @@ namespace Odin.Controllers
             {
                 order = _unitOfWork.Orders.GetOrderFor(userId, id);
             }
-            HousingViewModel viewModel = new HousingViewModel(order, _mapper);            
+            HousingViewModel viewModel = new HousingViewModel(order, _mapper);
             return PartialView("~/views/orders/partials/_HousingProperties.cshtml", viewModel.Properties);
         }
         public ActionResult PropertiesPartialPDF(string id, string listChoice)
@@ -108,13 +179,13 @@ namespace Odin.Controllers
             if (viewModel.Properties.Count() == 0)
             {
                 return new HttpNotFoundResult();
-            }           
+            }
             ViewBag.isPDF = true;
             return new Rotativa.ViewAsPdf("Partials/_HousingProperties", viewModel.Properties)
             {
                 FileName = "Housing.pdf",
                 PageMargins = new Rotativa.Options.Margins(0, 0, 0, 0)
-            };           
+            };
         }
         public ActionResult DetailsPartial(string id)
         {
@@ -124,7 +195,7 @@ namespace Odin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.NotFound, "Not found");
             }
-            if (order.ConsultantId != userId)
+            if (order.ConsultantId != userId && order.ProgramManagerId != userId && !User.IsInRole(UserRoles.ProgramManager))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.Unauthorized, "Unauthorized Order");
             }
@@ -156,7 +227,7 @@ namespace Odin.Controllers
 
             if (order == null)
             {
-                
+
                 //TempData.Add("notfound", 1);
                 return PartialView("~/views/orders/partials/_History.cshtml", null);
             }
@@ -191,12 +262,23 @@ namespace Odin.Controllers
         }
         public ActionResult Transferee(string id)
         {
+            //id is selected order id
             var userId = User.Identity.GetUserId();
-           
+            //setting current managers id to navigate through his orders
+            if (CurrentManager != null && userId != CurrentManager)
+            {
+                userId = CurrentManager;
+            }
+
+            var userRole = getUserRole();
             Order order = null;
             if (User.IsInRole(UserRoles.Transferee))
             {
-               order = _unitOfWork.Orders.GetOrderFor(userId, id, UserRoles.Transferee);
+                order = _unitOfWork.Orders.GetOrderFor(userId, id, UserRoles.Transferee);
+            }
+            else if (User.IsInRole(UserRoles.ProgramManager))
+            {
+                order = _unitOfWork.Orders.GetOrderFor(userId, id, UserRoles.ProgramManager);
             }
             else
             {
@@ -210,8 +292,8 @@ namespace Odin.Controllers
             ViewBag.Id = id;
             OrdersTransfereeViewModel viewModel = GetViewModelForOrderDetails(id);
             return View(viewModel);
-        }       
-        
+        }
+
         private OrdersTransfereeViewModel GetViewModelForOrderDetails(string id)
         {
             var userId = User.Identity.GetUserId();

@@ -12,7 +12,7 @@ namespace Odin.Controllers
     public class RoleController : Controller
     {
         private IUnitOfWork _unitOfWork;
-        
+
         // GET: Role
         public RoleController(IUnitOfWork unitOfWork)
         {
@@ -26,13 +26,18 @@ namespace Odin.Controllers
             {
                 return RedirectToAction("Index", "Orders");
             }
-            else if(User.IsInRole(UserRoles.Transferee))
+            else if (User.IsInRole(UserRoles.Transferee))
             {
                 IEnumerable<Order> orders = _unitOfWork.Orders.GetOrdersFor(User.Identity.GetUserId(), UserRoles.Transferee);
                 if (orders.Count() == 1)
                 {
-                    return RedirectToAction("Transferee", "Orders", new {id = orders.First().Id});
+                    return RedirectToAction("Transferee", "Orders", new { id = orders.First().Id });
                 }
+            }
+            else if (User.IsInRole(UserRoles.ProgramManager))
+            {
+                IEnumerable<Order> orders = _unitOfWork.Orders.GetOrdersFor(User.Identity.GetUserId(), UserRoles.ProgramManager);
+                return RedirectToAction("Index", "Orders");
             }
 
             return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);

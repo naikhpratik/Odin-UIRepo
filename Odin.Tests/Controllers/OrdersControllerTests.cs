@@ -3,18 +3,17 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Odin.Controllers;
-
 using Odin.Data.Core;
 using Odin.Data.Core.Models;
 using Odin.Data.Core.Repositories;
 using Odin.Interfaces;
 using Odin.Tests.Extensions;
-using System.Net;
-using System.Web.Mvc;
 using Odin.ViewModels.Orders.Transferee;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Web.Mvc;
 
 namespace Odin.Tests.Controllers
 {
@@ -36,6 +35,9 @@ namespace Odin.Tests.Controllers
         private Mock<ITransfereesRepository> _mockTransfereesRepository;
         private Mock<IHomeFindingPropertyRepository> _mockHFPropertyRepository;
 
+        private Mock<IUsersRepository> _mockUserRepository;
+        private Mock<IManagersRepository> _mockManagerRepository; 
+
         private Mock<IMapper> _mockMapper;
         private IMapper mapper;
 
@@ -56,6 +58,9 @@ namespace Odin.Tests.Controllers
             _mockHFPropertyRepository = new Mock<IHomeFindingPropertyRepository>();
             _mockMapper = new Mock<IMapper>();
 
+            _mockUserRepository = new Mock<IUsersRepository>();
+            _mockManagerRepository = new Mock<IManagersRepository>();
+
             var config = new MapperConfiguration(c => c.AddProfile(new MappingProfile()));
             mapper = config.CreateMapper();
 
@@ -73,6 +78,12 @@ namespace Odin.Tests.Controllers
             mockUnitOfWork.SetupGet(u => u.Transferees).Returns(_mockTransfereesRepository.Object);
             mockUnitOfWork.SetupGet(u => u.HomeFindingProperties).Returns(_mockHFPropertyRepository.Object);
 
+            mockUnitOfWork.SetupGet(u => u.Users).Returns(_mockUserRepository.Object);
+            mockUnitOfWork.SetupGet(u => u.Managers).Returns(_mockManagerRepository.Object);
+
+
+            List<Manager> manager = new List<Manager>();
+
             var mockEmailHelper = new Mock<IEmailHelper>();
             var mockAccountHelper = new Mock<IAccountHelper>();
             _controller = new OrdersController(mockUnitOfWork.Object, _mockMapper.Object, mockAccountHelper.Object);
@@ -81,12 +92,12 @@ namespace Odin.Tests.Controllers
 
 
         }
-
+        //we have to test this test
         [TestMethod]
         public void Index_WhenCalled_ReturnsOk()
         {
-            var result = _controller.Index() as ViewResult;
-
+            _userId = null;
+            var result = _controller.Index(_userId) as ViewResult;
             result.Should().NotBeNull();
         }
 
@@ -242,6 +253,45 @@ namespace Odin.Tests.Controllers
             HousingViewModel viewModel = new HousingViewModel(order, mapper, "ViewingsOnly");
             //var result = _controller.PropertiesPartialPDF(orderId, "ViewingsOnly");
             viewModel.Properties.Count().Should().Be(1);
+        }
+
+        [TestMethod]
+        public void DashboardViewModel_SelectedServices_ShouldHaveServices()
+        {
+            var vm = new DashboardViewModel();
+
+            var service = new Service()
+            {
+                ServiceType = new ServiceType(){Category = ServiceCategory.AreaOrientation,ActionLabel = "Area Orientation"},
+                Selected = true
+            };
+
+            var otherService = new Service()
+            {
+                ServiceType = new ServiceType() { Category = ServiceCategory.AreaOrientation, ActionLabel = "Area Orientation 2" },
+                Selected = true
+            };
+
+            var compService = new Service()
+            {
+                ServiceType = new ServiceType() { Category = ServiceCategory.SettlingIn, ActionLabel = "Settling in" },
+                Selected = true,
+                CompletedDate = DateTime.Now
+            };
+
+            var notService = new Service()
+            {
+                ServiceType = new ServiceType() { Category = ServiceCategory.SettlingIn, ActionLabel = "Settling in" },
+                Selected = false,
+                CompletedDate = DateTime.Now
+            };
+
+            vm.Services = new List<Service>(){service,otherService,compService,notService};
+
+            vm.CompletedServiceCount.Should().Be(1);
+            vm.TotalServiceCount.Should().Be(3);
+            vm.PercentComplete.Should().Be(33);
+            vm.ServiceCategories.Count().Should().Be(2);
         }
     }
 }

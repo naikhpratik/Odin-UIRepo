@@ -22,5 +22,32 @@ namespace Odin.Helpers
 
             return cats;
         }
+
+        public static string ToServiceCategoryString(ServiceCategory cat)
+        {
+            switch (cat)
+            {
+                    case ServiceCategory.InitialConsultation:
+                        return "Initial Consultation";
+                    case ServiceCategory.WelcomePacket:
+                        return "Welcome Packet";
+                    case ServiceCategory.SettlingIn:
+                        return "Settling In";
+                    case ServiceCategory.AreaOrientation:
+                        return "Area Orientation";
+                    case ServiceCategory.SchoolFinding:
+                        return "School Finding";
+                    case ServiceCategory.AccompaniedHomeFinding:
+                        return "Accompanied Home Finding";
+                    case ServiceCategory.UnAccompaniedHomeFinding:
+                        return "Unaccompanied Home Finding";
+                    case ServiceCategory.LeaseRenewal:
+                        return "Lease Renewal";
+                    case ServiceCategory.Departure:
+                        return "Departure";
+                    default:
+                        return String.Empty;
+            }
+        }
     }
 }

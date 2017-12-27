@@ -3,6 +3,7 @@ using Odin.Data.Core.Repositories;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using Odin.Data.Helpers;
 using Odin.Data.Extensions;
 
 namespace Odin.Data.Persistence
@@ -51,6 +52,16 @@ namespace Odin.Data.Persistence
                     .Where(o => o.ConsultantId == userId
                                 && o.SeCustStatus != OrderStatus.Cancelled
                                 && o.SeCustStatus != OrderStatus.Closed)
+                    .Include(o => o.Transferee)
+                    .Include(o => o.ProgramManager)
+                    .Include(o => o.Consultant)
+                    .Include(o => o.Services.Select(st => st.ServiceType))
+                    .ToList();
+            }
+            else if (UserRoles.ProgramManager == userRole)
+            {
+                return _context.Orders
+                    .Where(o => o.ProgramManagerId == userId)
                     .Include(o => o.Transferee)
                     .Include(o => o.ProgramManager)
                     .Include(o => o.Consultant)
@@ -131,7 +142,25 @@ namespace Odin.Data.Persistence
                 .Include(o => o.Notifications)
                 .SingleOrDefault<Order>();
             }
-            else
+            else if(userRole == UserRoles.ProgramManager) // for Program Manager
+            {
+                return _context.Orders
+                .Where(o => o.Id == orderId && o.ProgramManagerId == userId)
+                .Include(o => o.Services)
+                .Include(o => o.HomeFinding)
+                .Include(o => o.Services.Select(s => s.ServiceType))
+                .Include(o => o.HomeFinding)
+                .Include(o => o.HomeFinding.NumberOfBathrooms)
+                .Include(o => o.HomeFinding.HousingType)
+                .Include(o => o.HomeFinding.AreaType)
+                .Include(o => o.HomeFinding.TransportationType)
+                .Include(o => o.HomeFinding.HomeFindingProperties.Select(hfp => hfp.Property.Photos))
+                .Include(o => o.DepositType)
+                .Include(o => o.BrokerFeeType)
+                .Include(o => o.Notifications)
+                .SingleOrDefault<Order>();
+            }
+            else //for Consultant
             {
                 return _context.Orders
                 .Where(o => o.Id == orderId && o.ConsultantId == userId)
@@ -150,6 +179,8 @@ namespace Odin.Data.Persistence
                 .SingleOrDefault<Order>();
             }
         }
+
+    
 
         //public IEnumerable<UserNotification> GetUserNotification(string userId, string orderid)
         //{

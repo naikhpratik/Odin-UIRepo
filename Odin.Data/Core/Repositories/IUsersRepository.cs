@@ -8,5 +8,6 @@ namespace Odin.Data.Core.Repositories
         IEnumerable<ApplicationUser> GetUsersWithRole(string roleName);
         ApplicationUser GetUserByEmail(string email);
         ApplicationUser GetUserByUserName(string userName);
+        string GetRoleByUserId(string userId);
     }
 }
