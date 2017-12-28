@@ -1,4 +1,5 @@
 ﻿using Ganss.XSS;
+using Microsoft.AspNet.Identity;
 using Odin.ViewModels.Shared;
 using System;
 using System.Collections.Generic;
@@ -131,12 +132,12 @@ namespace Odin.ViewModels.Orders.Transferee
         public DateTime? ViewingDate { get; set; }
 
         public ICollection<Odin.Data.Core.Models.Message> Messages { get; set; }
-        public string CurrUserId { get; set; }
+        public System.Security.Principal.IPrincipal CurrUser { get; set; }
         public int ReadCount
         {
             get
             {
-                return Messages == null? 0 : Messages.Where(r => r.IsRead == false && r.AuthorId != CurrUserId).Count();                
+                return Messages == null? 0 : Messages.Where(r => r.IsRead == false && r.AuthorId != CurrUser.Identity.GetUserId() && CurrUser.IsInRole("ProgramManager") == false).Count();                
             }
         }
     }

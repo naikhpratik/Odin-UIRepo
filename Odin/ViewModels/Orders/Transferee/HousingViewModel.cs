@@ -52,7 +52,7 @@ namespace Odin.ViewModels.Orders.Transferee
 
             this.Properties = propertyViewModels;
         }
-        public HousingViewModel(Order order, IMapper mapper, string uId, bool dummy) : this()
+        public HousingViewModel(Order order, IMapper mapper, System.Security.Principal.IPrincipal user) : this()
         {
             mapper.Map<HomeFinding, HousingViewModel>(order.HomeFinding, this);
             mapper.Map<Order, HousingViewModel>(order, this);
@@ -62,7 +62,7 @@ namespace Odin.ViewModels.Orders.Transferee
             propertyViewModels = mapper.Map<IEnumerable<HomeFindingProperty>, IEnumerable<HousingPropertyViewModel>>(homeFindingProperties);
             foreach (var prop in propertyViewModels)
             {
-                prop.CurrUserId = uId;
+                prop.CurrUser = user;
             }
             this.Properties = propertyViewModels;
         }
