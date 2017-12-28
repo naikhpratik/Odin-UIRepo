@@ -25,6 +25,11 @@
         $.post(url).done(success).fail(fail);
     }
 
+    var inviteTransferee = function(orderId, success, fail) {
+        var url = route + "/invite";
+        $.post(url).done(success).fail(fail);
+    }
+
     return{
         updateIntakeBlock: updateIntakeBlock,
         insertIntakeEntity: insertIntakeEntity,
@@ -76,8 +81,10 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
         intakeBlocks.on("click", ".intake-save", saveBlock);
         intakeBlocks.on("change", "[type=checkbox]", saveChecked);
 
-        
-        
+        var btnInviteTransferee = $("#btnInviteTransferee");
+        btnInviteTransferee.on("click", function(e) {
+            toast("btn invite clicked", "success");
+        });
     };
 
     //Event Callbacks
