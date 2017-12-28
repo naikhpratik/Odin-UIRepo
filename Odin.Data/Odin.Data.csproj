@@ -153,6 +153,7 @@
     <Compile Include="Core\Dtos\TransfereeIndexDto.cs" />
     <Compile Include="Core\Dtos\UserDto.cs" />
     <Compile Include="Core\Models\ApplicationUser.cs" />
+    <Compile Include="Core\Models\InviteStatus.cs" />
     <Compile Include="Core\Models\Message.cs" />
     <Compile Include="Core\Models\Appointment.cs" />
     <Compile Include="Core\Models\AreaType.cs" />
@@ -573,6 +574,10 @@
     <Compile Include="Persistence\Migrations\201712271541010_AddedViewingDateNeedsEmptyMigration.Designer.cs">
       <DependentUpon>201712271541010_AddedViewingDateNeedsEmptyMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201712281602426_AddInviteStatusToTransferee.cs" />
+    <Compile Include="Persistence\Migrations\201712281602426_AddInviteStatusToTransferee.Designer.cs">
+      <DependentUpon>201712281602426_AddInviteStatusToTransferee.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\NumberOfBathroomsTypesRepository.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
@@ -856,6 +861,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201712271541010_AddedViewingDateNeedsEmptyMigration.resx">
       <DependentUpon>201712271541010_AddedViewingDateNeedsEmptyMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201712281602426_AddInviteStatusToTransferee.resx">
+      <DependentUpon>201712281602426_AddInviteStatusToTransferee.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
