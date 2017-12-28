@@ -8,6 +8,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Security.Principal;
+using Odin.Data.Core.Models;
 
 namespace Odin.ViewModels.Orders.Transferee
 {
@@ -132,12 +134,12 @@ namespace Odin.ViewModels.Orders.Transferee
         public DateTime? ViewingDate { get; set; }
 
         public ICollection<Odin.Data.Core.Models.Message> Messages { get; set; }
-        public System.Security.Principal.IPrincipal CurrUser { get; set; }
+        public IPrincipal CurrUser { get; set; }
         public int ReadCount
         {
             get
             {
-                return Messages == null? 0 : Messages.Where(r => r.IsRead == false && r.AuthorId != CurrUser.Identity.GetUserId() && CurrUser.IsInRole("ProgramManager") == false).Count();                
+                return Messages == null? 0 : Messages.Where(r => r.IsRead == false && r.AuthorId != CurrUser.Identity.GetUserId() && CurrUser.IsInRole(UserRoles.ProgramManager) == false).Count();                
             }
         }
     }
