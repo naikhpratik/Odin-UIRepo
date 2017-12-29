@@ -19,7 +19,7 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>44303</IISExpressSSLPort>
+    <IISExpressSSLPort>44370</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -412,7 +412,9 @@
   <ItemGroup>
     <Content Include="Content\animate.css" />
     <Content Include="Content\bootstrap-datetimepicker.css" />
-    <Content Include="Content\bootstrap-datetimepicker.min.css" />
+    <Content Include="Content\bootstrap-datetimepicker.min.css">
+      <DependentUpon>bootstrap-datetimepicker.css</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-flatly.css" />
     <Content Include="Content\bootstrap-paper.css" />
     <Content Include="Content\bootstrap-theme.css" />

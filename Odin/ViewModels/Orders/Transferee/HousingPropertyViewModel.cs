@@ -129,7 +129,7 @@ namespace Odin.ViewModels.Orders.Transferee
         [DataType("LikeDislike")]
         public bool? Liked { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy h:mmtt}")]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy h:mm tt}")]
         [DataType(DataType.Date)]
         public DateTime? ViewingDate { get; set; }
 
