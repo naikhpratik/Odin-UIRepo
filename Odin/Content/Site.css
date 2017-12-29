@@ -10,6 +10,21 @@
     padding-right: 15px;
 }
 
+.custom-icon-check {
+    background-image: url(Images/check.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.bootstrap-datetimepicker-widget table td,
+.bootstrap-datetimepicker-widget table th {
+    border-radius: 50%;
+}
+
+#scheduledServices .btn-primary {
+    border-radius: 50%;
+}
+
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
