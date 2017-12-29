@@ -12,7 +12,6 @@ using Odin.IntegrationTests.TestAttributes;
 using Odin.Interfaces;
 using System;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace Odin.IntegrationTests.Controllers
@@ -37,7 +36,15 @@ namespace Odin.IntegrationTests.Controllers
 
             _context = new ApplicationDbContext();
 
-            _transferee = _context.Transferees.First(u => u.UserName.Equals("odinee@dwellworks.com"));
+            _transferee = _context.Transferees.SingleOrDefault(u => u.Email.Equals("integrationee@dwellworks.com"));
+            if (_transferee == null)
+            {
+                _transferee = new Transferee() { Email = "integrationee@dwellworks.com", UserName = "bm-ee-test" };
+                _context.Transferees.Add(_transferee);
+                _context.SaveChanges();
+                _context.Entry(_transferee).Reload();
+            }
+
             _pm = _context.Managers.First(u => u.UserName.Equals("odinpm@dwellworks.com"));
 
             _dsc = _context.Consultants.SingleOrDefault(u => u.Email.Equals("bm-integration@test.com"));
@@ -53,7 +60,6 @@ namespace Odin.IntegrationTests.Controllers
             _mockBookMarkletHelper = new Mock<IBookMarkletHelper>();
 
             _controller = new BookMarkletController(new UnitOfWork(_context), mapper, queueStore, _mockBookMarkletHelper.Object);
-            _controller.MockCurrentUser(_dsc.Id, _dsc.UserName);
         }
 
         [TearDown]
@@ -77,6 +83,31 @@ namespace Odin.IntegrationTests.Controllers
 
             string url = "http://test.com";
             _mockBookMarkletHelper.Setup(r => r.IsValidUrl(url)).Returns(true);
+            _controller.MockCurrentUser(_dsc.Id, _dsc.UserName);
+
+            // Act
+            var result = _controller.Index(url) as ViewResult;
+
+            // Assert
+            result.Should().NotBeNull();
+            result.ViewName.Should().Be(String.Empty);
+        }
+
+        [Test, Isolated]
+        public void TransfereeIndex_ValidUrlHasOrder_ShowBmViewWithOrder()
+        {
+            // Arrange
+            Order order = OrderBuilder.New().First();
+            order.Transferee = _transferee;
+            order.ProgramManager = _pm;
+            order.Consultant = _dsc;
+            _context.Orders.Add(order);
+            _context.SaveChanges();
+            _context.Entry(order).Reload();
+
+            string url = "http://test.com";
+            _mockBookMarkletHelper.Setup(r => r.IsValidUrl(url)).Returns(true);
+            _controller.MockCurrentUserAndRole(_transferee.Id, _transferee.UserName,UserRoles.Transferee);
 
             // Act
             var result = _controller.Index(url) as ViewResult;
@@ -92,6 +123,23 @@ namespace Odin.IntegrationTests.Controllers
             // Arrange
             string url = "http://test.com";
             _mockBookMarkletHelper.Setup(r => r.IsValidUrl(url)).Returns(true);
+            _controller.MockCurrentUser(_dsc.Id, _dsc.UserName);
+
+            // Act
+            var result = _controller.Index(url) as ViewResult;
+
+            // Assert
+            result.Should().NotBeNull();
+            result.ViewName.Should().Be("Error");
+        }
+
+        [Test, Isolated]
+        public void TransfereeIndex_ValidUrlHasNoOrders_ShowError()
+        {
+            // Arrange
+            string url = "http://test.com";
+            _mockBookMarkletHelper.Setup(r => r.IsValidUrl(url)).Returns(true);
+            _controller.MockCurrentUserAndRole(_transferee.Id, _transferee.UserName, UserRoles.Transferee);
 
             // Act
             var result = _controller.Index(url) as ViewResult;
@@ -107,6 +155,23 @@ namespace Odin.IntegrationTests.Controllers
             // Arrange
             string url = "http://test.com";
             _mockBookMarkletHelper.Setup(r => r.IsValidUrl(url)).Returns(false);
+            _controller.MockCurrentUser(_dsc.Id, _dsc.UserName);
+
+            // Act
+            var result = _controller.Index(url) as ViewResult;
+
+            // Assert
+            result.Should().NotBeNull();
+            result.ViewName.Should().Be("Error");
+        }
+
+        [Test, Isolated]
+        public void TransfereeIndex_InValidUrlHasNoOrders_ShowError()
+        {
+            // Arrange
+            string url = "http://test.com";
+            _mockBookMarkletHelper.Setup(r => r.IsValidUrl(url)).Returns(false);
+            _controller.MockCurrentUserAndRole(_transferee.Id, _transferee.UserName,UserRoles.Transferee);
 
             // Act
             var result = _controller.Index(url) as ViewResult;
@@ -130,6 +195,31 @@ namespace Odin.IntegrationTests.Controllers
 
             string url = "http://test.com";
             _mockBookMarkletHelper.Setup(r => r.IsValidUrl(url)).Returns(false);
+            _controller.MockCurrentUser(_dsc.Id, _dsc.UserName);
+
+            // Act
+            var result = _controller.Index(url) as ViewResult;
+
+            // Assert
+            result.Should().NotBeNull();
+            result.ViewName.Should().Be("Error");
+        }
+
+        [Test, Isolated]
+        public void TransfereeIndex_InValidUrlHasOrders_ShowError()
+        {
+            // Arrange
+            Order order = OrderBuilder.New().First();
+            order.Transferee = _transferee;
+            order.ProgramManager = _pm;
+            order.Consultant = _dsc;
+            _context.Orders.Add(order);
+            _context.SaveChanges();
+            _context.Entry(order).Reload();
+
+            string url = "http://test.com";
+            _mockBookMarkletHelper.Setup(r => r.IsValidUrl(url)).Returns(false);
+            _controller.MockCurrentUserAndRole(_transferee.Id, _transferee.UserName,UserRoles.Transferee);
 
             // Act
             var result = _controller.Index(url) as ViewResult;

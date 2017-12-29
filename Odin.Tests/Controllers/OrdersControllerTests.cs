@@ -3,18 +3,17 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Odin.Controllers;
-
 using Odin.Data.Core;
 using Odin.Data.Core.Models;
 using Odin.Data.Core.Repositories;
 using Odin.Interfaces;
 using Odin.Tests.Extensions;
-using System.Net;
-using System.Web.Mvc;
 using Odin.ViewModels.Orders.Transferee;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Web.Mvc;
 
 namespace Odin.Tests.Controllers
 {
@@ -254,6 +253,45 @@ namespace Odin.Tests.Controllers
             HousingViewModel viewModel = new HousingViewModel(order, mapper, "ViewingsOnly");
             //var result = _controller.PropertiesPartialPDF(orderId, "ViewingsOnly");
             viewModel.Properties.Count().Should().Be(1);
+        }
+
+        [TestMethod]
+        public void DashboardViewModel_SelectedServices_ShouldHaveServices()
+        {
+            var vm = new DashboardViewModel();
+
+            var service = new Service()
+            {
+                ServiceType = new ServiceType(){Category = ServiceCategory.AreaOrientation,ActionLabel = "Area Orientation"},
+                Selected = true
+            };
+
+            var otherService = new Service()
+            {
+                ServiceType = new ServiceType() { Category = ServiceCategory.AreaOrientation, ActionLabel = "Area Orientation 2" },
+                Selected = true
+            };
+
+            var compService = new Service()
+            {
+                ServiceType = new ServiceType() { Category = ServiceCategory.SettlingIn, ActionLabel = "Settling in" },
+                Selected = true,
+                CompletedDate = DateTime.Now
+            };
+
+            var notService = new Service()
+            {
+                ServiceType = new ServiceType() { Category = ServiceCategory.SettlingIn, ActionLabel = "Settling in" },
+                Selected = false,
+                CompletedDate = DateTime.Now
+            };
+
+            vm.Services = new List<Service>(){service,otherService,compService,notService};
+
+            vm.CompletedServiceCount.Should().Be(1);
+            vm.TotalServiceCount.Should().Be(3);
+            vm.PercentComplete.Should().Be(33);
+            vm.ServiceCategories.Count().Should().Be(2);
         }
     }
 }
