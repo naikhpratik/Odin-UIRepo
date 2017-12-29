@@ -24,7 +24,12 @@
 #scheduledServices .btn-primary {
     border-radius: 50%;
 }
-
+.bootstrap-datetimepicker-widget .picker-switch table.table-condensed td a span:hover {
+    background: #eeeeee;
+    background-image: url(Images/check.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */

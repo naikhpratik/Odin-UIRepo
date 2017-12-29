@@ -44,6 +44,11 @@ var TransfereeDetailsController = function (transfereeDetailseService) {
     var saveServices = function (e) {;
         var detailsBlock = $(e.target).parents(".details-services");
         var who = $(e.target).attr("class");
+        if ($(e.target).hasClass('time') == true)
+        {
+            if ($(e.target).find('input').val() == '')
+                return false;
+        }
         var err = false;
         var block = detailsBlock.attr("data-block");
         var rows = detailsBlock.find(".details-row[data-entity-id]");        
