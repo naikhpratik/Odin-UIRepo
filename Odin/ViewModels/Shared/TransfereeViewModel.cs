@@ -25,6 +25,9 @@ namespace Odin.ViewModels.Shared
             {
                 return $"{FirstName} {LastName}";
             }
-        } 
+        }
+        
+        [DisplayName("Invite Status: ")]
+        public string InviteStatus { get; set; }
     }
 }

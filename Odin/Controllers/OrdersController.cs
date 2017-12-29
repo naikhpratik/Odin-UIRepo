@@ -126,7 +126,7 @@ namespace Odin.Controllers
 
         public ActionResult HousingPartial(string id)
         {
-            //var userId = User.Identity.GetUserId();
+            var userId = User.Identity.GetUserId();
 
             Order order = null;
             if (User.IsInRole(UserRoles.Transferee))

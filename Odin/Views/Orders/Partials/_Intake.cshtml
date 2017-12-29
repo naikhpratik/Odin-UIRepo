@@ -27,6 +27,15 @@
                 <p class="input-group time">@Model.Transferee.PhoneNumber</p>
             </li>
         </ul>
+        <ul class="row sectionList intake-row collapse in">
+            <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                @Html.LabelFor(model => @Model.Transferee.InviteStatus)
+                <p>@Model.Transferee.InviteStatus</p>
+            </li>
+            <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                <button id="btnInviteTransferee">Invite Transferee</button>
+            </li>
+        </ul>
     </div>
     <hr />
     <div class="intake-block expanded" data-block="rmc">
@@ -563,11 +572,6 @@
                 <span class="intake-span">@Model.LeaseTerm</span>
                 @Html.TextBoxFor(m => @Model.LengthOfAssignment, new { @class = "form-control intake-input", Name = "LengthOfAssignment", @type = "number", step = "1", min = "0" })
                 @Html.HiddenFor(m => @Model.LengthOfAssignment, new { @class = "intake-hidden" })
-            </div>
-        </div>
-        <div class="row intake-row collapse in">
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
-                <button id="btnInviteTransferee">Invite Transferee</button>
             </div>
         </div>
     </div>

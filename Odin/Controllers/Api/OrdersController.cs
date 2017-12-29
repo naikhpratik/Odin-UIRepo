@@ -10,6 +10,7 @@ using Odin.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace Odin.Controllers.Api
@@ -20,13 +21,15 @@ namespace Odin.Controllers.Api
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly IQueueStore _queueStore;
+        private readonly IAccountHelper _accountHelper;
 
-        public OrdersController(IUnitOfWork unitOfWork, IMapper mapper, IQueueStore queueStore)
+        public OrdersController(IUnitOfWork unitOfWork, IMapper mapper, IQueueStore queueStore, IAccountHelper accountHelper)
         {
             _orderImporter = new OrderImporter(unitOfWork, mapper);
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _queueStore = queueStore;
+            _accountHelper = accountHelper;
         }
 
         // POST /api/orders
@@ -62,6 +65,29 @@ namespace Odin.Controllers.Api
             var transfereeIndexDtos = _mapper.Map<IEnumerable<Order>, IEnumerable<TransfereeIndexDto>>(orders);
 
             return Ok(new OrderIndexDto {Transferees = transfereeIndexDtos});
+        }
+
+        [HttpPost]
+        [Authorize]
+        [Route("api/orders/transferee/invite")]
+        public async Task<IHttpActionResult> InviteTransferee(InviteTransfereeDto dto)
+        {
+            var userId = User.Identity.GetUserId();
+
+            var order = _unitOfWork.Orders.GetOrderFor(userId, dto.OrderId);
+
+            if (order == null)
+                return NotFound();
+
+            var response = await _accountHelper.SendEmailCreateTokenAsync(order.TransfereeId);
+
+            if (response == "Message not sent")
+                return BadRequest();
+
+            order.Transferee.InviteStatus = InviteStatus.Invited;
+            _unitOfWork.Complete();
+
+            return Ok();
         }
 
         [HttpPost]

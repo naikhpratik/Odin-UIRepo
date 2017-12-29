@@ -106,7 +106,7 @@ namespace Odin.Data.Persistence
         public Order GetOrderFor(string userId, string orderId)
         {
             return _context.Orders
-                .Where(o => o.Id == orderId && (o.ConsultantId == userId || o.TransfereeId == userId))
+                .Where(o => o.Id == orderId && (o.ConsultantId == userId || o.TransfereeId == userId || o.ProgramManagerId == userId))
                 .Include(o => o.Services)
                 .Include(o => o.HomeFinding)
                 .Include(o => o.Services.Select(s => s.ServiceType))

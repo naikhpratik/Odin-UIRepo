@@ -121,6 +121,7 @@
     <Compile Include="Builders\OrderBuilder.cs" />
     <Compile Include="Builders\OrderDtoBuilder.cs" />
     <Compile Include="Builders\TransfereeDtoBuilder.cs" />
+    <Compile Include="Core\Dtos\InviteTransfereeDto.cs" />
     <Compile Include="Core\Dtos\MessageDto.cs" />
     <Compile Include="Core\Dtos\BookMarkletDto.cs" />
     <Compile Include="Core\Dtos\ChildDto.cs" />
