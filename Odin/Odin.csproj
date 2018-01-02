@@ -803,6 +803,7 @@
     <Content Include="Scripts\app\controllers\userManagementController.js" />
     <Content Include="Scripts\app\services\userManagementService.js" />
     <Content Include="Scripts\app\views\bookmarklet.js" />
+    <Content Include="Scripts\app\views\help.js" />
     <Content Include="Scripts\app\views\transferee-itin-appntmt.js" />
     <Content Include="Scripts\app\views\transferee-hfp-messages.js" />
     <Content Include="Scripts\app\views\transferee-housing.js" />
