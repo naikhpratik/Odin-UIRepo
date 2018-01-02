@@ -9,25 +9,24 @@ using System.Threading;
 namespace Odin.UITests
 {
     [TestClass]
-    public class ApplicationStartPage : IDisposable
+    public class ApplicationStartPageTest : IDisposable
     {
-        private string baseURL = "https://localhost:44357";
+        private string baseURL = Globals.Url_Localhost;
+        private readonly IWebDriver _driver;
         //    private RemoteWebDriver driver;
         //    private string browser;
         //    public TestContext TestContext { get; set; }
-        private readonly IWebDriver _driver;
 
-        public ApplicationStartPage()
-        {
+        public ApplicationStartPageTest(){
             _driver = new ChromeDriver();
         }
 
-        private void gotolink()
+        public void Gotolink()
         {
             _driver.Navigate().GoToUrl(this.baseURL);
         }
 
-        private static void delay(int msec)
+        public void Delay(int msec)
         {
             Thread.Sleep(msec);
         }
@@ -36,7 +35,7 @@ namespace Odin.UITests
         public void ShouldLoadApplicationPage_test()
         {
 
-            gotolink();
+            Gotolink();
             Xunit.Assert.Equal("Log in", _driver.Title);
 
         }
@@ -50,21 +49,22 @@ namespace Odin.UITests
             //delay(500);
             _driver.Navigate().GoToUrl(this.baseURL);
 
-            Xunit.Assert.True(Login("Odinpm@dwellworks.com", "OdinOdin5$"));
+            Xunit.Assert.True(Login(Globals.email_pm_valid,Globals.pass_pm_valid));
             //delay(2000);
             Xunit.Assert.True(Logout());
             //delay(2000);
 
         }
 
-        private Boolean Login(string username, string password)
+        public Boolean Login(string username, string password)
         {
             if (_driver.Url.Split('/').Last().Contains("Login"))
             {
                 _driver.FindElement(By.Id("Email")).SendKeys(username);
                 _driver.FindElement(By.Id("Password")).SendKeys(password);
                 _driver.FindElement(By.ClassName("btn-default")).Click();
-                Xunit.Assert.Equal("Orders Page", _driver.Title);
+                if(_driver.Url.Split('/').Last().Contains("Orders"))
+                    Xunit.Assert.Equal("Orders Page", _driver.Title);
                 return true;
             }
             else
@@ -72,7 +72,7 @@ namespace Odin.UITests
                 return false;
             }
         }
-        private Boolean Logout()
+        public Boolean Logout()
         {
             _driver.FindElement(By.Id("logoutForm")).Submit();
             if (_driver.Url.Split('/').Last().Contains("Login"))
@@ -85,7 +85,7 @@ namespace Odin.UITests
         [Fact]
         public void Forgotpasswordclick_test()
         {
-            gotolink();
+            Gotolink();
             _driver.FindElement(By.Id("forgot")).Click();
             var word = "";
             if (_driver.Url.Split('/').Last().Equals("ForgotPassword"))
@@ -99,6 +99,15 @@ namespace Odin.UITests
             Xunit.Assert.Equal("Success", word);
         }
 
+        [Fact]
+        public void LoginPage_InvalidCredentails_ShouldCheckForErrors()
+        {
+            Gotolink();
+            Xunit.Assert.True(Login("", ""));
+            Xunit.Assert.Equal("The Email field is required.", _driver.FindElement(By.Id("validation_email")).Text);
+            Xunit.Assert.Equal("The Password field is required.", _driver.FindElement(By.Id("validation_password")).Text);
+        }
+        
         [TestCleanup]
         public void Dispose()
         {

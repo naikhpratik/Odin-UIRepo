@@ -5,9 +5,6 @@
 }
 @Styles.Render("~/Styling/orders")
 
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-
 <div class="container-fluid" id="list">
     
         <div id="search">
@@ -67,7 +64,7 @@
     {
         var order = Model.OrdersIndexVm.ElementAt(j);
 
-        <li class="row clickable orderRow" data-order-id="@order.Id">
+        <li id="rowclickableorderRow" class="row clickable orderRow" data-order-id="@order.Id">
             <div class="col-md-2">
                 <label class="header">Transferee</label>
                 <p class="eeName" data-last-name="@order.Transferee.LastName">@order.Transferee.FullName</p>
