@@ -7,7 +7,6 @@ using Odin.Interfaces;
 using Odin.ViewModels.Orders.Index;
 using Odin.ViewModels.Orders.Transferee;
 using Odin.ViewModels.Shared;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -119,8 +118,7 @@ namespace Odin.Controllers
             var userId = User.Identity.GetUserId();
             var order = _unitOfWork.Orders.GetOrderFor(userId, id, UserRoles.Transferee);
             ViewBag.PropBotScript = "javascript:" + System.IO.File.ReadAllText(Server.MapPath(@"~/Scripts/bookmarklet/dist.min.js"));
-            //HousingViewModel viewModel = new HousingViewModel(order, _mapper);
-
+            
             return PartialView("~/views/orders/partials/_Help.cshtml");
         }
 
