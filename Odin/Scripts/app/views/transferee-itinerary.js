@@ -34,13 +34,12 @@ var TransfereeItineraryController = function (transfereeItineraryService) {
             toolbarPlacement: 'bottom',
             icons: { close: 'custom-icon-check' }
         });
-        //Bind Events        
-        
+
+        //Bind Events
         $('#cmdPDF').click(function () {
-
             window.location.href = "/Orders/GeneratePDF/" + $('#itinerary').attr("data-order-id");
-
         });
+
         $('#cmdEmail').click(function () {
             var url = "/Email/EmailForm/" + $('#itinerary').attr("data-order-id");
             var app = $("#modalForm");

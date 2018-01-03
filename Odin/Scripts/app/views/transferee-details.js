@@ -30,7 +30,7 @@ var TransfereeDetailsController = function (transfereeDetailseService) {
             toolbarPlacement: 'bottom',
             keepOpen: false,
             icons: { close: 'custom-icon-check'}
-        }).on("dp.change", function (e) { saveServices(e); });
+        }).on("dp.hide", function (e) { saveServices(e); });
 
 
         //Init Variables
@@ -44,6 +44,11 @@ var TransfereeDetailsController = function (transfereeDetailseService) {
     var saveServices = function (e) {;
         var detailsBlock = $(e.target).parents(".details-services");
         var who = $(e.target).attr("class");
+        if ($(e.target).hasClass('time') == true)
+        {
+            if ($(e.target).find('input').val() == '')
+                return false;
+        }
         var err = false;
         var block = detailsBlock.attr("data-block");
         var rows = detailsBlock.find(".details-row[data-entity-id]");        

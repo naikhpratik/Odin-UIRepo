@@ -157,7 +157,17 @@
         });
     };
     var setupDatePickers = function () {
-        $('.date').datetimepicker({
+        var vDate = $('input[name=PropertyAvailabilityDate]').parent();
+        vDate.datetimepicker({
+            format: "DD-MMM-YYYY",
+            useCurrent: false,
+            keepOpen: true,
+            showClose: true,
+            toolbarPlacement: 'bottom',
+            icons: { close: 'custom-icon-check' }
+        });
+        var vDate = $('input[name=ViewingDate]').parent();
+        vDate.datetimepicker({
             format: "DD-MMM-YYYY h:mm A",
             useCurrent: false,
             keepOpen: true,
@@ -202,17 +212,7 @@
     };
 
     var export2PDF = function (choice) {
-        //window.location.href = "/Orders/PropertiesPartialPDF/" + currentOrderId + "?listChoice=" + choice;
-        $.ajax({
-            url: "/Orders/PropertiesPartialPDF/" + currentOrderId + "?listChoice=" + choice,
-            type: 'GET',
-            success: function (result) {
-                window.location.href = "/Orders/PropertiesPartialPDF/" + currentOrderId + "?listChoice=" + choice;
-            },
-            error: function () {
-                toast("No properties found that satisfy the selected option.", "warning");
-            }
-        });
+        window.location.href = "/Orders/PropertiesPartialPDF/" + currentOrderId + "?listChoice=" + choice;        
     };
 
     /*** Private Helpers ***/

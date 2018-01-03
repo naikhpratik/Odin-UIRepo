@@ -7,7 +7,18 @@ namespace Odin.Helpers
     {
         public static string GetViewFormat(string phone)
         {
-            return string.Format("{0:###'.'###'.'####}", double.Parse(phone));
+            string ecks = phone.ToUpper().IndexOf("X") > -1 ? " X":" ";
+            string value = new System.Text.RegularExpressions.Regex(@"\D").Replace(phone, string.Empty);
+            if (value.Length > 10)
+                value = value.TrimStart('1');
+            if (value.Length == 7)
+                return Convert.ToInt64(value).ToString("###'.'####");
+            if (value.Length == 10)
+                return Convert.ToInt64(value).ToString("0##'.'###'.'####");
+            if (value.Length > 10)
+                return Convert.ToInt64(value)
+                    .ToString("0##'.'###'.'####" + ecks + new String('#', (value.Length - 10)));
+            return value;            
         }
         public static string GetViewFormat(DateTime? date)
         {
