@@ -75,3 +75,13 @@ div#intake .intake-block {
   div#intake .intake-block .intake-row .intake-col-add {
     min-height: 0px; }
 
+div#intake .invite-block {
+  padding: 1rem;
+  background-color: #f3f8fd;
+  border-radius: 0.25rem;
+  border: 1px solid #2196f3; }
+  div#intake .invite-block p {
+    margin-bottom: 0; }
+  div#intake .invite-block h2.sectionSubHead {
+    color: #2196f3; }
+

@@ -53,16 +53,16 @@ div#intake {
                 display: inline;
 
                 img {
-                    margin-bottom:3px;
-                    margin-right:8px;
-                    height:1.6rem;
+                    margin-bottom: 3px;
+                    margin-right: 8px;
+                    height: 1.6rem;
                     width: 1.5rem;
                 }
-            }                      
+            }
 
             .intake-cancel {
                 display: none;
-                color: $DW_Red;                
+                color: $DW_Red;
                 padding-left: 15px;
             }
 
@@ -84,7 +84,7 @@ div#intake {
                 .intake-span {
                     color: $DW_Blue;
                     font-size: 1.6rem;
-                }                
+                }
 
                 .intake-input {
                     color: $DW_Blue;
@@ -119,4 +119,22 @@ div#intake {
             }
         }
     }
+
+
+    .invite-block {
+        padding: 1rem;
+        background-color: #f3f8fd;
+        border-radius: 0.25rem;
+        border: 1px solid #2196f3;
+
+        p{
+            margin-bottom: 0;
+        }
+    
+        h2.sectionSubHead{
+            color:#2196f3;
+        }
+        
+        
+   }
 }
