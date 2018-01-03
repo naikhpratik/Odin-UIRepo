@@ -99,7 +99,7 @@ namespace Odin.Domain
                 Notification notification = new Notification()
                 {
                     NotificationType = NotificationType.OrderCreated,
-                    Message = "A New order is created",
+                    Message = "Your manager has assigned you a new Transferee, their name is ",
                     Title = "New Order Creation",
                     OrderId = order.Id
                 };

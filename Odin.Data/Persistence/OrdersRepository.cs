@@ -58,7 +58,7 @@ namespace Odin.Data.Persistence
                     .Include(o => o.Services.Select(st => st.ServiceType))
                     .ToList();
             }
-            else if (UserRoles.ProgramManager == userRole)
+            else if (UserRoles.ProgramManager == userRole || UserRoles.GlobalSupplyChain == userRole)
             {
                 return _context.Orders
                     .Where(o => o.ProgramManagerId == userId)
@@ -180,9 +180,9 @@ namespace Odin.Data.Persistence
             }
         }
 
-    
 
-        //public IEnumerable<UserNotification> GetUserNotification(string userId, string orderid)
+
+        //public IEnumerable<UserNotification> GetOrderNotification(string userId, string orderid)
         //{
         //    return _context.Orders
         //        .Where(o => o.Id == orderid && o.ConsultantId == userId).ToList<UserNotification>();
