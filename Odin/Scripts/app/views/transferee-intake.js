@@ -99,6 +99,7 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
 
     var inviteSuccess = function () {
         toast("Transferee has been invited", "success");
+        $('#lblInviteStatus').html("Invited");
     }
 
     var inviteFailed = function () {
