@@ -12,6 +12,8 @@ using Odin.IntegrationTests.TestAttributes;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Odin.Data.Core.Models;
+using ControllerExtensions = Odin.Tests.Extensions.ControllerExtensions;
 
 namespace Odin.IntegrationTests.Controllers.Api
 {
@@ -43,7 +45,7 @@ namespace Odin.IntegrationTests.Controllers.Api
 
             // Act
             var controller = SetUpAppointmentController();
-            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            controller.MockCurrentUserAndRole(dsc.Id, dsc.UserName, UserRoles.Consultant);
             AppointmentDto dto = new AppointmentDto() { OrderId = order.Id, Id = null, ScheduledDate = DateTime.Now, Description = "Adding a new appointment" };
             var result = controller.UpsertItineraryAppointment(dto);
 
@@ -80,7 +82,7 @@ namespace Odin.IntegrationTests.Controllers.Api
 
             // Act
             var controller = SetUpAppointmentController();
-            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            controller.MockCurrentUserAndRole(dsc.Id, dsc.UserName, UserRoles.Consultant);
             var dto = new AppointmentDto() { OrderId = order.Id, Id = null, ScheduledDate = DateTime.Now, Description = "Adding a new appointment" };
             var result = controller.UpsertItineraryAppointment(dto);
             result = controller.DeleteAppointment(order.Appointments.First().Id);

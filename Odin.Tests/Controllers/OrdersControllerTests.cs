@@ -88,7 +88,7 @@ namespace Odin.Tests.Controllers
             var mockAccountHelper = new Mock<IAccountHelper>();
             _controller = new OrdersController(mockUnitOfWork.Object, _mockMapper.Object, mockAccountHelper.Object);
             _userId = "1";
-            _controller.MockControllerContextForUser(_userId);
+            _controller.MockControllerContextForUserAndRole(_userId,UserRoles.Consultant);
 
 
         }
@@ -112,18 +112,19 @@ namespace Odin.Tests.Controllers
         }
 
         [TestMethod]
-        public void Details_OrderConsultantIdIsNotCurrentUser_ShouldReturnUnauthorized()
+        public void Details_OrderConsultantIdIsNotCurrentUser_ShouldReturnNotFound()
         {
             var orderId = "1";
+            var userId = "1";
 
             Order order = new Order() { Id = orderId, ConsultantId = "2" };
 
-            _mockRepository.Setup(r => r.GetOrderById(orderId)).Returns(order);
+            _mockRepository.Setup(r => r.GetOrderFor(userId,orderId,UserRoles.Consultant)).Returns((Order)null);
 
             var result = _controller.DetailsPartial(orderId);
 
             result.Should().BeOfType<HttpStatusCodeResult>();
-            Assert.AreEqual(((HttpStatusCodeResult)result).StatusCode, (int)HttpStatusCode.Unauthorized);
+            Assert.AreEqual(((HttpStatusCodeResult)result).StatusCode, (int)HttpStatusCode.NotFound);
         }
 
         [TestMethod]
@@ -134,7 +135,7 @@ namespace Odin.Tests.Controllers
 
             Order order = new Order() { Id = orderId, ConsultantId = userId };
 
-            _mockRepository.Setup(r => r.GetOrderById(orderId)).Returns(order);
+            _mockRepository.Setup(r => r.GetOrderFor(userId,orderId,UserRoles.Consultant)).Returns(order);
             OrdersTransfereeViewModel vm = new OrdersTransfereeViewModel();
 
             _mockMapper.Setup(o => o.Map<Order, OrdersTransfereeViewModel>(It.IsAny<Order>())).Returns(vm);
@@ -187,7 +188,7 @@ namespace Odin.Tests.Controllers
             var orderId = "1";
             var userId = "1";
             var order = new Order() { Id = orderId, ConsultantId = userId };
-            _mockRepository.Setup(r => r.GetOrderFor(orderId, userId)).Returns(order);
+            _mockRepository.Setup(r => r.GetOrderFor(orderId, userId, UserRoles.Consultant)).Returns(order);
             order.HomeFinding = new HomeFinding() { Id = orderId, Deleted = false };
             
             HousingViewModel viewModel = new HousingViewModel(order, mapper, "AllViewings");
@@ -199,7 +200,7 @@ namespace Odin.Tests.Controllers
             var orderId = "1";
             var userId = "1";
             var order = new Order() { Id = orderId, ConsultantId = userId};
-            _mockRepository.Setup(r => r.GetOrderFor(orderId, userId)).Returns(order);
+            _mockRepository.Setup(r => r.GetOrderFor(orderId, userId, UserRoles.Consultant)).Returns(order);
             order.HomeFinding = new HomeFinding() { Id = orderId, Deleted = false };
             order.HomeFinding.HomeFindingProperties.Add(new HomeFindingProperty() { Id = "1", ViewingDate = DateTime.Now });
             HousingViewModel viewModel = new HousingViewModel(order, mapper, "NoViewings");
@@ -211,7 +212,7 @@ namespace Odin.Tests.Controllers
             var orderId = "1";
             var userId = "1";
             var order = new Order() { Id = orderId, ConsultantId = userId };
-            _mockRepository.Setup(r => r.GetOrderFor(orderId, userId)).Returns(order);
+            _mockRepository.Setup(r => r.GetOrderFor(orderId, userId, UserRoles.Consultant)).Returns(order);
             order.HomeFinding = new HomeFinding() { Id = orderId, Deleted = false };
             
             HomeFindingProperty p1 = new HomeFindingProperty();
@@ -236,7 +237,7 @@ namespace Odin.Tests.Controllers
             var orderId = "1";
             var userId = "1";
             var order = new Order() { Id = orderId, ConsultantId = userId };
-            _mockRepository.Setup(r => r.GetOrderFor(orderId, userId)).Returns(order);
+            _mockRepository.Setup(r => r.GetOrderFor(orderId, userId, UserRoles.Consultant)).Returns(order);
             order.HomeFinding = new HomeFinding() { Id = orderId, Deleted = false };
 
             HomeFindingProperty p1 = new HomeFindingProperty();

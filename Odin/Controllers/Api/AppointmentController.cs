@@ -7,6 +7,7 @@ using Odin.Domain;
 using Odin.Interfaces;
 using System;
 using System.Web.Http;
+using Odin.Extensions;
 
 namespace Odin.Controllers.Api
 {
@@ -48,8 +49,12 @@ namespace Odin.Controllers.Api
             var userId = User.Identity.GetUserId();
             var orderId = dto.OrderId;
 
-            var order = _unitOfWork.Orders.GetOrderFor(userId, orderId);
-
+            Order order = null;
+            if (User.IsInRole(UserRoles.ProgramManager) || User.IsInRole(UserRoles.Consultant))
+            {
+                order = _unitOfWork.Orders.GetOrderFor(userId, orderId,User.GetUserRole());
+            }
+           
             if (order == null)
             {
                 return NotFound();

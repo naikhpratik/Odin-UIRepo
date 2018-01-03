@@ -3,6 +3,7 @@ using Microsoft.AspNet.Identity;
 using Odin.Data.Core;
 using Odin.Data.Core.Dtos;
 using Odin.Data.Core.Models;
+using Odin.Extensions;
 using Odin.Filters;
 using Odin.Interfaces;
 using Odin.ViewModels.BookMarklet;
@@ -34,15 +35,7 @@ namespace Odin.Controllers
         public ActionResult Index(string url)
         {
             var userId = User.Identity.GetUserId();
-            IEnumerable<Order> orders = null;
-            if (User.IsInRole(UserRoles.Transferee))
-            {
-                orders = _unitOfWork.Orders.GetOrdersFor(userId,UserRoles.Transferee);
-            }
-            else
-            {
-                orders = _unitOfWork.Orders.GetOrdersFor(userId);
-            }
+            IEnumerable<Order> orders = _unitOfWork.Orders.GetOrdersFor(userId,User.GetUserRole());
 
             if (orders.Count() == 0)
             {

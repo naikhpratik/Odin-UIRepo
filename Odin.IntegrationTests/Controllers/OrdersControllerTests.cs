@@ -81,7 +81,7 @@ namespace Odin.IntegrationTests.Controllers
 
             _controller = new OrdersController(unitOfWork, mapper, accountHelper);
             _context.Orders.AddRange(orders);
-            _controller.MockCurrentUser(_dsc.Id, _dsc.UserName);
+            _controller.MockCurrentUserAndRole(_dsc.Id, _dsc.UserName,UserRoles.Consultant);
 
             Notification notification = new Notification();
             notification.NotificationType = NotificationType.OrderCreated;
@@ -283,7 +283,7 @@ namespace Odin.IntegrationTests.Controllers
 
             var order = new Order() { SeCustNumb = "867-5309", Transferee = _transferee, Consultant = _dsc, ProgramManager = _pm, TrackingId = "123Test" };
             order.HomeFinding = new HomeFinding();
-            _controller.MockCurrentUser(_dsc.Id, _dsc.UserName);
+            _controller.MockCurrentUserAndRole(_dsc.Id, _dsc.UserName,UserRoles.Consultant);
             _context.Orders.Add(order);
             _context.SaveChanges();
 
@@ -341,7 +341,7 @@ namespace Odin.IntegrationTests.Controllers
 
             var order = new Order() { SeCustNumb = "867-5309", Transferee = _transferee, Consultant = _dsc, ProgramManager = _pm, TrackingId = "123Test" };
             order.HomeFinding = new HomeFinding();
-            _controller.MockCurrentUser(_dsc.Id, _dsc.UserName);
+            _controller.MockCurrentUserAndRole(_dsc.Id, _dsc.UserName, UserRoles.Consultant);
             _context.Orders.Add(order);
             _context.SaveChanges();
 

@@ -5,6 +5,7 @@ using Odin.Data.Core;
 using Odin.Data.Core.Dtos;
 using Odin.Data.Core.Models;
 using Odin.Domain;
+using Odin.Extensions;
 using Odin.Filters;
 using Odin.Interfaces;
 using System;
@@ -56,8 +57,7 @@ namespace Odin.Controllers.Api
         public IHttpActionResult GetOrders()
         {
             var userId = User.Identity.GetUserId();
-
-            var orders = _unitOfWork.Orders.GetOrdersFor(userId);
+            var orders = _unitOfWork.Orders.GetOrdersFor(userId,User.GetUserRole());
 
             var transfereeIndexDtos = _mapper.Map<IEnumerable<Order>, IEnumerable<TransfereeIndexDto>>(orders);
 
@@ -71,7 +71,11 @@ namespace Odin.Controllers.Api
         {
 
             var userId = User.Identity.GetUserId();
-            var order = _unitOfWork.Orders.GetOrderFor(userId,dto.Id);
+            Order order = null;
+            if (User.IsInRole(UserRoles.Consultant) || User.IsInRole(UserRoles.ProgramManager))
+            {
+                order = _unitOfWork.Orders.GetOrderFor(userId, dto.Id, User.GetUserRole());
+            }
 
             if (order == null)
             {
@@ -91,7 +95,11 @@ namespace Odin.Controllers.Api
         {
 
             var userId = User.Identity.GetUserId();
-            var order = _unitOfWork.Orders.GetOrderFor(userId,dto.Id);
+            Order order = null;
+            if (User.IsInRole(UserRoles.Consultant) || User.IsInRole(UserRoles.ProgramManager))
+            {
+                order = _unitOfWork.Orders.GetOrderFor(userId, dto.Id, User.GetUserRole());
+            }
 
             if (order == null)
             {
@@ -110,7 +118,11 @@ namespace Odin.Controllers.Api
         public IHttpActionResult UpsertIntakeFamily(OrdersTransfereeIntakeFamilyDto dto)
         {
             var userId = User.Identity.GetUserId();
-            var order = _unitOfWork.Orders.GetOrderFor(userId,dto.Id);
+            Order order = null;
+            if (User.IsInRole(UserRoles.Consultant) || User.IsInRole(UserRoles.ProgramManager))
+            {
+                order = _unitOfWork.Orders.GetOrderFor(userId, dto.Id, User.GetUserRole());
+            }
 
             if (order == null)
             {
@@ -160,7 +172,11 @@ namespace Odin.Controllers.Api
         public IHttpActionResult InsertChild(string orderId)
         {
             var userId = User.Identity.GetUserId();
-            var order = _unitOfWork.Orders.GetOrderFor(userId,orderId);
+            Order order = null;
+            if (User.IsInRole(UserRoles.Consultant) || User.IsInRole(UserRoles.ProgramManager))
+            {
+                order = _unitOfWork.Orders.GetOrderFor(userId, orderId, User.GetUserRole());
+            }
 
             if (order == null)
             {
@@ -200,7 +216,11 @@ namespace Odin.Controllers.Api
         {
 
             var userId = User.Identity.GetUserId();
-            var order = _unitOfWork.Orders.GetOrderFor(userId,orderId);
+            Order order = null;
+            if (User.IsInRole(UserRoles.Consultant) || User.IsInRole(UserRoles.ProgramManager))
+            {
+                order = _unitOfWork.Orders.GetOrderFor(userId, orderId, User.GetUserRole());
+            }
 
             if (order == null)
             {
@@ -222,7 +242,11 @@ namespace Odin.Controllers.Api
         {
 
             var userId = User.Identity.GetUserId();
-            var order = _unitOfWork.Orders.GetOrderFor(userId,dto.Id);
+            Order order = null;
+            if (User.IsInRole(UserRoles.Consultant) || User.IsInRole(UserRoles.ProgramManager))
+            {
+                order = _unitOfWork.Orders.GetOrderFor(userId, dto.Id, User.GetUserRole());
+            }
 
             if (order == null)
             {
@@ -251,9 +275,12 @@ namespace Odin.Controllers.Api
         [Route("api/orders/transferee/details/services")]
         public IHttpActionResult UpsertDetailsServices(OrdersTransfereeDetailsServicesDto dto)
         {
-
             var userId = User.Identity.GetUserId();
-            var order = _unitOfWork.Orders.GetOrderById(dto.Id);
+            Order order = null;
+            if (User.IsInRole(UserRoles.Consultant) || User.IsInRole(UserRoles.ProgramManager))
+            {
+                order = _unitOfWork.Orders.GetOrderFor(userId, dto.Id, User.GetUserRole());
+            }
 
             if (order == null)
             {
@@ -290,7 +317,11 @@ namespace Odin.Controllers.Api
         {
 
             var userId = User.Identity.GetUserId();
-            var order = _unitOfWork.Orders.GetOrderFor(userId, dto.Id);
+            Order order = null;
+            if (User.IsInRole(UserRoles.Consultant) || User.IsInRole(UserRoles.ProgramManager))
+            {
+                order = _unitOfWork.Orders.GetOrderFor(userId, dto.Id, User.GetUserRole());
+            }
 
             if (order == null)
             {
@@ -309,7 +340,11 @@ namespace Odin.Controllers.Api
         public IHttpActionResult InsertPet(string orderId)
         {
             var userId = User.Identity.GetUserId();
-            var order = _unitOfWork.Orders.GetOrderFor(userId,orderId);
+            Order order = null;
+            if (User.IsInRole(UserRoles.Consultant) || User.IsInRole(UserRoles.ProgramManager))
+            {
+                order = _unitOfWork.Orders.GetOrderFor(userId, orderId, User.GetUserRole());
+            }
 
             if (order == null)
             {
@@ -349,8 +384,11 @@ namespace Odin.Controllers.Api
         {
 
             var userId = User.Identity.GetUserId();
-
-            var order = _unitOfWork.Orders.GetOrderFor(userId, dto.Id);
+            Order order = null;
+            if (User.IsInRole(UserRoles.Consultant) || User.IsInRole(UserRoles.ProgramManager))
+            {
+                order = _unitOfWork.Orders.GetOrderFor(userId, dto.Id, User.GetUserRole());
+            }
 
             if (order == null)
             {
@@ -369,8 +407,11 @@ namespace Odin.Controllers.Api
         public IHttpActionResult UpsertIntakeHomeFinding(OrdersTransfereeIntakeHomeFindingDto dto)
         {
             var userId = User.Identity.GetUserId();
-
-            var order = _unitOfWork.Orders.GetOrderFor(userId, dto.Id);
+            Order order = null;
+            if (User.IsInRole(UserRoles.Consultant) || User.IsInRole(UserRoles.ProgramManager))
+            {
+                order = _unitOfWork.Orders.GetOrderFor(userId, dto.Id, User.GetUserRole());
+            }
 
             if (order == null)
             {
@@ -397,7 +438,11 @@ namespace Odin.Controllers.Api
         public IHttpActionResult UpdateIntakeLease(OrdersTransfereeIntakeLeaseDto dto)
         {
             var userId = User.Identity.GetUserId();
-            var order = _unitOfWork.Orders.GetOrderFor(userId,dto.Id);
+            Order order = null;
+            if (User.IsInRole(UserRoles.Consultant) || User.IsInRole(UserRoles.ProgramManager))
+            {
+                order = _unitOfWork.Orders.GetOrderFor(userId, dto.Id, User.GetUserRole());
+            }
 
             if (order == null)
             {
@@ -417,8 +462,12 @@ namespace Odin.Controllers.Api
         {
 
             var userId = User.Identity.GetUserId();
-            var order = _unitOfWork.Orders.GetOrderFor(userId, dto.Id);
-            
+            Order order = null;
+            if (User.IsInRole(UserRoles.Consultant) || User.IsInRole(UserRoles.ProgramManager))
+            {
+                order = _unitOfWork.Orders.GetOrderFor(userId, dto.Id, User.GetUserRole());
+            }
+
             if (order == null)
             {
                 return NotFound();
