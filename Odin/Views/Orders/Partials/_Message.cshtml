@@ -20,7 +20,7 @@
                             <div class="col-md-11 messageList">
                                 <h6 class="messageHeader">
                                     @message.Author
-                                    <span>@(message.MessageDate.HasValue ? message.MessageDate.Value.ToString("dd - MMM - yyyy") : "")</span>
+                                    <span>@(message.MessageDate.HasValue ? message.MessageDate.Value.ToString("dd - MMM - yyyy hh:mm tt") : "")</span>
                                 </h6>
                                 <p class="messageText">@message.MessageText</p>
                             </div>
@@ -30,7 +30,7 @@
                             <div class="col-md-11 messageListNotRead">
                                 <h6 class="messageHeader">
                                     @message.Author
-                                    <span>@(message.MessageDate.HasValue ? message.MessageDate.Value.ToString("dd - MMM - yyyy") : "")</span>
+                                    <span>@(message.MessageDate.HasValue ? message.MessageDate.Value.ToString("dd - MMM - yyyy hh:mm tt") : "")</span>
                                 </h6>
                                 <p class="messageText">@message.MessageText</p>                                
                             </div>                            

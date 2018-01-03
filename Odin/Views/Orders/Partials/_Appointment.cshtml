@@ -4,7 +4,7 @@
 			@Html.DisplayNameFor(Model => Model.ScheduledDate)
 			@Html.DatePicker("date", "ScheduledDate", Model.ScheduledDate.HasValue ? Model.ScheduledDate.Value:DateTime.Now)
 			@Html.DisplayNameFor(Model => Model.Description)
-			@Html.EditorFor(Model => Model.Description, new { htmlAttributes = new { @class = "form-control", @type="input", @style="max-width:100%" } })
+			@Html.EditorFor(Model => Model.Description, new { htmlAttributes = new { @class = "form-control", @type="input", @style="max-width:100%", @placeholder="Enter a brief description here" } })
 
 </div>
 @*@Styles.Render("~/Styling/appointment")*@
