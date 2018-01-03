@@ -24,7 +24,8 @@ namespace Odin.ViewModels.Orders.Transferee
 
         public string Id { get; set; }
 
-       
+        public bool TransfereeInviteEnabled { get; set; }
+
         [DisplayName("City:")]
         public string DestinationCity { get; set; }
 

@@ -5,17 +5,21 @@
     <h1 class="sectionTitle">Intake</h1>
     <p class="sectionInstruction">Please fill out any items that are not already auto-generated that could aid in the help of your clients placement.</p>
 </div>
-    <div class="intake-block invite-block">
+    @if (Model.TransfereeInviteEnabled)
+    {
+        <div class="intake-block invite-block">
             <h2 class="sectionSubHead">Transferee Invite</h2>
             <div class="row">
-                <p><span style="font-weight: bold;">Invite Not Sent</span> Click the button to email your transferree a sign up link.</p>
+                <p id="lblInviteTransferee"><span style="font-weight: bold;">@Model.Transferee.InviteStatus</span> Click the button to email your transferee a sign up link.
+                </p>
             </div>
             <ul class="row sectionList">
                 <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
                     <button id="btnInviteTransferee" class="btn-primary">Invite Transferee</button>
                 </li>
             </ul>
-    </div>
+        </div>
+    }
     <div class="intake-block expanded">
         <div class="intake-header">
             <div class="intake-collapse">
