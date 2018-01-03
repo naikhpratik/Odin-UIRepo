@@ -23,7 +23,7 @@ namespace Odin.ViewModels.Orders.Transferee
         }
         //this version will replace the above constructor when the viewings portion is completed: 
         //the isViewing flag will detrmine if only those properties that have a viewing scheduled will be returned
-        public HousingViewModel(Order order, IMapper mapper, string listChoice) : this()
+        public HousingViewModel(Order order, IMapper mapper, string listChoice, System.Security.Principal.IPrincipal user) : this()
         {
            
             mapper.Map<HomeFinding, HousingViewModel>(order.HomeFinding, this);
@@ -49,7 +49,10 @@ namespace Odin.ViewModels.Orders.Transferee
 
             IEnumerable<HousingPropertyViewModel> propertyViewModels;
             propertyViewModels = mapper.Map<IEnumerable<HomeFindingProperty>, IEnumerable<HousingPropertyViewModel>>(homeFindingProperties);
-
+            foreach (var prop in propertyViewModels)
+            {
+                prop.CurrUser = user;
+            }
             this.Properties = propertyViewModels;
         }
         public HousingViewModel(Order order, IMapper mapper, System.Security.Principal.IPrincipal user) : this()
