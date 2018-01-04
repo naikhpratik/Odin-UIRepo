@@ -5,6 +5,8 @@ using Xunit;
 using System;
 using System.Linq;
 using System.Threading;
+using OpenQA.Selenium.PhantomJS;
+using System.Diagnostics;
 
 namespace Odin.UITests
 {
@@ -13,20 +15,22 @@ namespace Odin.UITests
     {
         private string baseURL = Globals.Url_Localhost;
         private readonly IWebDriver _driver;
-        //    private RemoteWebDriver driver;
-        //    private string browser;
-        //    public TestContext TestContext { get; set; }
-
-        public ApplicationStartPageTest(){
-            _driver = new ChromeDriver();
-        }
-
-        public void Gotolink()
+        private string method_Name;
+        public ApplicationStartPageTest()
         {
-            _driver.Navigate().GoToUrl(this.baseURL);
+            //_driver = new ChromeDriver();
+            _driver = new PhantomJSDriver();
         }
 
-        public void Delay(int msec)
+        private void initialsteps()
+        {
+
+            _driver.Navigate().GoToUrl(this.baseURL);
+            _driver.Manage().Window.Maximize();
+            
+        }
+
+        private void Delay(int msec)
         {
             Thread.Sleep(msec);
         }
@@ -35,25 +39,23 @@ namespace Odin.UITests
         public void ShouldLoadApplicationPage_test()
         {
 
-            Gotolink();
+            initialsteps();
             Xunit.Assert.Equal("Log in", _driver.Title);
-
+            //method_Name = "ShouldLoadApplicationPage_test";
         }
 
         [Fact]
         public void ChromeLoginLogout_test()
         {
 
-            _driver.Manage().Window.Maximize();
+
             //_driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
             //delay(500);
-            _driver.Navigate().GoToUrl(this.baseURL);
-
-            Xunit.Assert.True(Login(Globals.email_pm_valid,Globals.pass_pm_valid));
-            //delay(2000);
+            initialsteps();
+            Xunit.Assert.True(Login(Globals.email_pm_valid, Globals.pass_pm_valid));
             Xunit.Assert.True(Logout());
-            //delay(2000);
 
+            //method_Name = "ChromeLoginLogout_test";
         }
 
         public Boolean Login(string username, string password)
@@ -63,7 +65,7 @@ namespace Odin.UITests
                 _driver.FindElement(By.Id("Email")).SendKeys(username);
                 _driver.FindElement(By.Id("Password")).SendKeys(password);
                 _driver.FindElement(By.ClassName("btn-default")).Click();
-                if(_driver.Url.Split('/').Last().Contains("Orders"))
+                if (_driver.Url.Split('/').Last().Contains("Orders"))
                     Xunit.Assert.Equal("Orders Page", _driver.Title);
                 return true;
             }
@@ -76,7 +78,10 @@ namespace Odin.UITests
         {
             _driver.FindElement(By.Id("logoutForm")).Submit();
             if (_driver.Url.Split('/').Last().Contains("Login"))
-            { return true; }
+            {
+                _driver.Close();
+                return true;
+            }
             else
             { return false; }
         }
@@ -85,8 +90,8 @@ namespace Odin.UITests
         [Fact]
         public void Forgotpasswordclick_test()
         {
-            Gotolink();
-            _driver.FindElement(By.Id("forgot")).Click();
+            initialsteps();
+            _driver.FindElement(By.Id("forgot_password")).Click();
             var word = "";
             if (_driver.Url.Split('/').Last().Equals("ForgotPassword"))
             {
@@ -97,20 +102,24 @@ namespace Odin.UITests
                 word = "Failure";
             }
             Xunit.Assert.Equal("Success", word);
+            method_Name = "Forgotpasswordclick_test";
         }
 
         [Fact]
         public void LoginPage_InvalidCredentails_ShouldCheckForErrors()
         {
-            Gotolink();
+            initialsteps();
             Xunit.Assert.True(Login("", ""));
             Xunit.Assert.Equal("The Email field is required.", _driver.FindElement(By.Id("validation_email")).Text);
             Xunit.Assert.Equal("The Password field is required.", _driver.FindElement(By.Id("validation_password")).Text);
+            method_Name = "LoginPage_InvalidCredentails_ShouldCheckForErrors";
         }
-        
+
         [TestCleanup]
         public void Dispose()
         {
+            System.Diagnostics.Debug.WriteLine("Calling Method : " + method_Name);
+
             _driver.Quit();
             _driver.Dispose();
         }
