@@ -35,7 +35,6 @@ namespace Odin.Controllers
         public ViewResult Index(string id)
         {
             //id = selected manager's id 
-            var userId = User.Identity.GetUserId(); ;
             IEnumerable<Order> orders = null;
 
             //PM's and SC's are the only people who can view other individuals' files.
