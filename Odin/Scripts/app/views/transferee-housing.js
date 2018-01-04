@@ -139,7 +139,7 @@
     var setupLikeDislikeControls = function () {
         var likeSelector = '.likeDislike > .like';
         var dislikeSelector = '.likeDislike > .dislike';
-        var clickSelector = `${likeSelector}, ${dislikeSelector}`;
+        var clickSelector = likeSelector + ', ' + dislikeSelector;
 
         $(document).off('click', clickSelector);
         $(document).on('click', clickSelector, function (e) {
