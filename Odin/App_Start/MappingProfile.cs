@@ -29,7 +29,7 @@ namespace Odin
             CreateMap<ServiceType, ServiceTypeViewModel>();
             CreateMap<HomeFinding, HomeFindingViewModel>();
             CreateMap<UserNotification, NotificationViewModel>();
-            CreateMap<UserNotification, HistoryViewModel>();
+            CreateMap<Notification, HistoryViewModel>();
 
             /*Order - Index*/
             CreateMap<Order, OrdersIndexViewModel>();

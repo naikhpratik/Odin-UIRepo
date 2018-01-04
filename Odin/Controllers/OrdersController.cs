@@ -198,12 +198,10 @@ namespace Odin.Controllers
             }
             else
             {
-                IEnumerable<UserNotification> userNotifications = _unitOfWork.UserNotifications.GetUserNotificationHistory(userId, order.Id);
-                IEnumerable<HistoryViewModel> vms = _mapper.Map<IEnumerable<UserNotification>, IEnumerable<HistoryViewModel>>(userNotifications);
+                IEnumerable<Notification> notifications = _unitOfWork.Notifications.GetOrderNotifications(order.Id);
+                IEnumerable<HistoryViewModel> vms = _mapper.Map<IEnumerable<Notification>, IEnumerable<HistoryViewModel>>(notifications);
                 return PartialView("~/views/orders/partials/_History.cshtml", vms);
             }
-
-
         }
         
         public ActionResult Transferee(string id)
