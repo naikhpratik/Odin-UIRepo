@@ -88,6 +88,7 @@
     <Compile Include="Globals.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\Orders\IndexView_test.cs" />
+    <Compile Include="Views\Orders\TransfereeView_test.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
