@@ -7,7 +7,6 @@ using Odin.Data.Tests.Extensions;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using Microsoft.Azure.Mobile.Server;
 
 namespace Odin.Data.Tests.Persistence.Repositories
 {
@@ -36,7 +35,7 @@ namespace Odin.Data.Tests.Persistence.Repositories
 
             SetupRepositoryWithSource(new[] {order});
 
-            var orders = _ordersRepository.GetOrdersFor(consultant.Id + "-");
+            var orders = _ordersRepository.GetOrdersFor(consultant.Id + "-",UserRoles.Consultant);
 
             orders.Should().BeEmpty();
         }
@@ -49,7 +48,7 @@ namespace Odin.Data.Tests.Persistence.Repositories
 
             SetupRepositoryWithSource(new[] { order });
 
-            var orders = _ordersRepository.GetOrdersFor(consultant.Id);
+            var orders = _ordersRepository.GetOrdersFor(consultant.Id,UserRoles.Consultant);
 
             orders.Should().HaveCount(0);
         }
@@ -62,7 +61,7 @@ namespace Odin.Data.Tests.Persistence.Repositories
 
             SetupRepositoryWithSource(new[] { order });
 
-            var orders = _ordersRepository.GetOrdersFor(consultant.Id);
+            var orders = _ordersRepository.GetOrdersFor(consultant.Id, UserRoles.Consultant);
 
             orders.Should().HaveCount(0);
         }
@@ -75,7 +74,7 @@ namespace Odin.Data.Tests.Persistence.Repositories
             
             SetupRepositoryWithSource(new[] { order });
 
-            var orders = _ordersRepository.GetOrdersFor(consultant.Id);
+            var orders = _ordersRepository.GetOrdersFor(consultant.Id, UserRoles.Consultant);
 
             orders.Should().HaveCount(1);
         }
@@ -90,7 +89,7 @@ namespace Odin.Data.Tests.Persistence.Repositories
             
             SetupRepositoryWithSource(new[] { order1, order2 });
 
-            var orders = _ordersRepository.GetOrdersFor(consultant1.Id);
+            var orders = _ordersRepository.GetOrdersFor(consultant1.Id, UserRoles.Consultant);
 
             orders.Should().HaveCount(1);
             orders.FirstOrDefault()?.Id.Should().Be("1");

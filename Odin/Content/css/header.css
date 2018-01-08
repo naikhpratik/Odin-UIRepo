@@ -9,6 +9,7 @@
 
 .notification-dropdown > li.notifications_unread {
   border-bottom: solid;
+  width: 100%;
   border-bottom-color: lightgray;
   border-bottom-width: medium;
   background-image: url("/Content/Images/icn_attention.png");
@@ -24,6 +25,7 @@
 
 .notification-dropdown > li.notifications_read {
   border-bottom: solid;
+  width: 100%;
   border-bottom-color: lightgray;
   border-bottom-width: medium;
   background-image: url("/Content/Images/icn_attention.png");

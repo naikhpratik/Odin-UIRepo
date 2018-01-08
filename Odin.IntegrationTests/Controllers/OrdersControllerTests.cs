@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using FluentAssertions;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Moq;
 using NUnit.Framework;
 using Odin.Controllers;
@@ -9,19 +11,13 @@ using Odin.Data.Persistence;
 using Odin.Helpers;
 using Odin.IntegrationTests.Extensions;
 using Odin.IntegrationTests.TestAttributes;
+using Odin.ViewModels.Orders.Index;
 using Odin.ViewModels.Orders.Transferee;
+using Odin.ViewModels.Shared;
 using System;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using Odin.ViewModels.Orders.Transferee;
-using FluentAssertions;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNet.Identity;
-using Odin.ViewModels.Orders;
-using Odin.ViewModels.Orders.Index;
-using Odin.ViewModels.Shared;
-using System.Collections.Generic;
 
 namespace Odin.IntegrationTests.Controllers
 {
@@ -81,7 +77,7 @@ namespace Odin.IntegrationTests.Controllers
 
             _controller = new OrdersController(unitOfWork, mapper, accountHelper);
             _context.Orders.AddRange(orders);
-            _controller.MockCurrentUser(_dsc.Id, _dsc.UserName);
+            _controller.MockCurrentUserAndRole(_dsc.Id, _dsc.UserName,UserRoles.Consultant);
 
             Notification notification = new Notification();
             notification.NotificationType = NotificationType.OrderCreated;
@@ -97,17 +93,12 @@ namespace Odin.IntegrationTests.Controllers
             _context.SaveChanges();
 
             HistoryViewModel historyViewModel = new HistoryViewModel();
-            historyViewModel.NotificationMessage = notification.Message;
+            historyViewModel.Message = notification.Message;
 
-            historyViewModel.NotificationOrderId = notification.OrderId;
-            historyViewModel.NotificationTitle = notification.Title;
+            historyViewModel.OrderId = notification.OrderId;
+            historyViewModel.Title = notification.Title;
 
-            historyViewModel.IsRead = false;
-            historyViewModel.IsRemoved = false;
-            historyViewModel.NotificationUserNotificationId = notification.Id;
-
-
-            historyViewModel.NotificationNotificationType = NotificationType.OrderCreated;
+            historyViewModel.Id = notification.Id;
 
             //act 
             var result = _controller.HistoryPartial(order.Id) as PartialViewResult;
@@ -283,7 +274,7 @@ namespace Odin.IntegrationTests.Controllers
 
             var order = new Order() { SeCustNumb = "867-5309", Transferee = _transferee, Consultant = _dsc, ProgramManager = _pm, TrackingId = "123Test" };
             order.HomeFinding = new HomeFinding();
-            _controller.MockCurrentUser(_dsc.Id, _dsc.UserName);
+            _controller.MockCurrentUserAndRole(_dsc.Id, _dsc.UserName,UserRoles.Consultant);
             _context.Orders.Add(order);
             _context.SaveChanges();
 
@@ -341,7 +332,7 @@ namespace Odin.IntegrationTests.Controllers
 
             var order = new Order() { SeCustNumb = "867-5309", Transferee = _transferee, Consultant = _dsc, ProgramManager = _pm, TrackingId = "123Test" };
             order.HomeFinding = new HomeFinding();
-            _controller.MockCurrentUser(_dsc.Id, _dsc.UserName);
+            _controller.MockCurrentUserAndRole(_dsc.Id, _dsc.UserName, UserRoles.Consultant);
             _context.Orders.Add(order);
             _context.SaveChanges();
 

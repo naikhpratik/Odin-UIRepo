@@ -42,8 +42,6 @@ namespace Odin.Tests.Controllers.Api
             mockUnitOfWork.SetupGet(u => u.Children).Returns(_mockChildrenRepository.Object);
             mockUnitOfWork.SetupGet(u => u.Pets).Returns(_mockPetsRepository.Object);
             mockUnitOfWork.SetupGet(u => u.Appointments).Returns(_mockAppointmentsRepository.Object);
-            
-
 
             var mockQueueStore = new Mock<IQueueStore>();
             var mockAccountHelper = new Mock<IAccountHelper>();
@@ -51,15 +49,16 @@ namespace Odin.Tests.Controllers.Api
 
             _userId = "1";
             _userName = "TestUser";
-            _controller.MockCurrentUser(_userId,_userName);
+            _controller.MockCurrentUserAndRole(_userId,_userName,UserRoles.Consultant);
         }
 
         [TestMethod]
         public void UpsertDetailsServicesTest_NoServices()
         {
             var orderId = "1";
-            Order order = new Order() { Id = orderId };
-            _mockRepository.Setup(r => r.GetOrderById(orderId)).Returns(order);
+            
+            Order order = new Order() { Id = orderId};
+            _mockRepository.Setup(r => r.GetOrderFor(_userId,orderId,UserRoles.Consultant)).Returns(order);
             OrdersTransfereeDetailsServiceDto dto = new OrdersTransfereeDetailsServiceDto() { Id = "1", ScheduledDate = DateTime.Now,  CompletedDate = DateTime.Now};                
             OrdersTransfereeDetailsServicesDto dtos = new OrdersTransfereeDetailsServicesDto() { Id = "1" };
             List<OrdersTransfereeDetailsServiceDto> svc = new List<OrdersTransfereeDetailsServiceDto>();
@@ -108,7 +107,7 @@ namespace Odin.Tests.Controllers.Api
             var orderId = "1";
 
             Order order = new Order() { Id = orderId, DestinationCity = "Houston", DestinationCountry = "USA", DestinationState = "Texas"};
-            _mockRepository.Setup(r => r.GetOrderFor(_userId,orderId)).Returns(order);
+            _mockRepository.Setup(r => r.GetOrderFor(_userId,orderId,UserRoles.Consultant)).Returns(order);
 
             var dto = new OrdersTransfereeIntakeDestinationDto() { Id = orderId, DestinationCountry = "Canada", DestinationCity = "Toronto", DestinationState = "Alberta"};         
             
@@ -122,7 +121,7 @@ namespace Odin.Tests.Controllers.Api
             var orderId = "1";
             Order order = null;
 
-            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId, UserRoles.Consultant)).Returns(order);
 
             var dto = new OrdersTransfereeIntakeDestinationDto() { Id = orderId, DestinationCountry = "Canada", DestinationCity = "Toronto", DestinationState = "Alberta" };
 
@@ -136,7 +135,7 @@ namespace Odin.Tests.Controllers.Api
             var orderId = "1";
 
             Order order = new Order() { Id = orderId};
-            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId, UserRoles.Consultant)).Returns(order);
 
             var dto = new OrdersTransfereeIntakeOriginDto() { Id = orderId, OriginCountry = "Canada", OriginCity = "Toronto", OriginState = "Alberta" };
 
@@ -150,7 +149,7 @@ namespace Odin.Tests.Controllers.Api
             var orderId = "1";
             Order order = null;
 
-            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId, UserRoles.Consultant)).Returns(order);
 
             var dto = new OrdersTransfereeIntakeOriginDto() { Id = orderId, OriginCountry = "Canada", OriginCity = "Toronto", OriginState = "Alberta" };
 
@@ -164,7 +163,7 @@ namespace Odin.Tests.Controllers.Api
             var orderId = "1";
 
             Order order = new Order() { Id = orderId };
-            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId, UserRoles.Consultant)).Returns(order);
 
             var dto = new OrdersTransfereeIntakeFamilyDto() { Id = orderId, SpouseName = "Test Name"};
 
@@ -178,7 +177,7 @@ namespace Odin.Tests.Controllers.Api
             var orderId = "1";
             Order order = null;
 
-            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId, UserRoles.Consultant)).Returns(order);
 
             var dto = new OrdersTransfereeIntakeFamilyDto() { Id = orderId, SpouseName = "Test Name" };
 
@@ -192,7 +191,7 @@ namespace Odin.Tests.Controllers.Api
             var orderId = "1";
 
             Order order = new Order() { Id = orderId };
-            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId, UserRoles.Consultant)).Returns(order);
 
 
             var result = _controller.InsertChild(orderId) as IHttpActionResult;
@@ -207,7 +206,7 @@ namespace Odin.Tests.Controllers.Api
         {
             var orderId = "1";
             Order order = null;
-            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId, UserRoles.Consultant)).Returns(order);
 
             var result = _controller.InsertChild(orderId) as IHttpActionResult;
             result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
@@ -245,7 +244,7 @@ namespace Odin.Tests.Controllers.Api
             var serviceTypeId = 1;
 
             Order order = new Order() { Id = orderId };
-            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId, UserRoles.Consultant)).Returns(order);
 
             var result = _controller.InsertService(order.Id,serviceTypeId) as IHttpActionResult;
             result.Should().BeOfType<System.Web.Http.Results.OkNegotiatedContentResult<string>>();
@@ -261,7 +260,7 @@ namespace Odin.Tests.Controllers.Api
             var serviceTypeId = 1;
 
             Order order = null;
-            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId, UserRoles.Consultant)).Returns(order);
 
             var result = _controller.InsertService(orderId, serviceTypeId) as IHttpActionResult;
             result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
@@ -273,7 +272,7 @@ namespace Odin.Tests.Controllers.Api
             var orderId = "1";
            
             Order order = new Order(){Id = orderId};
-            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId, UserRoles.Consultant)).Returns(order);
 
             var dto = new OrdersTransfereeIntakeServicesDto() {Id = orderId};
 
@@ -287,7 +286,7 @@ namespace Odin.Tests.Controllers.Api
             var orderId = "1";
 
             Order order = null;
-            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId, UserRoles.Consultant)).Returns(order);
 
             var dto = new OrdersTransfereeIntakeServicesDto() { Id = orderId };
 
@@ -301,7 +300,7 @@ namespace Odin.Tests.Controllers.Api
             var orderId = "1";
 
             Order order = new Order() { Id = orderId };
-            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId, UserRoles.Consultant)).Returns(order);
 
             var dto = new OrdersTransfereeIntakeRmcDto() { Id = orderId };
 
@@ -315,7 +314,7 @@ namespace Odin.Tests.Controllers.Api
             var orderId = "1";
 
             Order order = null;
-            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId, UserRoles.Consultant)).Returns(order);
 
             var dto = new OrdersTransfereeIntakeRmcDto() { Id = orderId };
 
@@ -330,7 +329,7 @@ namespace Odin.Tests.Controllers.Api
             var orderId = "1";
 
             Order order = new Order() { Id = orderId };
-            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId, UserRoles.Consultant)).Returns(order);
 
             var result = _controller.InsertPet(orderId) as IHttpActionResult;
             result.Should().BeOfType<System.Web.Http.Results.OkNegotiatedContentResult<string>>();
@@ -344,7 +343,7 @@ namespace Odin.Tests.Controllers.Api
         {
             var orderId = "1";
             Order order = null;
-            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId, UserRoles.Consultant)).Returns(order);
 
             var result = _controller.InsertPet(orderId) as IHttpActionResult;
             result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
@@ -381,7 +380,7 @@ namespace Odin.Tests.Controllers.Api
             var orderId = "1";
 
             Order order = new Order() { Id = orderId };
-            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId, UserRoles.Consultant)).Returns(order);
 
             var dto = new OrdersTransfereeIntakeTempHousingDto() { Id = orderId };
 
@@ -395,7 +394,7 @@ namespace Odin.Tests.Controllers.Api
             var orderId = "1";
 
             Order order = null;
-            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId, UserRoles.Consultant)).Returns(order);
 
             var dto = new OrdersTransfereeIntakeTempHousingDto() { Id = orderId };
 
@@ -409,7 +408,7 @@ namespace Odin.Tests.Controllers.Api
             var orderId = "1";
 
             Order order = new Order() { Id = orderId };
-            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId, UserRoles.Consultant)).Returns(order);
 
             var dto = new OrdersTransfereeIntakeHomeFindingDto() { Id = orderId };
 
@@ -423,7 +422,7 @@ namespace Odin.Tests.Controllers.Api
             var orderId = "1";
 
             Order order = null;
-            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId, UserRoles.Consultant)).Returns(order);
 
             var dto = new OrdersTransfereeIntakeHomeFindingDto() { Id = orderId };
 
@@ -437,7 +436,7 @@ namespace Odin.Tests.Controllers.Api
             var orderId = "1";
 
             Order order = new Order() { Id = orderId };
-            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId, UserRoles.Consultant)).Returns(order);
 
             var dto = new OrdersTransfereeIntakeLeaseDto() { Id = orderId };
 
@@ -451,7 +450,7 @@ namespace Odin.Tests.Controllers.Api
             var orderId = "1";
 
             Order order = null;
-            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId, UserRoles.Consultant)).Returns(order);
 
             var dto = new OrdersTransfereeIntakeLeaseDto() { Id = orderId };
 
@@ -465,7 +464,7 @@ namespace Odin.Tests.Controllers.Api
             var orderId = "1";
 
             Order order = new Order() { Id = orderId };
-            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId, UserRoles.Consultant)).Returns(order);
 
             var dto = new OrdersTransfereeIntakeRelocationDto() { Id = orderId };
 
@@ -479,7 +478,7 @@ namespace Odin.Tests.Controllers.Api
             var orderId = "1";
 
             Order order = null;
-            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId)).Returns(order);
+            _mockRepository.Setup(r => r.GetOrderFor(_userId, orderId, UserRoles.Consultant)).Returns(order);
 
             var dto = new OrdersTransfereeIntakeRelocationDto() { Id = orderId };
 

@@ -584,73 +584,73 @@ namespace Odin.Data.Persistence.Migrations
                 type.ActionLabel = "Going to receive 'Language Assistance'";
             }
 
-            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Telephone systems".ToUpper()))
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Telephone Systems".ToUpper()))
             {
                 context.ServiceTypes.Add(new ServiceType()
                 {
-                    Name = "Telephone systems",
+                    Name = "Telephone Systems",
                     Category = ServiceCategory.SettlingIn,
                     SortOrder = 21,
                     Default = (int)DefaultType.No,
-                    ActionLabel = "Going to compare 'Telephone systems'"
+                    ActionLabel = "Going to compare 'Telephone Systems'"
                 });
             }
             else
             {
-                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Telephone systems".ToUpper());
+                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Telephone Systems".ToUpper());
                 if (type.SortOrder == 0)
                 {
                     type.SortOrder = 21;
                     type.Default = (int)DefaultType.No;
 
                 }
-                type.ActionLabel = "Going to compare 'Telephone systems'";
+                type.ActionLabel = "Going to compare 'Telephone Systems'";
             }
 
-            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Utility hook-up".ToUpper()))
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Utility Hook-up".ToUpper()))
             {
                 context.ServiceTypes.Add(new ServiceType()
                 {
-                    Name = "Utility hook-up",
+                    Name = "Utility Hook-up",
                     Category = ServiceCategory.SettlingIn,
                     SortOrder = 22,
                     Default = (int)DefaultType.No,
-                    ActionLabel = "Going to work on 'Utility hook-up'"
+                    ActionLabel = "Going to work on 'Utility Hook-up'"
                 });
             }
             else
             {
-                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Utility hook-up".ToUpper());
+                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Utility Hook-up".ToUpper());
                 if (type.SortOrder == 0)
                 {
                     type.SortOrder = 22;
                     type.Default = (int)DefaultType.No;
 
                 }
-                type.ActionLabel = "Going to work on 'Utility hook-up'";
+                type.ActionLabel = "Going to work on 'Utility Hook-up'";
             }
 
-            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Internet service providers".ToUpper()))
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Internet Service Providers".ToUpper()))
             {
                 context.ServiceTypes.Add(new ServiceType()
                 {
-                    Name = "Internet service providers",
+                    Name = "Internet Service Providers",
                     Category = ServiceCategory.SettlingIn,
                     SortOrder = 23,
                     Default = (int)DefaultType.No,
-                    ActionLabel = "Researching available 'Internet service providers'"
+                    ActionLabel = "Researching available 'Internet Service Providers'"
                 });
             }
             else
             {
-                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Internet service providers".ToUpper());
+                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Internet Service Providers".ToUpper());
                 if (type.SortOrder == 0)
                 {
                     type.SortOrder = 23;
                     type.Default = (int)DefaultType.No;
 
                 }
-                type.ActionLabel = "Researching available 'Internet service providers'";
+                type.ActionLabel = "Researching available 'Internet Service Providers'";
             }
 
             if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Furniture Rental".ToUpper()))
@@ -697,224 +697,224 @@ namespace Odin.Data.Persistence.Migrations
                 type.ActionLabel = "Going to complete 'Furniture Purchase'";
             }
 
-            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Appliances(compatibility / purchase)".ToUpper()))
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Appliances(Compatibility / Purchase)".ToUpper()))
             {
                 context.ServiceTypes.Add(new ServiceType()
                 {
-                    Name = "Appliances(compatibility / purchase)",
+                    Name = "Appliances(Compatibility / Purchase)",
                     Category = ServiceCategory.SettlingIn,
                     SortOrder = 26,
                     Default = (int)DefaultType.No,
-                    ActionLabel = "Going to shop for 'Appliances(compatibility / purchase)'"
+                    ActionLabel = "Going to shop for 'Appliances(Compatibility / Purchase)'"
                 });
             }
             else
             {
-                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Appliances(compatibility / purchase)".ToUpper());
+                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Appliances(Compatibility / Purchase)".ToUpper());
                 if (type.SortOrder == 0)
                 {
                     type.SortOrder = 26;
                     type.Default = (int)DefaultType.No;
                 }
-                type.ActionLabel = "Going to shop for 'Appliances(compatibility / purchase)'";
+                type.ActionLabel = "Going to shop for 'Appliances(Compatibility / Purchase)'";
             }
 
-            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Driving/auto info (licensing / driving schools)".ToUpper()))
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Driving/Auto Info (Licensing / Driving Schools)".ToUpper()))
             {
                 context.ServiceTypes.Add(new ServiceType()
                 {
-                    Name = "Driving/auto info (licensing / driving schools)",
+                    Name = "Driving/Auto Info (Licensing / Driving Schools)",
                     Category = ServiceCategory.SettlingIn,
                     SortOrder = 7,
                     Default = (int)DefaultType.International,
-                    ActionLabel = "Going to look into 'Driving/auto info (licensing / driving schools)'"
+                    ActionLabel = "Going to look into 'Driving/Auto Info (Licensing / Driving Schools)'"
                 });
             }
             else
             {
-                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Driving/auto info (licensing / driving schools)".ToUpper());
+                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Driving/Auto Info (Licensing / Driving Schools)".ToUpper());
                 if (type.SortOrder == 0)
                 {
                     type.SortOrder = 7;
                     type.Default = (int)DefaultType.International;
                 }
-                type.ActionLabel = "Going to look into 'Driving/auto info (licensing / driving schools)'";
+                type.ActionLabel = "Going to look into 'Driving/Auto Info (Licensing / Driving Schools)'";
             }
 
-            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Transportation options".ToUpper()))
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Transportation Options".ToUpper()))
             {
                 context.ServiceTypes.Add(new ServiceType()
                 {
-                    Name = "Transportation options",
+                    Name = "Transportation Options",
                     Category = ServiceCategory.SettlingIn,
                     SortOrder = 27,
                     Default = (int)DefaultType.No,
-                    ActionLabel = "Going to look into 'Transportation options'"
+                    ActionLabel = "Going to look into 'Transportation Options'"
                 });
             }
             else
             {
-                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Transportation options".ToUpper());
+                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Transportation Options".ToUpper());
                 if (type.SortOrder == 0)
                 {
                     type.SortOrder = 27;
                     type.Default = (int)DefaultType.No;
                 }
-                type.ActionLabel = "Going to look into 'Transportation options'";
+                type.ActionLabel = "Going to look into 'Transportation Options'";
             }
 
-            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Homeowner's services".ToUpper()))
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Homeowner's Services".ToUpper()))
             {
                 context.ServiceTypes.Add(new ServiceType()
                 {
-                    Name = "Homeowner's services",
+                    Name = "Homeowner's Services",
                     Category = ServiceCategory.SettlingIn,
                     SortOrder = 28,
                     Default = (int)DefaultType.No,
-                    ActionLabel = "Exploring various 'Homeowner's services'"
+                    ActionLabel = "Exploring various 'Homeowner's Services'"
                 });
             }
             else
             {
-                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Homeowner's services".ToUpper());
+                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Homeowner's Services".ToUpper());
                 if (type.SortOrder == 0)
                 {
                     type.SortOrder = 28;
                     type.Default = (int)DefaultType.No;
                 }
-                type.ActionLabel = "Exploring various 'Homeowner's services'";
+                type.ActionLabel = "Exploring various 'Homeowner's Services'";
             }
 
-            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Insurance (auto / renter / homeowner)".ToUpper()))
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Insurance (Auto / Renter / Homeowner)".ToUpper()))
             {
                 context.ServiceTypes.Add(new ServiceType()
                 {
-                    Name = "Insurance (auto / renter / homeowner)",
+                    Name = "Insurance (Auto / Renter / Homeowner)",
                     Category = ServiceCategory.SettlingIn,
                     SortOrder = 29,
                     Default = (int)DefaultType.No,
-                    ActionLabel = "Shopping for 'Insurance (auto / renter / homeowner)'"
+                    ActionLabel = "Shopping for 'Insurance (Auto / Renter / Homeowner)'"
                 });
             }
             else
             {
-                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Insurance (auto / renter / homeowner)".ToUpper());
+                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Insurance (Auto / Renter / Homeowner)".ToUpper());
                 if (type.SortOrder == 0)
                 {
                     type.SortOrder = 29;
                     type.Default = (int)DefaultType.No;
                 }
-                type.ActionLabel = "Shopping for 'Insurance (auto / renter / homeowner)'";
+                type.ActionLabel = "Shopping for 'Insurance (Auto / Renter / Homeowner)'";
             }
 
-            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Medical/dental information".ToUpper()))
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Medical/Dental Information".ToUpper()))
             {
                 context.ServiceTypes.Add(new ServiceType()
                 {
-                    Name = "Medical/dental information",
+                    Name = "Medical/Dental Information",
                     Category = ServiceCategory.SettlingIn,
                     SortOrder = 30,
                     Default = (int)DefaultType.No,
-                    ActionLabel = "Researching 'Medical/dental information'"
+                    ActionLabel = "Researching 'Medical/Dental Information'"
                 });
             }
             else
             {
-                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Medical/dental information".ToUpper());
+                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Medical/Dental Information".ToUpper());
                 if (type.SortOrder == 0)
                 {
                     type.SortOrder = 30;
                     type.Default = (int)DefaultType.No;
                 }
-                type.ActionLabel = "Researching 'Medical/dental information'";
+                type.ActionLabel = "Researching 'Medical/Dental Information'";
             }
 
-            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Money issues/banking".ToUpper()))
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Money Issues/Banking".ToUpper()))
             {
                 context.ServiceTypes.Add(new ServiceType()
                 {
-                    Name = "Money issues/banking",
+                    Name = "Money Issues/Banking",
                     Category = ServiceCategory.SettlingIn,
                     SortOrder = 6,
                     Default = (int)DefaultType.International,
-                    ActionLabel = "Looking into and resolving 'Money issues/banking'"
+                    ActionLabel = "Looking into and resolving 'Money Issues/Banking'"
                 });
             }
             else
             {
-                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Money issues/banking".ToUpper());
+                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Money Issues/Banking".ToUpper());
                 if (type.SortOrder == 0)
                 {
                     type.SortOrder = 6;
                     type.Default = (int)DefaultType.International;
                 }
-                type.ActionLabel = "Looking into and resolving 'Money issues/banking'";
+                type.ActionLabel = "Looking into and resolving 'Money Issues/Banking'";
             }
 
-            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Mail services".ToUpper()))
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Mail Services".ToUpper()))
             {
                 context.ServiceTypes.Add(new ServiceType()
                 {
-                    Name = "Mail services",
+                    Name = "Mail Services",
                     Category = ServiceCategory.SettlingIn,
                     SortOrder = 31,
                     Default = (int)DefaultType.No,
-                    ActionLabel = "Finding 'Mail services'"
+                    ActionLabel = "Finding 'Mail Services'"
                 });
             }
             else
             {
-                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Mail services".ToUpper());
+                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Mail Services".ToUpper());
                 if (type.SortOrder == 0)
                 {
                     type.SortOrder = 31;
                     type.Default = (int)DefaultType.No;
                 }
-                type.ActionLabel = "Finding 'Mail services'";
+                type.ActionLabel = "Finding 'Mail Services'";
             }
 
-            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Domestic services(maid / cook / driver)".ToUpper()))
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Domestic Services(Maid / Cook / Driver)".ToUpper()))
             {
                 context.ServiceTypes.Add(new ServiceType()
                 {
-                    Name = "Domestic services(maid / cook / driver)",
+                    Name = "Domestic Services(Maid / Cook / Driver)",
                     Category = ServiceCategory.SettlingIn,
                     SortOrder = 32,
                     Default = (int)DefaultType.No,
-                    ActionLabel = "Finding and hiring 'Domestic services(maid / cook / driver)'"
+                    ActionLabel = "Finding and hiring 'Domestic Services(Maid / Cook / Driver)'"
                 });
             }
             else
             {
-                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Domestic services(maid / cook / driver)".ToUpper());
+                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Domestic Services(Maid / Cook / Driver)".ToUpper());
                 if (type.SortOrder == 0)
                 {
                     type.SortOrder = 32;
                     type.Default = (int)DefaultType.No;
                 }
-                type.ActionLabel = "Finding and hiring 'Domestic services(maid / cook / driver)'";
+                type.ActionLabel = "Finding and hiring 'Domestic Services(Maid / Cook / Driver)'";
             }
 
-            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Pets (care/licensing/etc.)".ToUpper()))
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Pets (Care / Licensing / etc...)".ToUpper()))
             {
                 context.ServiceTypes.Add(new ServiceType()
                 {
-                    Name = "Pets (care/licensing/etc.)",
+                    Name = "Pets (Care / Licensing / etc...)",
                     Category = ServiceCategory.SettlingIn,
                     SortOrder = 33,
                     Default = (int)DefaultType.No,
-                    ActionLabel = "Finding 'Pets (care/licensing/etc.)'"
+                    ActionLabel = "Pets (Care / Licensing / etc...)'"
                 });
             }
             else
             {
-                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Pets (care/licensing/etc.)".ToUpper());
+                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Pets (Care / Licensing / etc...)".ToUpper());
                 if (type.SortOrder == 0)
                 {
                     type.SortOrder = 33;
                     type.Default = (int)DefaultType.No;
                 }
-                type.ActionLabel = "Finding 'Pets (care/licensing/etc.)'";
+                type.ActionLabel = "Finding 'Pets (Care / Licensing / etc...)'";
             }
 
             if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Childcare".ToUpper()))
@@ -993,70 +993,70 @@ namespace Odin.Data.Persistence.Migrations
                 type.ActionLabel = "Attending a briefing on 'Area Orientation / Overview'";
             }
 
-            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Housing/Neighborhoods".ToUpper()))
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Housing / Neighborhoods".ToUpper()))
             {
                 context.ServiceTypes.Add(new ServiceType()
                 {
-                    Name = "Housing/Neighborhoods",
+                    Name = "Housing / Neighborhoods",
                     Category = ServiceCategory.AreaOrientation,
                     SortOrder = 8,
                     Default = (int)DefaultType.No,
-                    ActionLabel = "Researching and visiting 'Housing/Neighborhoods'"
+                    ActionLabel = "Researching and visiting 'Housing / Neighborhoods'"
                 });
             }
             else
             {
-                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Housing/Neighborhoods".ToUpper());
+                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Housing / Neighborhoods".ToUpper());
                 if (type.SortOrder == 0)
                 {
                     type.SortOrder = 8;
                     type.Default = (int)DefaultType.No;
                 }
-                type.ActionLabel = "Researching and visiting 'Housing/Neighborhoods'";
+                type.ActionLabel = "Researching and visiting 'Housing / Neighborhoods'";
             }
 
-            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Religious worship".ToUpper()))
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Religious Worship".ToUpper()))
             {
                 context.ServiceTypes.Add(new ServiceType()
                 {
-                    Name = "Religious worship",
+                    Name = "Religious Worship",
                     Category = ServiceCategory.AreaOrientation,
                     SortOrder = 9,
                     Default = (int)DefaultType.No,
-                    ActionLabel = "Finding places for 'Religious worship'"
+                    ActionLabel = "Finding places for 'Religious Worship'"
                 });
             }
             else
             {
-                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Religious worship".ToUpper());
+                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Religious Worship".ToUpper());
                 if (type.SortOrder == 0)
                 {
                     type.SortOrder = 9;
                     type.Default = (int)DefaultType.No;
                 }
-                type.ActionLabel = "Finding places for 'Religious worship'";
+                type.ActionLabel = "Finding places for 'Religious Worship'";
             }
 
-            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Shopping information".ToUpper()))
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Shopping Information".ToUpper()))
             {
                 context.ServiceTypes.Add(new ServiceType()
                 {
-                    Name = "Shopping information",
+                    Name = "Shopping Information",
                     Category = ServiceCategory.AreaOrientation,
                     SortOrder = 10,
                     Default = (int)DefaultType.No,
-                    ActionLabel = "Researching 'Shopping information'"
+                    ActionLabel = "Researching 'Shopping Information'"
                 });
             }
             else
             {
-                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Shopping information".ToUpper());
+                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Shopping Information".ToUpper());
                 if (type.SortOrder == 0)
                 {
                     type.SortOrder = 10;
                     type.Default = (int)DefaultType.No;
                 }
-                type.ActionLabel = "Researching 'Shopping information'";
+                type.ActionLabel = "Researching 'Shopping Information'";
             }
 
             if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Restaurants".ToUpper()))
@@ -1081,92 +1081,92 @@ namespace Odin.Data.Persistence.Migrations
                 type.ActionLabel = "Locating 'Restaurants'";
             }
 
-            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Arts and leisure facilities".ToUpper()))
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Arts and Leisure Facilities".ToUpper()))
             {
                 context.ServiceTypes.Add(new ServiceType()
                 {
-                    Name = "Arts and leisure facilities",
+                    Name = "Arts and Leisure Facilities",
                     Category = ServiceCategory.AreaOrientation,
                     SortOrder = 12,
                     Default = (int)DefaultType.No,
-                    ActionLabel = "Locating local 'Arts and leisure facilities'"
+                    ActionLabel = "Locating local 'Arts and Leisure Facilities'"
                 });
             }
             else
             {
-                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Arts and leisure facilities".ToUpper());
+                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Arts and Leisure Facilities".ToUpper());
                 if (type.SortOrder == 0)
                 {
                     type.SortOrder = 12;
                     type.Default = (int)DefaultType.No;
                 }
-                type.ActionLabel = "Locating local 'Arts and leisure facilities'";
+                type.ActionLabel = "Locating local 'Arts and Leisure Facilities'";
             }
 
-            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Clubs (social / health / recreational)".ToUpper()))
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Clubs (Social / Health / Recreational)".ToUpper()))
             {
                 context.ServiceTypes.Add(new ServiceType()
                 {
-                    Name = "Clubs (social / health / recreational)",
+                    Name = "Clubs (Social / Health / Recreational)",
                     Category = ServiceCategory.AreaOrientation,
                     SortOrder = 13,
                     Default = (int)DefaultType.No,
-                    ActionLabel = "Locating local 'Clubs (social / health / recreational)'"
+                    ActionLabel = "Locating local 'Clubs (Social / Health / Recreational)'"
                 });
             }
             else
             {
-                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Clubs (social / health / recreational)".ToUpper());
+                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Clubs (Social / Health / Recreational)".ToUpper());
                 if (type.SortOrder == 0)
                 {
                     type.SortOrder = 13;
                     type.Default = (int)DefaultType.No;
                 }
-                type.ActionLabel = "Locating local 'Clubs (social / health / recreational)'";
+                type.ActionLabel = "Locating local 'Clubs (Social / Health / Recreational)'";
             }
 
-            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Sports information".ToUpper()))
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Sports Information".ToUpper()))
             {
                 context.ServiceTypes.Add(new ServiceType()
                 {
-                    Name = "Sports information",
+                    Name = "Sports Information",
                     Category = ServiceCategory.AreaOrientation,
                     SortOrder = 14,
                     Default = (int)DefaultType.No,
-                    ActionLabel = "Aquiring 'Sports information'"
+                    ActionLabel = "Acquiring 'Sports Information'"
                 });
             }
             else
             {
-                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Sports information".ToUpper());
+                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Sports Information".ToUpper());
                 if (type.SortOrder == 0)
                 {
                     type.SortOrder = 14;
                     type.Default = (int)DefaultType.No;
                 }
-                type.ActionLabel = "Aquiring 'Sports information'";
+                type.ActionLabel = "Aquiring 'Sports Information'";
             }
 
-            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Volunteer associations".ToUpper()))
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Volunteer Associations".ToUpper()))
             {
                 context.ServiceTypes.Add(new ServiceType()
                 {
-                    Name = "Volunteer associations",
+                    Name = "Volunteer Associations",
                     Category = ServiceCategory.AreaOrientation,
                     SortOrder = 15,
                     Default = (int)DefaultType.No,
-                    ActionLabel = "Investigating 'Volunteer associations'"
+                    ActionLabel = "Investigating 'Volunteer Associations'"
                 });
             }
             else
             {
-                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Volunteer associations".ToUpper());
+                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Volunteer Associations".ToUpper());
                 if (type.SortOrder == 0)
                 {
                     type.SortOrder = 15;
                     type.Default = (int)DefaultType.No;
                 }
-                type.ActionLabel = "Investigating 'Volunteer associations'";
+                type.ActionLabel = "Investigating 'Volunteer Associations'";
             }
 
             if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Library".ToUpper()))
@@ -1191,48 +1191,48 @@ namespace Odin.Data.Persistence.Migrations
                 type.ActionLabel = "Locating the local 'Library'";
             }
 
-            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Emergency/police/fire".ToUpper()))
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Emergency / Police / Fire".ToUpper()))
             {
                 context.ServiceTypes.Add(new ServiceType()
                 {
-                    Name = "Emergency/police/fire",
+                    Name = "Emergency / Police / Fire",
                     Category = ServiceCategory.AreaOrientation,
                     SortOrder = 17,
                     Default = (int)DefaultType.No,
-                    ActionLabel = "Locating the local 'Emergency/police/fire'"
+                    ActionLabel = "Locating the local 'Emergency / Police / Fire'"
                 });
             }
             else
             {
-                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Emergency/police/fire".ToUpper());
+                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Emergency / Police / Fire".ToUpper());
                 if (type.SortOrder == 0)
                 {
                     type.SortOrder = 17;
                     type.Default = (int)DefaultType.No;
                 }
-                type.ActionLabel = "Locating the local 'Emergency/police/fire'";
+                type.ActionLabel = "Locating the local 'Emergency / Police / Fire'";
             }
 
-            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Local/Regional/Government Holidays".ToUpper()))
+            if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Local / Regional / Government Holidays".ToUpper()))
             {
                 context.ServiceTypes.Add(new ServiceType()
                 {
-                    Name = "Local/Regional/Government Holidays",
+                    Name = "Local / Regional / Government Holidays",
                     Category = ServiceCategory.AreaOrientation,
                     SortOrder = 18,
                     Default = (int)DefaultType.No,
-                    ActionLabel = "Marking the 'Local/Regional/Government Holidays'"
+                    ActionLabel = "Marking the 'Local / Regional / Government Holidays'"
                 });
             }
             else
             {
-                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Local/Regional/Government Holidays".ToUpper());
+                ServiceType type = context.ServiceTypes.SingleOrDefault(s => s.Name.Trim().ToUpper() == "Local / Regional / Government Holidays".ToUpper());
                 if (type.SortOrder == 0)
                 {
                     type.SortOrder = 18;
                     type.Default = (int)DefaultType.No;
                 }
-                type.ActionLabel = "Marking the 'Local/Regional/Government Holidays'";
+                type.ActionLabel = "Marking the 'Local / Regional / Government Holidays'";
             }
 
             if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Settling In / Overview".ToUpper()))

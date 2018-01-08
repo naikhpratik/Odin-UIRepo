@@ -70,6 +70,7 @@ namespace Odin
 
             // Page scripts
             bundles.Add(new ScriptBundle("~/Scripts/orders").Include("~/Scripts/app/views/orders.js", "~/Scripts/typeahead.js"));
+            bundles.Add(new ScriptBundle("~/Scripts/help").Include("~/Scripts/app/views/help.js"));
             bundles.Add(new ScriptBundle("~/Scripts/transferee").Include(
                 "~/Scripts/bootstrap-notify.min.js",
                 "~/Scripts/app/views/transferee.js",

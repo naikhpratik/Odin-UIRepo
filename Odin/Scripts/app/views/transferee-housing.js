@@ -1,6 +1,9 @@
 ﻿﻿var TransfereeHousingController = function (TransfereeHousingProperty) {
 
-    var init = function () {
+﻿    var _map;
+﻿    var _markerDict = {};
+
+﻿    var init = function () {
         console.log("Loading Housing");
 
         setupLikeDislikeControls();
@@ -50,7 +53,7 @@
         var centLng = parseFloat(mapDiv.attr("data-lng"));
 
         // 'map' refers to a <div> element with the ID map
-        var map = L.mapquest.map('map', {
+        _map = L.mapquest.map('map', {
             center: [37.7749, -122.4194],
             layers: L.mapquest.tileLayer('map'),
             zoom: 10
@@ -67,7 +70,7 @@
                     centLat = lat;
                     centLng = lng;
                 }
-                var marker = L.marker([lat, lng]).addTo(map);
+                var marker = L.marker([lat, lng]).addTo(_map);
 
                 var propertyAddress = $(this).find(".propertyAddress");
                 if (propertyAddress.length > 0) {
@@ -95,20 +98,22 @@
                         });
 
                     });
+                _markerDict[propertyId] = marker;
             }
         });
 
         if (!isNaN(centLat) && !isNaN(centLng)) {
-            map.setView(new L.LatLng(centLat, centLng), 10);
+            _map.setView(new L.LatLng(centLat, centLng), 10);
         } 
 
         //For some reason need to set height then call invalidateSize to get map displaying correctly.
         //Hacky, works now, look for better solution.
         mapDiv.height(300);
-        map.invalidateSize(false);
+        _map.invalidateSize(false);
     };
 
     var setupPropertiesList = function () {
+
         setupDatePickers();
 
         $(document).off('click', '.propertyItem');
@@ -135,7 +140,7 @@
     var setupLikeDislikeControls = function () {
         var likeSelector = '.likeDislike > .like';
         var dislikeSelector = '.likeDislike > .dislike';
-        var clickSelector = `${likeSelector}, ${dislikeSelector}`;
+        var clickSelector = likeSelector + ', ' + dislikeSelector;
 
         $(document).off('click', clickSelector);
         $(document).on('click', clickSelector, function (e) {
@@ -157,7 +162,17 @@
         });
     };
     var setupDatePickers = function () {
-        $('.date').datetimepicker({
+        var vDate = $('input[name=PropertyAvailabilityDate]').parent();
+        vDate.datetimepicker({
+            format: "DD-MMM-YYYY",
+            useCurrent: false,
+            keepOpen: true,
+            showClose: true,
+            toolbarPlacement: 'bottom',
+            icons: { close: 'custom-icon-check' }
+        });
+        var vDate = $('input[name=ViewingDate]').parent();
+        vDate.datetimepicker({
             format: "DD-MMM-YYYY h:mm A",
             useCurrent: false,
             keepOpen: true,
@@ -202,17 +217,7 @@
     };
 
     var export2PDF = function (choice) {
-        //window.location.href = "/Orders/PropertiesPartialPDF/" + currentOrderId + "?listChoice=" + choice;
-        $.ajax({
-            url: "/Orders/PropertiesPartialPDF/" + currentOrderId + "?listChoice=" + choice,
-            type: 'GET',
-            success: function (result) {
-                window.location.href = "/Orders/PropertiesPartialPDF/" + currentOrderId + "?listChoice=" + choice;
-            },
-            error: function () {
-                toast("No properties found that satisfy the selected option.", "warning");
-            }
-        });
+        window.location.href = "/Orders/PropertiesPartialPDF/" + currentOrderId + "?listChoice=" + choice;        
     };
 
     /*** Private Helpers ***/
@@ -297,6 +302,12 @@
                     toast("An unknown error has occurred.Please try again later.", "danger");
                 }
             });
+
+            if ((propertyId in _markerDict) && _markerDict[propertyId] !== null) {
+                _map.removeLayer(_markerDict[propertyId]);
+                _markerDict[propertyId] = null;
+            }
+
         }
     };
 

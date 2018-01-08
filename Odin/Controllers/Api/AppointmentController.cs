@@ -4,12 +4,15 @@ using Odin.Data.Core;
 using Odin.Data.Core.Dtos;
 using Odin.Data.Core.Models;
 using Odin.Domain;
+using Odin.Extensions;
+using Odin.Filters;
 using Odin.Interfaces;
 using System;
 using System.Web.Http;
 
 namespace Odin.Controllers.Api
 {
+    [Authorize]
     public class AppointmentController : ApiController
     {
         private readonly IOrderImporter _orderImporter;
@@ -24,7 +27,7 @@ namespace Odin.Controllers.Api
         }
                
         [HttpDelete]
-        [Authorize]
+        [RoleAuthorize(UserRoles.Consultant,UserRoles.ProgramManager)]
         [Route("api/orders/transferee/itinerary/appointment/{id}")]
         public IHttpActionResult DeleteAppointment(string Id)
         {
@@ -40,7 +43,7 @@ namespace Odin.Controllers.Api
             return Ok();
         }
         [HttpPost]
-        [Authorize]
+        [RoleAuthorize(UserRoles.Consultant, UserRoles.ProgramManager)]
         [Route("api/orders/transferee/itinerary/appointment")]
         public IHttpActionResult UpsertItineraryAppointment(AppointmentDto dto)
         {
@@ -48,8 +51,12 @@ namespace Odin.Controllers.Api
             var userId = User.Identity.GetUserId();
             var orderId = dto.OrderId;
 
-            var order = _unitOfWork.Orders.GetOrderFor(userId, orderId);
-
+            Order order = null;
+            if (User.IsInRole(UserRoles.ProgramManager) || User.IsInRole(UserRoles.Consultant))
+            {
+                order = _unitOfWork.Orders.GetOrderFor(userId, orderId,User.GetUserRole());
+            }
+           
             if (order == null)
             {
                 return NotFound();

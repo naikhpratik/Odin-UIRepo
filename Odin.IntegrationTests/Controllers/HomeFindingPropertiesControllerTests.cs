@@ -60,7 +60,7 @@ namespace Odin.IntegrationTests.Controllers
 
             // Act
             HomeFindingPropertiesController controller = SetUpHomeFindingPropertiesController();
-            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            controller.MockCurrentUserAndRole(dsc.Id, dsc.UserName,UserRoles.Consultant);
             controller.Create(propertyVM);
 
             // Assert
@@ -124,7 +124,7 @@ namespace Odin.IntegrationTests.Controllers
 
             // Act
             HomeFindingPropertiesController controller = SetUpHomeFindingPropertiesController();
-            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            controller.MockCurrentUserAndRole(dsc.Id, dsc.UserName,UserRoles.Consultant);
             controller.Create(propertyVM);
 
             // Assert

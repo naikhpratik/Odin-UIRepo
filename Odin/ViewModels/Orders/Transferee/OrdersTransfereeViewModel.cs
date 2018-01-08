@@ -58,7 +58,7 @@ namespace Odin.ViewModels.Orders.Transferee
 
         public bool IsVip { private get; set; }
 
-        [DisplayName("Vip:")]
+        [DisplayName("VIP:")]
         public string IsVipDisplay
         {
             get

@@ -5,6 +5,7 @@ using Odin.Data.Core;
 using Odin.Data.Core.Dtos;
 using Odin.Data.Core.Models;
 using Odin.Domain;
+using Odin.Extensions;
 using Odin.Filters;
 using Odin.Interfaces;
 using System;
@@ -59,8 +60,7 @@ namespace Odin.Controllers.Api
         public IHttpActionResult GetOrders()
         {
             var userId = User.Identity.GetUserId();
-
-            var orders = _unitOfWork.Orders.GetOrdersFor(userId);
+            var orders = _unitOfWork.Orders.GetOrdersFor(userId,User.GetUserRole());
 
             var transfereeIndexDtos = _mapper.Map<IEnumerable<Order>, IEnumerable<TransfereeIndexDto>>(orders);
 
@@ -74,7 +74,7 @@ namespace Odin.Controllers.Api
         {
             var userId = User.Identity.GetUserId();
 
-            var order = _unitOfWork.Orders.GetOrderFor(userId, dto.OrderId);
+            var order = _unitOfWork.Orders.GetOrderFor(userId, dto.OrderId, User.GetUserRole());
 
             if (order == null)
                 return NotFound();
@@ -92,12 +92,13 @@ namespace Odin.Controllers.Api
 
         [HttpPost]
         [Authorize]
+        [RoleAuthorize(UserRoles.ProgramManager,UserRoles.Consultant)]
         [Route("api/orders/transferee/intake/destination")]
         public IHttpActionResult UpdateIntakeDestination(OrdersTransfereeIntakeDestinationDto dto)
         {
 
             var userId = User.Identity.GetUserId();
-            var order = _unitOfWork.Orders.GetOrderFor(userId,dto.Id);
+            Order order = _unitOfWork.Orders.GetOrderFor(userId, dto.Id, User.GetUserRole());
 
             if (order == null)
             {
@@ -111,13 +112,13 @@ namespace Odin.Controllers.Api
         }
 
         [HttpPost]
-        [Authorize]
+        [RoleAuthorize(UserRoles.ProgramManager, UserRoles.Consultant)]
         [Route("api/orders/transferee/intake/origin")]
         public IHttpActionResult UpdateIntakeOrigin(OrdersTransfereeIntakeOriginDto dto)
         {
 
             var userId = User.Identity.GetUserId();
-            var order = _unitOfWork.Orders.GetOrderFor(userId,dto.Id);
+            Order order = _unitOfWork.Orders.GetOrderFor(userId, dto.Id, User.GetUserRole());
 
             if (order == null)
             {
@@ -131,12 +132,12 @@ namespace Odin.Controllers.Api
         }
 
         [HttpPost]
-        [Authorize]
+        [RoleAuthorize(UserRoles.ProgramManager, UserRoles.Consultant)]
         [Route("api/orders/transferee/intake/family")]
         public IHttpActionResult UpsertIntakeFamily(OrdersTransfereeIntakeFamilyDto dto)
         {
             var userId = User.Identity.GetUserId();
-            var order = _unitOfWork.Orders.GetOrderFor(userId,dto.Id);
+            Order order = _unitOfWork.Orders.GetOrderFor(userId, dto.Id, User.GetUserRole());
 
             if (order == null)
             {
@@ -181,12 +182,12 @@ namespace Odin.Controllers.Api
         }
 
         [HttpPost]
-        [Authorize]
+        [RoleAuthorize(UserRoles.ProgramManager, UserRoles.Consultant)]
         [Route("api/orders/transferee/children/{orderId}")]
         public IHttpActionResult InsertChild(string orderId)
         {
             var userId = User.Identity.GetUserId();
-            var order = _unitOfWork.Orders.GetOrderFor(userId,orderId);
+            Order order = _unitOfWork.Orders.GetOrderFor(userId, orderId, User.GetUserRole());
 
             if (order == null)
             {
@@ -202,7 +203,7 @@ namespace Odin.Controllers.Api
         }
 
         [HttpDelete]
-        [Authorize]
+        [RoleAuthorize(UserRoles.ProgramManager, UserRoles.Consultant)]
         [Route("api/orders/transferee/children/{id}")]
         public IHttpActionResult DeleteChild(string id)
         {
@@ -220,13 +221,13 @@ namespace Odin.Controllers.Api
         }
 
         [HttpPost]
-        [Authorize]
+        [RoleAuthorize(UserRoles.ProgramManager, UserRoles.Consultant)]
         [Route("api/orders/transferee/services/{orderId}/{id}")]
         public IHttpActionResult InsertService(string orderId, int id)
         {
 
             var userId = User.Identity.GetUserId();
-            var order = _unitOfWork.Orders.GetOrderFor(userId,orderId);
+            Order order = _unitOfWork.Orders.GetOrderFor(userId, orderId, User.GetUserRole());
 
             if (order == null)
             {
@@ -242,13 +243,13 @@ namespace Odin.Controllers.Api
         }
 
         [HttpPost]
-        [Authorize]
+        [RoleAuthorize(UserRoles.ProgramManager, UserRoles.Consultant)]
         [Route("api/orders/transferee/intake/services")]
         public IHttpActionResult UpdateIntakeServices(OrdersTransfereeIntakeServicesDto dto)
         {
 
             var userId = User.Identity.GetUserId();
-            var order = _unitOfWork.Orders.GetOrderFor(userId,dto.Id);
+            Order order = _unitOfWork.Orders.GetOrderFor(userId, dto.Id, User.GetUserRole());
 
             if (order == null)
             {
@@ -273,13 +274,12 @@ namespace Odin.Controllers.Api
         }
 
         [HttpPost]
-        [Authorize]                
+        [RoleAuthorize(UserRoles.ProgramManager, UserRoles.Consultant)]
         [Route("api/orders/transferee/details/services")]
         public IHttpActionResult UpsertDetailsServices(OrdersTransfereeDetailsServicesDto dto)
         {
-
             var userId = User.Identity.GetUserId();
-            var order = _unitOfWork.Orders.GetOrderById(dto.Id);
+            Order order = _unitOfWork.Orders.GetOrderFor(userId, dto.Id, User.GetUserRole());
 
             if (order == null)
             {
@@ -310,13 +310,13 @@ namespace Odin.Controllers.Api
         }
 
         [HttpPost]
-        [Authorize]
+        [RoleAuthorize(UserRoles.ProgramManager, UserRoles.Consultant)]
         [Route("api/orders/transferee/intake/rmc")]
         public IHttpActionResult UpdateIntakeRmc(OrdersTransfereeIntakeRmcDto dto)
         {
 
             var userId = User.Identity.GetUserId();
-            var order = _unitOfWork.Orders.GetOrderFor(userId, dto.Id);
+            Order order = _unitOfWork.Orders.GetOrderFor(userId, dto.Id, User.GetUserRole());
 
             if (order == null)
             {
@@ -330,12 +330,12 @@ namespace Odin.Controllers.Api
         }
 
         [HttpPost]
-        [Authorize]
+        [RoleAuthorize(UserRoles.ProgramManager, UserRoles.Consultant)]
         [Route("api/orders/transferee/pets/{orderId}")]
         public IHttpActionResult InsertPet(string orderId)
         {
             var userId = User.Identity.GetUserId();
-            var order = _unitOfWork.Orders.GetOrderFor(userId,orderId);
+            Order order = _unitOfWork.Orders.GetOrderFor(userId, orderId, User.GetUserRole());
 
             if (order == null)
             {
@@ -351,11 +351,10 @@ namespace Odin.Controllers.Api
         }
 
         [HttpDelete]
-        [Authorize]
+        [RoleAuthorize(UserRoles.ProgramManager, UserRoles.Consultant)]
         [Route("api/orders/transferee/pets/{id}")]
         public IHttpActionResult DeletePet(string id)
         {
-
             var userId = User.Identity.GetUserId();
             var pet = _unitOfWork.Pets.GetPetFor(userId, id);
 
@@ -369,14 +368,12 @@ namespace Odin.Controllers.Api
         }
 
         [HttpPost]
-        [Authorize]
+        [RoleAuthorize(UserRoles.ProgramManager, UserRoles.Consultant)]
         [Route("api/orders/transferee/intake/temphousing")]
         public IHttpActionResult UpdateIntakeTempHousing(OrdersTransfereeIntakeTempHousingDto dto)
         {
-
             var userId = User.Identity.GetUserId();
-
-            var order = _unitOfWork.Orders.GetOrderFor(userId, dto.Id);
+            Order order = _unitOfWork.Orders.GetOrderFor(userId, dto.Id, User.GetUserRole());
 
             if (order == null)
             {
@@ -390,13 +387,12 @@ namespace Odin.Controllers.Api
         }
 
         [HttpPost]
-        [Authorize]
+        [RoleAuthorize(UserRoles.ProgramManager, UserRoles.Consultant)]
         [Route("api/orders/transferee/intake/homefinding")]
         public IHttpActionResult UpsertIntakeHomeFinding(OrdersTransfereeIntakeHomeFindingDto dto)
         {
             var userId = User.Identity.GetUserId();
-
-            var order = _unitOfWork.Orders.GetOrderFor(userId, dto.Id);
+            Order order = _unitOfWork.Orders.GetOrderFor(userId, dto.Id, User.GetUserRole());
 
             if (order == null)
             {
@@ -418,12 +414,12 @@ namespace Odin.Controllers.Api
         }
 
         [HttpPost]
-        [Authorize]
+        [RoleAuthorize(UserRoles.ProgramManager, UserRoles.Consultant)]
         [Route("api/orders/transferee/intake/lease")]
         public IHttpActionResult UpdateIntakeLease(OrdersTransfereeIntakeLeaseDto dto)
         {
             var userId = User.Identity.GetUserId();
-            var order = _unitOfWork.Orders.GetOrderFor(userId,dto.Id);
+            Order order = _unitOfWork.Orders.GetOrderFor(userId, dto.Id, User.GetUserRole());
 
             if (order == null)
             {
@@ -437,14 +433,14 @@ namespace Odin.Controllers.Api
         }
 
         [HttpPost]
-        [Authorize]
+        [RoleAuthorize(UserRoles.ProgramManager, UserRoles.Consultant)]
         [Route("api/orders/transferee/intake/relocation")]
         public IHttpActionResult UpdateIntakeRelocation(OrdersTransfereeIntakeRelocationDto dto)
         {
 
             var userId = User.Identity.GetUserId();
-            var order = _unitOfWork.Orders.GetOrderFor(userId, dto.Id);
-            
+            Order order = _unitOfWork.Orders.GetOrderFor(userId, dto.Id, User.GetUserRole());
+
             if (order == null)
             {
                 return NotFound();

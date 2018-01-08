@@ -1,5 +1,5 @@
 ﻿@model Odin.ViewModels.Orders.Transferee.OrdersTransfereeViewModel
-
+@using Odin.Helpers;
 <div class="container-fluid" id="intake" data-order-id="@Model.Id">
 <div class="titleGroup">
     <h1 class="sectionTitle">Intake</h1>
@@ -39,7 +39,7 @@
             </li>
             <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
                 @Html.LabelFor(model => @Model.Transferee.PhoneNumber)
-                <p class="input-group time">@Model.Transferee.PhoneNumber</p>
+                <p>@Model.Transferee.PhoneNumber</p>
             </li>
         </ul>
     </div>
@@ -229,13 +229,13 @@
                 <img class="intake-collapse-img" src="/Content/Images/collapse.png" />
                 <img class="intake-expand-img" src="/Content/Images/expand.png" />
                 <h2 class="sectionSubHead">Family And Pets</h2>
-                <span class="sectionSave intake-edit">
-                    + Edit
-                </span>
-                <span class="sectionSave intake-cancel">
-                    x Cancel
-                </span>
             </div>
+            <span class="sectionSave intake-edit">
+                + Edit
+            </span>
+            <span class="sectionSave intake-cancel">
+                x Cancel
+            </span>
         </div>
         <div class="row intake-row collapse in">
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
@@ -384,7 +384,7 @@
                     <span class="intake-span">@Model.PossibleServices.ElementAt(i).Name</span>
                 </div>
                 <div class="col-sm-5 intake-col">
-                    <input type="text" name="Notes" class="form-control intake-input intake-service-input" disabled="disabled"/>    
+                    <input type="text" name="Notes" class="form-control intake-input intake-service-input" disabled="disabled" />
                 </div>
             </div>
         }

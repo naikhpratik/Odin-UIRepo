@@ -6,7 +6,10 @@
      * @returns {any} Id of the the loader timeout. Pass this value to the hideLoaderWithId funciton
      *                to properly cancel the delay of the loader showing
      */
-    var showLoaderAfterDelay = function (delay = 250) {
+    var showLoaderAfterDelay = function (delay) {
+
+        delay = (typeof delay !== 'undefined') ? delay : 1;
+
         return window.setTimeout(function () {
             $(".loaderOverlay").fadeIn('slow');
         }, delay);

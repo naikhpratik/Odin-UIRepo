@@ -2,13 +2,6 @@
 
 @model IEnumerable<Odin.ViewModels.Orders.Transferee.HistoryViewModel>
 
-
-<html>
-
-<body>
-
-
-
     @Styles.Render("~/Styling/history")
 
     <div id="history" class="sectionTitle">
@@ -69,10 +62,7 @@
 
 
 
-        </table>*@
-
-    @{ var myType = "";}
-    
+        </table>*@   
     @if (Model == null)
     {<div>No History to show</div> }
     else
@@ -81,7 +71,7 @@
         {
             <div>
                 <div>
-                    <b>@notification.NotificationTitle: </b>@notification.NotificationNotificationType: @notification.NotificationMessage for <a href="/Orders/Transferee/@notification.NotificationOrderId" class="notifications">@notification.NotificationOrderTransfereeFullName</a>
+                    <b>@notification.Title: </b> @notification.Message for <a href="/Orders/Transferee/@notification.OrderId" class="notifications">@notification.OrderTransfereeFullName</a>
                 </div>
                 <div>
                     @notification.MyNotificationCreatedAt
@@ -90,6 +80,3 @@
             <br />
         }
     }
-
-</body>
-</html>
