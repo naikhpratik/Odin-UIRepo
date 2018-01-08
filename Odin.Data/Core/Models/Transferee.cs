@@ -16,5 +16,6 @@ namespace Odin.Data.Core.Models
         }
 
         public virtual ICollection<Order> Orders { get; set; }
+        public string InviteStatus { get; set; }
     }
 }
