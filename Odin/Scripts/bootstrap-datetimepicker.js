@@ -1,4 +1,4 @@
-/*! version : 4.17.45
+/*! version : 4.17.47
  =========================================================
  bootstrap-datetimejs
  https://github.com/Eonasdan/bootstrap-datetimepicker
@@ -476,12 +476,6 @@
                 if (e.type === 'dp.change' && ((e.date && e.date.isSame(e.oldDate)) || (!e.date && !e.oldDate))) {
                     return;
                 }
-
-                //Prevent trigger if initializing, basically if the DateTimePicker
-                //data is not yet set, where still initializing
-                if (!element.data('DateTimePicker')) return;
-                //End mod
-
                 element.trigger(e);
             },
 
@@ -515,7 +509,7 @@
                 }
 
                 while (currentDate.isBefore(viewDate.clone().endOf('w'))) {
-                    row.append($('<th>').addClass('dow').text(currentDate.format('dd').charAt(0)));
+                    row.append($('<th>').addClass('dow').text(currentDate.format('dd')));
                     currentDate.add(1, 'd');
                 }
                 widget.find('.datepicker-days thead').append(row);
@@ -720,7 +714,7 @@
 
                 currentDate = viewDate.clone().startOf('M').startOf('w').startOf('d');
 
-                for (i = 0; i < 35; i++) { //always display 42 days (should show 6 weeks, huh, not any more - 35 days!)
+                for (i = 0; i < 42; i++) { //always display 42 days (should show 6 weeks)
                     if (currentDate.weekday() === 0) {
                         row = $('<tr>');
                         if (options.calendarWeeks) {
@@ -953,7 +947,6 @@
 
                 input.blur();
 
-                currentViewMode = 0;
                 viewDate = date.clone();
 
                 return picker;
@@ -2475,7 +2468,7 @@
             next: 'glyphicon glyphicon-chevron-right',
             today: 'glyphicon glyphicon-screenshot',
             clear: 'glyphicon glyphicon-trash',
-            close: 'glyphicon glyphicon-ok-sign'
+            close: 'glyphicon glyphicon-remove'
         },
         tooltips: {
             today: 'Go to today',

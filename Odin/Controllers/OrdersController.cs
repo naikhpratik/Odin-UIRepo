@@ -109,7 +109,7 @@ namespace Odin.Controllers
 
             ViewBag.CurrentUser = userId;
 
-            HousingViewModel viewModel = new HousingViewModel(order, _mapper, userId, false);
+            HousingViewModel viewModel = new HousingViewModel(order, _mapper, User);
             return PartialView("~/views/orders/partials/_Housing.cshtml", viewModel);
 
         }
@@ -129,13 +129,14 @@ namespace Odin.Controllers
         {
             var userId = User.Identity.GetUserId();
             Order order = _unitOfWork.Orders.GetOrderFor(userId, id, User.GetUserRole());
+            HousingViewModel viewModel = new HousingViewModel(order, _mapper, listChoice, User);
 
-            HousingViewModel viewModel = new HousingViewModel(order, _mapper, listChoice);
             if (viewModel.Properties.Count() == 0)
             {
                 return new HttpNotFoundResult();
             }
             ViewBag.isPDF = true;
+            
             return new Rotativa.ViewAsPdf("Partials/_HousingProperties", viewModel.Properties)
             {
                 FileName = "Housing.pdf",

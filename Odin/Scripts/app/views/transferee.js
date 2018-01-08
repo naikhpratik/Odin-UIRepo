@@ -59,6 +59,8 @@
             $('#primaryNav').css('left', 0);
             $('#orderContainer').css('margin-left', $('#transfereeSideNav').outerWidth());
         } else {
+            $('#transfereeSideNav').css('left', 0);
+            $('#primaryNav').css('left', 0);
             $('#orderContainer').css('margin-left', 0);
         }
     }

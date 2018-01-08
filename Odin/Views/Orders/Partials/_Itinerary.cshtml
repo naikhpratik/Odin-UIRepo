@@ -68,7 +68,8 @@
             }
             else
             {
-                link = "window.history.pushState('link', 'fromitinerary', '#housing');OrdersPageController.loadPanel('housing');";
+                //link = "window.history.pushState('link', 'fromitinerary', '#housing');OrdersPageController.loadPanel('housing');";
+                link = "popUpPropertyDetails('" + elem.Id + "')";
             }
 
             <li class="itineraryDay">
@@ -147,7 +148,17 @@
             </div>
         </div>
     </div>
-</div>        
+</div>     
+
+<!-- Modal -->
+<div class="modal fade" id="propertyDetailsModal" tabindex="-1" role="dialog" aria-labelledby="propertyDetailsModal" data-backdrop="false">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" id="propertyModalContent">
+            <!-- Modal stuff goes here -->
+        </div>
+    </div>
+</div>
+   
 @if (Model.IsPdf == true)
 {
     @Styles.Render("~/Styling/itineraryPdf");    
@@ -159,5 +170,14 @@ else
 <script type="text/javascript">
     $(document).ready(function () {
         TransfereeItineraryController.init();        
-    });   
+    });
+    var popUpPropertyDetails = function (propertyId) {
+        var propertyModalUrl = '/homefindingproperties/propertypartial/' + propertyId;
+        $('#propertyModalContent').load(propertyModalUrl, function (response, status, xhr) {
+            if (status === "success") {
+                $('#removeProperty').hide();
+                $('#propertyDetailsModal').modal('show');
+            }
+        });
+    }
 </script>

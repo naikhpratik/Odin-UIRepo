@@ -191,7 +191,7 @@ namespace Odin.Tests.Controllers
             _mockRepository.Setup(r => r.GetOrderFor(orderId, userId, UserRoles.Consultant)).Returns(order);
             order.HomeFinding = new HomeFinding() { Id = orderId, Deleted = false };
             
-            HousingViewModel viewModel = new HousingViewModel(order, mapper, "AllViewings");
+            HousingViewModel viewModel = new HousingViewModel(order, mapper, "AllViewings", _controller.User);
             viewModel.Properties.Count().Should().Be(0);
         }
         [TestMethod]
@@ -203,7 +203,7 @@ namespace Odin.Tests.Controllers
             _mockRepository.Setup(r => r.GetOrderFor(orderId, userId, UserRoles.Consultant)).Returns(order);
             order.HomeFinding = new HomeFinding() { Id = orderId, Deleted = false };
             order.HomeFinding.HomeFindingProperties.Add(new HomeFindingProperty() { Id = "1", ViewingDate = DateTime.Now });
-            HousingViewModel viewModel = new HousingViewModel(order, mapper, "NoViewings");
+            HousingViewModel viewModel = new HousingViewModel(order, mapper, "NoViewings", _controller.User);
             viewModel.Properties.Count().Should().Be(0);
         }
         [TestMethod]
@@ -227,7 +227,7 @@ namespace Odin.Tests.Controllers
             p2.ViewingDate = DateTime.Now.AddDays(20);
             order.HomeFinding.HomeFindingProperties.Add(p2);
 
-            HousingViewModel viewModel = new HousingViewModel(order, mapper, "ViewingsOnly");
+            HousingViewModel viewModel = new HousingViewModel(order, mapper, "ViewingsOnly", _controller.User);
             //var result = _controller.PropertiesPartialPDF(orderId, "ViewingsOnly");
             viewModel.Properties.Count().Should().Be(2);
         }
@@ -251,7 +251,7 @@ namespace Odin.Tests.Controllers
             p2.Property = new Property();
             order.HomeFinding.HomeFindingProperties.Add(p2);
 
-            HousingViewModel viewModel = new HousingViewModel(order, mapper, "ViewingsOnly");
+            HousingViewModel viewModel = new HousingViewModel(order, mapper, "ViewingsOnly", _controller.User);
             //var result = _controller.PropertiesPartialPDF(orderId, "ViewingsOnly");
             viewModel.Properties.Count().Should().Be(1);
         }
