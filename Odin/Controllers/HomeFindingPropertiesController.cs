@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity;
 using Odin.Data.Core;
 using Odin.Data.Core.Models;
+using Odin.Extensions;
 using Odin.Interfaces;
 using Odin.ViewModels.Orders.Transferee;
 using System;
@@ -35,16 +36,8 @@ namespace Odin.Controllers
             propertyVM.Id = homeFindingProperty.Id;
             _mapper.Map<HousingPropertyViewModel, HomeFindingProperty>(propertyVM, homeFindingProperty);
 
-            Order order = null;
-            if (User.IsInRole(UserRoles.Transferee))
-            {
-                order = _unitOfWork.Orders.GetOrderFor(userId, propertyVM.OrderId,UserRoles.Transferee);
-            }
-            else
-            {
-                order = _unitOfWork.Orders.GetOrderFor(userId, propertyVM.OrderId);
-            }
-               
+            Order order = _unitOfWork.Orders.GetOrderFor(userId, propertyVM.OrderId, User.GetUserRole());
+            
             HomeFinding homeFinding = order.HomeFinding;
             homeFinding.HomeFindingProperties.Add(homeFindingProperty);
 
@@ -139,6 +132,7 @@ namespace Odin.Controllers
 
             return PartialView("~/views/orders/partials/_PropertyDetails.cshtml", viewModel);
         }
+
         public ActionResult RadioButtonList(string title)
         {
             ViewBag.Title = title;

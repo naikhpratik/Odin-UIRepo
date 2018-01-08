@@ -12,7 +12,6 @@
         initPmDropDown();
         
         $(window).resize(function () {
-            
             sizePage();
         });
     };

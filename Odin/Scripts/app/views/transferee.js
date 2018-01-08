@@ -29,7 +29,7 @@
         });
     };
 
-    var initPanels = function() {
+    var initPanels = function () {
         var actionName = "";
         var urlArray = window.location.href.split("#");
         if (urlArray.length === 2) {

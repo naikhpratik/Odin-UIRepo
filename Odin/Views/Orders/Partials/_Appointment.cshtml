@@ -1,11 +1,25 @@
-﻿@model Odin.Data.Core.Models.Appointment
+﻿@using Odin.Data.Core.Models
+@model Odin.Data.Core.Models.Appointment
 <div id="appointmentModal" data-appointment-id="@Model.Id">
 	
-			@Html.DisplayNameFor(Model => Model.ScheduledDate)
-			@Html.DatePicker("date", "ScheduledDate", Model.ScheduledDate.HasValue ? Model.ScheduledDate.Value:DateTime.Now)
-			@Html.DisplayNameFor(Model => Model.Description)
-			@Html.EditorFor(Model => Model.Description, new { htmlAttributes = new { @class = "form-control", @type="input", @style="max-width:100%", @placeholder="Enter a brief description here" } })
-
+            @if (User.IsInRole(UserRoles.Transferee))
+            {
+                @Html.DisplayNameFor(Model => Model.ScheduledDate)
+                <p>
+                    @(Model.ScheduledDate.HasValue ? Model.ScheduledDate.Value.ToString() : String.Empty)
+                </p>
+                @Html.DisplayNameFor(Model => Model.Description)
+                <p>
+                    @Html.DisplayFor(m => Model.Description)
+                </p>
+                }
+                else
+                {
+                @Html.DisplayNameFor(Model => Model.ScheduledDate)
+                @Html.DatePicker("date", "ScheduledDate", Model.ScheduledDate.HasValue ? Model.ScheduledDate.Value : DateTime.Now)
+                @Html.DisplayNameFor(Model => Model.Description)
+                @Html.EditorFor(Model => Model.Description, new { htmlAttributes = new { @class = "form-control", @type = "input", @style = "max-width:100%" } })
+            }
 </div>
 @*@Styles.Render("~/Styling/appointment")*@
 <script>

@@ -115,3 +115,15 @@ ul.primaryNavIconList {
         }
     }
 }
+
+#profileDropDown {
+    ul.dropdown-menu {
+        .divider{
+            margin: 0px;
+        }
+
+        li {
+            margin: .5rem 0 .5rem 0;
+        }
+    }
+}

@@ -124,7 +124,7 @@
     </ul>
     <div class="modal fade appointmentModal" id="modalForm" tabindex="-100" role="dialog" data-backdrop="false" aria-labelledby="appointmentModal">
         <div class="modal-dialog" role="document" id="appointment" style="z-index: 2147483647;">
-            <div class="modal-content id="appointmentModalLabel"">
+            <div class="modal-content" id="appointmentModalLabel">
                 <div class="modal-header row">
                     <h5 class="modal-title"></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -134,14 +134,16 @@
                 <div class="modal-body"></div>
                 <div class="modal-footer row">
                     <div class="col-sm-6">
-                        
                     </div>
-                    <div class="col-sm-3">
-                        <button type="button" class="btn btn-secondary delete" data-dismiss="modal">Delete</button>
-                    </div>
-                    <div class="col-sm-3">
-                        <button type="button" class="btn btn-primary save">Save</button>
-                    </div>
+                    @if (User.IsInRole(UserRoles.Consultant) || User.IsInRole(UserRoles.ProgramManager))
+                    {
+                        <div class="col-sm-3">
+                            <button type="button" class="btn btn-secondary delete" data-dismiss="modal">Delete</button>
+                        </div>
+                        <div class="col-sm-3">
+                            <button type="button" class="btn btn-primary save">Save</button>
+                        </div>
+                    }
                 </div>
             </div>
         </div>

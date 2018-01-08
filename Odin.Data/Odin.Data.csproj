@@ -197,6 +197,7 @@
     <Compile Include="Core\Repositories\IHomeFindingPropertyRepository.cs" />
     <Compile Include="Core\Repositories\IHousingTypesRepository.cs" />
     <Compile Include="Core\Repositories\IManagersRepository.cs" />
+    <Compile Include="Core\Repositories\INotificationRepository.cs" />
     <Compile Include="Core\Repositories\INumberOfBathroomsTypesRepository.cs" />
     <Compile Include="Core\Repositories\IOrdersRepository.cs" />
     <Compile Include="Core\Repositories\IPetsRepository.cs" />
@@ -574,6 +575,7 @@
       <DependentUpon>201712271541010_AddedViewingDateNeedsEmptyMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
+    <Compile Include="Persistence\NotificationRepository.cs" />
     <Compile Include="Persistence\NumberOfBathroomsTypesRepository.cs" />
     <Compile Include="Persistence\OrdersRepository.cs" />
     <Compile Include="Persistence\PetsRepository.cs" />

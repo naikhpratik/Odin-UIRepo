@@ -13,7 +13,8 @@ using System;
 using System.IO;
 
 namespace Odin.Controllers
-{  
+{
+    [Authorize]
     public class EmailController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
