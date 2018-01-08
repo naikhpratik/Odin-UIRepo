@@ -113,6 +113,7 @@
     };
 
     var setupPropertiesList = function () {
+
         setupDatePickers();
 
         $(document).off('click', '.propertyItem');

@@ -2,12 +2,12 @@
 using Microsoft.AspNet.Identity;
 using Odin.Data.Core;
 using Odin.Data.Core.Models;
+using Odin.Extensions;
 using Odin.Interfaces;
 using Odin.ViewModels.Orders.Transferee;
 using System;
 using System.Net;
 using System.Web.Mvc;
-using Odin.Extensions;
 
 namespace Odin.Controllers
 {
@@ -132,6 +132,7 @@ namespace Odin.Controllers
 
             return PartialView("~/views/orders/partials/_PropertyDetails.cshtml", viewModel);
         }
+
         public ActionResult RadioButtonList(string title)
         {
             ViewBag.Title = title;

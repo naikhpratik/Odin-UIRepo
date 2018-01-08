@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using System.Web.Http;
 using Odin.Data.Core;
 using Odin.Data.Core.Models;
 using System;
@@ -7,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Odin.Controllers
 {
+    [Authorize]
     public class AppointmentController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -17,6 +17,7 @@ namespace Odin.Controllers
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
+
         public ActionResult AppointmentPartial(string id)
         {
             Appointment viewModel;
@@ -33,6 +34,7 @@ namespace Odin.Controllers
             }
             return PartialView("~/views/orders/partials/_Appointment.cshtml", viewModel);
         }
+
         private Appointment GetAppointmentById(string Id)
         {
             var itinAppointment = _unitOfWork.Appointments.GetAppointmentById(Id);

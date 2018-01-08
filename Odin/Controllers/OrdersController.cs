@@ -3,6 +3,7 @@ using Microsoft.AspNet.Identity;
 using Odin.Data.Core;
 using Odin.Data.Core.Models;
 using Odin.Extensions;
+using Odin.Filters;
 using Odin.Helpers;
 using Odin.Interfaces;
 using Odin.ViewModels.Orders.Index;
@@ -32,11 +33,11 @@ namespace Odin.Controllers
         }
 
         // GET: Orders/id
+        [RoleAuthorize(UserRoles.Consultant,UserRoles.ProgramManager)]
         public ViewResult Index(string id)
         {
             //id = selected manager's id 
             IEnumerable<Order> orders = null;
-
             //PM's and SC's are the only people who can view other individuals' files.
             if (!String.IsNullOrEmpty(id) && (User.IsInRole(UserRoles.ProgramManager) || User.IsInRole(UserRoles.GlobalSupplyChain)))
             {
@@ -64,10 +65,11 @@ namespace Odin.Controllers
         }
 
         // GET Partials
+        [RoleAuthorize(UserRoles.Transferee)]
         public ActionResult DashboardPartial(string id)
         {
             var userId = User.Identity.GetUserId();
-            var order = _unitOfWork.Orders.GetOrderFor(userId, id, UserRoles.Transferee);
+            var order = _unitOfWork.Orders.GetOrderFor(userId, id, User.GetUserRole());
 
             if (order == null)
             {
@@ -82,10 +84,11 @@ namespace Odin.Controllers
         }
 
         // GET Partials
+        [RoleAuthorize(UserRoles.Transferee)]
         public ActionResult HelpPartial(string id)
         {
             var userId = User.Identity.GetUserId();
-            var order = _unitOfWork.Orders.GetOrderFor(userId, id, UserRoles.Transferee);
+            var order = _unitOfWork.Orders.GetOrderFor(userId, id, User.GetUserRole());
 
             if (order == null)
             {
@@ -97,6 +100,7 @@ namespace Odin.Controllers
             return PartialView("~/views/orders/partials/_Help.cshtml");
         }
 
+        [RoleAuthorize(UserRoles.ProgramManager,UserRoles.Consultant,UserRoles.Transferee)]
         public ActionResult HousingPartial(string id)
         {
             var userId = User.Identity.GetUserId();
@@ -109,6 +113,8 @@ namespace Odin.Controllers
             return PartialView("~/views/orders/partials/_Housing.cshtml", viewModel);
 
         }
+
+        [RoleAuthorize(UserRoles.ProgramManager, UserRoles.Consultant, UserRoles.Transferee)]
         public ActionResult PropertiesPartial(string id)
         {
             var userId = User.Identity.GetUserId();
@@ -117,6 +123,8 @@ namespace Odin.Controllers
             HousingViewModel viewModel = new HousingViewModel(order, _mapper);
             return PartialView("~/views/orders/partials/_HousingProperties.cshtml", viewModel.Properties);
         }
+
+        [RoleAuthorize(UserRoles.ProgramManager, UserRoles.Consultant, UserRoles.Transferee)]
         public ActionResult PropertiesPartialPDF(string id, string listChoice)
         {
             var userId = User.Identity.GetUserId();
@@ -134,15 +142,13 @@ namespace Odin.Controllers
                 PageMargins = new Rotativa.Options.Margins(0, 0, 0, 0)
             };
         }
+
+        [RoleAuthorize(UserRoles.Consultant,UserRoles.ProgramManager)]
         public ActionResult DetailsPartial(string id)
         {
             var userId = User.Identity.GetUserId();
 
-            Order order = null;
-            if (User.IsInRole(UserRoles.ProgramManager) || User.IsInRole(UserRoles.Consultant))
-            {
-                order = _unitOfWork.Orders.GetOrderFor(userId, id, User.GetUserRole());
-            }
+            Order order = _unitOfWork.Orders.GetOrderFor(userId, id, User.GetUserRole());
 
             if (order == null)
             {
@@ -152,15 +158,12 @@ namespace Odin.Controllers
             OrdersTransfereeViewModel viewModel = GetOrdersTransfereeViewModel(order);
             return PartialView("~/views/orders/partials/_Details.cshtml", viewModel);
         }
+
+        [RoleAuthorize(UserRoles.Consultant, UserRoles.ProgramManager)]
         public ActionResult IntakePartial(string id)
         {
             var userId = User.Identity.GetUserId();
-
-            Order order = null;
-            if (User.IsInRole(UserRoles.ProgramManager) || User.IsInRole(UserRoles.Consultant))
-            {
-                order = _unitOfWork.Orders.GetOrderFor(userId, id, User.GetUserRole());
-            }
+            Order order = _unitOfWork.Orders.GetOrderFor(userId, id, User.GetUserRole());
 
             if (order == null)
             {
@@ -170,6 +173,8 @@ namespace Odin.Controllers
             OrdersTransfereeViewModel viewModel = GetOrdersTransfereeViewModel(order);
             return PartialView("~/views/orders/partials/_Intake.cshtml", viewModel);
         }
+
+        [RoleAuthorize(UserRoles.ProgramManager, UserRoles.Consultant, UserRoles.Transferee)]
         public ActionResult ItineraryPartial(string id)
         {
             OrdersTransfereeItineraryViewModel viewModel = GetItineraryByOrderId(id);
@@ -182,15 +187,11 @@ namespace Odin.Controllers
             return PartialView("~/views/orders/partials/_Itinerary.cshtml", viewModel);
         }
 
-        //id is the Order id. 
+        [RoleAuthorize(UserRoles.Consultant, UserRoles.ProgramManager)]
         public ActionResult HistoryPartial(string id)
         {
             var userId = User.Identity.GetUserId();
-            Order order = null;
-            if (User.IsInRole(UserRoles.ProgramManager) || User.IsInRole(UserRoles.Consultant))
-            {
-                order = _unitOfWork.Orders.GetOrderFor(userId, id, User.GetUserRole());
-            }
+            Order order = _unitOfWork.Orders.GetOrderFor(userId, id, User.GetUserRole());
 
             if (order == null)
             {
@@ -203,7 +204,8 @@ namespace Odin.Controllers
                 return PartialView("~/views/orders/partials/_History.cshtml", vms);
             }
         }
-        
+
+        [RoleAuthorize(UserRoles.ProgramManager, UserRoles.Consultant, UserRoles.Transferee)]
         public ActionResult Transferee(string id)
         {
             //id is selected order id

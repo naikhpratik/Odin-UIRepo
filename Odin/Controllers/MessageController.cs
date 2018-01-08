@@ -1,16 +1,15 @@
 ﻿using AutoMapper;
-using Odin.ViewModels.Shared;
+using Microsoft.AspNet.Identity;
 using Odin.Data.Core;
 using Odin.Data.Core.Models;
+using Odin.ViewModels.Shared;
 using System.Collections.Generic;
-using System.Web.Mvc;
 using System.Linq;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Odin.Data.Persistence;
-using Microsoft.AspNet.Identity;
+using System.Web.Mvc;
 
 namespace Odin.Controllers
 {
+    [Authorize]
     public class MessageController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Odin.Data.Core.Models;
 using System.Security.Principal;
-using System.Web;
-using Odin.Data.Core.Models;
 
 namespace Odin.Extensions
 {
@@ -15,22 +11,28 @@ namespace Odin.Extensions
             {
                 return UserRoles.Admin;
             }
-            else if (User.IsInRole(UserRoles.Consultant))
+
+            if (User.IsInRole(UserRoles.Consultant))
             {
                 return UserRoles.Consultant;
             }
+
             if (User.IsInRole(UserRoles.GlobalSupplyChain))
             {
                 return UserRoles.GlobalSupplyChain;
             }
-            else if (User.IsInRole(UserRoles.ProgramManager))
+
+            if (User.IsInRole(UserRoles.ProgramManager))
             {
                 return UserRoles.ProgramManager;
             }
-            else
+
+            if (User.IsInRole(UserRoles.Transferee))
             {
                 return UserRoles.Transferee;
             }
+
+            return null;
         }
     }
 }
