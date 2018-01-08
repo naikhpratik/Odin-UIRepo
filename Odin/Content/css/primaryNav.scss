@@ -72,7 +72,7 @@ ul.primaryNavIconList {
     padding: 0 0 0 0;
 
     li.primaryNavIconList__item {
-        position: relative;
+        position: static;
         height: calc(#{$logoHeight} + 1rem);
         margin-right: 1rem;
         padding: 0.5rem 1rem;
@@ -85,8 +85,8 @@ ul.primaryNavIconList {
             $notificationsSize: 1.25rem;
 
             position: absolute;
-            top: 0;
-            right: 0;
+            top: 1rem;
+            right: 6rem;
             background-color: $DW_Red;
             color: white;
             padding: calc(#{$notificationsSize}/2);

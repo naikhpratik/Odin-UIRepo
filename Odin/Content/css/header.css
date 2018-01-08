@@ -1,14 +1,22 @@
 ﻿/* Bootstrap Overrides */
 .notification-dropdown {
   box-shadow: none;
+  overflow-y: scroll;
+  max-height: 50vh;
   -webkit-box-shadow: none;
   position: absolute;
   font-size: small;
-  left: -280px;
-  width: 400px; }
+  left: 0;
+  width: 100vw; }
+  @media screen and (min-width: 40rem) {
+    .notification-dropdown {
+      right: 0;
+      left: initial;
+      width: 400px; } }
 
 .notification-dropdown > li.notifications_unread {
   border-bottom: solid;
+  width: 100%;
   border-bottom-color: lightgray;
   border-bottom-width: medium;
   background-image: url("/Content/Images/icn_attention.png");
@@ -24,6 +32,7 @@
 
 .notification-dropdown > li.notifications_read {
   border-bottom: solid;
+  width: 100%;
   border-bottom-color: lightgray;
   border-bottom-width: medium;
   background-image: url("/Content/Images/icn_attention.png");

@@ -57,7 +57,7 @@ ul.primaryNavIconList {
   margin-bottom: 0;
   padding: 0 0 0 0; }
   ul.primaryNavIconList li.primaryNavIconList__item {
-    position: relative;
+    position: static;
     height: calc(3rem + 1rem);
     margin-right: 1rem;
     padding: 0.5rem 1rem; }
@@ -65,8 +65,8 @@ ul.primaryNavIconList {
       margin-right: 0rem; }
     ul.primaryNavIconList li.primaryNavIconList__item span {
       position: absolute;
-      top: 0;
-      right: 0;
+      top: 1rem;
+      right: 6rem;
       background-color: #e53c2e;
       color: white;
       padding: calc(1.25rem/2);

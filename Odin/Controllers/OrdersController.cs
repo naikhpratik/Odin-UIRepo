@@ -50,9 +50,20 @@ namespace Odin.Controllers
                 userId = id;
                 orders = _unitOfWork.Orders.GetOrdersFor(userId, UserRoles.ProgramManager);
             }
+            
             ViewBag.userRole = _unitOfWork.Users.GetRoleByUserId(userId);
             var managers = _unitOfWork.Managers.GetManagers();
             var orderVms = _mapper.Map<IEnumerable<Order>, IEnumerable<OrdersIndexViewModel>>(orders);
+
+            if (_unitOfWork.UserNotifications != null)
+            {
+                var UserNotifications = _unitOfWork.UserNotifications.GetUserNotification(userId);
+                foreach (var ovms in orderVms)
+                {
+                    ovms.UserNotificationsCount = UserNotifications.Count(un => un.Notification.OrderId == ovms.Id);
+                }
+            }
+            
 
             if (managers != null)
             {
