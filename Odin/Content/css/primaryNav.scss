@@ -71,18 +71,20 @@ ul.primaryNavIconList {
     margin-bottom: 0;
     padding: 0 0 0 0;
 
-    .dropdown-toggle:hover{
-        box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
-    }
-
     li.primaryNavIconList__item {
         position: relative;
-        height: calc(#{$logoHeight} + 1rem);
+        padding: 1rem;
         margin-right: 1rem;
-        padding: 0.5rem 1rem;
+        border-radius: 50%;
+        cursor: pointer;
+        
 
         &:last-child {
             margin-right: 0rem;
+        }
+
+        &:hover {
+            box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
         }
 
         span {
