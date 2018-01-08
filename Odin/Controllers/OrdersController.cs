@@ -36,6 +36,7 @@ namespace Odin.Controllers
         [RoleAuthorize(UserRoles.Consultant,UserRoles.ProgramManager)]
         public ViewResult Index(string id)
         {
+            var userId = User.Identity.GetUserId();
             //id = selected manager's id 
             IEnumerable<Order> orders = null;
             //PM's and SC's are the only people who can view other individuals' files.
@@ -45,7 +46,7 @@ namespace Odin.Controllers
             }
             else
             {
-                orders = _unitOfWork.Orders.GetOrdersFor(User.Identity.GetUserId(),User.GetUserRole());
+                orders = _unitOfWork.Orders.GetOrdersFor(userId, User.GetUserRole());
             }
             
             var managers = _unitOfWork.Managers.GetManagers();
