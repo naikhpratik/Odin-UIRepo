@@ -11,6 +11,7 @@ using Odin.Tests.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Results;
 
@@ -50,6 +51,14 @@ namespace Odin.Tests.Controllers.Api
             _userId = "1";
             _userName = "TestUser";
             _controller.MockCurrentUserAndRole(_userId,_userName,UserRoles.Consultant);
+        }
+
+        [TestMethod]
+        public async Task InviteTransferee_OrderIsNull_ReturnsNotFound()
+        {
+            var InviteTransfereeDto = new InviteTransfereeDto {OrderId = "asdf"};
+            var result = await _controller.InviteTransferee(InviteTransfereeDto);
+            result.Should().BeOfType<NotFoundResult>();
         }
 
         [TestMethod]

@@ -1,4 +1,5 @@
 ﻿@model Odin.ViewModels.Orders.Transferee.OrdersTransfereeViewModel
+@using Odin.Data.Core.Models
 @using Odin.Helpers;
 <div class="container-fluid" id="intake" data-order-id="@Model.Id">
 <div class="titleGroup">
@@ -10,12 +11,12 @@
         <div class="intake-block invite-block">
             <h2 class="sectionSubHead">Transferee Invite</h2>
             <div class="row">
-                <p id="lblInviteTransferee"><span style="font-weight: bold;">@Model.Transferee.InviteStatus</span> Click the button to email your transferee a sign up link.
+                <p id="lblInviteTransferee"><span id="lblInviteStatus" style="font-weight: bold;">@Model.Transferee.InviteStatus</span> Click the button to email your transferee a sign up link.
                 </p>
             </div>
             <ul class="row sectionList">
                 <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
-                    <button id="btnInviteTransferee" class="btn-primary">Invite Transferee</button>
+                    <button id="btnInviteTransferee" class="btn-primary">@(Model.Transferee.InviteStatus == InviteStatus.NotYetInvited ? "Invite Transferee" : "Re-Invite Transferee")</button>
                 </li>
             </ul>
         </div>

@@ -151,6 +151,7 @@ namespace Odin.IntegrationTests.Controllers.Api
             response.StatusCode.Should().Be(HttpStatusCode.OK);
             var newTransferee = Context.Transferees.SingleOrDefault(t => t.Email.Equals("integration@test.com"));
             newTransferee.Should().NotBeNull();
+            newTransferee?.InviteStatus.Should().Be(InviteStatus.NotYetInvited);
             var newOrder = Context.Orders.SingleOrDefault(o => o.TrackingId.Equals(orderDto.TrackingId));
             newOrder.Should().NotBeNull();
         }
