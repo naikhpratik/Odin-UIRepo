@@ -2,7 +2,7 @@
 @using Odin.Helpers;
 <div class="container-fluid" id="intake" data-order-id="@Model.Id">
     <div class="titleGroup">
-        <h1 class="sectionTitle">Intake</h1>
+        <h1 class="sectionTitle">Program Details</h1>
         <p class="sectionInstruction">Please fill out any items that are not already auto-generated that could aid in the help of your clients placement.</p>
     </div>
     <div class="intake-block expanded">
@@ -29,103 +29,7 @@
         </ul>
     </div>
     <hr />
-    <div class="intake-block expanded" data-block="rmc">
-        <div class="intake-header">
-            <div class="intake-collapse">
-                <img class="intake-collapse-img" src="/Content/Images/collapse.png" />
-                <img class="intake-expand-img" src="/Content/Images/expand.png" />
-                <h2 class="sectionSubHead">RMC Information</h2>
-            </div>
-        </div>
-        <ul class="row sectionList intake-row collapse in">
-            <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
-                @Html.LabelFor(model => @Model.Rmc)
-                <p class="intake-span">@Model.Rmc</p>
-            </li>
-            <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
-                @Html.LabelFor(model => @Model.RmcContact)
-                <p class="intake-span">@Model.RmcContact</p>
-            </li>
-            <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
-                @Html.LabelFor(model => @Model.RmcContactEmail)
-                <p class="intake-span">@Model.RmcContactEmail</p>
-            </li>
-        </ul>
-    </div>
-    <hr />
-    <div class="intake-block expanded" data-block="destination">
-        <div class="intake-header">
-            <div class="intake-collapse">
-                <img class="intake-collapse-img" src="/Content/Images/collapse.png" />
-                <img class="intake-expand-img" src="/Content/Images/expand.png" />
-                <h2 class="sectionSubHead">Destination Location</h2>
-            </div>
-            <span class="sectionSave intake-edit">
-                + Edit
-            </span>
-            <span class="sectionSave intake-cancel">
-                x Cancel
-            </span>
-        </div>
-        <ul class="row sectionList intake-row collapse in">
-            <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
-                @Html.LabelFor(model => @Model.DestinationCity)
-                <span class="intake-span">@Model.DestinationCity</span>
-                @Html.TextBoxFor(m => @Model.DestinationCity, new { @class = "form-control intake-input" })
-                @Html.HiddenFor(m => @Model.DestinationCity, new { @class = "intake-hidden" })
-            </li>
-            <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
-                @Html.LabelFor(model => @Model.DestinationState)
-                <span class="intake-span">@Model.DestinationState</span>
-                @Html.TextBoxFor(m => @Model.DestinationState, new { @class = "form-control intake-input" })
-                @Html.HiddenFor(m => @Model.DestinationState, new { @class = "intake-hidden" })
-            </li>
-            <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
-                @Html.LabelFor(model => @Model.DestinationCountry)
-                <span class="intake-span">@Model.DestinationCountry</span>
-                @Html.TextBoxFor(m => @Model.DestinationCountry, new { @class = "form-control intake-input" })
-                @Html.HiddenFor(m => @Model.DestinationCountry, new { @class = "intake-hidden" })
-            </li>
-        </ul>
-    </div>
-    <hr />
-    <div class="intake-block expanded" data-block="origin">
-        <div class="intake-header">
-            <div class="intake-collapse">
-                <img class="intake-collapse-img" src="/Content/Images/collapse.png" />
-                <img class="intake-expand-img" src="/Content/Images/expand.png" />
-                <h2 class="sectionSubHead">Departure Location</h2>
-            </div>
-            <span class="sectionSave intake-edit">
-                + Edit
-            </span>
-            <span class="sectionSave intake-cancel">
-                x Cancel
-            </span>
-        </div>
-        <ul class="row sectionList intake-row collapse in">
-            <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
-                @Html.LabelFor(model => @Model.OriginCity)
-                <span class="intake-span">@Model.OriginCity</span>
-                @Html.TextBoxFor(m => @Model.OriginCity, new { @class = "form-control intake-input" })
-                @Html.HiddenFor(m => @Model.OriginCity, new { @class = "intake-hidden" })
-            </li>
-            <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
-                @Html.LabelFor(model => @Model.OriginState)
-                <span class="intake-span">@Model.OriginState</span>
-                @Html.TextBoxFor(m => @Model.OriginState, new { @class = "form-control intake-input" })
-                @Html.HiddenFor(m => @Model.OriginState, new { @class = "intake-hidden" })
-            </li>
-            <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
-                @Html.LabelFor(model => @Model.OriginCountry)
-                <span class="intake-span">@Model.OriginCountry</span>
-                @Html.TextBoxFor(m => @Model.OriginCountry, new { @class = "form-control intake-input" })
-                @Html.HiddenFor(m => @Model.OriginCountry, new { @class = "intake-hidden" })
-            </li>
-        </ul>
-    </div>
-    <hr />
-    <div class="intake-block" data-block="relocation">
+    <div class="intake-block expanded" data-block="relocation">
         <div class="intake-header">
             <div class="intake-collapse">
                 <img class="intake-collapse-img" src="/Content/Images/collapse.png" />
@@ -168,7 +72,7 @@
             </div>
         </div>
         @if (@Model.IsAssignment)
-            {
+        {
             <div class="row intake-row collapse in">
                 <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                     @Html.LabelFor(model => @Model.EstimatedDepartureDateDisplay)
@@ -180,32 +84,53 @@
         }
     </div>
     <hr />
-    <div class="intake-block">
+    <div class="intake-block expanded" data-block="services">
         <div class="intake-header">
             <div class="intake-collapse">
                 <img class="intake-collapse-img" src="/Content/Images/collapse.png" />
                 <img class="intake-expand-img" src="/Content/Images/expand.png" />
-                <h2 class="sectionSubHead">General</h2>
+                <h2 class="sectionSubHead">Services</h2>
             </div>
+            <span class="sectionSave intake-save">
+                - Save
+            </span>
         </div>
-        <div class="row intake-row collapse in">
-            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 intake-col">
-                @Html.LabelFor(model => @Model.IsRushDisplay)
-                <span class="intake-span">@Model.IsRushDisplay</span>
+        @for (int i = 0; i < @Model.Services.Count(); i++)
+        {
+            <div class="row intake-row collapse in" data-entity-id="@Model.Services.ElementAt(i).Id" data-entity-collection="services">
+                <div class="col-xs-2 col-sm-1 intake-col">
+                    <input type="checkbox" class="intake-input intake-service-input" name="Selected" @(Model.Services.ElementAt(i).Selected ? "checked =\"checked\"" : String.Empty) />
+                </div>
+                <div class="col-xs-10 col-sm-5 intake-col">
+                    <span class="intake-span">@Model.Services.ElementAt(i).Name</span>
+                </div>
+                <div class="col-xs-12 col-sm-5 intake-col">
+                    @if (Model.Services.ElementAt(i).Selected)
+                    {
+                        @Html.TextBoxFor(s => @Model.Services.ElementAt(i).Notes, new { @class = "form-control intake-input intake-service-input", @placeholder = "Enter or Edit Notes" })
+                    }
+                    else
+                    {
+                        @Html.TextBoxFor(s => @Model.Services.ElementAt(i).Notes, new { @class = "form-control intake-input intake-service-input", disabled = "disabled" })
+                    }
+                </div>
             </div>
-            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 intake-col">
-                @Html.LabelFor(model => @Model.IsVipDisplay)
-                <span class="intake-span">@Model.IsVipDisplay</span>
+
+        }
+        @for (int i = 0; i < @Model.PossibleServices.Count(); i++)
+        {
+            <div class="row intake-row collapse in" data-entity-collection="services" data-entity-type-id="@Model.PossibleServices.ElementAt(i).Id">
+                <div class="col-sm-1 intake-col">
+                    <input type="checkbox" value="false" class="intake-service-input" name="Selected" />
+                </div>
+                <div class="col-sm-5 intake-col">
+                    <span class="intake-span">@Model.PossibleServices.ElementAt(i).Name</span>
+                </div>
+                <div class="col-sm-5 intake-col">
+                    <input type="text" name="Notes" class="form-control intake-input intake-service-input" disabled="disabled" />
+                </div>
             </div>
-            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 intake-col">
-                @Html.LabelFor(model => @Model.IsAssignmentDisplay)
-                <span class="intake-span">@Model.IsAssignmentDisplay</span>
-            </div>
-            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 intake-col">
-                @Html.LabelFor(model => @Model.IsInternationalDisplay)
-                <span class="intake-span">@Model.IsInternationalDisplay</span>
-            </div>
-        </div>
+        }
     </div>
     <hr />
     <div class="intake-block" data-block="family">
@@ -242,9 +167,9 @@
             </div>
         </div>
         @if (@Model.Children.Count() > 0)
+        {
+            for (int i = 0; i < @Model.Children.Count(); i++)
             {
-                for (int i = 0; i < @Model.Children.Count(); i++)
-                {
                 <div class="row intake-row collapse in" data-entity-id="@Model.Children.ElementAt(i).Id" data-entity-collection="children">
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                         @Html.LabelFor(model => @Model.Children.ElementAt(i).Name)
@@ -286,9 +211,9 @@
             </div>
         </div>
         @if (@Model.Pets.Count() > 0)
+        {
+            for (int i = 0; i < @Model.Pets.Count(); i++)
             {
-                for (int i = 0; i < @Model.Pets.Count(); i++)
-                {
                 <div class="row intake-row collapse in" data-entity-id="@Model.Pets.ElementAt(i).Id" data-entity-collection="pets">
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                         @Html.LabelFor(model => @Model.Pets.ElementAt(i).Type)
@@ -326,61 +251,12 @@
         </div>
     </div>
     <hr />
-    <div class="intake-block" data-block="services">
+    <div class="intake-block" data-block="destination">
         <div class="intake-header">
             <div class="intake-collapse">
                 <img class="intake-collapse-img" src="/Content/Images/collapse.png" />
                 <img class="intake-expand-img" src="/Content/Images/expand.png" />
-                <h2 class="sectionSubHead">Services</h2>
-            </div>
-            <span class="sectionSave intake-save">
-                - Save
-            </span>
-        </div>
-        @for (int i = 0; i < @Model.Services.Count(); i++)
-            {
-            <div class="row intake-row collapse in" data-entity-id="@Model.Services.ElementAt(i).Id" data-entity-collection="services">
-                <div class="col-xs-2 col-sm-1 intake-col">
-                    <input type="checkbox" class="intake-input intake-service-input" name="Selected" @(Model.Services.ElementAt(i).Selected ? "checked =\"checked\"" : String.Empty) />
-                </div>
-                <div class="col-xs-10 col-sm-5 intake-col">
-                    <span class="intake-span">@Model.Services.ElementAt(i).Name</span>
-                </div>
-                <div class="col-xs-12 col-sm-5 intake-col">
-                    @if (Model.Services.ElementAt(i).Selected)
-                    {
-                        @Html.TextBoxFor(s => @Model.Services.ElementAt(i).Notes, new { @class = "form-control intake-input intake-service-input", @placeholder = "Enter or Edit Notes" })
-                    }
-                    else
-                    {
-                        @Html.TextBoxFor(s => @Model.Services.ElementAt(i).Notes, new { @class = "form-control intake-input intake-service-input", disabled = "disabled" })
-                    }
-                </div>
-            </div>
-
-        }
-        @for (int i = 0; i < @Model.PossibleServices.Count(); i++)
-            {
-            <div class="row intake-row collapse in" data-entity-collection="services" data-entity-type-id="@Model.PossibleServices.ElementAt(i).Id">
-                <div class="col-sm-1 intake-col">
-                    <input type="checkbox" value="false" class="intake-service-input" name="Selected" />
-                </div>
-                <div class="col-sm-5 intake-col">
-                    <span class="intake-span">@Model.PossibleServices.ElementAt(i).Name</span>
-                </div>
-                <div class="col-sm-5 intake-col">
-                    <input type="text" name="Notes" class="form-control intake-input intake-service-input" disabled="disabled" />
-                </div>
-            </div>
-        }
-    </div>
-    <hr />
-    <div class="intake-block" data-block="temphousing">
-        <div class="intake-header">
-            <div class="intake-collapse">
-                <img class="intake-collapse-img" src="/Content/Images/collapse.png" />
-                <img class="intake-expand-img" src="/Content/Images/expand.png" />
-                <h2 class="sectionSubHead">Temporary Housing</h2>
+                <h2 class="sectionSubHead">Destination Location</h2>
             </div>
             <span class="sectionSave intake-edit">
                 + Edit
@@ -389,20 +265,62 @@
                 x Cancel
             </span>
         </div>
-        <div class="row intake-row collapse in">
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
-                @Html.LabelFor(model => @Model.TempHousingDays)
-                <span class="intake-span">@Model.TempHousingDays</span>
-                @Html.TextBoxFor(m => @Model.TempHousingDays, new { @class = "form-control intake-input", @type = "number", step = "1", min = "0" })
-                @Html.HiddenFor(m => @Model.TempHousingDays, new { @class = "intake-hidden" })
+        <ul class="row sectionList intake-row collapse in">
+            <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
+                @Html.LabelFor(model => @Model.DestinationCity)
+                <span class="intake-span">@Model.DestinationCity</span>
+                @Html.TextBoxFor(m => @Model.DestinationCity, new { @class = "form-control intake-input" })
+                @Html.HiddenFor(m => @Model.DestinationCity, new { @class = "intake-hidden" })
+            </li>
+            <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
+                @Html.LabelFor(model => @Model.DestinationState)
+                <span class="intake-span">@Model.DestinationState</span>
+                @Html.TextBoxFor(m => @Model.DestinationState, new { @class = "form-control intake-input" })
+                @Html.HiddenFor(m => @Model.DestinationState, new { @class = "intake-hidden" })
+            </li>
+            <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
+                @Html.LabelFor(model => @Model.DestinationCountry)
+                <span class="intake-span">@Model.DestinationCountry</span>
+                @Html.TextBoxFor(m => @Model.DestinationCountry, new { @class = "form-control intake-input" })
+                @Html.HiddenFor(m => @Model.DestinationCountry, new { @class = "intake-hidden" })
+            </li>
+        </ul>
+    </div>
+    <hr />
+    <div class="intake-block" data-block="origin">
+        <div class="intake-header">
+            <div class="intake-collapse">
+                <img class="intake-collapse-img" src="/Content/Images/collapse.png" />
+                <img class="intake-expand-img" src="/Content/Images/expand.png" />
+                <h2 class="sectionSubHead">Departure Location</h2>
             </div>
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
-                @Html.LabelFor(model => @Model.TempHousingEndDateDisplay)
-                <span class="intake-span">@Model.TempHousingEndDateDisplay</span>
-                @Html.DatePicker("intake-date date", "TempHousingEndDateDisplay", Model.TempHousingEndDate)
-                @Html.HiddenFor(Model => @Model.TempHousingEndDateDisplay, new { @class = "intake-hidden" })
-            </div>
+            <span class="sectionSave intake-edit">
+                + Edit
+            </span>
+            <span class="sectionSave intake-cancel">
+                x Cancel
+            </span>
         </div>
+        <ul class="row sectionList intake-row collapse in">
+            <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
+                @Html.LabelFor(model => @Model.OriginCity)
+                <span class="intake-span">@Model.OriginCity</span>
+                @Html.TextBoxFor(m => @Model.OriginCity, new { @class = "form-control intake-input" })
+                @Html.HiddenFor(m => @Model.OriginCity, new { @class = "intake-hidden" })
+            </li>
+            <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
+                @Html.LabelFor(model => @Model.OriginState)
+                <span class="intake-span">@Model.OriginState</span>
+                @Html.TextBoxFor(m => @Model.OriginState, new { @class = "form-control intake-input" })
+                @Html.HiddenFor(m => @Model.OriginState, new { @class = "intake-hidden" })
+            </li>
+            <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
+                @Html.LabelFor(model => @Model.OriginCountry)
+                <span class="intake-span">@Model.OriginCountry</span>
+                @Html.TextBoxFor(m => @Model.OriginCountry, new { @class = "form-control intake-input" })
+                @Html.HiddenFor(m => @Model.OriginCountry, new { @class = "intake-hidden" })
+            </li>
+        </ul>
     </div>
     <hr />
     <div class="intake-block" data-block="homefinding">
@@ -523,6 +441,36 @@
         </div>
     </div>
     <hr />
+    <div class="intake-block" data-block="temphousing">
+        <div class="intake-header">
+            <div class="intake-collapse">
+                <img class="intake-collapse-img" src="/Content/Images/collapse.png" />
+                <img class="intake-expand-img" src="/Content/Images/expand.png" />
+                <h2 class="sectionSubHead">Temporary Housing</h2>
+            </div>
+            <span class="sectionSave intake-edit">
+                + Edit
+            </span>
+            <span class="sectionSave intake-cancel">
+                x Cancel
+            </span>
+        </div>
+        <div class="row intake-row collapse in">
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
+                @Html.LabelFor(model => @Model.TempHousingDays)
+                <span class="intake-span">@Model.TempHousingDays</span>
+                @Html.TextBoxFor(m => @Model.TempHousingDays, new { @class = "form-control intake-input", @type = "number", step = "1", min = "0" })
+                @Html.HiddenFor(m => @Model.TempHousingDays, new { @class = "intake-hidden" })
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
+                @Html.LabelFor(model => @Model.TempHousingEndDateDisplay)
+                <span class="intake-span">@Model.TempHousingEndDateDisplay</span>
+                @Html.DatePicker("intake-date date", "TempHousingEndDateDisplay", Model.TempHousingEndDate)
+                @Html.HiddenFor(Model => @Model.TempHousingEndDateDisplay, new { @class = "intake-hidden" })
+            </div>
+        </div>
+    </div>
+    <hr />
     <div class="intake-block" data-block="lease">
         <div class="intake-header">
             <div class="intake-collapse">
@@ -563,6 +511,58 @@
                 <span class="intake-span">@Model.LeaseTerm</span>
                 @Html.TextBoxFor(m => @Model.LengthOfAssignment, new { @class = "form-control intake-input", Name = "LengthOfAssignment", @type = "number", step = "1", min = "0" })
                 @Html.HiddenFor(m => @Model.LengthOfAssignment, new { @class = "intake-hidden" })
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="intake-block" data-block="rmc">
+        <div class="intake-header">
+            <div class="intake-collapse">
+                <img class="intake-collapse-img" src="/Content/Images/collapse.png" />
+                <img class="intake-expand-img" src="/Content/Images/expand.png" />
+                <h2 class="sectionSubHead">RMC Information</h2>
+            </div>
+        </div>
+        <ul class="row sectionList intake-row collapse in">
+            <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                @Html.LabelFor(model => @Model.Rmc)
+                <p class="intake-span">@Model.Rmc</p>
+            </li>
+            <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                @Html.LabelFor(model => @Model.RmcContact)
+                <p class="intake-span">@Model.RmcContact</p>
+            </li>
+            <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                @Html.LabelFor(model => @Model.RmcContactEmail)
+                <p class="intake-span">@Model.RmcContactEmail</p>
+            </li>
+        </ul>
+    </div>
+    <hr />
+    <div class="intake-block">
+        <div class="intake-header">
+            <div class="intake-collapse">
+                <img class="intake-collapse-img" src="/Content/Images/collapse.png" />
+                <img class="intake-expand-img" src="/Content/Images/expand.png" />
+                <h2 class="sectionSubHead">General</h2>
+            </div>
+        </div>
+        <div class="row intake-row collapse in">
+            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 intake-col">
+                @Html.LabelFor(model => @Model.IsRushDisplay)
+                <span class="intake-span">@Model.IsRushDisplay</span>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 intake-col">
+                @Html.LabelFor(model => @Model.IsVipDisplay)
+                <span class="intake-span">@Model.IsVipDisplay</span>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 intake-col">
+                @Html.LabelFor(model => @Model.IsAssignmentDisplay)
+                <span class="intake-span">@Model.IsAssignmentDisplay</span>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 intake-col">
+                @Html.LabelFor(model => @Model.IsInternationalDisplay)
+                <span class="intake-span">@Model.IsInternationalDisplay</span>
             </div>
         </div>
     </div>

@@ -102,18 +102,18 @@ namespace Odin.ViewModels.Orders.Transferee
 
 
         public bool IsAssignment {get; set; }
-        [DisplayName("Assignment:")]
+        [DisplayName("Move Type:")]
         public string IsAssignmentDisplay
         {
-            get { return IsAssignment ? "Yes" : "No"; }
+            get { return IsAssignment ? "Temporary" : "Permanent"; }
             
         }
 
         public bool IsInternational { get; set; }
-        [DisplayName("International:")]
+        [DisplayName("Relocation Type:")]
         public string IsInternationalDisplay
         {
-            get { return IsInternational ? "Yes" : "No"; }
+            get { return IsInternational ? "International" : "Domestic"; }
 
         }
 
