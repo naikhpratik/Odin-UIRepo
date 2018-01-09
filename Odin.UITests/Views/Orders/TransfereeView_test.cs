@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Odin.Data.Core.Models;
 using Odin.Data.Persistence;
+using Odin.Helpers;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.PhantomJS;
@@ -15,6 +16,7 @@ using Xunit;
 
 namespace Odin.UITests.Views.Orders
 {
+    [TestClass]
     public class TransfereeView_test
     {
         private string baseURL = Globals.Url_Localhost;
@@ -38,8 +40,8 @@ namespace Odin.UITests.Views.Orders
             _context = new ApplicationDbContext();
             _unitOfWork = new UnitOfWork(_context);
             userRepo = new UsersRepository(_context);
-
         }
+
 
         private void initialsteps()
         {
@@ -49,7 +51,7 @@ namespace Odin.UITests.Views.Orders
             _driver.FindElement(By.Id("Password")).SendKeys(Globals.pass_pm_valid);
             _driver.FindElement(By.ClassName("btn-default")).Click();
             orders = _driver.FindElements(By.Id("rowclickableorderRow"));
-            
+
         }
 
         [Fact]
@@ -112,29 +114,38 @@ namespace Odin.UITests.Views.Orders
                 var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
                 var db_order = _unitOfWork.Orders.GetOrderById(order_id); ;
                 _driver.Navigate().GoToUrl(this.baseURL + "/Orders/Transferee/" + order_id);
-                //orders.ElementAt(i).Click();
 
-                //Check for contact Info
+                //Check for Destiantion and Departure Info
 
-                delay(50);
-                
+                /**
                 //var city = _driver.FindElement(By.CssSelector("span#spanDestinationCity.intake-span")).Text;
                 //var state = _driver.FindElement(By.Id("spanDestinationState")).Text;
                 //var country = _driver.FindElement(By.Id("spanDestinationCountry")).Text;
-                Xunit.Assert.Equal(db_order.DestinationCity,  _driver.FindElement(By.CssSelector("span#spanDestinationCity.intake-span")).Text);
-                Xunit.Assert.Equal(db_order.DestinationState,  _driver.FindElement(By.CssSelector("span#spanDestinationState.intake-span")).Text);
-                Xunit.Assert.Equal(db_order.DestinationCountry, _driver.FindElement(By.CssSelector("span#spanDestinationCountry.intake-span")).Text);
+                // Xunit.Assert.Equal(db_order.DestinationCity, _driver.FindElement(By.CssSelector("span#spanDestinationCity.intake-span")).Text);
+                // Xunit.Assert.Equal(db_order.DestinationState, _driver.FindElement(By.CssSelector("span#spanDestinationState.intake-span")).Text);
+                // Xunit.Assert.Equal(db_order.DestinationCountry, _driver.FindElement(By.CssSelector("span#spanDestinationCountry.intake-span")).Text);
+                **/
 
-                _driver.FindElement(By.XPath("//span[@class = 'sectionSave intake-edit'][1]")).Click();
+                //** Destination Location **//
+                Xunit.Assert.Equal(db_order.DestinationCity, GetElement(_driver, By.Id("spanDestinationCity"), 10));
+                Xunit.Assert.Equal(db_order.DestinationState, _driver.FindElement(By.Id("spanDestinationState")).Text);
+                Xunit.Assert.Equal(db_order.DestinationCountry, _driver.FindElement(By.Id("spanDestinationCountry")).Text);
 
-                _driver.FindElement(By.XPath("//span[@class = 'sectionSave intake-edit'][1]")).Click();
-                //Xunit.Assert.Equal(db_order.Rmc, _driver.FindElement(By.Id("Rmc")).Text);
+                _driver.FindElement(By.XPath("(//span[@class = 'sectionSave intake-edit'])[1]")).Click();
+                _driver.FindElement(By.XPath("(//span[@class = 'sectionSave intake-cancel'])[1]")).Click();
+                _driver.FindElement(By.XPath("(//span[@class = 'sectionSave intake-edit'])[1]")).Click();
+                _driver.FindElement(By.Id("DestinationCity")).SendKeys("Test City");
+                _driver.FindElement(By.Id("DestinationState")).SendKeys("Test State");
+                _driver.FindElement(By.Id("DestinationCountry")).SendKeys("Test Country");
 
-                //*** Check what all information is important or Not null attributes **** //
+                _driver.FindElement(By.XPath("(//span[@class = 'sectionSave intake-edit'])[1]")).Click();
 
-                //var rmc1 = _driver.FindElement(By.Id("Rmc_contact")).Text;
-                //Xunit.Assert.Equal(db_order.RmcContact,rmc1);
-                //Xunit.Assert.Equal(db_order.RmcContactEmail, _driver.FindElement(By.Id("Rmc_contactemail")).Text);
+                /****** Check the saved values once the code is Uptodate ******/
+
+                //check for the update with the database 
+
+                /****** End ******/
+
 
                 _driver.FindElement(By.Id("backButton")).Click();
                 orders = _driver.FindElements(By.Id("rowclickableorderRow"));
@@ -148,9 +159,155 @@ namespace Odin.UITests.Views.Orders
 
         }
 
+        [Fact]
+        public void Transferee_Intakepage_ShouldCheckandUpdateDepartureLocation()
+        {
+
+            initialsteps();
+
+            for (int i = 0; i < orders.Count(); i++)
+            {
+
+                var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
+                var db_order = _unitOfWork.Orders.GetOrderById(order_id); ;
+                _driver.Navigate().GoToUrl(this.baseURL + "/Orders/Transferee/" + order_id);
+
+                //Check for Destiantion and Departure Info
+
+                /**
+                var city = GetElement( _driver, By.Id("spanOriginCity"),10);
+                var state = _driver.FindElement(By.Id("spanOriginState")).Text;
+                var country = _driver.FindElement(By.Id("spanOriginCountry")).Text;
+                Xunit.Assert.Equal(db_order.DestinationCity, _driver.FindElement(By.CssSelector("span#spanDestinationCity.intake-span")).Text);
+                Xunit.Assert.Equal(db_order.DestinationState, _driver.FindElement(By.CssSelector("span#spanDestinationState.intake-span")).Text);
+                Xunit.Assert.Equal(db_order.DestinationCountry, _driver.FindElement(By.CssSelector("span#spanDestinationCountry.intake-span")).Text);
+                **/
+
+                //** Departure Location **//
+
+                //Xunit.Assert.Equal(db_order.DestinationCity, _driver.FindElement(By.Id("spanDestinationCity")).Text);
+                Xunit.Assert.Equal(db_order.OriginCity, GetElement(_driver, By.Id("spanOriginCity"), 10));
+                Xunit.Assert.Equal(db_order.OriginState, _driver.FindElement(By.Id("spanOriginState")).Text);
+                Xunit.Assert.Equal(db_order.OriginCountry, _driver.FindElement(By.Id("spanOriginCountry")).Text);
+
+                _driver.FindElement(By.XPath("(//span[@class = 'sectionSave intake-edit'])[2]")).Click();
+                _driver.FindElement(By.XPath("(//span[@class = 'sectionSave intake-cancel'])[2]")).Click();
+                _driver.FindElement(By.XPath("(//span[@class = 'sectionSave intake-edit'])[2]")).Click();
+                _driver.FindElement(By.Id("OriginCity")).SendKeys("Test City");
+                _driver.FindElement(By.Id("OriginState")).SendKeys("Test State");
+                _driver.FindElement(By.Id("OriginCountry")).SendKeys("Test Country");
+                _driver.FindElement(By.XPath("(//span[@class = 'sectionSave intake-edit'])[2]")).Click();
+
+                /****** Check the saved values once the code is Uptodate ******/
+
+                //check for the update with the database 
+
+                /****** End ******/
+
+                _driver.FindElement(By.Id("backButton")).Click();
+                orders = _driver.FindElements(By.Id("rowclickableorderRow"));
+
+            }
 
 
+            // Xunit.Assert.Equal(orders.Count(), order_db.Count());
 
+            Logout();
+
+        }
+
+        [Fact]
+        public void Transferee_Intakepage_ShouldCheckandUpdateRelocationDates()
+        {
+
+            initialsteps();
+
+            for (int i = 0; i < orders.Count(); i++)
+            {
+
+                var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
+                var db_order = _unitOfWork.Orders.GetOrderById(order_id); ;
+                _driver.Navigate().GoToUrl(this.baseURL + "/Orders/Transferee/" + order_id);
+
+                //Check for Destiantion and Departure Info
+
+                /**
+                var city = GetElement( _driver, By.Id("spanOriginCity"),10);
+                var state = _driver.FindElement(By.Id("spanOriginState")).Text;
+                var country = _driver.FindElement(By.Id("spanOriginCountry")).Text;
+                var prepre = DateHelper.GetViewFormat(db_order.PreTripDate);
+                var Pre = GetElement(_driver, By.Id("spanPreTripDateDisplay"), 10);
+                Xunit.Assert.Equal(db_order.DestinationCity, _driver.FindElement(By.CssSelector("span#spanDestinationCity.intake-span")).Text);
+                Xunit.Assert.Equal(db_order.DestinationState, _driver.FindElement(By.CssSelector("span#spanDestinationState.intake-span")).Text);
+                Xunit.Assert.Equal(db_order.DestinationCountry, _driver.FindElement(By.CssSelector("span#spanDestinationCountry.intake-span")).Text);
+                **/
+
+                //** Departure Location **//
+
+                var click_expand = GetElementClick(_driver, By.XPath("(//img[@class = 'intake-expand-img'])[5]"), 10);
+                var click_collapse = GetElementClick(_driver, By.XPath("(//img[@class = 'intake-collapse-img'])[5]"), 10);
+                click_expand.Click();
+                click_collapse.Click();
+                click_expand.Click();
+                ((IJavaScriptExecutor)_driver).ExecuteScript("scroll(0,300)");
+                delay(100);
+                Xunit.Assert.Equal(DateHelper.GetViewFormat(db_order.PreTripDate), GetElement(_driver, By.Id("spanPreTripDate"), 10));
+                Xunit.Assert.Equal(DateHelper.GetViewFormat(db_order.EstimatedArrivalDate), GetElement(_driver, By.Id("spanEstimatedArrivalDate"), 10));
+                Xunit.Assert.Equal(DateHelper.GetViewFormat(db_order.WorkStartDate), _driver.FindElement(By.Id("spanWorkStartDate")).Text);
+
+                //Complete//
+
+                /****** Check the saved values once the code is Uptodate ******/
+
+                //check for the update with the database 
+
+                /****** End ******/
+
+                _driver.FindElement(By.Id("backButton")).Click();
+                orders = _driver.FindElements(By.Id("rowclickableorderRow"));
+
+            }
+
+
+            // Xunit.Assert.Equal(orders.Count(), order_db.Count());
+
+            Logout();
+
+        }
+
+        private string GetElement(IWebDriver driver, By by, int tries)
+        {
+
+            for (int i = 1; i <= tries; i++)
+            {
+                try
+                {
+                    return driver.FindElement(by).Text;
+                }
+                catch (WebDriverException)
+                {
+                    Thread.Sleep(10);
+                }
+            }
+            return null;
+
+        }
+        private IWebElement GetElementClick(IWebDriver driver, By by, int tries)
+        {
+
+            for (int i = 1; i <= tries; i++)
+            {
+                try
+                {
+                    return driver.FindElement(by);
+                }
+                catch (WebDriverException)
+                {
+                    Thread.Sleep(100);
+                }
+            }
+            return null;
+        }
 
         private void delay(int msec)
         {

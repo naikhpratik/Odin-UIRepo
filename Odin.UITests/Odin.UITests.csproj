@@ -102,6 +102,10 @@
       <Project>{0D2C0B84-DAFF-4F5C-97D9-1C3BC5871B4C}</Project>
       <Name>Odin.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Odin\Odin.csproj">
+      <Project>{003E6885-6839-46E6-9E1F-CC8EBFE57EFB}</Project>
+      <Name>Odin</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\packages\PhantomJS.1.9.2\tools\phantomjs\phantomjs.exe">
