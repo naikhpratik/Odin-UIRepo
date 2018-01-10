@@ -275,6 +275,214 @@ namespace Odin.UITests.Views.Orders
 
         }
 
+        [Fact]
+        public void Transferee_Intakepage_ShouldCheckandUpdateGeneral()
+        {
+
+            initialsteps();
+
+            for (int i = 0; i < orders.Count(); i++)
+            {
+
+                var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
+                var db_order = _unitOfWork.Orders.GetOrderById(order_id);
+                _driver.Navigate().GoToUrl(this.baseURL + "/Orders/Transferee/" + order_id);
+                delay(800);
+
+
+                /**
+                var city = GetElement( _driver, By.Id("spanOriginCity"),10);
+                var state = _driver.FindElement(By.Id("spanOriginState")).Text;
+                var country = _driver.FindElement(By.Id("spanOriginCountry")).Text;
+                var prepre = DateHelper.GetViewFormat(db_order.PreTripDate);
+                var Pre = GetElement(_driver, By.Id("spanPreTripDateDisplay"), 10);
+                Xunit.Assert.Equal(db_order.DestinationCity, _driver.FindElement(By.CssSelector("span#spanDestinationCity.intake-span")).Text);
+                Xunit.Assert.Equal(db_order.DestinationState, _driver.FindElement(By.CssSelector("span#spanDestinationState.intake-span")).Text);
+                Xunit.Assert.Equal(db_order.DestinationCountry, _driver.FindElement(By.CssSelector("span#spanDestinationCountry.intake-span")).Text);
+                **/
+
+
+                var click_expand = GetElementClick(_driver, By.XPath("(//img[@class = 'intake-expand-img'])[6]"), 10);
+                var click_collapse = GetElementClick(_driver, By.XPath("(//img[@class = 'intake-collapse-img'])[6]"), 10);
+                ((IJavaScriptExecutor)_driver).ExecuteScript("scroll(0,400)");
+                click_expand.Click();
+                click_collapse.Click();
+                //delay(100);
+                click_expand.Click();
+
+                delay(100);
+                //Xunit.Assert.Equal(DateHelper.GetViewFormat(db_order.IsRush), GetElement(_driver, By.Id("spanRush"), 10));
+
+                if (db_order.IsRush)
+                {
+                    Xunit.Assert.Equal("Yes", GetElement(_driver, By.Id("spanRush"), 10));
+                }
+                else
+                    Xunit.Assert.Equal("No", GetElement(_driver, By.Id("spanRush"), 10));
+
+                if (db_order.IsVip)
+                {
+                    Xunit.Assert.Equal("Yes", GetElement(_driver, By.Id("spanVip"), 10));
+                }
+                else
+                    Xunit.Assert.Equal("No", GetElement(_driver, By.Id("spanVip"), 10));
+
+                if (db_order.IsAssignment)
+                {
+                    Xunit.Assert.Equal("Yes", GetElement(_driver, By.Id("spanAssignment"), 10));
+                }
+                else
+                    Xunit.Assert.Equal("No", GetElement(_driver, By.Id("spanAssignment"), 10));
+
+                if (db_order.IsInternational)
+                {
+                    Xunit.Assert.Equal("Yes", GetElement(_driver, By.Id("spanInternational"), 10));
+                }
+                else
+                    Xunit.Assert.Equal("No", GetElement(_driver, By.Id("spanInternational"), 10));
+
+
+                //Xunit.Assert.Equal(DateHelper.GetViewFormat(db_order.EstimatedArrivalDate), GetElement(_driver, By.Id("spanVip"), 10));
+                //Xunit.Assert.Equal(DateHelper.GetViewFormat(db_order.WorkStartDate), _driver.FindElement(By.Id("spanAssignment")).Text);
+                //Xunit.Assert.Equal(DateHelper.GetViewFormat(db_order.WorkStartDate), _driver.FindElement(By.Id("spanInternational")).Text);
+                //Complete//
+
+                /****** Check the saved values once the code is Uptodate ******/
+
+                //check for the update with the database 
+
+                /****** End ******/
+
+                _driver.FindElement(By.Id("backButton")).Click();
+                orders = _driver.FindElements(By.Id("rowclickableorderRow"));
+
+            }
+
+
+            // Xunit.Assert.Equal(orders.Count(), order_db.Count());
+
+            Logout();
+
+        }
+
+
+        [Fact]
+        public void Transferee_Detailspage_ShouldCheckprofilesummary()
+        {
+
+            initialsteps();
+
+            for (int i = 0; i < orders.Count(); i++)
+            {
+
+                var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
+                var db_order = _unitOfWork.Orders.GetOrderById(order_id);
+                _driver.Navigate().GoToUrl(this.baseURL + "/Orders/Transferee/" + order_id + "#details");
+
+                 delay(800);
+
+                // File Details
+
+                Xunit.Assert.Equal(db_order.ProgramManager.FullName, _driver.FindElement(By.Id("pmFname")).Text);
+                Xunit.Assert.Equal(db_order.ProgramManager.Email, _driver.FindElement(By.Id("pmemail")).Text);
+                Xunit.Assert.Equal(db_order.ProgramManager.PhoneNumber, _driver.FindElement(By.Id("pmpno")).Text.Replace(".", ""));
+                
+                // Important Dates
+
+                // Housing details
+                
+                _driver.FindElement(By.Id("backButton")).Click();
+                orders = _driver.FindElements(By.Id("rowclickableorderRow"));
+
+            }
+
+
+            // Xunit.Assert.Equal(orders.Count(), order_db.Count());
+
+            Logout();
+
+        }
+
+        [Fact]
+        public void Transferee_Housingpage_ShouldCheckHousingsummary()
+        {
+
+            initialsteps();
+
+            for (int i = 0; i < orders.Count(); i++)
+            {
+
+                var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
+                var db_order = _unitOfWork.Orders.GetOrderById(order_id);
+                _driver.Navigate().GoToUrl(this.baseURL + "/Orders/Transferee/" + order_id + "#housing");
+
+                delay(800);
+
+                // File Details
+                //var a = db_order.HomeFinding.HousingBudget.ToString().Replace(".","");
+                //var b = GetElement(_driver, By.Id("HousingBudget"), 10);
+                //var c = b.Replace("[^0-9]", "");
+                Xunit.Assert.Equal(db_order.HomeFinding.HousingBudget.ToString().Replace(".", ""), GetElement( _driver,By.Id("HousingBudget"),10).Replace("$", "").Replace(".", "").Replace(",", ""));
+                Xunit.Assert.Equal(db_order.HomeFinding.NumberOfBedrooms.ToString(), _driver.FindElement(By.Id("NumberOfBedrooms")).Text);
+                Xunit.Assert.Equal(db_order.Pets.Count().ToString(), _driver.FindElement(By.Id("PetsCount")).Text.Replace(".", ""));
+
+                // Important Dates
+
+                // Housing details
+
+                _driver.FindElement(By.Id("backButton")).Click();
+                orders = _driver.FindElements(By.Id("rowclickableorderRow"));
+
+            }
+
+
+            // Xunit.Assert.Equal(orders.Count(), order_db.Count());
+
+            Logout();
+
+        }
+
+        [Fact]
+        public void Transferee_Housingpage_ShouldCheckPropertiesCount()
+        {
+
+            initialsteps();
+
+            for (int i = 0; i < orders.Count(); i++)
+            {
+
+                var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
+                var db_order = _unitOfWork.Orders.GetOrderById(order_id);
+                _driver.Navigate().GoToUrl(this.baseURL + "/Orders/Transferee/" + order_id + "#housing");
+
+                delay(800);
+                IList<IWebElement> properties = _driver.FindElements(By.Id("Listproperties"));
+                IList<IWebElement> properties1 = _driver.FindElements(By.ClassName(".row.sectionList"));
+                IList<IWebElement> properties2 = _driver.FindElements(By.CssSelector("li#Listproperties"));
+
+                //Xunit.Assert.Equal(db_order.HomeFinding.HousingBudget.ToString().Replace(".", ""), GetElement(_driver, By.Id("HousingBudget"), 10).Replace("$", "").Replace(".", "").Replace(",", ""));
+                //Xunit.Assert.Equal(db_order.HomeFinding.NumberOfBedrooms.ToString(), _driver.FindElement(By.Id("NumberOfBedrooms")).Text);
+                
+                // works except for the last property vella koplin 5 shown but actual 8 prop
+
+                Xunit.Assert.Equal(db_order.HomeFinding.HomeFindingProperties.Count().ToString(), properties.Count().ToString());
+              
+                // Important Dates
+
+                // Housing details
+
+                _driver.FindElement(By.Id("backButton")).Click();
+                orders = _driver.FindElements(By.Id("rowclickableorderRow"));
+
+            }
+
+
+            // Xunit.Assert.Equal(orders.Count(), order_db.Count());
+
+            Logout();
+
+        }
+
         private string GetElement(IWebDriver driver, By by, int tries)
         {
 

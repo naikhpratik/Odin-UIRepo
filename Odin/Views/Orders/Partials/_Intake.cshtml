@@ -191,19 +191,19 @@
         <div class="row intake-row collapse in">
             <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.IsRushDisplay)
-                <span class="intake-span">@Model.IsRushDisplay</span>
+                <span id="spanRush" class="intake-span">@Model.IsRushDisplay</span>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.IsVipDisplay)
-                <span class="intake-span">@Model.IsVipDisplay</span>
+                <span id="spanVip" class="intake-span">@Model.IsVipDisplay</span>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.IsAssignmentDisplay)
-                <span class="intake-span">@Model.IsAssignmentDisplay</span>
+                <span id="spanAssignment" class="intake-span">@Model.IsAssignmentDisplay</span>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.IsInternationalDisplay)
-                <span class="intake-span">@Model.IsInternationalDisplay</span>
+                <span id="spanInternational" class="intake-span">@Model.IsInternationalDisplay</span>
             </div>
         </div>
     </div>
@@ -225,13 +225,13 @@
         <div class="row intake-row collapse in">
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.SpouseName)
-                <span class="intake-span">@Model.SpouseName</span>
+                <span id="spanSpouseName" class="intake-span">@Model.SpouseName</span>
                 @Html.TextBoxFor(m => @Model.SpouseName, new { @class = "form-control intake-input" })
                 @Html.HiddenFor(m => @Model.SpouseName, new { @class = "intake-hidden" })
             </div>
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.SpouseVisaType)
-                <span class="intake-span">@Model.SpouseVisaType</span>
+                <span id="spanSpouseVisaType" class="intake-span">@Model.SpouseVisaType</span>
                 @Html.TextBoxFor(m => @Model.SpouseVisaType, new { @class = "form-control intake-input" })
                 @Html.HiddenFor(m => @Model.SpouseVisaType, new { @class = "intake-hidden" })
             </div>
@@ -248,19 +248,19 @@
                 <div class="row intake-row collapse in" data-entity-id="@Model.Children.ElementAt(i).Id" data-entity-collection="children">
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                         @Html.LabelFor(model => @Model.Children.ElementAt(i).Name)
-                        <span class="intake-span">@Model.Children.ElementAt(i).Name</span>
+                        <span id="spanChildname"class="intake-span">@Model.Children.ElementAt(i).Name</span>
                         @Html.TextBoxFor(m => @Model.Children.ElementAt(i).Name, new { @class = "form-control intake-input" })
                         @Html.HiddenFor(m => @Model.Children.ElementAt(i).Name, new { @class = "intake-hidden" })
                     </div>
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                         @Html.LabelFor(model => @Model.Children.ElementAt(i).Age)
-                        <span class="intake-span">@Model.Children.ElementAt(i).Age</span>
+                        <span id="spanChildage"class="intake-span">@Model.Children.ElementAt(i).Age</span>
                         @Html.TextBoxFor(m => @Model.Children.ElementAt(i).Age, new { @class = "form-control intake-input", @type = "number", step = "1", min = "0" })
                         @Html.HiddenFor(m => @Model.Children.ElementAt(i).Age, new { @class = "intake-hidden" })
                     </div>
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                         @Html.LabelFor(model => @Model.Children.ElementAt(i).Grade)
-                        <span class="intake-span">@Model.Children.ElementAt(i).Grade</span>
+                        <span id="spanChildgrade"class="intake-span">@Model.Children.ElementAt(i).Grade</span>
                         @Html.TextBoxFor(m => @Model.Children.ElementAt(i).Grade, new { @class = "form-control intake-input", @type = "number", step = "1", min = "0" })
                         @Html.HiddenFor(m => @Model.Children.ElementAt(i).Grade, new { @class = "intake-hidden" })
                     </div>
