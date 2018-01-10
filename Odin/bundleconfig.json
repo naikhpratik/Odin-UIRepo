@@ -22,5 +22,11 @@
     "inputFiles": [
       "Scripts/bookmarklet/app.js"
     ]
+  },
+  {
+    "outputFileName": "Content/bootstrap-datetimepicker.min.css",
+    "inputFiles": [
+      "Content/bootstrap-datetimepicker.css"
+    ]
   }
 ]

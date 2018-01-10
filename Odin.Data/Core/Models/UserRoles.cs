@@ -2,10 +2,10 @@
 {
     public static class UserRoles
     {
-        public static readonly string Consultant = "Consultant";
-        public static readonly string GlobalSupplyChain = "Global Supply Chain";
-        public static readonly string ProgramManager = "Program Manager";
-        public static readonly string Transferee = "Transferee";
-        public static readonly string Admin = "Admin";
+        public const string Consultant = "Consultant";
+        public const string GlobalSupplyChain = "Global Supply Chain";
+        public const string ProgramManager = "Program Manager";
+        public const string Transferee = "Transferee";
+        public const string Admin = "Admin";
     }
 }

@@ -19,6 +19,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http.Results;
+using Odin.Helpers;
 
 namespace Odin.IntegrationTests.Controllers.Api
 {
@@ -30,7 +31,7 @@ namespace Odin.IntegrationTests.Controllers.Api
             var config = new MapperConfiguration(c => c.AddProfile(new MappingProfile()));
             var mapper = config.CreateMapper();
             var unitOfWork = new UnitOfWork(Context);
-            return new OrdersController(unitOfWork, mapper, new QueueStore());
+            return new OrdersController(unitOfWork, mapper, new QueueStore(), new AccountHelper(new EmailHelper()));
         }
 
         [Test, Isolated]
@@ -49,7 +50,7 @@ namespace Odin.IntegrationTests.Controllers.Api
             Context.SaveChanges();
 
             var controller = SetUpOrdersController();
-            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            controller.MockCurrentUserAndRole(dsc.Id, dsc.UserName,UserRoles.Consultant);
 
             // Act
             var result = controller.GetOrders();
@@ -150,6 +151,7 @@ namespace Odin.IntegrationTests.Controllers.Api
             response.StatusCode.Should().Be(HttpStatusCode.OK);
             var newTransferee = Context.Transferees.SingleOrDefault(t => t.Email.Equals("integration@test.com"));
             newTransferee.Should().NotBeNull();
+            newTransferee?.InviteStatus.Should().Be(InviteStatus.NotYetInvited);
             var newOrder = Context.Orders.SingleOrDefault(o => o.TrackingId.Equals(orderDto.TrackingId));
             newOrder.Should().NotBeNull();
         }
@@ -399,7 +401,7 @@ namespace Odin.IntegrationTests.Controllers.Api
 
             // Act
             var controller = SetUpOrdersController();
-            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            controller.MockCurrentUserAndRole(dsc.Id, dsc.UserName,UserRoles.Consultant);
             var result = controller.UpsertDetailsServices(svc);
 
             // Assert
@@ -520,7 +522,7 @@ namespace Odin.IntegrationTests.Controllers.Api
 
             // Act
             var controller = SetUpOrdersController();
-            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            controller.MockCurrentUserAndRole(dsc.Id, dsc.UserName,UserRoles.Consultant);
             var result = controller.UpdateIntakeDestination(dto);
 
             // Assert
@@ -578,7 +580,7 @@ namespace Odin.IntegrationTests.Controllers.Api
 
             // Act
             var controller = SetUpOrdersController();
-            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            controller.MockCurrentUserAndRole(dsc.Id, dsc.UserName, UserRoles.Consultant);
             var result = controller.UpdateIntakeOrigin(dto);
 
             // Assert
@@ -661,7 +663,7 @@ namespace Odin.IntegrationTests.Controllers.Api
 
             // Act
             var controller = SetUpOrdersController();
-            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            controller.MockCurrentUserAndRole(dsc.Id, dsc.UserName, UserRoles.Consultant);
             var result = controller.UpsertIntakeFamily(dto);
 
             // Assert
@@ -749,7 +751,7 @@ namespace Odin.IntegrationTests.Controllers.Api
 
             // Act
             var controller = SetUpOrdersController();
-            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            controller.MockCurrentUserAndRole(dsc.Id, dsc.UserName, UserRoles.Consultant);
             var result = controller.UpsertIntakeFamily(dto);
 
             // Assert
@@ -786,7 +788,7 @@ namespace Odin.IntegrationTests.Controllers.Api
 
             // Act
             var controller = SetUpOrdersController();
-            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            controller.MockCurrentUserAndRole(dsc.Id, dsc.UserName, UserRoles.Consultant);
             var result = controller.InsertChild(order.Id);
 
             // Assert
@@ -876,7 +878,7 @@ namespace Odin.IntegrationTests.Controllers.Api
 
             // Act
             var controller = SetUpOrdersController();
-            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            controller.MockCurrentUserAndRole(dsc.Id, dsc.UserName,UserRoles.Consultant);
             var result = controller.InsertService(order.Id, serviceTypeId);
 
             // Assert
@@ -937,7 +939,7 @@ namespace Odin.IntegrationTests.Controllers.Api
 
             // Act
             var controller = SetUpOrdersController();
-            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            controller.MockCurrentUserAndRole(dsc.Id, dsc.UserName, UserRoles.Consultant);
             var result = controller.UpdateIntakeServices(dto);
 
             // Assert
@@ -1032,7 +1034,7 @@ namespace Odin.IntegrationTests.Controllers.Api
 
             // Act
             var controller = SetUpOrdersController();
-            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            controller.MockCurrentUserAndRole(dsc.Id, dsc.UserName, UserRoles.Consultant);
             var result = controller.UpdateIntakeRmc(dto);
 
             // Assert
@@ -1081,7 +1083,7 @@ namespace Odin.IntegrationTests.Controllers.Api
 
             // Act
             var controller = SetUpOrdersController();
-            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            controller.MockCurrentUserAndRole(dsc.Id, dsc.UserName, UserRoles.Consultant);
             var result = controller.InsertPet(order.Id);
 
             // Assert
@@ -1135,7 +1137,7 @@ namespace Odin.IntegrationTests.Controllers.Api
 
             // Act
             var controller = SetUpOrdersController();
-            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            controller.MockCurrentUserAndRole(dsc.Id, dsc.UserName, UserRoles.Consultant);
             var result = controller.UpdateIntakeTempHousing(dto);
 
             // Assert
@@ -1198,7 +1200,7 @@ namespace Odin.IntegrationTests.Controllers.Api
 
             // Act
             var controller = SetUpOrdersController();
-            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            controller.MockCurrentUserAndRole(dsc.Id, dsc.UserName, UserRoles.Consultant);
             var result = controller.UpdateIntakeLease(dto);
 
             // Assert
@@ -1266,7 +1268,7 @@ namespace Odin.IntegrationTests.Controllers.Api
 
             // Act
             var controller = SetUpOrdersController();
-            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            controller.MockCurrentUserAndRole(dsc.Id, dsc.UserName, UserRoles.Consultant);
             var result = controller.UpdateIntakeRelocation(dto);
 
             // Assert
@@ -1332,7 +1334,7 @@ namespace Odin.IntegrationTests.Controllers.Api
 
             // Act
             var controller = SetUpOrdersController();
-            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            controller.MockCurrentUserAndRole(dsc.Id, dsc.UserName,UserRoles.Consultant);
             var result = controller.UpsertIntakeHomeFinding(dto);
 
             // Assert
@@ -1389,7 +1391,7 @@ namespace Odin.IntegrationTests.Controllers.Api
 
             // Act
             var controller = SetUpOrdersController();
-            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            controller.MockCurrentUserAndRole(dsc.Id, dsc.UserName, UserRoles.Consultant);
             var result = controller.UpsertIntakeHomeFinding(dto);
 
             // Assert

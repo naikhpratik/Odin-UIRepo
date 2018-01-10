@@ -38,24 +38,30 @@
     color: #231F20;
 }
 
-    .sectionSubHead {
-        margin: 1rem 0 0.5rem 0;
-        font-size: 1.725rem;
-        font-weight: 400;
-        color: #8e1a55;
-        display: inline-block;
-    }
+.sectionSubHead {
+    margin: 1rem 0 0.5rem 0;
+    font-size: 1.725rem;
+    font-weight: 400;
+    color: #8e1a55;
+    display: inline-block;
+}
    
-    .sectionSave {
-        font-size: small;
-        color: $DW_Lime;
-        cursor: pointer;
-    }
+.sectionSave, .sectionAdd {
+    font-size: small;
+    color: $DW_Lime;
+    cursor: pointer;
+}
 
-    .sectionInstruction {
-        color: #35A2DB;
-        font-size: 16px;
-    }
+.sectionDelete{
+    font-size: small;
+    color: $DW_Red;
+    cursor: pointer;
+}
+
+.sectionInstruction {
+    color: #35A2DB;
+    font-size: 16px;
+}
 
 .sectionList {
     list-style: none;

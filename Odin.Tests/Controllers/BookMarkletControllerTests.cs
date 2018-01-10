@@ -38,7 +38,7 @@ namespace Odin.Tests.Controllers
 
             _userId = "1";
             _userName = "TestUser";
-            _controller.MockControllerContextForUser(_userId);
+            _controller.MockControllerContextForUserAndRole(_userId,UserRoles.Consultant);
         }
 
         [TestMethod]
@@ -47,7 +47,7 @@ namespace Odin.Tests.Controllers
             var url = "http://test.com";
 
             var orders = new List<Order> {new Order() {Id = "1"}};
-            _mockRepository.Setup(r => r.GetOrdersFor(_userId)).Returns(orders);
+            _mockRepository.Setup(r => r.GetOrdersFor(_userId,UserRoles.Consultant)).Returns(orders);
             _mockBookMarkletHelper.Setup(r => r.IsValidUrl(url)).Returns(true);
 
             var result = _controller.Index(url) as ViewResult;
@@ -61,7 +61,7 @@ namespace Odin.Tests.Controllers
             var url = "http://test.com";
 
             var orders = new List<Order> { new Order() { Id = "1" } };
-            _mockRepository.Setup(r => r.GetOrdersFor(_userId)).Returns(orders);
+            _mockRepository.Setup(r => r.GetOrdersFor(_userId,UserRoles.Consultant)).Returns(orders);
             _mockBookMarkletHelper.Setup(r => r.IsValidUrl(url)).Returns(false);
 
             var result = _controller.Index(url) as ViewResult;
@@ -75,7 +75,7 @@ namespace Odin.Tests.Controllers
             var url = "http://test.com";
 
             var orders = new List<Order>();
-            _mockRepository.Setup(r => r.GetOrdersFor(_userId)).Returns(orders);
+            _mockRepository.Setup(r => r.GetOrdersFor(_userId,UserRoles.Consultant)).Returns(orders);
             _mockBookMarkletHelper.Setup(r => r.IsValidUrl(url)).Returns(true);
 
             var result = _controller.Index(url) as ViewResult;

@@ -6,11 +6,12 @@ using Odin.Data.Core.Models;
 using Odin.Domain;
 using Odin.Interfaces;
 using System;
-using System.Web.Http;
 using System.Security.Claims;
+using System.Web.Http;
 
 namespace Odin.Controllers.Api
 {
+    [Authorize]
     public class MessageController : ApiController
     {
         private readonly IOrderImporter _orderImporter;

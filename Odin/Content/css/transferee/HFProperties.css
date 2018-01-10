@@ -51,8 +51,8 @@
       float: left;
       margin-left: 1rem; }
     .sectionList li img.location {
-      width: 70px;
-      height: 70px; }
+      width: 7rem;
+      height: 7rem; }
   @media screen and (min-width: 62rem) {
     .sectionList label.mobileLabel {
       display: none; } }

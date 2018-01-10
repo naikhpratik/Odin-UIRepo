@@ -79,3 +79,9 @@ ul.primaryNavIconList {
       width: 3rem;
       height: 3rem; }
 
+#profileDropDown ul.dropdown-menu .divider {
+  margin: 0px; }
+
+#profileDropDown ul.dropdown-menu li {
+  margin: .5rem 0 .5rem 0; }
+

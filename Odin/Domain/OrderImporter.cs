@@ -42,6 +42,7 @@ namespace Odin.Domain
                 if (transferee == null)
                 {
                     transferee = _mapper.Map<TransfereeDto, Transferee>(orderDto.Transferee);
+                    transferee.InviteStatus = InviteStatus.NotYetInvited;
                     _unitOfWork.Transferees.Add(transferee);
                 }
 
@@ -55,6 +56,7 @@ namespace Odin.Domain
                 if (transferee == null)
                 {
                     transferee = _mapper.Map<TransfereeDto, Transferee>(orderDto.Transferee);
+                    transferee.InviteStatus = InviteStatus.NotYetInvited;
                     _unitOfWork.Transferees.Add(transferee);
                 }
             }

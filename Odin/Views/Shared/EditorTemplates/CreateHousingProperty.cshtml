@@ -65,7 +65,7 @@
                         <div class="form-group col-md-6">
                             <div>
                                 @Html.ValidationMessageFor(model => model.PropertyAvailabilityDate, "", new { @class = "text-danger" })
-                                @Html.EditorFor(model => model.PropertyAvailabilityDate, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.DatePicker("date", "PropertyAvailabilityDate", Model.PropertyAvailabilityDate)
                             </div>
                             @Html.LabelFor(model => model.PropertyAvailabilityDate, htmlAttributes: new { @class = "control-label" })
                         </div>

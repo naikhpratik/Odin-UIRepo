@@ -18,7 +18,23 @@ namespace Odin.Tests.Extensions
 
             var claimsIdentity = new ClaimsIdentity(new[] { claim });
             var principal = new Moq.Mock<IPrincipal>();
+            
             principal.SetupGet(x => x.Identity).Returns(claimsIdentity);
+            controllerContext.SetupGet(x => x.HttpContext.User).Returns(principal.Object);
+
+            controller.ControllerContext = controllerContext.Object;
+        }
+
+        public static void MockControllerContextForUserAndRole(this Controller controller, string userId, string role)
+        {
+            var controllerContext = new Mock<ControllerContext>();
+            var claim = new Claim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier", userId);
+
+            var claimsIdentity = new ClaimsIdentity(new[] { claim });
+            var principal = new Moq.Mock<IPrincipal>();
+
+            principal.SetupGet(x => x.Identity).Returns(claimsIdentity);
+            principal.Setup(x => x.IsInRole(role)).Returns(true);
             controllerContext.SetupGet(x => x.HttpContext.User).Returns(principal.Object);
 
             controller.ControllerContext = controllerContext.Object;
@@ -54,11 +70,11 @@ namespace Odin.Tests.Extensions
                 new Claim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier",
                     userId));
 
-            identity.AddClaim(new Claim(ClaimTypes.Role, roleName));
+            //identity.AddClaim(new Claim(ClaimTypes.Role, roleName));
 
             identity.AddClaim(new Claim("FullName", FullName));
 
-            var principal = new GenericPrincipal(identity, new string[]{ "Transferee" });
+            var principal = new GenericPrincipal(identity, new string[]{ roleName });
 
             controller.ControllerContext.RequestContext.Principal = principal;
         }

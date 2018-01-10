@@ -59,11 +59,11 @@ namespace Odin.IntegrationTests.Extensions
                 new Claim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier",
                     userId));
 
-            identity.AddClaim(new Claim(ClaimTypes.Role, roleName));
+            //identity.AddClaim(new Claim(ClaimTypes.Role, roleName));
 
             identity.AddClaim(new Claim("FullName", FullName));
 
-            var principal = new GenericPrincipal(identity, new string[] { "Transferee" });
+            var principal = new GenericPrincipal(identity, new string[] { roleName });
 
             controller.ControllerContext = Mock.Of<ControllerContext>(ctx =>
                 ctx.HttpContext == Mock.Of<HttpContextBase>(http =>
@@ -81,11 +81,11 @@ namespace Odin.IntegrationTests.Extensions
                 new Claim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier",
                     userId));
 
-            identity.AddClaim(new Claim(ClaimTypes.Role, roleName));
+            //identity.AddClaim(new Claim(ClaimTypes.Role, roleName));
 
             identity.AddClaim(new Claim("FullName", FullName));
 
-            var principal = new GenericPrincipal(identity, new string[] { "Transferee" });
+            var principal = new GenericPrincipal(identity, new string[] { roleName });
 
             controller.ControllerContext.RequestContext.Principal = principal;
         }

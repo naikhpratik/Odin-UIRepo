@@ -19,7 +19,7 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>44303</IISExpressSSLPort>
+    <IISExpressSSLPort>44394</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -313,6 +313,7 @@
     <Compile Include="Controllers\Api\MessageController.cs" />
     <Compile Include="Controllers\AppointmentController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HelpController.cs" />
     <Compile Include="Controllers\HomeFindingPropertiesController.cs" />
     <Compile Include="Controllers\Api\ManagersController.cs" />
@@ -330,9 +331,11 @@
     <Compile Include="Domain\ManagerImporter.cs" />
     <Compile Include="Domain\OrderImporter.cs" />
     <Compile Include="Extensions\HttpResponseMessageExtensions.cs" />
+    <Compile Include="Extensions\UserExtensions.cs" />
     <Compile Include="Filters\AiHandleErrorAttribute.cs" />
     <Compile Include="Filters\ApiAuthorizeAttribute.cs" />
     <Compile Include="Filters\AuthorizeBookMarklet.cs" />
+    <Compile Include="Filters\RoleAuthorize.cs" />
     <Compile Include="Filters\TokenAuthorizeAttribute.cs" />
     <Compile Include="Filters\ValidationActionFilter.cs" />
     <Compile Include="Global.asax.cs">
@@ -412,7 +415,9 @@
   <ItemGroup>
     <Content Include="Content\animate.css" />
     <Content Include="Content\bootstrap-datetimepicker.css" />
-    <Content Include="Content\bootstrap-datetimepicker.min.css" />
+    <Content Include="Content\bootstrap-datetimepicker.min.css">
+      <DependentUpon>bootstrap-datetimepicker.css</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-flatly.css" />
     <Content Include="Content\bootstrap-paper.css" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -689,7 +694,9 @@
     <Content Include="Content\Images\collapse.png" />
     <Content Include="Content\Images\Desktop_ln_image_placeholder.png" />
     <Content Include="Content\Images\dwellworks_icon.png" />
+    <Content Include="Content\Images\dw_logo_mobile.png" />
     <Content Include="Content\Images\expand.png" />
+    <Content Include="Content\Images\export_pdf_icon.png" />
     <Content Include="Content\Images\forgot_password.jpg" />
     <Content Include="Content\Images\icn_alert_B1.png" />
     <Content Include="Content\Images\icn_alert_circle.png" />
@@ -715,6 +722,7 @@
     <Content Include="Content\Images\icn_housing.png" />
     <Content Include="Content\Images\icn_up_arrow.png" />
     <Content Include="Content\Images\icn_up_sel_arrow.png" />
+    <Content Include="Content\Images\ic_open_in_new_white.svg" />
     <Content Include="Content\Images\ic_search.png" />
     <Content Include="Content\Images\image_placeholder_large.png" />
     <Content Include="Content\Images\install.jpg" />
@@ -803,6 +811,7 @@
     <Content Include="Scripts\app\controllers\userManagementController.js" />
     <Content Include="Scripts\app\services\userManagementService.js" />
     <Content Include="Scripts\app\views\bookmarklet.js" />
+    <Content Include="Scripts\app\views\help.js" />
     <Content Include="Scripts\app\views\transferee-itin-appntmt.js" />
     <Content Include="Scripts\app\views\transferee-hfp-messages.js" />
     <Content Include="Scripts\app\views\transferee-housing.js" />
@@ -956,7 +965,6 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\jspdf.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\moment-with-locales.js" />
     <Content Include="Scripts\moment-with-locales.min.js" />
@@ -1042,6 +1050,8 @@
     <Content Include="Views\Orders\Partials\_Dashboard.cshtml" />
     <Content Include="Views\Orders\Partials\_Help.cshtml" />
     <Content Include="Views\Orders\Partials\_Message.cshtml" />
+    <Content Include="Views\Error\Error404.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
     <None Include="Web.Azure.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

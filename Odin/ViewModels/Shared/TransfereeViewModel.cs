@@ -1,5 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
+using Odin.Helpers;
+using System.ComponentModel.DataAnnotations;
 
 namespace Odin.ViewModels.Shared
 {
@@ -12,9 +14,13 @@ namespace Odin.ViewModels.Shared
         public string Email { get; set; }
 
         private string _phoneNumber;
+
         [DisplayName("Phone:")]
         public string PhoneNumber {
-            get { return _phoneNumber ?? String.Empty; }
+            get
+            {
+                return DateHelper.GetViewFormat(_phoneNumber);                
+            }
             set { _phoneNumber = value; }
         }
 
@@ -25,6 +31,9 @@ namespace Odin.ViewModels.Shared
             {
                 return $"{FirstName} {LastName}";
             }
-        } 
+        }
+        
+        [DisplayName("Invite Status: ")]
+        public string InviteStatus { get; set; }
     }
 }

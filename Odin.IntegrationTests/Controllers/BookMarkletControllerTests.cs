@@ -83,7 +83,7 @@ namespace Odin.IntegrationTests.Controllers
 
             string url = "http://test.com";
             _mockBookMarkletHelper.Setup(r => r.IsValidUrl(url)).Returns(true);
-            _controller.MockCurrentUser(_dsc.Id, _dsc.UserName);
+            _controller.MockCurrentUserAndRole(_dsc.Id, _dsc.UserName,UserRoles.Consultant);
 
             // Act
             var result = _controller.Index(url) as ViewResult;

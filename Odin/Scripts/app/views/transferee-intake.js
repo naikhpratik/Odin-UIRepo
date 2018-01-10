@@ -25,11 +25,22 @@
         $.post(url).done(success).fail(fail);
     }
 
+    var inviteTransferee = function(orderId, success, fail) {
+        var url = route + "invite";
+        var data = { "OrderId": orderId };
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: data
+        }).done(success).fail(fail);
+    }
+
     return{
         updateIntakeBlock: updateIntakeBlock,
         insertIntakeEntity: insertIntakeEntity,
         deleteIntakeEntity: deleteIntakeEntity,
-        insertIntakeEntityWithType: insertIntakeEntityWithType
+        insertIntakeEntityWithType: insertIntakeEntityWithType,
+        inviteTransferee: inviteTransferee
     }
 
 }();
@@ -76,11 +87,24 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
         intakeBlocks.on("click", ".intake-save", saveBlock);
         intakeBlocks.on("change", "[type=checkbox]", saveChecked);
 
-        
-        
+        var btnInviteTransferee = $("#btnInviteTransferee");
+        btnInviteTransferee.on("click", inviteTransferee);
     };
 
     //Event Callbacks
+
+    var inviteTransferee = function () {
+        transfereeIntakeService.inviteTransferee(orderId, inviteSuccess, inviteFailed);
+    }
+
+    var inviteSuccess = function () {
+        toast("Transferee has been invited", "success");
+        $('#lblInviteStatus').html("Invited");
+    }
+
+    var inviteFailed = function () {
+        toast("Uh oh!  Something went wrong!", "danger");
+    }
 
     var editSaveBlock = function (e) {
 

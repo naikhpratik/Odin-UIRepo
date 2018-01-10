@@ -3,8 +3,6 @@ using Odin.Data.Core.Repositories;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using Odin.Data.Helpers;
-using Odin.Data.Extensions;
 
 namespace Odin.Data.Persistence
 {
@@ -17,59 +15,38 @@ namespace Odin.Data.Persistence
             _context = context;
         }
 
-        public IEnumerable<Order> GetOrdersFor(string userId)
-        {
-            return _context.Orders
+        //public IEnumerable<Order> GetOrdersFor(string userId)
+        //{
+        //    return _context.Orders
 
-                .Where(o => (o.ConsultantId == userId || o.TransfereeId == userId)
-                            && o.SeCustStatus != OrderStatus.Cancelled
-                            && o.SeCustStatus != OrderStatus.Closed)
-                .Include(o => o.Transferee)
-                .Include(o => o.ProgramManager)
-                .Include(o => o.Consultant)
-                .Include(o => o.Services.Select(st => st.ServiceType))
-                .ToList();
+        //        .Where(o => (o.ConsultantId == userId || o.TransfereeId == userId)
+        //                    && o.SeCustStatus != OrderStatus.Cancelled
+        //                    && o.SeCustStatus != OrderStatus.Closed)
+        //        .Include(o => o.Transferee)
+        //        .Include(o => o.ProgramManager)
+        //        .Include(o => o.Consultant)
+        //        .Include(o => o.Services.Select(st => st.ServiceType))
+        //        .ToList();
 
-        }
+        //}
 
         public IEnumerable<Order> GetOrdersFor(string userId, string userRole)
         {
             if (UserRoles.Transferee == userRole)
             {
-                return _context.Orders
-                    .Where(o => o.TransfereeId == userId
-                                && o.SeCustStatus != OrderStatus.Cancelled
-                                && o.SeCustStatus != OrderStatus.Closed)
-                    .Include(o => o.Transferee)
-                    .Include(o => o.ProgramManager)
-                    .Include(o => o.Consultant)
-                    .Include(o => o.Services.Select(st => st.ServiceType))
-                    .ToList();
+                return GetOrdersQueryable().Where(o => o.TransfereeId == userId).ToList();
             }
             else if (UserRoles.Consultant == userRole)
             {
-                return _context.Orders
-                    .Where(o => o.ConsultantId == userId
-                                && o.SeCustStatus != OrderStatus.Cancelled
-                                && o.SeCustStatus != OrderStatus.Closed)
-                    .Include(o => o.Transferee)
-                    .Include(o => o.ProgramManager)
-                    .Include(o => o.Consultant)
-                    .Include(o => o.Services.Select(st => st.ServiceType))
-                    .ToList();
+                return GetOrdersQueryable().Where(o => o.ConsultantId == userId).ToList();
             }
             else if (UserRoles.ProgramManager == userRole || UserRoles.GlobalSupplyChain == userRole)
             {
-                return _context.Orders
-                    .Where(o => o.ProgramManagerId == userId)
-                    .Include(o => o.Transferee)
-                    .Include(o => o.ProgramManager)
-                    .Include(o => o.Consultant)
-                    .Include(o => o.Services.Select(st => st.ServiceType))
-                    .ToList();
+                //Show closed/cancelled?
+                return GetOrdersQueryable().Where(o => o.ProgramManagerId == userId).ToList();
             }
 
-            return null;
+            return new List<Order>();
         }
 
         public Order GetOrderByTrackingId(string trackingId)
@@ -87,7 +64,50 @@ namespace Odin.Data.Persistence
 
         public Order GetOrderById(string orderId)
         {
+            return GetOrderQueryable(orderId).SingleOrDefault<Order>();
+        }
 
+        //Removed because dangerous. What type of user does the order belong to?
+        //public Order GetOrderFor(string userId, string orderId)
+        //{
+        //    return _context.Orders
+        //        .Where(o => o.Id == orderId && (o.ConsultantId == userId || o.TransfereeId == userId))
+        //        .Include(o => o.Services)
+        //        .Include(o => o.HomeFinding)
+        //        .Include(o => o.Services.Select(s => s.ServiceType))
+        //        .Include(o => o.HomeFinding)
+        //        .Include(o => o.HomeFinding.NumberOfBathrooms)
+        //        .Include(o => o.HomeFinding.HousingType)
+        //        .Include(o => o.HomeFinding.AreaType)
+        //        .Include(o => o.HomeFinding.TransportationType)
+        //        .Include(o => o.HomeFinding.HomeFindingProperties.Select(hfp => hfp.Property.Photos))
+        //        .Include(o => o.DepositType)
+        //        .Include(o => o.BrokerFeeType)
+        //        .SingleOrDefault<Order>();
+
+        //}
+
+        public Order GetOrderFor(string userId, string orderId, string userRole)
+        {
+            if (userRole == UserRoles.Transferee)
+            {
+                return GetOrderQueryable(orderId).SingleOrDefault<Order>(o => o.TransfereeId == userId);
+            }
+            else if(userRole == UserRoles.ProgramManager) // for Program Manager
+            {
+                //PM can access any order.
+                return GetOrderById(orderId);
+            }
+            else if (userRole == UserRoles.Consultant)
+            {
+                return GetOrderQueryable(orderId).SingleOrDefault<Order>(o => o.ConsultantId == userId);
+            }
+
+            return null;
+        }
+
+        private IQueryable<Order> GetOrderQueryable(string orderId)
+        {
             return _context.Orders
                 .Where(o => o.Id == orderId)
                 .Include(o => o.Services)
@@ -98,86 +118,22 @@ namespace Odin.Data.Persistence
                 .Include(o => o.HomeFinding.HousingType)
                 .Include(o => o.HomeFinding.AreaType)
                 .Include(o => o.HomeFinding.TransportationType)
+                .Include(o => o.HomeFinding.HomeFindingProperties.Select(hfp => hfp.Property.Photos))
                 .Include(o => o.DepositType)
                 .Include(o => o.BrokerFeeType)
-                .SingleOrDefault<Order>();
+                .Include(o => o.Notifications);
         }
 
-        public Order GetOrderFor(string userId, string orderId)
+        private IQueryable<Order> GetOrdersQueryable()
         {
             return _context.Orders
-                .Where(o => o.Id == orderId && (o.ConsultantId == userId || o.TransfereeId == userId))
-                .Include(o => o.Services)
-                .Include(o => o.HomeFinding)
-                .Include(o => o.Services.Select(s => s.ServiceType))
-                .Include(o => o.HomeFinding)
-                .Include(o => o.HomeFinding.NumberOfBathrooms)
-                .Include(o => o.HomeFinding.HousingType)
-                .Include(o => o.HomeFinding.AreaType)
-                .Include(o => o.HomeFinding.TransportationType)
-                .Include(o => o.HomeFinding.HomeFindingProperties.Select(hfp => hfp.Property.Photos))
-                .Include(o => o.DepositType)
-                .Include(o => o.BrokerFeeType)
-                .SingleOrDefault<Order>();
 
-        }
-
-        public Order GetOrderFor(string userId, string orderId, string userRole)
-        {
-            if (userRole == UserRoles.Transferee)
-            {
-                return _context.Orders
-                .Where(o => o.Id == orderId && o.TransfereeId == userId)
-                .Include(o => o.Services)
-                .Include(o => o.HomeFinding)
-                .Include(o => o.Services.Select(s => s.ServiceType))
-                .Include(o => o.HomeFinding)
-                .Include(o => o.HomeFinding.NumberOfBathrooms)
-                .Include(o => o.HomeFinding.HousingType)
-                .Include(o => o.HomeFinding.AreaType)
-                .Include(o => o.HomeFinding.TransportationType)
-                .Include(o => o.HomeFinding.HomeFindingProperties.Select(hfp => hfp.Property.Photos))
-                .Include(o => o.DepositType)
-                .Include(o => o.BrokerFeeType)
-                .Include(o => o.Notifications)
-                .SingleOrDefault<Order>();
-            }
-            else if(userRole == UserRoles.ProgramManager) // for Program Manager
-            {
-                return _context.Orders
-                .Where(o => o.Id == orderId && o.ProgramManagerId == userId)
-                .Include(o => o.Services)
-                .Include(o => o.HomeFinding)
-                .Include(o => o.Services.Select(s => s.ServiceType))
-                .Include(o => o.HomeFinding)
-                .Include(o => o.HomeFinding.NumberOfBathrooms)
-                .Include(o => o.HomeFinding.HousingType)
-                .Include(o => o.HomeFinding.AreaType)
-                .Include(o => o.HomeFinding.TransportationType)
-                .Include(o => o.HomeFinding.HomeFindingProperties.Select(hfp => hfp.Property.Photos))
-                .Include(o => o.DepositType)
-                .Include(o => o.BrokerFeeType)
-                .Include(o => o.Notifications)
-                .SingleOrDefault<Order>();
-            }
-            else //for Consultant
-            {
-                return _context.Orders
-                .Where(o => o.Id == orderId && o.ConsultantId == userId)
-                .Include(o => o.Services)
-                .Include(o => o.HomeFinding)
-                .Include(o => o.Services.Select(s => s.ServiceType))
-                .Include(o => o.HomeFinding)
-                .Include(o => o.HomeFinding.NumberOfBathrooms)
-                .Include(o => o.HomeFinding.HousingType)
-                .Include(o => o.HomeFinding.AreaType)
-                .Include(o => o.HomeFinding.TransportationType)
-                .Include(o => o.HomeFinding.HomeFindingProperties.Select(hfp => hfp.Property.Photos))
-                .Include(o => o.DepositType)
-                .Include(o => o.BrokerFeeType)
-                .Include(o => o.Notifications)
-                .SingleOrDefault<Order>();
-            }
+                .Where(o => o.SeCustStatus != OrderStatus.Cancelled
+                            && o.SeCustStatus != OrderStatus.Closed)
+                .Include(o => o.Transferee)
+                .Include(o => o.ProgramManager)
+                .Include(o => o.Consultant)
+                .Include(o => o.Services.Select(st => st.ServiceType));
         }
 
 

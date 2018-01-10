@@ -1,6 +1,23 @@
 ﻿html, body {
   background-color: #f1f1f1; }
 
+ul.thumbnails-carousel li img {
+  max-width: 6rem !important; }
+
+.img-responsive {
+  height: 32rem !important;
+  width: 55rem; }
+
+img li.thumbnails-carousel, img.location {
+  width: 5rem;
+  height: 3rem; }
+
+.glyphicon-chevron-left {
+  margin-left: -4.2rem !important; }
+
+.glyphicon-chevron-right {
+  margin-right: -4.2rem !important; }
+
 div#itinerary .sectionList {
   list-style: none;
   margin: 0;
