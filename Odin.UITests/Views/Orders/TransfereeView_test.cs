@@ -534,6 +534,60 @@ namespace Odin.UITests.Views.Orders
 
         }
 
+
+        [Fact]
+        public void Transferee_Housingpage_ShouldCheckFilter()
+        {
+
+            initialsteps();
+
+            for (int i = 0; i < orders.Count(); i++)
+            {
+
+                var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
+                var db_order = _unitOfWork.Orders.GetOrderById(order_id);
+                _driver.Navigate().GoToUrl(this.baseURL + "/Orders/Transferee/" + order_id + "#housing");
+                delay(800);
+
+                //var all_count = db_order.HomeFinding.HomeFindingProperties.Count();
+                //var new_count = db_order.HomeFinding.HomeFindingProperties.Count();
+                var liked_count = db_order.HomeFinding.HomeFindingProperties.Count(x => x.Liked == true);
+                //var disliked_count = db_order.HomeFinding.HomeFindingProperties.Count();
+
+
+                _driver.FindElement(By.Id("allfilter")).Click();
+
+
+
+
+                _driver.FindElement(By.Id("newfilter")).Click();
+                _driver.FindElement(By.Id("likedfilter")).Click();
+
+
+
+                IList<IWebElement> liked_properties = _driver.FindElements(By.CssSelector("li#Listproperties"));
+                _driver.FindElement(By.Id("dislikedfilter")).Click();
+                var a = liked_properties.Count(x => x.Displayed).ToString();
+                
+                Xunit.Assert.Equal(liked_count.ToString(), liked_properties.Count(x =>x.Displayed).ToString());
+
+                // Important Dates
+
+                // Housing details
+
+                _driver.FindElement(By.Id("backButton")).Click();
+                orders = _driver.FindElements(By.Id("rowclickableorderRow"));
+
+            }
+
+
+            // Xunit.Assert.Equal(orders.Count(), order_db.Count());
+
+            Logout();
+
+        }
+
+
         private string GetElement(IWebDriver driver, By by, int tries)
         {
 
