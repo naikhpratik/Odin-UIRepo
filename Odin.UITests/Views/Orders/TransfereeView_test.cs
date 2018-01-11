@@ -365,6 +365,57 @@ namespace Odin.UITests.Views.Orders
 
         }
 
+        //check after merge
+        [Fact]
+        public void Transferee_Intakepage_ShouldCheckServicesonDetailspage()
+        {
+
+            initialsteps();
+
+            for (int i = 0; i < orders.Count(); i++)
+            {
+
+                var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
+                var db_order = _unitOfWork.Orders.GetOrderById(order_id);
+                _driver.Navigate().GoToUrl(this.baseURL + "/Orders/Transferee/" + order_id);
+                delay(800);
+                ((IJavaScriptExecutor)_driver).ExecuteScript("scroll(0,600)");
+
+                var selectedservices_count = db_order.Services.Count(x => x.Selected == true);
+               
+
+                var click_expand = GetElementClick(_driver, By.XPath("(//img[@class = 'intake-expand-img'])[8]"), 10);
+                var click_collapse = GetElementClick(_driver, By.XPath("(//img[@class = 'intake-collapse-img'])[8]"), 10);
+                click_expand.Click();
+                click_collapse.Click();
+                
+                
+                click_expand.Click();
+                
+
+                //IList<IWebElement> services = _driver.FindElements(By.Id("intakeservices"));
+                IList<IWebElement> intake_services = _driver.FindElements(By.XPath("//div[@data-entity-collection = 'services']"));
+
+                Xunit.Assert.Equal(intake_services.ToString(), db_order.Services.Count().ToString());
+
+                
+                _driver.Navigate().GoToUrl(this.baseURL + "/Orders/Transferee/" + order_id + "#details");
+                delay(800);
+                IList<IWebElement> details_services = _driver.FindElements(By.XPath("//ul[@data-entity-collection = 'services']"));
+
+
+                Xunit.Assert.Equal(selectedservices_count.ToString(), details_services.ToString());
+
+
+                _driver.FindElement(By.Id("backButton")).Click();
+                orders = _driver.FindElements(By.Id("rowclickableorderRow"));
+
+            }
+
+            Logout();
+
+        }
+
 
         [Fact]
         public void Transferee_Detailspage_ShouldCheckprofilesummary()
@@ -379,18 +430,18 @@ namespace Odin.UITests.Views.Orders
                 var db_order = _unitOfWork.Orders.GetOrderById(order_id);
                 _driver.Navigate().GoToUrl(this.baseURL + "/Orders/Transferee/" + order_id + "#details");
 
-                 delay(800);
+                delay(800);
 
                 // File Details
 
                 Xunit.Assert.Equal(db_order.ProgramManager.FullName, _driver.FindElement(By.Id("pmFname")).Text);
                 Xunit.Assert.Equal(db_order.ProgramManager.Email, _driver.FindElement(By.Id("pmemail")).Text);
                 Xunit.Assert.Equal(db_order.ProgramManager.PhoneNumber, _driver.FindElement(By.Id("pmpno")).Text.Replace(".", ""));
-                
+
                 // Important Dates
 
                 // Housing details
-                
+
                 _driver.FindElement(By.Id("backButton")).Click();
                 orders = _driver.FindElements(By.Id("rowclickableorderRow"));
 
@@ -422,7 +473,7 @@ namespace Odin.UITests.Views.Orders
                 //var a = db_order.HomeFinding.HousingBudget.ToString().Replace(".","");
                 //var b = GetElement(_driver, By.Id("HousingBudget"), 10);
                 //var c = b.Replace("[^0-9]", "");
-                Xunit.Assert.Equal(db_order.HomeFinding.HousingBudget.ToString().Replace(".", ""), GetElement( _driver,By.Id("HousingBudget"),10).Replace("$", "").Replace(".", "").Replace(",", ""));
+                Xunit.Assert.Equal(db_order.HomeFinding.HousingBudget.ToString().Replace(".", ""), GetElement(_driver, By.Id("HousingBudget"), 10).Replace("$", "").Replace(".", "").Replace(",", ""));
                 Xunit.Assert.Equal(db_order.HomeFinding.NumberOfBedrooms.ToString(), _driver.FindElement(By.Id("NumberOfBedrooms")).Text);
                 Xunit.Assert.Equal(db_order.Pets.Count().ToString(), _driver.FindElement(By.Id("PetsCount")).Text.Replace(".", ""));
 
@@ -462,11 +513,11 @@ namespace Odin.UITests.Views.Orders
 
                 //Xunit.Assert.Equal(db_order.HomeFinding.HousingBudget.ToString().Replace(".", ""), GetElement(_driver, By.Id("HousingBudget"), 10).Replace("$", "").Replace(".", "").Replace(",", ""));
                 //Xunit.Assert.Equal(db_order.HomeFinding.NumberOfBedrooms.ToString(), _driver.FindElement(By.Id("NumberOfBedrooms")).Text);
-                
+
                 // works except for the last property vella koplin 5 shown but actual 8 prop
 
                 Xunit.Assert.Equal(db_order.HomeFinding.HomeFindingProperties.Count().ToString(), properties.Count().ToString());
-              
+
                 // Important Dates
 
                 // Housing details
