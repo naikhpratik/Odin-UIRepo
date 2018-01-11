@@ -18,8 +18,8 @@ namespace Odin.UITests
         private string method_Name;
         public ApplicationStartPageTest()
         {
-            //_driver = new ChromeDriver();
-            _driver = new PhantomJSDriver();
+            _driver = new ChromeDriver();
+            //_driver = new PhantomJSDriver();
         }
 
         private void initialsteps()

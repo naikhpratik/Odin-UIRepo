@@ -32,8 +32,8 @@ namespace Odin.UITests.Views.Orders
             //options.AddArguments("--incognito");
             //options.ToCapabilities();
 
-            //_driver = new ChromeDriver();
-            _driver = new PhantomJSDriver();
+            _driver = new ChromeDriver();
+            //_driver = new PhantomJSDriver();
             _context = new ApplicationDbContext();
             _unitOfWork = new UnitOfWork(_context);
             userRepo = new UsersRepository(_context);
@@ -44,7 +44,7 @@ namespace Odin.UITests.Views.Orders
         {
 
             _driver.Navigate().GoToUrl(this.baseURL);
-            _driver.Manage().Window.Maximize();
+            //_driver.Manage().Window.Maximize();
             _driver.FindElement(By.Id("Email")).SendKeys(Globals.email_pm_valid);
             _driver.FindElement(By.Id("Password")).SendKeys(Globals.pass_pm_valid);
             _driver.FindElement(By.ClassName("btn-default")).Click();
@@ -102,10 +102,12 @@ namespace Odin.UITests.Views.Orders
                 var index_Name = orders.ElementAt(i).Text.Substring(0, orders.ElementAt(i).Text.IndexOf("\r"));
                 orders.ElementAt(i).Click();
                 var transferee_Name = _driver.FindElement(By.ClassName("eeName")).Text;
-                _driver.FindElement(By.Id("backButton")).Click();
-
+                
                 Xunit.Assert.Equal(index_Name, transferee_Name);
-
+                //delay(800);
+                //GetElementClick(_driver, By.Id("backButton"), 10).Click();
+                //_driver.FindElement(By.Id("backButton")).Click();
+                _driver.Navigate().GoToUrl(this.baseURL + "/Orders");
                 orders = _driver.FindElements(By.Id("rowclickableorderRow"));
 
             }
@@ -141,7 +143,7 @@ namespace Odin.UITests.Views.Orders
                 executor.ExecuteScript("arguments[0].click();", _driver.FindElement(By.Id("details")));
                 executor.ExecuteScript("arguments[0].click();", _driver.FindElement(By.Id("housing")));
                 executor.ExecuteScript("arguments[0].click();", _driver.FindElement(By.Id("history")));
-                executor.ExecuteScript("arguments[0].click();", _driver.FindElement(By.Id("messages")));
+               // executor.ExecuteScript("arguments[0].click();", _driver.FindElement(By.Id("messages")));
                 executor.ExecuteScript("arguments[0].click();", _driver.FindElement(By.Id("itinerary")));
 
                 _driver.Navigate().GoToUrl(this.baseURL + "/Orders");
@@ -173,8 +175,9 @@ namespace Odin.UITests.Views.Orders
 
                 //Navigating by URL
                 _driver.Navigate().GoToUrl(this.baseURL + "/Orders/Index/" + pm_Id);
+                delay(500);
                 _driver.Navigate().GoToUrl(this.baseURL + "/Orders");
-
+                delay(500);
                 program_managers = _driver.FindElements(By.ClassName("clickablepm"));
 
             }
@@ -229,7 +232,22 @@ namespace Odin.UITests.Views.Orders
 
         }
 
-
+        private IWebElement GetElementClick(IWebDriver driver, By by, int tries)
+        {
+            IWebElement element = null;
+            for (int i = 1; i <= tries; i++)
+            {
+                try
+                {
+                    element = driver.FindElement(by);
+                }
+                catch (ElementNotVisibleException)
+                {
+                    Thread.Sleep(100);
+                }
+            }
+            return element;
+        }
 
         private void delay(int msec)
         {
