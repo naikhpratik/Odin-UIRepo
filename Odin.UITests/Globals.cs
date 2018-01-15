@@ -22,7 +22,5 @@ namespace Odin.UITests
         public static readonly String email_pm_valid = "Odinpm@dwellworks.com";
         public static readonly String pass_pm_valid = "OdinOdin5$";
         
-        
-       
     }
 }

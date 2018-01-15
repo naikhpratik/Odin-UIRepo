@@ -6,6 +6,7 @@ using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Odin.Data.Core.Models;
 using Odin.Data.Persistence;
+using Odin.UITests.Helper;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.PhantomJS;
@@ -14,16 +15,18 @@ using Xunit;
 
 namespace Odin.UITests.Views.Orders
 {
-    [TestClass]
+    //[Collection("Our Test Collection #1")]
     public class IndexView_test
     {
-        private string baseURL = Globals.Url_Localhost;
+
         private readonly IWebDriver _driver;
         private ApplicationDbContext _context;
         private UnitOfWork _unitOfWork;
         private UsersRepository userRepo;
         public IEnumerable<Order> orderFrom_db;
-        private string method_Name;
+        //private string method_Name;
+        private HelperMethod help;
+        private string baseURL;
 
         public IndexView_test()
         {
@@ -31,49 +34,40 @@ namespace Odin.UITests.Views.Orders
             //ChromeOptions options = new ChromeOptions();
             //options.AddArguments("--incognito");
             //options.ToCapabilities();
-
             _driver = new ChromeDriver();
+            help = new HelperMethod(_driver);
             //_driver = new PhantomJSDriver();
             _context = new ApplicationDbContext();
             _unitOfWork = new UnitOfWork(_context);
             userRepo = new UsersRepository(_context);
-            
+            baseURL = Globals.Url_Localhost;
         }
 
-        private void initialsteps()
-        {
 
-            _driver.Navigate().GoToUrl(this.baseURL);
-            //_driver.Manage().Window.Maximize();
-            _driver.FindElement(By.Id("Email")).SendKeys(Globals.email_pm_valid);
-            _driver.FindElement(By.Id("Password")).SendKeys(Globals.pass_pm_valid);
-            _driver.FindElement(By.ClassName("btn-default")).Click();
-
-        }
         //checking with Pm login Add more for different logins 
         [Fact]
         public void OrdersPage_ShouldCheckForOrders()
         {
 
-            initialsteps();
-            
+            help.initialsteps();
+
             //getting orders from database according to the id
             var appuser = userRepo.GetUserIdByEmail(Globals.email_pm_valid);
 
             IEnumerable<Order> order_db = _unitOfWork.Orders.GetOrdersFor(appuser.Id, UserRoles.ProgramManager);
             IList<IWebElement> orders = _driver.FindElements(By.Id("rowclickableorderRow"));
-            
+
             Xunit.Assert.Equal(orders.Count(), order_db.Count());
 
-            Logout();
-            
+            help.Logout(_driver);
+
         }
 
         [Fact]
         public void OrdersPage_VerifyAllOrders_Displayed()
         {
 
-            initialsteps();
+            help.initialsteps();
 
             var appuser = userRepo.GetUserIdByEmail(Globals.email_pm_valid);
 
@@ -83,7 +77,7 @@ namespace Odin.UITests.Views.Orders
             //Create Dictionary to match the order by their Full Name`s from DB and UI
 
             Xunit.Assert.True(match_Orders(orderFrom_db, orders));
-            Logout();
+            help.Logout(_driver);
 
         }
 
@@ -91,7 +85,7 @@ namespace Odin.UITests.Views.Orders
         public void OrdersPage_VerifyAllOrdersbyClicking_ShouldReturnTrue()
         {
 
-            initialsteps();
+            help.initialsteps();
 
             var appuser = userRepo.GetUserIdByEmail(Globals.email_pm_valid);
             //orderFrom_db = _unitOfWork.Orders.GetOrdersFor(appuser.Id, UserRoles.ProgramManager);
@@ -102,7 +96,7 @@ namespace Odin.UITests.Views.Orders
                 var index_Name = orders.ElementAt(i).Text.Substring(0, orders.ElementAt(i).Text.IndexOf("\r"));
                 orders.ElementAt(i).Click();
                 var transferee_Name = _driver.FindElement(By.ClassName("eeName")).Text;
-                
+
                 Xunit.Assert.Equal(index_Name, transferee_Name);
                 //delay(800);
                 //GetElementClick(_driver, By.Id("backButton"), 10).Click();
@@ -115,7 +109,7 @@ namespace Odin.UITests.Views.Orders
 
             //Xunit.Assert.True(true);
 
-            Logout();
+            help.Logout(_driver);
 
         }
 
@@ -123,7 +117,7 @@ namespace Odin.UITests.Views.Orders
         public void OrdersPage_VerifyTransfereePageElements_Displayed()
         {
 
-            initialsteps();
+            help.initialsteps();
 
             var appuser = userRepo.GetUserIdByEmail(Globals.email_pm_valid);
 
@@ -143,7 +137,7 @@ namespace Odin.UITests.Views.Orders
                 executor.ExecuteScript("arguments[0].click();", _driver.FindElement(By.Id("details")));
                 executor.ExecuteScript("arguments[0].click();", _driver.FindElement(By.Id("housing")));
                 executor.ExecuteScript("arguments[0].click();", _driver.FindElement(By.Id("history")));
-               // executor.ExecuteScript("arguments[0].click();", _driver.FindElement(By.Id("messages")));
+                // executor.ExecuteScript("arguments[0].click();", _driver.FindElement(By.Id("messages")));
                 executor.ExecuteScript("arguments[0].click();", _driver.FindElement(By.Id("itinerary")));
 
                 _driver.Navigate().GoToUrl(this.baseURL + "/Orders");
@@ -152,7 +146,7 @@ namespace Odin.UITests.Views.Orders
             }
 
             //Xunit.Assert.True(match_Orders(orderFrom_db, orders));
-            Logout();
+            help.Logout(_driver);
 
         }
 
@@ -160,7 +154,7 @@ namespace Odin.UITests.Views.Orders
         public void OrdersIndexPage_SwitchDifferntPM_NavigateViaURL_ShouldDisplayRespectiveOrders()
         {
 
-            initialsteps();
+            help.initialsteps();
 
             //var appuser = userRepo.GetUserIdByEmail(Globals.email_pm_valid);
             //orderFrom_db = _unitOfWork.Orders.GetOrdersFor(appuser.Id, UserRoles.ProgramManager);
@@ -175,15 +169,15 @@ namespace Odin.UITests.Views.Orders
 
                 //Navigating by URL
                 _driver.Navigate().GoToUrl(this.baseURL + "/Orders/Index/" + pm_Id);
-                delay(500);
+                help.delay(500);
                 _driver.Navigate().GoToUrl(this.baseURL + "/Orders");
-                delay(500);
+                help.delay(500);
                 program_managers = _driver.FindElements(By.ClassName("clickablepm"));
 
             }
 
             //Xunit.Assert.True(match_Orders(orderFrom_db, orders));
-            Logout();
+            help.Logout(_driver);
 
         }
 
@@ -191,7 +185,7 @@ namespace Odin.UITests.Views.Orders
         public void OrdersIndexPage_SwitchDifferntPM_Onclick_ShouldDisplayRespectiveOrders()
         {
 
-            initialsteps();
+            help.initialsteps();
 
             //var appuser = userRepo.GetUserIdByEmail(Globals.email_pm_valid);
             //orderFrom_db = _unitOfWork.Orders.GetOrdersFor(appuser.Id, UserRoles.ProgramManager);
@@ -206,17 +200,12 @@ namespace Odin.UITests.Views.Orders
 
                 orderFrom_db = _unitOfWork.Orders.GetOrdersFor(pm_Id, UserRoles.ProgramManager);
 
-
-
-                //_driver.Navigate().GoToUrl(this.baseURL + "/Orders/Index/" + pm_Id);
-                //_driver.Navigate().GoToUrl(this.baseURL + "/Orders");
-
                 //Navigating by clicking
                 //To click on the elements rather then wait for the refresh or using delay
                 IJavaScriptExecutor executor = (IJavaScriptExecutor)_driver;
                 executor.ExecuteScript("arguments[0].click();", _driver.FindElement(By.Id("dropdownMenuLink")));
                 executor.ExecuteScript("arguments[0].click();", program_managers.ElementAt(i));
-                delay(500);
+                help.delay(500);
                 IList<IWebElement> orders = _driver.FindElements(By.Id("rowclickableorderRow"));
 
                 Xunit.Assert.True(match_Orders(orderFrom_db, orders));
@@ -228,31 +217,26 @@ namespace Odin.UITests.Views.Orders
             }
 
             //Xunit.Assert.True(match_Orders(orderFrom_db, orders));
-            Logout();
+            help.Logout(_driver);
 
         }
 
-        private IWebElement GetElementClick(IWebDriver driver, By by, int tries)
-        {
-            IWebElement element = null;
-            for (int i = 1; i <= tries; i++)
-            {
-                try
-                {
-                    element = driver.FindElement(by);
-                }
-                catch (ElementNotVisibleException)
-                {
-                    Thread.Sleep(100);
-                }
-            }
-            return element;
-        }
-
-        private void delay(int msec)
-        {
-            Thread.Sleep(msec);
-        }
+        //private IWebElement GetElementClick(IWebDriver driver, By by, int tries)
+        //{
+        //    IWebElement element = null;
+        //    for (int i = 1; i <= tries; i++)
+        //    {
+        //        try
+        //        {
+        //            element = driver.FindElement(by);
+        //        }
+        //        catch (ElementNotVisibleException)
+        //        {
+        //            Thread.Sleep(100);
+        //        }
+        //    }
+        //    return element;
+        //}
 
         private bool match_Orders(IEnumerable<Order> orderFrom_db, IList<IWebElement> orders)
         {
@@ -302,22 +286,13 @@ namespace Odin.UITests.Views.Orders
 
         }
 
-        private void Logout()
-        {
-            method_Name = new StackTrace().GetFrame(1).GetMethod().Name;
-            _driver.FindElement(By.Id("logoutForm")).Submit();
-            _driver.Close();
-        }
-
         [TestCleanup]
         private void Dispose()
         {
 
-            System.Diagnostics.Debug.WriteLine("Calling Method : " + method_Name);
+            //System.Diagnostics.Debug.WriteLine("Calling Method : " + method_Name);
             _driver.Quit();
             _driver.Dispose();
-
-
         }
 
     }

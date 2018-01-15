@@ -10,7 +10,7 @@ using System.Diagnostics;
 
 namespace Odin.UITests
 {
-    [TestClass]
+    //[Collection("Our Test Collection #1")]
     public class ApplicationStartPageTest : IDisposable
     {
         private string baseURL = Globals.Url_Localhost;
