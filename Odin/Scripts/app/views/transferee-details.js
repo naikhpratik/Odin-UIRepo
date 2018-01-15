@@ -92,6 +92,7 @@ var TransfereeDetailsController = function (transfereeDetailseService) {
         var sd = '';
         var st = '';
         var cd = '';
+        var notes = '';
         var timeTag;
         var dateTag;
 
@@ -106,7 +107,8 @@ var TransfereeDetailsController = function (transfereeDetailseService) {
                 st = input.val();
                 timeTag = input.parent().find('.glyphicon-time');                
             }
-            cd = input.attr("name") == "CompletedDate" ? input.val() : cd;                   
+            cd = input.attr("name") == "CompletedDate" ? input.val() : cd;
+            notes = input.attr("name") === "Notes" ? input.val() : notes;
         });
         
         if (sd.length == 0 && st.length > 0) {    
@@ -135,6 +137,7 @@ var TransfereeDetailsController = function (transfereeDetailseService) {
             data["ScheduledDate"] = sd + ' ' + st;
         }
         data["CompletedDate"] = cd;
+        data["Notes"] = notes;
         return 0;
     }
 
