@@ -27,7 +27,7 @@ var TransfereeAppointmentController = function (transfereeItineraryAppointment) 
             showClose: true,
             toolbarPlacement: 'bottom',
             icons: { close: 'custom-icon-check' },
-            useCurrent:true,
+            useCurrent:false,
             keepOpen: false
         });
 
@@ -46,7 +46,8 @@ var TransfereeAppointmentController = function (transfereeItineraryAppointment) 
         var appointment = $(e.target).parent().parent().parent().find("div#appointmentModal");        
         appointment.attr("data-appointment-id", '');
         var dt = appointment.children().find("input[name=ScheduledDate]");
-        dt.val('');
+        alert(dt.val());
+        dt.val();
         var ds = appointment.find("#Description");
         ds.attr('value', '');
     }

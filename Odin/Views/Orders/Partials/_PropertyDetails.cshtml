@@ -36,7 +36,7 @@
                         <p>@Html.DisplayFor(model => model.PropertyAmount)</p>
                     </li>
                     @if (Model.ViewingDate.HasValue)
-                    { 
+                    {
                     <li class="col-md-12">
                         <label>@Html.DisplayNameFor(model => model.ViewingDate)</label>
                         <p>@Html.DisplayFor(model => model.ViewingDate)</p>
@@ -65,13 +65,17 @@
     </div>
 </div>
 <div class="modal-footer">
-    <button type="button" id="removeProperty" class="btn btn-danger btn-ok">Remove Property</button>
+    <button type="button" id="removeProperty" class="btn btn-danger btn-ok pull-left">Remove Property</button>
+    <button type="button" id="selectProperty" class='btn btn-@(Model.selected == true ? "warning" : "success") pull-right' data-dismiss="modal">@(Model.selected == true ? "De-" : "")Select Property</button>
 </div>
 
 <script>
     $(document).ready(function () {
         $("#removeProperty.btn-danger").click(function () {
-            TransfereeHousingController.deleteProperty("@Model.Id");
+                TransfereeHousingController.deleteProperty("@Model.Id");
+            });
+        $('#selectProperty.btn-@(Model.selected == true ? "warning" : "success")').click(function () {
+                TransfereeHousingController.selectProperty("@Model.Id");
+            });
         });
-    });
 </script>

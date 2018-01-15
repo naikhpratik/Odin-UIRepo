@@ -140,6 +140,10 @@ ul.thumbnails-carousel li img {
     }
 }
 
+li.propertyItem.selected {
+    background-color: $DW_Brown;
+}
+
 li.propertyItem {
     margin: 0 0 0 0;
     padding: 0.5rem 0 0.5rem 0;
@@ -200,6 +204,8 @@ li.propertyItem {
         .btn-container {
             text-align: center;
         }
+
+
     }
 
     .comments {
@@ -215,7 +221,7 @@ li.propertyItem {
             position: absolute;
             top: -1rem;
             left: 2rem;
-            text-align:center;
+            text-align: center;
             background-color: $DW_Red;
             color: white;
             font-size: 1.25rem;

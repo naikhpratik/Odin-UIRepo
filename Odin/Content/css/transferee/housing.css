@@ -98,6 +98,9 @@ ul.thumbnails-carousel li img {
     #propertiesHeader {
       display: none; } }
 
+li.propertyItem.selected {
+  background-color: #4b3311; }
+
 li.propertyItem {
   margin: 0 0 0 0;
   padding: 0.5rem 0 0.5rem 0; }
