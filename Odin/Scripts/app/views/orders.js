@@ -152,6 +152,9 @@
             elt.find(".estimatedArrivalDate").text(_data[i]["estimatedArrivalDate"]);
             elt.find(".notifications").text(_data[i]["notifications"]);
 
+            elt.find(".scheduledCaption").text(_data[i]["scheduledCaption"]);
+            elt.find(".completedCaption").text(_data[i]["completedCaption"]);
+
             var pb = elt.find(".progressBar");
             pb.attr("data-comp-percent", _data[i]["compPercent"]);
             pb.attr("data-auth-percent", _data[i]["authPercent"]);
@@ -185,6 +188,9 @@
             var schedPercent = pb.attr("data-sched-percent");
             var compPercent = pb.attr("data-comp-percent");
 
+            var scheduledCaption = elt.find(".scheduledCaption").text();
+            var completedCaption = elt.find(".completedCaption").text();
+
             data.push({
                 id: id,
                 eeName: eeName,
@@ -199,7 +205,9 @@
                 notifications: notifications,
                 authPercent: authPercent,
                 schedPercent: schedPercent,
-                compPercent: compPercent
+                compPercent: compPercent,
+                scheduledCaption: scheduledCaption,
+                completedCaption: completedCaption
             });
         });
 

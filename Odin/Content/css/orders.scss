@@ -74,6 +74,29 @@ div#list {
         display: block;
     }
 
+    .progressBar__caption {
+        position: relative;
+        top: 2rem;
+        margin-top: 0.75rem;
+
+        label {
+            display: block;
+            margin-bottom: 0.75rem;
+            line-height: 1rem;
+
+            span.green {
+                color: $DW_Green;
+                font-weight: 600;
+            }
+
+            span.blue {
+                color: $DW_Blue;
+                font-weight: 600;
+            }
+        }
+    }
+
+
     ul {
         list-style: none;
         margin: 0;
