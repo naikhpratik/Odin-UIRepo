@@ -28,21 +28,29 @@ ul.primaryNavIconList {
     padding: 0 0 0 0;
 
     li.primaryNavIconList__item {
-        position: relative;
-        height: calc(#{$logoHeight} + 1rem);
+        position: static;
+        padding: 0.5rem;
         margin-right: 1rem;
-        padding: 0.5rem 1rem;
+        border-radius: 50%;
+        cursor: pointer;
+
+        @media screen and (min-width: 48rem) {
+            padding: 1rem;
+        }
 
         &:last-child {
             margin-right: 0rem;
         }
 
+        &:hover {
+            box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+        }
+
         span {
             $notificationsSize: 1.25rem;
-
             position: absolute;
-            top: 0;
-            right: 0;
+            top: 1rem;
+            right: 5rem;
             background-color: $DW_Red;
             color: white;
             padding: calc(#{$notificationsSize}/2);
@@ -51,6 +59,10 @@ ul.primaryNavIconList {
             min-width: calc(#{$notificationsSize}*1.5);
             line-height: calc(#{$notificationsSize}/2);
             border-radius: calc(#{$notificationsSize}*.75);
+
+            @media screen and (min-width: 48rem) {
+                right: 6rem;
+            }
         }
 
         img {
