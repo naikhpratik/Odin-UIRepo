@@ -37,8 +37,8 @@ namespace Odin.UITests.Views.Orders
             //options.AddArguments("--incognito");
             //options.ToCapabilities();
 
-            _driver = new ChromeDriver();
-            //_driver = new PhantomJSDriver();
+            //_driver = new ChromeDriver();
+            _driver = new PhantomJSDriver();
             help = new HelperMethod(_driver);
             _context = new ApplicationDbContext();
             _unitOfWork = new UnitOfWork(_context);
@@ -235,6 +235,7 @@ namespace Odin.UITests.Views.Orders
         {
 
             help.initialsteps();
+            
             orders = help.getOrders();
             for (int i = 0; i < orders.Count(); i++)
             {
@@ -627,8 +628,7 @@ namespace Odin.UITests.Views.Orders
             return false;
 
         }
-
-        
+    
 
         [TestCleanup]
         private void Dispose()

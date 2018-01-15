@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Security;
 using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Odin.Data.Core.Models;
@@ -34,15 +35,16 @@ namespace Odin.UITests.Views.Orders
             //ChromeOptions options = new ChromeOptions();
             //options.AddArguments("--incognito");
             //options.ToCapabilities();
-            _driver = new ChromeDriver();
+            //_driver = new ChromeDriver();
+            _driver = new PhantomJSDriver();
             help = new HelperMethod(_driver);
-            //_driver = new PhantomJSDriver();
+            
             _context = new ApplicationDbContext();
             _unitOfWork = new UnitOfWork(_context);
             userRepo = new UsersRepository(_context);
             baseURL = Globals.Url_Localhost;
         }
-        
+
         //checking with Pm login Add more for different logins 
         [Fact]
         public void OrdersPage_ShouldCheckForOrders()
@@ -65,7 +67,6 @@ namespace Odin.UITests.Views.Orders
         [Fact]
         public void OrdersPage_VerifyAllOrders_Displayed()
         {
-
             help.initialsteps();
 
             var appuser = userRepo.GetUserIdByEmail(Globals.email_pm_valid);
@@ -219,7 +220,7 @@ namespace Odin.UITests.Views.Orders
             help.Logout();
 
         }
-        
+
         private bool match_Orders(IEnumerable<Order> orderFrom_db, IList<IWebElement> orders)
         {
             //Create Dictionary to match the order by their Full Name`s from DB and UI

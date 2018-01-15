@@ -84,7 +84,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationStartPageTest.cs" />
+    <Compile Include="SeleniumTest.cs" />
+    <Compile Include="Views\ApplicationStartPageTest.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="Helper\HelperMethod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

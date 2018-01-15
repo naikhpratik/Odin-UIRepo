@@ -18,8 +18,8 @@ namespace Odin.UITests
         private string method_Name;
         public ApplicationStartPageTest()
         {
-            _driver = new ChromeDriver();
-            //_driver = new PhantomJSDriver();
+            //_driver = new ChromeDriver();
+            _driver = new PhantomJSDriver();
         }
 
         private void initialsteps()
@@ -29,12 +29,7 @@ namespace Odin.UITests
             _driver.Manage().Window.Maximize();
             
         }
-
-        private void Delay(int msec)
-        {
-            Thread.Sleep(msec);
-        }
-
+        
         [Fact]
         public void ShouldLoadApplicationPage_test()
         {
@@ -47,10 +42,7 @@ namespace Odin.UITests
         [Fact]
         public void ChromeLoginLogout_test()
         {
-
-
-            //_driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
-            //delay(500);
+            
             initialsteps();
             Xunit.Assert.True(Login(Globals.email_pm_valid, Globals.pass_pm_valid));
             Xunit.Assert.True(Logout());
