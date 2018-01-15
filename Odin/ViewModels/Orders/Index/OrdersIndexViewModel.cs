@@ -35,6 +35,20 @@ namespace Odin.ViewModels.Orders.Index
 
         public ICollection<Notification> Notifications { get; private set; }
 
+        public int UserNotificationsCount { get; set; }
+
+        //public IEnumerable<UserNotification> GetOrderUserNotification()
+        //{
+        //    DateTime currentdate = Convert.ToDateTime(DateTime.Now.AddDays(-1));
+        //    return UserNotifications.Where(u => u.CreatedAt == currentdate);
+        //}
+
+        //public IEnumerable<Notification> GetOrderNotifications()
+        //{
+        //    DateTime currentdate = Convert.ToDateTime(DateTime.Now.AddDays(-1));
+        //    return Notifications.Where(n => n.CreatedAt == currentdate);
+        //}
+
 
         public decimal CompletedWidth { get; set; }
         public decimal ScheduledWidth {  get; set; }
