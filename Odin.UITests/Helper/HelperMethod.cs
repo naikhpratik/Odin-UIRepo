@@ -16,18 +16,12 @@ namespace Odin.UITests.Helper
         {
             this._driver = _driver;
         }
-
-        public void Logout(IWebDriver _driver)
-        {
-            _driver.FindElement(By.Id("logoutForm")).Submit();
-            _driver.Close();
-        }
-
+        
         public void delay(int msec)
         {
             Thread.Sleep(msec);
         }
-
+        
         public void initialsteps()
         {
             _driver.Navigate().GoToUrl(this.baseURL);
@@ -37,7 +31,7 @@ namespace Odin.UITests.Helper
             _driver.FindElement(By.ClassName("btn-default")).Click();
 
         }
-
+        
         public IList<IWebElement> getOrders()
         {
             return _driver.FindElements(By.Id("rowclickableorderRow"));
@@ -75,6 +69,13 @@ namespace Odin.UITests.Helper
                 }
             }
             return null;
+        }
+
+        public void Logout()
+        {
+            //method_name = new stacktrace().getframe(1).getmethod().name;
+            _driver.FindElement(By.Id("logoutForm")).Submit();
+            _driver.Close();
         }
     }
 }

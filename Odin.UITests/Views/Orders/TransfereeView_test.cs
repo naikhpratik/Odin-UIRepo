@@ -27,7 +27,7 @@ namespace Odin.UITests.Views.Orders
         private UsersRepository userRepo;
         public IEnumerable<Order> orderFrom_db;
         private IList<IWebElement> orders;
-        private object method_Name;
+        //private object method_Name;
         private HelperMethod help;
 
         public TransfereeView_test()
@@ -45,18 +45,6 @@ namespace Odin.UITests.Views.Orders
             userRepo = new UsersRepository(_context);
            
         }
-
-
-        //private void initialsteps()
-        //{
-        //    _driver.Navigate().GoToUrl(this.baseURL);
-        //    _driver.Manage().Window.Maximize();
-        //    _driver.FindElement(By.Id("Email")).SendKeys(Globals.email_pm_valid);
-        //    _driver.FindElement(By.Id("Password")).SendKeys(Globals.pass_pm_valid);
-        //    _driver.FindElement(By.ClassName("btn-default")).Click();
-        //    orders = _driver.FindElements(By.Id("rowclickableorderRow"));
-
-        //}
 
         [Fact]
         public void Transferee_IntakePage_ShouldCheckForTransfereeDetails()
@@ -105,7 +93,7 @@ namespace Odin.UITests.Views.Orders
 
             // Xunit.Assert.Equal(orders.Count(), order_db.Count());
 
-            Logout();
+            help.Logout();
 
         }
 
@@ -170,7 +158,7 @@ namespace Odin.UITests.Views.Orders
 
             // Xunit.Assert.Equal(orders.Count(), order_db.Count());
 
-            Logout();
+            help.Logout();
 
         }
 
@@ -238,7 +226,7 @@ namespace Odin.UITests.Views.Orders
 
             // Xunit.Assert.Equal(orders.Count(), order_db.Count());
 
-            Logout();
+            help.Logout();
 
         }
 
@@ -291,7 +279,7 @@ namespace Odin.UITests.Views.Orders
 
             // Xunit.Assert.Equal(orders.Count(), order_db.Count());
 
-            Logout();
+            help.Logout();
 
         }
 
@@ -382,7 +370,7 @@ namespace Odin.UITests.Views.Orders
 
             // Xunit.Assert.Equal(orders.Count(), order_db.Count());
 
-            Logout();
+            help.Logout();
 
         }
 
@@ -419,11 +407,10 @@ namespace Odin.UITests.Views.Orders
 
             }
 
-            Logout();
+            help.Logout();
 
         }
-
-
+        
         [Fact]
         [Ignore]
         public void Transferee_Detailspage_ShouldCheckprofilesummary()
@@ -458,7 +445,7 @@ namespace Odin.UITests.Views.Orders
 
             //// Xunit.Assert.Equal(orders.Count(), order_db.Count());
 
-            //Logout();
+            //help.Logout();
 
         }
 
@@ -497,7 +484,7 @@ namespace Odin.UITests.Views.Orders
 
             // Xunit.Assert.Equal(orders.Count(), order_db.Count());
 
-            Logout();
+            help.Logout();
 
         }
 
@@ -538,7 +525,7 @@ namespace Odin.UITests.Views.Orders
 
             // Xunit.Assert.Equal(orders.Count(), order_db.Count());
 
-            Logout();
+            help.Logout();
 
         }
 
@@ -586,11 +573,9 @@ namespace Odin.UITests.Views.Orders
                 orders = _driver.FindElements(By.Id("rowclickableorderRow"));
 
             }
-
-
-            // Xunit.Assert.Equal(orders.Count(), order_db.Count());
-
-            Logout();
+            
+             // Xunit.Assert.Equal(orders.Count(), order_db.Count());
+             help.Logout();
 
         }
 
@@ -643,22 +628,14 @@ namespace Odin.UITests.Views.Orders
 
         }
 
-        private void Logout()
-        {
-            //method_name = new stacktrace().getframe(1).getmethod().name;
-            _driver.FindElement(By.Id("logoutForm")).Submit();
-            _driver.Close();
-        }
+        
 
         [TestCleanup]
         private void Dispose()
         {
-
-            System.Diagnostics.Debug.WriteLine("Calling Method : " + method_Name);
+            //System.Diagnostics.Debug.WriteLine("Calling Method : " + method_Name);
             _driver.Quit();
             _driver.Dispose();
-
-
         }
     }
 }

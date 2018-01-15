@@ -42,8 +42,7 @@ namespace Odin.UITests.Views.Orders
             userRepo = new UsersRepository(_context);
             baseURL = Globals.Url_Localhost;
         }
-
-
+        
         //checking with Pm login Add more for different logins 
         [Fact]
         public void OrdersPage_ShouldCheckForOrders()
@@ -59,7 +58,7 @@ namespace Odin.UITests.Views.Orders
 
             Xunit.Assert.Equal(orders.Count(), order_db.Count());
 
-            help.Logout(_driver);
+            help.Logout();
 
         }
 
@@ -77,7 +76,7 @@ namespace Odin.UITests.Views.Orders
             //Create Dictionary to match the order by their Full Name`s from DB and UI
 
             Xunit.Assert.True(match_Orders(orderFrom_db, orders));
-            help.Logout(_driver);
+            help.Logout();
 
         }
 
@@ -109,7 +108,7 @@ namespace Odin.UITests.Views.Orders
 
             //Xunit.Assert.True(true);
 
-            help.Logout(_driver);
+            help.Logout();
 
         }
 
@@ -146,7 +145,7 @@ namespace Odin.UITests.Views.Orders
             }
 
             //Xunit.Assert.True(match_Orders(orderFrom_db, orders));
-            help.Logout(_driver);
+            help.Logout();
 
         }
 
@@ -177,7 +176,7 @@ namespace Odin.UITests.Views.Orders
             }
 
             //Xunit.Assert.True(match_Orders(orderFrom_db, orders));
-            help.Logout(_driver);
+            help.Logout();
 
         }
 
@@ -217,27 +216,10 @@ namespace Odin.UITests.Views.Orders
             }
 
             //Xunit.Assert.True(match_Orders(orderFrom_db, orders));
-            help.Logout(_driver);
+            help.Logout();
 
         }
-
-        //private IWebElement GetElementClick(IWebDriver driver, By by, int tries)
-        //{
-        //    IWebElement element = null;
-        //    for (int i = 1; i <= tries; i++)
-        //    {
-        //        try
-        //        {
-        //            element = driver.FindElement(by);
-        //        }
-        //        catch (ElementNotVisibleException)
-        //        {
-        //            Thread.Sleep(100);
-        //        }
-        //    }
-        //    return element;
-        //}
-
+        
         private bool match_Orders(IEnumerable<Order> orderFrom_db, IList<IWebElement> orders)
         {
             //Create Dictionary to match the order by their Full Name`s from DB and UI
