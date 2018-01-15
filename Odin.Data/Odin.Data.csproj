@@ -89,6 +89,7 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Spatial, Version=5.8.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Spatial.5.8.2\lib\net40\System.Spatial.dll</HintPath>
     </Reference>
@@ -155,6 +156,7 @@
     <Compile Include="Core\Dtos\UserDto.cs" />
     <Compile Include="Core\Models\ApplicationUser.cs" />
     <Compile Include="Core\Models\InviteStatus.cs" />
+    <Compile Include="Core\Models\Lease.cs" />
     <Compile Include="Core\Models\Message.cs" />
     <Compile Include="Core\Models\Appointment.cs" />
     <Compile Include="Core\Models\AreaType.cs" />
@@ -190,6 +192,7 @@
     <Compile Include="Core\Models\TransportationType.cs" />
     <Compile Include="Core\Models\UserNotification.cs" />
     <Compile Include="Core\Models\UserRoles.cs" />
+    <Compile Include="Core\Repositories\ILeasesRepository .cs" />
     <Compile Include="Core\Repositories\IMessagesRepository.cs" />
     <Compile Include="Core\Repositories\IAreaTypesRepository.cs" />
     <Compile Include="Core\Repositories\IBrokerFeeTypesRepository.cs" />
@@ -219,6 +222,7 @@
     <Compile Include="Persistence\ApplicationDbContext.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Persistence\ApplicationUserRepository.cs" />
+    <Compile Include="Persistence\LeaseRepository.cs" />
     <Compile Include="Persistence\MessagesRepository.cs" />
     <Compile Include="Persistence\AreaTypesRepository.cs" />
     <Compile Include="Persistence\BrokerFeeTypesRepository.cs" />
@@ -580,6 +584,14 @@
     <Compile Include="Persistence\Migrations\201712281602426_AddInviteStatusToTransferee.Designer.cs">
       <DependentUpon>201712281602426_AddInviteStatusToTransferee.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201801102010103_selectedProperty.cs" />
+    <Compile Include="Persistence\Migrations\201801102010103_selectedProperty.Designer.cs">
+      <DependentUpon>201801102010103_selectedProperty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201801121524348_leaseModel.cs" />
+    <Compile Include="Persistence\Migrations\201801121524348_leaseModel.Designer.cs">
+      <DependentUpon>201801121524348_leaseModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\NotificationRepository.cs" />
     <Compile Include="Persistence\NumberOfBathroomsTypesRepository.cs" />
@@ -867,6 +879,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201712281602426_AddInviteStatusToTransferee.resx">
       <DependentUpon>201712281602426_AddInviteStatusToTransferee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201801102010103_selectedProperty.resx">
+      <DependentUpon>201801102010103_selectedProperty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201801121524348_leaseModel.resx">
+      <DependentUpon>201801121524348_leaseModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

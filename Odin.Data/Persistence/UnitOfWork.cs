@@ -14,6 +14,7 @@ namespace Odin.Data.Persistence
         public IServicesRepository Services { get; private set; }
         public IServiceTypesRepository ServiceTypes { get; private set; }
         public IAppointmentsRepository Appointments { get; private set; }
+        public ILeasesRepository Leases { get; private set; }
         public IChildrenRepository Children { get; private set; }
         public IPetsRepository Pets { get; private set; }
         public INumberOfBathroomsTypesRepository NumberOfBathrooms { get; private set; }
@@ -39,6 +40,7 @@ namespace Odin.Data.Persistence
             Services = new ServicesRepository(context);
             ServiceTypes = new ServiceTypesRepository(context);
             Appointments = new AppointmentsRepository(context);
+            Leases = new LeasesRepository(context);
             Children = new ChildrenRepository(context);
             Pets = new PetsRepository(context);
             NumberOfBathrooms = new NumberOfBathroomsTypesRepository(context);

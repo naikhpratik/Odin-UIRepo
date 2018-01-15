@@ -6,6 +6,7 @@ namespace Odin.Data.Core.Repositories
     public interface IHomeFindingPropertyRepository
     {
         HomeFindingProperty GetHomeFindingPropertyById(string homeFindingPropertyId);
+        HomeFindingProperty GetHomeFindingPropertyByPropertyId(string propertyId);
         IEnumerable<HomeFindingProperty> GetUpcomingHomeFindingPropertiesByHomeFindingId(string homeFindingId);
     }
 }
