@@ -3,18 +3,24 @@
 <div class="container-fluid" data-property-id="@Model.Id">
     <div class="row">
         <div class="col-md-6">
-            <h4>Selected Home</h4>
+            <h3>
+                Selected Home
+            </h3>
+            <p>&nbsp;</p>
         </div>
-        <div class="col-md-6">            
-            <button type="button" id="exportProperty" class="btn btn-ok pull-right">Export to PDF</button>
-            <button type="button" id="deselectProperty" class='btn btn-ok pull-right' data-dismiss="modal">Deselect Property</button>
+        <div class="col-md-6 buttonGroup">            
+            @if (ViewBag.IsPDF != true)
+            { 
+                <button type="button" id="exportProperty" class="btn btn-ok">Export to PDF</button>        
+                <button type="button" id="deselectProperty" class='btn btn-secondary' data-dismiss="modal">Deselect Property</button>
+            }
         </div>        
     </div>
     <div class="row">
-        <div class="col-md-4">           
+        <div class="col-md-3">           
             <img class="homePhoto" src='@(Model.Property.Photos.Count > 0 ? Model.Property.Photos.First().PhotoUrl:"")' />
         </div>
-        <div class="col-md-8">
+        <div class="col-md-9 rightSection">
             <div class="row">
                 <label class="col-md-12 address">@Html.DisplayFor(model => model.Property.Street1)</label>
                 <label class="col-md-12 address2">@Html.DisplayFor(model => model.Property.City), @Html.DisplayFor(model => model.Property.State) @Html.DisplayFor(model => model.Property.PostalCode)</label>
@@ -22,8 +28,8 @@
             <ul class="row selectedPropertySummary">
                 <li class="col-md-3">
                     <div class="selectedPropertySummary__item">
-                        <p>@Html.DisplayFor(model => model.Property.NumberOfBedrooms)
-                        <span>Bedrooms</span>
+                        <p class="selectedProperty__summaryContent">@Html.DisplayFor(model => model.Property.NumberOfBedrooms)
+                        <span class="selectedProperty__summarySpan">Bedrooms</span>
                         </p>
                     </div>
                 </li>
@@ -31,28 +37,28 @@
                     <div class="selectedPropertySummary__item ">
                         <p class="selectedProperty__summaryContent">
                             @Html.DisplayFor(model => model.Property.NumberOfBathrooms)
-                        <span>Bathrooms</span>
+                        <span class="selectedProperty__summarySpan">Bathrooms</span>
                         </p>
                     </div>
                 </li>
                 <li class="col-md-3">
                     <div class="selectedPropertySummary__item ">
                         <p class="selectedProperty__summaryContent">@Html.DisplayFor(model => model.Property.SquareFootage)
-                        <span>Square Feet</span>
+                        <span class="selectedProperty__summarySpan">Square Feet</span>
                         </p>
                     </div>
                 </li>
                 <li class="col-md-3">
                     <div class="selectedPropertySummary__item ">
                         <p class="selectedProperty__summaryContent">@Html.DisplayFor(model => model.Property.Amount)
-                        <span>Per Month</span>
+                        <span class="selectedProperty__summarySpan">Per Month</span>
                         </p>
                     </div>
                 </li>
             </ul>
         </div>
     </div>
-    <div class="row">
+    <div class="row leaseSection">
         <div class="col-md-6">
             <h4>Lease Information</h4>
         </div>
@@ -62,42 +68,59 @@
     </div>
 </div>
 <style>
-    .homePhoto {
-        width: 100%;
+    .buttonGroup {
+        margin-top: 2rem;
     }
-    .li {
+        .btn {
+                  float:right;
+                  margin-right:2rem;
+              }
 
+    .rightSection{
+        margin-left:-15px;
+    }
+    
+    .homePhoto {
+        width: 25rem;
+    }
+    li {
+        display: inline-block;
     }
 
     .selectedPropertySummary {
         list-style:none;
+        list-style-type:none;
         margin: 0 0 0 0;
         padding: 0 0 0 0;
     }
     .selectedPropertySummary__item {
         background-color: #efefef;
         text-align: center;
-        width: 96%;
         padding: 1rem 0;
         margin: 0 auto;
+        margin-left:-15px;
     }
-    .selectedPropertySummary__item p {
-        font-size: 1.2rem;
+    .selectedProperty__summaryContent {
+        font-size: 1.8rem;
         color: #808080;
         font-weight: 600;
     }
-    .selectedPropertySummary__item span {
+    .selectedProperty__summarySpan {
         display: block;
+        font-size: 1.5rem;
+        color: #808080;
+        font-weight: 400;
     }
     
     .address {
         font-size: 1.8rem;
         font-weight: bold;
-        margin-left: .5rem;
     }
     .address2 {
         font-size: 1.5rem;
-        margin-left: .5rem;
+    }
+    .leaseSection{
+        margin-top:2rem;
     }
 </style>
 <script>
