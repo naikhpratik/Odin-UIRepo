@@ -16,8 +16,9 @@ var TransfereeMessagesController = function (transfereeHousingMessages) {
         var modalParent = messagesModal.parent().parent();
 
         //Save Event for message
-        modalParent.on("click", ".btn-primary.send", saveMessage);
-        modalParent.on("click", ".btn-secondary", readMessages);
+        modalParent.find(".btn-primary.send").on('click', saveMessage);
+        //mark messages read
+        modalParent.find(".btn-secondary").on("click", readMessages);
     };
     
     var saveMessage = function (e) {
