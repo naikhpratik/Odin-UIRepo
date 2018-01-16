@@ -20,6 +20,7 @@ namespace Odin.Data.Persistence
             return _context.Notifications
                 .Where(n => n.OrderId == orderid)
                 .Include(n => n.Order)
+                .Include(n => n.CreatedBy)
                 .ToList();
         }
     }

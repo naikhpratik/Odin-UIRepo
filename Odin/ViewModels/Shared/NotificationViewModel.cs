@@ -1,7 +1,4 @@
-﻿using Odin.Helpers;
-using System;
-
-namespace Odin.ViewModels.Shared
+﻿namespace Odin.ViewModels.Shared
 {
     public class NotificationViewModel
     {
@@ -15,7 +12,7 @@ namespace Odin.ViewModels.Shared
         public bool IsRemoved { get; set; }
         public string NotificationUserNotificationId { get; set; }
         public string NotificationNotificationType { get; set; }
-
+        public string NotificationCreatedByFullName{ get; set;}
     }
 
 }
