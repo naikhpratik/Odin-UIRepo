@@ -34,19 +34,18 @@ namespace Odin
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new StyleBundle("~/Content/cssBundle").Include(
-                      "~/Content/bootstrap-paper.css",
-                      "~/Content/bootstrap-datetimepicker.css",
+                      "~/Content/styles/css/bootstrap-paper.css",
+                      "~/Content/styles/css/bootstrap-datetimepicker.css",
                       "~/Content/site.css",
                       "~/Content/css/primaryNav.css",
-                      "~/Content/datatables/css/datatables.bootstrap.css",
-                      "~/Content/animate.css",
+                      "~/Content/styles/css/animate.css",
                       "~/Content/css/header.css",
                       "~/Content/css/shared/dw_loading.css"));
 
 
             // Page Styling
             bundles.Add(new StyleBundle("~/Styling/help").Include("~/Content/css/help.css"));
-            bundles.Add(new StyleBundle("~/Styling/orders").Include("~/Content/css/orders.css","~/Content/typeahead.css"));
+            bundles.Add(new StyleBundle("~/Styling/orders").Include("~/Content/css/orders.css","~/Content/styles/css/typeahead.css"));
             bundles.Add(new StyleBundle("~/Styling/login").Include("~/Content/css/login.css"));
             bundles.Add(new StyleBundle("~/Styling/forgotPassword").Include("~/Content/css/forgotpassword.css",
                 "~/Content/animate.css"));

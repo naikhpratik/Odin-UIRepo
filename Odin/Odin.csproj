@@ -19,7 +19,7 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>44394</IISExpressSSLPort>
+    <IISExpressSSLPort>44312</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -413,17 +413,13 @@
     <Compile Include="Views\Helpers\UrlHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\animate.css" />
-    <Content Include="Content\bootstrap-datetimepicker.css" />
-    <Content Include="Content\bootstrap-datetimepicker.min.css">
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\styles\css\animate.css" />
+    <Content Include="Content\styles\css\bootstrap-datetimepicker.css" />
+    <Content Include="Content\styles\css\bootstrap-datetimepicker.min.css">
       <DependentUpon>bootstrap-datetimepicker.css</DependentUpon>
     </Content>
-    <Content Include="Content\bootstrap-flatly.css" />
-    <Content Include="Content\bootstrap-paper.css" />
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\styles\css\bootstrap-paper.css" />
     <Content Include="Content\css\bookmarklet.css">
       <DependentUpon>bookmarklet.scss</DependentUpon>
     </Content>
@@ -755,7 +751,7 @@
     <Content Include="Content\css\primaryNav.min.css">
       <DependentUpon>primaryNav.css</DependentUpon>
     </Content>
-    <Content Include="Content\leaflet.css" />
+    <Content Include="Content\styles\css\leaflet.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -797,13 +793,12 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
-    <Content Include="Content\typeahead.css" />
+    <Content Include="Content\styles\css\typeahead.css" />
     <Content Include="Errors\404.html" />
     <Content Include="Errors\error.html" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="Rotativa\help-wkhtmltoimage.txt" />
     <Content Include="Rotativa\help-wkhtmltopdf.txt" />
     <Content Include="Rotativa\wkhtmltoimage.exe" />
@@ -859,11 +854,9 @@
     <Content Include="Content\css\transferee\history.scss" />
     <Content Include="Content\css\transferee\messages.scss" />
     <Content Include="Content\css\transferee\transferee.scss" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\css\primaryNav.scss" />
     <Content Include="Content\css\header.scss" />
     <Content Include="Content\css\transferee\sideNav.scss" />
@@ -874,6 +867,7 @@
     <Content Include="Content\css\transferee\propertyMessages.scss" />
     <Content Include="Content\css\transferee\itineraryPdf.scss" />
     <Content Include="Content\css\transferee\dashboard.scss" />
+    <Content Include="Content\styles\scss\reset.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
