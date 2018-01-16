@@ -13,7 +13,7 @@ namespace Odin.Data.Persistence.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201801151559584_leaseModel"; }
+            get { return "201801161804330_leaseModel"; }
         }
         
         string IMigrationMetadata.Source

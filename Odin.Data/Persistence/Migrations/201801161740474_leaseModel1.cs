@@ -9,55 +9,6 @@ namespace Odin.Data.Persistence.Migrations
     {
         public override void Up()
         {
-            DropForeignKey("dbo.Leases", "PropertyId", "dbo.Properties");
-            DropForeignKey("dbo.Leases", "transferee_Id", "dbo.AspNetUsers");
-            DropIndex("dbo.Leases", new[] { "PropertyId" });
-            DropIndex("dbo.Leases", new[] { "CreatedAt" });
-            DropIndex("dbo.Leases", new[] { "transferee_Id" });
-            DropColumn("dbo.HomeFindingProperties", "selected");
-            DropTable("dbo.Leases",
-                removedColumnAnnotations: new Dictionary<string, IDictionary<string, object>>
-                {
-                    {
-                        "CreatedAt",
-                        new Dictionary<string, object>
-                        {
-                            { "ServiceTableColumn", "CreatedAt" },
-                        }
-                    },
-                    {
-                        "Deleted",
-                        new Dictionary<string, object>
-                        {
-                            { "ServiceTableColumn", "Deleted" },
-                        }
-                    },
-                    {
-                        "Id",
-                        new Dictionary<string, object>
-                        {
-                            { "ServiceTableColumn", "Id" },
-                        }
-                    },
-                    {
-                        "UpdatedAt",
-                        new Dictionary<string, object>
-                        {
-                            { "ServiceTableColumn", "UpdatedAt" },
-                        }
-                    },
-                    {
-                        "Version",
-                        new Dictionary<string, object>
-                        {
-                            { "ServiceTableColumn", "Version" },
-                        }
-                    },
-                });
-        }
-        
-        public override void Down()
-        {
             CreateTable(
                 "dbo.Leases",
                 c => new
@@ -126,14 +77,63 @@ namespace Odin.Data.Persistence.Migrations
                             }),
                         transferee_Id = c.String(maxLength: 128),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Properties", t => t.PropertyId)
+                .ForeignKey("dbo.AspNetUsers", t => t.transferee_Id)
+                .Index(t => t.PropertyId)
+                .Index(t => t.CreatedAt, clustered: true)
+                .Index(t => t.transferee_Id);
             
             AddColumn("dbo.HomeFindingProperties", "selected", c => c.Boolean());
-            CreateIndex("dbo.Leases", "transferee_Id");
-            CreateIndex("dbo.Leases", "CreatedAt", clustered: true);
-            CreateIndex("dbo.Leases", "PropertyId");
-            AddForeignKey("dbo.Leases", "transferee_Id", "dbo.AspNetUsers", "Id");
-            AddForeignKey("dbo.Leases", "PropertyId", "dbo.Properties", "Id");
+        }
+        
+        public override void Down()
+        {
+            DropForeignKey("dbo.Leases", "transferee_Id", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Leases", "PropertyId", "dbo.Properties");
+            DropIndex("dbo.Leases", new[] { "transferee_Id" });
+            DropIndex("dbo.Leases", new[] { "CreatedAt" });
+            DropIndex("dbo.Leases", new[] { "PropertyId" });
+            DropColumn("dbo.HomeFindingProperties", "selected");
+            DropTable("dbo.Leases",
+                removedColumnAnnotations: new Dictionary<string, IDictionary<string, object>>
+                {
+                    {
+                        "CreatedAt",
+                        new Dictionary<string, object>
+                        {
+                            { "ServiceTableColumn", "CreatedAt" },
+                        }
+                    },
+                    {
+                        "Deleted",
+                        new Dictionary<string, object>
+                        {
+                            { "ServiceTableColumn", "Deleted" },
+                        }
+                    },
+                    {
+                        "Id",
+                        new Dictionary<string, object>
+                        {
+                            { "ServiceTableColumn", "Id" },
+                        }
+                    },
+                    {
+                        "UpdatedAt",
+                        new Dictionary<string, object>
+                        {
+                            { "ServiceTableColumn", "UpdatedAt" },
+                        }
+                    },
+                    {
+                        "Version",
+                        new Dictionary<string, object>
+                        {
+                            { "ServiceTableColumn", "Version" },
+                        }
+                    },
+                });
         }
     }
 }
