@@ -17,6 +17,7 @@ using Xunit;
 namespace Odin.UITests.Views.Orders
 {
     //[Collection("Our Test Collection #1")]
+    [TestClass]
     public class IndexView_test
     {
 
@@ -46,7 +47,7 @@ namespace Odin.UITests.Views.Orders
         }
 
         //checking with Pm login Add more for different logins 
-        [Fact]
+        [TestMethod]
         public void OrdersPage_ShouldCheckForOrders()
         {
 
@@ -64,7 +65,7 @@ namespace Odin.UITests.Views.Orders
 
         }
 
-        [Fact]
+        [TestMethod]
         public void OrdersPage_VerifyAllOrders_Displayed()
         {
             help.initialsteps();
@@ -81,7 +82,7 @@ namespace Odin.UITests.Views.Orders
 
         }
 
-        [Fact]
+        [TestMethod]
         public void OrdersPage_VerifyAllOrdersbyClicking_ShouldReturnTrue()
         {
 
@@ -113,7 +114,7 @@ namespace Odin.UITests.Views.Orders
 
         }
 
-        [Fact]
+        [TestMethod]
         public void OrdersPage_VerifyTransfereePageElements_Displayed()
         {
 
@@ -150,7 +151,7 @@ namespace Odin.UITests.Views.Orders
 
         }
 
-        [Fact]
+        [TestMethod]
         public void OrdersIndexPage_SwitchDifferntPM_NavigateViaURL_ShouldDisplayRespectiveOrders()
         {
 
@@ -181,7 +182,7 @@ namespace Odin.UITests.Views.Orders
 
         }
 
-        [Fact]
+        [TestMethod]
         public void OrdersIndexPage_SwitchDifferntPM_Onclick_ShouldDisplayRespectiveOrders()
         {
 
@@ -270,7 +271,7 @@ namespace Odin.UITests.Views.Orders
         }
 
         [TestCleanup]
-        private void Dispose()
+        public void Dispose()
         {
 
             //System.Diagnostics.Debug.WriteLine("Calling Method : " + method_Name);

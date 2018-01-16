@@ -11,12 +11,13 @@ using System.Diagnostics;
 namespace Odin.UITests
 {
     //[Collection("Our Test Collection #1")]
-    public class ApplicationStartPageTest : IDisposable
+    [TestClass]
+    public class ApplicationStartPageTest : SeleniumTest
     {
         private string baseURL = Globals.Url_Localhost;
         private readonly IWebDriver _driver;
         private string method_Name;
-        public ApplicationStartPageTest()
+        public ApplicationStartPageTest() : base("Odin")
         {
             //_driver = new ChromeDriver();
             _driver = new PhantomJSDriver();
@@ -30,7 +31,7 @@ namespace Odin.UITests
             
         }
         
-        [Fact]
+        [TestMethod]
         public void ShouldLoadApplicationPage_test()
         {
 
@@ -39,7 +40,7 @@ namespace Odin.UITests
             //method_Name = "ShouldLoadApplicationPage_test";
         }
 
-        [Fact]
+        [TestMethod]
         public void ChromeLoginLogout_test()
         {
             
@@ -79,7 +80,7 @@ namespace Odin.UITests
         }
 
         // Can add additional functionality to verify email 
-        [Fact]
+        [TestMethod]
         public void Forgotpasswordclick_test()
         {
             initialsteps();
@@ -97,7 +98,7 @@ namespace Odin.UITests
             method_Name = "Forgotpasswordclick_test";
         }
 
-        [Fact]
+        [TestMethod]
         public void LoginPage_InvalidCredentails_ShouldCheckForErrors()
         {
             initialsteps();

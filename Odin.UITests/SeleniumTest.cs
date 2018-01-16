@@ -12,8 +12,9 @@ using System.Threading.Tasks;
 
 namespace Odin.UITests
 {
-    class SeleniumTest
+    public class SeleniumTest
     {
+        //private readonly int iisPort = ConfigHelper.GetWebServerPort();
         private readonly int iisPort = ConfigHelper.GetWebServerPort();
         private readonly string _applicationName;
         private Process _iisProcess;
