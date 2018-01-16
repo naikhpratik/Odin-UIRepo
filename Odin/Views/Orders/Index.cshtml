@@ -101,7 +101,8 @@
             </div>
             <div class="col-md-2">
                 <label class="header">Notifications</label>
-                <p>@order.Notifications.Count()</p>
+                @*<p>@order.Notifications.Count()</p>*@
+                <p>@order.UserNotificationsCount</p>
             </div>
         </li>
     }

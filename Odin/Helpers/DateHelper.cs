@@ -7,6 +7,8 @@ namespace Odin.Helpers
     {
         public static string GetViewFormat(string phone)
         {
+            if (string.IsNullOrEmpty(phone))
+                return "";
             string ecks = phone.ToUpper().IndexOf("X") > -1 ? " X":" ";
             string value = new System.Text.RegularExpressions.Regex(@"\D").Replace(phone, string.Empty);
             if (value.Length > 10)

@@ -9,6 +9,7 @@ using Odin.Data.Helpers;
 using Odin.Data.Persistence;
 using Odin.Domain;
 using Odin.Extensions;
+using Odin.Helpers;
 using Odin.IntegrationTests.Extensions;
 using Odin.IntegrationTests.TestAttributes;
 using System;
@@ -19,7 +20,6 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http.Results;
-using Odin.Helpers;
 
 namespace Odin.IntegrationTests.Controllers.Api
 {
@@ -409,6 +409,53 @@ namespace Odin.IntegrationTests.Controllers.Api
             Context.Entry(service).Reload();
             service.ScheduledDate.ToString().Should().Be(changedDate.ToString());
         }
+
+        [Test, Isolated]
+        public async Task UpsertOrderDetails_UpdateExistingService_ShouldChangeNotes()
+        {
+            // arrange
+            ServiceType serviceType = Context.ServiceTypes.First();
+
+            Service service = new Service()
+            {
+                ServiceType = serviceType,
+                ServiceTypeId = serviceType.Id,
+                ScheduledDate = DateTime.Now,
+                CompletedDate = DateTime.Now,
+                Notes = String.Empty
+            };
+
+            var order = OrderBuilder.New().First();
+            order.TrackingId = TokenHelper.NewToken();
+            order.Transferee = transferee;
+            order.Consultant = dsc;
+            order.ProgramManager = pm;
+            order.Services.Add(service);
+            order.DestinationCity = "integration city";
+            Context.Orders.Add(order);
+            Context.SaveChanges();
+            Context.Entry(order).Reload();
+
+            //modify the service
+            string notes = "Added notes.";
+            List<OrdersTransfereeDetailsServiceDto> oTranDetailServices = new List<OrdersTransfereeDetailsServiceDto>();
+            OrdersTransfereeDetailsServiceDto oTranDetailService = new OrdersTransfereeDetailsServiceDto() { Id = service.Id, Notes = notes };
+            oTranDetailServices.Add(oTranDetailService);
+            OrdersTransfereeDetailsServicesDto svc = new OrdersTransfereeDetailsServicesDto();
+            svc.Services = oTranDetailServices;
+            svc.Id = order.Id;
+
+            // Act
+            var controller = SetUpOrdersController();
+            controller.MockCurrentUserAndRole(dsc.Id, dsc.UserName, UserRoles.Consultant);
+            var result = controller.UpsertDetailsServices(svc);
+
+            // Assert
+            Context.Entry(order).Reload();
+            Context.Entry(service).Reload();
+            service.Notes.Should().Be(notes);
+        }
+
         [Test, Isolated]
         public async Task UpsertOrderDetails_ServiceDoesNotExist_ShouldReturnNotFound()
         {

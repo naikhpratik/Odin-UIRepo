@@ -147,7 +147,8 @@
                         </li>
                         <li class="col-md-4">
                             <label class="mobileLabel">Notes</label>
-                            <p>@Model.Services.ElementAt(i).Notes</p>
+                            @Html.TextBoxFor(m => Model.Services.ElementAt(i).Notes, new {@class = "form-control"})
+                            @*<p>@Model.Services.ElementAt(i).Notes</p>*@
                         </li>
                     </ul>
                 }
