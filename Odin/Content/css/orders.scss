@@ -11,17 +11,18 @@ body {
         padding: 0px;
     }
 }
-.clickable, .clickablepm{
-    cursor:pointer;
+
+.clickable, .clickablepm {
+    cursor: pointer;
 }
 
-.sortLabel{
+.sortLabel {
     text-align: center;
 }
 
-.sortPlus, .sortMinus{
+.sortPlus, .sortMinus {
     margin-left: 1rem;
-    display:none;
+    display: none;
 }
 
 div#list {
@@ -68,34 +69,6 @@ div#list {
             margin-top: $primaryNavHeightLg;
         }
     }
-
-    progress {
-        width: 100%;
-        display: block;
-    }
-
-    .progressBar__caption {
-        position: relative;
-        top: 2rem;
-        margin-top: 0.75rem;
-
-        label {
-            display: block;
-            margin-bottom: 0.75rem;
-            line-height: 1rem;
-
-            span.green {
-                color: $DW_Green;
-                font-weight: 600;
-            }
-
-            span.blue {
-                color: $DW_Blue;
-                font-weight: 600;
-            }
-        }
-    }
-
 
     ul {
         list-style: none;
@@ -164,82 +137,7 @@ div#list {
     .rmcName {
         font-size: 1.6rem;
         font-weight: 500;
-    }
-
-    .progressBar {
-        display: block;
-        position: relative;
-        width: 100%;
-
-        progress {
-            /* Reset the default appearance */
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            box-sizing: border-box;
-            border: 0px;
-            background-color: #ebebeb;
-            height: 2rem;
-        }
-
-        .progressCompleted::-webkit-progress-bar {
-            background-color: transparent;
-        }
-
-        .progressScheduled {
-            border: 0px;
-            color: $DW_LtBlue;
-        }
-
-        .progressScheduled::-webkit-progress-bar {
-            background-color: #ebebeb;
-        }
-
-        .progressScheduled::-webkit-progress-value {
-            background-color: $DW_LtBlue;
-            color: red;
-        }
-
-        .progressCompleted {
-            border: none;
-            color: $DW_Lime;
-            position: absolute;
-            top: 0;
-            background-color: transparent;
-        }
-
-        .progressCompleted::-webkit-progress-value {
-            background-color: $DW_Lime;
-        }
-
-        .progressScheduled::-ms-fill {
-            border-color: currentColor;
-        }
-
-        .progressCompleted::-ms-fill {
-            border-color: currentColor;
-        }
-
-        .progressBar__progress {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 2rem;
-        }
-
-        .progressBar__auth {
-            background-color: #ebebeb;
-            width: 100%;
-        }
-
-        .progressBar__sched {
-            background-color: $DW_LtBlue;
-        }
-
-        .progressBar__comp {
-            background-color: $DW_Green;
-        }
-    }
+    }    
 
     @media screen and (min-width: 60rem) {
 
@@ -261,6 +159,43 @@ div#list {
 
         .col-md-2 label.header.headerPersist {
             display: block;
+        }
+    }
+}
+.progress {
+    height: 2rem;
+    margin-bottom: 0px;
+}
+
+.progressBar__sched {
+    background-color: $DW_LtBlue;
+}
+
+.progressBar__comp {
+    background-color: $DW_Green;
+}
+
+.progress-bar:last-child:before {
+    background-color: #efefef;
+}
+
+.progressBar__caption {
+    position: relative;
+    margin-top: 0.75rem;
+
+    label {
+        display: block;
+        margin-bottom: 0.75rem;
+        line-height: 1rem;
+
+        .green {
+            color: $DW_Green;
+            font-weight: 600;
+        }
+
+        .blue {
+            color: $DW_Blue;
+            font-weight: 600;
         }
     }
 }

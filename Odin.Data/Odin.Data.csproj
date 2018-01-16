@@ -584,6 +584,10 @@
     <Compile Include="Persistence\Migrations\201801151559584_leaseModel.Designer.cs">
       <DependentUpon>201801151559584_leaseModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201801161425547_leaseModel1.cs" />
+    <Compile Include="Persistence\Migrations\201801161425547_leaseModel1.Designer.cs">
+      <DependentUpon>201801161425547_leaseModel1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\NotificationRepository.cs" />
     <Compile Include="Persistence\NumberOfBathroomsTypesRepository.cs" />
@@ -874,6 +878,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201801151559584_leaseModel.resx">
       <DependentUpon>201801151559584_leaseModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201801161425547_leaseModel1.resx">
+      <DependentUpon>201801161425547_leaseModel1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

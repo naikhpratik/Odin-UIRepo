@@ -91,23 +91,6 @@ div#list {
     @media screen and (min-width: 48rem) {
       div#list div#search {
         margin-top: 8rem; } }
-  div#list progress {
-    width: 100%;
-    display: block; }
-  div#list .progressBar__caption {
-    position: relative;
-    top: 2rem;
-    margin-top: 0.75rem; }
-    div#list .progressBar__caption label {
-      display: block;
-      margin-bottom: 0.75rem;
-      line-height: 1rem; }
-      div#list .progressBar__caption label span.green {
-        color: #49ae44;
-        font-weight: 600; }
-      div#list .progressBar__caption label span.blue {
-        color: #31a4dd;
-        font-weight: 600; }
   div#list ul {
     list-style: none;
     margin: 0;
@@ -156,53 +139,6 @@ div#list {
   div#list .rmcName {
     font-size: 1.6rem;
     font-weight: 500; }
-  div#list .progressBar {
-    display: block;
-    position: relative;
-    width: 100%; }
-    div#list .progressBar progress {
-      /* Reset the default appearance */
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
-      box-sizing: border-box;
-      border: 0px;
-      background-color: #ebebeb;
-      height: 2rem; }
-    div#list .progressBar .progressCompleted::-webkit-progress-bar {
-      background-color: transparent; }
-    div#list .progressBar .progressScheduled {
-      border: 0px;
-      color: #73c2ed; }
-    div#list .progressBar .progressScheduled::-webkit-progress-bar {
-      background-color: #ebebeb; }
-    div#list .progressBar .progressScheduled::-webkit-progress-value {
-      background-color: #73c2ed;
-      color: red; }
-    div#list .progressBar .progressCompleted {
-      border: none;
-      color: #a7ce39;
-      position: absolute;
-      top: 0;
-      background-color: transparent; }
-    div#list .progressBar .progressCompleted::-webkit-progress-value {
-      background-color: #a7ce39; }
-    div#list .progressBar .progressScheduled::-ms-fill {
-      border-color: currentColor; }
-    div#list .progressBar .progressCompleted::-ms-fill {
-      border-color: currentColor; }
-    div#list .progressBar .progressBar__progress {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 2rem; }
-    div#list .progressBar .progressBar__auth {
-      background-color: #ebebeb;
-      width: 100%; }
-    div#list .progressBar .progressBar__sched {
-      background-color: #73c2ed; }
-    div#list .progressBar .progressBar__comp {
-      background-color: #49ae44; }
   @media screen and (min-width: 60rem) {
     div#list li {
       margin: 0rem;
@@ -213,4 +149,31 @@ div#list {
       display: none; }
     div#list .col-md-2 label.header.headerPersist {
       display: block; } }
+
+.progress {
+  height: 2rem;
+  margin-bottom: 0px; }
+
+.progressBar__sched {
+  background-color: #73c2ed; }
+
+.progressBar__comp {
+  background-color: #49ae44; }
+
+.progress-bar:last-child:before {
+  background-color: #efefef; }
+
+.progressBar__caption {
+  position: relative;
+  margin-top: 0.75rem; }
+  .progressBar__caption label {
+    display: block;
+    margin-bottom: 0.75rem;
+    line-height: 1rem; }
+    .progressBar__caption label .green {
+      color: #49ae44;
+      font-weight: 600; }
+    .progressBar__caption label .blue {
+      color: #31a4dd;
+      font-weight: 600; }
 

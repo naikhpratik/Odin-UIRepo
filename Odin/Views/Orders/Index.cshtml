@@ -67,10 +67,9 @@
                 </div>
                 <div class="col-md-2">
                     <label class="header">Program Progress</label>
-                    <div class="progressBar" data-auth-percent="100%" data-sched-percent="@order.ScheduledWidth%" data-comp-percent="@order.CompletedWidth%">
-                        <span class="progressBar__progress progressBar__auth" style="width:100%"></span>
-                        <span class="progressBar__progress progressBar__sched" style="width:@order.ScheduledWidth%"></span>
-                        <span class="progressBar__progress progressBar__comp" style="width:@order.CompletedWidth%"></span>
+                    <div class="progress" data-sched-percent="@order.ScheduledWidth%" data-comp-percent="@order.CompletedWidth%">
+                        <div class="progress-bar progressBar__comp" role="progressbar" style="width:@order.CompletedWidth%"></div>                       
+                        <div class="progress-bar progressBar__sched" role="progressbar" style="width:@order.ScheduledWidth%"></div>                        
                     </div>
                     <div class="progressBar__caption">
                         <label class="scheduledCaption"><span class="blue">@(order.ScheduledServicesDisplay) of @(order.AuthorizedServicesDisplay)</span> Scheduled</label>
