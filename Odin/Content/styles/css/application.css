@@ -1,4 +1,7 @@
-﻿.custom-icon-check {
+﻿body {
+  background-color: #f1f1f1; }
+
+.custom-icon-check {
   background-image: url(../../Images/check.png);
   background-repeat: no-repeat;
   background-position: center; }

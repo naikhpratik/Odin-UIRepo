@@ -83,7 +83,8 @@ li.propertyItem {
 .glyphicon-calendar {
   display: none; }
 
-.form-control {
-  -webkit-box-shadow: none !important;
-  box-shadow: none !important; }
+/*.form-control {
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}*/
 

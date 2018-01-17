@@ -417,7 +417,6 @@
     <Content Include="Content\styles\css\application.min.css">
       <DependentUpon>application.css</DependentUpon>
     </Content>
-    <Content Include="Content\styles\css\Site.css" />
     <Content Include="Content\styles\css\animate.css" />
     <Content Include="Content\styles\css\bootstrap-datetimepicker.css" />
     <Content Include="Content\styles\css\bootstrap-datetimepicker.min.css">
@@ -755,7 +754,6 @@
     <Content Include="Content\css\primaryNav.min.css">
       <DependentUpon>primaryNav.css</DependentUpon>
     </Content>
-    <Content Include="Content\styles\css\leaflet.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -872,8 +870,9 @@
     <Content Include="Content\css\transferee\itineraryPdf.scss" />
     <Content Include="Content\css\transferee\dashboard.scss" />
     <Content Include="Content\styles\scss\2_resets\reset.scss" />
-    <Content Include="Content\styles\scss\3_components\datetimepicker.scss" />
+    <Content Include="Content\styles\scss\4_components\datetimepicker.scss" />
     <Content Include="Content\styles\scss\application.scss" />
+    <Content Include="Content\styles\scss\3_elements\body.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />

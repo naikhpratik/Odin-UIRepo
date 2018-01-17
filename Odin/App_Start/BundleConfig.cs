@@ -50,23 +50,39 @@ namespace Odin
             bundles.Add(new StyleBundle("~/Styling/login").Include("~/Content/css/login.css"));
             bundles.Add(new StyleBundle("~/Styling/forgotPassword").Include("~/Content/css/forgotpassword.css",
                 "~/Content/animate.css"));
-            bundles.Add(new StyleBundle("~/Styling/transferee").Include("~/Content/css/transferee/transferee.css"));
+           
             bundles.Add(new StyleBundle("~/Styling/bookmarklet").Include("~/Content/css/bookmarklet.css", "~/Content/animate.css"));
 
+            bundles.Add(new StyleBundle("~/Styling/transferee").Include(
+                "~/Content/css/transferee/transferee.css",
+                "~/Content/css/transferee/sideNav.css",
+                "~/Content/css/transferee/itinerary.css",
+                "~/Content/css/transferee/details.css",
+                "~/Content/css/transferee/history.css",
+                "~/Content/css/transferee/intake.css",
+                "~/Content/css/transferee/messages.css",
+                "~/Content/css/transferee/housing.css",
+                "~/Content/css/transferee/HFProperties.css",
+                "~/Content/css/transferee/help.css",
+                "~/Content/css/transferee/propertyMessages.css",
+                "~/Content/css/transferee/dashboard.css"
+                ));
+
+            //bundles.Add(new StyleBundle("~/Styling/transferee").Include("~/Content/css/transferee/transferee.css"));
+
             // Panel Styling
-            bundles.Add(new StyleBundle("~/Styling/sideNav").Include("~/Content/css/transferee/sideNav.css"));
-            bundles.Add(new StyleBundle("~/Styling/itinerary").Include("~/Content/css/transferee/itinerary.css"));
-            bundles.Add(new StyleBundle("~/Styling/details").Include("~/Content/css/transferee/details.css"));
-            bundles.Add(new StyleBundle("~/Styling/history").Include("~/Content/css/transferee/history.css"));
-            bundles.Add(new StyleBundle("~/Styling/intake").Include("~/Content/css/transferee/intake.css", "~/Content/animate.css"));
-            bundles.Add(new StyleBundle("~/Styling/messages").Include("~/Content/css/transferee/messages.css"));
-            bundles.Add(new StyleBundle("~/Styling/housing").Include("~/Content/css/transferee/housing.css","~/Content/leaflet.css"));
-            bundles.Add(new StyleBundle("~/Styling/housing").Include("~/Content/css/transferee/housing.css"));
-            bundles.Add(new StyleBundle("~/Styling/properties").Include("~/Content/css/transferee/HFProperties.css"));
-            bundles.Add(new StyleBundle("~/Styling/transfereeHelp").Include("~/Content/css/transferee/help.css"));
-            bundles.Add(new StyleBundle("~/Styling/propertyMessages").Include("~/Content/css/transferee/propertyMessages.css"));
+            //bundles.Add(new StyleBundle("~/Styling/sideNav").Include("~/Content/css/transferee/sideNav.css"));
+            //bundles.Add(new StyleBundle("~/Styling/itinerary").Include("~/Content/css/transferee/itinerary.css"));
+            //bundles.Add(new StyleBundle("~/Styling/details").Include("~/Content/css/transferee/details.css"));
+            //bundles.Add(new StyleBundle("~/Styling/history").Include("~/Content/css/transferee/history.css"));
+            //bundles.Add(new StyleBundle("~/Styling/intake").Include("~/Content/css/transferee/intake.css"));
+            //bundles.Add(new StyleBundle("~/Styling/messages").Include("~/Content/css/transferee/messages.css"));
+            //bundles.Add(new StyleBundle("~/Styling/housing").Include("~/Content/css/transferee/housing.css"));
+            //bundles.Add(new StyleBundle("~/Styling/properties").Include("~/Content/css/transferee/HFProperties.css"));
+            //bundles.Add(new StyleBundle("~/Styling/transfereeHelp").Include("~/Content/css/transferee/help.css"));
+            //bundles.Add(new StyleBundle("~/Styling/propertyMessages").Include("~/Content/css/transferee/propertyMessages.css"));
             bundles.Add(new StyleBundle("~/Styling/itineraryPdf").Include("~/Content/css/transferee/itineraryPdf.css"));
-            bundles.Add(new StyleBundle("~/Styling/dashboard").Include("~/Content/css/transferee/dashboard.css"));
+            //bundles.Add(new StyleBundle("~/Styling/dashboard").Include("~/Content/css/transferee/dashboard.css"));
 
             // Page scripts
             bundles.Add(new ScriptBundle("~/Scripts/orders").Include("~/Scripts/app/views/orders.js", "~/Scripts/typeahead.js"));

@@ -83,3 +83,63 @@ ul.primaryNavIconList {
         }
     }
 }
+
+
+a.dw_logo {
+    display: flex;
+    text-decoration: none;
+    align-items: center;
+
+    img.primaryNavHome__logo--mobile {
+        display: block;
+        height: $logoHeight;
+        width: auto;
+        text-decoration: none;
+        margin-right: 0.325rem;
+    }
+
+    img.primaryNavHome__logo {
+        display: none;
+    }
+
+    > p {
+        text-decoration: none;
+        line-height: $logoHeight;
+        height: $logoHeight;
+        color: $DW_Green;
+        font-size: 2rem;
+        font-weight: 300;
+        margin: 0 0 0 0; //die bootstrap die
+        padding: 0 0 0 0; //die bootstrap die
+        padding-left: 0.5rem;
+        margin-left: 0.5rem;
+        border-left: 1px solid #acacac;
+    }
+
+    @media screen and (min-width: 48rem) {
+        margin-left: 0.5rem;
+
+        img.primaryNavHome__logo--mobile {
+            display: none;
+        }
+
+        img.primaryNavHome__logo {
+            display: block;
+            height: $logoHeight;
+            width: auto;
+            padding-right: 0.325rem;
+        }
+    }
+
+    &:hover {
+        > p {
+            text-decoration: none;
+        }
+    }
+}
+
+.centered_logo {
+    display: flex;
+    justify-content: center;
+    margin: 3rem 0;
+}
