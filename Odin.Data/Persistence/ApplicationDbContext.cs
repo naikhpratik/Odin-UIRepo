@@ -21,7 +21,6 @@ namespace Odin.Data.Persistence
         public DbSet<Service> Services { get; set; }
         public DbSet<ServiceType> ServiceTypes { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
-        public DbSet<Lease> Leases { get; set; }
         public virtual DbSet<Manager> Managers { get; set; }
         public virtual DbSet<Consultant> Consultants { get; set; }
         public virtual DbSet<Transferee> Transferees { get; set; }

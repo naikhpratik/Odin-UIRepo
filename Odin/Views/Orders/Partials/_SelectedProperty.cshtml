@@ -166,11 +166,8 @@
 </style>
 <script>
     $(document).ready(function () {
-        $("#exportProperty").click(function () {
-            TransfereeHousingController.lease2PDF("@Model.Id");
-            });
         $('#deselectProperty').click(function () {
-                TransfereeHousingController.selectProperty("", "@Model.Id");
+                TransfereeHousingController.selectProperty("", "@Model.propertyId");
             });
     });
 </script>

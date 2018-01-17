@@ -294,10 +294,6 @@ namespace Odin.Controllers
             return itinHelper.Build(id);
         }
 
-        private Lease GetLeaseByPropertyId(string id, string pmEmail)
-        {
-            return _unitOfWork.Leases.GetLeaseByPropertyId(id, pmEmail);
-        }
         public ActionResult GeneratePDF(string id)
         {
             OrdersTransfereeItineraryViewModel viewModel = GetItineraryByOrderId(id);

@@ -156,7 +156,6 @@
     <Compile Include="Core\Dtos\UserDto.cs" />
     <Compile Include="Core\Models\ApplicationUser.cs" />
     <Compile Include="Core\Models\InviteStatus.cs" />
-    <Compile Include="Core\Models\Lease.cs" />
     <Compile Include="Core\Models\Message.cs" />
     <Compile Include="Core\Models\Appointment.cs" />
     <Compile Include="Core\Models\AreaType.cs" />
@@ -192,7 +191,6 @@
     <Compile Include="Core\Models\TransportationType.cs" />
     <Compile Include="Core\Models\UserNotification.cs" />
     <Compile Include="Core\Models\UserRoles.cs" />
-    <Compile Include="Core\Repositories\ILeasesRepository .cs" />
     <Compile Include="Core\Repositories\IMessagesRepository.cs" />
     <Compile Include="Core\Repositories\IAreaTypesRepository.cs" />
     <Compile Include="Core\Repositories\IBrokerFeeTypesRepository.cs" />
