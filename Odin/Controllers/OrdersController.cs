@@ -120,31 +120,6 @@ namespace Odin.Controllers
 
         }
 
-        //[RoleAuthorize(UserRoles.ProgramManager, UserRoles.Consultant, UserRoles.Transferee)]
-        //public ActionResult HousingPartialPDF(string id)
-        //{
-        //    var userId = User.Identity.GetUserId();
-
-        //    Order order = _unitOfWork.Orders.GetOrderFor(userId, id, User.GetUserRole());
-
-        //    ViewBag.CurrentUser = userId;
-        //    ViewBag.IsConsultant = User.IsInRole(UserRoles.Consultant);
-        //    HousingViewModel viewModel = new HousingViewModel(order, _mapper, User);
-        //    HousingPropertyViewModel sel = viewModel.Properties.Where(p => p.selected == true).FirstOrDefault();
-        //    if (sel == null)
-        //    {
-        //        return new HttpNotFoundResult();
-        //    }
-        //    ViewBag.isPDF = true;
-        //    var propertyId = sel.propertyId;
-        //    Lease lease = GetLeaseByPropertyId(propertyId, order.ProgramManager.Email);
-        //    return new Rotativa.ViewAsPdf("Partials/_Lease", lease)
-        //    {
-        //        FileName = "Lease.pdf",
-        //        PageMargins = new Rotativa.Options.Margins(0, 0, 0, 0)
-        //    };
-        //}
-
         [RoleAuthorize(UserRoles.ProgramManager, UserRoles.Consultant, UserRoles.Transferee)]
         public ActionResult PropertiesPartial(string id)
         {

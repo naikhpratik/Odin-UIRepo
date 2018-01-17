@@ -49,48 +49,37 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <button type="button" id="selectProperty" class='btn propertyDetails btn-@(Model.selected == true ? "warning" : "success") pull-right' data-dismiss="modal">@(Model.selected == true ? "De-" : "")Select Property</button>
+                    <button type="button" id="selectProperty" class='btn propertyDetails btn-success pull-right' data-dismiss="modal">Select Property</button>
                     <button type="button" id="removeProperty" class="btn propertyDetails btn-danger btn-ok pull-left">Remove Property</button>
                 </div>
             </div>
-            <div class="row controlsContainer">
-                @*<div class="col-md-12">
-                    <ul class="row sectionList">
-                        <li class="col-md-12">
-                            <label>@Html.DisplayNameFor(model => model.PropertyDescription)</label>
-                            Should be safe because sanitized in view model.
-                            <p>@Html.Raw(@Model.PropertyDescription)</p>
-                        </li>
-                    </ul>
-                </div>*@
-
+            <div class="row">
                 <div class="col-md-12">
                     <h6>Description/Notes:</h6>
                 </div>
                 <div class="col-md-12">
-                    <h6>---OVERVIEW---</h6>
+                    <h6>-----OVERVIEW-----</h6>
                 </div>
                 <div class="col-md-12">
-                    <span>@Html.DisplayFor(model => model.PropertyNumberOfBedrooms) beds</span>
-                    <span>@Html.DisplayFor(model => model.PropertyNumberOfBathrooms) baths</span>
-                    <span>@Html.DisplayFor(model => model.PropertySquareFootage) sq. ft. lot</span>
+                    <div class="overviewItems">@Html.DisplayFor(model => model.PropertyNumberOfBedrooms) beds</div>
+                    <div class="overviewItems">@Html.DisplayFor(model => model.PropertyNumberOfBathrooms) baths</div>
+                    <div class="overviewItems">@Html.DisplayFor(model => model.PropertySquareFootage) sq. ft. lot</div>
                 </div>
                 <div class="col-md-12">
-                    <h6>---DESCRIPTION---</h6>
+                    <h6>-----DESCRIPTION-----</h6>
                 </div>
                 <div class="col-md-12">
-                    <p>Status: </p>
                     <p>@Html.Raw(@Model.PropertyDescription)</p>
-                    <p></p>
                 </div>
             </div>
 
-                </div>
-   
+        </div>
+    </div>
 </div>
-<div class="modal-footer">
-    
-</div>
+    <div class="modal-footer">
+
+    </div>
+
 <style>
     .propertyDetails {
         width: 20rem;
@@ -98,9 +87,12 @@
         display: block;
         float: right !important;
     }
-    .controlsContainer
-    {
-        color: blue;
+    .controlsContainer {
+        color: #35a2db;
+    }
+    .overviewItems {
+        margin: 0;
+        line-height: 1.5rem;
     }
 </style>
 <script>
