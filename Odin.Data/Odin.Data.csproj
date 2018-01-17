@@ -222,7 +222,6 @@
     <Compile Include="Persistence\ApplicationDbContext.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Persistence\ApplicationUserRepository.cs" />
-    <Compile Include="Persistence\LeaseRepository.cs" />
     <Compile Include="Persistence\MessagesRepository.cs" />
     <Compile Include="Persistence\AreaTypesRepository.cs" />
     <Compile Include="Persistence\BrokerFeeTypesRepository.cs" />
@@ -588,14 +587,6 @@
     <Compile Include="Persistence\Migrations\201801102010103_selectedProperty.Designer.cs">
       <DependentUpon>201801102010103_selectedProperty.cs</DependentUpon>
     </Compile>
-    <Compile Include="Persistence\Migrations\201801121524348_leaseModel.cs" />
-    <Compile Include="Persistence\Migrations\201801121524348_leaseModel.Designer.cs">
-      <DependentUpon>201801121524348_leaseModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Persistence\Migrations\201801161228307_leaseDev.cs" />
-    <Compile Include="Persistence\Migrations\201801161228307_leaseDev.Designer.cs">
-      <DependentUpon>201801161228307_leaseDev.cs</DependentUpon>
-    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\NotificationRepository.cs" />
     <Compile Include="Persistence\NumberOfBathroomsTypesRepository.cs" />
@@ -886,12 +877,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201801102010103_selectedProperty.resx">
       <DependentUpon>201801102010103_selectedProperty.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Persistence\Migrations\201801121524348_leaseModel.resx">
-      <DependentUpon>201801121524348_leaseModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Persistence\Migrations\201801161228307_leaseDev.resx">
-      <DependentUpon>201801161228307_leaseDev.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -108,43 +108,42 @@ namespace Odin.Controllers
             Order order = _unitOfWork.Orders.GetOrderFor(userId, id, User.GetUserRole());
 
             ViewBag.CurrentUser = userId;
-
+            ViewBag.IsConsultant = User.IsInRole(UserRoles.Consultant);           
             HousingViewModel viewModel = new HousingViewModel(order, _mapper, User);
             HousingPropertyViewModel sel = viewModel.Properties.Where(p => p.selected == true).FirstOrDefault();
             if (sel == null)
             {
                 return PartialView("~/views/orders/partials/_Housing.cshtml", viewModel);
             }
-            var propertyId = sel.propertyId;
-            Lease lease = GetLeaseByPropertyId(propertyId);
-            return PartialView("~/views/orders/partials/_Lease.cshtml", lease);
+            ViewBag.pmEmail = order.ProgramManager.Email;
+            return PartialView("~/views/orders/partials/_SelectedProperty.cshtml", sel);
 
         }
 
-        [RoleAuthorize(UserRoles.ProgramManager, UserRoles.Consultant, UserRoles.Transferee)]
-        public ActionResult HousingPartialPDF(string id)
-        {
-            var userId = User.Identity.GetUserId();
+        //[RoleAuthorize(UserRoles.ProgramManager, UserRoles.Consultant, UserRoles.Transferee)]
+        //public ActionResult HousingPartialPDF(string id)
+        //{
+        //    var userId = User.Identity.GetUserId();
 
-            Order order = _unitOfWork.Orders.GetOrderFor(userId, id, User.GetUserRole());
+        //    Order order = _unitOfWork.Orders.GetOrderFor(userId, id, User.GetUserRole());
 
-            ViewBag.CurrentUser = userId;
-
-            HousingViewModel viewModel = new HousingViewModel(order, _mapper, User);
-            HousingPropertyViewModel sel = viewModel.Properties.Where(p => p.selected == true).FirstOrDefault();
-            if (sel == null)
-            {
-                return new HttpNotFoundResult();
-            }
-            ViewBag.isPDF = true;
-            var propertyId = sel.propertyId;
-            Lease lease = GetLeaseByPropertyId(propertyId);
-            return new Rotativa.ViewAsPdf("Partials/_Lease", lease)
-            {
-                FileName = "Lease.pdf",
-                PageMargins = new Rotativa.Options.Margins(0, 0, 0, 0)
-            };
-        }
+        //    ViewBag.CurrentUser = userId;
+        //    ViewBag.IsConsultant = User.IsInRole(UserRoles.Consultant);
+        //    HousingViewModel viewModel = new HousingViewModel(order, _mapper, User);
+        //    HousingPropertyViewModel sel = viewModel.Properties.Where(p => p.selected == true).FirstOrDefault();
+        //    if (sel == null)
+        //    {
+        //        return new HttpNotFoundResult();
+        //    }
+        //    ViewBag.isPDF = true;
+        //    var propertyId = sel.propertyId;
+        //    Lease lease = GetLeaseByPropertyId(propertyId, order.ProgramManager.Email);
+        //    return new Rotativa.ViewAsPdf("Partials/_Lease", lease)
+        //    {
+        //        FileName = "Lease.pdf",
+        //        PageMargins = new Rotativa.Options.Margins(0, 0, 0, 0)
+        //    };
+        //}
 
         [RoleAuthorize(UserRoles.ProgramManager, UserRoles.Consultant, UserRoles.Transferee)]
         public ActionResult PropertiesPartial(string id)
@@ -295,9 +294,9 @@ namespace Odin.Controllers
             return itinHelper.Build(id);
         }
 
-        private Lease GetLeaseByPropertyId(string id)
+        private Lease GetLeaseByPropertyId(string id, string pmEmail)
         {
-            return _unitOfWork.Leases.GetLeaseByPropertyId(id);
+            return _unitOfWork.Leases.GetLeaseByPropertyId(id, pmEmail);
         }
         public ActionResult GeneratePDF(string id)
         {

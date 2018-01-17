@@ -13,17 +13,13 @@ using Odin.Data.Core.Models;
 
 namespace Odin.ViewModels.Orders.Transferee
 {
-    public class LeaseViewModel
+    public class SelectedPropertyViewModel
     {
-        public LeaseViewModel()
-        {
-            
-        }
-
+        public String Id { get; set; }
         public bool Deleted { get; set; }
         public string propertyId { get; set; }
         public String OrderId { get; set; }
-        public String Id { get; set; }
+        public string pmEmail { get; set; }
 
         [DisplayFormat(ConvertEmptyStringToNull = true, NullDisplayText ="", HtmlEncode = false)]
         [Display(Name = "Address")]
@@ -69,31 +65,7 @@ namespace Odin.ViewModels.Orders.Transferee
 
         [Display(Name = "Rent")]
         [DisplayFormat(NullDisplayText = "NA", DataFormatString = "{0:c}")]
-        [DataType(DataType.Currency)]
-
-        public TransfereeViewModel transferee { get; set; }
-
-        public string Tenant { get; set; }
-        public string LandLord { get; set; }
-        public DateTime? StartDate { get; set; }
-        public DateTime? EndDate { get; set; }
-        public decimal RentIncrease { get; set; }
-        public decimal SecurityDeposit { get; set; }
-        public string SecurityDepositTerms { get; set; }
-        public string LeaseEndNoticeTerms { get; set; }
-        public string RenewalTerms { get; set; }
-        public string DiplomatTerms { get; set; }
-        public string EarlyTerminationTerms { get; set; }
-        public string NotableClauses { get; set; }
-        public string PaymentInformation { get; set; }
-        public decimal InitialRentAmount { get; set; }
-        public DateTime? InitialRentDueDate { get; set; }
-        public string InitialRentPaideTo { get; set; }
-        public DateTime? SecurityDepositDueDate { get; set; }
-        public string SecurityDepositPaideTo { get; set; }
-        public decimal FirstOnGoingRentAmount { get; set; }
-        public DateTime? FirstOnGoingRentDueDate { get; set; }
-        public string FirstOnGoingRentPaideTo { get; set; }
+        [DataType(DataType.Currency)]        
 
     }
 }

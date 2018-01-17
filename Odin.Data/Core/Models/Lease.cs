@@ -9,6 +9,7 @@ namespace Odin.Data.Core.Models
 
         public string PropertyId { get; set; }
         public Property Property { get; set; }
+        public string pmEmail { get; set; }
         public Transferee transferee { get; set; }
         public string Tenant { get; set; }
         public string LandLord { get; set; }

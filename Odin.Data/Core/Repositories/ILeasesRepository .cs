@@ -7,7 +7,7 @@ namespace Odin.Data.Core.Repositories
     {
         void Add(Lease lease);
         void Remove(Lease lease);
-        Lease GetLeaseByPropertyId(string id);
+        Lease GetLeaseByPropertyId(string id, string email);
         Lease GetLeaseById(string id);
     }
 }

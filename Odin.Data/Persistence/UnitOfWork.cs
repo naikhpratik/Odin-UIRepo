@@ -40,7 +40,6 @@ namespace Odin.Data.Persistence
             Services = new ServicesRepository(context);
             ServiceTypes = new ServiceTypesRepository(context);
             Appointments = new AppointmentsRepository(context);
-            Leases = new LeasesRepository(context);
             Children = new ChildrenRepository(context);
             Pets = new PetsRepository(context);
             NumberOfBathrooms = new NumberOfBathroomsTypesRepository(context);

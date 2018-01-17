@@ -393,7 +393,6 @@
     <Compile Include="ViewModels\Mailers\ViewRenderer.cs" />
     <Compile Include="ViewModels\Orders\Transferee\DashboardViewModel.cs" />
     <Compile Include="ViewModels\Orders\Transferee\HistoryViewModel.cs" />
-    <Compile Include="ViewModels\Orders\Transferee\LeaseViewModel.cs" />
     <Compile Include="ViewModels\Orders\Transferee\HousingPropertyViewModel.cs" />
     <Compile Include="ViewModels\Orders\Transferee\HousingViewModel.cs" />
     <Compile Include="ViewModels\Orders\Transferee\OrdersTransfereeItineraryViewModel.cs" />
@@ -1053,7 +1052,7 @@
     <Content Include="Views\Orders\Partials\_Message.cshtml" />
     <Content Include="Views\Error\Error404.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
-    <Content Include="Views\Orders\Partials\_Lease.cshtml" />
+    <Content Include="Views\Orders\Partials\_SelectedProperty.cshtml" />
     <None Include="Web.Azure.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
