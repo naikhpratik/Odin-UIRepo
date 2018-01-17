@@ -413,7 +413,11 @@
     <Compile Include="Views\Helpers\UrlHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\styles\css\application.css" />
+    <Content Include="Content\styles\css\application.min.css">
+      <DependentUpon>application.css</DependentUpon>
+    </Content>
+    <Content Include="Content\styles\css\Site.css" />
     <Content Include="Content\styles\css\animate.css" />
     <Content Include="Content\styles\css\bootstrap-datetimepicker.css" />
     <Content Include="Content\styles\css\bootstrap-datetimepicker.min.css">
@@ -867,7 +871,9 @@
     <Content Include="Content\css\transferee\propertyMessages.scss" />
     <Content Include="Content\css\transferee\itineraryPdf.scss" />
     <Content Include="Content\css\transferee\dashboard.scss" />
-    <Content Include="Content\styles\scss\reset.scss" />
+    <Content Include="Content\styles\scss\2_resets\reset.scss" />
+    <Content Include="Content\styles\scss\3_components\datetimepicker.scss" />
+    <Content Include="Content\styles\scss\application.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
@@ -1056,6 +1062,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\styles\scss\1_settings\" />
     <Folder Include="Views\Appointment\" />
     <Folder Include="Views\Email\" />
     <Folder Include="Views\Message\" />

@@ -40,7 +40,8 @@ namespace Odin
                       "~/Content/css/primaryNav.css",
                       "~/Content/styles/css/animate.css",
                       "~/Content/css/header.css",
-                      "~/Content/css/shared/dw_loading.css"));
+                      "~/Content/css/shared/dw_loading.css",
+                      "~/Content/styles/css/application.css"));
 
 
             // Page Styling

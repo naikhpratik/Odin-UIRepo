@@ -51,3 +51,11 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
+
+/*Custom added from Site.css*/
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    width: 100%;
+}

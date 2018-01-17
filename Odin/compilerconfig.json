@@ -82,5 +82,9 @@
   {
     "outputFile": "Content/css/transferee/dashboard.css",
     "inputFile": "Content/css/transferee/dashboard.scss"
+  },
+  {
+    "outputFile": "Content/styles/css/application.css",
+    "inputFile": "Content/styles/scss/application.scss"
   }
 ]
