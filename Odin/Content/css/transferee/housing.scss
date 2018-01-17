@@ -5,26 +5,29 @@
     overflow: hidden;
     position: relative;
 }
-.img-responsive 
-{
-    height:32rem !important;
-    width:55rem;
+
+.img-responsive {
+    height: 32rem !important;
+    width: 55rem;
 }
-img li.thumbnails-carousel, img.location
-{
-    width:8rem;
-    height:5rem;
+
+img li.thumbnails-carousel, img.location {
+    width: 8rem;
+    height: 5rem;
 }
 
 .glyphicon-chevron-left {
     margin-left: -4.2rem !important;
 }
+
 .glyphicon-chevron-right {
     margin-right: -4.2rem !important;
 }
+
 ul.thumbnails-carousel li img {
     max-width: 6rem !important;
 }
+
 #map {
     /*height getting set in javascript because of map issue.*/
     height: 300px;
@@ -47,6 +50,45 @@ ul.thumbnails-carousel li img {
         }
     }
 }
+
+.housingPropertyModal__likeDislike {
+    border-top: 1px solid $DW_Gray;
+    border-bottom: 1px solid $DW_Gray;
+    padding: 1.5rem 0;
+    margin-top: 2rem;
+
+    @media screen and (max-width: 61.875rem) {
+        > * {
+            display: flex;
+            justify-content: center;
+        }
+
+        #housingFilter {
+            margin-bottom: 3rem;
+        }
+    }
+}
+
+.housingPropertyModal__selectRemove {
+    margin-top: 3rem;
+}
+
+.housingPropertyModal__select {
+    width: 100%;
+}
+
+.housingPropertyModal__remove {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    background: none;
+    box-shadow: none;
+    color: red;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 2rem;
+}
+
 
 #housingFilter {
     margin: 0;
@@ -215,7 +257,7 @@ li.propertyItem {
             position: absolute;
             top: -1rem;
             left: 2rem;
-            text-align:center;
+            text-align: center;
             background-color: $DW_Red;
             color: white;
             font-size: 1.25rem;
@@ -250,14 +292,10 @@ li.propertyItem {
 }
 
 .likeDislike {
-    margin: 0 auto;
-    width: auto;
-    height: auto;
-    min-width: 60px;
+
 
     @media screen and (max-width:61.875rem) {
-        max-width: 10rem;
-        margin-left: 0;
+        width: 100%;
     }
 
     .likeDislike-btn {
