@@ -101,6 +101,21 @@
         }
     </div>
     <hr />
+    <div class="intake-block expanded">
+        <div class="intake-header">
+            <div class="intake-collapse">
+                <img class="intake-collapse-img" src="/Content/Images/collapse.png" />
+                <img class="intake-expand-img" src="/Content/Images/expand.png" />
+                <h2 class="sectionSubHead">Program Notes</h2>
+            </div>
+        </div>
+        <div class="row intake-row collapse in">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 intake-col">
+                <span class="intake-span">@Html.DisplayFor(m => Model.ProgramNotes)</span>
+            </div>
+        </div>
+    </div>
+    <hr />
     <div class="intake-block expanded" data-block="services">
         <div class="intake-header">
             <div class="intake-collapse">
