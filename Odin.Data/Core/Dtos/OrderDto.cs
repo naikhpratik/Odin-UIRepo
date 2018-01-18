@@ -58,6 +58,7 @@ namespace Odin.Data.Core.Dtos
         public string SeCustStatus { get; set;  }
         public decimal? Latitude { get; set; }
         public decimal? Longitude { get; set; }
+        public string ProgramNotes { get; set; }
 
 
         [Required]

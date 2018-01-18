@@ -35,9 +35,8 @@ var HeaderController = function (headerService) {
     var notificationClicked;
 
     var hideNotification = function () {
-        $("#ulNotifications").remove();
+        //$("#ulNotifications").remove();
         $("#spanNotificationCount").css("display", "none");
-
     }
 
    

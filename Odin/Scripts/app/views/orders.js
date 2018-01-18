@@ -1,5 +1,5 @@
 ﻿var OrdersPageController = function () {
-   
+
     var _data;
     var _sortAsc = true;
     var _sortCurr = "";
@@ -10,7 +10,7 @@
         initSearch();
         initSort();
         initPmDropDown();
-        
+
         $(window).resize(function () {
             sizePage();
         });
@@ -20,19 +20,19 @@
 
         var marginalWidth = 0;
         marginalWidth = ($(window).innerWidth() - 1440) / 2;
-        
+
         if (window.innerWidth > 1440) {
             $('#primaryNav').css('left', marginalWidth);
 
         } else if (window.innerWidth >= 768) {
             $('#primaryNav').css('left', 0);
 
-        }       
+        }
     };
 
-    var initSearch = function() {
+    var initSearch = function () {
         // constructs the suggestion engine
-        
+
         var engine = new Bloodhound({
             datumTokenizer: function (datum) {
                 return Bloodhound.tokenizers.whitespace(datum.eeName);
@@ -43,10 +43,10 @@
         });
 
         $('#searchbox').typeahead({
-                hint: true,
-                highlight: true,
-                minLength: 1
-            },
+            hint: true,
+            highlight: true,
+            minLength: 1
+        },
             {
                 name: 'data',
                 source: engine,
@@ -57,7 +57,7 @@
 
                 goToOrder(suggestion.id);
             }
-        );
+            );
 
         // row selection handler
         $('.clickable').click(function () {
@@ -66,16 +66,16 @@
     }
 
     var initPmDropDown = function () {
-        
+
         $('.clickablepm').click(function () {
             goToOrderofManagers($(this).attr("data-order-id"));
         });
 
     }
 
-    var initSort = function() {
+    var initSort = function () {
         $("#eeNameSort").click(function () {
-            sortCol($(this), "eeLastName", function(a) { return a.toUpperCase() });
+            sortCol($(this), "eeLastName", function (a) { return a.toUpperCase() });
         });
 
         $("#pmNameSort").click(function () {
@@ -91,7 +91,7 @@
         });
 
         $("#notificationsSort").click(function () {
-            sortCol($(this), "notifications", function (a) { return parseInt(a.replace("*","")) });
+            sortCol($(this), "notifications", function (a) { return parseInt(a.replace("*", "")) });
         });
 
 
@@ -99,13 +99,13 @@
         sortCol($("#estimatedArrivalDateSort"), "estimatedArrivalDate", function (a) { return new Date(a) });
     }
 
-    var sortCol = function(headerElt, dataName, sortFunc) {
+    var sortCol = function (headerElt, dataName, sortFunc) {
         resetSortHeaders();
         headerElt.css("font-weight", "Bold").css("color", "black");
 
         var ascElt = headerElt.find(".sortPlus");
         var descElt = headerElt.find(".sortMinus");
-        
+
         var sortId = headerElt.attr('id');
         if (_sortCurr === sortId) {
             _sortAsc = !_sortAsc;
@@ -122,7 +122,7 @@
             descElt.css("display", "inline-block");
             ascElt.css("display", "none");
         }
-        
+
         _data.sort(sortBy(dataName, _sortAsc, sortFunc));
         bindData();
     }
@@ -133,16 +133,15 @@
 
     }
 
-    var bindData = function()
-    {
+    var bindData = function () {
         var rows = $(".orderRow");
         rows.each(function (i, element) {
 
             var elt = $(element);
-           
-            elt.attr("data-order-id",_data[i]["id"]);
+
+            elt.attr("data-order-id", _data[i]["id"]);
             elt.find(".eeName").text(_data[i]["eeName"]);
-            elt.find(".eeName").data("last-name",_data[i]["eeLastName"]);
+            elt.find(".eeName").data("last-name", _data[i]["eeLastName"]);
             elt.find(".rmcName").text(_data[i]["rmcName"]);
             elt.find(".clientName").text(_data[i]["clientName"]);
             elt.find(".pmName").text(_data[i]["pmName"]);
@@ -152,16 +151,18 @@
             elt.find(".estimatedArrivalDate").text(_data[i]["estimatedArrivalDate"]);
             elt.find(".notifications").text(_data[i]["notifications"]);
 
-            var pb = elt.find(".progressBar");
+            elt.find(".scheduledCaption").html(_data[i]["scheduledCaption"]);
+            elt.find(".completedCaption").html(_data[i]["completedCaption"]);
+
+            var pb = elt.find(".progress");
             pb.attr("data-comp-percent", _data[i]["compPercent"]);
-            pb.attr("data-auth-percent", _data[i]["authPercent"]);
             pb.attr("data-sched-percent", _data[i]["schedPercent"]);
             loadProgressBar(pb);
         });
     }
 
     var getData = function () {
-       
+
         var rows = $(".orderRow");
         var data = new Array();
 
@@ -180,26 +181,29 @@
             var estimatedArrivalDate = elt.find(".estimatedArrivalDate").text();
             var notifications = elt.find(".notifications").text();
 
-            var pb = elt.find(".progressBar");
-            var authPercent = pb.attr("data-auth-percent");
+            var pb = elt.find(".progress");
             var schedPercent = pb.attr("data-sched-percent");
             var compPercent = pb.attr("data-comp-percent");
+
+            var scheduledCaption = elt.find(".scheduledCaption").html();
+            var completedCaption = elt.find(".completedCaption").html();
 
             data.push({
                 id: id,
                 eeName: eeName,
-                eeLastName:eeLastName,
+                eeLastName: eeLastName,
                 rmcName: rmcName,
                 clientName: clientName,
                 pmName: pmName,
-                pmLastName:pmLastName,
-                pmPhone:pmPhone,
+                pmLastName: pmLastName,
+                pmPhone: pmPhone,
                 preTripDate: preTripDate,
                 estimatedArrivalDate: estimatedArrivalDate,
                 notifications: notifications,
-                authPercent: authPercent,
                 schedPercent: schedPercent,
-                compPercent: compPercent
+                compPercent: compPercent,
+                scheduledCaption: scheduledCaption,
+                completedCaption: completedCaption
             });
         });
 
@@ -216,7 +220,7 @@
 
         return function (a, b) {
             return a = key(a), b = key(b), reverse * ((a > b) - (b > a));
-        } 
+        }
     }
 
     var goToOrder = function (id) {
@@ -229,14 +233,12 @@
         window.location.href = "/Orders/Index/" + id;
     }
 
-    var loadProgressBar = function(pbElt) {
-        pbElt.find(".progressBar__auth").width(pbElt.attr("data-auth-percent"));
+    var loadProgressBar = function (pbElt) {
         pbElt.find(".progressBar__sched").width(pbElt.attr("data-sched-percent"));
         pbElt.find(".progressBar__comp").width(pbElt.attr("data-comp-percent"));
     }
 
-    return { 
-       init: init
+    return {
+        init: init
     };
 }();
-

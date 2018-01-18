@@ -32,6 +32,7 @@ var TransfereeDetailsController = function (transfereeDetailseService) {
             icons: { close: 'custom-icon-check'}
         }).on("dp.hide", function (e) { saveServices(e); });
 
+        servicesBlocks.find('.form-control').on("change", function (e) { saveServices(e); });
 
         //Init Variables
         servicesBlocks = pnlDetails.find(".details-services");

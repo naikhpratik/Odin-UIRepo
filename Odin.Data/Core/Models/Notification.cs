@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Odin.Data.Core.Models
+﻿namespace Odin.Data.Core.Models
 {
     public class Notification : MobileTable
     {
@@ -18,5 +12,8 @@ namespace Odin.Data.Core.Models
 
         public Order Order { get; set; }
 
+        public string CreatedById { get; set; }
+
+        public virtual ApplicationUser CreatedBy { get; set; }
     }
 }

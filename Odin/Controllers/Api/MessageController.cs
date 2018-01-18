@@ -60,29 +60,28 @@ namespace Odin.Controllers.Api
                         NotificationType = NotificationType.MessageCreated,
                         Message = "A New message was composed",
                         Title = "New Message",
-                        OrderId = dto.OrderId
+                        OrderId = dto.OrderId,
+                        CreatedById = User.Identity.GetUserId()
                     };
                 if (User.IsInRole(UserRoles.ProgramManager))
                 {                    
                     var order = _unitOfWork.Orders.GetOrderById(dto.OrderId);
-                    int seId = (int)(order.Consultant.SeContactUid == null ? 0 : order.Consultant.SeContactUid);
-                    Consultant consultant = _unitOfWork.Consultants.GetConsultantBySeContactUid(seId);
-                    consultant.Notify(notification);
-                    var ee = order.Transferee;
-                    ee.Notify(notification);
+                    //int seId = (int)(order.Consultant.SeContactUid == null ? 0 : order.Consultant.SeContactUid);
+                    //Consultant consultant = _unitOfWork.Consultants.GetConsultantBySeContactUid(seId);
+                    order.Consultant.Notify(notification);
+                    order.Transferee.Notify(notification);
                 }
                 else if (User.IsInRole(UserRoles.Consultant))
                 {
                     var order = _unitOfWork.Orders.GetOrderById(dto.OrderId);
-                    var ee = order.Transferee;
-                    ee.Notify(notification);
+                    order.Transferee.Notify(notification);
                 }
                 else if (User.IsInRole(UserRoles.Transferee))
                 {                   
                     var order = _unitOfWork.Orders.GetOrderById(dto.OrderId);
-                    int seId = (int)(order.Consultant.SeContactUid == null ? 0 : order.Consultant.SeContactUid);
-                    Consultant consultant = _unitOfWork.Consultants.GetConsultantBySeContactUid(seId);
-                    consultant.Notify(notification);
+                    //int seId = (int)(order.Consultant.SeContactUid == null ? 0 : order.Consultant.SeContactUid);
+                    //Consultant consultant = _unitOfWork.Consultants.GetConsultantBySeContactUid(seId);
+                    order.Consultant.Notify(notification);
                 }
                 property.Messages.Add(msg);
                 _unitOfWork.Complete();

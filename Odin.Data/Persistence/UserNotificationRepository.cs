@@ -26,6 +26,7 @@ namespace Odin.Data.Persistence
                 .Where(n => n.UserId == UserID && ((!n.IsRead) || (n.CreatedAt >= currentdate && n.IsRead)) && !n.IsRemoved)
                 .Include(n => n.Notification)
                 .Include(n => n.Notification.Order)
+                .Include(n => n.Notification.CreatedBy)
                 .OrderByDescending(n => !n.IsRead)
                 .OrderByDescending(n => n.CreatedAt)
                 .ToList();
