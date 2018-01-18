@@ -700,6 +700,7 @@
     <Content Include="Content\Images\forgot_password.jpg" />
     <Content Include="Content\Images\icn_alert_B1.png" />
     <Content Include="Content\Images\icn_alert_circle.png" />
+    <Content Include="Content\Images\icn_attention.png" />
     <Content Include="Content\Images\icn_cal_B1.png" />
     <Content Include="Content\Images\icn_chat_1.png" />
     <Content Include="Content\Images\icn_chat_2.png" />
