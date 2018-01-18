@@ -171,8 +171,8 @@
             toolbarPlacement: 'bottom',
             icons: { close: 'custom-icon-check' }
         });
-        var vDate = $('input[name=ViewingDate]').parent();
-        vDate.datetimepicker({
+        var vuDate = $('input[name=ViewingDate]').parent();
+        vuDate.datetimepicker({
             format: "DD-MMM-YYYY h:mm A",
             useCurrent: false,
             keepOpen: true,
@@ -220,6 +220,9 @@
         window.location.href = "/Orders/PropertiesPartialPDF/" + currentOrderId + "?listChoice=" + choice;        
     };
 
+    var lease2PDF = function (propertyId) {
+        window.location.href = "/Orders/HousingPartialPDF/" + currentOrderId;
+    }
     /*** Private Helpers ***/
     // FIXME: this toas function is in 4 other spots. I'm copy/pasting here for quickness, but we should refactor
     var toast = function (message, type) {
@@ -241,7 +244,9 @@
     var reloadPropertiesPartial = function () {
         $('#propertiesContainer').load('/orders/propertiesPartial/' + currentOrderId);
     };
-
+    var reloadHousingPartial = function () {
+        OrdersPageController.loadPanel('Housing');
+    };
     /**
      * Return all DOM elements that track the liked value for the property matching propertyId
      * @param {any} propertyId The id of the property
@@ -287,6 +292,25 @@
         });
     };
 
+    var selectProperty = function (id, propertyId) {
+        var suffix = 'Select/' + id;
+        if (id == '') {
+            suffix = 'SelectProperty/' + propertyId;
+        }
+        $.ajax({
+            url: '/HomeFindingProperties/' + suffix,
+            type: 'PUT',
+            success: function (result) {    
+                reloadHousingPartial();
+                //reloadPropertiesPartial();
+                //$('#propertyDetailsModal').modal('hide');
+            },
+            error: function () {
+                toast("An unknown error has occurred.Please try again later.", "danger");
+            }
+        });        
+    };
+
     var deleteProperty = function (propertyId) {
         var confirmed = confirm("Are you sure you want to remove this property?");
 
@@ -313,9 +337,11 @@
 
     return {
         init: init,
+        selectProperty: selectProperty,
         deleteProperty: deleteProperty,
         setupDatePickers: setupDatePickers,
-        export2PDF: export2PDF
+        export2PDF: export2PDF,
+        lease2PDF: lease2PDF
     };
 
 }();

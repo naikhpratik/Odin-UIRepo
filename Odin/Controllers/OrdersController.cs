@@ -119,9 +119,15 @@ namespace Odin.Controllers
             Order order = _unitOfWork.Orders.GetOrderFor(userId, id, User.GetUserRole());
 
             ViewBag.CurrentUser = userId;
-
+            ViewBag.IsConsultant = User.IsInRole(UserRoles.Consultant);           
             HousingViewModel viewModel = new HousingViewModel(order, _mapper, User);
-            return PartialView("~/views/orders/partials/_Housing.cshtml", viewModel);
+            HousingPropertyViewModel sel = viewModel.Properties.Where(p => p.selected == true).FirstOrDefault();
+            if (sel == null)
+            {
+                return PartialView("~/views/orders/partials/_Housing.cshtml", viewModel);
+            }
+            ViewBag.pmEmail = order.ProgramManager.Email;
+            return PartialView("~/views/orders/partials/_SelectedProperty.cshtml", sel);
 
         }
 

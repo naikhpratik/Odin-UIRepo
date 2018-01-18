@@ -1,16 +1,17 @@
 ﻿var transfereeHousingMessages = function (){
      var route = "/api/orders/transferee/";
 
-    var updateMessage = function (block, data, success, fail) {
-        var url = route + "/housing/messages/";
-    $.post(url, data).done(success).fail(fail);
+    var updateMessage = function (block, datum, success, fail) {
+        var url = route + "housing/messages/";
+    $.post(url, datum).done(success).fail(fail);
      }    
     return {
         updateMessage: updateMessage
     }
 }();
 var TransfereeMessagesController = function (transfereeHousingMessages) {
-    
+
+    var dunnOnce;
     var init = function () {
         var messagesModal = $("div#messagesModal");
         var modalParent = messagesModal.parent().parent();
@@ -22,34 +23,36 @@ var TransfereeMessagesController = function (transfereeHousingMessages) {
     };
     
     var saveMessage = function (e) {
-
+        e.stopPropagation();
+        var err = false;
         var orderId = $('div#housing').attr('data-order-id');
         var message = $('div#messagesModal').find('#message').val();        
         if (message === 'Enter your comment here...' || message.length === 0) {
             alert('Please type a message to send.');
             return;
-        }
+        }        
         var propertyId = $('div#messagesModal').attr('data-property-id');
         var currDate = moment().format('YYYY-MM-DD HH:mm');
-        var err = false;
-        var saveSuccess = function () {      
-            var app = $('#modalNotification');            
-            var url = '/Message/MessagePartial/' + propertyId;
-            $.get(url, function (data) {
-                app.find('.modal-content').html();
-                app.find('.modal-content').html(data);
-            });
+        e.stopPropagation();
+        var saveSuccess = function () {            
+            if (err == false) {
+                var app = $('#modalNotification');
+                var url = '/Message/MessagePartial/' + propertyId;
+                $.get(url, function (data) {                    
+                    app.find('.modal-content').html(data);
+                });
+                
+            }
         }
         var saveFail = function () {
             err = true;
             toast('The message was not sent', 'danger');
-        }       
-
-        if (!err) {
-            
-            var data = { "HomeFindingPropertyId": propertyId, "MessageDate": currDate, "MessageText": message, "OrderId":orderId };
-            transfereeHousingMessages.updateMessage("messages", data, saveSuccess, saveFail);
-        }
+        }        
+            var datum = { "HomeFindingPropertyId": propertyId, "MessageDate": currDate, "MessageText": message, "OrderId":orderId };
+            if (!dunnOnce) {
+                dunnOnce = true;
+                transfereeHousingMessages.updateMessage("messages", datum, saveSuccess, saveFail);
+            }                
     }    
 
     var readMessages = function (e) {

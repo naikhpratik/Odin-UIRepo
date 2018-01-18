@@ -89,6 +89,7 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Spatial, Version=5.8.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Spatial.5.8.2\lib\net40\System.Spatial.dll</HintPath>
     </Reference>
@@ -584,6 +585,10 @@
     <Compile Include="Persistence\Migrations\201801161919330_AddCreatedByToNotifications.Designer.cs">
       <DependentUpon>201801161919330_AddCreatedByToNotifications.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201801171900011_selectedProperty.cs" />
+    <Compile Include="Persistence\Migrations\201801171900011_selectedProperty.Designer.cs">
+      <DependentUpon>201801171900011_selectedProperty.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\NotificationRepository.cs" />
     <Compile Include="Persistence\NumberOfBathroomsTypesRepository.cs" />
@@ -874,6 +879,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201801161919330_AddCreatedByToNotifications.resx">
       <DependentUpon>201801161919330_AddCreatedByToNotifications.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201801171900011_selectedProperty.resx">
+      <DependentUpon>201801171900011_selectedProperty.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

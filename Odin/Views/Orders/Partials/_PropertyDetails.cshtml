@@ -6,53 +6,59 @@
 </div>
 
 
-<div class="modal-body">
+<div class="modal-body" id="housingPropertyModalBody">
     <div class="container-fluid" data-property-id="@Model.Id">
-        <div class="col-md-4 col-md-push-8">
+        <div class="col-md-4 col-md-push-8 housingProperty-block">
             <ul class="sectionList">
                 @if (Model.ViewingDate.HasValue)
-        {
-            <li class="">
-                <label>@Html.DisplayNameFor(model => model.ViewingDate)</label>
-                <p>@Html.DisplayFor(model => model.ViewingDate)</p>
-            </li>
-}
-                <li class="">
+                {
+                    <li class="housingPropertyModal__ViewDate">
+                        <label>@Html.DisplayNameFor(model => model.ViewingDate)</label>
+                        <p>@Html.DisplayFor(model => model.ViewingDate)</p>
+                    </li>
+                }
+                <li class="housingPropertyModal__propAddress">
                     <label>@Html.DisplayNameFor(model => model.PropertyAddress)</label>
                     <p>@Html.DisplayFor(model => model.PropertyAddress)</p>
                 </li>
 
-                <li class="">
+                <li class="housingPropertyModal__propBedrooms hpm_edit">
                     <label>@Html.DisplayNameFor(model => model.PropertyNumberOfBedrooms)</label>
-                    <p>@Html.DisplayFor(model => model.PropertyNumberOfBedrooms)</p>
-                    @Html.HiddenFor(model => @Model.PropertyNumberOfBedrooms, new { @class = "intake-hidden" })
+                    <p class="prop-span">@Html.DisplayFor(model => model.PropertyNumberOfBedrooms)</p>
+                    @Html.TextBoxFor(model => @Model.PropertyNumberOfBedrooms, new { @class = "form-control intake-input" })
+                    @Html.HiddenFor(model => @Model.PropertyNumberOfBedrooms, new { @class = "housingDetails-hidden" })
                 </li>
-                <li class="">
+                <li class="housingPropertyModal__propBedrooms hpm_edit">
                     <label>@Html.DisplayNameFor(model => model.PropertyNumberOfBathrooms)</label>
-                    <p>@Html.DisplayFor(model => model.PropertyNumberOfBathrooms)</p>
-                    @Html.HiddenFor(model => @Model.PropertyNumberOfBathrooms, new { @class = "intake-hidden" })
+                    <p class="prop-span">@Html.DisplayFor(model => model.PropertyNumberOfBathrooms)</p>
+                    @Html.TextBoxFor(model => @Model.PropertyNumberOfBathrooms, new { @class = "form-control intake-input" })
+                    @Html.HiddenFor(model => @Model.PropertyNumberOfBathrooms, new { @class = "housingDetails-hidden" })
                 </li>
 
-                <li class="">
+                <li class="housingPropertyModal__propSquarefootage hpm_edit">
                     <label>@Html.DisplayNameFor(model => model.PropertySquareFootage)</label>
-                    <p>@Html.DisplayFor(model => model.PropertySquareFootage)</p>
-                    @Html.HiddenFor(model => @Model.PropertySquareFootage, new { @class = "intake-hidden" })
+                    <p class="prop-span">@Html.DisplayFor(model => model.PropertySquareFootage)</p>
+                    @Html.TextBoxFor(model => @Model.PropertySquareFootage, new { @class = "form-control intake-input"})
+                    @Html.HiddenFor(model => @Model.PropertySquareFootage, new { @class = "housingDetails-hidden" })
                 </li>
-                <li class="">
+                <li class="housingPropertyModal__propAmount hpm_edit">
                     <label>@Html.DisplayNameFor(model => model.PropertyAmount)</label>
-                    <p>@Html.DisplayFor(model => model.PropertyAmount)</p>
-                    @Html.HiddenFor(model => @Model.PropertyAmount, new { @class = "intake-hidden" })
+                    <p class="prop-span">@Html.DisplayFor(model => model.PropertyAmount)</p>
+                    @Html.TextBoxFor(model => @Model.PropertyAmount, new { @class = "form-control intake-input" })
+                    @Html.HiddenFor(model => @Model.PropertyAmount, new { @class = "housingDetails-hidden" })
                 </li>
 
             </ul>
 
             <button type="button" id="editProperty" class="btn btn-secondary housingPropertyModal__edit">Edit</button>
-            <button type="button" id="saveProperty" class="btn btn-primary housingPropertyModal__edit hidden">Save</button>
-
             <div class="row housingPropertyModal__likeDislike">
                 <div class="col-md-12">
                     @Html.EditorFor(model => model.Liked, new { propertyId = Model.Id })
                 </div>
+                @*<div class="col-md-12">
+                        <button type="button" id="selectProperty" class='btn propertyDetails btn-success pull-right' data-dismiss="modal">Select Property</button>
+                        <button type="button" id="removeProperty" class="btn propertyDetails btn-danger btn-ok pull-left">Remove Property</button>
+                    </div>*@
             </div>
             <div class="row housingPropertyModal__selectRemove">
                 <button type="button" id="selectProperty" class="btn btn-success btn-lg housingPropertyModal__select">Select Property</button>
@@ -65,70 +71,21 @@
                 <label>@Html.DisplayNameFor(model => model.PropertyDescription)</label>
                 <p>@Html.Raw(@Model.PropertyDescription)</p>
             </div>
+
         </div>
     </div>
 </div>
 
 
-
-
-@*<div class="modal-body">
-        <div class="container-fluid" data-property-id="@Model.Id">
-
-
-            <div class="row">
-                <div class="col-md-4 pull-right">
-                    <ul class="sectionList">
-                        <li class="col-md-12">
-                            <label>@Html.DisplayNameFor(model => model.PropertyAddress)</label>
-                            <p>@Html.DisplayFor(model => model.PropertyAddress)</p>
-                        </li>
-
-                        <li class="col-md-12">
-                            <label>@Html.DisplayNameFor(model => model.PropertyNumberOfBedrooms)</label>
-                            <p>@Html.DisplayFor(model => model.PropertyNumberOfBedrooms)</p>
-                        </li>
-                        <li class="col-md-12">
-                            <label>@Html.DisplayNameFor(model => model.PropertyNumberOfBathrooms)</label>
-                            <p>@Html.DisplayFor(model => model.PropertyNumberOfBathrooms)</p>
-                        </li>
-
-                        <li class="col-md-12">
-                            <label>@Html.DisplayNameFor(model => model.PropertySquareFootage)</label>
-                            <p>@Html.DisplayFor(model => model.PropertySquareFootage)</p>
-                        </li>
-                        <li class="col-md-12">
-                            <label>@Html.DisplayNameFor(model => model.PropertyAmount)</label>
-                            <p>@Html.DisplayFor(model => model.PropertyAmount)</p>
-                        </li>
-                        @if (Model.ViewingDate.HasValue)
-                        {
-                            <li class="col-md-12">
-                                <label>@Html.DisplayNameFor(model => model.ViewingDate)</label>
-                                <p>@Html.DisplayFor(model => model.ViewingDate)</p>
-                            </li>
-                        }
-                    </ul>
-                    <div class="row controlsContainer">
-                        <div class="col-md-12">
-                            @Html.EditorFor(model => model.Liked, new { propertyId = Model.Id })
-                        </div>
-
-                    </div>
-                    <div class="housingPropertyModal__remove">
-                        <button type="button" id="removeProperty" class="btn btn-danger btn-ok">Remove Property</button>
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-    </div>*@
-
 <script>
     $(document).ready(function () {
-        $("#removeProperty.btn-danger").click(function () {
-            TransfereeHousingController.deleteProperty("@Model.Id");
+        $("#removeProperty").click(function () {
+                TransfereeHousingController.deleteProperty("@Model.Id");
+            });
+        $('#selectProperty').click(function () {
+                TransfereeHousingController.selectProperty("@Model.Id");
         });
-    });
+        $('.intake-input').css("display", "none");
+        TransfereeSelectedPropertyController.init();
+      });
 </script>
