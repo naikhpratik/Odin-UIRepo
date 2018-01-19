@@ -589,6 +589,14 @@
     <Compile Include="Persistence\Migrations\201801171900011_selectedProperty.Designer.cs">
       <DependentUpon>201801171900011_selectedProperty.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201801171734343_AddProgramNotes.cs" />
+    <Compile Include="Persistence\Migrations\201801171734343_AddProgramNotes.Designer.cs">
+      <DependentUpon>201801171734343_AddProgramNotes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201801191922093_MergeProgramNotes.cs" />
+    <Compile Include="Persistence\Migrations\201801191922093_MergeProgramNotes.Designer.cs">
+      <DependentUpon>201801191922093_MergeProgramNotes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\NotificationRepository.cs" />
     <Compile Include="Persistence\NumberOfBathroomsTypesRepository.cs" />
@@ -882,6 +890,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201801171900011_selectedProperty.resx">
       <DependentUpon>201801171900011_selectedProperty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201801171734343_AddProgramNotes.resx">
+      <DependentUpon>201801171734343_AddProgramNotes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201801191922093_MergeProgramNotes.resx">
+      <DependentUpon>201801191922093_MergeProgramNotes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

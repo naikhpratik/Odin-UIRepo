@@ -100,6 +100,8 @@ namespace Odin.Data.Core.Models
         public decimal? Latitude { get; set; }
         public decimal? Longitude { get; set; }
 
+        public string ProgramNotes { get; set; }
+
         public bool HasService(int serviceTypeId)
         {
             return Services.Any<Service>(s => s.ServiceTypeId == serviceTypeId);

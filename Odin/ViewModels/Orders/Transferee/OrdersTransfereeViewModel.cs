@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using PetViewModel = Odin.ViewModels.Shared.PetViewModel;
 
@@ -460,6 +461,10 @@ namespace Odin.ViewModels.Orders.Transferee
 
         [DisplayName("Phone")]
         public string ConsultantPhoneNumber { get; set; }
+
+        [DisplayName("Program Notes")]
+        [DisplayFormat(NullDisplayText = "There are currently no notes.")]
+        public string ProgramNotes { get; set; }
 
     }
 }

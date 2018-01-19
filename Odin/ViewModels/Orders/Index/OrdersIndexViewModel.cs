@@ -23,7 +23,7 @@ namespace Odin.ViewModels.Orders.Index
         public string LastContactedDateDisplay => DateHelper.GetViewFormat(LastContactedDate);
         public string IsRushDisplay => IsRush ? "Rush" : String.Empty;
         public int AuthorizedServicesDisplay => Services.Count();
-        public int ScheduledServicesDisplay => Services.Where(s => s.ScheduledDate.HasValue).Count();
+        public int ScheduledServicesDisplay => Services.Where(s => s.ScheduledDate.HasValue && !s.CompletedDate.HasValue).Count();
         public int CompletedServicesDisplay => Services.Where(s => s.CompletedDate.HasValue).Count();
         public int CompletedWidth => Convert.ToInt32(AuthorizedServicesDisplay == 0 ? 0 : CompletedServicesDisplay * 100 / AuthorizedServicesDisplay);
         public int ScheduledWidth => Convert.ToInt32(AuthorizedServicesDisplay == 0 ? 0 : ScheduledServicesDisplay * 100 / AuthorizedServicesDisplay);
