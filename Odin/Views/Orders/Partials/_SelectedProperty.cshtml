@@ -164,10 +164,9 @@
             var err = false;
 
             var saveSuccess = function () {
-                
-                toast('changes to the property are successful', 'success');
                 $('body').removeClass('modal-open');
                 OrdersPageController.loadPanel("housing");
+                toast('changes to the property are successful', 'success');
             }
             var saveFail = function () {
                 
