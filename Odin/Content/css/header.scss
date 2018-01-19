@@ -19,8 +19,8 @@
 
 .notification-dropdown > li.notifications_unread {
     border-bottom: solid;
-    width:100%;
-    border-bottom-color: lightgray;
+    width: 100%;
+    border-bottom-color: darkgray;
     border-bottom-width: medium;
     background-image: url('/Content/Images/icn_attention.png');
     background-size: 90px;
@@ -49,6 +49,40 @@
     content: "x";
     color: #999;
 }
+
+.notification-dropdown > li.notifications_unread_message {
+    border-bottom: solid;
+    width: 100%;
+    border-bottom-color: darkgray;
+    border-bottom-width: medium;
+    background-image: url('/Content/Images/icn_msg.png');
+    background-size: 90px;
+    background-repeat: no-repeat;
+    padding-left: 100px;
+    text-wrap: none;
+    height: 90px;
+    display: inline-block;
+    content: "x";
+    color: #999;
+    background-color: lightgray;
+}
+
+.notification-dropdown > li.notifications_read_message {
+    border-bottom: solid;
+    width: 100%;
+    border-bottom-color: lightgray;
+    border-bottom-width: medium;
+    background-image: url('/Content/Images/icn_msg.png');
+    background-size: 90px;
+    background-repeat: no-repeat;
+    padding-left: 100px;
+    text-wrap: none;
+    height: 90px;
+    display: inline-block;
+    content: "x";
+    color: #999;
+}
+
 
 .notification-close-read {
     display: block;

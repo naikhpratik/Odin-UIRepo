@@ -34,7 +34,7 @@
     {
         if (!notification.IsRead)
         {
-            <li data-OrderId="@notification.NotificationOrderId" data-id="@notification.Id" data-isread="@notification.IsRead" data-isremoved="@notification.IsRemoved" class="notification notifications_unread" id="notificationlistitem_unread">
+            <li data-OrderId="@notification.NotificationOrderId" data-id="@notification.Id" data-isread="@notification.IsRead" data-isremoved="@notification.IsRemoved" class="notification notifications_unread_message" id="notificationlistitem_unread">
                 @*<input type="radio" id="r1" name="r1" />*@
                 <label id="notificationlabel" class="notifications notification-label notification-close-unread">&times</label>
 
@@ -46,7 +46,7 @@
         }
         else
         {
-            <li data-OrderId="@notification.NotificationOrderId" data-id="@notification.Id" data-isread="@notification.IsRead" data-isremoved="@notification.IsRemoved" class="notification notifications_read" id="notificationlistitem_unread">
+            <li data-OrderId="@notification.NotificationOrderId" data-id="@notification.Id" data-isread="@notification.IsRead" data-isremoved="@notification.IsRemoved" class="notification notifications_read_message" id="notificationlistitem_unread">
                 <label id="notificationlabel" class="notifications notification-label notification-close-read">&times</label>
                 <strong>@notification.NotificationTitle</strong>
                 <br />@notification.NotificationMessage<a href="/Orders/Transferee/@notification.NotificationOrderId#housing" class="notifications">@notification.NotificationCreatedByFullName</a>
