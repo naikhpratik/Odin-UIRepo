@@ -23,7 +23,7 @@
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" align="center">
                 @foreach (var mngr in Model.Managers)
                 {
-                    <div class="clickablepm" data-order-id="@mngr.Id" align="center">@mngr.FullName</div><br>
+                    <div class="clickablepm" data-order-id="@mngr.Id" align="center">@mngr.LastName, @mngr.FirstName</div><br>
                 }
             </div>
         </div>

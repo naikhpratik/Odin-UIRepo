@@ -10,10 +10,11 @@
     padding-right: 15px;
 }
 
-.custom-icon-check {
-    background-image: url(Images/check.png);
-    background-repeat: no-repeat;
-    background-position: center;
+.custom-icon-check, .custom-icon-check:hover {
+    background: #eeeeee !important;
+    background-image: url(Images/check.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
 }
 
 .bootstrap-datetimepicker-widget table td,
@@ -24,12 +25,7 @@
 #scheduledServices .btn-primary {
     border-radius: 50%;
 }
-.bootstrap-datetimepicker-widget .picker-switch table.table-condensed td a span:hover {
-    background: #eeeeee;
-    background-image: url(Images/check.png);
-    background-repeat: no-repeat;
-    background-position: center;
-}
+
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */

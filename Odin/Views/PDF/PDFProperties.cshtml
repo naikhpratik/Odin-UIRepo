@@ -1,0 +1,117 @@
+﻿@using Odin.Data.Core.Models
+@model IEnumerable<Odin.ViewModels.Orders.Transferee.HousingPropertyViewModel>
+
+<div id="propertiesBlock">
+    <h4>
+       @ViewBag.Choice
+    </h4>
+        @foreach (var propertyVM in Model)
+        {
+
+            <div class="propertyBody" data-property-id="@propertyVM.Id" data-lat="@propertyVM.PropertyLatitude" data-lng="@propertyVM.PropertyLongitude" data-liked="@propertyVM.Liked">                
+                <table class="sectionTable photoTable">
+                    <caption>Property Photos</caption>
+                    <tr>
+                        @{
+                            int kount = 0;
+                            if (propertyVM.PropertyPhotos.Count() == 0)
+                            {
+                                <th>No photographs submitted for this property.</th>
+                            }
+                            foreach (var photo in propertyVM.PropertyPhotos)
+                            {
+                                if ((kount % 5) == 0 && kount > 0)
+                                {
+                                    @:</tr><tr>                                    
+                                }
+                                <td class="photo">
+                                    <img class="location" src="@photo.PhotoUrl" />
+                                </td>
+                                kount = kount + 1;
+                                if ((kount % 5) == 0)
+                                {
+                                    @:</tr>
+                                }
+                                if (kount > 9)
+                                {
+                                    break;
+                                }
+                            }
+                        }
+                        </tr>
+                    </table>
+                </div>
+                <table class="sectionTable">
+                    <tr>
+                        <td valign="top" width="25%">
+                            <label >Address:</label>
+                        </td>
+                        <td class="propertyItem" align="left" valign="top" width="25%">
+                            <p class="propertyAddress">
+                                @Html.DisplayFor(m => propertyVM.PropertyAddress)
+                            </p>
+                        </td>                    
+                        <td valign="top" width="25%">
+                            <label >Availability Date:</label>
+                        </td>
+                        <td class="propertyItem" width="25%">
+                            <p>
+                                @Html.DisplayFor(m => propertyVM.PropertyAvailabilityDate)
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="top">
+                            <label >Bedrooms:</label>
+                        </td>
+                        <td class="propertyItem">
+                            <p>
+                                @Html.DisplayFor(m => propertyVM.PropertyNumberOfBedrooms)
+                            </p>
+                        </td>                    
+                        <td valign="top">
+                            <label >Bathrooms:</label>
+                        </td>
+                        <td class="propertyItem">
+                            <p>
+                                @Html.DisplayFor(m => propertyVM.PropertyNumberOfBathrooms)
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="top">
+                            <label >Rent Amount:</label>
+                        </td>
+                        <td class="propertyItem">
+                            <p>
+                                @Html.DisplayFor(m => propertyVM.PropertyAmount)
+                            </p>
+                        </td>                   
+                        <td valign="top">
+                            <label >Square Footage:</label>
+                        </td>
+                        <td class="propertyItem">
+                            <p>
+                                @Html.DisplayFor(m => propertyVM.PropertySquareFootage)
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="top">
+                            <label >Scheduled Viewing:</label>
+                        </td>
+                        <td class="propertyItem">
+                            <p>@(propertyVM.ViewingDate.HasValue ? Html.DisplayFor(m => propertyVM.ViewingDate).ToString() : "N/A")</p>                            
+                        </td>                    
+                        <td valign="top">
+                            <label >Like or Dislike:</label>
+                        </td>
+                        <td class="propertyItem">
+                            <p>@(propertyVM.Liked.HasValue ? (Html.DisplayFor(m => propertyVM.Liked, new { propertyId = propertyVM.Id }).ToString() == "False" ? "DisLike" : "Like") : "N/A")</p>
+                        </td>
+                    </tr>
+                </table>
+                <hr />
+                            }
+</div>
+@Styles.Render("~/Styling/propertiesPDF")

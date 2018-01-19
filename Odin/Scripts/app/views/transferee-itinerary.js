@@ -28,7 +28,7 @@ var TransfereeItineraryController = function (transfereeItineraryService) {
 
         //Bind Events
         $('#cmdPDF').click(function () {
-            window.location.href = "/Orders/GeneratePDF/" + $('#itinerary').attr("data-order-id");
+            window.location.href = "/Orders/GenerateItineraryPDF/" + $('#itinerary').attr("data-order-id");
         });
 
         $('#cmdEmail').click(function () {

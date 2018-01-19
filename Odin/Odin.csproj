@@ -463,10 +463,16 @@
       <DependentUpon>help.css</DependentUpon>
     </Content>
     <Content Include="Content\css\transferee\HFProperties.css">
-      <DependentUpon>HFProperties.scss</DependentUpon>
+      <DependentUpon>HFPropertiesPDF.scss</DependentUpon>
     </Content>
     <Content Include="Content\css\transferee\HFProperties.min.css">
       <DependentUpon>HFProperties.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\transferee\HFPropertiesPDF.css">
+      <DependentUpon>HFPropertiesPDF.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\transferee\HFPropertiesPDF.min.css">
+      <DependentUpon>HFPropertiesPDF.css</DependentUpon>
     </Content>
     <Content Include="Content\css\transferee\history.css">
       <DependentUpon>history.scss</DependentUpon>
@@ -734,6 +740,16 @@
     <Content Include="Content\Images\marker-icon-2x.png" />
     <Content Include="Content\Images\marker-icon.png" />
     <Content Include="Content\Images\marker-shadow.png" />
+    <Content Include="Content\Images\pic1.jpg" />
+    <Content Include="Content\Images\pic10.jpg" />
+    <Content Include="Content\Images\pic2.jpg" />
+    <Content Include="Content\Images\pic3.jpg" />
+    <Content Include="Content\Images\pic4.jpg" />
+    <Content Include="Content\Images\pic5.jpg" />
+    <Content Include="Content\Images\pic6.jpg" />
+    <Content Include="Content\Images\pic7.jpg" />
+    <Content Include="Content\Images\pic8.jpg" />
+    <Content Include="Content\Images\pic9.jpg" />
     <Content Include="Content\Images\popout_sml_img.png" />
     <Content Include="Content\Images\task_done.png" />
     <Content Include="Content\Images\task_notDone.png" />
@@ -870,7 +886,7 @@
     <Content Include="Content\css\transferee\sideNav.scss" />
     <Content Include="Content\css\bookmarklet.scss" />
     <Content Include="Content\css\help.scss" />
-    <TypeScriptCompile Include="Content\css\transferee\HFProperties.scss" />
+    <TypeScriptCompile Include="Content\css\transferee\HFPropertiesPDF.scss" />
     <Content Include="Content\css\transferee\help.scss" />
     <Content Include="Content\css\transferee\propertyMessages.scss" />
     <Content Include="Content\css\transferee\itineraryPdf.scss" />
@@ -1054,6 +1070,8 @@
     <Content Include="Views\Error\Error404.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\Orders\Partials\_SelectedProperty.cshtml" />
+    <Content Include="Views\PDF\PDFProperties.cshtml" />
+    <Content Include="Views\PDF\PDFItinerary.cshtml" />
     <None Include="Web.Azure.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -49,32 +49,8 @@
 
 
                 <div class="col-md-1 col-xs-12">
-                    <label class="mobileLabel">Property Photos</label>
-
-                    @if (ViewBag.IsPDF == true)
-                    {
-                        <ul class="sectionList">
-                            @{ int kount = 0; }
-                            @foreach (var photo in propertyVM.PropertyPhotos)
-                            {
-                                <li class="photo">
-                                    <img class="location" src="@photo.PhotoUrl" />
-                                </li>
-
-                                kount++;
-
-                                if (kount > 5)
-                                {
-                                    break;
-                                }
-                            }
-                        </ul>
-                    }
-                    else
-                    {
+                    <label class="mobileLabel">Property Photos</label>                    
                         <img class="location" src="@propertyVM.ThumbnailPhotoUrl" />
-                    }
-
                 </div>
 
 
@@ -112,13 +88,7 @@
 
                 <div class="col-md-1 col-xs-12">
                     <label class="mobileLabel">Like or Dislike</label>
-                    @if (ViewBag.IsPDF == true && !propertyVM.Liked.HasValue)
-                    {
-                        <span>Not Yet Rated</span>
-                    }
-
                     @Html.EditorFor(m => propertyVM.Liked, new { propertyId = propertyVM.Id })
-
                 </div>
                 <div class="col-md-1 col-xs-12 comments" data-property-id="@propertyVM.Id">
                     <label class="mobileLabel">Property Comments</label>
@@ -142,10 +112,7 @@
         </div>
     </div>
 </div>
-@if (ViewBag.IsPDF == true)
-{
-    @Styles.Render("~/Styling/properties")
-}
+
 <script>
 
     $('.comments').click(function (event) {
