@@ -423,103 +423,30 @@
       <DependentUpon>bootstrap-datetimepicker.css</DependentUpon>
     </Content>
     <Content Include="Content\styles\css\bootstrap-paper.css" />
-    <Content Include="Content\css\bookmarklet.css">
-      <DependentUpon>bookmarklet.scss</DependentUpon>
+    <Content Include="Content\styles\css\ref_bookmarklet.css" />
+    <Content Include="Content\styles\css\ref_bookmarklet.min.css">
+      <DependentUpon>ref_bookmarklet.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\bookmarklet.min.css">
+    <Content Include="Content\styles\css\ref_forgotpassword.css" />
+    <Content Include="Content\styles\css\ref_forgotpassword.min.css">
+      <DependentUpon>ref_forgotpassword.css</DependentUpon>
+    </Content>
+    <Content Include="Content\styles\css\ref_login.css" />
+    <Content Include="Content\styles\css\ref_orders.css" />
+    <Content Include="Content\styles\css\ref_orders.min.css">
+      <DependentUpon>ref_orders.css</DependentUpon>
+    </Content>
+    <Content Include="Content\styles\scss\bookmarklet.css">
+      <DependentUpon>ref_bookmarklet.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\styles\scss\bookmarklet.min.css">
       <DependentUpon>bookmarklet.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\header.css">
-      <DependentUpon>header.scss</DependentUpon>
+    <Content Include="Content\styles\scss\help.css">
+      <DependentUpon>ref_help.scss</DependentUpon>
     </Content>
-    <Content Include="Content\css\header.min.css">
-      <DependentUpon>header.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\help.css">
-      <DependentUpon>help.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\help.min.css">
+    <Content Include="Content\styles\scss\help.min.css">
       <DependentUpon>help.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\shared\dw_loading.css" />
-    <Content Include="Content\css\shared\thumbnails.carousel.css" />
-    <Content Include="Content\css\transferee\dashboard.css">
-      <DependentUpon>dashboard.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\dashboard.min.css">
-      <DependentUpon>dashboard.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\details.css">
-      <DependentUpon>details.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\details.min.css">
-      <DependentUpon>details.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\help.css">
-      <DependentUpon>help.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\help.min.css">
-      <DependentUpon>help.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\HFProperties.css">
-      <DependentUpon>HFProperties.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\HFProperties.min.css">
-      <DependentUpon>HFProperties.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\history.css">
-      <DependentUpon>history.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\history.min.css">
-      <DependentUpon>history.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\housing.css">
-      <DependentUpon>housing.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\housing.min.css">
-      <DependentUpon>housing.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\intake.css">
-      <DependentUpon>intake.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\intake.min.css">
-      <DependentUpon>intake.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\itinerary.css">
-      <DependentUpon>itinerary.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\itinerary.min.css">
-      <DependentUpon>itinerary.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\itineraryPdf.css">
-      <DependentUpon>itineraryPdf.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\itineraryPdf.min.css">
-      <DependentUpon>itineraryPdf.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\messages.css">
-      <DependentUpon>messages.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\messages.min.css">
-      <DependentUpon>messages.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\propertyMessages.css">
-      <DependentUpon>propertyMessages.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\propertyMessages.min.css">
-      <DependentUpon>propertyMessages.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\sideNav.css">
-      <DependentUpon>sideNav.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\sideNav.min.css">
-      <DependentUpon>sideNav.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\transferee.css">
-      <DependentUpon>transferee.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\transferee.min.css">
-      <DependentUpon>transferee.css</DependentUpon>
     </Content>
     <Content Include="Content\DataTables\css\autoFill.bootstrap.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.min.css" />
@@ -678,10 +605,10 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
-    <Content Include="Content\css\forgotpassword.css">
-      <DependentUpon>forgotpassword.scss</DependentUpon>
+    <Content Include="Content\styles\scss\forgotpassword.css">
+      <DependentUpon>ref_forgotpassword.scss</DependentUpon>
     </Content>
-    <Content Include="Content\css\forgotpassword.min.css">
+    <Content Include="Content\styles\scss\forgotpassword.min.css">
       <DependentUpon>forgotpassword.css</DependentUpon>
     </Content>
     <Content Include="Content\Images\bg_gradient_forgot_password.png" />
@@ -736,23 +663,103 @@
     <Content Include="Content\Images\task_done.png" />
     <Content Include="Content\Images\task_notDone.png" />
     <Content Include="Content\Images\user-placeholder.png" />
-    <Content Include="Content\css\login.css">
-      <DependentUpon>login.scss</DependentUpon>
+    <Content Include="Content\styles\scss\login.css">
+      <DependentUpon>ref_login.scss</DependentUpon>
     </Content>
-    <Content Include="Content\css\login.min.css">
+    <Content Include="Content\styles\scss\login.min.css">
       <DependentUpon>login.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\orders.css">
-      <DependentUpon>orders.scss</DependentUpon>
+    <Content Include="Content\styles\scss\orders.css">
+      <DependentUpon>ref_orders.scss</DependentUpon>
     </Content>
-    <Content Include="Content\css\orders.min.css">
+    <Content Include="Content\styles\scss\orders.min.css">
       <DependentUpon>orders.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\primaryNav.css">
-      <DependentUpon>primaryNav.scss</DependentUpon>
+    <Content Include="Content\styles\css\ref_itineraryPdf.css" />
+    <Content Include="Content\styles\css\ref_itineraryPdf.min.css">
+      <DependentUpon>ref_itineraryPdf.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\primaryNav.min.css">
-      <DependentUpon>primaryNav.css</DependentUpon>
+    <Content Include="Content\styles\css\ref_transferee.css" />
+    <Content Include="Content\styles\css\ref_transferee.min.css">
+      <DependentUpon>ref_transferee.css</DependentUpon>
+    </Content>
+    <Content Include="Content\styles\scss\ref_transferee\dashboard.css">
+      <DependentUpon>dashboard.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\styles\scss\ref_transferee\dashboard.min.css">
+      <DependentUpon>dashboard.css</DependentUpon>
+    </Content>
+    <Content Include="Content\styles\scss\ref_transferee\details.css">
+      <DependentUpon>details.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\styles\scss\ref_transferee\details.min.css">
+      <DependentUpon>details.css</DependentUpon>
+    </Content>
+    <Content Include="Content\styles\scss\ref_transferee\help.css">
+      <DependentUpon>help.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\styles\scss\ref_transferee\help.min.css">
+      <DependentUpon>help.css</DependentUpon>
+    </Content>
+    <Content Include="Content\styles\scss\ref_transferee\HFProperties.css">
+      <DependentUpon>HFProperties.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\styles\scss\ref_transferee\HFProperties.min.css">
+      <DependentUpon>HFProperties.css</DependentUpon>
+    </Content>
+    <Content Include="Content\styles\scss\ref_transferee\history.css">
+      <DependentUpon>history.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\styles\scss\ref_transferee\history.min.css">
+      <DependentUpon>history.css</DependentUpon>
+    </Content>
+    <Content Include="Content\styles\scss\ref_transferee\housing.css">
+      <DependentUpon>housing.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\styles\scss\ref_transferee\housing.min.css">
+      <DependentUpon>housing.css</DependentUpon>
+    </Content>
+    <Content Include="Content\styles\scss\ref_transferee\intake.css">
+      <DependentUpon>intake.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\styles\scss\ref_transferee\intake.min.css">
+      <DependentUpon>intake.css</DependentUpon>
+    </Content>
+    <Content Include="Content\styles\scss\ref_transferee\itinerary.css">
+      <DependentUpon>itinerary.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\styles\scss\ref_transferee\itinerary.min.css">
+      <DependentUpon>itinerary.css</DependentUpon>
+    </Content>
+    <Content Include="Content\styles\scss\itineraryPdf.css">
+      <DependentUpon>ref_itineraryPdf.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\styles\scss\itineraryPdf.min.css">
+      <DependentUpon>itineraryPdf.css</DependentUpon>
+    </Content>
+    <Content Include="Content\styles\scss\ref_transferee\messages.css">
+      <DependentUpon>messages.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\styles\scss\ref_transferee\messages.min.css">
+      <DependentUpon>messages.css</DependentUpon>
+    </Content>
+    <Content Include="Content\styles\scss\ref_transferee\propertyMessages.css">
+      <DependentUpon>propertyMessages.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\styles\scss\ref_transferee\propertyMessages.min.css">
+      <DependentUpon>propertyMessages.css</DependentUpon>
+    </Content>
+    <Content Include="Content\styles\scss\ref_transferee\sideNav.css">
+      <DependentUpon>sideNav.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\styles\scss\ref_transferee\sideNav.min.css">
+      <DependentUpon>sideNav.css</DependentUpon>
+    </Content>
+    <Content Include="Content\styles\scss\ref_transferee\transferee.css">
+      <DependentUpon>transferee.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\styles\scss\ref_transferee\transferee.min.css">
+      <DependentUpon>transferee.css</DependentUpon>
     </Content>
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
@@ -845,34 +852,36 @@
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
-    <Content Include="Content\css\login.scss" />
-    <Content Include="Content\css\orders.scss" />
-    <Content Include="Content\css\forgotpassword.scss" />
-    <Content Include="Content\css\shared\_definitions.scss" />
-    <Content Include="Content\css\transferee\intake.scss" />
-    <Content Include="Content\css\transferee\itinerary.scss" />
-    <Content Include="Content\css\transferee\details.scss" />
-    <Content Include="Content\css\transferee\housing.scss" />
-    <Content Include="Content\css\transferee\history.scss" />
-    <Content Include="Content\css\transferee\messages.scss" />
-    <Content Include="Content\css\transferee\transferee.scss" />
+    <Content Include="Content\styles\scss\ref_login.scss" />
+    <Content Include="Content\styles\scss\ref_orders.scss" />
+    <Content Include="Content\styles\scss\ref_forgotpassword.scss" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\css\primaryNav.scss" />
-    <Content Include="Content\css\header.scss" />
-    <Content Include="Content\css\transferee\sideNav.scss" />
-    <Content Include="Content\css\bookmarklet.scss" />
-    <Content Include="Content\css\help.scss" />
-    <TypeScriptCompile Include="Content\css\transferee\HFProperties.scss" />
-    <Content Include="Content\css\transferee\help.scss" />
-    <Content Include="Content\css\transferee\propertyMessages.scss" />
-    <Content Include="Content\css\transferee\itineraryPdf.scss" />
-    <Content Include="Content\css\transferee\dashboard.scss" />
+    <Content Include="Content\styles\scss\ref_bookmarklet.scss" />
+    <Content Include="Content\styles\scss\ref_help.scss" />
     <Content Include="Content\styles\scss\2_resets\reset.scss" />
     <Content Include="Content\styles\scss\4_components\datetimepicker.scss" />
     <Content Include="Content\styles\scss\application.scss" />
     <Content Include="Content\styles\scss\3_elements\body.scss" />
+    <Content Include="Content\styles\scss\ref_transferee.scss" />
+    <Content Include="Content\styles\scss\ref_transferee\dashboard.scss" />
+    <Content Include="Content\styles\scss\ref_transferee\details.scss" />
+    <Content Include="Content\styles\scss\ref_transferee\help.scss" />
+    <TypeScriptCompile Include="Content\styles\scss\ref_transferee\HFProperties.scss" />
+    <Content Include="Content\styles\scss\ref_transferee\history.scss" />
+    <Content Include="Content\styles\scss\ref_transferee\housing.scss" />
+    <Content Include="Content\styles\scss\ref_transferee\intake.scss" />
+    <Content Include="Content\styles\scss\ref_transferee\itinerary.scss" />
+    <Content Include="Content\styles\scss\ref_itineraryPdf.scss" />
+    <Content Include="Content\styles\scss\ref_transferee\messages.scss" />
+    <Content Include="Content\styles\scss\ref_transferee\propertyMessages.scss" />
+    <Content Include="Content\styles\scss\ref_transferee\sideNav.scss" />
+    <Content Include="Content\styles\scss\ref_transferee\transferee.scss" />
+    <Content Include="Content\styles\scss\ref_definitions.scss" />
+    <Content Include="Content\styles\scss\4_components\primaryNav.scss" />
+    <Content Include="Content\styles\scss\4_components\loadingAnimation.scss" />
+    <Content Include="Content\styles\scss\4_components\carousel.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
