@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using Odin.ViewModels.Shared;
 
 namespace Odin.Tests.Controllers
 {
@@ -261,33 +262,37 @@ namespace Odin.Tests.Controllers
         {
             var vm = new DashboardViewModel();
 
-            var service = new Service()
+            var service = new ServiceViewModel()
             {
-                ServiceType = new ServiceType(){Category = ServiceCategory.AreaOrientation,ActionLabel = "Area Orientation"},
+                Category = ServiceCategory.AreaOrientation,
+                ActionLabel = "Area Orientation",
                 Selected = true
             };
 
-            var otherService = new Service()
+            var otherService = new ServiceViewModel()
             {
-                ServiceType = new ServiceType() { Category = ServiceCategory.AreaOrientation, ActionLabel = "Area Orientation 2" },
+                Category = ServiceCategory.AreaOrientation,
+                ActionLabel = "Area Orientation 2",
                 Selected = true
             };
 
-            var compService = new Service()
+            var compService = new ServiceViewModel()
             {
-                ServiceType = new ServiceType() { Category = ServiceCategory.SettlingIn, ActionLabel = "Settling in" },
+                Category = ServiceCategory.SettlingIn,
+                ActionLabel = "Settling in",
                 Selected = true,
                 CompletedDate = DateTime.Now
             };
 
-            var notService = new Service()
+            var notService = new ServiceViewModel()
             {
-                ServiceType = new ServiceType() { Category = ServiceCategory.SettlingIn, ActionLabel = "Settling in" },
+                Category = ServiceCategory.SettlingIn,
+                ActionLabel = "Settling in",
                 Selected = false,
                 CompletedDate = DateTime.Now
             };
 
-            vm.Services = new List<Service>(){service,otherService,compService,notService};
+            vm.Services = new List<ServiceViewModel>(){service,otherService,compService,notService};
 
             vm.CompletedServiceCount.Should().Be(1);
             vm.TotalServiceCount.Should().Be(3);

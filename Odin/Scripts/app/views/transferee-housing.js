@@ -244,9 +244,7 @@
     var reloadPropertiesPartial = function () {
         $('#propertiesContainer').load('/orders/propertiesPartial/' + currentOrderId);
     };
-    var reloadHousingPartial = function () {
-        OrdersPageController.loadPanel('Housing');
-    };
+    
     /**
      * Return all DOM elements that track the liked value for the property matching propertyId
      * @param {any} propertyId The id of the property
@@ -300,8 +298,8 @@
         $.ajax({
             url: '/HomeFindingProperties/' + suffix,
             type: 'PUT',
-            success: function (result) {    
-                reloadHousingPartial();
+            success: function (result) {
+                window.location.reload(true);
                 //reloadPropertiesPartial();
                 //$('#propertyDetailsModal').modal('hide');
             },

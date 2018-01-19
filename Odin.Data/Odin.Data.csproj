@@ -581,7 +581,6 @@
     <Compile Include="Persistence\Migrations\201712281602426_AddInviteStatusToTransferee.Designer.cs">
       <DependentUpon>201712281602426_AddInviteStatusToTransferee.cs</DependentUpon>
     </Compile>
-<<<<<<< HEAD
     <Compile Include="Persistence\Migrations\201801161919330_AddCreatedByToNotifications.cs" />
     <Compile Include="Persistence\Migrations\201801161919330_AddCreatedByToNotifications.Designer.cs">
       <DependentUpon>201801161919330_AddCreatedByToNotifications.cs</DependentUpon>
@@ -589,11 +588,14 @@
     <Compile Include="Persistence\Migrations\201801171734343_AddProgramNotes.cs" />
     <Compile Include="Persistence\Migrations\201801171734343_AddProgramNotes.Designer.cs">
       <DependentUpon>201801171734343_AddProgramNotes.cs</DependentUpon>
-=======
+    </Compile>
     <Compile Include="Persistence\Migrations\201801102010103_selectedProperty.cs" />
     <Compile Include="Persistence\Migrations\201801102010103_selectedProperty.Designer.cs">
       <DependentUpon>201801102010103_selectedProperty.cs</DependentUpon>
->>>>>>> c1d5afa3a6b1db7f2bfc3eb2ba7aaea95fe2a3dd
+    </Compile>
+    <Compile Include="Persistence\Migrations\201801191629287_MergedSelectProperty.cs" />
+    <Compile Include="Persistence\Migrations\201801191629287_MergedSelectProperty.Designer.cs">
+      <DependentUpon>201801191629287_MergedSelectProperty.cs</DependentUpon>
     </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\NotificationRepository.cs" />
@@ -883,16 +885,17 @@
     <EmbeddedResource Include="Persistence\Migrations\201712281602426_AddInviteStatusToTransferee.resx">
       <DependentUpon>201712281602426_AddInviteStatusToTransferee.cs</DependentUpon>
     </EmbeddedResource>
-<<<<<<< HEAD
     <EmbeddedResource Include="Persistence\Migrations\201801161919330_AddCreatedByToNotifications.resx">
       <DependentUpon>201801161919330_AddCreatedByToNotifications.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201801171734343_AddProgramNotes.resx">
       <DependentUpon>201801171734343_AddProgramNotes.cs</DependentUpon>
-=======
+    </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201801102010103_selectedProperty.resx">
       <DependentUpon>201801102010103_selectedProperty.cs</DependentUpon>
->>>>>>> c1d5afa3a6b1db7f2bfc3eb2ba7aaea95fe2a3dd
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201801191629287_MergedSelectProperty.resx">
+      <DependentUpon>201801191629287_MergedSelectProperty.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

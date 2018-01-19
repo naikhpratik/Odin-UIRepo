@@ -11,26 +11,45 @@ namespace Odin.ViewModels.Orders.Transferee
     {
         public DashboardViewModel()
         {
-            Services = new List<Service>();
+            Services = new List<ServiceViewModel>();
+            HomeFindingServices = new List<ServiceViewModel>();
         }
 
-        public IEnumerable<Service> Services { get; set; }
+        public IEnumerable<ServiceViewModel> Services { get; set; }
+
+        public IEnumerable<ServiceViewModel> HomeFindingServices { get; set; }
+
+        private IEnumerable<ServiceViewModel> _allServices;
+        public IEnumerable<ServiceViewModel> AllServices
+        {
+            get
+            {
+                if (_allServices == null)
+                {
+                    _allServices = Services.Concat(HomeFindingServices);
+                }
+                return _allServices;
+            }
+        }
 
         public IEnumerable<ServiceCategory> ServiceCategories
         {
-            get { return Services.Where(s => s.Selected).Select(s => s.ServiceType.Category).Distinct(); }
+            get
+            {
+                return AllServices.Where(s => s.Selected).Select(s => s.Category).Distinct().ToList();
+            }
         }
 
-        public IEnumerable<Service> GetServiceTypesByCategory(ServiceCategory cat)
+        public IEnumerable<ServiceViewModel> GetServiceTypesByCategory(ServiceCategory cat)
         {
-            return Services.Where(s => s.ServiceType.Category == cat && s.Selected).ToList();
+            return AllServices.Where(s => s.Category == cat && s.Selected).ToList();
         }
 
         public int CompletedServiceCount
         {
             get
             {
-                return Services.Where(s => s.Selected && s.CompletedDate.HasValue).Count();
+                return AllServices.Where(s => s.Selected && s.CompletedDate.HasValue).Count();
             }
         }
 
@@ -38,7 +57,7 @@ namespace Odin.ViewModels.Orders.Transferee
         {
             get
             {
-                return Services.Where(s => s.Selected).Count();
+                return AllServices.Where(s => s.Selected).Count();
             }
         }
 
