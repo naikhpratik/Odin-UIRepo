@@ -293,7 +293,7 @@
     var selectProperty = function (id, propertyId) {
         var suffix = 'Select/' + id;
         if (id == '') {
-            suffix = 'SelectProperty/' + propertyId
+            suffix = 'SelectProperty/' + propertyId;
         }
         $.ajax({
             url: '/HomeFindingProperties/' + suffix,

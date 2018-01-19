@@ -7,12 +7,13 @@
             </h3>
             <p>&nbsp;</p>
         </div>
-        <div class="col-md-6 buttonGroup">            
-            <button type="button" id="deselectProperty" class='btn btn-secondary' data-dismiss="modal">Deselect Property</button>            
-        </div>        
+        <div class="col-md-6 buttonGroup">
+            <button type="button" id="deselectProperty" class='btn btn-secondary' data-dismiss="modal">Deselect Property</button>
+            <button type="button" id="editProperty" class='btn btn-secondary' data-dismiss="modal">Edit</button>
+        </div>
     </div>
     <div class="row">
-        <div class="col-md-3">           
+        <div class="col-md-3">
             <img class="homePhoto" src='@(Model.PropertyPhotos.Count() > 0 ? Model.PropertyPhotos.First().PhotoUrl : "")' />
         </div>
         <div class="col-md-9 rightSection">
@@ -23,8 +24,9 @@
             <ul class="row selectedPropertySummary">
                 <li class="col-md-3">
                     <div class="selectedPropertySummary__item">
-                        <p class="selectedProperty__summaryContent">@Html.DisplayFor(model => model.PropertyNumberOfBedrooms)
-                        <span class="selectedProperty__summarySpan">Bedrooms</span>
+                        <p class="selectedProperty__summaryContent">
+                            @Html.DisplayFor(model => model.PropertyNumberOfBedrooms)
+                            <span class="selectedProperty__summarySpan">Bedrooms</span>
                         </p>
                     </div>
                 </li>
@@ -32,21 +34,23 @@
                     <div class="selectedPropertySummary__item ">
                         <p class="selectedProperty__summaryContent">
                             @Html.DisplayFor(model => model.PropertyNumberOfBathrooms)
-                        <span class="selectedProperty__summarySpan">Bathrooms</span>
+                            <span class="selectedProperty__summarySpan">Bathrooms</span>
                         </p>
                     </div>
                 </li>
                 <li class="col-md-3">
                     <div class="selectedPropertySummary__item ">
-                        <p class="selectedProperty__summaryContent">@Html.DisplayFor(model => model.PropertySquareFootage)
-                        <span class="selectedProperty__summarySpan">Square Feet</span>
+                        <p class="selectedProperty__summaryContent">
+                            @Html.DisplayFor(model => model.PropertySquareFootage)
+                            <span class="selectedProperty__summarySpan">Square Feet</span>
                         </p>
                     </div>
                 </li>
                 <li class="col-md-3">
                     <div class="selectedPropertySummary__item ">
-                        <p class="selectedProperty__summaryContent">@Html.DisplayFor(model => model.PropertyAmount)
-                        <span class="selectedProperty__summarySpan">Per Month</span>
+                        <p class="selectedProperty__summaryContent">
+                            @Html.DisplayFor(model => model.PropertyAmount)
+                            <span class="selectedProperty__summarySpan">Per Month</span>
                         </p>
                     </div>
                 </li>
@@ -89,92 +93,112 @@
         </div>
     </div>
 </div>
-<style>
-    .propertyInfo{
-        margin-top:2rem;
-    }
-    .overviewItems {
-        margin: 0;
-        line-height: 1.5rem;
-    }
-    .infoLine {
-        background-color: khaki;
-        height: 7rem;
-        padding-top: 20px
-    }
-    .infoLineItem {
-        vertical-align: middle;
-    }
-    #emailPM {
-        background-color: olive;
-        color:white;
-        padding:0.7rem;
-        font-size:1.2rem;
-        font-weight:bold;
-        text-decoration:none;
-    }
-    .buttonGroup {
-        margin-top: 2rem;
-    }
-        .btn {
-                  float:right;
-                  margin-right:2rem;
-              }
+<div class="modal fade editPropertyModal" id="modalForm" tabindex="-100" data-property-id="@Model.Id" role="dialog" data-backdrop="false" aria-labelledby="editPropertyModal">
+    <div class="modal-dialog" role="document" id="editProperty" style="z-index: 2147483647;">
+        <div class="modal-content" id="editPropertyModalLabel">
+            <div class="modal-header row">
+                <div class="col-md-10">
+                    <h5 class="modal-title">Property Info for @Model.PropertyStreet1</h5>
+                </div>
+                <div class="col-md-2">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="col-md-12">
+                    <span>Please ensure the Prop Bot has absorbed the information about this property correctly.</span>
+                </div>
+            </div>
+            <div class="modal-body row inputRow">
+                <div class="col-md-6">
+                    <label for="bedrooms">Bedrooms</label>
+                    <input type="number" name="bedrooms" value="@Model.PropertyNumberOfBedrooms" />
+                </div>
+                <div class="col-md-6">
+                    <label for="bathrooms">Bathrooms</label>
+                    <input type="number" name="bathrooms" value="@Model.PropertyNumberOfBathrooms" />
+                </div>
+            </div>
+            <div class="modal-body row">
+                <div class="col-md-6">
+                    <label for="squarefeet">Square feet</label>
+                    <input type="number" name="squarefeet" value="@Model.PropertySquareFootage" />
+                </div>
+                <div class="col-md-6">
+                    <label for="cost">Monthly Cost</label>
+                    <input type="number" name="cost" value="@Model.PropertyAmount" />
+                </div>
+            </div>
 
-    .rightSection{
-        margin-left:-15px;
-    }
-    
-    .homePhoto {
-        width: 100%;
-    }
-    li {
-        display: inline-block;
-    }
+            <div class="modal-footer row">
+                <div class="col-sm-6">
+                </div>
+                <div class="col-sm-6">
+                    <button type="button" id="cmdUpdate" class="btn btn-primary update">Update Property</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-    .selectedPropertySummary {
-        list-style:none;
-        list-style-type:none;
-        margin: 0 0 0 0;
-        padding: 0 0 0 0;
-    }
-    .selectedPropertySummary__item {
-        background-color: #efefef;
-        text-align: center;
-        padding: 1rem 0;
-        margin: 0 auto;
-        margin-left:-15px;
-    }
-    .selectedProperty__summaryContent {
-        font-size: 1.8rem;
-        color: #808080;
-        font-weight: 600;
-    }
-    .selectedProperty__summarySpan {
-        display: block;
-        font-size: 1.5rem;
-        color: #808080;
-        font-weight: 400;
-    }
+@Styles.Render("~/Styling/selectedProperty")
 
-    .address1 {
-        font-size: 1.8rem;
-        font-weight: bold;
-        margin-bottom: -1rem;
-        margin-top: -1rem;
-    }
-    .address2 {
-        font-size: 1.5rem;
-        margin-bottom:3rem;
-    }
-    .leaseSection{
-        margin-top:2rem;
-    }
-</style>
 <script>
     $(document).ready(function () {
         $('#deselectProperty').click(function () {
-                TransfereeHousingController.selectProperty("", "@Model.propertyId");
-            });
+            TransfereeHousingController.selectProperty("", "@Model.propertyId");
+        });
+        $('#editProperty').click(function () {
+            $('#modalForm').modal('show');
+        });
+
+        $('#cmdUpdate').click(function (e) {
+           
+            var prop = $("#modalForm");
+            var propertyId = prop.attr("data-property-id");
+            var bd = prop.children().find("input[name=bedrooms]");
+            var bt = prop.children().find("input[name=bathrooms]");
+            var sq = prop.children().find("input[name=squarefeet]");
+            var am = prop.children().find("input[name=cost]");
+
+            var err = false;
+
+            var saveSuccess = function () {
+                $('body').removeClass('modal-open');
+                OrdersPageController.loadPanel("housing");
+                toast('changes to the property are successful', 'success');
+            }
+            var saveFail = function () {
+                
+                err = true;
+                toast('changes to the property failed', 'danger');
+            }
+
+            if (!err) {
+
+                var data = { "Id": propertyId, "PropertyNumberOfBedrooms": bd.val(), "PropertyNumberOfBathrooms": bt.val(), "PropertySquareFootage": sq.val(), "PropertyAmount": am.val() };
+                var url =  "/api/orders/transferee/housing/update";
+                $.post(url, data).done(saveSuccess).fail(saveFail);
+                
+            }
+        });
+        var toast = function (message, type) {
+            $.notify({
+                message: message
+            }, {
+                    delay: 2000,
+
+                    type: type,
+                    placement: {
+                        from: "bottom",
+                        align: "center"
+                    },
+                    animate: {
+                        enter: 'animated fadeInUp',
+                        exit: 'animated fadeOutDown'
+                    }
+                });
+        }
     });
 </script>
+

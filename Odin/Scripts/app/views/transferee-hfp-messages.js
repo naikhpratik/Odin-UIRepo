@@ -20,7 +20,6 @@ var TransfereeMessagesController = function (transfereeHousingMessages) {
         modalParent.find(".btn-primary.send").on('click', saveMessage);
         //mark messages read
         modalParent.find(".btn-secondary").on("click", readMessages);
-
     };
     
     var saveMessage = function (e) {

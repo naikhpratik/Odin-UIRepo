@@ -84,7 +84,12 @@
     "inputFile": "Content/css/transferee/dashboard.scss"
   },
   {
+
     "outputFile": "Content/css/transferee/HFPropertiesPDF.css",
     "inputFile": "Content/css/transferee/HFPropertiesPDF.scss"
+  },
+  {
+    "outputFile": "Content/css/selectedProperty.css",
+    "inputFile": "Content/css/selectedProperty.scss"
   }
 ]

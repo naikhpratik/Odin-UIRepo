@@ -142,7 +142,7 @@ namespace Odin.Controllers
         }
 
         [RoleAuthorize(UserRoles.ProgramManager, UserRoles.Consultant, UserRoles.Transferee)]
-        public ActionResult PropertiesPDF(string id, string listChoice)
+        public ActionResult PropertiesPartialPDF(string id, string listChoice)
         {
             var userId = User.Identity.GetUserId();
             Order order = _unitOfWork.Orders.GetOrderFor(userId, id, User.GetUserRole());

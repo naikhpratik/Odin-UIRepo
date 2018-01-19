@@ -12,6 +12,7 @@ using Odin.Extensions;
 using Odin.Helpers;
 using Odin.IntegrationTests.Extensions;
 using Odin.IntegrationTests.TestAttributes;
+using Odin.ViewModels.Orders.Transferee;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -50,7 +51,7 @@ namespace Odin.IntegrationTests.Controllers.Api
             Context.SaveChanges();
 
             var controller = SetUpOrdersController();
-            controller.MockCurrentUserAndRole(dsc.Id, dsc.UserName,UserRoles.Consultant);
+            controller.MockCurrentUserAndRole(dsc.Id, dsc.UserName, UserRoles.Consultant);
 
             // Act
             var result = controller.GetOrders();
@@ -121,7 +122,7 @@ namespace Odin.IntegrationTests.Controllers.Api
                 .Where(o => o.TrackingId.Equals(orderDto.TrackingId))
                 .Include(o => o.HomeFinding)
                 .FirstOrDefault();
-            
+
             order.Should().NotBeNull();
             order?.HomeFinding.Should().NotBeNull();
         }
@@ -191,7 +192,7 @@ namespace Odin.IntegrationTests.Controllers.Api
             order.Consultant = dsc;
             order.ProgramManager = pm;
             order.DestinationCity = "test-before-insert";
-            order.HomeFinding = new HomeFinding {Id = order.Id};
+            order.HomeFinding = new HomeFinding { Id = order.Id };
             Context.Orders.Add(order);
             Context.SaveChanges();
             var orderDto = OrderDtoBuilder.New();
@@ -401,7 +402,7 @@ namespace Odin.IntegrationTests.Controllers.Api
 
             // Act
             var controller = SetUpOrdersController();
-            controller.MockCurrentUserAndRole(dsc.Id, dsc.UserName,UserRoles.Consultant);
+            controller.MockCurrentUserAndRole(dsc.Id, dsc.UserName, UserRoles.Consultant);
             var result = controller.UpsertDetailsServices(svc);
 
             // Assert
@@ -569,7 +570,7 @@ namespace Odin.IntegrationTests.Controllers.Api
 
             // Act
             var controller = SetUpOrdersController();
-            controller.MockCurrentUserAndRole(dsc.Id, dsc.UserName,UserRoles.Consultant);
+            controller.MockCurrentUserAndRole(dsc.Id, dsc.UserName, UserRoles.Consultant);
             var result = controller.UpdateIntakeDestination(dto);
 
             // Assert
@@ -925,7 +926,7 @@ namespace Odin.IntegrationTests.Controllers.Api
 
             // Act
             var controller = SetUpOrdersController();
-            controller.MockCurrentUserAndRole(dsc.Id, dsc.UserName,UserRoles.Consultant);
+            controller.MockCurrentUserAndRole(dsc.Id, dsc.UserName, UserRoles.Consultant);
             var result = controller.InsertService(order.Id, serviceTypeId);
 
             // Assert
@@ -1381,7 +1382,7 @@ namespace Odin.IntegrationTests.Controllers.Api
 
             // Act
             var controller = SetUpOrdersController();
-            controller.MockCurrentUserAndRole(dsc.Id, dsc.UserName,UserRoles.Consultant);
+            controller.MockCurrentUserAndRole(dsc.Id, dsc.UserName, UserRoles.Consultant);
             var result = controller.UpsertIntakeHomeFinding(dto);
 
             // Assert
@@ -1672,5 +1673,56 @@ namespace Odin.IntegrationTests.Controllers.Api
 
             order.Services.Count.Should().BeGreaterThan(2);
         }
+
+        [Test, Isolated]
+        public async Task UpdateHomeFindingProperties_ModifyOrder_ShouldChangePropertyValues()
+        {
+            // arrange
+            var order = OrderBuilder.New().First();
+            order.TrackingId = TokenHelper.NewToken();
+            order.Transferee = transferee;
+            order.Consultant = dsc;
+            order.ProgramManager = pm;
+            Context.Orders.Add(order);
+            Context.SaveChanges();
+            var orderDto = OrderDtoBuilder.New();
+            orderDto.TrackingId = order.TrackingId;
+            orderDto.ProgramManager = ProgramManagerDtoBuilder.New();
+            orderDto.ProgramManager.SeContactUid = pm.SeContactUid.Value;
+            orderDto.Consultant = ConsultantDtoBuilder.New();
+            orderDto.Consultant.SeContactUid = dsc.SeContactUid.Value;
+            orderDto.Transferee = TransfereeDtoBuilder.New();
+            orderDto.Transferee.Email = transferee.Email;
+            orderDto.ServiceFlag = 7;
+            orderDto.IsInternational = false;
+
+            HomeFinding h1 = new HomeFinding() { Id = "1" };
+
+            HomeFindingProperty p1 = new HomeFindingProperty() { Id = "1" };
+            p1.Deleted = false;
+            p1.Property = new Property() { Id = "1", Amount = 10, NumberOfBathrooms = 5, NumberOfBedrooms = 2, SquareFootage = 2343 };
+            p1.ViewingDate = DateTime.Now.AddDays(10);
+            h1.HomeFindingProperties.Add(p1);
+            order.HomeFinding = h1;
+            Context.SaveChanges();
+            Context.Entry(h1).Reload();
+
+            //modify the order
+            HousingPropertyViewModel propertyVM = new HousingPropertyViewModel() { Id = "1", PropertyNumberOfBathrooms = 10, PropertyNumberOfBedrooms = 12, PropertyAmount = 2002, PropertySquareFootage = 1023 };
+
+            // Act
+            var controller = SetUpOrdersController();
+            controller.MockCurrentUserAndRole(dsc.Id, dsc.UserName, UserRoles.Consultant);
+            var result = controller.UpdateHousingProperty(propertyVM);
+
+            // Assert
+            //Context.Entry(p1).Reload();
+            result.Should().BeOfType<System.Web.Http.Results.OkResult>();
+            p1.Property.NumberOfBedrooms.Equals(propertyVM.PropertyNumberOfBedrooms);
+            p1.Property.NumberOfBathrooms.Equals(propertyVM.PropertyNumberOfBathrooms);
+            p1.Property.Amount.Should().Equals(propertyVM.PropertyAmount);
+            p1.Property.SquareFootage.Equals(propertyVM.PropertySquareFootage);
+        }
+
     }
 }

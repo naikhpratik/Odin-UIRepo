@@ -442,6 +442,12 @@
     <Content Include="Content\css\help.min.css">
       <DependentUpon>help.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\selectedProperty.css">
+      <DependentUpon>selectedProperty.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\selectedProperty.min.css">
+      <DependentUpon>selectedProperty.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\shared\dw_loading.css" />
     <Content Include="Content\css\shared\thumbnails.carousel.css" />
     <Content Include="Content\css\transferee\dashboard.css">
@@ -835,6 +841,7 @@
     <Content Include="Scripts\app\views\transferee-details.js" />
     <Content Include="Scripts\app\views\transferee-itinerary.js" />
     <Content Include="Scripts\app\views\transferee-intake.js" />
+    <Content Include="Scripts\app\views\transferee-selectedproperty.js" />
     <Content Include="Scripts\app\views\transferee.js" />
     <Content Include="Scripts\app\views\forgotPassword.js" />
     <Content Include="Scripts\app\views\orders.js" />
@@ -891,6 +898,7 @@
     <Content Include="Content\css\transferee\propertyMessages.scss" />
     <Content Include="Content\css\transferee\itineraryPdf.scss" />
     <Content Include="Content\css\transferee\dashboard.scss" />
+    <Content Include="Content\css\selectedProperty.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />

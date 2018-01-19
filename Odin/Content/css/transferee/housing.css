@@ -81,6 +81,35 @@ ul.thumbnails-carousel li img {
     .controlsContainer #housingFilter {
       margin-bottom: 3rem; } }
 
+.housingPropertyModal__likeDislike {
+  border-top: 1px solid #b7a998;
+  border-bottom: 1px solid #b7a998;
+  padding: 1.5rem 0;
+  margin-top: 2rem; }
+  @media screen and (max-width: 61.875rem) {
+    .housingPropertyModal__likeDislike > * {
+      display: flex;
+      justify-content: center; }
+    .housingPropertyModal__likeDislike #housingFilter {
+      margin-bottom: 3rem; } }
+
+.housingPropertyModal__selectRemove {
+  margin-top: 3rem; }
+
+.housingPropertyModal__select {
+  width: 100%; }
+
+.housingPropertyModal__remove {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  background: none;
+  box-shadow: none;
+  color: red;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 2rem; }
+
 #housingFilter {
   margin: 0;
   padding: 0; }
@@ -213,29 +242,28 @@ li.propertyItem {
 #propertyDetailsModal h5 {
   color: #8d0b56; }
 
-.likeDislike {
-  margin: 0 auto;
-  width: auto;
-  height: auto;
-  min-width: 60px; }
-  @media screen and (max-width: 61.875rem) {
-    .likeDislike {
-      max-width: 10rem;
-      margin-left: 0; } }
-  .likeDislike .likeDislike-btn, .likeDislike .like, .likeDislike .dislike {
-    width: 50%;
-    height: 5rem;
-    background-position: center center !important;
-    background-size: contain;
-    cursor: pointer; }
-  .likeDislike .like {
-    background: url("/Content/Images/icn_ln_non_selected_like.png") no-repeat; }
-  .likeDislike .dislike {
-    background: url("/Content/Images/icn_ln_non_selected_dislike.png") no-repeat; }
-  .likeDislike[data-liked="True"] .like {
-    background: url("/Content/Images/icn_ln_selected_like.png") no-repeat; }
-  .likeDislike[data-liked="False"] .dislike {
-    background: url("/Content/Images/icn_ln_selected_dislike.png") no-repeat; }
+@media screen and (max-width: 61.875rem) {
+  .likeDislike {
+    width: 100%; } }
+
+.likeDislike .likeDislike-btn, .likeDislike .like, .likeDislike .dislike {
+  width: 50%;
+  height: 5rem;
+  background-position: center center !important;
+  background-size: contain;
+  cursor: pointer; }
+
+.likeDislike .like {
+  background: url("/Content/Images/icn_ln_non_selected_like.png") no-repeat; }
+
+.likeDislike .dislike {
+  background: url("/Content/Images/icn_ln_non_selected_dislike.png") no-repeat; }
+
+.likeDislike[data-liked="True"] .like {
+  background: url("/Content/Images/icn_ln_selected_like.png") no-repeat; }
+
+.likeDislike[data-liked="False"] .dislike {
+  background: url("/Content/Images/icn_ln_selected_dislike.png") no-repeat; }
 
 #propertiesList[data-filter="liked"] .propertyItem[data-liked="True"] {
   display: initial; }

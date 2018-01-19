@@ -110,7 +110,7 @@ namespace Odin.ViewModels.Orders.Transferee
             {
                 String thumbUrl = "/Content/Images/popout_sml_img.png";
 
-                if (PropertyPhotos.Any())
+                if (PropertyPhotos!=null && PropertyPhotos.Any())
                 {
                     thumbUrl = PropertyPhotos.ElementAt(0).PhotoUrl;
                 }

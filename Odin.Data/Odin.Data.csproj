@@ -597,6 +597,10 @@
     <Compile Include="Persistence\Migrations\201801191629287_MergedSelectProperty.Designer.cs">
       <DependentUpon>201801191629287_MergedSelectProperty.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201801191922093_MergeProgramNotes.cs" />
+    <Compile Include="Persistence\Migrations\201801191922093_MergeProgramNotes.Designer.cs">
+      <DependentUpon>201801191922093_MergeProgramNotes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\NotificationRepository.cs" />
     <Compile Include="Persistence\NumberOfBathroomsTypesRepository.cs" />
@@ -896,6 +900,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201801191629287_MergedSelectProperty.resx">
       <DependentUpon>201801191629287_MergedSelectProperty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201801191922093_MergeProgramNotes.resx">
+      <DependentUpon>201801191922093_MergeProgramNotes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
