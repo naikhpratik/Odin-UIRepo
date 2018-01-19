@@ -146,12 +146,33 @@ namespace Odin.Controllers
             {
                 return new HttpNotFoundResult();
             }
-            ViewBag.isPDF = true;
-            
-            return new Rotativa.ViewAsPdf("Partials/_HousingProperties", viewModel.Properties)
+            switch (listChoice.ToUpper())
+                {
+                case "NOVIEWINGS":
+                    {
+                        ViewBag.Choice = "List of Properties With no Viewings Scheduled";
+                        break;
+                    }
+                case "VIEWINGSONLY":
+                    {
+                        ViewBag.Choice = "List of Properties With a Viewing Scheduled";
+                        break;
+                    }
+                case "ALLPROPERTIES":
+                    {
+                        ViewBag.Choice = "List of all Properties";
+                        break;
+                    }
+                default:
+                    break;
+            }
+
+            //return PartialView("~/Views/PDF/PDFProperties.cshtml", viewModel.Properties);
+            return new Rotativa.ViewAsPdf("~/Views/PDF/PDFProperties.cshtml", viewModel.Properties)
             {
                 FileName = "Housing.pdf",
-                PageMargins = new Rotativa.Options.Margins(0, 0, 0, 0)
+                PageMargins = new Rotativa.Options.Margins(1, 1, 1, 1),
+                CustomSwitches = "--disable-smart-shrinking"
             };
         }
 
