@@ -30,7 +30,7 @@ namespace Odin.Data.Persistence
 
         public object GetManagers()
         {
-            return _context.Managers.ToList();
+            return _context.Managers.ToList().OrderBy(o => o.LastName);
         }
     }
 }
