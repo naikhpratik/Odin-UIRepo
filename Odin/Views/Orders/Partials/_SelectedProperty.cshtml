@@ -1,0 +1,180 @@
+﻿@model Odin.ViewModels.Orders.Transferee.HousingPropertyViewModel
+<div class="container-fluid" data-property-id="@Model.Id">
+    <div class="row">
+        <div class="col-md-6">
+            <h3>
+                Selected Home
+            </h3>
+            <p>&nbsp;</p>
+        </div>
+        <div class="col-md-6 buttonGroup">            
+            <button type="button" id="deselectProperty" class='btn btn-secondary' data-dismiss="modal">Deselect Property</button>            
+        </div>        
+    </div>
+    <div class="row">
+        <div class="col-md-3">           
+            <img class="homePhoto" src='@(Model.PropertyPhotos.Count() > 0 ? Model.PropertyPhotos.First().PhotoUrl : "")' />
+        </div>
+        <div class="col-md-9 rightSection">
+            <div class="row">
+                <label class="col-md-12 address1">@Html.DisplayFor(model => model.PropertyStreet1)</label>
+                <label class="col-md-12 address2">@Html.DisplayFor(model => model.PropertyCity), @Html.DisplayFor(model => model.PropertyState) @Html.DisplayFor(model => model.PropertyPostalCode)</label>
+            </div>
+            <ul class="row selectedPropertySummary">
+                <li class="col-md-3">
+                    <div class="selectedPropertySummary__item">
+                        <p class="selectedProperty__summaryContent">@Html.DisplayFor(model => model.PropertyNumberOfBedrooms)
+                        <span class="selectedProperty__summarySpan">Bedrooms</span>
+                        </p>
+                    </div>
+                </li>
+                <li class="col-md-3">
+                    <div class="selectedPropertySummary__item ">
+                        <p class="selectedProperty__summaryContent">
+                            @Html.DisplayFor(model => model.PropertyNumberOfBathrooms)
+                        <span class="selectedProperty__summarySpan">Bathrooms</span>
+                        </p>
+                    </div>
+                </li>
+                <li class="col-md-3">
+                    <div class="selectedPropertySummary__item ">
+                        <p class="selectedProperty__summaryContent">@Html.DisplayFor(model => model.PropertySquareFootage)
+                        <span class="selectedProperty__summarySpan">Square Feet</span>
+                        </p>
+                    </div>
+                </li>
+                <li class="col-md-3">
+                    <div class="selectedPropertySummary__item ">
+                        <p class="selectedProperty__summaryContent">@Html.DisplayFor(model => model.PropertyAmount)
+                        <span class="selectedProperty__summarySpan">Per Month</span>
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row leaseSection">
+        @if (ViewBag.IsConsultant)
+        {
+            <div class="col-md-12">
+                <div class="row infoLine">
+                    <div class="col-md-10 infoLineItem">
+                        <span>Please ensure the detail information above is accurate and then send the lease documents to your PM via email</span>
+                    </div>
+                    <div class="col-md-2">
+                        <a href="mailto:@ViewBag.pmEmail" id="emailPM">Email My PM</a>
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="col-md-12 propertyInfo">
+            <h4>Property Info</h4>
+        </div>
+        <div class="col-md-12">
+            <h6>Description/Notes:</h6>
+        </div>
+        <div class="col-md-12">
+            <h6>-----OVERVIEW-----</h6>
+        </div>
+        <div class="col-md-12">
+            <div class="overviewItems">@Html.DisplayFor(model => model.PropertyNumberOfBedrooms) beds</div>
+            <div class="overviewItems">@Html.DisplayFor(model => model.PropertyNumberOfBathrooms) baths</div>
+            <div class="overviewItems">@Html.DisplayFor(model => model.PropertySquareFootage) sq. ft. lot</div>
+        </div>
+        <div class="col-md-12">
+            <h6>-----DESCRIPTION-----</h6>
+        </div>
+        <div class="col-md-12">
+            <p>@Html.Raw(@Model.PropertyDescription)</p>
+        </div>
+    </div>
+</div>
+<style>
+    .propertyInfo{
+        margin-top:2rem;
+    }
+    .overviewItems {
+        margin: 0;
+        line-height: 1.5rem;
+    }
+    .infoLine {
+        background-color: khaki;
+        height: 7rem;
+        padding-top: 20px
+    }
+    .infoLineItem {
+        vertical-align: middle;
+    }
+    #emailPM {
+        background-color: olive;
+        color:white;
+        padding:0.7rem;
+        font-size:1.2rem;
+        font-weight:bold;
+        text-decoration:none;
+    }
+    .buttonGroup {
+        margin-top: 2rem;
+    }
+        .btn {
+                  float:right;
+                  margin-right:2rem;
+              }
+
+    .rightSection{
+        margin-left:-15px;
+    }
+    
+    .homePhoto {
+        width: 100%;
+    }
+    li {
+        display: inline-block;
+    }
+
+    .selectedPropertySummary {
+        list-style:none;
+        list-style-type:none;
+        margin: 0 0 0 0;
+        padding: 0 0 0 0;
+    }
+    .selectedPropertySummary__item {
+        background-color: #efefef;
+        text-align: center;
+        padding: 1rem 0;
+        margin: 0 auto;
+        margin-left:-15px;
+    }
+    .selectedProperty__summaryContent {
+        font-size: 1.8rem;
+        color: #808080;
+        font-weight: 600;
+    }
+    .selectedProperty__summarySpan {
+        display: block;
+        font-size: 1.5rem;
+        color: #808080;
+        font-weight: 400;
+    }
+
+    .address1 {
+        font-size: 1.8rem;
+        font-weight: bold;
+        margin-bottom: -1rem;
+        margin-top: -1rem;
+    }
+    .address2 {
+        font-size: 1.5rem;
+        margin-bottom:3rem;
+    }
+    .leaseSection{
+        margin-top:2rem;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        $('#deselectProperty').click(function () {
+                TransfereeHousingController.selectProperty("", "@Model.propertyId");
+            });
+    });
+</script>

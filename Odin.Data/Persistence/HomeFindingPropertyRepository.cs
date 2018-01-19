@@ -24,6 +24,14 @@ namespace Odin.Data.Persistence
                 .SingleOrDefault<HomeFindingProperty>();
         }
 
+        public HomeFindingProperty GetHomeFindingPropertyByPropertyId(string propertyId)
+        {
+            return _context.HomeFindingProperties
+                .Where(hfp => hfp.Property.Id.Equals(propertyId))
+                .Include(hfp => hfp.Property.Photos)
+                .SingleOrDefault<HomeFindingProperty>();
+        }
+
         public IEnumerable<HomeFindingProperty> GetUpcomingHomeFindingPropertiesByHomeFindingId(string homeFindingId)
         {
             return _context.HomeFindingProperties

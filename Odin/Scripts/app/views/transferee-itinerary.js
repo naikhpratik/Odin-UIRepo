@@ -24,16 +24,7 @@ var TransfereeItineraryController = function (transfereeItineraryService) {
         //Init Variables
         itineraryBlocks = pnlItinerary.find(".event-item");
         orderId = pnlItinerary.attr("data-order-id");
-
-        //Init Dates
-        itineraryBlocks.find(".itinerary-date").datetimepicker({
-            format: "MM/DD/YYYY",
-            useCurrent: true,
-            keepOpen: false,
-            showClose: true,
-            toolbarPlacement: 'bottom',
-            icons: { close: 'custom-icon-check' }
-        });
+               
 
         //Bind Events
         $('#cmdPDF').click(function () {
@@ -66,20 +57,18 @@ var TransfereeItineraryController = function (transfereeItineraryService) {
             var app = $('#modalForm');
             app.find('.modal-title').text("New Appointment");
             app.find(".modal-footer").css("display", "block");
-            app.find(".delete").css("display", "none");
-            var url = '/Appointment/appointmentPartial/';
+            app.find(".delete").css("display", "none");;
 
+            var url = '/Appointment/appointmentPartial/';
             app.find('.modal-body').load(url, function (response, status, xhr) {
                 if (status === "success") {
+                    var dt = app.children().find("input[name=ScheduledDate]");
+                    var tomorrow = moment().add('days', 1).format('DD-MMM-YYYY hh:mm A');
+                    dt.val(tomorrow);
                     app.modal('show');
                 }
             });
-        });
-
-        $(".new").click(function (e) {
-            e.stopPropagation();
-            return false;
-        })
+        });        
     }
    
     //formaction = '@Url.Action("Index","email")'

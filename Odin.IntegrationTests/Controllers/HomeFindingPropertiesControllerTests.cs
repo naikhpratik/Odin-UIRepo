@@ -365,6 +365,33 @@ namespace Odin.IntegrationTests.Controllers
         }
 
         [Test, Isolated]
+        public void TransfereeUpdateHomeFindingProperty_TogglesSelected()
+        {
+            // Arrange
+            Order order = BuildOrder(false);
+            Context.Orders.Add(order);
+            HomeFindingProperty hfp = order.HomeFinding.HomeFindingProperties.First();
+            hfp.selected = null; // ensure this isn't already selected
+            Context.SaveChanges();
+
+            // Act
+            HousingPropertyViewModel propertyVM = new HousingPropertyViewModel();
+            propertyVM.Id = hfp.Id;
+            propertyVM.selected = true;
+
+            HomeFindingPropertiesController controller = SetUpHomeFindingPropertiesController();
+            controller.MockCurrentUserAndRole(transferee.Id, transferee.UserName, UserRoles.Transferee);
+            HttpStatusCodeResult response = (HttpStatusCodeResult)controller.Select(propertyVM.Id);
+
+            // Assert
+            Context.Entry(hfp).Reload();
+            hfp.selected.Should().BeTrue();
+
+            response = (HttpStatusCodeResult)controller.Select(propertyVM.Id);
+            hfp.selected.Should().BeFalse();
+        }
+
+        [Test, Isolated]
         public void UpdateHomeFindingProperty_UpdatesDisliked()
         {
             // Arrange

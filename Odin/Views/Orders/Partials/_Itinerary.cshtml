@@ -176,6 +176,7 @@ else
         $('#propertyModalContent').load(propertyModalUrl, function (response, status, xhr) {
             if (status === "success") {
                 $('#removeProperty').hide();
+                $('#selectProperty').hide();
                 $('#propertyDetailsModal').modal('show');
             }
         });

@@ -104,6 +104,39 @@ namespace Odin.Controllers
             return new HttpStatusCodeResult(HttpStatusCode.NoContent);
         }
 
+        [HttpPut]
+        public ActionResult Select(string id)
+        {
+            HomeFindingProperty homeFindingProperty;
+            homeFindingProperty = _unitOfWork.HomeFindingProperties.GetHomeFindingPropertyById(id);
+            if (homeFindingProperty != null)
+            {   if (homeFindingProperty.selected.HasValue)
+                    homeFindingProperty.selected = !homeFindingProperty.selected;
+                else
+                    homeFindingProperty.selected = true;
+            }
+            _unitOfWork.Complete();
+            return new HttpStatusCodeResult(HttpStatusCode.NoContent);
+        }
+
+        [HttpPut]
+        public ActionResult SelectProperty(string id)
+        {
+            HomeFindingProperty homeFindingProperty;
+            homeFindingProperty = _unitOfWork.HomeFindingProperties.GetHomeFindingPropertyByPropertyId(id);
+            if (homeFindingProperty != null)
+            {
+                if (homeFindingProperty.selected.HasValue)
+                    homeFindingProperty.selected = !homeFindingProperty.selected;
+                else
+                {
+
+                }
+            }
+            _unitOfWork.Complete();
+            return new HttpStatusCodeResult(HttpStatusCode.NoContent);
+        }
+
         // DELETE /homefindingproperties/delete/[hfpId]
         [HttpDelete]
         public ActionResult Delete(string id)
