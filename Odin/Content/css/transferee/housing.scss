@@ -335,7 +335,7 @@ li.propertyItem {
     }
 }
 
-#propertiesList {
+/*#propertiesList {
 
     &[data-filter="liked"] {
         .propertyItem[data-liked="True"] {
@@ -367,9 +367,9 @@ li.propertyItem {
         }
     }
 
-    &[filter=""] {
+    &[data-filter=""] {
         .propertyItem {
             display: initial;
         }
     }
-}
+}*/

@@ -133,7 +133,30 @@
     };
     var setupFilterButtons = function () {
         $('input[type=radio][name=Filter]').change(function () {
-            $('#propertiesList').attr('data-filter', this.value);
+
+            var propList = $('#propertiesList');
+            propList.attr('data-filter', this.value);
+
+            var propItems = propList.find(".propertyItem");
+
+            switch (this.value) {
+                case "liked":
+                    propList.find(".propertyItem[data-liked='True']").css("display", "block");
+                    propList.find(".propertyItem:not([data-liked='True'])").css("display", "none");
+                    break;
+                case "disliked":
+                    propList.find(".propertyItem[data-liked='False']").css("display", "block");
+                    propList.find(".propertyItem:not([data-liked='False'])").css("display", "none");
+                    break;
+                case "new":
+                    propList.find(".propertyItem[data-liked='']").css("display", "block");
+                    propList.find(".propertyItem:not([data-liked=''])").css("display", "none");
+                    break;
+                case "":
+                    propItems.css("display", "block");
+                    break;
+            }
+           
         });
     };
     var setupLikeDislikeControls = function () {
