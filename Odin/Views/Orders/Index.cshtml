@@ -5,29 +5,29 @@
     Layout = "~/Views/Shared/_Common.cshtml";
 }
 @Styles.Render("~/Styling/orders")
-
 <div class="container-fluid" id="list">
 
-    <div id="search">
+    <div id="ordersTopBar">
         <input id="searchbox" placeholder="Type here to search, select to go" />
-    </div>
+        @if (User.IsInRole(UserRoles.ProgramManager) || User.IsInRole(UserRoles.GlobalSupplyChain))
+        {
 
-    @if (User.IsInRole(UserRoles.ProgramManager) || User.IsInRole(UserRoles.GlobalSupplyChain))
-    {
+            <div class="changePropertyManager dropdown show">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Change Manager
+                </a>
 
-        <div class="dropdown show">
-            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Property Managers
-            </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" align="center">
+                    @foreach (var mngr in Model.Managers)
+                    {
+                        <div class="clickablepm" data-order-id="@mngr.Id" align="center">@mngr.LastName, @mngr.FirstName</div>
+                    }
+                    <div class="clickablepm" align="center">Charles Montgomery Burns</div>
 
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" align="center">
-                @foreach (var mngr in Model.Managers)
-                {
-                    <div class="clickablepm" data-order-id="@mngr.Id" align="center">@mngr.LastName, @mngr.FirstName</div><br>
-                }
+                </div>
             </div>
-        </div>
-    }
+        }
+    </div>
 
     <ul class="container-fluid">
         <li class="header row">
@@ -68,8 +68,8 @@
                 <div class="col-md-2">
                     <label class="header">Program Progress</label>
                     <div class="progress" data-sched-percent="@order.ScheduledWidth%" data-comp-percent="@order.CompletedWidth%">
-                        <div class="progress-bar progressBar__comp" role="progressbar" style="width:@order.CompletedWidth%"></div>                       
-                        <div class="progress-bar progressBar__sched" role="progressbar" style="width:@order.ScheduledWidth%"></div>                        
+                        <div class="progress-bar progressBar__comp" role="progressbar" style="width:@order.CompletedWidth%"></div>
+                        <div class="progress-bar progressBar__sched" role="progressbar" style="width:@order.ScheduledWidth%"></div>
                     </div>
                     <div class="progressBar__caption">
                         <label class="scheduledCaption"><span class="blue">@(order.ScheduledServicesDisplay) of @(order.AuthorizedServicesDisplay)</span> Scheduled</label>

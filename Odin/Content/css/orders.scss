@@ -16,6 +16,11 @@ body {
     cursor: pointer;
 }
 
+.clickablepm{
+    margin: 2rem 0;
+    line-height:1.4rem;
+}
+
 .sortLabel {
     text-align: center;
 }
@@ -33,13 +38,17 @@ div#list {
     margin: 0 auto;
     background-color: white;
 
-    div#search {
+    #selectPropertyManager {
+    }
+
+    #ordersTopBar {
         margin-top: $primaryNavHeightSm;
         padding: 2rem;
         background-color: $DW_Lime;
         box-sizing: border-box;
         display: flex;
         align-items: center;
+        flex-direction: column;
 
         input {
             width: 100%;
@@ -55,18 +64,22 @@ div#list {
             }
         }
 
-        button {
-            width: auto;
-            padding: 0 1rem;
-            color: white;
-            border: none;
-            font-size: 1.5rem;
-            margin-left: 1.5rem;
-            background-color: $DW_Blue;
+        .changePropertyManager {
+            background-color: white;
+            margin-top: 2rem;
         }
 
         @media screen and (min-width: 48rem) {
             margin-top: $primaryNavHeightLg;
+            flex-direction: row;
+
+            input {
+            }
+
+            .changePropertyManager {
+                margin-top: 0;
+                margin-left: 8rem;
+            }
         }
     }
 
@@ -137,7 +150,7 @@ div#list {
     .rmcName {
         font-size: 1.6rem;
         font-weight: 500;
-    }    
+    }
 
     @media screen and (min-width: 60rem) {
 
