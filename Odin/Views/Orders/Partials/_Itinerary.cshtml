@@ -145,6 +145,7 @@
     </div>
 </div>
    
+
 @Styles.Render("~/Styling/itinerary");
 
 <script type="text/javascript">
@@ -157,6 +158,7 @@
             if (status === "success") {
                 $('#removeProperty').hide();
                 $('#selectProperty').hide();
+                $('#editProperty').hide();
                 $('#propertyDetailsModal').modal('show');
             }
         });
