@@ -3,14 +3,14 @@
 
 <div id="propertiesBlock">
     <h4>
-       @ViewBag.Choice
+       @ViewBag.Title
     </h4>
         @foreach (var propertyVM in Model)
         {
 
             <div class="propertyBody" data-property-id="@propertyVM.Id" data-lat="@propertyVM.PropertyLatitude" data-lng="@propertyVM.PropertyLongitude" data-liked="@propertyVM.Liked">                
-                <table class="sectionTable photoTable">
-                    <caption>Property Photos</caption>
+                <h5>@propertyVM.PropertyStreet1</h5>
+                <table class="sectionTable photoTable">                   
                     <tr>
                         @{
                             int kount = 0;

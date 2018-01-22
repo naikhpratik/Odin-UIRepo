@@ -156,22 +156,23 @@ namespace Odin.Controllers
                 {
                 case "NOVIEWINGS":
                     {
-                        ViewBag.Choice = "List of Properties With no Viewings Scheduled";
+                        ViewBag.Title = "List of Properties With no Viewings Scheduled";
                         break;
                     }
                 case "VIEWINGSONLY":
                     {
-                        ViewBag.Choice = "List of Properties With a Viewing Scheduled";
+                        ViewBag.Title = "List of Properties With a Viewing Scheduled";
                         break;
                     }
                 case "ALLPROPERTIES":
                     {
-                        ViewBag.Choice = "List of all Properties";
+                        ViewBag.Title = "List of all Properties";
                         break;
                     }
                 default:
                     break;
             }
+            ViewBag.Title += " for " + order.Transferee.FullName;
             return new Rotativa.ViewAsPdf("~/Views/PDF/PDFProperties.cshtml", viewModel.Properties)
             {
                 FileName = "Housing.pdf",

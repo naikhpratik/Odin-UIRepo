@@ -118,7 +118,6 @@
 
         $(document).off('click', '.propertyItem');
         $(document).on('click', '.propertyItem', function (event) {
-
             if (!$(event.target).is("input") &&
                 !$(event.target).is("span") &&
                 !$(event.target).is(".comments")) { // prevents the date picker and messages from triggering the modal
@@ -220,9 +219,6 @@
         window.location.href = "/Orders/PropertiesPartialPDF/" + currentOrderId + "?listChoice=" + choice;        
     };
 
-    var lease2PDF = function (propertyId) {
-        window.location.href = "/Orders/HousingPartialPDF/" + currentOrderId;
-    }
     /*** Private Helpers ***/
     // FIXME: this toas function is in 4 other spots. I'm copy/pasting here for quickness, but we should refactor
     var toast = function (message, type) {
@@ -338,8 +334,7 @@
         selectProperty: selectProperty,
         deleteProperty: deleteProperty,
         setupDatePickers: setupDatePickers,
-        export2PDF: export2PDF,
-        lease2PDF: lease2PDF
+        export2PDF: export2PDF
     };
 
 }();

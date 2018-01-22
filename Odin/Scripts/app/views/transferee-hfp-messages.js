@@ -10,8 +10,6 @@
     }
 }();
 var TransfereeMessagesController = function (transfereeHousingMessages) {
-
-    var dunnOnce;
     var init = function () {
         var messagesModal = $("div#messagesModal");
         var modalParent = messagesModal.parent().parent();
@@ -49,8 +47,7 @@ var TransfereeMessagesController = function (transfereeHousingMessages) {
             toast('The message was not sent', 'danger');
         }        
             var datum = { "HomeFindingPropertyId": propertyId, "MessageDate": currDate, "MessageText": message, "OrderId":orderId };
-            if (!dunnOnce) {
-                dunnOnce = true;
+            if (!err) {
                 transfereeHousingMessages.updateMessage("messages", datum, saveSuccess, saveFail);
             }                
     }    

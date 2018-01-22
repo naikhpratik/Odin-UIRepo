@@ -123,7 +123,7 @@ namespace Odin.Controllers
         public ActionResult SelectProperty(string id)
         {
             HomeFindingProperty homeFindingProperty;
-            homeFindingProperty = _unitOfWork.HomeFindingProperties.GetHomeFindingPropertyByPropertyId(id);
+            homeFindingProperty = _unitOfWork.HomeFindingProperties.GetHomeFindingPropertyById(id);
             if (homeFindingProperty != null)
             {
                 if (homeFindingProperty.selected.HasValue)

@@ -28,7 +28,7 @@ namespace Odin.Data.Persistence
         public HomeFindingProperty GetHomeFindingPropertyByPropertyId(string propertyId)
         {
             return _context.HomeFindingProperties
-                .Where(hfp => hfp.Property.Id.Equals(propertyId))
+                .Where(hfp => hfp.Id.Equals(propertyId))
                 .Include(hfp => hfp.Property.Photos)
                 .SingleOrDefault<HomeFindingProperty>();
         }
