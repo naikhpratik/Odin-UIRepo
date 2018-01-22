@@ -18,18 +18,13 @@ var TransfereeSelectedPropertyController = function (TransfereeSelectedPropertyS
 
         var housingPropertyBlock = $("div#housingPropertyModalBody");
         //console.dir(housingPropertyBlock);
+
         //Init Variables
-        //intakeBlocks = pnlIntake.find(".intake-block");
         propertyId = housingPropertyBlock.find("div.container-fluid").attr("data-property-id");
-        //console.dir(housingPropertyBlock.find("div.container-fluid"));
+        
         //Bind Events
         housingPropertyBlock.on("click", "#editProperty", editSaveProperty);
-        //intakeBlocks.on("click", ".intake-cancel", cancelEditBlock);
-        //intakeBlocks.on("click", ".intake-add", addRowToBlock);
-        //intakeBlocks.on("click", ".intake-collapse", toggleCollapse);
-        //intakeBlocks.on("click", ".intake-del", deleteRowFromBlock);
-        //intakeBlocks.on("click", ".intake-save", saveBlock);
-        //intakeBlocks.on("change", "[type=checkbox]", saveChecked);
+        
     };
     
     var editSaveProperty = function (e) {
@@ -113,7 +108,7 @@ var TransfereeSelectedPropertyController = function (TransfereeSelectedPropertyS
                         hidden.val(input.val());
                     }
                 } else {
-                    input.prev("p").text($(this).val());
+                    input.prev(".prop-span").text($(this).val());
                     input.next(".housingDetails-hidden").val($(this).val());
                 }
             });
@@ -146,7 +141,7 @@ var TransfereeSelectedPropertyController = function (TransfereeSelectedPropertyS
                 }
             });
         }
-       
+        
         if (contains(spnEditSave[0].innerText, "EDIT")) {
             edit();
         } else {
