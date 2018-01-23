@@ -119,7 +119,7 @@ div#itinerary {
         font-weight: 300;
         margin: 0px;
         padding: 0;
-        line-height: 1rem;
+        line-height: 2rem;
     }
 
     .eventTime {
@@ -129,7 +129,7 @@ div#itinerary {
         margin: 0px;
         padding: 0;
         color: $DW_Green;
-        line-height: 1rem;
+        line-height: 2rem;
     }
 
     @media screen and (min-width: 48rem) {

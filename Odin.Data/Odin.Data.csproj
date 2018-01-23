@@ -588,6 +588,10 @@
     <Compile Include="Persistence\Migrations\201801171734343_AddProgramNotes.Designer.cs">
       <DependentUpon>201801171734343_AddProgramNotes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201801221927435_masterPull.cs" />
+    <Compile Include="Persistence\Migrations\201801221927435_masterPull.Designer.cs">
+      <DependentUpon>201801221927435_masterPull.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\NotificationRepository.cs" />
     <Compile Include="Persistence\NumberOfBathroomsTypesRepository.cs" />
@@ -881,6 +885,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201801171734343_AddProgramNotes.resx">
       <DependentUpon>201801171734343_AddProgramNotes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201801221927435_masterPull.resx">
+      <DependentUpon>201801221927435_masterPull.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

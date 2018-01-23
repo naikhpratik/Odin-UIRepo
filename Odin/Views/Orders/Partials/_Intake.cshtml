@@ -497,7 +497,7 @@
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.TempHousingEndDateDisplay)
                 <span class="intake-span">@Model.TempHousingEndDateDisplay</span>
-                @Html.DatePicker("intake-date date", "TempHousingEndDateDisplay", Model.TempHousingEndDate)
+                @Html.DatePicker("intake-date date", "TempHousingEndDate", Model.TempHousingEndDate)
                 @Html.HiddenFor(Model => @Model.TempHousingEndDateDisplay, new { @class = "intake-hidden" })
             </div>
         </div>

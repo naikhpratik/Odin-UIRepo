@@ -78,16 +78,23 @@
                 </div>
                 <div class="col-md-2">
                     <label class="header">Manager</label>
-                    <p>@order.ProgramManager.FullName</p>
+                    @if (User.IsInRole(UserRoles.Consultant))
+                    {
+                        <p><a href="mailto:@order.ProgramManager.Email">@order.ProgramManager.FullName</a></p>
+                    }
+                    else
+                    {
+                        <p>@order.ProgramManager.FullName</p>
+                    }
                     <p class="subTitle pmPhone">@order.ProgramManager.phoneNumber</p>
                 </div>
                 <div class="col-md-2">
                     <label class="header">Pre-Trip</label>
-                    <p class="preTripDate">@order.PreTripDate</p>
+                    <p class="preTripDate">@order.PreTripDateDisplay</p>
                 </div>
                 <div class="col-md-2">
                     <label class="header">Final Arrival</label>
-                    <p class="estimatedArrivalDate">@order.EstimatedArrivalDate</p>
+                    <p class="estimatedArrivalDate">@order.EstimatedArrivalDateDisplay</p>
                 </div>
                 <div class="col-md-2">
                     <label class="header">Notifications</label>
