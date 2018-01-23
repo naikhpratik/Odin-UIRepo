@@ -32,10 +32,7 @@ namespace Odin.UITests.Views.Orders
 
         public IndexView_test()
         {
-            //DesiredCapabilities capabilities = DesiredCapabilities.Chrome();
-            //ChromeOptions options = new ChromeOptions();
-            //options.AddArguments("--incognito");
-            //options.ToCapabilities();
+            
             //_driver = new ChromeDriver();
             _driver = new PhantomJSDriver();
             help = new HelperMethod(_driver);

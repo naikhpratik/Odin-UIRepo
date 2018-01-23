@@ -19,7 +19,7 @@ namespace Odin.UITests.Views.Orders
 {
     //[Collection("Our Test Collection #1")]
     [TestClass]
-    public class TransfereeView_test 
+    public class TransfereeView_test
     {
         private string baseURL = Globals.Url_Localhost;
         private IWebDriver _driver;
@@ -393,7 +393,7 @@ namespace Odin.UITests.Views.Orders
 
                 var totalservices_count = db_order.Services.Count();
                 var selectedservices_count = db_order.Services.Count(x => x.Selected == true);
-                
+
                 IList<IWebElement> intake_services = _driver.FindElements(By.XPath("//div[@data-entity-collection = 'services']"));
 
                 //Xunit.Assert.Equal(intake_services.Count(), db_order.Services.Count());
@@ -480,8 +480,8 @@ namespace Odin.UITests.Views.Orders
                         Xunit.Assert.Equal("No Preference", Ui_housingbudget);
                     else
                         Xunit.Assert.Equal(Db_housingbuget, Ui_housingbudget);
-                    
-                    if(Db_Noofbedrooms == "")
+
+                    if (Db_Noofbedrooms == "")
                         Xunit.Assert.Equal("No Preference", Ui_Noofbedrooms);
                     else
                         Xunit.Assert.Equal(Db_Noofbedrooms, Ui_Noofbedrooms);
@@ -605,6 +605,87 @@ namespace Odin.UITests.Views.Orders
 
         }
 
+        [TestMethod]
+        public void Transferee_Housingpage_ShouldAddProperty()
+        {
+
+            help.initialsteps();
+            orders = help.getOrders();
+            for (int i = 0; i < orders.Count(); i++)
+            {
+
+                var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
+                var db_order = _unitOfWork.Orders.GetOrderById(order_id);
+                _driver.Navigate().GoToUrl(this.baseURL + "/Orders/Transferee/" + order_id + "#housing");
+                help.delay(800);
+
+                var before_properties = db_order.HomeFinding.HomeFindingProperties.Count(x => x.Deleted == false);
+
+
+                if (db_order.HomeFinding != null)
+                {
+                    help.GetElementClick(_driver, By.Id("addProperty"), 10).Click();
+                    _driver.FindElement(By.Id("PropertyStreet1")).SendKeys("11145 Meril Rd");
+                    _driver.FindElement(By.Id("PropertyCity")).SendKeys("Singheshwar");
+                    _driver.FindElement(By.XPath("(//option[@value = 'CA'])")).Click();
+                    _driver.FindElement(By.Id("PropertyPostalCode")).SendKeys("44567");
+                    _driver.FindElement(By.Id("savePropertyAdd")).Click();
+
+
+                    IList<IWebElement> after_properties = _driver.FindElements(By.Id("Listproperties"));
+                    //help.delay(200);
+                    Xunit.Assert.Equal(before_properties, after_properties.Count());
+                }
+                help.GetElementClick(_driver, By.Id("backButton"), 10).Click();
+                orders = _driver.FindElements(By.Id("rowclickableorderRow"));
+
+            }
+
+
+            // Xunit.Assert.Equal(orders.Count(), order_db.Count());
+            help.Logout();
+
+        }
+
+
+        [TestMethod]
+        public void Transferee_Housingpage_ShouldRemoveProperty()
+        {
+          
+            help.initialsteps();
+            orders = help.getOrders();
+            for (int i = 0; i < orders.Count(); i++)
+            {
+
+                var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
+                var db_order = _unitOfWork.Orders.GetOrderById(order_id);
+                _driver.Navigate().GoToUrl(this.baseURL + "/Orders/Transferee/" + order_id + "#housing");
+                help.delay(800);
+
+                var before_properties = db_order.HomeFinding.HomeFindingProperties.Count(x => x.Deleted == false);
+
+                IList<IWebElement> list_properties = _driver.FindElements(By.Id("Listproperties"));
+
+
+                if (db_order.HomeFinding != null && list_properties.Count > 0)
+                {
+                    list_properties.First().Click();
+                    help.delay(800);
+                    help.GetElementClick(_driver, By.Id("removeProperty"), 10).Click();
+                    _driver.SwitchTo().Alert().Accept();
+                    IList<IWebElement> after_properties = _driver.FindElements(By.Id("Listproperties"));
+                    //help.delay(200);
+                    Xunit.Assert.Equal(before_properties, after_properties.Count());
+                }
+                help.GetElementClick(_driver, By.Id("backButton"), 10).Click();
+                orders = _driver.FindElements(By.Id("rowclickableorderRow"));
+
+            }
+
+            // Xunit.Assert.Equal(orders.Count(), order_db.Count());
+            help.Logout();
+
+        }
 
         private bool match_Orders(IEnumerable<Order> orderFrom_db, IList<IWebElement> orders)
         {
