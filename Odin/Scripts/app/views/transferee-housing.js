@@ -118,7 +118,6 @@
 
         $(document).off('click', '.propertyItem');
         $(document).on('click', '.propertyItem', function (event) {
-
             if (!$(event.target).is("input") &&
                 !$(event.target).is("span") &&
                 !$(event.target).is(".comments")) { // prevents the date picker and messages from triggering the modal
@@ -134,7 +133,30 @@
     };
     var setupFilterButtons = function () {
         $('input[type=radio][name=Filter]').change(function () {
-            $('#propertiesList').attr('data-filter', this.value);
+
+            var propList = $('#propertiesList');
+            propList.attr('data-filter', this.value);
+
+            var propItems = propList.find(".propertyItem");
+
+            switch (this.value) {
+                case "liked":
+                    propList.find(".propertyItem[data-liked='True']").css("display", "block");
+                    propList.find(".propertyItem:not([data-liked='True'])").css("display", "none");
+                    break;
+                case "disliked":
+                    propList.find(".propertyItem[data-liked='False']").css("display", "block");
+                    propList.find(".propertyItem:not([data-liked='False'])").css("display", "none");
+                    break;
+                case "new":
+                    propList.find(".propertyItem[data-liked='']").css("display", "block");
+                    propList.find(".propertyItem:not([data-liked=''])").css("display", "none");
+                    break;
+                case "":
+                    propItems.css("display", "block");
+                    break;
+            }
+           
         });
     };
     var setupLikeDislikeControls = function () {
@@ -171,8 +193,8 @@
             toolbarPlacement: 'bottom',
             icons: { close: 'custom-icon-check' }
         });
-        var vDate = $('input[name=ViewingDate]').parent();
-        vDate.datetimepicker({
+        var vuDate = $('input[name=ViewingDate]').parent();
+        vuDate.datetimepicker({
             format: "DD-MMM-YYYY h:mm A",
             useCurrent: false,
             keepOpen: true,
@@ -241,7 +263,7 @@
     var reloadPropertiesPartial = function () {
         $('#propertiesContainer').load('/orders/propertiesPartial/' + currentOrderId);
     };
-
+    
     /**
      * Return all DOM elements that track the liked value for the property matching propertyId
      * @param {any} propertyId The id of the property
@@ -287,6 +309,25 @@
         });
     };
 
+    var selectProperty = function (id, propertyId) {
+        var suffix = 'Select/' + id;
+        if (id == '') {
+            suffix = 'SelectProperty/' + propertyId;
+        }
+        $.ajax({
+            url: '/HomeFindingProperties/' + suffix,
+            type: 'PUT',
+            success: function (result) {
+                window.location.reload(true);
+                //reloadPropertiesPartial();
+                //$('#propertyDetailsModal').modal('hide');
+            },
+            error: function () {
+                toast("An unknown error has occurred.Please try again later.", "danger");
+            }
+        });        
+    };
+
     var deleteProperty = function (propertyId) {
         var confirmed = confirm("Are you sure you want to remove this property?");
 
@@ -313,6 +354,7 @@
 
     return {
         init: init,
+        selectProperty: selectProperty,
         deleteProperty: deleteProperty,
         setupDatePickers: setupDatePickers,
         export2PDF: export2PDF

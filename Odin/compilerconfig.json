@@ -64,10 +64,6 @@
     "inputFile": "Content/css/bookmarklet.scss"
   },
   {
-    "outputFile": "Content/css/transferee/HFProperties.css",
-    "inputFile": "Content/css/transferee/HFProperties.scss"
-  },
-  {
     "outputFile": "Content/css/transferee/help.css",
     "inputFile": "Content/css/transferee/help.scss"
   },
@@ -82,5 +78,14 @@
   {
     "outputFile": "Content/css/transferee/dashboard.css",
     "inputFile": "Content/css/transferee/dashboard.scss"
+  },
+  {
+
+    "outputFile": "Content/css/transferee/HFPropertiesPDF.css",
+    "inputFile": "Content/css/transferee/HFPropertiesPDF.scss"
+  },
+  {
+    "outputFile": "Content/css/selectedProperty.css",
+    "inputFile": "Content/css/selectedProperty.scss"
   }
 ]

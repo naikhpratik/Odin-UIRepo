@@ -68,7 +68,7 @@ namespace Odin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.ServiceUnavailable);
             }
 
-            return new HttpStatusCodeResult(HttpStatusCode.NoContent);
+            return new HttpStatusCodeResult(HttpStatusCode.Created);
         }
 
         [HttpPut]
@@ -102,6 +102,39 @@ namespace Odin.Controllers
 
             _unitOfWork.Complete();
 
+            return new HttpStatusCodeResult(HttpStatusCode.NoContent);
+        }
+
+        [HttpPut]
+        public ActionResult Select(string id)
+        {
+            HomeFindingProperty homeFindingProperty;
+            homeFindingProperty = _unitOfWork.HomeFindingProperties.GetHomeFindingPropertyById(id);
+            if (homeFindingProperty != null)
+            {   if (homeFindingProperty.selected.HasValue)
+                    homeFindingProperty.selected = !homeFindingProperty.selected;
+                else
+                    homeFindingProperty.selected = true;
+            }
+            _unitOfWork.Complete();
+            return new HttpStatusCodeResult(HttpStatusCode.NoContent);
+        }
+
+        [HttpPut]
+        public ActionResult SelectProperty(string id)
+        {
+            HomeFindingProperty homeFindingProperty;
+            homeFindingProperty = _unitOfWork.HomeFindingProperties.GetHomeFindingPropertyById(id);
+            if (homeFindingProperty != null)
+            {
+                if (homeFindingProperty.selected.HasValue)
+                    homeFindingProperty.selected = !homeFindingProperty.selected;
+                else
+                {
+
+                }
+            }
+            _unitOfWork.Complete();
             return new HttpStatusCodeResult(HttpStatusCode.NoContent);
         }
 

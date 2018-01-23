@@ -119,9 +119,15 @@ namespace Odin.Controllers
             Order order = _unitOfWork.Orders.GetOrderFor(userId, id, User.GetUserRole());
 
             ViewBag.CurrentUser = userId;
-
+            ViewBag.IsConsultant = User.IsInRole(UserRoles.Consultant);           
             HousingViewModel viewModel = new HousingViewModel(order, _mapper, User);
-            return PartialView("~/views/orders/partials/_Housing.cshtml", viewModel);
+            HousingPropertyViewModel sel = viewModel.Properties.Where(p => p.selected == true).FirstOrDefault();
+            if (sel == null)
+            {
+                return PartialView("~/views/orders/partials/_Housing.cshtml", viewModel);
+            }
+            ViewBag.pmEmail = order.ProgramManager.Email;
+            return PartialView("~/views/orders/partials/_SelectedProperty.cshtml", sel);
 
         }
 
@@ -146,12 +152,32 @@ namespace Odin.Controllers
             {
                 return new HttpNotFoundResult();
             }
-            ViewBag.isPDF = true;
-            
-            return new Rotativa.ViewAsPdf("Partials/_HousingProperties", viewModel.Properties)
+            switch (listChoice.ToUpper())
+                {
+                case "NOVIEWINGS":
+                    {
+                        ViewBag.Title = "List of Properties With no Viewings Scheduled";
+                        break;
+                    }
+                case "VIEWINGSONLY":
+                    {
+                        ViewBag.Title = "List of Properties With a Viewing Scheduled";
+                        break;
+                    }
+                case "ALLPROPERTIES":
+                    {
+                        ViewBag.Title = "List of all Properties";
+                        break;
+                    }
+                default:
+                    break;
+            }
+            ViewBag.Title += " for " + order.Transferee.FullName;
+            return new Rotativa.ViewAsPdf("~/Views/PDF/PDFProperties.cshtml", viewModel.Properties)
             {
                 FileName = "Housing.pdf",
-                PageMargins = new Rotativa.Options.Margins(0, 0, 0, 0)
+                PageMargins = new Rotativa.Options.Margins(1, 1, 1, 1),
+                CustomSwitches = "--disable-smart-shrinking"
             };
         }
 
@@ -191,7 +217,6 @@ namespace Odin.Controllers
         {
             OrdersTransfereeItineraryViewModel viewModel = GetItineraryByOrderId(id);
             viewModel.Id = id;
-            viewModel.IsPdf = false;
             Transferee ee = GetTransfereeByOrderId(id);
             if (ee == null)
                 return new HttpStatusCodeResult(HttpStatusCode.NotFound, "Not found");
@@ -274,14 +299,14 @@ namespace Odin.Controllers
             return itinHelper.Build(id);
         }
 
-        public ActionResult GeneratePDF(string id)
+        public ActionResult GenerateItineraryPDF(string id)
         {
             OrdersTransfereeItineraryViewModel viewModel = GetItineraryByOrderId(id);
             viewModel.Id = id;
             viewModel.IsPdf = true;
             Transferee ee = GetTransfereeByOrderId(id);
             viewModel.TransfereeName = ee.FullName;
-            return new Rotativa.ViewAsPdf("Partials/_Itinerary", viewModel)
+            return new Rotativa.ViewAsPdf("~/Views/PDF/PDFItinerary.cshtml", viewModel)
             {
                 FileName = "Itinerary.pdf",
                 PageMargins = new Rotativa.Options.Margins(0, 0, 0, 0)

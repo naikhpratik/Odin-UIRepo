@@ -124,6 +124,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Models\HomeFindingPropertyTests.cs" />
+    <Compile Include="Core\Models\OrderTests.cs" />
     <Compile Include="Core\Models\PropertyTests.cs" />
     <Compile Include="Extensions\MockDbSetExtensions.cs" />
     <Compile Include="Extensions\StringExtensionsTests.cs" />

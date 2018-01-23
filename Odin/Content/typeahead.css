@@ -140,7 +140,7 @@ span.twitter-typeahead .tt-suggestion:hover strong.tt-highlight, span.twitter-ty
 span.twitter-typeahead input.tt-hint {
         color: #31a4dd;
         font-size:2rem;
-    padding: 0 1rem;
+        padding: 0 1rem;
     }
 
     span.twitter-typeahead .tt-input {

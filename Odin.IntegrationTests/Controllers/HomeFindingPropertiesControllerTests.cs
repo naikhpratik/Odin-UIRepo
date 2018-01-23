@@ -91,9 +91,11 @@ namespace Odin.IntegrationTests.Controllers
             // Act
             HomeFindingPropertiesController controller = SetUpHomeFindingPropertiesController();
             controller.MockCurrentUserAndRole(transferee.Id, transferee.UserName,UserRoles.Transferee);
-            controller.Create(propertyVM);
+            HttpStatusCodeResult result = (HttpStatusCodeResult)controller.Create(propertyVM);
 
             // Assert
+            result.StatusCode.Should().Be((int) HttpStatusCode.Created);
+
             Context.Entry(order).Reload();
             order.HomeFinding.HomeFindingProperties.Count().Should().Be(1);
 
@@ -362,6 +364,33 @@ namespace Odin.IntegrationTests.Controllers
             // Assert
             Context.Entry(hfp).Reload();
             hfp.ViewingDate.Should().BeSameDateAs(propertyVM.ViewingDate.Value);
+        }
+
+        [Test, Isolated]
+        public void TransfereeUpdateHomeFindingProperty_TogglesSelected()
+        {
+            // Arrange
+            Order order = BuildOrder(false);
+            Context.Orders.Add(order);
+            HomeFindingProperty hfp = order.HomeFinding.HomeFindingProperties.First();
+            hfp.selected = null; // ensure this isn't already selected
+            Context.SaveChanges();
+
+            // Act
+            HousingPropertyViewModel propertyVM = new HousingPropertyViewModel();
+            propertyVM.Id = hfp.Id;
+            propertyVM.selected = true;
+
+            HomeFindingPropertiesController controller = SetUpHomeFindingPropertiesController();
+            controller.MockCurrentUserAndRole(transferee.Id, transferee.UserName, UserRoles.Transferee);
+            HttpStatusCodeResult response = (HttpStatusCodeResult)controller.Select(propertyVM.Id);
+
+            // Assert
+            Context.Entry(hfp).Reload();
+            hfp.selected.Should().BeTrue();
+
+            response = (HttpStatusCodeResult)controller.Select(propertyVM.Id);
+            hfp.selected.Should().BeFalse();
         }
 
         [Test, Isolated]

@@ -11,10 +11,10 @@ namespace Odin
                         "~/Scripts/app/controllers/userManagementController.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/lib").Include(
-                        "~/Scripts/jquery-{version}.js",                        
+                        "~/Scripts/jquery-{version}.js",
                         "~/Scripts/bootstrap.js",
                         "~/Scripts/moment.js",
-                        "~/Scripts/bootstrap-datetimepicker.js",                        
+                        "~/Scripts/bootstrap-datetimepicker.js",
                         "~/Scripts/respond.js",
                         "~/Scripts/jspdf.min.js",
                         "~/Scripts/datatables/jquery.datatables.js",
@@ -46,13 +46,13 @@ namespace Odin
 
             // Page Styling
             bundles.Add(new StyleBundle("~/Styling/help").Include("~/Content/css/help.css"));
-            bundles.Add(new StyleBundle("~/Styling/orders").Include("~/Content/css/orders.css","~/Content/typeahead.css"));
+            bundles.Add(new StyleBundle("~/Styling/orders").Include("~/Content/css/orders.css", "~/Content/typeahead.css"));
             bundles.Add(new StyleBundle("~/Styling/login").Include("~/Content/css/login.css"));
             bundles.Add(new StyleBundle("~/Styling/forgotPassword").Include("~/Content/css/forgotpassword.css",
                 "~/Content/animate.css"));
             bundles.Add(new StyleBundle("~/Styling/transferee").Include("~/Content/css/transferee/transferee.css"));
             bundles.Add(new StyleBundle("~/Styling/bookmarklet").Include("~/Content/css/bookmarklet.css", "~/Content/animate.css"));
-
+            bundles.Add(new StyleBundle("~/Styling/selectedProperty").Include("~/Content/css/selectedProperty.css"));
             // Panel Styling
             bundles.Add(new StyleBundle("~/Styling/sideNav").Include("~/Content/css/transferee/sideNav.css"));
             bundles.Add(new StyleBundle("~/Styling/itinerary").Include("~/Content/css/transferee/itinerary.css"));
@@ -60,9 +60,9 @@ namespace Odin
             bundles.Add(new StyleBundle("~/Styling/history").Include("~/Content/css/transferee/history.css"));
             bundles.Add(new StyleBundle("~/Styling/intake").Include("~/Content/css/transferee/intake.css", "~/Content/animate.css"));
             bundles.Add(new StyleBundle("~/Styling/messages").Include("~/Content/css/transferee/messages.css"));
-            bundles.Add(new StyleBundle("~/Styling/housing").Include("~/Content/css/transferee/housing.css","~/Content/leaflet.css"));
+            bundles.Add(new StyleBundle("~/Styling/housing").Include("~/Content/css/transferee/housing.css", "~/Content/leaflet.css"));
             bundles.Add(new StyleBundle("~/Styling/housing").Include("~/Content/css/transferee/housing.css"));
-            bundles.Add(new StyleBundle("~/Styling/properties").Include("~/Content/css/transferee/HFProperties.css"));
+            bundles.Add(new StyleBundle("~/Styling/propertiesPDF").Include("~/Content/css/transferee/HFPropertiesPDF.css"));
             bundles.Add(new StyleBundle("~/Styling/transfereeHelp").Include("~/Content/css/transferee/help.css"));
             bundles.Add(new StyleBundle("~/Styling/propertyMessages").Include("~/Content/css/transferee/propertyMessages.css"));
             bundles.Add(new StyleBundle("~/Styling/itineraryPdf").Include("~/Content/css/transferee/itineraryPdf.css"));
@@ -80,6 +80,7 @@ namespace Odin
                 "~/Scripts/app/views/transferee-itinerary.js",
                 "~/Scripts/app/views/transferee-itin-appntmt.js",
                 "~/Scripts/app/views/transferee-hfp-messages.js",
+                "~/Scripts/app/views/transferee-selectedProperty.js",
                 "~/Scripts/leaflet.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/forgotPassword").Include(
