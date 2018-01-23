@@ -34,6 +34,7 @@ namespace Odin.Controllers
             HomeFindingProperty homeFindingProperty = new HomeFindingProperty();
             // mapping wipes out the Id - this is hack to resolve that
             propertyVM.Id = homeFindingProperty.Id;
+            propertyVM.CurrUser = User;
             _mapper.Map<HousingPropertyViewModel, HomeFindingProperty>(propertyVM, homeFindingProperty);
 
             Order order = _unitOfWork.Orders.GetOrderFor(userId, propertyVM.OrderId, User.GetUserRole());

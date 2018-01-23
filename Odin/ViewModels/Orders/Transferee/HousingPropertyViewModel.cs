@@ -140,7 +140,7 @@ namespace Odin.ViewModels.Orders.Transferee
         {
             get
             {
-                return Messages == null? 0 : Messages.Where(r => r.IsRead == false && r.AuthorId != CurrUser.Identity.GetUserId() && CurrUser.IsInRole(UserRoles.ProgramManager) == false).Count();                
+                return Messages == null || CurrUser == null ? 0 : Messages.Where(r => r.IsRead == false && r.AuthorId != CurrUser.Identity.GetUserId() && CurrUser.IsInRole(UserRoles.ProgramManager) == false).Count();                
             }
         }
     }

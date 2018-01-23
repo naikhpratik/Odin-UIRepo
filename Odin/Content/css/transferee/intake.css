@@ -43,12 +43,6 @@ a.dw_logo {
   justify-content: center;
   margin: 3rem 0; }
 
-div[data-notify].alert-success {
-  background-color: #8d0b56; }
-
-div[data-notify].alert-danger {
-  background-color: #e53c2e; }
-
 div#intake div.row {
   text-align: left;
   margin: 0px; }
