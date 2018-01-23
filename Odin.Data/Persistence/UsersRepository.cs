@@ -21,9 +21,9 @@ namespace Odin.Data.Persistence
             return _context.Users.Include(u => u.Roles).Where(u => u.Roles.Any(r => r.RoleId == role.Id));
         }
 
-        public ApplicationUser GetUserByEmail(string email)
+        public ApplicationUser GetUserIdByEmail(string email)
         {
-            throw new System.NotImplementedException();
+            return _context.Users.Where(r => r.Email == email).SingleOrDefault();
         }
 
         public ApplicationUser GetUserByUserName(string userName)
@@ -36,5 +36,10 @@ namespace Odin.Data.Persistence
             var RoleUsertbl = _context.Users.Include(u => u.Roles).Where(r => r.Id.Equals(userId)).SingleOrDefault().Roles.SingleOrDefault().RoleId;
             return _context.Roles.Where(u => u.Id == RoleUsertbl).SingleOrDefault().Name;
         }
+
+        //ApplicationUser IUsersRepository.GetUserByEmail(string email)
+        //{
+        //    throw new System.NotImplementedException();
+        //}
     }
 }

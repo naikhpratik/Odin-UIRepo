@@ -6,7 +6,6 @@
 }
 @Styles.Render("~/Styling/orders")
 <div class="container-fluid" id="list">
-
     <div id="ordersTopBar">
         <input id="searchbox" placeholder="Type here to search, select to go" />
         @if (User.IsInRole(UserRoles.ProgramManager) || User.IsInRole(UserRoles.GlobalSupplyChain))
@@ -16,19 +15,16 @@
                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Change Manager
                 </a>
-
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" align="center">
                     @foreach (var mngr in Model.Managers)
                     {
                         <div class="clickablepm" data-order-id="@mngr.Id" align="center">@mngr.LastName, @mngr.FirstName</div>
                     }
                     <div class="clickablepm" align="center">Charles Montgomery Burns</div>
-
                 </div>
             </div>
         }
     </div>
-
     <ul class="container-fluid">
         <li class="header row">
             <div class="col-md-2">
@@ -58,7 +54,7 @@
         {
             var order = Model.OrdersIndexVm.ElementAt(j);
 
-            <li class="row clickable orderRow" data-order-id="@order.Id">
+            <li id="rowclickableorderRow" class="row clickable orderRow" data-order-id="@order.Id">
                 <div class="col-md-2">
                     <label class="header">Transferee</label>
                     <p class="eeName" data-last-name="@order.Transferee.LastName">@order.Transferee.FullName</p>
@@ -105,13 +101,9 @@
     </ul>
 </div>
 
-
-
 @section scripts
 {
-
     @Scripts.Render("~/Scripts/orders")
-
     <script>
 
         $(document).ready(OrdersPageController.init);

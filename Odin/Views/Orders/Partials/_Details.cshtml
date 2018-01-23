@@ -1,6 +1,101 @@
 ﻿@model Odin.ViewModels.Orders.Transferee.OrdersTransfereeViewModel
-
+<!-- 
 <div class="container-fluid" id="details" data-order-id="@Model.Id">
+    <div class="titleGroup">
+        <h1 class="sectionTitle">Profile Summary</h1>
+    </div>
+    <h2 class="sectionSubHead">File Details</h2>
+    <ul class="row sectionList">
+        <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+            <label>Manager:</label>
+            <p id="pmFname">@Model.ProgramManager.FullName</p>
+        </li>
+        <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+            <label>Manager Email:</label>
+            <p id="pmemail">@Model.ProgramManager.Email</p>
+        </li>
+        <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+            <label>Manager Phone #:</label>
+            <p id="pmpno"> @Model.PhoneNumberDisplay</p>
+        </li>
+
+        <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+            <label>SE Number:</label>
+            <p id="pmSenum">@Model.SeContactUidDisplay</p>
+        </li>
+        <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+            <label>Client Number:</label>
+            <p id="pmClientFnum">@Model.ClientFileNumberDisplay</p>
+        </li>
+        this is a hack, remove this column
+        <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+            <label></label>
+            <p>&nbsp;</p>
+        </li>
+    </ul>
+    <hr>
+    <h2 class="sectionSubHead">Important Dates</h2>
+    <ul class="row sectionList">
+        <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+            <label>Familiarization Trip</label>
+            <p id="PreTripDate">@Model.PreTripDateDisplay</p>
+        </li>
+        <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+            <label>Work Start Date:</label>
+            <p id="WorkStartDate">@Model.WorkStartDateDisplay</p>
+        </li>
+        <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+            <label>Temp Housing:</label>
+            <p id="TempHousingDays">@Model.TempHousingDays</p>
+        </li>
+
+        <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+            <label>Final Arrival:</label>
+            <p id="FinalArrivalDate">@Model.FinalArrivalDateDisplay &nbsp;</p>
+        </li>
+        <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+            <label>Home Finding Date:</label>
+            <p id="HFindingDate">@Model.HomeFindingDateDisplay</p>
+        </li>
+        <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+            <label>Temp Housing Last Day:</label>
+            <p id="TempHousingEndDate">@Model.TempHousingEndDateDisplay</p>
+        </li>
+    </ul>
+    <hr>
+    @if (@Model.HomeFinding != null)
+    {
+        <h2 class="sectionSubHead">Housing Details</h2>
+        <ul class="row sectionList">
+            <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                <label>Monthly Budget:</label>
+                <p id="HousingBudget">@Model.HousingBudgetDisplay</p>
+            </li>
+            <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                <label>Housing:</label>
+                <p id="HousingType">@Model.HousingTypeDisplay</p>
+            </li>
+            <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                <label>School District:</label>
+                <p id="SchoolDistrict">@Model.SchoolDistrictDisplay </p>
+            </li>
+
+            <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                <label>BD/BA:</label>
+                <p id="numberofBedBath">@Model.NumberOfBedroomsDisplay/@Model.NumberOfBathroomsDisplay</p>
+            </li>
+            <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                <label>Sq.Ft:</label>
+                <p id="SquareFootageDisplay">@Model.SquareFootageDisplay</p>
+            </li>
+            <li class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                <label>Rent or Own:</label>
+                <p id="OwnershipType">@Model.HomeFinding.OwnershipType</p>
+            </li>
+        </ul>
+        <hr>
+    }     -->
+
     <div class="details-services" data-block="services">
         <h1 class="sectionTitle">
             Service Reporting
