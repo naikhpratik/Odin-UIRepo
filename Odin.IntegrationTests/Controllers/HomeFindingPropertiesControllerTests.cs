@@ -91,9 +91,11 @@ namespace Odin.IntegrationTests.Controllers
             // Act
             HomeFindingPropertiesController controller = SetUpHomeFindingPropertiesController();
             controller.MockCurrentUserAndRole(transferee.Id, transferee.UserName,UserRoles.Transferee);
-            controller.Create(propertyVM);
+            HttpStatusCodeResult result = (HttpStatusCodeResult)controller.Create(propertyVM);
 
             // Assert
+            result.StatusCode.Should().Be((int) HttpStatusCode.Created);
+
             Context.Entry(order).Reload();
             order.HomeFinding.HomeFindingProperties.Count().Should().Be(1);
 

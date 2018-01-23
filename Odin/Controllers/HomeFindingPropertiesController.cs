@@ -67,7 +67,7 @@ namespace Odin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.ServiceUnavailable);
             }
 
-            return new HttpStatusCodeResult(HttpStatusCode.NoContent);
+            return new HttpStatusCodeResult(HttpStatusCode.Created);
         }
 
         [HttpPut]

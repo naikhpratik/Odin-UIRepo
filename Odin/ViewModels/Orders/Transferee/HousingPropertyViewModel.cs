@@ -1,15 +1,15 @@
 ﻿using Ganss.XSS;
 using Microsoft.AspNet.Identity;
+using Odin.Data.Core.Models;
 using Odin.ViewModels.Shared;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
-using System.Security.Principal;
-using Odin.Data.Core.Models;
 
 namespace Odin.ViewModels.Orders.Transferee
 {
@@ -21,7 +21,6 @@ namespace Odin.ViewModels.Orders.Transferee
         }
 
         public bool Deleted { get; set; }
-        public string propertyId { get; set; }
         public String OrderId { get; set; }
         public String Id { get; set; }
 
