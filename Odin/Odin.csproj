@@ -471,9 +471,6 @@
     <Content Include="Content\css\transferee\HFProperties.css">
       <DependentUpon>HFPropertiesPDF.scss</DependentUpon>
     </Content>
-    <Content Include="Content\css\transferee\HFProperties.min.css">
-      <DependentUpon>HFProperties.css</DependentUpon>
-    </Content>
     <Content Include="Content\css\transferee\HFPropertiesPDF.css">
       <DependentUpon>HFPropertiesPDF.scss</DependentUpon>
     </Content>
