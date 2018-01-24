@@ -28,46 +28,35 @@ public static class DatePickerHelper
 
         public static IHtmlString DatePicker(this HtmlHelper htmlhelper, string clss, string name, bool includePlaceHolder = true)
         {
-            string icon = "calendar";
-            //string wid = "100%";
+            string icon = "calendar";            
             if (name == "time")
             {
-                icon = "time";
-              //  wid = "92%";
+                icon = "time";              
             }
             string res = "";
             TagBuilder tagDiv = new TagBuilder("div");
-            tagDiv.AddCssClass("input-group " + clss);
-            //tagDiv.Attributes.Add("style", "width:" + wid);
+            tagDiv.AddCssClass("input-group " + clss);            
             res = tagDiv.ToString(TagRenderMode.StartTag);
 
             TagBuilder tagInput = new TagBuilder("input");
             tagInput.AddCssClass("form-control");
             tagInput.Attributes.Add("type", "text");
             tagInput.Attributes.Add("name", name);
-           tagInput.Attributes.Add("style", "display:block;width:90%;");
 
             if (includePlaceHolder)
             {
                 tagInput.Attributes.Add("placeholder", "Enter " + clss + " or click");
             }
             tagInput.Attributes.Add("data-date-today-highlight", "true");
-            tagInput.Attributes.Add("data-date-today-btn", "true");
-        
+            tagInput.Attributes.Add("data-date-today-btn", "true");        
             res += tagInput.ToString(TagRenderMode.SelfClosing);
-
             TagBuilder tagSpan1 = new TagBuilder("span");
             tagSpan1.AddCssClass("input-group-addon");
-            tagSpan1.Attributes.Add("style", "display:block;");//width:15%
-
             res += tagSpan1.ToString(TagRenderMode.StartTag);
-
             TagBuilder tagSpan2 = new TagBuilder("span");
             tagSpan2.AddCssClass("glyphicon glyphicon-" + icon);
             tagSpan2.Attributes.Add("style", "text-align:left");
-
             res += tagSpan2.ToString(TagRenderMode.Normal) + "</span></div>";
-
             HtmlString html = new HtmlString(res);
             return html;
         }
@@ -76,26 +65,18 @@ public static class DatePickerHelper
         {
             if (String.IsNullOrEmpty(clss) || String.IsNullOrEmpty(name))
                 throw new ArgumentNullException("helper");
-
             string icon = "calendar";
-            //string wid = "100%";
-            if (clss == "time")
-            {
+            if (clss == "time")            {
                 icon = "time";
-               // wid = "92%";
             }
             string res = "";
             TagBuilder tagDiv = new TagBuilder("div");        
             tagDiv.AddCssClass("input-group " + clss);
-            //tagDiv.Attributes.Add("style", "width:" + wid);        
             res = tagDiv.ToString(TagRenderMode.StartTag);
-
             TagBuilder tagInput = new TagBuilder("input");
             tagInput.Attributes.Add("name", name);
             tagInput.AddCssClass("form-control");            
             tagInput.Attributes.Add("type", "text");
-            tagInput.Attributes.Add("style", "display:block;width:90%;");
-
             if (includePlaceHolder)
             {
                 tagInput.Attributes.Add("placeholder", "Enter " + clss + " or click");
@@ -103,21 +84,13 @@ public static class DatePickerHelper
             tagInput.Attributes.Add("data-date-today-highlight", "true");
             tagInput.Attributes.Add("data-date-today-btn", "true");
             tagInput.Attributes.Add("value", value.ToString("dd-MMM-yyyy hh:mm tt"));
-
             res += tagInput.ToString(TagRenderMode.SelfClosing);
-
             TagBuilder tagSpan1 = new TagBuilder("span");
             tagSpan1.AddCssClass("input-group-addon");
-            tagSpan1.Attributes.Add("style", "display:block;");//width:15%
-
             res += tagSpan1.ToString(TagRenderMode.StartTag);
-
             TagBuilder tagSpan2 = new TagBuilder("span");
-            tagSpan2.AddCssClass("glyphicon glyphicon-"+icon);
-            tagSpan2.Attributes.Add("style", "text-align:left");
-
-            res += tagSpan2.ToString(TagRenderMode.Normal) + "</span></div>";
-                
+            tagSpan2.AddCssClass("glyphicon glyphicon-" + icon);
+            res += tagSpan2.ToString(TagRenderMode.Normal) + "</span></div>";                
             HtmlString html = new HtmlString(res);
             return html;
         }
@@ -128,42 +101,29 @@ public static class DatePickerHelper
             throw new ArgumentNullException("helper");
 
         string icon = "calendar";
-        //string wid = "100%";
         if (clss == "time")
         {
             icon = "time";
-           // wid = "92%";
         }
         string res = "";
         TagBuilder tagDiv = new TagBuilder("div");
         tagDiv.AddCssClass("input-group " + clss);
-        //tagDiv.Attributes.Add("style", "width:" + wid);
         res = tagDiv.ToString(TagRenderMode.StartTag);
-
         TagBuilder tagInput = new TagBuilder("input");
         tagInput.Attributes.Add("name", name);
         tagInput.AddCssClass("form-control");
         tagInput.Attributes.Add("type", "text");
-        tagInput.Attributes.Add("style", "display:block;width:90%;");
         tagInput.Attributes.Add("placeholder", "Enter " + clss + " or click");
         tagInput.Attributes.Add("data-date-today-highlight", "true");
         tagInput.Attributes.Add("data-date-today-btn", "true");
         tagInput.Attributes.Add("value", dateValue);
-
         res += tagInput.ToString(TagRenderMode.SelfClosing);
-
         TagBuilder tagSpan1 = new TagBuilder("span");
         tagSpan1.AddCssClass("input-group-addon");
-        tagSpan1.Attributes.Add("style", "display:block;"); //width:15%
-
         res += tagSpan1.ToString(TagRenderMode.StartTag);
-
         TagBuilder tagSpan2 = new TagBuilder("span");
         tagSpan2.AddCssClass("glyphicon glyphicon-" + icon);
-        tagSpan2.Attributes.Add("style", "text-align:left");
-
         res += tagSpan2.ToString(TagRenderMode.Normal) + "</span></div>";
-
         HtmlString html = new HtmlString(res);
         return html;
     }
@@ -179,22 +139,17 @@ public static class DatePickerHelper
     private static string buildTags(string name, IDictionary<string, object> validationAttributes)
         {
             string icon = "calendar";
-            //string wid = "100%";
             if (name == "time")
             {
                 icon = "time";
-                //wid = "92%";
             }
             string res = "";
             TagBuilder tagDiv = new TagBuilder("div");
             tagDiv.Attributes.Add("name", name);
-            //tagDiv.Attributes.Add("style", "width:" + wid);
             res = tagDiv.ToString(TagRenderMode.StartTag);
-
             TagBuilder tagInput = new TagBuilder("input");
             tagInput.AddCssClass("form-control");
             tagInput.Attributes.Add("type", "text");
-            tagInput.Attributes.Add("style", "display:block;width:90%;");
             tagInput.Attributes.Add("placeholder", "Enter " + name + " or click");
             tagInput.Attributes.Add("data-date-today-highlight", "true");
             tagInput.Attributes.Add("data-date-today-btn", "true");
@@ -203,17 +158,11 @@ public static class DatePickerHelper
                 tagInput.Attributes.Add(key, validationAttributes[key].ToString());
             }
             res += tagInput.ToString(TagRenderMode.SelfClosing);
-
             TagBuilder tagSpan1 = new TagBuilder("span");
             tagSpan1.AddCssClass("input-group-addon");
-            tagSpan1.Attributes.Add("style", "display:block;");//width:15%
-
             res += tagSpan1.ToString(TagRenderMode.StartTag);
-
             TagBuilder tagSpan2 = new TagBuilder("span");
             tagSpan2.AddCssClass("glyphicon glyphicon-" + icon);
-            tagSpan2.Attributes.Add("style", "text-align:left");
-
             res += tagSpan2.ToString(TagRenderMode.Normal) + "</span></div>";
             return res;
         }
