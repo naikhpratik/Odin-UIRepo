@@ -19,7 +19,7 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>44312</IISExpressSSLPort>
+    <IISExpressSSLPort>44303</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -822,6 +822,7 @@
     <Content Include="Scripts\app\views\transferee-details.js" />
     <Content Include="Scripts\app\views\transferee-itinerary.js" />
     <Content Include="Scripts\app\views\transferee-intake.js" />
+    <Content Include="Scripts\app\views\transferee-selectedproperty.js" />
     <Content Include="Scripts\app\views\transferee.js" />
     <Content Include="Scripts\app\views\forgotPassword.js" />
     <Content Include="Scripts\app\views\orders.js" />
@@ -882,6 +883,8 @@
     <Content Include="Content\styles\scss\4_components\primaryNav.scss" />
     <Content Include="Content\styles\scss\4_components\loadingAnimation.scss" />
     <Content Include="Content\styles\scss\4_components\carousel.scss" />
+    <Content Include="Content\styles\scss\ref_transferee\HFPropertiesPDF.scss" />
+    <Content Include="Content\styles\scss\ref_transferee\selectedProperty.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />

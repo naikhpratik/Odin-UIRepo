@@ -6,6 +6,10 @@
 .clickable, .clickablepm {
   cursor: pointer; }
 
+.clickablepm {
+  margin: 2rem 0;
+  line-height: 1.4rem; }
+
 .sortLabel {
   text-align: center; }
 
@@ -20,32 +24,32 @@ div#list {
   max-width: 1440px;
   margin: 0 auto;
   background-color: white; }
-  div#list div#search {
+  div#list #ordersTopBar {
     margin-top: 5rem;
     padding: 2rem;
     background-color: #a7ce39;
     box-sizing: border-box;
     display: flex;
-    align-items: center; }
-    div#list div#search input {
+    align-items: center;
+    flex-direction: column; }
+    div#list #ordersTopBar input {
       width: 100%;
       border: none;
       padding: 0.5rem 1rem;
       box-shadow: 0px 0px 0px 0px; }
-      div#list div#search input:focus {
+      div#list #ordersTopBar input:focus {
         outline: none;
         box-shadow: 0px 0px 0px 0px; }
-    div#list div#search button {
-      width: auto;
-      padding: 0 1rem;
-      color: white;
-      border: none;
-      font-size: 1.5rem;
-      margin-left: 1.5rem;
-      background-color: #31a4dd; }
+    div#list #ordersTopBar .changePropertyManager {
+      background-color: white;
+      margin-top: 2rem; }
     @media screen and (min-width: 48rem) {
-      div#list div#search {
-        margin-top: 8rem; } }
+      div#list #ordersTopBar {
+        margin-top: 8rem;
+        flex-direction: row; }
+        div#list #ordersTopBar .changePropertyManager {
+          margin-top: 0;
+          margin-left: 8rem; } }
   div#list ul {
     list-style: none;
     margin: 0;

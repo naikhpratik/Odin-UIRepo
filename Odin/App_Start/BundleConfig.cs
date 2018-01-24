@@ -47,6 +47,7 @@ namespace Odin
                 "~/Scripts/app/views/transferee-itinerary.js",
                 "~/Scripts/app/views/transferee-itin-appntmt.js",
                 "~/Scripts/app/views/transferee-hfp-messages.js",
+                "~/Scripts/app/views/transferee-selectedproperty.js",
                 "~/Scripts/leaflet.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/forgotPassword").Include(
