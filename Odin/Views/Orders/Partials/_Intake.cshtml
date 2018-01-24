@@ -37,7 +37,7 @@
             </li>
             <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
                 @Html.LabelFor(model => @Model.Transferee.Email)
-                <p class="input-group date">@Model.Transferee.Email</p>
+                <p class="input-group">@Model.Transferee.Email</p>
             </li>
             <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
                 @Html.LabelFor(model => @Model.Transferee.PhoneNumber)
@@ -64,7 +64,7 @@
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.PreTripDateDisplay)
                 <span class="intake-span">@Model.PreTripDateDisplay</span>
-                @Html.DatePicker("intake-date date", "PreTripDate", Model.PreTripDate)
+                @Html.DatePicker("date", "PreTripDate", Model.PreTripDate)
                 @Html.HiddenFor(model => @Model.PreTripDateDisplay, new { @class = "intake-hidden" })
             </div>
             <div class="col-xs-6 col-sm-6 col-md-7 col-lg-7 intake-col">
@@ -78,13 +78,13 @@
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.EstimatedArrivalDateDisplay)
                 <span class="intake-span">@Model.EstimatedArrivalDateDisplay</span>
-                @Html.DatePicker("intake-date date", "EstimatedArrivalDate", Model.EstimatedArrivalDate)
+                @Html.DatePicker("date", "EstimatedArrivalDate", Model.EstimatedArrivalDate)
                 @Html.HiddenFor(model => @Model.EstimatedArrivalDateDisplay, new { @class = "intake-hidden" })
             </div>
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.WorkStartDateDisplay)
                 <span class="intake-span">@Model.WorkStartDateDisplay</span>
-                @Html.DatePicker("intake-date date", "WorkStartDate", Model.WorkStartDate)
+                @Html.DatePicker("date", "WorkStartDate", Model.WorkStartDate)
                 @Html.HiddenFor(model => @Model.WorkStartDateDisplay, new { @class = "intake-hidden" })
             </div>
         </div>
@@ -94,7 +94,7 @@
                 <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                     @Html.LabelFor(model => @Model.EstimatedDepartureDateDisplay)
                     <span class="intake-span">@Model.EstimatedDepartureDateDisplay</span>
-                    @Html.DatePicker("intake-date date", "EstimatedDepartureDate", Model.EstimatedDepartureDate)
+                    @Html.DatePicker("date", "EstimatedDepartureDate", Model.EstimatedDepartureDate)
                     @Html.HiddenFor(model => @Model.EstimatedDepartureDateDisplay, new { @class = "intake-hidden" })
                 </div>
             </div>
@@ -497,7 +497,7 @@
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.TempHousingEndDateDisplay)
                 <span class="intake-span">@Model.TempHousingEndDateDisplay</span>
-                @Html.DatePicker("intake-date date", "TempHousingEndDate", Model.TempHousingEndDate)
+                @Html.DatePicker("date", "TempHousingEndDate", Model.TempHousingEndDate)
                 @Html.HiddenFor(Model => @Model.TempHousingEndDateDisplay, new { @class = "intake-hidden" })
             </div>
         </div>
