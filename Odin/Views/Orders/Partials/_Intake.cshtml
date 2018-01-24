@@ -297,26 +297,26 @@
                 x Cancel
             </span>
         </div>
-        <ul class="row sectionList intake-row collapse in">
-            <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
+        <div class="row intake-row collapse in">
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.DestinationCity)
                 <span class="intake-span">@Model.DestinationCity</span>
                 @Html.TextBoxFor(m => @Model.DestinationCity, new { @class = "form-control intake-input" })
                 @Html.HiddenFor(m => @Model.DestinationCity, new { @class = "intake-hidden" })
-            </li>
-            <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.DestinationState)
                 <span class="intake-span">@Model.DestinationState</span>
                 @Html.TextBoxFor(m => @Model.DestinationState, new { @class = "form-control intake-input" })
                 @Html.HiddenFor(m => @Model.DestinationState, new { @class = "intake-hidden" })
-            </li>
-            <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.DestinationCountry)
                 <span class="intake-span">@Model.DestinationCountry</span>
                 @Html.TextBoxFor(m => @Model.DestinationCountry, new { @class = "form-control intake-input" })
                 @Html.HiddenFor(m => @Model.DestinationCountry, new { @class = "intake-hidden" })
-            </li>
-        </ul>
+            </div>
+        </div>
     </div>
     <hr />
     <div class="intake-block" data-block="origin">
@@ -333,26 +333,26 @@
                 x Cancel
             </span>
         </div>
-        <ul class="row sectionList intake-row collapse in">
-            <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
+        <div class="row intake-row collapse in">
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.OriginCity)
                 <span class="intake-span">@Model.OriginCity</span>
                 @Html.TextBoxFor(m => @Model.OriginCity, new { @class = "form-control intake-input" })
                 @Html.HiddenFor(m => @Model.OriginCity, new { @class = "intake-hidden" })
-            </li>
-            <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.OriginState)
                 <span class="intake-span">@Model.OriginState</span>
                 @Html.TextBoxFor(m => @Model.OriginState, new { @class = "form-control intake-input" })
                 @Html.HiddenFor(m => @Model.OriginState, new { @class = "intake-hidden" })
-            </li>
-            <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.OriginCountry)
                 <span class="intake-span">@Model.OriginCountry</span>
                 @Html.TextBoxFor(m => @Model.OriginCountry, new { @class = "form-control intake-input" })
                 @Html.HiddenFor(m => @Model.OriginCountry, new { @class = "intake-hidden" })
-            </li>
-        </ul>
+            </div>
+        </div>
     </div>
     <hr />
     <div class="intake-block" data-block="homefinding">
@@ -555,20 +555,20 @@
                 <h2 class="sectionSubHead">RMC Information</h2>
             </div>
         </div>
-        <ul class="row sectionList intake-row collapse in">
-            <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+        <div class="row intake-row collapse in">
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.Rmc)
-                <p class="intake-span">@Model.Rmc</p>
-            </li>
-            <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                <span class="intake-span">@Model.Rmc</span>
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.RmcContact)
-                <p class="intake-span">@Model.RmcContact</p>
-            </li>
-            <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                <span class="intake-span">@Model.RmcContact</span>
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.RmcContactEmail)
-                <p class="intake-span">@Model.RmcContactEmail</p>
-            </li>
-        </ul>
+                <span class="intake-span">@Model.RmcContactEmail</span>
+            </div>
+        </div>
     </div>
     <hr />
     <div class="intake-block">
