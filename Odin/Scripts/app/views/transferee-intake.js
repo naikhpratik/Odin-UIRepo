@@ -125,13 +125,13 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
             spnEditSave.next(".intake-cancel").css("display", "inline");
 
             //Bind hidden values to inputs
-            inputs.css("display", "block").each(function() {
+            inputs.css("display", "initial").each(function() {
                 var hidden = $(this).next(".intake-hidden");
                 $(this).val(hidden.val());
             });
 
             //Bind hidden values to inputs
-            dates.css("display", "block").each(function () {
+            dates.css("display", "table").each(function () {
                 var hidden = $(this).next(".intake-hidden");
                 $(this).find("input").val(hidden.val());
             });
@@ -207,9 +207,9 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
 
             dates.css("display", "none");
             inputs.css("display", "none");
-            spans.css("display", "block");
-            addSpans.css("display", "block");
-            delSpans.css("display", "block");
+            spans.css("display", "initial");
+            addSpans.css("display", "initial");
+            delSpans.css("display", "initial");
 
             toast("Save Successful!","success");
         }
@@ -421,9 +421,9 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
         spnCancel.prev(".intake-edit").text("+ Edit");
         cols.find(".intake-input").css("display", "none").val("");
         cols.find(".date").css("display", "none").find("input").val("");
-        cols.find(".intake-span").css("display", "block");
-        cols.find(".intake-add").css("display", "block");
-        cols.find(".intake-del").css("display", "block");
+        cols.find(".intake-span").css("display", "initial");
+        cols.find(".intake-add").css("display", "initial");
+        cols.find(".intake-del").css("display", "initial");
     }
 
     var toast = function (message, type) {
