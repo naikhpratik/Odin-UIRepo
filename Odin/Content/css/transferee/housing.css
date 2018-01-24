@@ -228,6 +228,10 @@ li.propertyItem {
       padding: 0.625rem;
       border-radius: 1.25rem;
       z-index: 1; }
+    li.propertyItem .comments .hasmessages {
+      opacity: 1; }
+    li.propertyItem .comments .nomessages {
+      opacity: 0.6; }
 
 #propertyForm input,
 #propertyForm select,

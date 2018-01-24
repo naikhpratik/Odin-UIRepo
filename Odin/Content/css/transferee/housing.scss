@@ -246,8 +246,6 @@ li.propertyItem {
         .btn-container {
             text-align: center;
         }
-
-
     }
 
     .comments {
@@ -272,6 +270,14 @@ li.propertyItem {
             padding: 0.625rem;
             border-radius: 1.25rem;
             z-index: 1;
+        }
+
+        .hasmessages {
+            opacity: 1;
+        }
+
+        .nomessages {
+            opacity: 0.6;
         }
     }
 }
@@ -334,6 +340,7 @@ li.propertyItem {
         }
     }
 }
+
 
 /*#propertiesList {
 
