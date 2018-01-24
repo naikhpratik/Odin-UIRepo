@@ -8,6 +8,7 @@ using Odin.Domain;
 using Odin.Extensions;
 using Odin.Filters;
 using Odin.Interfaces;
+using Odin.ViewModels.Orders.Transferee;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -447,6 +448,26 @@ namespace Odin.Controllers.Api
             }
 
             _mapper.Map<OrdersTransfereeIntakeRelocationDto, Order>(dto, order);
+            _unitOfWork.Complete();
+
+            return Ok();
+        }
+
+        [HttpPost]
+        [RoleAuthorize(UserRoles.ProgramManager, UserRoles.Consultant)]
+        [Route("api/orders/transferee/housing/update")]
+        public IHttpActionResult UpdateHousingProperty(HousingPropertyViewModel propertyVM)
+        {
+            HomeFindingProperty homeFindingProperty;
+            homeFindingProperty = _unitOfWork.HomeFindingProperties.GetHomeFindingPropertyById(propertyVM.Id);
+
+            var prop = homeFindingProperty.Property;
+ 
+            prop.Amount = propertyVM.PropertyAmount;
+            prop.NumberOfBathrooms = propertyVM.PropertyNumberOfBathrooms;
+            prop.NumberOfBedrooms = propertyVM.PropertyNumberOfBedrooms;
+            prop.SquareFootage = propertyVM.PropertySquareFootage;
+           
             _unitOfWork.Complete();
 
             return Ok();

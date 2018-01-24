@@ -1,9 +1,9 @@
-﻿using Odin.Helpers;
+﻿using Odin.Data.Core.Models;
+using Odin.Helpers;
 using Odin.ViewModels.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Odin.Data.Core.Models;
 
 namespace Odin.ViewModels.Orders.Index
 {
@@ -22,9 +22,9 @@ namespace Odin.ViewModels.Orders.Index
         public string EstimatedArrivalDateDisplay => DateHelper.GetViewFormat(EstimatedArrivalDate);
         public string LastContactedDateDisplay => DateHelper.GetViewFormat(LastContactedDate);
         public string IsRushDisplay => IsRush ? "Rush" : String.Empty;
-        public int AuthorizedServicesDisplay => Services.Count();
-        public int ScheduledServicesDisplay => Services.Where(s => s.ScheduledDate.HasValue && !s.CompletedDate.HasValue).Count();
-        public int CompletedServicesDisplay => Services.Where(s => s.CompletedDate.HasValue).Count();
+        public int AuthorizedServicesDisplay => AllServices.Count();
+        public int ScheduledServicesDisplay => AllServices.Where(s => s.ScheduledDate.HasValue && !s.CompletedDate.HasValue).Count();
+        public int CompletedServicesDisplay => AllServices.Where(s => s.CompletedDate.HasValue).Count();
         public int CompletedWidth => Convert.ToInt32(AuthorizedServicesDisplay == 0 ? 0 : CompletedServicesDisplay * 100 / AuthorizedServicesDisplay);
         public int ScheduledWidth => Convert.ToInt32(AuthorizedServicesDisplay == 0 ? 0 : ScheduledServicesDisplay * 100 / AuthorizedServicesDisplay);
         public decimal AuthorizedWidth = 100;
@@ -38,6 +38,21 @@ namespace Odin.ViewModels.Orders.Index
         public ICollection<Notification> Notifications { get; private set; }
 
         public int UserNotificationsCount { get; set; }
+
+        public IEnumerable<ServiceViewModel> HomeFindingServices { get; set; }
+
+        private IEnumerable<ServiceViewModel> _allServices;
+        public IEnumerable<ServiceViewModel> AllServices
+        {
+            get
+            {
+                if (_allServices == null)
+                {
+                    _allServices = Services.Concat(HomeFindingServices);
+                }
+                return _allServices;
+            }
+        }
 
         //public IEnumerable<UserNotification> GetOrderUserNotification()
         //{

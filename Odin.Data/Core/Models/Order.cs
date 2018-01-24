@@ -112,5 +112,55 @@ namespace Odin.Data.Core.Models
             return Services.FirstOrDefault<Service>(s => s.ServiceTypeId == serviceTypeId);
         }
 
+        public IEnumerable<Service> HomeFindingServices
+        {
+            get
+            {
+                bool hasHF = HomeFinding != null;
+                var hfServices = new List<Service>()
+                {
+                    new Service()
+                    {
+                        Selected = hasHF,
+                        CompletedDate = hasHF && HomeFinding.HomeFindingProperties.Count > 0 ? DateTime.Now : (DateTime?) null,
+                        ServiceType = new ServiceType()
+                        {
+                            Category = ServiceCategory.AccompaniedHomeFinding,
+                            Name = "FindHomes",
+                            ActionLabel = "Find potential homes to view."
+                        }
+                    },
+                    new Service()
+                    {
+                        Selected = hasHF,
+                        CompletedDate = hasHF && HomeFinding.HomeFindingProperties.Any(hf => hf.ViewingDate.HasValue || (hf.selected.HasValue && hf.selected.Value))
+                            ? DateTime.Now
+                            : (DateTime?) null,
+                        ServiceType = new ServiceType()
+                        {
+                            Category = ServiceCategory.AccompaniedHomeFinding,
+                            Name = "ScheduleViewings",
+                            ActionLabel = "Schedule viewings of \"liked\" homes."
+                        }
+                    },
+                    new Service()
+                    {
+                        Selected = hasHF,
+                        CompletedDate = hasHF && HomeFinding.HomeFindingProperties.Any(hf => hf.selected.HasValue && hf.selected.Value)
+                                ? DateTime.Now
+                                : (DateTime?) null,
+                        ServiceType = new ServiceType()
+                        {
+                            Category = ServiceCategory.AccompaniedHomeFinding,
+                            Name = "SelectHome",
+                            ActionLabel = "Select a home."
+                        }
+                    }
+                };
+
+                return hfServices;
+            }
+        }
+
     }
 }

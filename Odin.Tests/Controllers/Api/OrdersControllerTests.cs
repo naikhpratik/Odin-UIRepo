@@ -8,6 +8,7 @@ using Odin.Data.Core.Models;
 using Odin.Data.Core.Repositories;
 using Odin.Interfaces;
 using Odin.Tests.Extensions;
+using Odin.ViewModels.Orders.Transferee;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace Odin.Tests.Controllers.Api
         private Mock<IChildrenRepository> _mockChildrenRepository;
         private Mock<IPetsRepository> _mockPetsRepository;
         private Mock<IAppointmentsRepository> _mockAppointmentsRepository;
+        private Mock<IHomeFindingPropertyRepository> _mockHomeFindingPropertiesRepository;
         private Mock<IMapper> _mockMapper;
         private string _userId;
         private string _userName;
@@ -37,12 +39,14 @@ namespace Odin.Tests.Controllers.Api
             _mockChildrenRepository = new Mock<IChildrenRepository>();
             _mockPetsRepository = new Mock<IPetsRepository>();
             _mockAppointmentsRepository = new Mock<IAppointmentsRepository>();
+            _mockHomeFindingPropertiesRepository = new Mock<IHomeFindingPropertyRepository>();
 
             var mockUnitOfWork = new Mock<IUnitOfWork>();
             mockUnitOfWork.SetupGet(u => u.Orders).Returns(_mockRepository.Object);
             mockUnitOfWork.SetupGet(u => u.Children).Returns(_mockChildrenRepository.Object);
             mockUnitOfWork.SetupGet(u => u.Pets).Returns(_mockPetsRepository.Object);
             mockUnitOfWork.SetupGet(u => u.Appointments).Returns(_mockAppointmentsRepository.Object);
+            mockUnitOfWork.SetupGet(u => u.HomeFindingProperties).Returns(_mockHomeFindingPropertiesRepository.Object);
 
             var mockQueueStore = new Mock<IQueueStore>();
             var mockAccountHelper = new Mock<IAccountHelper>();
@@ -493,6 +497,32 @@ namespace Odin.Tests.Controllers.Api
 
             var result = _controller.UpdateIntakeRelocation(dto) as IHttpActionResult;
             result.Should().BeOfType<System.Web.Http.Results.NotFoundResult>();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [TestMethod]
+        public void UpdateHousingProperty_ValidOrder_ReturnFound()
+        {
+            var propertyId = "1";
+            
+            HomeFindingProperty p1 = new HomeFindingProperty();
+            p1.Deleted = false;
+            p1.Property = new Property() { Id = propertyId, Amount = 10, NumberOfBathrooms = 5, NumberOfBedrooms = 2, SquareFootage = 2343 };
+            p1.ViewingDate = DateTime.Now.AddDays(10);
+
+            _mockHomeFindingPropertiesRepository.Setup(r => r.GetHomeFindingPropertyById(propertyId)).Returns(p1);
+            
+            
+            HousingPropertyViewModel propertyVM = new HousingPropertyViewModel() { Id = propertyId, PropertyNumberOfBathrooms = 10, PropertyNumberOfBedrooms = 12 , PropertyAmount = 2002, PropertySquareFootage = 1023 };
+            
+            var result = _controller.UpdateHousingProperty(propertyVM) as IHttpActionResult;
+            result.Should().BeOfType<System.Web.Http.Results.OkResult>();
+            p1.Property.NumberOfBedrooms.Equals(propertyVM.PropertyNumberOfBedrooms);
+            p1.Property.NumberOfBathrooms.Equals(propertyVM.PropertyNumberOfBathrooms);
+            p1.Property.Amount.Should().Equals(propertyVM.PropertyAmount);
+            p1.Property.SquareFootage.Equals(propertyVM.PropertySquareFootage);
         }
     }
 }

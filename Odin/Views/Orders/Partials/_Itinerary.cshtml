@@ -2,36 +2,16 @@
 @model Odin.ViewModels.Orders.Transferee.OrdersTransfereeItineraryViewModel
 
 <div class="container-fluid" data-order-id="@Model.Id" id="itinerary">
-    @if (Model.IsPdf == true)
-    {
-        <img style="margin-top:20px;float:right;" src="@Server.MapPath("~/Content/Images/dwellworks_icon.png")">
-    }
     <div class="row">
-        <div class="col-md-6 titleGroup">
-            @if (Model.IsPdf == true)
-            {
-                <h3 class="sectionTitle" style="padding-top:10px;">
-                    @(Model.TransfereeName + "'s Itinerary")
-                </h3>
-
-                <style>
-                    ul.itineraryDayList{
-                        margin-left: 1.5rem;
-                    }
-                </style>
-            }
-            else
-            {
-                <h1 class="sectionTitle">
+    <div class="col-md-6 titleGroup">
+           <h1 class="sectionTitle">
                     Your Itinerary
-                </h1>
-            }
-            <p class="sectionInstruction">
+           </h1>
+           <p class="sectionInstruction">
                 What is going on. Check to see what you have planned. To stay on top of things.
             </p>
         </div>
-        @if (Model.IsPdf == false)
-        {
+        
             <div class="col-md-6">
                 @if (!User.IsInRole(UserRoles.Transferee))
                 {
@@ -40,12 +20,7 @@
                 <button type="button" class="btn btn-secondary showNewAppointment" id="cmdEmail" data-toggle="modal" data-target="#modalForm">Email</button>
                 <button type="button" class="btn btn-secondary showNewAppointment" id="cmdPDF">Generate PDF</button>
             </div>
-        }
-        else
-        {
-            <div class="col-md-6"></div>
-        }
-    </div>
+        </div>
     <ul class="sectionList event-item row" data-entity-id="@Model.Id">
         @for (int i = 0; i < Model.Itinerary.Count(); i++)
         {
@@ -68,7 +43,6 @@
             }
             else
             {
-                //link = "window.history.pushState('link', 'fromitinerary', '#housing');OrdersPageController.loadPanel('housing');";
                 link = "popUpPropertyDetails('" + elem.Id + "')";
             }
 
@@ -102,13 +76,25 @@
                                         <span class="eventTime col-sm-12 col-md-2">@(dt2.HasValue ? dt2.Value.ToString("hh:mm tt") : "NA")&nbsp;</span><span class="eventNote col-sm-12 col-md-10">@al</span>
                                     </a>
                                 }
-                                else
+                                else if (Model.Itinerary.ElementAt(j).ItemType.Contains("Viewing"))
                                 {
                                     <a class="row noteRow" onclick="@link">
                                         <span class="eventTime col-sm-12 col-md-2">@(dt2.HasValue ? dt2.Value.ToString("hh:mm tt") : "NA")&nbsp;</span><span class="eventNote col-sm-12 col-md-10">@al</span>
                                     </a>
                                 }
-
+                                else
+                                {
+                                if (User.IsInRole(UserRoles.Transferee))
+                                {
+                                    <p class="row" ><span class="eventTime col-sm-12 col-md-2">@(dt2.HasValue ? dt2.Value.ToString("hh:mm tt") : "NA")&nbsp;</span><span class="eventNote col-sm-12 col-md-10">@al</span></p>
+                                }
+                                else
+                                {
+                                <a class="row noteRow" onclick="@link">
+                                    <span class="eventTime col-sm-12 col-md-2">@(dt2.HasValue ? dt2.Value.ToString("hh:mm tt") : "NA")&nbsp;</span><span class="eventNote col-sm-12 col-md-10">@al</span>
+                                </a>
+                                }
+                                }
                             </li>
                         }
                         else
@@ -159,14 +145,9 @@
     </div>
 </div>
    
-@if (Model.IsPdf == true)
-{
-    @Styles.Render("~/Styling/itineraryPdf");    
-}
-else
-{
-    @Styles.Render("~/Styling/itinerary");
-}
+
+@Styles.Render("~/Styling/itinerary");
+
 <script type="text/javascript">
     $(document).ready(function () {
         TransfereeItineraryController.init();        
@@ -176,6 +157,8 @@ else
         $('#propertyModalContent').load(propertyModalUrl, function (response, status, xhr) {
             if (status === "success") {
                 $('#removeProperty').hide();
+                $('#selectProperty').hide();
+                $('#editProperty').hide();
                 $('#propertyDetailsModal').modal('show');
             }
         });

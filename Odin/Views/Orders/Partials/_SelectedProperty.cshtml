@@ -1,0 +1,204 @@
+﻿@model Odin.ViewModels.Orders.Transferee.HousingPropertyViewModel
+<div class="container-fluid" data-property-id="@Model.Id">
+    <div class="row">
+        <div class="col-md-6">
+            <h3>
+                Selected Home
+            </h3>
+            <p>&nbsp;</p>
+        </div>
+        <div class="col-md-6 buttonGroup">
+            <button type="button" id="deselectProperty" class='btn btn-secondary' data-dismiss="modal">Deselect Property</button>
+            <button type="button" id="editProperty" class='btn btn-secondary' data-dismiss="modal">Edit</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <img class="homePhoto" src='@(Model.PropertyPhotos.Count() > 0 ? Model.PropertyPhotos.First().PhotoUrl : "")' />
+        </div>
+        <div class="col-md-9 rightSection">
+            <div class="row">
+                <label class="col-md-12 address1">@Html.DisplayFor(model => model.PropertyStreet1)</label>
+                <label class="col-md-12 address2">@Html.DisplayFor(model => model.PropertyCity), @Html.DisplayFor(model => model.PropertyState) @Html.DisplayFor(model => model.PropertyPostalCode)</label>
+            </div>
+            <ul class="row selectedPropertySummary">
+                <li class="col-md-3">
+                    <div class="selectedPropertySummary__item">
+                        <p class="selectedProperty__summaryContent">
+                            @Html.DisplayFor(model => model.PropertyNumberOfBedrooms)
+                            <span class="selectedProperty__summarySpan">Bedrooms</span>
+                        </p>
+                    </div>
+                </li>
+                <li class="col-md-3">
+                    <div class="selectedPropertySummary__item ">
+                        <p class="selectedProperty__summaryContent">
+                            @Html.DisplayFor(model => model.PropertyNumberOfBathrooms)
+                            <span class="selectedProperty__summarySpan">Bathrooms</span>
+                        </p>
+                    </div>
+                </li>
+                <li class="col-md-3">
+                    <div class="selectedPropertySummary__item ">
+                        <p class="selectedProperty__summaryContent">
+                            @Html.DisplayFor(model => model.PropertySquareFootage)
+                            <span class="selectedProperty__summarySpan">Square Feet</span>
+                        </p>
+                    </div>
+                </li>
+                <li class="col-md-3">
+                    <div class="selectedPropertySummary__item ">
+                        <p class="selectedProperty__summaryContent">
+                            @Html.DisplayFor(model => model.PropertyAmount)
+                            <span class="selectedProperty__summarySpan">Per Month</span>
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row leaseSection">
+        @if (ViewBag.IsConsultant)
+        {
+            <div class="col-md-12">
+                <div class="row infoLine">
+                    <div class="col-md-10 infoLineItem">
+                        <span>Please ensure the detail information above is accurate and then send the lease documents to your PM via email</span>
+                    </div>
+                    <div class="col-md-2">
+                        <a href="mailto:@ViewBag.pmEmail" id="emailPM">Email My PM</a>
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="col-md-12 propertyInfo">
+            <h4>Property Info</h4>
+        </div>
+        <div class="col-md-12">
+            <h6>Description/Notes:</h6>
+        </div>
+        <div class="col-md-12">
+            <h6>-----OVERVIEW-----</h6>
+        </div>
+        <div class="col-md-12">
+            <div class="overviewItems">@Html.DisplayFor(model => model.PropertyNumberOfBedrooms) beds</div>
+            <div class="overviewItems">@Html.DisplayFor(model => model.PropertyNumberOfBathrooms) baths</div>
+            <div class="overviewItems">@Html.DisplayFor(model => model.PropertySquareFootage) sq. ft. lot</div>
+        </div>
+        <div class="col-md-12">
+            <h6>-----DESCRIPTION-----</h6>
+        </div>
+        <div class="col-md-12">
+            <p>@Html.Raw(@Model.PropertyDescription)</p>
+        </div>
+    </div>
+</div>
+<div class="modal fade editPropertyModal" id="modalForm" tabindex="-100" data-property-id="@Model.Id" role="dialog" data-backdrop="false" aria-labelledby="editPropertyModal">
+    <div class="modal-dialog" role="document" id="editProperty" style="z-index: 2147483647;">
+        <div class="modal-content" id="editPropertyModalLabel">
+            <div class="modal-header row">
+                <div class="col-md-10">
+                    <h5 class="modal-title">Property Info for @Model.PropertyStreet1</h5>
+                </div>
+                <div class="col-md-2">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="col-md-12">
+                    <span>Please ensure the Prop Bot has absorbed the information about this property correctly.</span>
+                </div>
+            </div>
+            <div class="modal-body row inputRow">
+                <div class="col-md-6">
+                    <label for="bedrooms">Bedrooms</label>
+                    <input type="number" name="bedrooms" value="@Model.PropertyNumberOfBedrooms" />
+                </div>
+                <div class="col-md-6">
+                    <label for="bathrooms">Bathrooms</label>
+                    <input type="number" name="bathrooms" value="@Model.PropertyNumberOfBathrooms" />
+                </div>
+            </div>
+            <div class="modal-body row inputRow">
+                <div class="col-md-6">
+                    <label for="squarefeet">Square feet</label>
+                    <input type="number" name="squarefeet" value="@Model.PropertySquareFootage" />
+                </div>
+                <div class="col-md-6">
+                    <label for="cost">Monthly Cost</label>
+                    <input type="number" name="cost" value="@Model.PropertyAmount" />
+                </div>
+            </div>
+
+            <div class="modal-footer row">
+                <div class="col-sm-6">
+                </div>
+                <div class="col-sm-6">
+                    <button type="button" id="cmdUpdate" class="btn btn-primary update">Update Property</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Styles.Render("~/Styling/selectedProperty")
+
+<script>
+    $(document).ready(function () {
+        $('#deselectProperty').click(function () {
+            TransfereeHousingController.selectProperty("", "@Model.Id");
+        });
+        $('#editProperty').click(function () {
+            $('#modalForm').modal('show');
+        });
+
+        $('#cmdUpdate').click(function (e) {
+           
+            var prop = $("#modalForm");
+            var propertyId = prop.attr("data-property-id");
+            var bd = prop.children().find("input[name=bedrooms]");
+            var bt = prop.children().find("input[name=bathrooms]");
+            var sq = prop.children().find("input[name=squarefeet]");
+            var am = prop.children().find("input[name=cost]");
+
+            var err = false;
+
+            var saveSuccess = function () {
+                $('body').removeClass('modal-open');
+                OrdersPageController.loadPanel("housing");
+                toast('changes to the property are successful', 'success');
+            }
+            var saveFail = function () {
+                
+                err = true;
+                toast('changes to the property failed', 'danger');
+            }
+
+            if (!err) {
+
+                var data = { "Id": propertyId, "PropertyNumberOfBedrooms": bd.val(), "PropertyNumberOfBathrooms": bt.val(), "PropertySquareFootage": sq.val(), "PropertyAmount": am.val() };
+                var url =  "/api/orders/transferee/housing/update";
+                $.post(url, data).done(saveSuccess).fail(saveFail);
+                
+            }
+        });
+        var toast = function (message, type) {
+            $.notify({
+                message: message
+            }, {
+                    delay: 2000,
+
+                    type: type,
+                    placement: {
+                        from: "bottom",
+                        align: "center"
+                    },
+                    animate: {
+                        enter: 'animated fadeInUp',
+                        exit: 'animated fadeOutDown'
+                    }
+                });
+        }
+    });
+</script>
+

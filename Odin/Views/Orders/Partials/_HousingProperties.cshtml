@@ -28,43 +28,29 @@
         <div class="col-md-1 col-xs-12">
             <p>Property Comments:</p>
         </div>
-        
     </div>
 
     <ul class="row sectionList" id="propertiesList" data-filter="">
 
         @foreach (var propertyVM in Model)
         {
-            <li class="row propertyItem" data-property-id="@propertyVM.Id" data-lat="@propertyVM.PropertyLatitude" data-lng="@propertyVM.PropertyLongitude" data-liked="@propertyVM.Liked">
+            if (propertyVM.selected == true)
+            {
+                if (ViewBag.selectionSet == true)
+                {                    
+                    <li><script>$.notify({ message: 'Multiple selections made, remove additional selection(s) please' }, { delay: 5000, type: 'warning', placement: { from: "bottom", align: "center" }, animate: { enter: 'animated fadeInUp', exit: 'animated fadeOutDown' } });</script></li>
+                }
+                else
+                {
+                    ViewBag.selectionSet = true;
+                }
+            }
+            <li class="row propertyItem @propertyVM.selectedDisplay" data-property-id="@propertyVM.Id" data-lat="@propertyVM.PropertyLatitude" data-lng="@propertyVM.PropertyLongitude" data-liked="@propertyVM.Liked">
 
 
                 <div class="col-md-1 col-xs-12">
-                    <label class="mobileLabel">Property Photos</label>
-
-                    @if (ViewBag.IsPDF == true)
-                    {
-                        <ul class="sectionList">
-                            @{ int kount = 0; }
-                            @foreach (var photo in propertyVM.PropertyPhotos)
-                            {
-                                <li class="photo">
-                                    <img class="location" src="@photo.PhotoUrl" />
-                                </li>
-
-                                kount++;
-
-                                if (kount > 5)
-                                {
-                                    break;
-                                }
-                            }
-                        </ul>
-                    }
-                    else
-                    {
+                    <label class="mobileLabel">Property Photos</label>                    
                         <img class="location" src="@propertyVM.ThumbnailPhotoUrl" />
-                    }
-
                 </div>
 
 
@@ -102,24 +88,21 @@
 
                 <div class="col-md-1 col-xs-12">
                     <label class="mobileLabel">Like or Dislike</label>
-                    @if (ViewBag.IsPDF == true && !propertyVM.Liked.HasValue)
-                    {
-                        <span>Not Yet Rated</span>
-                    }
-
                     @Html.EditorFor(m => propertyVM.Liked, new { propertyId = propertyVM.Id })
-
                 </div>
                 <div class="col-md-1 col-xs-12 comments" data-property-id="@propertyVM.Id">
-                    <img src="~/Content/Images/icn_chat_bubble.png" />
-                    @if (propertyVM.ReadCount != 0)
+                    <label class="mobileLabel">Property Comments</label>
+                    @if (ViewBag.IsPDF != true)
+                    {
+                        <img src="~/Content/Images/icn_chat_bubble.png" />
+                    }
+                    @if (propertyVM.ReadCount != 0 || ViewBag.IsPDF == true)
                     {
                         <span style="text-align:center">@propertyVM.ReadCount</span>
                     }
                 </div>
             </li>
-        }
-
+         }
     </ul>
 </div>
 <div class="modal fade notificationModal" id="modalNotification" data-backdrop="false" tabindex="-100" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true" style="z-index: 2147483647;">
@@ -129,21 +112,17 @@
         </div>
     </div>
 </div>
-@if (ViewBag.IsPDF == true)
-{
-    @Styles.Render("~/Styling/properties")
-}
+
 <script>
+
     $('.comments').click(function (event) {
         event.stopPropagation();
-
-        var app = $('#modalNotification');        
+        var app = $('#modalNotification');
         var url = '/Message/MessagePartial/' + $(this).attr('data-property-id');
-        event.stopPropagation();
-        $.get(url, function (data) {
-            app.find('.modal-content').html();
+        $.get(url, function (data) {            
             app.find('.modal-content').html(data);            
         });        
         app.modal('show');
     });
+
 </script>
