@@ -116,47 +116,56 @@ namespace Odin.Data.Core.Models
         {
             get
             {
-                bool hasHF = HomeFinding != null;
-                var hfServices = new List<Service>()
+                List<Service> hfServices;
+                if (HomeFinding != null)
                 {
-                    new Service()
+                    hfServices = new List<Service>()
                     {
-                        Selected = hasHF,
-                        CompletedDate = hasHF && HomeFinding.HomeFindingProperties.Count > 0 ? DateTime.Now : (DateTime?) null,
-                        ServiceType = new ServiceType()
+                        new Service()
                         {
-                            Category = ServiceCategory.AccompaniedHomeFinding,
-                            Name = "FindHomes",
-                            ActionLabel = "Find potential homes to view."
-                        }
-                    },
-                    new Service()
-                    {
-                        Selected = hasHF,
-                        CompletedDate = hasHF && HomeFinding.HomeFindingProperties.Any(hf => hf.ViewingDate.HasValue || (hf.selected.HasValue && hf.selected.Value))
-                            ? DateTime.Now
-                            : (DateTime?) null,
-                        ServiceType = new ServiceType()
-                        {
-                            Category = ServiceCategory.AccompaniedHomeFinding,
-                            Name = "ScheduleViewings",
-                            ActionLabel = "Schedule viewings of \"liked\" homes."
-                        }
-                    },
-                    new Service()
-                    {
-                        Selected = hasHF,
-                        CompletedDate = hasHF && HomeFinding.HomeFindingProperties.Any(hf => hf.selected.HasValue && hf.selected.Value)
+                            Selected = true,
+                            CompletedDate = HomeFinding.HomeFindingProperties.Count > 0
                                 ? DateTime.Now
                                 : (DateTime?) null,
-                        ServiceType = new ServiceType()
+                            ServiceType = new ServiceType()
+                            {
+                                Category = ServiceCategory.AccompaniedHomeFinding,
+                                Name = "FindHomes",
+                                ActionLabel = "Find Potential Homes to View"
+                            }
+                        },
+                        new Service()
                         {
-                            Category = ServiceCategory.AccompaniedHomeFinding,
-                            Name = "SelectHome",
-                            ActionLabel = "Select a home."
+                            Selected = true,
+                            CompletedDate = HomeFinding.HomeFindingProperties.Any(hf => hf.ViewingDate.HasValue || (hf.selected.HasValue && hf.selected.Value))
+                                ? DateTime.Now
+                                : (DateTime?) null,
+                            ServiceType = new ServiceType()
+                            {
+                                Category = ServiceCategory.AccompaniedHomeFinding,
+                                Name = "ScheduleViewings",
+                                ActionLabel = "Schedule Viewings of \"Liked\" Homes"
+                            }
+                        },
+                        new Service()
+                        {
+                            Selected = true,
+                            CompletedDate = HomeFinding.HomeFindingProperties.Any(hf => hf.selected.HasValue && hf.selected.Value)
+                                    ? DateTime.Now
+                                    : (DateTime?) null,
+                            ServiceType = new ServiceType()
+                            {
+                                Category = ServiceCategory.AccompaniedHomeFinding,
+                                Name = "SelectHome",
+                                ActionLabel = "Select a Home"
+                            }
                         }
-                    }
-                };
+                    };
+                }
+                else
+                {
+                    hfServices = new List<Service>();
+                }
 
                 return hfServices;
             }
