@@ -29,9 +29,12 @@ var TransfereeAppointmentController = function (transfereeItineraryAppointment) 
             showClear: true,
             showClose: true,
             toolbarPlacement: 'bottom',
-            icons: { close: 'custom-icon-check' },
             useCurrent:false,
-            keepOpen: false
+            keepOpen: false,
+            icons: {
+                close: 'custom-icon-check',
+                clear: 'glyphicon glyphicon-remove'
+            }
         });
 
         var modalParent = appointmentModal.parent().parent();
