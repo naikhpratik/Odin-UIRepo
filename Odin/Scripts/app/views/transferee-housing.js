@@ -194,7 +194,10 @@
             allowInputToggle: true,
             showClear: true,
             toolbarPlacement: 'bottom',
-            icons: { close: 'custom-icon-check' }
+            icons: {
+                close: 'custom-icon-check',
+                clear: 'glyphicon glyphicon-remove'
+            }
         });
         var vuDate = $('input[name=ViewingDate]').parent();
         vuDate.datetimepicker({
@@ -206,7 +209,10 @@
             allowInputToggle: true,
             showClear: true,
             toolbarPlacement: 'bottom',
-            icons: { close: 'custom-icon-check' }
+            icons: {
+                close: 'custom-icon-check',
+                clear: 'glyphicon glyphicon-remove'
+            }
         }).on("dp.hide", function (e) {
             var success = function (result) {
                 toast("You scheduled to view the property at " + e.date.format("MM/DD/YYYY h:mm A"), "success");

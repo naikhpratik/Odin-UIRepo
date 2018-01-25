@@ -78,7 +78,8 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
             ignoreReadonly: true,
             allowInputToggle: true,
             showClear: true,
-            keepOpen: false
+            keepOpen: false,
+            icons: { clear: 'glyphicon glyphicon-remove' }
         }).css("display","none");
 
         //Bind Events

@@ -23,7 +23,8 @@ var TransfereeDetailsController = function (transfereeDetailseService) {
             ignoreReadonly: true,
             allowInputToggle: true,
             showClear: true,
-            keepOpen: false
+            keepOpen: false,
+            icons: { clear: 'glyphicon glyphicon-remove' }
         }).on("dp.change", function (e) { saveServices(e); });
 
         servicesBlocks.find('.time').datetimepicker({
@@ -35,7 +36,10 @@ var TransfereeDetailsController = function (transfereeDetailseService) {
             useCurrent: false,
             toolbarPlacement: 'bottom',
             keepOpen: false,
-            icons: { close: 'custom-icon-check'}
+            icons: {
+                close: 'custom-icon-check',
+                clear: 'glyphicon glyphicon-remove'
+            }
         }).on("dp.hide", function (e) { saveServices(e); });
 
         servicesBlocks.find('.form-control').on("change", function (e) { saveServices(e); });
