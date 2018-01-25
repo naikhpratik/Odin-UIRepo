@@ -24,6 +24,9 @@ var TransfereeAppointmentController = function (transfereeItineraryAppointment) 
         var appointmentModal = $("div#appointmentModal");        
         appointmentModal.find('.date').datetimepicker({    
             format: "DD-MMM-YYYY hh:mm A",
+            ignoreReadonly: true,
+            allowInputToggle: true,
+            showClear: true,
             showClose: true,
             toolbarPlacement: 'bottom',
             icons: { close: 'custom-icon-check' },

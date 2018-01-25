@@ -10,8 +10,8 @@
             foreach (var propertyVM in Model)
             {
 
-            <div class="propertyBody" data-property-id="@propertyVM.Id" data-lat="@propertyVM.PropertyLatitude" data-lng="@propertyVM.PropertyLongitude" data-liked="@propertyVM.Liked">
-            <h5>@propertyVM.PropertyStreet1</h5>
+            <div data-property-id="@propertyVM.Id" data-lat="@propertyVM.PropertyLatitude" data-lng="@propertyVM.PropertyLongitude" data-liked="@propertyVM.Liked">
+            <h5 class="propertyBody">@props<span> - </span>@propertyVM.PropertyStreet1</h5>
             <table class="sectionTable photoTable">
                 <tr>
                     @{

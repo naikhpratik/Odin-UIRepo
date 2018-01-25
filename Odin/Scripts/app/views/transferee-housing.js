@@ -190,6 +190,9 @@
             useCurrent: false,
             keepOpen: true,
             showClose: true,
+            ignoreReadonly: true,
+            allowInputToggle: true,
+            showClear: true,
             toolbarPlacement: 'bottom',
             icons: { close: 'custom-icon-check' }
         });
@@ -199,6 +202,9 @@
             useCurrent: false,
             keepOpen: true,
             showClose: true,
+            ignoreReadonly: true,
+            allowInputToggle: true,
+            showClear: true,
             toolbarPlacement: 'bottom',
             icons: { close: 'custom-icon-check' }
         }).on("dp.hide", function (e) {

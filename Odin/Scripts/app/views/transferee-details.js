@@ -20,11 +20,17 @@ var TransfereeDetailsController = function (transfereeDetailseService) {
         servicesBlocks.find('.date').datetimepicker({
             format: "DD-MMM-YYYY",
             useCurrent: false,
+            ignoreReadonly: true,
+            allowInputToggle: true,
+            showClear: true,
             keepOpen: false
         }).on("dp.change", function (e) { saveServices(e); });
 
         servicesBlocks.find('.time').datetimepicker({
             format: 'LT',
+            ignoreReadonly: true,
+            allowInputToggle: true,
+            showClear: true,
             showClose: true,
             useCurrent: false,
             toolbarPlacement: 'bottom',

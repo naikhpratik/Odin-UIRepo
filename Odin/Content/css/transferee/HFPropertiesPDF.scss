@@ -22,8 +22,7 @@ p.spacer {
 }
 
 .pdfTitle {
-    padding-top: 3rem;
-    margin-bottom:2rem;
+    padding-top: 3rem;    
 }
 
 .sectionTable {
@@ -81,7 +80,9 @@ p.spacer {
         }
     }
 }
-
+.propertyBody {
+    padding-top: 3rem;
+}
 .sectionRow {
     line-height: 1.875rem;
     margin: 1rem 0 0 0;
