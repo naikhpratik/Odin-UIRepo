@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using Odin.Data.Core;
 using Odin.Data.Core.Models;
 using Odin.ToSeWebJob.Domain;
+using Odin.ToSeWebJob.Exceptions;
 using Odin.ToSeWebJob.Helpers;
 using Odin.ToSeWebJob.Interfaces;
 using ServicEngineImporter.Models;
@@ -37,7 +38,12 @@ namespace Odin.ToSeWebJob.QueueProcessors
             using (var client = new HttpClient())
             {
                 var response = await client.SendAsync(request);
-                return await response.Content.ReadAsStringAsync();
+                var content = await response.Content.ReadAsStringAsync();
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new SimImportException(content);
+                }
+                return content;
             }
         }
     }
