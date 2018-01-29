@@ -37,7 +37,7 @@ namespace Odin.ToSeWebJob
         public async Task ProcessQueueMessage([QueueTrigger("odintose")] string message, int dequeueCount, TextWriter log)
         {
             log.WriteLine(message);
-            if (dequeueCount > MaxQueueCount)
+            if (dequeueCount >= MaxQueueCount)
             {
                 log.WriteLine("Hit Max dequeue count");
                 return;
@@ -46,17 +46,8 @@ namespace Odin.ToSeWebJob
             if (queueEntry.QueueTypeId == (int) QueueType.Service)
             {
                 var serviceProcessor = new ServiceProcessor(_unitOfWork);
-                try
-                {
-                    var result = await serviceProcessor.ProcessService(queueEntry.ObjectId, log);
-                    log.WriteLine($"Service Process Result: {result}");
-                }
-                catch 
-                {
-                    // If it hit max dequeue count 
-                    if(dequeueCount == MaxQueueCount)
-                        throw;
-                }
+                var result = await serviceProcessor.ProcessService(queueEntry.ObjectId, log);
+                log.WriteLine($"Service Process Result: {result}");
             }
         }
 
