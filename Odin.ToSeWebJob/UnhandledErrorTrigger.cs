@@ -19,7 +19,7 @@ namespace Odin.ToSeWebJob
             _telemetryClient = telemetryClient;
         }
 
-        public void UnHandledException([ErrorTrigger("0:01:00", 1)] TraceFilter filter, TextWriter log)
+        public void UnHandledException([ErrorTrigger("0:01:00", 4)] TraceFilter filter, TextWriter log)
         {
             foreach (var traceEvent in filter.GetEvents())
             {

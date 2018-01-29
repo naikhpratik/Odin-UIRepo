@@ -39,10 +39,9 @@ namespace Odin.ToSeWebJob.QueueProcessors
             {
                 var response = await client.SendAsync(request);
                 var content = await response.Content.ReadAsStringAsync();
-                log.WriteLine($"response code {response.IsSuccessStatusCode}  {response.StatusCode}");
+                log.WriteLine($"response code {response.IsSuccessStatusCode} : {response.StatusCode}");
                 if (!response.IsSuccessStatusCode)
                 {
-                    log.WriteLine("Was not successful");
                     throw new SimImportException(content);
                 }
                 return content;
