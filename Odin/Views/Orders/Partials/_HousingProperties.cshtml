@@ -92,13 +92,16 @@
                 </div>
                 <div class="col-md-1 col-xs-12 comments" data-property-id="@propertyVM.Id">
                     <label class="mobileLabel">Property Comments</label>
-                    @if (ViewBag.IsPDF != true)
+                    @if (propertyVM.Messages.Count() == 0)
                     {
-                        <img src="~/Content/Images/icn_chat_bubble.png" />
-                    }
-                    @if (propertyVM.ReadCount != 0 || ViewBag.IsPDF == true)
+                    <img class="nomessages" src="~/Content/Images/icn_chat_bubble.png" />
+                    }else if (propertyVM.Messages.Count()>0)
                     {
-                        <span style="text-align:center">@propertyVM.ReadCount</span>
+                    <img class="hasmessages" src="~/Content/Images/icn_chat_bubble.png" />
+                        if (propertyVM.ReadCount > 0)
+                        {
+                            <span style="text-align:center">@propertyVM.ReadCount</span>
+                        }
                     }
                 </div>
             </li>

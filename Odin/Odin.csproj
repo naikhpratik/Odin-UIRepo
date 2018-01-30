@@ -19,7 +19,7 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>44312</IISExpressSSLPort>
+    <IISExpressSSLPort>44394</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -468,12 +468,6 @@
     <Content Include="Content\css\transferee\help.min.css">
       <DependentUpon>help.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\transferee\HFProperties.css">
-      <DependentUpon>HFPropertiesPDF.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\transferee\HFProperties.min.css">
-      <DependentUpon>HFProperties.css</DependentUpon>
-    </Content>
     <Content Include="Content\css\transferee\HFPropertiesPDF.css">
       <DependentUpon>HFPropertiesPDF.scss</DependentUpon>
     </Content>
@@ -729,7 +723,9 @@
     <Content Include="Content\Images\icn_ln_non_selected_like.png" />
     <Content Include="Content\Images\icn_ln_selected_dislike.png" />
     <Content Include="Content\Images\icn_ln_selected_like.png" />
+    <Content Include="Content\Images\icn_lookup.png" />
     <Content Include="Content\Images\icn_marker.png" />
+    <Content Include="Content\Images\icn_msg.png" />
     <Content Include="Content\Images\icn_person.png" />
     <Content Include="Content\Images\icn_profile_B1.png" />
     <Content Include="Content\Images\icn_housing.png" />
