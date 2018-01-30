@@ -63,13 +63,9 @@
         <div class="row intake-row collapse in">
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.PreTripDateDisplay)
-<<<<<<< HEAD
                 <span id="spanPreTripDate" class="intake-span">@Model.PreTripDateDisplay</span>
                 @Html.DatePicker("intake-date date", "PreTripDate", Model.PreTripDate)
-=======
-                <span class="intake-span">@Model.PreTripDateDisplay</span>
-                @Html.DatePicker("date intake-date", "PreTripDate", Model.PreTripDate)
->>>>>>> master
+
                 @Html.HiddenFor(model => @Model.PreTripDateDisplay, new { @class = "intake-hidden" })
             </div>
             <div class="col-xs-6 col-sm-6 col-md-7 col-lg-7 intake-col">
@@ -82,24 +78,16 @@
         <div class="row intake-row collapse in">
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.EstimatedArrivalDateDisplay)
-<<<<<<< HEAD
+
                 <span id="spanEstimatedArrivalDate" class="intake-span">@Model.EstimatedArrivalDateDisplay</span>
                 @Html.DatePicker("intake-date date", "EstimatedArrivalDate", Model.EstimatedArrivalDate)
-=======
-                <span class="intake-span">@Model.EstimatedArrivalDateDisplay</span>
-                @Html.DatePicker("date intake-date", "EstimatedArrivalDate", Model.EstimatedArrivalDate)
->>>>>>> master
+
                 @Html.HiddenFor(model => @Model.EstimatedArrivalDateDisplay, new { @class = "intake-hidden" })
             </div>
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.WorkStartDateDisplay)
-<<<<<<< HEAD
                 <span id="spanWorkStartDate" class="intake-span">@Model.WorkStartDateDisplay</span>
                 @Html.DatePicker("intake-date date", "WorkStartDate", Model.WorkStartDate)
-=======
-                <span class="intake-span">@Model.WorkStartDateDisplay</span>
-                @Html.DatePicker("date intake-date", "WorkStartDate", Model.WorkStartDate)
->>>>>>> master
                 @Html.HiddenFor(model => @Model.WorkStartDateDisplay, new { @class = "intake-hidden" })
             </div>
         </div>

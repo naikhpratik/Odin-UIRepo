@@ -288,7 +288,7 @@ namespace Odin.UITests.Views.Orders
         [TestMethod]
         public void Transferee_Intakepage_ShouldCheckandUpdateGeneral()
         {
-
+           
             help.initialsteps();
             orders = help.getOrders();
             for (int i = 0; i < orders.Count(); i++)
@@ -298,20 +298,7 @@ namespace Odin.UITests.Views.Orders
                 var db_order = _unitOfWork.Orders.GetOrderById(order_id);
                 _driver.Navigate().GoToUrl(this.baseURL + "/Orders/Transferee/" + order_id);
                 help.delay(800);
-
-
-                /**
-                var city = GetElement( _driver, By.Id("spanOriginCity"),10);
-                var state = _driver.FindElement(By.Id("spanOriginState")).Text;
-                var country = _driver.FindElement(By.Id("spanOriginCountry")).Text;
-                var prepre = DateHelper.GetViewFormat(db_order.PreTripDate);
-                var Pre = GetElement(_driver, By.Id("spanPreTripDateDisplay"), 10);
-                Xunit.Assert.Equal(db_order.DestinationCity, _driver.FindElement(By.CssSelector("span#spanDestinationCity.intake-span")).Text);
-                Xunit.Assert.Equal(db_order.DestinationState, _driver.FindElement(By.CssSelector("span#spanDestinationState.intake-span")).Text);
-                Xunit.Assert.Equal(db_order.DestinationCountry, _driver.FindElement(By.CssSelector("span#spanDestinationCountry.intake-span")).Text);
-                **/
-
-
+                
                 var click_expand = help.GetElementClick(_driver, By.XPath("(//img[@class = 'intake-expand-img'])[12]"), 10);
                 var click_collapse = help.GetElementClick(_driver, By.XPath("(//img[@class = 'intake-collapse-img'])[12]"), 10);
                 ((IJavaScriptExecutor)_driver).ExecuteScript("scroll(0,1200)");
