@@ -15,5 +15,6 @@ namespace Odin.Data.Core.Models
         public bool? Liked { get; set; }
         public DateTime? ViewingDate { get; set; }
         public virtual ICollection<Message> Messages { get; set; }
+        public bool? selected { get; set; }
     }
 }

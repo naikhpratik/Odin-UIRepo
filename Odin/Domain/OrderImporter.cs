@@ -26,10 +26,12 @@ namespace Odin.Domain
         public void ImportOrder(OrderDto orderDto)
         {
             var order = _unitOfWork.Orders.GetOrderByTrackingId(orderDto.TrackingId);
+
+            // Will error if no consultant is found, expected behaivor, an order doesn't make sense without a consultant
             Consultant consultant = _unitOfWork.Consultants.GetConsultantBySeContactUid(orderDto.Consultant.SeContactUid);
             var consultantId = consultant.Id;
-            var transferee = _unitOfWork.Transferees.GetTransfereeByEmail(orderDto.Transferee.Email);
 
+            var transferee = _unitOfWork.Transferees.GetTransfereeByEmail(orderDto.Transferee.Email);
 
             var programManagerId = _unitOfWork.Managers.GetManagerBySeContactUid(orderDto.ProgramManager.SeContactUid).Id;
 

@@ -1,0 +1,104 @@
+﻿@using Odin.Data.Core.Models
+@model IEnumerable<Odin.ViewModels.Orders.Transferee.HousingPropertyViewModel>
+
+<div id="propertiesBlock">
+    <h4 class="pdfTitle">
+        @ViewBag.Title
+    </h4>
+
+    @{var props = 1;
+            foreach (var propertyVM in Model)
+            {
+
+            <div data-property-id="@propertyVM.Id" data-lat="@propertyVM.PropertyLatitude" data-lng="@propertyVM.PropertyLongitude" data-liked="@propertyVM.Liked">
+            <h5 class="propertyBody">@props<span> - </span>@propertyVM.PropertyStreet1</h5>
+            <table class="sectionTable photoTable">
+                <tr>
+                    @{
+                        int kount = 0;
+                        if (propertyVM.PropertyPhotos.Count() == 0)
+                        {
+                            <th>No photographs submitted for this property.</th>
+                        }
+                        foreach (var photo in propertyVM.PropertyPhotos)
+                        {
+                            if ((kount % 5) == 0 && kount > 0)
+                            {
+                                @:</tr><tr>
+                            }
+                            <td class="photo">
+                                <img class="location" src="@photo.PhotoUrl" />
+                            </td>
+                            kount = kount + 1;
+                            if ((kount % 5) == 0)
+                            {
+                                @:</tr>
+                            }
+                            if (kount > 9)
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    </tr>
+                </table>
+            </div>
+            <div class="sectionRow">
+                <div class="addressPDF">
+                    <label>Address:</label>
+                    <p class="propertyAddress">
+                        @Html.DisplayFor(m => propertyVM.PropertyAddress)
+                    </p>
+                </div>
+                <div class="itemUnit">
+                    <label>Availability Date:</label>
+                    <p>
+                        @Html.DisplayFor(m => propertyVM.PropertyAvailabilityDate)
+                    </p>
+                </div>
+                <div class="itemUnit">
+                    <label>Bedrooms:</label>
+                    <p>
+                        @Html.DisplayFor(m => propertyVM.PropertyNumberOfBedrooms)
+                    </p>
+                </div>
+                <div class="itemUnit">
+                    <label>Bathrooms:</label>
+                    <p>
+                        @Html.DisplayFor(m => propertyVM.PropertyNumberOfBathrooms)
+                    </p>
+                </div>
+            </div>
+            <div class="sectionRow">
+                <div class="itemUnit">
+                    <label>Rent Amount:</label>
+                    <p>
+                        @Html.DisplayFor(m => propertyVM.PropertyAmount)
+                    </p>
+                </div>
+                <div class="itemUnit">
+                    <label>Square Footage:</label>
+                    <p>
+                        @Html.DisplayFor(m => propertyVM.PropertySquareFootage)
+                    </p>
+                </div>
+                <div class="itemUnit">
+                    <label>Scheduled Viewing:</label>
+                    <p>@(propertyVM.ViewingDate.HasValue ? Html.DisplayFor(m => propertyVM.ViewingDate).ToString() : "N/A")</p>
+                </div>
+                <div class="itemUnit">
+                    <label>Like or Dislike:</label>
+                    <p>@(propertyVM.Liked.HasValue ? (Html.DisplayFor(m => propertyVM.Liked, new { propertyId = propertyVM.Id }).ToString() == "False" ? "DisLike" : "Like") : "N/A")</p>
+                </div>
+            </div>
+            <hr />
+            if ((props % 2) == 0)
+            {
+                <P class="breakhere" />
+                }
+                props++;
+            }
+    }
+
+</div>
+@Styles.Render("~/Styling/propertiesPDF")

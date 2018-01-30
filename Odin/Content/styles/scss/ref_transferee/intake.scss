@@ -1,11 +1,3 @@
-﻿div[data-notify].alert-success {
-    background-color: $DW_LtPurple;
-}
-
-div[data-notify].alert-danger {
-    background-color: $DW_Red;
-}
-
 
 div#intake {
 
@@ -101,12 +93,6 @@ div#intake {
                     display: none;
 
                     input {
-                        color: $DW_Blue;
-                        font-size: 16px;
-                        display: none;
-                    }
-
-                    span {
                         color: $DW_Blue;
                     }
                 }

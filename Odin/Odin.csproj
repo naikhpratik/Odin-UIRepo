@@ -58,6 +58,30 @@
     <Reference Include="HtmlSanitizer, Version=3.0.0.0, Culture=neutral, PublicKeyToken=61c49a1a9e79cc28, processorArchitecture=MSIL">
       <HintPath>..\packages\HtmlSanitizer.4.0.181\lib\net45\HtmlSanitizer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.4.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.4.1\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.4.1\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.4.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.4.1\lib\net45\Microsoft.AI.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.4.1\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.4.0\lib\net46\Microsoft.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.TelemetryCorrelation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.TelemetryCorrelation.1.0.0\lib\net45\Microsoft.AspNet.TelemetryCorrelation.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Azure.KeyVault.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Azure.KeyVault.Core.1.0.0\lib\net40\Microsoft.Azure.KeyVault.Core.dll</HintPath>
     </Reference>
@@ -145,6 +169,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.4.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
@@ -273,27 +300,6 @@
     <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
       <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.0.1\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.ApplicationInsights">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.2.2.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AI.Agent.Intercept">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AI.DependencyCollector">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.2.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AI.PerfCounterCollector">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.2.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AI.ServerTelemetryChannel">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.2.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AI.WindowsServer">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.2.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AI.Web">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.2.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AzureStorageStartup.cs" />
@@ -330,6 +336,7 @@
     <Compile Include="Domain\ConsultantImporter.cs" />
     <Compile Include="Domain\ManagerImporter.cs" />
     <Compile Include="Domain\OrderImporter.cs" />
+    <Compile Include="Exceptions\ModelValidationFilterException.cs" />
     <Compile Include="Extensions\HttpResponseMessageExtensions.cs" />
     <Compile Include="Extensions\UserExtensions.cs" />
     <Compile Include="Filters\AiHandleErrorAttribute.cs" />
@@ -626,6 +633,7 @@
     <Content Include="Content\Images\forgot_password.jpg" />
     <Content Include="Content\Images\icn_alert_B1.png" />
     <Content Include="Content\Images\icn_alert_circle.png" />
+    <Content Include="Content\Images\icn_attention.png" />
     <Content Include="Content\Images\icn_cal_B1.png" />
     <Content Include="Content\Images\icn_chat_1.png" />
     <Content Include="Content\Images\icn_chat_2.png" />
@@ -642,7 +650,9 @@
     <Content Include="Content\Images\icn_ln_non_selected_like.png" />
     <Content Include="Content\Images\icn_ln_selected_dislike.png" />
     <Content Include="Content\Images\icn_ln_selected_like.png" />
+    <Content Include="Content\Images\icn_lookup.png" />
     <Content Include="Content\Images\icn_marker.png" />
+    <Content Include="Content\Images\icn_msg.png" />
     <Content Include="Content\Images\icn_person.png" />
     <Content Include="Content\Images\icn_profile_B1.png" />
     <Content Include="Content\Images\icn_housing.png" />
@@ -659,6 +669,16 @@
     <Content Include="Content\Images\marker-icon-2x.png" />
     <Content Include="Content\Images\marker-icon.png" />
     <Content Include="Content\Images\marker-shadow.png" />
+    <Content Include="Content\Images\pic1.jpg" />
+    <Content Include="Content\Images\pic10.jpg" />
+    <Content Include="Content\Images\pic2.jpg" />
+    <Content Include="Content\Images\pic3.jpg" />
+    <Content Include="Content\Images\pic4.jpg" />
+    <Content Include="Content\Images\pic5.jpg" />
+    <Content Include="Content\Images\pic6.jpg" />
+    <Content Include="Content\Images\pic7.jpg" />
+    <Content Include="Content\Images\pic8.jpg" />
+    <Content Include="Content\Images\pic9.jpg" />
     <Content Include="Content\Images\popout_sml_img.png" />
     <Content Include="Content\Images\task_done.png" />
     <Content Include="Content\Images\task_notDone.png" />
@@ -700,12 +720,6 @@
     </Content>
     <Content Include="Content\styles\scss\ref_transferee\help.min.css">
       <DependentUpon>help.css</DependentUpon>
-    </Content>
-    <Content Include="Content\styles\scss\ref_transferee\HFProperties.css">
-      <DependentUpon>HFProperties.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\styles\scss\ref_transferee\HFProperties.min.css">
-      <DependentUpon>HFProperties.css</DependentUpon>
     </Content>
     <Content Include="Content\styles\scss\ref_transferee\history.css">
       <DependentUpon>history.scss</DependentUpon>
@@ -822,6 +836,7 @@
     <Content Include="Scripts\app\views\transferee-details.js" />
     <Content Include="Scripts\app\views\transferee-itinerary.js" />
     <Content Include="Scripts\app\views\transferee-intake.js" />
+    <Content Include="Scripts\app\views\transferee-selectedproperty.js" />
     <Content Include="Scripts\app\views\transferee.js" />
     <Content Include="Scripts\app\views\forgotPassword.js" />
     <Content Include="Scripts\app\views\orders.js" />
@@ -868,7 +883,6 @@
     <Content Include="Content\styles\scss\ref_transferee\dashboard.scss" />
     <Content Include="Content\styles\scss\ref_transferee\details.scss" />
     <Content Include="Content\styles\scss\ref_transferee\help.scss" />
-    <TypeScriptCompile Include="Content\styles\scss\ref_transferee\HFProperties.scss" />
     <Content Include="Content\styles\scss\ref_transferee\history.scss" />
     <Content Include="Content\styles\scss\ref_transferee\housing.scss" />
     <Content Include="Content\styles\scss\ref_transferee\intake.scss" />
@@ -882,6 +896,8 @@
     <Content Include="Content\styles\scss\4_components\primaryNav.scss" />
     <Content Include="Content\styles\scss\4_components\loadingAnimation.scss" />
     <Content Include="Content\styles\scss\4_components\carousel.scss" />
+    <Content Include="Content\styles\scss\ref_selectedProperty.scss" />
+    <Content Include="Content\styles\scss\ref_transferee\HFPropertiesPDF.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
@@ -1060,6 +1076,9 @@
     <Content Include="Views\Orders\Partials\_Message.cshtml" />
     <Content Include="Views\Error\Error404.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\Orders\Partials\_SelectedProperty.cshtml" />
+    <Content Include="Views\PDF\PDFProperties.cshtml" />
+    <Content Include="Views\PDF\PDFItinerary.cshtml" />
     <None Include="Web.Azure.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

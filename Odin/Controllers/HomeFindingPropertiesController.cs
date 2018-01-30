@@ -34,6 +34,7 @@ namespace Odin.Controllers
             HomeFindingProperty homeFindingProperty = new HomeFindingProperty();
             // mapping wipes out the Id - this is hack to resolve that
             propertyVM.Id = homeFindingProperty.Id;
+            propertyVM.CurrUser = User;
             _mapper.Map<HousingPropertyViewModel, HomeFindingProperty>(propertyVM, homeFindingProperty);
 
             Order order = _unitOfWork.Orders.GetOrderFor(userId, propertyVM.OrderId, User.GetUserRole());
@@ -67,7 +68,7 @@ namespace Odin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.ServiceUnavailable);
             }
 
-            return new HttpStatusCodeResult(HttpStatusCode.NoContent);
+            return new HttpStatusCodeResult(HttpStatusCode.Created);
         }
 
         [HttpPut]
@@ -101,6 +102,39 @@ namespace Odin.Controllers
 
             _unitOfWork.Complete();
 
+            return new HttpStatusCodeResult(HttpStatusCode.NoContent);
+        }
+
+        [HttpPut]
+        public ActionResult Select(string id)
+        {
+            HomeFindingProperty homeFindingProperty;
+            homeFindingProperty = _unitOfWork.HomeFindingProperties.GetHomeFindingPropertyById(id);
+            if (homeFindingProperty != null)
+            {   if (homeFindingProperty.selected.HasValue)
+                    homeFindingProperty.selected = !homeFindingProperty.selected;
+                else
+                    homeFindingProperty.selected = true;
+            }
+            _unitOfWork.Complete();
+            return new HttpStatusCodeResult(HttpStatusCode.NoContent);
+        }
+
+        [HttpPut]
+        public ActionResult SelectProperty(string id)
+        {
+            HomeFindingProperty homeFindingProperty;
+            homeFindingProperty = _unitOfWork.HomeFindingProperties.GetHomeFindingPropertyById(id);
+            if (homeFindingProperty != null)
+            {
+                if (homeFindingProperty.selected.HasValue)
+                    homeFindingProperty.selected = !homeFindingProperty.selected;
+                else
+                {
+
+                }
+            }
+            _unitOfWork.Complete();
             return new HttpStatusCodeResult(HttpStatusCode.NoContent);
         }
 

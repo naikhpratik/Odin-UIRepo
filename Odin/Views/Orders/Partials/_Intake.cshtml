@@ -37,7 +37,7 @@
             </li>
             <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
                 @Html.LabelFor(model => @Model.Transferee.Email)
-                <p class="input-group date">@Model.Transferee.Email</p>
+                <p class="input-group">@Model.Transferee.Email</p>
             </li>
             <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
                 @Html.LabelFor(model => @Model.Transferee.PhoneNumber)
@@ -64,7 +64,7 @@
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.PreTripDateDisplay)
                 <span class="intake-span">@Model.PreTripDateDisplay</span>
-                @Html.DatePicker("intake-date date", "PreTripDate", Model.PreTripDate)
+                @Html.DatePicker("date intake-date", "PreTripDate", Model.PreTripDate)
                 @Html.HiddenFor(model => @Model.PreTripDateDisplay, new { @class = "intake-hidden" })
             </div>
             <div class="col-xs-6 col-sm-6 col-md-7 col-lg-7 intake-col">
@@ -78,13 +78,13 @@
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.EstimatedArrivalDateDisplay)
                 <span class="intake-span">@Model.EstimatedArrivalDateDisplay</span>
-                @Html.DatePicker("intake-date date", "EstimatedArrivalDate", Model.EstimatedArrivalDate)
+                @Html.DatePicker("date intake-date", "EstimatedArrivalDate", Model.EstimatedArrivalDate)
                 @Html.HiddenFor(model => @Model.EstimatedArrivalDateDisplay, new { @class = "intake-hidden" })
             </div>
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.WorkStartDateDisplay)
                 <span class="intake-span">@Model.WorkStartDateDisplay</span>
-                @Html.DatePicker("intake-date date", "WorkStartDate", Model.WorkStartDate)
+                @Html.DatePicker("date intake-date", "WorkStartDate", Model.WorkStartDate)
                 @Html.HiddenFor(model => @Model.WorkStartDateDisplay, new { @class = "intake-hidden" })
             </div>
         </div>
@@ -94,7 +94,7 @@
                 <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                     @Html.LabelFor(model => @Model.EstimatedDepartureDateDisplay)
                     <span class="intake-span">@Model.EstimatedDepartureDateDisplay</span>
-                    @Html.DatePicker("intake-date date", "EstimatedDepartureDate", Model.EstimatedDepartureDate)
+                    @Html.DatePicker("date intake-date", "EstimatedDepartureDate", Model.EstimatedDepartureDate)
                     @Html.HiddenFor(model => @Model.EstimatedDepartureDateDisplay, new { @class = "intake-hidden" })
                 </div>
             </div>
@@ -297,26 +297,26 @@
                 x Cancel
             </span>
         </div>
-        <ul class="row sectionList intake-row collapse in">
-            <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
+        <div class="row intake-row collapse in">
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.DestinationCity)
                 <span class="intake-span">@Model.DestinationCity</span>
                 @Html.TextBoxFor(m => @Model.DestinationCity, new { @class = "form-control intake-input" })
                 @Html.HiddenFor(m => @Model.DestinationCity, new { @class = "intake-hidden" })
-            </li>
-            <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.DestinationState)
                 <span class="intake-span">@Model.DestinationState</span>
                 @Html.TextBoxFor(m => @Model.DestinationState, new { @class = "form-control intake-input" })
                 @Html.HiddenFor(m => @Model.DestinationState, new { @class = "intake-hidden" })
-            </li>
-            <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.DestinationCountry)
                 <span class="intake-span">@Model.DestinationCountry</span>
                 @Html.TextBoxFor(m => @Model.DestinationCountry, new { @class = "form-control intake-input" })
                 @Html.HiddenFor(m => @Model.DestinationCountry, new { @class = "intake-hidden" })
-            </li>
-        </ul>
+            </div>
+        </div>
     </div>
     <hr />
     <div class="intake-block" data-block="origin">
@@ -333,26 +333,26 @@
                 x Cancel
             </span>
         </div>
-        <ul class="row sectionList intake-row collapse in">
-            <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
+        <div class="row intake-row collapse in">
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.OriginCity)
                 <span class="intake-span">@Model.OriginCity</span>
                 @Html.TextBoxFor(m => @Model.OriginCity, new { @class = "form-control intake-input" })
                 @Html.HiddenFor(m => @Model.OriginCity, new { @class = "intake-hidden" })
-            </li>
-            <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.OriginState)
                 <span class="intake-span">@Model.OriginState</span>
                 @Html.TextBoxFor(m => @Model.OriginState, new { @class = "form-control intake-input" })
                 @Html.HiddenFor(m => @Model.OriginState, new { @class = "intake-hidden" })
-            </li>
-            <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.OriginCountry)
                 <span class="intake-span">@Model.OriginCountry</span>
                 @Html.TextBoxFor(m => @Model.OriginCountry, new { @class = "form-control intake-input" })
                 @Html.HiddenFor(m => @Model.OriginCountry, new { @class = "intake-hidden" })
-            </li>
-        </ul>
+            </div>
+        </div>
     </div>
     <hr />
     <div class="intake-block" data-block="homefinding">
@@ -497,7 +497,7 @@
             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.TempHousingEndDateDisplay)
                 <span class="intake-span">@Model.TempHousingEndDateDisplay</span>
-                @Html.DatePicker("intake-date date", "TempHousingEndDateDisplay", Model.TempHousingEndDate)
+                @Html.DatePicker("date intake-date", "TempHousingEndDate", Model.TempHousingEndDate)
                 @Html.HiddenFor(Model => @Model.TempHousingEndDateDisplay, new { @class = "intake-hidden" })
             </div>
         </div>
@@ -555,20 +555,20 @@
                 <h2 class="sectionSubHead">RMC Information</h2>
             </div>
         </div>
-        <ul class="row sectionList intake-row collapse in">
-            <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+        <div class="row intake-row collapse in">
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.Rmc)
-                <p class="intake-span">@Model.Rmc</p>
-            </li>
-            <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                <span class="intake-span">@Model.Rmc</span>
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.RmcContact)
-                <p class="intake-span">@Model.RmcContact</p>
-            </li>
-            <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                <span class="intake-span">@Model.RmcContact</span>
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 intake-col">
                 @Html.LabelFor(model => @Model.RmcContactEmail)
-                <p class="intake-span">@Model.RmcContactEmail</p>
-            </li>
-        </ul>
+                <span class="intake-span">@Model.RmcContactEmail</span>
+            </div>
+        </div>
     </div>
     <hr />
     <div class="intake-block">

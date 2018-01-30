@@ -112,5 +112,64 @@ namespace Odin.Data.Core.Models
             return Services.FirstOrDefault<Service>(s => s.ServiceTypeId == serviceTypeId);
         }
 
+        public IEnumerable<Service> HomeFindingServices
+        {
+            get
+            {
+                List<Service> hfServices;
+                if (HomeFinding != null)
+                {
+                    hfServices = new List<Service>()
+                    {
+                        new Service()
+                        {
+                            Selected = true,
+                            CompletedDate = HomeFinding.HomeFindingProperties.Count > 0
+                                ? DateTime.Now
+                                : (DateTime?) null,
+                            ServiceType = new ServiceType()
+                            {
+                                Category = ServiceCategory.AccompaniedHomeFinding,
+                                Name = "FindHomes",
+                                ActionLabel = "Find Potential Homes to View"
+                            }
+                        },
+                        new Service()
+                        {
+                            Selected = true,
+                            CompletedDate = HomeFinding.HomeFindingProperties.Any(hf => hf.ViewingDate.HasValue || (hf.selected.HasValue && hf.selected.Value))
+                                ? DateTime.Now
+                                : (DateTime?) null,
+                            ServiceType = new ServiceType()
+                            {
+                                Category = ServiceCategory.AccompaniedHomeFinding,
+                                Name = "ScheduleViewings",
+                                ActionLabel = "Schedule Viewings of \"Liked\" Homes"
+                            }
+                        },
+                        new Service()
+                        {
+                            Selected = true,
+                            CompletedDate = HomeFinding.HomeFindingProperties.Any(hf => hf.selected.HasValue && hf.selected.Value)
+                                    ? DateTime.Now
+                                    : (DateTime?) null,
+                            ServiceType = new ServiceType()
+                            {
+                                Category = ServiceCategory.AccompaniedHomeFinding,
+                                Name = "SelectHome",
+                                ActionLabel = "Select a Home"
+                            }
+                        }
+                    };
+                }
+                else
+                {
+                    hfServices = new List<Service>();
+                }
+
+                return hfServices;
+            }
+        }
+
     }
 }

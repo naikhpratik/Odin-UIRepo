@@ -1,8 +1,55 @@
+<<<<<<< HEAD:Odin/Content/styles/scss/ref_transferee/intake.css
 ﻿div[data-notify].alert-success {
   background-color: #8d0b56; }
 
 div[data-notify].alert-danger {
   background-color: #e53c2e; }
+=======
+﻿html, body {
+  background-color: #f1f1f1; }
+
+a.dw_logo {
+  display: flex;
+  text-decoration: none;
+  align-items: center; }
+  a.dw_logo img.primaryNavHome__logo--mobile {
+    display: block;
+    height: 3rem;
+    width: auto;
+    text-decoration: none;
+    margin-right: 0.325rem; }
+  a.dw_logo img.primaryNavHome__logo {
+    display: none; }
+  a.dw_logo > p {
+    text-decoration: none;
+    line-height: 3rem;
+    height: 3rem;
+    color: #49ae44;
+    font-size: 2rem;
+    font-weight: 300;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    padding-left: 0.5rem;
+    margin-left: 0.5rem;
+    border-left: 1px solid #acacac; }
+  @media screen and (min-width: 48rem) {
+    a.dw_logo {
+      margin-left: 0.5rem; }
+      a.dw_logo img.primaryNavHome__logo--mobile {
+        display: none; }
+      a.dw_logo img.primaryNavHome__logo {
+        display: block;
+        height: 3rem;
+        width: auto;
+        padding-right: 0.325rem; } }
+  a.dw_logo:hover > p {
+    text-decoration: none; }
+
+.centered_logo {
+  display: flex;
+  justify-content: center;
+  margin: 3rem 0; }
+>>>>>>> master:Odin/Content/css/transferee/intake.css
 
 div#intake div.row {
   text-align: left;
@@ -64,10 +111,6 @@ div#intake .intake-block {
     div#intake .intake-block .intake-row .intake-col .intake-date {
       display: none; }
       div#intake .intake-block .intake-row .intake-col .intake-date input {
-        color: #31a4dd;
-        font-size: 16px;
-        display: none; }
-      div#intake .intake-block .intake-row .intake-col .intake-date span {
         color: #31a4dd; }
   div#intake .intake-block .intake-row .intake-col-add {
     min-height: 0px; }

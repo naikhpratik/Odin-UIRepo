@@ -30,5 +30,13 @@
   {
     "outputFile": "Content/styles/css/ref_itineraryPdf.css",
     "inputFile": "Content/styles/scss/ref_itineraryPdf.scss"
+  },
+  {    
+    "outputFile": "Content/styles/css/ref_transferee/HFPropertiesPDF.css",
+    "inputFile": "Content/styles/scss/ref_transferee/HFPropertiesPDF.scss"
+  },
+  {
+    "outputFile": "Content/styles/css/ref_selectedProperty.css",
+    "inputFile": "Content/styles/scss/ref_selectedProperty.scss"
   }
 ]

@@ -16,7 +16,7 @@
                 else
                 {
                 @Html.DisplayNameFor(Model => Model.ScheduledDate)
-                @Html.DatePicker("date", "ScheduledDate", Model.ScheduledDate.HasValue ? Model.ScheduledDate.Value : DateTime.Now)
+                @Html.DatePicker("date", "ScheduledDate", Model.ScheduledDate.HasValue ? Model.ScheduledDate.Value : DateTime.Now.AddDays(1))
                 @Html.DisplayNameFor(Model => Model.Description)
                 @Html.EditorFor(Model => Model.Description, new { htmlAttributes = new { @class = "form-control", @type = "input", @style = "max-width:100%" } })
             }

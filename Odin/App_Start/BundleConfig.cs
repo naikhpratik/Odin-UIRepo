@@ -13,10 +13,10 @@ namespace Odin
                         "~/Scripts/app/controllers/userManagementController.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/lib").Include(
-                        "~/Scripts/jquery-{version}.js",                        
+                        "~/Scripts/jquery-{version}.js",
                         "~/Scripts/bootstrap.js",
                         "~/Scripts/moment.js",
-                        "~/Scripts/bootstrap-datetimepicker.js",                        
+                        "~/Scripts/bootstrap-datetimepicker.js",
                         "~/Scripts/respond.js",
                         "~/Scripts/jspdf.min.js",
                         "~/Scripts/datatables/jquery.datatables.js",
@@ -47,6 +47,7 @@ namespace Odin
                 "~/Scripts/app/views/transferee-itinerary.js",
                 "~/Scripts/app/views/transferee-itin-appntmt.js",
                 "~/Scripts/app/views/transferee-hfp-messages.js",
+                "~/Scripts/app/views/transferee-selectedProperty.js",
                 "~/Scripts/leaflet.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/forgotPassword").Include(
@@ -75,14 +76,16 @@ namespace Odin
             bundles.Add(new StyleBundle("~/Styling/orders").Include("~/Content/styles/css/ref_orders.css","~/Content/styles/css/typeahead.css"));
             bundles.Add(new StyleBundle("~/Styling/login").Include("~/Content/styles/css/ref_login.css"));
             bundles.Add(new StyleBundle("~/Styling/forgotPassword").Include("~/Content/styles/css/ref_forgotpassword.css"));
-           
             bundles.Add(new StyleBundle("~/Styling/bookmarklet").Include("~/Content/styles/ref_bookmarklet.css"));
-
             bundles.Add(new StyleBundle("~/Styling/transferee").Include("~/Content/styles/css/ref_transferee.css"));
-            
             bundles.Add(new StyleBundle("~/Styling/itineraryPdf").Include("~/Content/styles/css/ref_itineraryPdf.css"));
-            
-           
+            bundles.Add(new StyleBundle("~/Styling/propertiesPDF").Include("~/Content/styles/css/ref_transferee/HFPropertiesPDF.css"));
+            bundles.Add(new StyleBundle("~/Styling/selectedProperty").Include("~/Content/styles/css/ref_selectedProperty.css"));
+
+
+
+
+
 
         }
     }

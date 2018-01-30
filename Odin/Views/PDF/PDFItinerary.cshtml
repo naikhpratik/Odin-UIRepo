@@ -1,0 +1,100 @@
+﻿@using Odin.Data.Core.Models
+@model Odin.ViewModels.Orders.Transferee.OrdersTransfereeItineraryViewModel
+
+<div class="container-fluid" data-order-id="@Model.Id" id="itinerary">
+    <img style="margin-top:20px;float:right;" src="@Server.MapPath("~/Content/Images/dwellworks_icon.png")">
+    <div class="row">
+        <div class="col-md-6 titleGroup">           
+                <h3 class="sectionTitle" style="padding-top:10px;">
+                    @(Model.TransfereeName + "'s Itinerary")
+                </h3>
+
+                <style>
+                    ul.itineraryDayList{
+                        margin-left: 1.5rem;
+                    }
+                </style>
+           
+            <p class="sectionInstruction">
+                What is going on. Check to see what you have planned. To stay on top of things.
+            </p>
+        </div>
+       <div class="col-md-6"></div>       
+    </div>
+    <ul class="sectionList event-item row" data-entity-id="@Model.Id">
+        @for (int i = 0; i < Model.Itinerary.Count(); i++)
+        {
+            var elem = Model.Itinerary.ElementAt(i);
+            string link = "";
+            DateTime? dt = (DateTime?)(elem).ScheduledDate;
+
+            string id = Model.Id;
+            if (Model.Itinerary.ElementAt(i).ItemType.Contains("Service"))
+            {
+                link = "window.history.pushState('link', 'fromitinerary', '#details');OrdersPageController.loadPanel('details');";
+                if (!dt.HasValue)
+                {
+                    continue;
+                }
+            }
+            else if (Model.Itinerary.ElementAt(i).ItemType.Contains("Appointment"))
+            {
+                link = "";
+            }
+            else
+            {                
+                link = "popUpPropertyDetails('" + elem.Id + "')";
+            }
+
+            <li class="itineraryDay">
+
+                @if (ViewBag.SameAs == null || DateTime.Parse(ViewBag.SameAs.ToString()).ToShortDateString() != dt.Value.ToShortDateString())
+                {
+                    ViewBag.SameAs = dt;
+                    <div class="dayTitle row">
+                        <h2 class="dayNumber col-md-2">
+                            @(dt.HasValue ? dt.Value.ToString("dd") : "NA")
+                        </h2>
+                        <div class="dayText col-md-10">
+                            <p class="dayName"><span>@(dt.HasValue ? dt.Value.ToString("dddd") : "NA")</span></p>
+                            <p class="mmmyyyy">@(dt.HasValue ? dt.Value.ToString("MMMM yyyy") : "NA")</p>
+                        </div>
+                    </div>
+                }
+                <ul class="itineraryDayList">
+                    @for (int j = i; j < Model.Itinerary.Count(); j++)
+                    {
+                        string al = (string)(Model.Itinerary.ElementAt(j)).ActionLabel;
+                        DateTime? dt2 = (DateTime?)(Model.Itinerary.ElementAt(j)).ScheduledDate;
+                        if (dt2.Value.ToShortDateString() == dt.Value.ToShortDateString())
+                        {
+                            i++;
+                            <li class="noteEntry">
+                                @if (Model.Itinerary.ElementAt(j).ItemType.Contains("Appointment"))
+                                {                                    
+                                    <a id="showAppointment" class="showAppointment row noteRow" data-appointment-id="@Model.Itinerary.ElementAt(j).Id" data-toggle="modal" data-target="#modalForm">
+                                        <span class="eventTime col-sm-12 col-md-2">@(dt2.HasValue ? dt2.Value.ToString("hh:mm tt") : "NA")&nbsp;</span><span class="eventNote col-sm-12 col-md-10">@al</span>
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a class="row noteRow" onclick="@link">
+                                        <span class="eventTime col-sm-12 col-md-2">@(dt2.HasValue ? dt2.Value.ToString("hh:mm tt") : "NA")&nbsp;</span><span class="eventNote col-sm-12 col-md-10">@al</span>
+                                    </a>
+                                }
+
+                            </li>
+                        }
+                        else
+                        {
+                            i = j - 1;
+                            break;
+                        }
+                    }
+                </ul>
+                <hr>
+            </li>
+        }
+    </ul>
+</div>     
+@Styles.Render("~/Styling/itineraryPdf");    

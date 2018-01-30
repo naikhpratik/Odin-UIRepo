@@ -1,15 +1,15 @@
 ﻿using Ganss.XSS;
 using Microsoft.AspNet.Identity;
+using Odin.Data.Core.Models;
 using Odin.ViewModels.Shared;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
-using System.Security.Principal;
-using Odin.Data.Core.Models;
 
 namespace Odin.ViewModels.Orders.Transferee
 {
@@ -21,7 +21,6 @@ namespace Odin.ViewModels.Orders.Transferee
         }
 
         public bool Deleted { get; set; }
-
         public String OrderId { get; set; }
         public String Id { get; set; }
 
@@ -110,7 +109,7 @@ namespace Odin.ViewModels.Orders.Transferee
             {
                 String thumbUrl = "/Content/Images/popout_sml_img.png";
 
-                if (PropertyPhotos.Any())
+                if (PropertyPhotos!=null && PropertyPhotos.Any())
                 {
                     thumbUrl = PropertyPhotos.ElementAt(0).PhotoUrl;
                 }
@@ -140,8 +139,17 @@ namespace Odin.ViewModels.Orders.Transferee
         {
             get
             {
-                return Messages == null? 0 : Messages.Where(r => r.IsRead == false && r.AuthorId != CurrUser.Identity.GetUserId() && CurrUser.IsInRole(UserRoles.ProgramManager) == false).Count();                
+                return Messages == null || CurrUser == null ? 0 : Messages.Where(r => r.IsRead == false && r.AuthorId != CurrUser.Identity.GetUserId()).Count();                
             }
         }
+        public bool? selected { get; set; }
+        public string selectedDisplay
+        {
+            get
+            {
+                return selected == null || selected == false ? "" : "selected";
+            }
+        }
+
     }
 }
