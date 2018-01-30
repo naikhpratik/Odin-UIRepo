@@ -72,11 +72,15 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
         });
 
         //Init Dates
-        intakeBlocks.find(".intake-date").datetimepicker({
+        intakeBlocks.find(".date").datetimepicker({
             format: "DD-MMM-YYYY",
             useCurrent: true,
-            keepOpen: false
-        });
+            ignoreReadonly: true,
+            allowInputToggle: true,
+            showClear: true,
+            keepOpen: false,
+            icons: { clear: 'glyphicon glyphicon-remove' }
+        }).css("display","none");
 
         //Bind Events
         intakeBlocks.on("click", ".intake-edit", editSaveBlock);
@@ -116,7 +120,7 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
         var addSpans = rows.find(".intake-add");
         var delSpans = rows.find(".intake-del");
         var inputs = rows.find(".intake-input");
-        var dates = rows.find(".intake-date");
+        var dates = rows.find(".date");
 
         //Local Functions
         var edit = function () {
@@ -125,13 +129,13 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
             spnEditSave.next(".intake-cancel").css("display", "inline");
 
             //Bind hidden values to inputs
-            inputs.css("display", "block").each(function() {
+            inputs.css("display", "initial").each(function() {
                 var hidden = $(this).next(".intake-hidden");
                 $(this).val(hidden.val());
             });
 
             //Bind hidden values to inputs
-            dates.css("display", "block").each(function () {
+            dates.css("display", "table").each(function () {
                 var hidden = $(this).next(".intake-hidden");
                 $(this).find("input").val(hidden.val());
             });
@@ -149,7 +153,7 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
 
             rows.each(function () {
                 var row = $(this);
-                var rowInputs = row.find(".intake-input, .intake-date");
+                var rowInputs = row.find(".intake-input, .date");
 
                 //If a collection that can have added values
                 if (hasAttr(row, 'data-entity-collection')) {
@@ -207,9 +211,9 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
 
             dates.css("display", "none");
             inputs.css("display", "none");
-            spans.css("display", "block");
-            addSpans.css("display", "block");
-            delSpans.css("display", "block");
+            spans.css("display", "initial");
+            addSpans.css("display", "initial");
+            delSpans.css("display", "initial");
 
             toast("Save Successful!","success");
         }
@@ -311,7 +315,7 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
 
         rows.each(function () {
             var row = $(this);
-            var rowInputs = row.find(".intake-input, .intake-date");
+            var rowInputs = row.find(".intake-input, .date");
 
             //If a collection that can have added values
             if (hasAttr(row, 'data-entity-collection')) {
@@ -371,7 +375,7 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
     var fillPostData = function(data, inputs){
         inputs.each(function () {
             var elt = $(this);
-            if (elt.hasClass("intake-date")) {
+            if (elt.hasClass("date")) {
                 var innerInput = elt.find("input");
                 data[innerInput.attr("name")] = innerInput.val();
             } else if (elt.is(":checkbox")) {
@@ -420,10 +424,10 @@ var TransfereeIntakeController = function (transfereeIntakeService) {
         spnCancel.css("display", "none");
         spnCancel.prev(".intake-edit").text("+ Edit");
         cols.find(".intake-input").css("display", "none").val("");
-        cols.find(".intake-date").css("display", "none").find("input").val("");
-        cols.find(".intake-span").css("display", "block");
-        cols.find(".intake-add").css("display", "block");
-        cols.find(".intake-del").css("display", "block");
+        cols.find(".date").css("display", "none").find("input").val("");
+        cols.find(".intake-span").css("display", "initial");
+        cols.find(".intake-add").css("display", "initial");
+        cols.find(".intake-del").css("display", "initial");
     }
 
     var toast = function (message, type) {

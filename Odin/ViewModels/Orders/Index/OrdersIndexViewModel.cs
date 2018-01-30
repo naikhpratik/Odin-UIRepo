@@ -22,9 +22,9 @@ namespace Odin.ViewModels.Orders.Index
         public string EstimatedArrivalDateDisplay => DateHelper.GetViewFormat(EstimatedArrivalDate);
         public string LastContactedDateDisplay => DateHelper.GetViewFormat(LastContactedDate);
         public string IsRushDisplay => IsRush ? "Rush" : String.Empty;
-        public int AuthorizedServicesDisplay => AllServices.Count();
-        public int ScheduledServicesDisplay => AllServices.Where(s => s.ScheduledDate.HasValue && !s.CompletedDate.HasValue).Count();
-        public int CompletedServicesDisplay => AllServices.Where(s => s.CompletedDate.HasValue).Count();
+        public int AuthorizedServicesDisplay => AuthServices.Count();
+        public int ScheduledServicesDisplay => AuthServices.Where(s => s.ScheduledDate.HasValue && !s.CompletedDate.HasValue).Count();
+        public int CompletedServicesDisplay => AuthServices.Where(s => s.CompletedDate.HasValue).Count();
         public int CompletedWidth => Convert.ToInt32(AuthorizedServicesDisplay == 0 ? 0 : CompletedServicesDisplay * 100 / AuthorizedServicesDisplay);
         public int ScheduledWidth => Convert.ToInt32(AuthorizedServicesDisplay == 0 ? 0 : ScheduledServicesDisplay * 100 / AuthorizedServicesDisplay);
         public decimal AuthorizedWidth = 100;
@@ -41,16 +41,16 @@ namespace Odin.ViewModels.Orders.Index
 
         public IEnumerable<ServiceViewModel> HomeFindingServices { get; set; }
 
-        private IEnumerable<ServiceViewModel> _allServices;
-        public IEnumerable<ServiceViewModel> AllServices
+        private IEnumerable<ServiceViewModel> _authServices;
+        public IEnumerable<ServiceViewModel> AuthServices
         {
             get
             {
-                if (_allServices == null)
+                if (_authServices == null)
                 {
-                    _allServices = Services.Concat(HomeFindingServices);
+                    _authServices = Services.Concat(HomeFindingServices).Where(s => s.Selected);
                 }
-                return _allServices;
+                return _authServices;
             }
         }
 

@@ -185,6 +185,7 @@
     <Compile Include="Domain\FirstContactConverter.cs" />
     <Compile Include="Domain\ServiceToJson.cs" />
     <Compile Include="Domain\SettlingInConverter.cs" />
+    <Compile Include="Exceptions\SimImportException.cs" />
     <Compile Include="Helpers\EndPointHelper.cs" />
     <Compile Include="Helpers\RequestHelper.cs" />
     <Compile Include="Interfaces\IServiceProcessor.cs" />

@@ -46,7 +46,7 @@ namespace Odin.ToSeWebJob
             if (queueEntry.QueueTypeId == (int) QueueType.Service)
             {
                 var serviceProcessor = new ServiceProcessor(_unitOfWork);
-                var result = await serviceProcessor.ProcessService(queueEntry.ObjectId);
+                var result = await serviceProcessor.ProcessService(queueEntry.ObjectId, log);
                 log.WriteLine($"Service Process Result: {result}");
             }
         }

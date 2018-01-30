@@ -103,10 +103,6 @@ div#intake .intake-block {
     div#intake .intake-block .intake-row .intake-col .intake-date {
       display: none; }
       div#intake .intake-block .intake-row .intake-col .intake-date input {
-        color: #31a4dd;
-        font-size: 16px;
-        display: none; }
-      div#intake .intake-block .intake-row .intake-col .intake-date span {
         color: #31a4dd; }
   div#intake .intake-block .intake-row .intake-col-add {
     min-height: 0px; }

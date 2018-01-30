@@ -64,7 +64,7 @@
         <div class="col-md-8 col-md-pull-4">
             @if (Model.PropertyPhotos.Count() > 0)
             {
-                Html.DisplayFor(p => p.PropertyPhotos);
+                @Html.DisplayFor(p => p.PropertyPhotos);
             }
             <div class="">
                 <label>@Html.DisplayNameFor(model => model.PropertyDescription)</label>
