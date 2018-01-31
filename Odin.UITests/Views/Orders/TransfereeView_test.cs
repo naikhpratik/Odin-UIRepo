@@ -6,6 +6,7 @@ using Odin.UITests.Helper;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.PhantomJS;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -37,9 +38,9 @@ namespace Odin.UITests.Views.Orders
             //ChromeOptions options = new ChromeOptions();
             //options.AddArguments("--incognito");
             //options.ToCapabilities();
-            _driver = new ChromeDriver();
+            //_driver = new ChromeDriver();
 
-            //_driver = new PhantomJSDriver();
+            _driver = new PhantomJSDriver();
             help = new HelperMethod(_driver);
             _context = new ApplicationDbContext();
             _unitOfWork = new UnitOfWork(_context);
@@ -261,7 +262,7 @@ namespace Odin.UITests.Views.Orders
                 //** Departure Location **//
 
                 help.delay(800);
-                Xunit.Assert.Equal(DateHelper.GetViewFormat(db_order.PreTripDate), _driver.FindElement(By.Id("spanPreTripDate")).Text);
+                Xunit.Assert.Equal(DateHelper.GetViewFormat(db_order.PreTripDate), help.GetElement(_driver, By.Id("spanPreTripDate"), 10));
                 Xunit.Assert.Equal(DateHelper.GetViewFormat(db_order.EstimatedArrivalDate), _driver.FindElement(By.Id("spanEstimatedArrivalDate")).Text);
                 Xunit.Assert.Equal(DateHelper.GetViewFormat(db_order.WorkStartDate), _driver.FindElement(By.Id("spanWorkStartDate")).Text);
 
@@ -288,7 +289,7 @@ namespace Odin.UITests.Views.Orders
         [TestMethod]
         public void Transferee_Intakepage_ShouldCheckandUpdateGeneral()
         {
-           
+
             help.initialsteps();
             orders = help.getOrders();
             for (int i = 0; i < orders.Count(); i++)
@@ -298,7 +299,7 @@ namespace Odin.UITests.Views.Orders
                 var db_order = _unitOfWork.Orders.GetOrderById(order_id);
                 _driver.Navigate().GoToUrl(this.baseURL + "/Orders/Transferee/" + order_id);
                 help.delay(800);
-                
+
                 var click_expand = help.GetElementClick(_driver, By.XPath("(//img[@class = 'intake-expand-img'])[12]"), 10);
                 var click_collapse = help.GetElementClick(_driver, By.XPath("(//img[@class = 'intake-collapse-img'])[12]"), 10);
                 ((IJavaScriptExecutor)_driver).ExecuteScript("scroll(0,1200)");
@@ -453,7 +454,7 @@ namespace Odin.UITests.Views.Orders
                 _driver.Navigate().GoToUrl(this.baseURL + "/Orders/Transferee/" + order_id + "#housing");
 
                 help.delay(800);
-                if (db_order.HomeFinding != null)
+                if (db_order.HomeFinding != null && !_driver.FindElement(By.Id("housingsectionTitle")).Text.Equals("Selected Home"))
                 {
                     // File Details
                     var Db_housingbuget = db_order.HomeFinding.HousingBudget.ToString().Replace(".", "");
@@ -510,9 +511,9 @@ namespace Odin.UITests.Views.Orders
                 var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
                 var db_order = _unitOfWork.Orders.GetOrderById(order_id);
                 _driver.Navigate().GoToUrl(this.baseURL + "/Orders/Transferee/" + order_id + "#housing");
-
+                //check the title and  then because of change in pages
                 help.delay(800);
-                if (db_order.HomeFinding != null)
+                if (db_order.HomeFinding != null && !help.GetElement(_driver, By.Id("housingsectionTitle"), 10).Equals("Selected Home"))
                 {
                     IList<IWebElement> properties = _driver.FindElements(By.Id("Listproperties"));
                     IList<IWebElement> properties1 = _driver.FindElements(By.ClassName(".row.sectionList"));
@@ -522,21 +523,15 @@ namespace Odin.UITests.Views.Orders
                     //Xunit.Assert.Equal(db_order.HomeFinding.NumberOfBedrooms.ToString(), _driver.FindElement(By.Id("NumberOfBedrooms")).Text);
 
                     // works except for the last property vella koplin 5 shown but actual 8 prop
-
-                    Xunit.Assert.Equal(db_order.HomeFinding.HomeFindingProperties.Count(x => x.Deleted != true).ToString(), properties.Count().ToString());
-
-                    // Important Dates
-
-                    // Housing details
+                   
+                    //if (!_driver.FindElement(By.Id("housingsectionTitle")).Text.Equals("Selected Home"))
+                        Xunit.Assert.Equal(db_order.HomeFinding.HomeFindingProperties.Count(x => x.Deleted != true).ToString(), properties.Count().ToString());
+                    
                 }
                 _driver.FindElement(By.Id("backButton")).Click();
                 orders = _driver.FindElements(By.Id("rowclickableorderRow"));
-
             }
-
-
-            // Xunit.Assert.Equal(orders.Count(), order_db.Count());
-
+            
             help.Logout();
 
         }
@@ -561,8 +556,9 @@ namespace Odin.UITests.Views.Orders
                 var liked_count = db_order.HomeFinding != null ? db_order.HomeFinding.HomeFindingProperties.Count(x => x.Liked == true) : 0;
                 //var disliked_count = db_order.HomeFinding.HomeFindingProperties.Count();
 
-                if (db_order.HomeFinding != null)
+                if (db_order.HomeFinding != null && !help.GetElement(_driver, By.Id("housingsectionTitle"), 10).Equals("Selected Home"))
                 {
+                    //help.GetElementClick(_driver, By.Id("allfilter"), 10).Click();
                     _driver.FindElement(By.Id("allfilter")).Click();
                     _driver.FindElement(By.Id("newfilter")).Click();
                     _driver.FindElement(By.Id("likedfilter")).Click();
@@ -609,7 +605,7 @@ namespace Odin.UITests.Views.Orders
                 var before_properties = db_order.HomeFinding.HomeFindingProperties.Count(x => x.Deleted == false);
 
 
-                if (db_order.HomeFinding != null)
+                if (db_order.HomeFinding != null && !help.GetElement(_driver, By.Id("housingsectionTitle"), 10).Equals("Selected Home"))
                 {
                     help.GetElementClick(_driver, By.Id("addProperty"), 10).Click();
                     _driver.FindElement(By.Id("PropertyStreet1")).SendKeys("11145 Meril Rd");
@@ -617,15 +613,16 @@ namespace Odin.UITests.Views.Orders
                     _driver.FindElement(By.XPath("(//option[@value = 'CA'])")).Click();
                     _driver.FindElement(By.Id("PropertyPostalCode")).SendKeys("44567");
                     _driver.FindElement(By.Id("savePropertyAdd")).Click();
-
-
+                    
+                    _driver.Navigate().GoToUrl(this.baseURL + "/Orders/Transferee/" + order_id + "#housing");
+                    help.delay(800);
                     IList<IWebElement> after_properties = _driver.FindElements(By.Id("Listproperties"));
                     //help.delay(200);
-                    Xunit.Assert.Equal(before_properties, after_properties.Count());
+                    Xunit.Assert.Equal(before_properties, after_properties.Count()-1);
                 }
+                ///help.delay(2000);
                 help.GetElementClick(_driver, By.Id("backButton"), 10).Click();
                 orders = _driver.FindElements(By.Id("rowclickableorderRow"));
-
             }
 
 
@@ -638,12 +635,12 @@ namespace Odin.UITests.Views.Orders
         [TestMethod]
         public void Transferee_Housingpage_ShouldRemoveProperty()
         {
-          
+
             help.initialsteps();
             orders = help.getOrders();
             for (int i = 0; i < orders.Count(); i++)
             {
-
+                WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
                 var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
                 var db_order = _unitOfWork.Orders.GetOrderById(order_id);
                 _driver.Navigate().GoToUrl(this.baseURL + "/Orders/Transferee/" + order_id + "#housing");
@@ -654,22 +651,29 @@ namespace Odin.UITests.Views.Orders
                 IList<IWebElement> list_properties = _driver.FindElements(By.Id("Listproperties"));
 
 
-                if (db_order.HomeFinding != null && list_properties.Count > 0)
+                if (db_order.HomeFinding != null && list_properties.Count > 0 && !help.GetElement(_driver, By.Id("housingsectionTitle"), 10).Equals("Selected Home"))
                 {
                     list_properties.First().Click();
-                    help.delay(800);
+                    //help.delay(800);
                     help.GetElementClick(_driver, By.Id("removeProperty"), 10).Click();
-                    _driver.SwitchTo().Alert().Accept();
+                    
+                    if (_driver.GetType() == typeof(PhantomJSDriver))
+                    {
+                        PhantomJSDriver phantom = (PhantomJSDriver)_driver;
+                        phantom.ExecuteScript("window.alert = function(){}");
+                        phantom.ExecuteScript("window.confirm = function(){return true;}");
+                    }
+                    else
+                        _driver.SwitchTo().Alert().Accept();
+
                     IList<IWebElement> after_properties = _driver.FindElements(By.Id("Listproperties"));
-                    //help.delay(200);
                     Xunit.Assert.Equal(before_properties, after_properties.Count());
                 }
+                
                 help.GetElementClick(_driver, By.Id("backButton"), 10).Click();
                 orders = _driver.FindElements(By.Id("rowclickableorderRow"));
-
             }
-
-            // Xunit.Assert.Equal(orders.Count(), order_db.Count());
+            //Xunit.Assert.Equal(orders.Count(), order_db.Count());
             help.Logout();
 
         }
