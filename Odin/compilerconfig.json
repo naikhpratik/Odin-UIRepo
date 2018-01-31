@@ -1,42 +1,42 @@
 ﻿[
   {
-    "outputFile": "Content/styles/css/ref_orders.css",
-    "inputFile": "Content/styles/scss/ref_orders.scss"
+    "outputFile": "Content/styles/css/refactor/orders.css",
+    "inputFile": "Content/styles/scss/refactor/orders.scss"
   },
   {
-    "outputFile": "Content/styles/css/ref_login.css",
-    "inputFile": "Content/styles/scss/ref_login.scss"
+    "outputFile": "Content/styles/css/refactor/login.css",
+    "inputFile": "Content/styles/scss/refactor/login.scss"
   },
   {
-    "outputFile": "Content/styles/css/ref_forgotpassword.css",
-    "inputFile": "Content/styles/scss/ref_forgotpassword.scss"
+    "outputFile": "Content/styles/css/refactor/forgotpassword.css",
+    "inputFile": "Content/styles/scss/refactor/forgotpassword.scss"
   },
   {
-    "outputFile": "Content/styles/css/ref_help.css",
-    "inputFile": "Content/styles/scss/ref_help.scss"
+    "outputFile": "Content/styles/css/refactor/help.css",
+    "inputFile": "Content/styles/scss/refactor/help.scss"
   },
   {
-    "outputFile": "Content/styles/css/ref_bookmarklet.css",
-    "inputFile": "Content/styles/scss/ref_bookmarklet.scss"
+    "outputFile": "Content/styles/css/refactor/bookmarklet.css",
+    "inputFile": "Content/styles/scss/refactor/bookmarklet.scss"
   },
   {
     "outputFile": "Content/styles/css/application.css",
     "inputFile": "Content/styles/scss/application.scss"
   },
   {
-    "outputFile": "Content/styles/css/ref_transferee.css",
-    "inputFile": "Content/styles/scss/ref_transferee.scss"
+    "outputFile": "Content/styles/css/refactor/transferee.css",
+    "inputFile": "Content/styles/scss/refactor/transferee.scss"
   },
   {
-    "outputFile": "Content/styles/css/ref_itineraryPdf.css",
-    "inputFile": "Content/styles/scss/ref_itineraryPdf.scss"
-  },
-  {    
-    "outputFile": "Content/styles/css/ref_transferee/HFPropertiesPDF.css",
-    "inputFile": "Content/styles/scss/ref_transferee/HFPropertiesPDF.scss"
+    "outputFile": "Content/styles/css/refactor/itineraryPdf.css",
+    "inputFile": "Content/styles/scss/refactor/itineraryPdf.scss"
   },
   {
-    "outputFile": "Content/styles/css/ref_selectedProperty.css",
-    "inputFile": "Content/styles/scss/ref_selectedProperty.scss"
+    "outputFile": "Content/styles/css/refactor/transferee/HFPropertiesPDF.css",
+    "inputFile": "Content/styles/scss/refactor/transferee/HFPropertiesPDF.scss"
+  },
+  {
+    "outputFile": "Content/styles/css/refactor/selectedProperty.css",
+    "inputFile": "Content/styles/scss/refactor/selectedProperty.scss"
   }
 ]

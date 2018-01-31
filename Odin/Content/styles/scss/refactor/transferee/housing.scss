@@ -14,13 +14,17 @@ img li.thumbnails-carousel, img.location {
     height: 5rem;
 }
 
-.glyphicon-chevron-left {
-    margin-left: -4.2rem !important;
+//Temp Refactor
+#photosCarousel {
+    .glyphicon-chevron-left {
+        margin-left: -4.2rem !important;
+    }
+
+    .glyphicon-chevron-right {
+        margin-right: -4.2rem !important;
+    }
 }
 
-.glyphicon-chevron-right {
-    margin-right: -4.2rem !important;
-}
 
 ul.thumbnails-carousel li img {
     max-width: 6rem !important;

@@ -1,15 +1,30 @@
-﻿@import "./ref_definitions.scss";
-
-html{
-    background-color: white;
+﻿ul.thumbnails-carousel li img {
+    max-width: 6rem !important;
 }
 
-body{
-    background-color:white;
+.img-responsive {
+    height: 32rem !important;
+    width: 55rem;
+}
+
+img li.thumbnails-carousel, img.location {
+    width: 5rem;
+    height: 3rem;
+}
+
+
+#photosCarousel
+{
+    .glyphicon-chevron-left {
+        margin-left: -4.2rem !important;
+    }
+
+    .glyphicon-chevron-right {
+        margin-right: -4.2rem !important;
+    }
 }
 
 div#itinerary {
-
     .sectionList {
         list-style: none;
         margin: 0;
@@ -104,19 +119,19 @@ div#itinerary {
         font-size: 1.8rem;
         color: #4E4E4E;
         font-weight: 300;
+        margin: 0px;
         padding: 0;
-        line-height: 26px;
-
+        line-height: 2rem;
     }
 
     .eventTime {
         font-size: 1.8rem;
         color: #A7CE39;
         font-weight: 500;
+        margin: 0px;
         padding: 0;
         color: $DW_Green;
-        line-height: 26px;
-
+        line-height: 2rem;
     }
 
     @media screen and (min-width: 48rem) {
@@ -126,24 +141,20 @@ div#itinerary {
             }
         }
     }
+}
+.sectionList li.noteEntry {
+    line-height: 1rem;
+    margin-bottom: 0rem;
+}
+.noteRow{
+    cursor:pointer;
+}
+.modal-content {
+    padding: 2rem;
 
-
-    .sectionList li.noteEntry {
-        line-height: 26px;
-        margin-bottom: 1rem;
-    }
-
-    .noteRow {
-        cursor: pointer;
-    }
-
-    .modal-content {
-        padding: 2rem;
-
-        .close {
-            position: absolute;
-            top: 3rem;
-            right: 3rem;
-        }
+    .close {
+        position: absolute;
+        top: 3rem;
+        right: 3rem;
     }
 }

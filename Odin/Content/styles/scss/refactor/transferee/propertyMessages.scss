@@ -1,10 +1,23 @@
 ﻿#messageBody {
     padding: 0 7%;
 }
-.modal-title {
-    float: right;
-    color: white;
+
+//Temp refactor
+#modalNotification {
+    .modal-title {
+        float: right;
+        color: white;
+    }
+
+    .modal-content{
+        padding: 0;
+    }
+
+    textarea{
+        width:100%;
+    }
 }
+
 .messageImage {
     margin-top: 1rem;    
 }

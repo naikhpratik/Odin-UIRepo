@@ -13,11 +13,11 @@
 #scheduledServices .btn-primary {
   border-radius: 50%; }
 
-.bootstrap-datetimepicker-widget .picker-switch table.table-condensed td a span:hover {
-  background-image: url(../../Images/check.png);
-  background-repeat: no-repeat;
-  background-position: center; }
-
+/*.bootstrap-datetimepicker-widget .picker-switch table.table-condensed td a span:hover {
+    background-image: url(../../Images/check.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}*/
 #primaryNav {
   position: fixed;
   z-index: 1010;
