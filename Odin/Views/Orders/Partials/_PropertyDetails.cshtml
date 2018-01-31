@@ -3,6 +3,8 @@
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     <h5 class="modal-title"><strong>Available on:</strong> @Html.DisplayFor(model => model.PropertyAvailabilityDate)</h5>
+    <a href="@Model.PropertySourceUrl" target = "_blank">Source Url</a>
+  
 </div>
 
 
@@ -17,10 +19,11 @@
                         <p>@Html.DisplayFor(model => model.ViewingDate)</p>
                     </li>
                 }
-                <li class="housingPropertyModal__propAddress">
-                    <label>@Html.DisplayNameFor(model => model.PropertyAddress)</label>
-                    <p>@Html.DisplayFor(model => model.PropertyAddress)</p>
-                </li>
+                    <li class="housingPropertyModal__propAddress">
+                        <label>@Html.DisplayNameFor(model => model.PropertyAddress)</label>
+                        <p>@Html.DisplayFor(model => model.PropertyAddress)</p>
+                        
+                    </li>
 
                 <li class="housingPropertyModal__propBedrooms hpm_edit">
                     <label>@Html.DisplayNameFor(model => model.PropertyNumberOfBedrooms)</label>

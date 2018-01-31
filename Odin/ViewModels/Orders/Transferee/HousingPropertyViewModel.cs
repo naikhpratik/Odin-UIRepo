@@ -38,7 +38,11 @@ namespace Odin.ViewModels.Orders.Transferee
                 return addressMarkup;
             }
         }
-        
+
+        [Display(Name = "Source Url")]
+        [DisplayFormat(NullDisplayText = "No Url")]
+        public string PropertySourceUrl { get; set; }
+
         [Display(Name = "Street 1")]
         [Required(ErrorMessage = "Street 1 is required")]
         public String PropertyStreet1 { get; set; }
@@ -117,7 +121,7 @@ namespace Odin.ViewModels.Orders.Transferee
                 return thumbUrl;
             }
         }
-
+        
         [Display(Name = "Latitude")]
         [DisplayFormat(NullDisplayText = "")]
         public Decimal PropertyLatitude { get; set; }
