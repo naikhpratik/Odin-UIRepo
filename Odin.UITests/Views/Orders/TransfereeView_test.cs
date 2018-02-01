@@ -38,7 +38,7 @@ namespace Odin.UITests.Views.Orders
             //ChromeOptions options = new ChromeOptions();
             //options.AddArguments("--incognito");
             //options.ToCapabilities();
-            //_driver = new ChromeDriver();
+           // _driver = new ChromeDriver();
 
             _driver = new PhantomJSDriver();
             help = new HelperMethod(_driver);
@@ -523,15 +523,15 @@ namespace Odin.UITests.Views.Orders
                     //Xunit.Assert.Equal(db_order.HomeFinding.NumberOfBedrooms.ToString(), _driver.FindElement(By.Id("NumberOfBedrooms")).Text);
 
                     // works except for the last property vella koplin 5 shown but actual 8 prop
-                   
+
                     //if (!_driver.FindElement(By.Id("housingsectionTitle")).Text.Equals("Selected Home"))
-                        Xunit.Assert.Equal(db_order.HomeFinding.HomeFindingProperties.Count(x => x.Deleted != true).ToString(), properties.Count().ToString());
-                    
+                    Xunit.Assert.Equal(db_order.HomeFinding.HomeFindingProperties.Count(x => x.Deleted != true).ToString(), properties.Count().ToString());
+
                 }
                 _driver.FindElement(By.Id("backButton")).Click();
                 orders = _driver.FindElements(By.Id("rowclickableorderRow"));
             }
-            
+
             help.Logout();
 
         }
@@ -613,12 +613,12 @@ namespace Odin.UITests.Views.Orders
                     _driver.FindElement(By.XPath("(//option[@value = 'CA'])")).Click();
                     _driver.FindElement(By.Id("PropertyPostalCode")).SendKeys("44567");
                     _driver.FindElement(By.Id("savePropertyAdd")).Click();
-                    
+
                     _driver.Navigate().GoToUrl(this.baseURL + "/Orders/Transferee/" + order_id + "#housing");
                     help.delay(800);
                     IList<IWebElement> after_properties = _driver.FindElements(By.Id("Listproperties"));
                     //help.delay(200);
-                    Xunit.Assert.Equal(before_properties, after_properties.Count()-1);
+                    Xunit.Assert.Equal(before_properties, after_properties.Count() - 1);
                 }
                 ///help.delay(2000);
                 help.GetElementClick(_driver, By.Id("backButton"), 10).Click();
@@ -656,7 +656,7 @@ namespace Odin.UITests.Views.Orders
                     list_properties.First().Click();
                     //help.delay(800);
                     help.GetElementClick(_driver, By.Id("removeProperty"), 10).Click();
-                    
+
                     if (_driver.GetType() == typeof(PhantomJSDriver))
                     {
                         PhantomJSDriver phantom = (PhantomJSDriver)_driver;
@@ -669,11 +669,71 @@ namespace Odin.UITests.Views.Orders
                     IList<IWebElement> after_properties = _driver.FindElements(By.Id("Listproperties"));
                     Xunit.Assert.Equal(before_properties, after_properties.Count());
                 }
-                
+
                 help.GetElementClick(_driver, By.Id("backButton"), 10).Click();
                 orders = _driver.FindElements(By.Id("rowclickableorderRow"));
             }
             //Xunit.Assert.Equal(orders.Count(), order_db.Count());
+            help.Logout();
+
+        }
+
+        [TestMethod]
+        public void Transferee_Housingpage_ShouldSelectProperties()
+        {
+
+            help.initialsteps();
+            orders = help.getOrders();
+            for (int i = 0; i < orders.Count(); i++)
+            {
+
+                var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
+                var db_order = _unitOfWork.Orders.GetOrderById(order_id);
+                _driver.Navigate().GoToUrl(this.baseURL + "/Orders/Transferee/" + order_id + "#housing");
+                //check the title and  then because of change in pages
+                help.delay(800);
+                if (db_order.HomeFinding != null && !help.GetElement(_driver, By.Id("housingsectionTitle"), 10).Equals("Selected Home"))
+                {
+                    IList<IWebElement> properties = _driver.FindElements(By.Id("Listproperties"));
+
+                    properties.First().Click();
+                    
+                    help.GetElementClick(_driver, By.Id("selectProperty"), 10).Click();
+                    help.delay(800);
+                    var text = help.GetElement(_driver, By.Id("housingsectionTitle"), 10);
+                    Xunit.Assert.True(help.GetElement(_driver, By.Id("housingsectionTitle"), 10).Equals("Selected Home"));
+                }
+                help.GetElementClick(_driver, By.Id("backButton"), 10).Click();
+                orders = _driver.FindElements(By.Id("rowclickableorderRow"));
+            }
+
+            help.Logout();
+
+        }
+
+        [TestMethod]
+        public void Transferee_Housingpage_ShouldDeselectProperties()
+        {
+
+            help.initialsteps();
+            orders = help.getOrders();
+            for (int i = 0; i < orders.Count(); i++)
+            {
+                var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
+                var db_order = _unitOfWork.Orders.GetOrderById(order_id);
+                _driver.Navigate().GoToUrl(this.baseURL + "/Orders/Transferee/" + order_id + "#housing");
+                //check the title and  then because of change in pages
+                help.delay(800);
+                if (db_order.HomeFinding != null && help.GetElement(_driver, By.Id("housingsectionTitle"), 10).Equals("Selected Home"))
+                {
+                    help.GetElementClick(_driver, By.Id("deselectProperty"), 10).Click();
+                    help.delay(800);
+                    Xunit.Assert.True(help.GetElement(_driver, By.Id("housingsectionTitle"), 10).Equals("Housing Summary"));
+                }
+                help.GetElementClick(_driver, By.Id("backButton"), 10);
+                orders = _driver.FindElements(By.Id("rowclickableorderRow"));
+            }
+
             help.Logout();
 
         }
