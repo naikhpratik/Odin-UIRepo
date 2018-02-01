@@ -70,7 +70,7 @@ namespace Odin.IntegrationTests.Controllers
 
         // Tests
         [Test, Isolated]
-        public void Index_ValidUrlHasOrders_ShowBmViewWithOrders()
+        public void Index_ValidUrlHasOrders_ShowPmViewWithOrders()
         {
             // Arrange
             Order order = OrderBuilder.New().First();
@@ -83,7 +83,7 @@ namespace Odin.IntegrationTests.Controllers
 
             string url = "http://test.com";
             _mockBookMarkletHelper.Setup(r => r.IsValidUrl(url)).Returns(true);
-            _controller.MockCurrentUserAndRole(_dsc.Id, _dsc.UserName,UserRoles.Consultant);
+            _controller.MockCurrentUserAndRole(_dsc.Id, _dsc.UserName, UserRoles.Consultant);
 
             // Act
             var result = _controller.Index(url) as ViewResult;
@@ -94,7 +94,7 @@ namespace Odin.IntegrationTests.Controllers
         }
 
         [Test, Isolated]
-        public void TransfereeIndex_ValidUrlHasOrder_ShowBmViewWithOrder()
+        public void TransfereeIndex_ValidUrlHasOrder_ShowPmViewWithOrder()
         {
             // Arrange
             Order order = OrderBuilder.New().First();
@@ -107,7 +107,7 @@ namespace Odin.IntegrationTests.Controllers
 
             string url = "http://test.com";
             _mockBookMarkletHelper.Setup(r => r.IsValidUrl(url)).Returns(true);
-            _controller.MockCurrentUserAndRole(_transferee.Id, _transferee.UserName,UserRoles.Transferee);
+            _controller.MockCurrentUserAndRole(_transferee.Id, _transferee.UserName, UserRoles.Transferee);
 
             // Act
             var result = _controller.Index(url) as ViewResult;
@@ -171,7 +171,7 @@ namespace Odin.IntegrationTests.Controllers
             // Arrange
             string url = "http://test.com";
             _mockBookMarkletHelper.Setup(r => r.IsValidUrl(url)).Returns(false);
-            _controller.MockCurrentUserAndRole(_transferee.Id, _transferee.UserName,UserRoles.Transferee);
+            _controller.MockCurrentUserAndRole(_transferee.Id, _transferee.UserName, UserRoles.Transferee);
 
             // Act
             var result = _controller.Index(url) as ViewResult;
@@ -219,7 +219,7 @@ namespace Odin.IntegrationTests.Controllers
 
             string url = "http://test.com";
             _mockBookMarkletHelper.Setup(r => r.IsValidUrl(url)).Returns(false);
-            _controller.MockCurrentUserAndRole(_transferee.Id, _transferee.UserName,UserRoles.Transferee);
+            _controller.MockCurrentUserAndRole(_transferee.Id, _transferee.UserName, UserRoles.Transferee);
 
             // Act
             var result = _controller.Index(url) as ViewResult;

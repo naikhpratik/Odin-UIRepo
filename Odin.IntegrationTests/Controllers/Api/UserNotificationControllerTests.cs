@@ -25,6 +25,7 @@ using System.Web.Http.Results;
 
 namespace Odin.IntegrationTests.Controllers.Api
 {
+    //Check on Monday
     [TestFixture]
     public class UserNotificationControllerTests : WebApiBaseTest
     {
@@ -48,14 +49,12 @@ namespace Odin.IntegrationTests.Controllers.Api
             orders.ForEach(o => o.TrackingId = TokenHelper.NewToken());
             var testDateTime = new DateTime(1999, 6, 14);
             orders.ForEach(o => o.PreTripDate = testDateTime);
-
-
-
+            
             Context.Orders.AddRange(orders);
-            //Context.SaveChanges();
+            Context.SaveChanges();
 
             var controller = SetUpUserNotificationController();
-            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            controller.MockCurrentUserAndRole(dsc.Id, dsc.UserName, UserRoles.Consultant);
 
             Notification notification = new Notification();
             notification.NotificationType = NotificationType.OrderCreated;
@@ -77,7 +76,7 @@ namespace Odin.IntegrationTests.Controllers.Api
             //Assert 
             result.Should().BeOfType<OkNegotiatedContentResult<string>>();
 
-
+            userNotification.IsRead.Should().BeTrue();
         }
 
         [Test, Isolated]
@@ -91,14 +90,12 @@ namespace Odin.IntegrationTests.Controllers.Api
             orders.ForEach(o => o.TrackingId = TokenHelper.NewToken());
             var testDateTime = new DateTime(1999, 6, 14);
             orders.ForEach(o => o.PreTripDate = testDateTime);
-
-
-
+            
             Context.Orders.AddRange(orders);
             //Context.SaveChanges();
 
             var controller = SetUpUserNotificationController();
-            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            controller.MockCurrentUserAndRole(dsc.Id, dsc.UserName, UserRoles.Consultant);
 
             Notification notification = new Notification();
             notification.NotificationType = NotificationType.OrderCreated;
@@ -119,7 +116,7 @@ namespace Odin.IntegrationTests.Controllers.Api
 
             //Assert 
             result.Should().BeOfType<OkNegotiatedContentResult<string>>();
-
+            userNotification.IsRemoved.Should().BeTrue();
 
         }
     }
