@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Security.Principal;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -24,9 +25,11 @@ namespace Odin.ViewModels.Orders.Transferee
         public String OrderId { get; set; }
         public String Id { get; set; }
 
-        [DisplayFormat(ConvertEmptyStringToNull = true, NullDisplayText ="", HtmlEncode = false)]
+        [DisplayFormat(ConvertEmptyStringToNull = true, NullDisplayText = "", HtmlEncode = false)]
         [Display(Name = "Address")]
-        public string PropertyAddress { get
+        public string PropertyAddress
+        {
+            get
             {
                 var addressMarkup = PropertyStreet1 + "<br />";
                 if (PropertyStreet2 != null && PropertyStreet2.Length > 0)
@@ -42,6 +45,21 @@ namespace Odin.ViewModels.Orders.Transferee
         [Display(Name = "Source Url")]
         [DisplayFormat(NullDisplayText = "No Url")]
         public string PropertySourceUrl { get; set; }
+
+        public string PostUrl
+        {
+            get
+            {
+                if (PropertySourceUrl != null)
+                {
+
+                    var parts = PropertySourceUrl.Split('.');
+                    return parts[1].First().ToString().ToUpper()+parts[1].Substring(1)+ '.' + parts[2].Substring(0,parts[2].IndexOf('/'));
+
+                }
+                return "";
+            }
+        }
 
         [Display(Name = "Street 1")]
         [Required(ErrorMessage = "Street 1 is required")]
@@ -94,7 +112,8 @@ namespace Odin.ViewModels.Orders.Transferee
         [DataType(DataType.MultilineText)]
         [AllowHtml]
         [DisplayFormat(ConvertEmptyStringToNull = true)]
-        public String PropertyDescription {
+        public String PropertyDescription
+        {
             get
             {
                 var sanitizer = new HtmlSanitizer();
@@ -109,11 +128,13 @@ namespace Odin.ViewModels.Orders.Transferee
         [DataType("Photos")]
         public IEnumerable<PhotoViewModel> PropertyPhotos { get; set; }
 
-        public String ThumbnailPhotoUrl {  get
+        public String ThumbnailPhotoUrl
+        {
+            get
             {
                 String thumbUrl = "/Content/Images/popout_sml_img.png";
 
-                if (PropertyPhotos!=null && PropertyPhotos.Any())
+                if (PropertyPhotos != null && PropertyPhotos.Any())
                 {
                     thumbUrl = PropertyPhotos.ElementAt(0).PhotoUrl;
                 }
@@ -121,7 +142,7 @@ namespace Odin.ViewModels.Orders.Transferee
                 return thumbUrl;
             }
         }
-        
+
         [Display(Name = "Latitude")]
         [DisplayFormat(NullDisplayText = "")]
         public Decimal PropertyLatitude { get; set; }
@@ -143,7 +164,7 @@ namespace Odin.ViewModels.Orders.Transferee
         {
             get
             {
-                return Messages == null || CurrUser == null ? 0 : Messages.Where(r => r.IsRead == false && r.AuthorId != CurrUser.Identity.GetUserId()).Count();                
+                return Messages == null || CurrUser == null ? 0 : Messages.Where(r => r.IsRead == false && r.AuthorId != CurrUser.Identity.GetUserId()).Count();
             }
         }
         public bool? selected { get; set; }

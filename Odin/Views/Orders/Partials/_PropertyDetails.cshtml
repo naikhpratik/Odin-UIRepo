@@ -3,6 +3,10 @@
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     <h5 class="modal-title"><strong>Available on:</strong> @Html.DisplayFor(model => model.PropertyAvailabilityDate)</h5>
+    @if (Model.PropertySourceUrl != null)
+    {
+        <span><a href="@Model.PropertySourceUrl" target="_blank">Posted From @Model.PostUrl >></a></span>
+    }
 </div>
 
 
@@ -52,10 +56,7 @@
             </ul>
             <div class="btn-toolbar">
                 <button type="button" id="editProperty" class="btn btn-secondary housingPropertyModal__edit">EDIT</button>
-                @if (Model.PropertySourceUrl != null)
-                {
-                    <button type="button" id="sourceUrl" class="btn btn-secondary housingPropertyModal__viewPost" onclick="window.open('@Model.PropertySourceUrl')">View Posting</button>
-                }
+
             </div>
             <div class="row housingPropertyModal__likeDislike">
                 <div class="col-md-12">
