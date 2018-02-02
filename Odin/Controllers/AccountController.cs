@@ -466,11 +466,7 @@ namespace Odin.Controllers
 
         private ActionResult RedirectToLocal(string returnUrl)
         {
-            if (Url.IsLocalUrl(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
-            return RedirectToAction("Index", "Role");
+            return RedirectToAction("Index", "Role", new {returnUrl = returnUrl});
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult
