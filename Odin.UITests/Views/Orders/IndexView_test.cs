@@ -36,7 +36,7 @@ namespace Odin.UITests.Views.Orders
             //_driver = new ChromeDriver();
             _driver = new PhantomJSDriver();
             help = new HelperMethod(_driver);
-            
+           
             _context = new ApplicationDbContext();
             _unitOfWork = new UnitOfWork(_context);
             userRepo = new UsersRepository(_context);
@@ -52,9 +52,11 @@ namespace Odin.UITests.Views.Orders
 
             //getting orders from database according to the id
             var appuser = userRepo.GetUserIdByEmail(Globals.email_pm_valid);
-
+            IList<IWebElement> orders = null;
             IEnumerable<Order> order_db = _unitOfWork.Orders.GetOrdersFor(appuser.Id, UserRoles.ProgramManager);
-            IList<IWebElement> orders = _driver.FindElements(By.Id("rowclickableorderRow"));
+            //if (help.getWhenVisible(_driver, By.Id("rowclickableorderRow"), 3)) {
+                 orders = _driver.FindElements(By.Id("rowclickableorderRow"));
+            //}
 
             Xunit.Assert.Equal(orders.Count(), order_db.Count());
 

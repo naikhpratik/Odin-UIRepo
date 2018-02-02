@@ -5,6 +5,7 @@ using Odin.Helpers;
 using Odin.UITests.Helper;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.PhantomJS;
 using OpenQA.Selenium.Support.UI;
 using System;
@@ -38,7 +39,7 @@ namespace Odin.UITests.Views.Orders
             //ChromeOptions options = new ChromeOptions();
             //options.AddArguments("--incognito");
             //options.ToCapabilities();
-           // _driver = new ChromeDriver();
+            //_driver = new ChromeDriver();
 
             _driver = new PhantomJSDriver();
             help = new HelperMethod(_driver);
@@ -54,12 +55,6 @@ namespace Odin.UITests.Views.Orders
 
             help.initialsteps();
             orders = help.getOrders();
-            //orders = _driver.FindElements(By.Id("rowclickableorderRow"));
-            //getting orders from database according to the id
-            //var appuser = userRepo.GetUserIdByEmail(Globals.email_pm_valid);
-            //IEnumerable<Order> order_db = _unitOfWork.Orders.GetOrdersFor(appuser.Id, UserRoles.ProgramManager);
-
-            //delay(3000);
 
             for (int i = 0; i < orders.Count(); i++)
             {
@@ -74,19 +69,7 @@ namespace Odin.UITests.Views.Orders
 
                 Xunit.Assert.Equal(db_order.Transferee.FullName, help.GetElement(_driver, By.Id("Transferee_FullName"), 10));
                 Xunit.Assert.Equal(db_order.Transferee.Email, help.GetElement(_driver, By.Id("Transferee_Email"), 10));
-                //Xunit.Assert.Equal(db_order.Transferee.PhoneNumber.Replace("-",""), _driver.FindElement(By.Id("Transferee_PhoneNumber")).Text.Replace(".",""));
 
-                //Check for Rmc Info
-
-                //Xunit.Assert.Equal(db_order.Rmc, _driver.FindElement(By.Id("Rmc")).Text);
-
-                //*** Check what all information is important or Not null attributes **** //
-
-                //var rmc1 = _driver.FindElement(By.Id("Rmc_contact")).Text;
-                //Xunit.Assert.Equal(db_order.RmcContact,rmc1);
-                //Xunit.Assert.Equal(db_order.RmcContactEmail, _driver.FindElement(By.Id("Rmc_contactemail")).Text);
-
-                // _driver.FindElement(By.Id("backButton")).Click();
                 _driver.Navigate().GoToUrl(this.baseURL + "/Orders");
                 orders = _driver.FindElements(By.Id("rowclickableorderRow"));
 
@@ -697,7 +680,7 @@ namespace Odin.UITests.Views.Orders
                     IList<IWebElement> properties = _driver.FindElements(By.Id("Listproperties"));
 
                     properties.First().Click();
-                    
+
                     help.GetElementClick(_driver, By.Id("selectProperty"), 10).Click();
                     help.delay(800);
                     var text = help.GetElement(_driver, By.Id("housingsectionTitle"), 10);
@@ -729,6 +712,44 @@ namespace Odin.UITests.Views.Orders
                     help.GetElementClick(_driver, By.Id("deselectProperty"), 10).Click();
                     help.delay(800);
                     Xunit.Assert.True(help.GetElement(_driver, By.Id("housingsectionTitle"), 10).Equals("Housing Summary"));
+                }
+                help.GetElementClick(_driver, By.Id("backButton"), 10);
+                orders = _driver.FindElements(By.Id("rowclickableorderRow"));
+            }
+
+            help.Logout();
+
+        }
+
+        [TestMethod]
+        public void Transferee_Housingpage_ShouldEditPropertiesinModal()
+        {
+            help.initialsteps();
+            orders = help.getOrders();
+            for (int i = 0; i < orders.Count(); i++)
+            {
+                var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
+                var db_order = _unitOfWork.Orders.GetOrderById(order_id);
+                _driver.Navigate().GoToUrl(this.baseURL + "/Orders/Transferee/" + order_id + "#housing");
+                //check the title and  then because of change in pages
+                help.delay(800);
+                if (db_order.HomeFinding != null && !help.GetElement(_driver, By.Id("housingsectionTitle"), 10).Equals("Selected Home"))
+                {
+                    IList<IWebElement> properties = _driver.FindElements(By.Id("Listproperties"));
+                    properties.ElementAt(help.GetRandomNo(properties)).Click();
+
+                    help.delay(800);
+                    _driver.FindElement(By.Id("editProperty")).Click();
+
+                    _driver.FindElement(By.XPath("(//input[@class = 'form-control intake-input'])[1]")).SendKeys("2");
+                    _driver.FindElement(By.XPath("(//input[@class = 'form-control intake-input'])[2]")).SendKeys("2");
+                    _driver.FindElement(By.XPath("(//input[@class = 'form-control intake-input'])[3]")).SendKeys("1.5");
+                    _driver.FindElement(By.XPath("(//input[@class = 'form-control intake-input'])[4]")).SendKeys("232.453");
+
+                    _driver.FindElement(By.Id("editProperty")).Click();
+                    
+                    //No assert statements because the modal completing its task and gettign closed 
+                    Xunit.Assert.True(help.closeModal(_driver));
                 }
                 help.GetElementClick(_driver, By.Id("backButton"), 10);
                 orders = _driver.FindElements(By.Id("rowclickableorderRow"));
