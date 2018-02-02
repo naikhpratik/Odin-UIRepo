@@ -13,10 +13,10 @@ namespace Odin
                         "~/Scripts/app/controllers/userManagementController.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/lib").Include(
-                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/jquery-{version}.js",                        
                         "~/Scripts/bootstrap.js",
                         "~/Scripts/moment.js",
-                        "~/Scripts/bootstrap-datetimepicker.js",
+                        "~/Scripts/bootstrap-datetimepicker.js",                        
                         "~/Scripts/respond.js",
                         "~/Scripts/jspdf.min.js",
                         "~/Scripts/datatables/jquery.datatables.js",
@@ -47,7 +47,7 @@ namespace Odin
                 "~/Scripts/app/views/transferee-itinerary.js",
                 "~/Scripts/app/views/transferee-itin-appntmt.js",
                 "~/Scripts/app/views/transferee-hfp-messages.js",
-                "~/Scripts/app/views/transferee-selectedProperty.js",
+                "~/Scripts/app/views/transferee-selectedproperty.js",
                 "~/Scripts/leaflet.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/forgotPassword").Include(

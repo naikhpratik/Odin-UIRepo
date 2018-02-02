@@ -559,7 +559,7 @@ li.propertyItem.selected {
 
 li.propertyItem {
   margin: 0 0 0 0;
-  padding: 2rem 0 0.5rem 0; }
+  padding: 0.5rem 0 0.5rem 0; }
   @media screen and (max-width: 61.875rem) {
     li.propertyItem {
       margin-top: 2rem;
@@ -634,6 +634,7 @@ li.propertyItem {
 @media screen and (max-width: 61.875rem) {
   .likeDislike {
     width: 100%; } }
+<<<<<<< HEAD:Odin/Content/styles/css/refactor/transferee.css
 
 .likeDislike .likeDislike-btn, .likeDislike .like, .likeDislike .dislike {
   width: 50%;
@@ -655,6 +656,71 @@ li.propertyItem {
   background: url("/Content/Images/icn_ln_selected_dislike.png") no-repeat; }
 
 /*#propertiesList {
+=======
+
+.likeDislike .likeDislike-btn, .likeDislike .like, .likeDislike .dislike {
+  width: 50%;
+  height: 5rem;
+  background-position: center center !important;
+  background-size: contain;
+  cursor: pointer; }
+
+.likeDislike .like {
+  background: url("/Content/Images/icn_ln_non_selected_like.png") no-repeat; }
+
+.likeDislike .dislike {
+  background: url("/Content/Images/icn_ln_non_selected_dislike.png") no-repeat; }
+
+.likeDislike[data-liked="True"] .like {
+  background: url("/Content/Images/icn_ln_selected_like.png") no-repeat; }
+
+.likeDislike[data-liked="False"] .dislike {
+  background: url("/Content/Images/icn_ln_selected_dislike.png") no-repeat; }
+
+/*#propertiesList {
+
+    &[data-filter="liked"] {
+        .propertyItem[data-liked="True"] {
+            display: initial;
+        }
+
+        .propertyItem:not([data-liked="True"]) {
+            display: none;
+        }
+    }
+
+    &[data-filter="disliked"] {
+        .propertyItem[data-liked="False"] {
+            display: initial;
+        }
+
+        .propertyItem:not([data-liked="False"]) {
+            display: none;
+        }
+    }
+
+    &[data-filter="new"] {
+        .propertyItem[data-liked=""] {
+            display: initial;
+        }
+
+        .propertyItem:not([data-liked=""]) {
+            display: none;
+        }
+    }
+
+    &[data-filter=""] {
+        .propertyItem {
+            display: initial;
+        }
+    }
+}*/
+.sectionTitle {
+  padding-bottom: 0px;
+  margin: 2rem 0 1rem 0;
+  font-size: 2.5rem;
+  color: #231F20; }
+>>>>>>> a0962622ddaf0e7da217e9de53dd418d8a1f3e8d:Odin/Content/styles/css/ref_transferee.css
 
     &[data-filter="liked"] {
         .propertyItem[data-liked="True"] {
@@ -880,4 +946,211 @@ textarea#message {
   margin-left: 1rem;
   line-height: 2rem;
   color: #111111; }
+
+.propertyInfo {
+  margin-top: 2rem; }
+
+.overviewItems {
+  margin: 0;
+  line-height: 1.5rem; }
+
+.infoLine {
+  background-color: khaki;
+  height: 7rem;
+  padding-top: 20px; }
+
+.infoLineItem {
+  vertical-align: middle; }
+
+#emailPM {
+  background-color: olive;
+  color: white;
+  padding: 0.7rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-decoration: none; }
+
+.buttonGroup {
+  margin-top: 2rem; }
+
+.btn {
+  float: right;
+  margin-right: 2rem; }
+
+.rightSection {
+  margin-left: -15px; }
+
+.homePhoto {
+  width: 100%; }
+
+li {
+  display: inline-block; }
+
+.selectedPropertySummary {
+  list-style: none;
+  list-style-type: none;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0; }
+
+.selectedPropertySummary__item {
+  background-color: #efefef;
+  text-align: center;
+  padding: 1rem 0;
+  margin: 0 auto;
+  margin-left: -15px; }
+
+.selectedProperty__summaryContent {
+  font-size: 1.8rem;
+  color: #808080;
+  font-weight: 600; }
+
+.selectedProperty__summarySpan {
+  display: block;
+  font-size: 1.5rem;
+  color: #808080;
+  font-weight: 400; }
+
+.address1 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: -1rem;
+  margin-top: -1rem; }
+
+.address2 {
+  font-size: 1.5rem;
+  margin-bottom: 3rem; }
+
+.leaseSection {
+  margin-top: 2rem; }
+
+.inputRow {
+  margin-bottom: 0; }
+  .inputRow label {
+    margin-bottom: 0;
+    font-size: 1.1rem; }
+  .inputRow input {
+    color: #31a4dd; }
+
+html {
+  height: auto; }
+
+body {
+  height: auto;
+  background: #fff; }
+
+p.spacer {
+  display: block; }
+
+.propertiesBlock {
+  margin-top: 1rem; }
+
+.photoTable tr {
+  height: 11rem; }
+
+.pdfTitle {
+  padding-top: 3rem;
+  margin-bottom: 2rem; }
+
+.sectionTable {
+  line-height: 1.875rem;
+  margin: 1rem 0 0 0;
+  padding: 0; }
+  .sectionTable caption {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #858585;
+    padding: 0;
+    margin: 1.5rem 0 1rem 1.2rem;
+    vertical-align: top; }
+  .sectionTable td {
+    margin-bottom: 1rem;
+    padding: 0; }
+    .sectionTable td label {
+      display: block;
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: #858585;
+      padding: 0;
+      vertical-align: top; }
+    .sectionTable td p {
+      color: #35A2DB;
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin: 0;
+      padding: 0;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      -ms-word-break: break-all;
+      word-break: break-all;
+      word-break: break-word;
+      vertical-align: top;
+      text-align: right; }
+    .sectionTable td td.photo {
+      margin: .5rem; }
+    .sectionTable td img.location {
+      width: 14rem;
+      height: 10rem;
+      margin-left: 1rem; }
+
+.sectionRow {
+  line-height: 1.875rem;
+  margin: 1rem 0 0 0;
+  padding: 0;
+  display: block; }
+  .sectionRow .itemUnit {
+    margin: 1rem;
+    padding: 0;
+    display: inline-block;
+    vertical-align: top;
+    width: 22%; }
+  .sectionRow label {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #858585;
+    padding: 0;
+    margin: 0;
+    vertical-align: top;
+    text-align: left; }
+  .sectionRow p {
+    color: #35A2DB;
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin: 0;
+    margin-top: 1rem;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    -ms-word-break: break-all;
+    word-break: break-all;
+    word-break: break-word;
+    vertical-align: top;
+    text-align: left; }
+  .sectionRow .addressPDF {
+    margin: 1rem;
+    padding: 0;
+    display: inline-block;
+    vertical-align: top;
+    width: 22%; }
+    .sectionRow .addressPDF label {
+      text-align: left; }
+    .sectionRow .addressPDF p {
+      text-align: left; }
+  .sectionRow td.photo {
+    margin: .5rem; }
+  .sectionRow img.location {
+    width: 14rem;
+    height: 10rem;
+    margin-left: 1rem; }
+
+#propertiesHeader {
+  display: none; }
+
+td.propertyItem {
+  /*page-break-after: always;*/
+  width: 25%;
+  vertical-align: text-top; }
+
+.breakhere {
+  page-break-after: always; }
 

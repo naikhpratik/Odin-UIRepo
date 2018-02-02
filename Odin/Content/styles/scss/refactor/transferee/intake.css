@@ -1,9 +1,13 @@
+<<<<<<< HEAD:Odin/Content/styles/scss/refactor/transferee/intake.css
 <<<<<<< HEAD:Odin/Content/styles/scss/ref_transferee/intake.css
+=======
+>>>>>>> a0962622ddaf0e7da217e9de53dd418d8a1f3e8d:Odin/Content/styles/scss/ref_transferee/intake.css
 ﻿div[data-notify].alert-success {
   background-color: #8d0b56; }
 
 div[data-notify].alert-danger {
   background-color: #e53c2e; }
+<<<<<<< HEAD:Odin/Content/styles/scss/refactor/transferee/intake.css
 =======
 ﻿html, body {
   background-color: #f1f1f1; }
@@ -50,6 +54,8 @@ a.dw_logo {
   justify-content: center;
   margin: 3rem 0; }
 >>>>>>> master:Odin/Content/css/transferee/intake.css
+=======
+>>>>>>> a0962622ddaf0e7da217e9de53dd418d8a1f3e8d:Odin/Content/styles/scss/ref_transferee/intake.css
 
 div#intake div.row {
   text-align: left;

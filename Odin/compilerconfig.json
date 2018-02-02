@@ -28,6 +28,7 @@
     "inputFile": "Content/styles/scss/refactor/transferee.scss"
   },
   {
+<<<<<<< HEAD
     "outputFile": "Content/styles/css/refactor/itineraryPdf.css",
     "inputFile": "Content/styles/scss/refactor/itineraryPdf.scss"
   },
@@ -38,5 +39,9 @@
   {
     "outputFile": "Content/styles/css/refactor/selectedProperty.css",
     "inputFile": "Content/styles/scss/refactor/selectedProperty.scss"
+=======
+    "outputFile": "Content/styles/css/ref_itineraryPdf.css",
+    "inputFile": "Content/styles/scss/ref_itineraryPdf.scss"
+>>>>>>> a0962622ddaf0e7da217e9de53dd418d8a1f3e8d
   }
 ]
