@@ -4,7 +4,7 @@
     //If string not replaced by CI use localhost.
     var bmDomain = "#{BOOKMARKLET_DOMAIN}#";
     var bmUrl = bmDomain.toLowerCase().indexOf("bookmarklet_domain") >= 0
-        ? "https://localhost:44303/BookMarklet?url="
+        ? "https://localhost:44312/BookMarklet?url="
         : bmDomain + "/BookMarklet?url=";
     
     var getComputedStyle = function (elt, style) {
