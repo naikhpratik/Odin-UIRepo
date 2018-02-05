@@ -43,7 +43,14 @@
     var loadPanel = function (actionName) {
         $('.item.selected').removeClass('selected');
         $("[data-panel=" + actionName + "]").addClass('selected');
-        $('#orderContainer').load('/orders/' + actionName + 'Partial/' + currentOrderId);
+        $.ajax({
+            url: '/orders/' + actionName + 'Partial/' + currentOrderId,
+            cache: false,
+            dataType: "html",
+            success: function (data) {
+                $("#orderContainer").html(data);
+            }
+        });
     }
 
     var sizePage = function () {

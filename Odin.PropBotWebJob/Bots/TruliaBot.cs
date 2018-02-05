@@ -44,7 +44,7 @@ namespace Odin.PropBotWebJob.Bots
             Property retVal = null;
 
             //Try to scrape rent pages first.
-            if (_botType == "rental" || _botType == "rental-community")
+            if (_botType == "rental" || _botType == "rental-community" || _botType == "c")
             {
                 try
                 {
@@ -57,7 +57,7 @@ namespace Odin.PropBotWebJob.Bots
                 retVal.Description = BotRentalDescription();
                 retVal.AvailabilityDate = BotRentalAvailabilityDate();
             }
-            else if (_botType == "property")
+            else if (_botType == "property" || _botType == "p")
             {
                 //Try to scrape buy pages.
                 try
@@ -87,11 +87,11 @@ namespace Odin.PropBotWebJob.Bots
         {
             IEnumerable<string> images = null;
 
-            if (_botType == "rental" || _botType == "rental-community")
+            if (_botType == "rental" || _botType == "rental-community" || _botType == "c")
             {
                 images = BotRentImageJson();
             }
-            else if (_botType == "property" || _botType == "builder-community")
+            else if (_botType == "property" || _botType == "builder-community" || _botType == "p")
             {
                 images = BotBuyImageJson();
             }

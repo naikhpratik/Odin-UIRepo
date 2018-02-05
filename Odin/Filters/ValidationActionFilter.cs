@@ -17,18 +17,27 @@ namespace Odin.Filters
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
             var modelState = actionContext.ModelState;
-            
+            if (modelState.IsValid) return;
+
             var ai = new TelemetryClient();
-            
+
             var telemetry = new ExceptionTelemetry(new ModelValidationFilterException());
-            if(actionContext.ActionArguments.TryGetValue("orderDto", out var orderDto))
-                telemetry.Properties["TrackingID"] = ((OrderDto)orderDto).TrackingId;
+            if (actionContext.ActionArguments.TryGetValue("orderDto", out var orderDto))
+            {
+                var dto = orderDto as OrderDto;
+                if (dto != null)
+                    telemetry.Properties["TrackingID"] = dto.TrackingId;
+                else
+                {
+                    telemetry.Properties["OrderDto is Null"] = true.ToString();
+                }
+            }
             telemetry.Properties["ModelErrors"] = JsonConvert.SerializeObject(modelState.ErrorDescriptions());
             ai.TrackException(telemetry);
 
-            if (!modelState.IsValid)
-                actionContext.Response = actionContext.Request
-                    .CreateResponse(HttpStatusCode.BadRequest, ErrorResponse.CreateResponse(modelState));
+            actionContext.Response = actionContext.Request
+                .CreateResponse(HttpStatusCode.BadRequest, ErrorResponse.CreateResponse(modelState));
         }
     }
+    
 }

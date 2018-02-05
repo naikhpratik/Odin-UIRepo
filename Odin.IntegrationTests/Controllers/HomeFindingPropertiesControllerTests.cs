@@ -253,7 +253,7 @@ namespace Odin.IntegrationTests.Controllers
         {
             HttpStatusCodeResult expectedCode = new HttpStatusCodeResult(HttpStatusCode.NotFound);
             HomeFindingPropertiesController controller = SetUpHomeFindingPropertiesController();
-            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            controller.MockCurrentUserAndRole(dsc.Id, dsc.UserName, UserRoles.Consultant);
 
             HttpStatusCodeResult response = (HttpStatusCodeResult)controller.Delete("SomeNonExisitingRecordId");
             response.StatusCode.Should().Be(expectedCode.StatusCode);
@@ -286,7 +286,7 @@ namespace Odin.IntegrationTests.Controllers
             propertyVM.Liked = true;
 
             HomeFindingPropertiesController controller = SetUpHomeFindingPropertiesController();
-            controller.MockCurrentUser(dsc.Id, dsc.UserName);
+            controller.MockCurrentUserAndRole(dsc.Id, dsc.UserName, UserRoles.Consultant);
             HttpStatusCodeResult response = (HttpStatusCodeResult)controller.UpdateLiked(propertyVM);
 
             // Assert

@@ -19,24 +19,29 @@ namespace Odin.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string returnUrl = null)
         {
-
-            if (User.IsInRole(UserRoles.Consultant))
-            {
-                return RedirectToAction("Index", "Orders");
-            }
-            else if (User.IsInRole(UserRoles.Transferee))
+            if (User.IsInRole(UserRoles.Transferee))
             {
                 IEnumerable<Order> orders = _unitOfWork.Orders.GetOrdersFor(User.Identity.GetUserId(), UserRoles.Transferee);
+
+                if (Url.IsLocalUrl(returnUrl) && returnUrl != "/" && returnUrl != "/Orders")
+                {
+                    return Redirect(returnUrl);
+                }
+
                 if (orders.Count() == 1)
                 {
-                    return RedirectToAction("Transferee", "Orders", new { id = orders.First().Id });
+                    return RedirectToAction("Transferee", "Orders", new {id = orders.First().Id});
                 }
             }
-            else if (User.IsInRole(UserRoles.ProgramManager))
+            else if (User.IsInRole(UserRoles.Consultant) || User.IsInRole(UserRoles.ProgramManager))
             {
-                IEnumerable<Order> orders = _unitOfWork.Orders.GetOrdersFor(User.Identity.GetUserId(), UserRoles.ProgramManager);
+                if (Url.IsLocalUrl(returnUrl))
+                {
+                    return Redirect(returnUrl);
+                }
+
                 return RedirectToAction("Index", "Orders");
             }
 
