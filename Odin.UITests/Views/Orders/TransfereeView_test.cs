@@ -39,9 +39,9 @@ namespace Odin.UITests.Views.Orders
             //ChromeOptions options = new ChromeOptions();
             //options.AddArguments("--incognito");
             //options.ToCapabilities();
-            //_driver = new ChromeDriver();
+            _driver = new ChromeDriver();
 
-            _driver = new PhantomJSDriver();
+            //_driver = new PhantomJSDriver();
             help = new HelperMethod(_driver);
             _context = new ApplicationDbContext();
             _unitOfWork = new UnitOfWork(_context);
@@ -747,11 +747,71 @@ namespace Odin.UITests.Views.Orders
                     _driver.FindElement(By.XPath("(//input[@class = 'form-control intake-input'])[4]")).SendKeys("232.453");
 
                     _driver.FindElement(By.Id("editProperty")).Click();
-                    
-                    //No assert statements because the modal completing its task and gettign closed 
+
+                    //No assert statements because the modal completing its task and getting closed 
                     Xunit.Assert.True(help.closeModal(_driver));
                 }
                 help.GetElementClick(_driver, By.Id("backButton"), 10);
+                orders = _driver.FindElements(By.Id("rowclickableorderRow"));
+            }
+
+            help.Logout();
+
+        }
+
+        [TestMethod]
+        public void Transferee_Housingpage_ShouldEditSelectedProperty()
+        {
+
+            help.initialsteps();
+            orders = help.getOrders();
+            for (int i = 0; i < orders.Count(); i++)
+            {
+
+                var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
+                var db_order = _unitOfWork.Orders.GetOrderById(order_id);
+                _driver.Navigate().GoToUrl(this.baseURL + "/Orders/Transferee/" + order_id + "#housing");
+                //check the title and  then because of change in pages
+                help.delay(800);
+                if (db_order.HomeFinding != null)
+                {
+                    if (!help.GetElement(_driver, By.Id("housingsectionTitle"), 10).Equals("Selected Home"))
+                    {
+                        IList<IWebElement> properties = _driver.FindElements(By.Id("Listproperties"));
+
+                        properties.First().Click();
+                        help.delay(800);
+                        help.GetElementClick(_driver, By.Id("selectProperty"), 10).Click();
+
+                        //var text = help.GetElement(_driver, By.Id("housingsectionTitle"), 10);
+                        //Xunit.Assert.True(help.GetElement(_driver, By.Id("housingsectionTitle"), 10).Equals("Selected Home"));
+                    }
+
+                    help.GetElementClick(_driver, By.Id("editProperty"), 10).Click();
+                    help.delay(800);
+                    var bedroom = _driver.FindElement(By.XPath("(//input[@name = 'bedrooms'])"));
+                    bedroom.Clear();
+                    bedroom.SendKeys("2");
+                    var bathroom = _driver.FindElement(By.XPath("(//input[@id = 'editBathrooms'])"));
+                    bathroom.Clear();
+                    bathroom.SendKeys("2");
+                    var squarefeet = _driver.FindElement(By.XPath("(//input[@id = 'editSquarefeet'])"));
+                    squarefeet.Clear();
+                    squarefeet.SendKeys("543");
+                    var cost = _driver.FindElement(By.XPath("(//input[@id = 'editCost'])"));
+                    cost.Clear();
+                    cost.SendKeys("232.453");
+
+                    help.GetElementClick(_driver, By.Id("cmdUpdate"), 10).Click();
+                   // help.delay(800);
+                    // help.closeModal(_driver);
+                }
+                //if (help.ClickWhenReady(help.GetElementClick(_driver, By.Id("backButton"), 20)))
+                //{
+                //    help.GetElementClick(_driver, By.Id("backButton"), 10).Click();
+                //}
+                _driver.Navigate().GoToUrl(this.baseURL + "/Orders");
+                //help.delay(800);
                 orders = _driver.FindElements(By.Id("rowclickableorderRow"));
             }
 
