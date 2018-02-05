@@ -3,6 +3,10 @@
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     <h5 class="modal-title"><strong>Available on:</strong> @Html.DisplayFor(model => model.PropertyAvailabilityDate)</h5>
+    @if (Model.PropertySourceUrl != null)
+    {
+        <span><a href="@Model.PropertySourceUrl" target="_blank">Posted From @Model.PostUrl >></a></span>
+    }
 </div>
 
 
@@ -20,6 +24,7 @@
                 <li class="housingPropertyModal__propAddress">
                     <label>@Html.DisplayNameFor(model => model.PropertyAddress)</label>
                     <p>@Html.DisplayFor(model => model.PropertyAddress)</p>
+
                 </li>
 
                 <li class="housingPropertyModal__propBedrooms hpm_edit">
@@ -38,7 +43,7 @@
                 <li class="housingPropertyModal__propSquarefootage hpm_edit">
                     <label>@Html.DisplayNameFor(model => model.PropertySquareFootage)</label>
                     <p class="prop-span">@Html.DisplayFor(model => model.PropertySquareFootage)</p>
-                    @Html.TextBoxFor(model => @Model.PropertySquareFootage, new { @class = "form-control intake-input"})
+                    @Html.TextBoxFor(model => @Model.PropertySquareFootage, new { @class = "form-control intake-input" })
                     @Html.HiddenFor(model => @Model.PropertySquareFootage, new { @class = "housingDetails-hidden" })
                 </li>
                 <li class="housingPropertyModal__propAmount hpm_edit">
@@ -49,8 +54,10 @@
                 </li>
 
             </ul>
+            <div class="btn-toolbar">
+                <button type="button" id="editProperty" class="btn btn-secondary housingPropertyModal__edit">EDIT</button>
 
-            <button type="button" id="editProperty" class="btn btn-secondary housingPropertyModal__edit">EDIT</button>
+            </div>
             <div class="row housingPropertyModal__likeDislike">
                 <div class="col-md-12">
                     @Html.EditorFor(model => model.Liked, new { propertyId = Model.Id })
