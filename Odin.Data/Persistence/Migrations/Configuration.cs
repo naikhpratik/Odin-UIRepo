@@ -727,7 +727,7 @@ namespace Odin.Data.Persistence.Migrations
                     Category = ServiceCategory.SettlingIn,
                     SortOrder = 7,
                     Default = (int)DefaultType.International,
-                    ActionLabel = "Review Driving Information (license, driving schools, vehicle purcahse, etc.)"
+                    ActionLabel = "Review Driving Information (license, driving schools, vehicle purchase, etc.)"
                 });
             }
             else
@@ -738,7 +738,7 @@ namespace Odin.Data.Persistence.Migrations
                     type.SortOrder = 7;
                     type.Default = (int)DefaultType.International;
                 }
-                type.ActionLabel = "Review Driving Information (license, driving schools, vehicle purcahse, etc.)";
+                type.ActionLabel = "Review Driving Information (license, driving schools, vehicle purchase, etc.)";
             }
 
             if (!context.ServiceTypes.Any(s => s.Name.Trim().ToUpper() == "Transportation Options".ToUpper()))
