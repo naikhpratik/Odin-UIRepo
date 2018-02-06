@@ -75,7 +75,7 @@ namespace Odin
             bundles.Add(new StyleBundle("~/Styling/orders").Include("~/Content/styles/css/refactor/orders.css", "~/Content/styles/css/typeahead.css"));
             bundles.Add(new StyleBundle("~/Styling/login").Include("~/Content/styles/css/refactor/login.css"));
             bundles.Add(new StyleBundle("~/Styling/forgotPassword").Include("~/Content/styles/css/refactor/forgotpassword.css"));
-            bundles.Add(new StyleBundle("~/Styling/bookmarklet").Include("~/Content/styles/refactor/bookmarklet.css"));
+            bundles.Add(new StyleBundle("~/Styling/bookmarklet").Include("~/Content/styles/css/refactor/bookmarklet.css"));
             bundles.Add(new StyleBundle("~/Styling/transferee").Include("~/Content/styles/css/refactor/transferee.css"));
             bundles.Add(new StyleBundle("~/Styling/itineraryPdf").Include("~/Content/styles/css/refactor/itineraryPdf.css"));
             bundles.Add(new StyleBundle("~/Styling/propertiesPDF").Include("~/Content/styles/css/refactor/transferee/HFPropertiesPDF.css"));

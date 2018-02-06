@@ -19,7 +19,7 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>44303</IISExpressSSLPort>
+    <IISExpressSSLPort>44312</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -420,6 +420,7 @@
     <Compile Include="Views\Helpers\UrlHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Images\bm-loader.gif" />
     <Content Include="Content\styles\css\application.css" />
     <Content Include="Content\styles\css\application.min.css">
       <DependentUpon>application.css</DependentUpon>
@@ -430,28 +431,8 @@
       <DependentUpon>bootstrap-datetimepicker.css</DependentUpon>
     </Content>
     <Content Include="Content\styles\css\bootstrap-paper.css" />
-<<<<<<< HEAD
     <Content Include="Content\styles\css\refactor\bookmarklet.css" />
     <Content Include="Content\styles\css\refactor\bookmarklet.min.css">
-=======
-    <Content Include="Content\styles\css\ref_bookmarklet.css" />
-    <Content Include="Content\styles\css\ref_bookmarklet.min.css">
-      <DependentUpon>ref_bookmarklet.css</DependentUpon>
-    </Content>
-    <Content Include="Content\styles\css\ref_forgotpassword.css" />
-    <Content Include="Content\styles\css\ref_forgotpassword.min.css">
-      <DependentUpon>ref_forgotpassword.css</DependentUpon>
-    </Content>
-    <Content Include="Content\styles\css\ref_login.css" />
-    <Content Include="Content\styles\css\ref_orders.css" />
-    <Content Include="Content\styles\css\ref_orders.min.css">
-      <DependentUpon>ref_orders.css</DependentUpon>
-    </Content>
-    <Content Include="Content\styles\scss\bookmarklet.css">
-      <DependentUpon>ref_bookmarklet.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\styles\scss\bookmarklet.min.css">
->>>>>>> a0962622ddaf0e7da217e9de53dd418d8a1f3e8d
       <DependentUpon>bookmarklet.css</DependentUpon>
     </Content>
     <Content Include="Content\styles\css\refactor\forgotpassword.css" />
@@ -462,7 +443,6 @@
     <Content Include="Content\styles\css\refactor\help.min.css">
       <DependentUpon>help.css</DependentUpon>
     </Content>
-<<<<<<< HEAD
     <Content Include="Content\styles\css\refactor\itineraryPdf.css" />
     <Content Include="Content\styles\css\refactor\itineraryPdf.min.css">
       <DependentUpon>itineraryPdf.css</DependentUpon>
@@ -499,8 +479,6 @@
     <Content Include="Content\styles\scss\refactor\help.min.css">
       <DependentUpon>help.css</DependentUpon>
     </Content>
-=======
->>>>>>> a0962622ddaf0e7da217e9de53dd418d8a1f3e8d
     <Content Include="Content\DataTables\css\autoFill.bootstrap.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.min.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap4.css" />
@@ -894,15 +872,9 @@
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
-<<<<<<< HEAD
     <Content Include="Content\styles\scss\refactor\login.scss" />
     <Content Include="Content\styles\scss\refactor\orders.scss" />
     <Content Include="Content\styles\scss\refactor\forgotpassword.scss" />
-=======
-    <Content Include="Content\styles\scss\ref_login.scss" />
-    <Content Include="Content\styles\scss\ref_orders.scss" />
-    <Content Include="Content\styles\scss\ref_forgotpassword.scss" />
->>>>>>> a0962622ddaf0e7da217e9de53dd418d8a1f3e8d
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
@@ -929,13 +901,8 @@
     <Content Include="Content\styles\scss\4_components\primaryNav.scss" />
     <Content Include="Content\styles\scss\4_components\loadingAnimation.scss" />
     <Content Include="Content\styles\scss\4_components\carousel.scss" />
-<<<<<<< HEAD
     <Content Include="Content\styles\scss\refactor\selectedProperty.scss" />
     <Content Include="Content\styles\scss\refactor\transferee\HFPropertiesPDF.scss" />
-=======
-    <Content Include="Content\styles\scss\ref_transferee\HFPropertiesPDF.scss" />
-    <Content Include="Content\styles\scss\ref_transferee\selectedProperty.scss" />
->>>>>>> a0962622ddaf0e7da217e9de53dd418d8a1f3e8d
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
