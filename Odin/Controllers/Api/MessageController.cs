@@ -89,6 +89,7 @@ namespace Odin.Controllers.Api
             }
             return NotFound();            
         }
+
         [HttpPost]
         [Route("api/orders/transferee/housing/markRead/{propertyId}")]
         public IHttpActionResult markMessageRead(string propertyId)
@@ -107,8 +108,7 @@ namespace Odin.Controllers.Api
                 }
             };            
             _unitOfWork.Complete();
-            if (markedOne == false)
-                return  NotFound();
+
             return Ok();            
         }
     }
