@@ -146,15 +146,16 @@
                    
                     $('#propertiesList').find(".propertyItem[data-liked='True']").each(function (index) {
 
-                        //console.log("Id : " + this.getAttribute('data-property-id'));
-                        _map.addLayer(_markerDict[this.getAttribute('data-property-id')]);
-                        
+                        var propId = this.getAttribute('data-property-id');
+                        if (propId in _markerDict) {
+                            _map.addLayer(_markerDict[propId]);
+                        }
                     });
                     $('#propertiesList').find(".propertyItem:not([data-liked='True'])").each(function (index) {
-
-                        //console.log("Id : " + this.getAttribute('data-property-id'));
-                        _map.removeLayer(_markerDict[this.getAttribute('data-property-id')]);
-                       
+                        var propId = this.getAttribute('data-property-id');
+                        if (propId in _markerDict) {
+                            _map.removeLayer(_markerDict[propId]);
+                        }
                     });
                     break;
                 case "disliked":
@@ -162,44 +163,44 @@
                     propList.find(".propertyItem:not([data-liked='False'])").css("display", "none");
                     
                     $('#propertiesList').find(".propertyItem[data-liked='False']").each(function (index) {
-                       
-                        //console.log("Id : " + this.getAttribute('data-property-id'));
-                        _map.addLayer(_markerDict[this.getAttribute('data-property-id')]);
+                        var propId = this.getAttribute('data-property-id');
+                        if (propId in _markerDict) {
+                            _map.addLayer(_markerDict[propId]);
+                        }
                         
                     });
                     $('#propertiesList').find(".propertyItem:not([data-liked='False'])").each(function (index) {
-                       
-                        //console.log("Id : " + this.getAttribute('data-property-id'));
-                        _map.removeLayer(_markerDict[this.getAttribute('data-property-id')]);
-                        
-                    });Pittsburgh, PA
-                    
+                        var propId = this.getAttribute('data-property-id');
+                        if (propId in _markerDict) {
+                            _map.removeLayer(_markerDict[propId]);
+                        }
+                    });
                     break;
                 case "new":
                     propList.find(".propertyItem[data-liked='']").css("display", "block");
                     propList.find(".propertyItem:not([data-liked=''])").css("display", "none");
                     
                     $('#propertiesList').find(".propertyItem[data-liked='']").each(function (index) {
-
-                        //console.log("Id : " + this.getAttribute('data-property-id'));
-                        _map.addLayer(_markerDict[this.getAttribute('data-property-id')]);
-                       
+                        var propId = this.getAttribute('data-property-id');
+                        if (propId in _markerDict) {
+                            _map.addLayer(_markerDict[propId]);
+                        }
                     });
                     $('#propertiesList').find(".propertyItem:not([data-liked=''])").each(function (index) {
-
-                        //console.log("Id : " + this.getAttribute('data-property-id'));
-                        _map.removeLayer(_markerDict[this.getAttribute('data-property-id')]);
-                       
+                        var propId = this.getAttribute('data-property-id');
+                        if (propId in _markerDict) {
+                            _map.removeLayer(_markerDict[propId]);
+                        }
                     });
                     break;
                 case "":
 
                     propItems.css("display", "block");
                     $('#propertiesList').find(".propertyItem").each(function (index) {
-
-                        //console.log("Id : " + this.getAttribute('data-property-id'));
-                        _map.addLayer(_markerDict[this.getAttribute('data-property-id')]);
-
+                        var propId = this.getAttribute('data-property-id');
+                        if (propId in _markerDict) {
+                            _map.addLayer(_markerDict[propId]);
+                        }
                     });
                     break;
             }
