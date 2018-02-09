@@ -54,7 +54,23 @@ namespace Odin.ViewModels.Orders.Transferee
                 {
 
                     var parts = PropertySourceUrl.Split('.');
-                    return parts[1].First().ToString().ToUpper()+parts[1].Substring(1)+ '.' + parts[2].Substring(0,parts[2].IndexOf('/'));
+                    try
+                    {
+                        try
+                        {
+                            return parts[1].First().ToString().ToUpper() + parts[1].Substring(1) + '.' + parts[2].Substring(0, parts[2].IndexOf('/'));
+                        }
+                        catch (ArgumentException e) {
+                            Console.WriteLine("Error : " + e);
+                            return "";
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("Error : " + e);
+                        return "";
+                    }
+
 
                 }
                 return "";
