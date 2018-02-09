@@ -36,7 +36,7 @@
     "inputFile": "Content/styles/scss/refactor/transferee/HFPropertiesPDF.scss"
   },
   {
-    "outputFile": "Content/styles/css/refactor/selectedProperty.css",
-    "inputFile": "Content/styles/scss/refactor/selectedProperty.scss"
+    "outputFile": "Content/styles/css/refactor/transferee/selectedProperty.css",
+    "inputFile": "Content/styles/scss/refactor/transferee/selectedProperty.scss"
   }
 ]
