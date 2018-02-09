@@ -28,11 +28,11 @@
 
 .buttonGroup {
     margin-top: 2rem;
-}
 
-.btn {
-    float: right;
-    margin-right: 2rem;
+    .btn {
+        float: right;
+        margin-right: 2rem;
+    }
 }
 
 .rightSection {
@@ -43,15 +43,15 @@
     width: 100%;
 }
 
-li {
-    display: inline-block;
-}
-
 .selectedPropertySummary {
     list-style: none;
     list-style-type: none;
     margin: 0 0 0 0;
     padding: 0 0 0 0;
+
+    li {
+        display: inline-block;
+    }
 }
 
 .selectedPropertySummary__item {
@@ -90,6 +90,7 @@ li {
 .leaseSection {
     margin-top: 2rem;
 }
+
 .inputRow {
     margin-bottom: 0;
 
