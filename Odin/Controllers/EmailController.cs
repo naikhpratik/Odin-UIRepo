@@ -36,7 +36,7 @@ namespace Odin.Controllers
             viewModel.id = id;
             viewModel.Email = ee.Email;
             viewModel.Name = ee.FullName;
-            viewModel.Subject = "Your DwellWorks Itinerary";
+            viewModel.Subject = "Your Dwellworks Itinerary";
             viewModel.Message = "Please find attached your itinerary for the upcoming move";
             return PartialView("~/views/Mailers/Partials/Email.cshtml", viewModel);
         }
@@ -56,7 +56,7 @@ namespace Odin.Controllers
                     return new HttpStatusCodeResult(HttpStatusCode.NotFound, "Not found");
                 viewModel.TransfereeName = ee.FullName;
                 string filename = "Itinerary" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".pdf";
-                var pdf = new Rotativa.ViewAsPdf("~/views/Orders/Partials/_Itinerary.cshtml", viewModel);
+                var pdf = new Rotativa.ViewAsPdf("~/Views/PDF/PDFItinerary.cshtml", viewModel);
                 byte[] pdfBytes = pdf.BuildFile(ControllerContext);
                 MemoryStream stream = new MemoryStream(pdfBytes);                
                 EmailHelper EH = new EmailHelper();                    
