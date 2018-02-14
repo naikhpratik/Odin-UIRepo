@@ -39,9 +39,9 @@ namespace Odin.UITests.Views.Orders
             //ChromeOptions options = new ChromeOptions();
             //options.AddArguments("--incognito");
             //options.ToCapabilities();
-            _driver = new ChromeDriver();
+            //_driver = new ChromeDriver();
 
-            //_driver = new PhantomJSDriver();
+            _driver = new PhantomJSDriver();
             help = new HelperMethod(_driver);
             _context = new ApplicationDbContext();
             _unitOfWork = new UnitOfWork(_context);
@@ -65,8 +65,8 @@ namespace Odin.UITests.Views.Orders
 
                 help.delay(800);
                 //Check for contact Info
-
-                Xunit.Assert.Equal(db_order.Transferee.FullName, help.GetElement(_driver, By.Id("Transferee_FullName"), 10));
+                var text_name = help.GetElement(_driver, By.Id("Transferee_FullName"), 10);
+                Xunit.Assert.Equal(db_order.Transferee.FullName, text_name);
                 Xunit.Assert.Equal(db_order.Transferee.Email, help.GetElement(_driver, By.Id("Transferee_Email"), 10));
 
                 _driver.Navigate().GoToUrl(this.baseURL + "/Orders");
@@ -81,7 +81,7 @@ namespace Odin.UITests.Views.Orders
 
         }
 
-        [TestMethod]
+        [TestMethod, Ignore]
         public void Transferee_Intakepage_ShouldCheckandUpdateDestinationLocation()
         {
 
@@ -229,7 +229,7 @@ namespace Odin.UITests.Views.Orders
 
         }
 
-        [TestMethod, Ignore]
+        [TestMethod]
         public void Transferee_Intakepage_ShouldCheckandUpdateRelocationDates()
         {
 
@@ -283,7 +283,7 @@ namespace Odin.UITests.Views.Orders
 
         }
 
-        [TestMethod, Ignore]
+        [TestMethod]
         public void Transferee_Intakepage_ShouldCheckandUpdateGeneral()
         {
 
@@ -362,7 +362,7 @@ namespace Odin.UITests.Views.Orders
         }
 
         //check after merge
-        [TestMethod, Ignore]
+        [TestMethod]
         public void Transferee_Intakepage_ShouldCheckServicesonDetailspage()
         {
 
@@ -634,7 +634,7 @@ namespace Odin.UITests.Views.Orders
 
 
         [TestMethod,Priority(4)]
-        public void Transferee_Housingpage_ShouldAgRemoveProperty()
+        public void Transferee_Housingpage_ShouldRemoveProperty()
         {
 
             help.initialsteps();
@@ -693,7 +693,7 @@ namespace Odin.UITests.Views.Orders
         }
 
         [TestMethod,Priority(2)]
-        public void Transferee_Housingpage_ShouldAeSelectProperties()
+        public void Transferee_Housingpage_ShouldSelectProperties()
         {
 
             help.initialsteps();
@@ -726,10 +726,9 @@ namespace Odin.UITests.Views.Orders
 
         }
 
-        [TestMethod, Priority(3)]
-        public void Transferee_Housingpage_ShouldAfDeselectProperties()
+        [TestMethod, Priority(3), Ignore]
+        public void Transferee_Housingpage_ShouldDeselectProperties()
         {
-
             help.initialsteps();
             orders = help.getOrders();
             var count = orders.Count();
@@ -754,7 +753,7 @@ namespace Odin.UITests.Views.Orders
 
         }
 
-        [TestMethod]
+        [TestMethod, Ignore]
         public void Transferee_Housingpage_ShouldEditPropertiesinModal()
         {
             help.initialsteps();
