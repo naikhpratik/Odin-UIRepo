@@ -58,9 +58,13 @@ namespace Odin.UITests.Views.Orders
             for (int i = 0; i < orders.Count(); i++)
             {
 
-                var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
+                if (i == 3) break;
+
+                var random = help.GetRandomNo(orders);
+                var order_id = orders.ElementAt(random).GetAttribute("data-order-id");
+                //var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
                 var db_order = _unitOfWork.Orders.GetOrderById(order_id);
-                orders.ElementAt(i).Click();
+                orders.ElementAt(random).Click();
 
 
                 help.delay(800);
@@ -90,7 +94,9 @@ namespace Odin.UITests.Views.Orders
             for (int i = 0; i < orders.Count(); i++)
             {
 
-                var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
+                if (i == 3) break;
+                var order_id = orders.ElementAt(help.GetRandomNo(orders)).GetAttribute("data-order-id");
+                //var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
                 var db_order = _unitOfWork.Orders.GetOrderById(order_id); ;
                 _driver.Navigate().GoToUrl(this.baseURL + "/Orders/Transferee/" + order_id);
                 help.delay(800);
@@ -155,7 +161,7 @@ namespace Odin.UITests.Views.Orders
 
         }
 
-        [TestMethod,Ignore]
+        [TestMethod]
         public void Transferee_Intakepage_ShouldCheckandUpdateDepartureLocation()
         {
 
@@ -164,7 +170,9 @@ namespace Odin.UITests.Views.Orders
             for (int i = 0; i < orders.Count(); i++)
             {
 
-                var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
+                if (i == 3) break;
+                var order_id = orders.ElementAt(help.GetRandomNo(orders)).GetAttribute("data-order-id");
+                //var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
                 var db_order = _unitOfWork.Orders.GetOrderById(order_id);
                 _driver.Navigate().GoToUrl(this.baseURL + "/Orders/Transferee/" + order_id);
                 help.delay(800);
@@ -239,7 +247,9 @@ namespace Odin.UITests.Views.Orders
             for (int i = 0; i < orders.Count(); i++)
             {
 
-                var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
+                if (i == 3) break;
+                var order_id = orders.ElementAt(help.GetRandomNo(orders)).GetAttribute("data-order-id");
+                //var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
                 var db_order = _unitOfWork.Orders.GetOrderById(order_id);
                 _driver.Navigate().GoToUrl(this.baseURL + "/Orders/Transferee/" + order_id);
 
@@ -292,7 +302,9 @@ namespace Odin.UITests.Views.Orders
             for (int i = 0; i < orders.Count(); i++)
             {
 
-                var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
+                if (i == 3) break;
+                var order_id = orders.ElementAt(help.GetRandomNo(orders)).GetAttribute("data-order-id");
+                //var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
                 var db_order = _unitOfWork.Orders.GetOrderById(order_id);
                 _driver.Navigate().GoToUrl(this.baseURL + "/Orders/Transferee/" + order_id);
                 help.delay(800);
@@ -371,7 +383,9 @@ namespace Odin.UITests.Views.Orders
             for (int i = 0; i < orders.Count(); i++)
             {
 
-                var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
+                if (i == 3) break;
+                var order_id = orders.ElementAt(help.GetRandomNo(orders)).GetAttribute("data-order-id");
+                //var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
                 var db_order = _unitOfWork.Orders.GetOrderById(order_id);
                 _driver.Navigate().GoToUrl(this.baseURL + "/Orders/Transferee/" + order_id);
                 help.delay(800);
@@ -451,7 +465,9 @@ namespace Odin.UITests.Views.Orders
             for (int i = 0; i < orders.Count(); i++)
             {
 
-                var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
+                if (i == 3) break;
+                var order_id = orders.ElementAt(help.GetRandomNo(orders)).GetAttribute("data-order-id");
+                //var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
                 var db_order = _unitOfWork.Orders.GetOrderById(order_id);
                 _driver.Navigate().GoToUrl(this.baseURL + "/Orders/Transferee/" + order_id + "#housing");
 
@@ -510,7 +526,9 @@ namespace Odin.UITests.Views.Orders
             for (int i = 0; i < orders.Count(); i++)
             {
 
-                var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
+                if (i == 3) break;
+                var order_id = orders.ElementAt(help.GetRandomNo(orders)).GetAttribute("data-order-id");
+                //var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
                 var db_order = _unitOfWork.Orders.GetOrderById(order_id);
                 _driver.Navigate().GoToUrl(this.baseURL + "/Orders/Transferee/" + order_id + "#housing");
                 //check the title and  then because of change in pages
@@ -548,7 +566,9 @@ namespace Odin.UITests.Views.Orders
             for (int i = 0; i < orders.Count(); i++)
             {
 
-                var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
+                if (i == 3) break;
+                var order_id = orders.ElementAt(help.GetRandomNo(orders)).GetAttribute("data-order-id");
+                //var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
                 var db_order = _unitOfWork.Orders.GetOrderById(order_id);
                 _driver.Navigate().GoToUrl(this.baseURL + "/Orders/Transferee/" + order_id + "#housing");
                 help.delay(800);
@@ -598,7 +618,9 @@ namespace Odin.UITests.Views.Orders
             for (int i = 0; i < orders.Count(); i++)
             {
 
-                var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
+                if (i == 3) break;
+                var order_id = orders.ElementAt(help.GetRandomNo(orders)).GetAttribute("data-order-id");
+                //var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
                 var db_order = _unitOfWork.Orders.GetOrderById(order_id);
                 _driver.Navigate().GoToUrl(this.baseURL + "/Orders/Transferee/" + order_id + "#housing");
                 help.delay(800);
@@ -641,8 +663,10 @@ namespace Odin.UITests.Views.Orders
             orders = help.getOrders();
             for (int i = 0; i < orders.Count(); i++)
             {
+                if (i == 3) break;
+                var order_id = orders.ElementAt(help.GetRandomNo(orders)).GetAttribute("data-order-id");
+                //var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
                 WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
-                var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
                 var db_order = _unitOfWork.Orders.GetOrderById(order_id);
                 //_driver.Navigate().GoToUrl(this.baseURL + "/Orders/Transferee/4ec37167-a6a6-4900-9d4f-17568c0c15cb#housing");
                 _driver.Navigate().GoToUrl(this.baseURL + "/Orders/Transferee/" + order_id + "#housing");
@@ -701,7 +725,9 @@ namespace Odin.UITests.Views.Orders
             for (int i = 0; i < orders.Count(); i++)
             {
 
-                var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
+                if (i == 3) break;
+                var order_id = orders.ElementAt(help.GetRandomNo(orders)).GetAttribute("data-order-id");
+                //var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
                 var db_order = _unitOfWork.Orders.GetOrderById(order_id);
                 _driver.Navigate().GoToUrl(this.baseURL + "/Orders/Transferee/" + order_id + "#housing");
                 //check the title and  then because of change in pages
@@ -734,7 +760,9 @@ namespace Odin.UITests.Views.Orders
             var count = orders.Count();
             for (int i = 0; i < orders.Count(); i++)
             {
-                var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
+                if (i == 3) break;
+                var order_id = orders.ElementAt(help.GetRandomNo(orders)).GetAttribute("data-order-id");
+                //var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
                 var db_order = _unitOfWork.Orders.GetOrderById(order_id);
                 _driver.Navigate().GoToUrl(this.baseURL + "/Orders/Transferee/" + order_id + "#housing");
                 //check the title and  then because of change in pages
@@ -760,7 +788,9 @@ namespace Odin.UITests.Views.Orders
             orders = help.getOrders();
             for (int i = 0; i < orders.Count(); i++)
             {
-                var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
+                if (i == 3) break;
+                var order_id = orders.ElementAt(help.GetRandomNo(orders)).GetAttribute("data-order-id");
+                //var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
                 var db_order = _unitOfWork.Orders.GetOrderById(order_id);
                 _driver.Navigate().GoToUrl(this.baseURL + "/Orders/Transferee/" + order_id + "#housing");
                 //check the title and  then because of change in pages
@@ -798,7 +828,9 @@ namespace Odin.UITests.Views.Orders
             orders = help.getOrders();
             for (int i = 0; i < orders.Count(); i++)
             {
-                var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
+                if (i == 3) break;
+                var order_id = orders.ElementAt(help.GetRandomNo(orders)).GetAttribute("data-order-id");
+                //var order_id = orders.ElementAt(i).GetAttribute("data-order-id");
                 var db_order = _unitOfWork.Orders.GetOrderById(order_id);
                 _driver.Navigate().GoToUrl(this.baseURL + "/Orders/Transferee/" + order_id + "#housing");
                 //check the title and  then because of change in pages
@@ -852,54 +884,7 @@ namespace Odin.UITests.Views.Orders
 
         }
 
-        private bool match_Orders(IEnumerable<Order> orderFrom_db, IList<IWebElement> orders)
-        {
-            //Create Dictionary to match the order by their Full Name`s from DB and UI
-
-            Dictionary<string, int> verify;
-            if (orderFrom_db.Count() == orders.Count())
-            {
-                verify = new Dictionary<string, int>();
-
-                for (int i = 0; i < orderFrom_db.Count(); i++)
-                {
-                    var Db_firstname = orderFrom_db.ElementAt(i).Transferee.FullName;
-
-                    var UI_firstname = orders.ElementAt(i).Text.Substring(0, orders.ElementAt(i).Text.IndexOf("\r"));
-
-                    if (!Db_firstname.Equals(UI_firstname))
-                    {
-                        if (verify.ContainsKey(Db_firstname))
-                        {
-                            if (verify[Db_firstname] > 1)
-                                verify.Add(Db_firstname, verify[Db_firstname] - 1);
-                            else
-                                verify.Remove(Db_firstname);
-                        }
-                        else
-                        {
-                            verify.Add(Db_firstname, 1);
-                        }
-                        if (verify.ContainsKey(UI_firstname))
-                        {
-                            if (verify[UI_firstname] > 1)
-                                verify.Add(UI_firstname, verify[UI_firstname] - 1);
-                            else
-                                verify.Remove(UI_firstname);
-                        }
-                        else
-                        {
-                            verify.Add(UI_firstname, 1);
-                        }
-                    }
-                }
-                return verify.Count() > 0 ? false : true;
-            }
-
-            return false;
-
-        }
-
+        
 
         [TestCleanup]
         public void Dispose()

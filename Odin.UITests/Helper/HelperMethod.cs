@@ -1,8 +1,10 @@
-﻿using OpenQA.Selenium;
+﻿using Odin.Data.Core.Models;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 
 namespace Odin.UITests.Helper
@@ -127,10 +129,59 @@ namespace Odin.UITests.Helper
             return true;
         }
 
-        public int GetRandomNo(IList<IWebElement> properties)
+        public int GetRandomNo(IList<IWebElement> elements)
         {
             Random rnd = new Random();
-            return rnd.Next(properties.Count);
+            return rnd.Next(elements.Count);
         }
+
+        public bool match_Orders(IEnumerable<Order> orderFrom_db, IList<IWebElement> orders)
+        {
+            //Create Dictionary to match the order by their Full Name`s from DB and UI
+
+            Dictionary<string, int> verify;
+            if (orderFrom_db.Count() == orders.Count())
+            {
+                verify = new Dictionary<string, int>();
+
+                for (int i = 0; i < orderFrom_db.Count(); i++)
+                {
+                    var Db_firstname = orderFrom_db.ElementAt(i).Transferee.FullName;
+
+                    var UI_firstname = orders.ElementAt(i).Text.Substring(0, orders.ElementAt(i).Text.IndexOf("\r"));
+
+                    if (!Db_firstname.Equals(UI_firstname))
+                    {
+                        if (verify.ContainsKey(Db_firstname))
+                        {
+                            if (verify[Db_firstname] > 1)
+                                verify.Add(Db_firstname, verify[Db_firstname] - 1);
+                            else
+                                verify.Remove(Db_firstname);
+                        }
+                        else
+                        {
+                            verify.Add(Db_firstname, 1);
+                        }
+                        if (verify.ContainsKey(UI_firstname))
+                        {
+                            if (verify[UI_firstname] > 1)
+                                verify.Add(UI_firstname, verify[UI_firstname] - 1);
+                            else
+                                verify.Remove(UI_firstname);
+                        }
+                        else
+                        {
+                            verify.Add(UI_firstname, 1);
+                        }
+                    }
+                }
+                return verify.Count() > 0 ? false : true;
+            }
+
+            return false;
+
+        }
+
     }
 }
