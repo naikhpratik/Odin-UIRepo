@@ -85,7 +85,7 @@ namespace Odin.UITests.Views.Orders
 
         }
 
-        [TestMethod, Ignore]
+        [TestMethod]
         public void Transferee_Intakepage_ShouldCheckandUpdateDestinationLocation()
         {
 
@@ -164,7 +164,7 @@ namespace Odin.UITests.Views.Orders
         [TestMethod]
         public void Transferee_Intakepage_ShouldCheckandUpdateDepartureLocation()
         {
-
+            //System.Diagnostics.Debugger.Launch();
             help.initialsteps();
             orders = help.getOrders();
             for (int i = 0; i < orders.Count(); i++)
@@ -198,9 +198,9 @@ namespace Odin.UITests.Views.Orders
                 click_collapse.Click();
                 //delay(100);
                 click_expand.Click();
+                help.delay(500);
 
-
-                Xunit.Assert.Equal(db_order.OriginCity, help.GetElement(_driver, By.Id("spanOriginCity"), 10));
+                Xunit.Assert.Equal(db_order.OriginCity, _driver.FindElement(By.Id("spanOriginCity")).Text);
                 Xunit.Assert.Equal(db_order.OriginState, _driver.FindElement(By.Id("spanOriginState")).Text);
                 Xunit.Assert.Equal(db_order.OriginCountry, _driver.FindElement(By.Id("spanOriginCountry")).Text);
 
@@ -719,7 +719,6 @@ namespace Odin.UITests.Views.Orders
         [TestMethod,Priority(2)]
         public void Transferee_Housingpage_ShouldSelectProperties()
         {
-
             help.initialsteps();
             orders = help.getOrders();
             for (int i = 0; i < orders.Count(); i++)
@@ -752,7 +751,7 @@ namespace Odin.UITests.Views.Orders
 
         }
 
-        [TestMethod, Priority(3), Ignore]
+        [TestMethod, Priority(3),Ignore]
         public void Transferee_Housingpage_ShouldDeselectProperties()
         {
             help.initialsteps();
@@ -771,13 +770,19 @@ namespace Odin.UITests.Views.Orders
                 {
                     help.GetElementClick(_driver, By.Id("deselectProperty"), 10).Click();
                     help.delay(800);
-                    Xunit.Assert.Equal("Housing Summary", help.GetElement(_driver, By.Id("housingsectionTitle"), 10));
+                    Xunit.Assert.Equal("Housing Summary", _driver.FindElement(By.Id("housingsectionTitle")).Text);
                 }
                 _driver.Navigate().GoToUrl(this.baseURL + "/Orders");
                 orders = _driver.FindElements(By.Id("rowclickableorderRow"));
             }
 
             help.Logout();
+
+        }
+
+        public void Transferee_Housingpage_ShouldSelectDeselectProperties() {
+
+
 
         }
 
@@ -821,7 +826,7 @@ namespace Odin.UITests.Views.Orders
 
         }
 
-        [TestMethod, Ignore]
+        [TestMethod,Ignore]
         public void Transferee_Housingpage_ShouldEditSelectedProperty()
         {
             help.initialsteps();
@@ -855,17 +860,21 @@ namespace Odin.UITests.Views.Orders
                     }
                     help.GetElementClick(_driver, By.Id("editProperty"), 10).Click();
                     help.delay(800);
-                    var bedroom = help.GetElementClick(_driver, By.Id("editBedrooms"), 10);
-                    //var bedroom = _driver.FindElement(By.XPath("(//input[@name = 'bedrooms'])"));
+                    //var bedroom = help.GetElementClick(_driver, By.Id("editBedrooms"), 10);
+                    var bedroom = _driver.FindElement(By.XPath("(//input[@name = 'bedrooms'])"));
+                    bedroom.Click();
                     bedroom.Clear();
                     bedroom.SendKeys("2");
                     var bathroom = _driver.FindElement(By.XPath("(//input[@id = 'editBathrooms'])"));
+                    bathroom.Click();
                     bathroom.Clear();
                     bathroom.SendKeys("2");
                     var squarefeet = _driver.FindElement(By.XPath("(//input[@id = 'editSquarefeet'])"));
+                    squarefeet.Click();
                     squarefeet.Clear();
                     squarefeet.SendKeys("543");
                     var cost = _driver.FindElement(By.XPath("(//input[@id = 'editCost'])"));
+                    cost.Click();
                     cost.Clear();
                     cost.SendKeys("232.453");
 
